@@ -1,2 +1,2 @@
-# Monkey Paw Prototype
-Collect and Brew wacky potions to make a living!
+# Dr Bounce Prototype
+Bounce the gun around the level to destroy the enemy slimes.
