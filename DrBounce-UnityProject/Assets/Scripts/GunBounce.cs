@@ -21,7 +21,7 @@ public class GunBounce : MonoBehaviour
         canThrow = true;
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        transform.parent = cam.transform.parent;
+        transform.parent = cam.transform;
         transform.rotation = Quaternion.identity;
     }
 
@@ -42,8 +42,11 @@ public class GunBounce : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.rotation = cam.transform.rotation;
-        if (returning)
+        if (transform.parent)
+        {
+            transform.rotation = cam.transform.rotation;
+        }
+        if(returning)
         {
             returning = false;
             Vector3 dir = (originPoint - transform.position).normalized;
@@ -66,7 +69,7 @@ public class GunBounce : MonoBehaviour
         returning = false;
         rb.velocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        transform.parent = cam.transform.parent;
+        transform.parent = cam.transform;
         transform.localPosition = handPosition;
         transform.rotation = cam.transform.rotation;
         canThrow = true;
@@ -85,7 +88,15 @@ public class GunBounce : MonoBehaviour
             }
         }
 
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player") && returning)
+        {
+            ResetScript();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && !transform.parent)
         {
             ResetScript();
         }
