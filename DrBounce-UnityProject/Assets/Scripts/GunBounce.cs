@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MoreMountains.Feedbacks;
 public class GunBounce : MonoBehaviour
 {
     [SerializeField] bool returning; 
@@ -12,6 +12,10 @@ public class GunBounce : MonoBehaviour
     Camera cam;
     Vector3 originPoint;
     Rigidbody rb;
+
+    [Header("Feedbacks")]
+    public MMFeedbacks BounceFeedback;
+    public MMFeedbacks CatchFeedback;
 
     // Start is called before the first frame update
     void Start()
@@ -81,23 +85,20 @@ public class GunBounce : MonoBehaviour
         {
             if (collision.transform.CompareTag(tag))
             {
-                        Debug.Log("Collided");
-
+                Debug.Log("Collided");
+                BounceFeedback?.PlayFeedbacks();
                 rb.velocity = Vector3.zero;
                 returning = true;
             }
         }
 
-        if (collision.transform.CompareTag("Player") && returning)
-        {
-            ResetScript();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !transform.parent)
         {
+            CatchFeedback?.PlayFeedbacks();
             ResetScript();
         }
     }
