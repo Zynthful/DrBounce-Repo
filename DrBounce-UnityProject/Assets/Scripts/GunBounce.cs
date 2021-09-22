@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
@@ -8,8 +8,8 @@ public class GunBounce : MonoBehaviour
     [SerializeField] float forceMod;
     [SerializeField] bool canThrow;
     [SerializeField] string[] bounceableTags;
-    Vector3 handPosition;
     Camera cam;
+    Vector3 handPosition;
     Vector3 originPoint;
     Rigidbody rb;
 
@@ -61,6 +61,11 @@ public class GunBounce : MonoBehaviour
 
     public void Thrown(Vector3 position)
     {
+        //when we get out of prototype we need to made the world model seperate from the fp model
+        gameObject.layer = 0;
+        foreach (Transform child in transform) 
+            child.gameObject.layer = 0;
+
         returning = false;
         rb.constraints = RigidbodyConstraints.None;
         transform.parent = null;
@@ -71,6 +76,10 @@ public class GunBounce : MonoBehaviour
 
     void ResetScript()
     {
+        gameObject.layer = 7;
+        foreach (Transform child in transform)
+            child.gameObject.layer = 7;
+
         returning = false;
         rb.velocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints.FreezeAll;
