@@ -16,6 +16,7 @@ public class GunBounce : MonoBehaviour
     [Header("Feedbacks")]
     public MMFeedbacks BounceFeedback;
     public MMFeedbacks CatchFeedback;
+    public MMFeedbacks BounceHitFeedback;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +88,7 @@ public class GunBounce : MonoBehaviour
             {
                 Debug.Log("Collided");
                 BounceFeedback?.PlayFeedbacks();
+                collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
                 rb.velocity = Vector3.zero;
                 returning = true;
             }
