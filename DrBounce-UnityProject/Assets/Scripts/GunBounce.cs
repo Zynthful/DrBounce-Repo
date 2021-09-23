@@ -8,7 +8,7 @@ public class GunBounce : MonoBehaviour
     [SerializeField] float forceMod;
     [SerializeField] bool canThrow;
     [SerializeField] string[] bounceableTags;
-    Camera cam;
+    [SerializeField] Transform weaponHolderTransform = null;
     Vector3 handPosition;
     Vector3 originPoint;
     Rigidbody rb;
@@ -31,12 +31,11 @@ public class GunBounce : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
         handPosition = transform.localPosition;
         canThrow = true;
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        transform.parent = cam.transform;
+        transform.parent = weaponHolderTransform;
         transform.rotation = Quaternion.identity;
     }
 
@@ -59,7 +58,7 @@ public class GunBounce : MonoBehaviour
     {
         if (transform.parent)
         {
-            transform.rotation = cam.transform.rotation;
+            transform.rotation = weaponHolderTransform.rotation;
         }
         if(returning)
         {
@@ -93,9 +92,9 @@ public class GunBounce : MonoBehaviour
         returning = false;
         rb.velocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        transform.parent = cam.transform;
+        transform.parent = weaponHolderTransform;
         transform.localPosition = handPosition;
-        transform.rotation = cam.transform.rotation;
+        transform.rotation = weaponHolderTransform.rotation;
         canThrow = true;
         inFlight = false;
     }
