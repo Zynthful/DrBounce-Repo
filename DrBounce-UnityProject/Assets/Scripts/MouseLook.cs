@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MouseLook : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class MouseLook : MonoBehaviour
 
     float xRotation = 0f;
     // Start is called before the first frame update
+
+    public InputMaster controls;
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+    }
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -18,8 +26,8 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float MouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivity * Time.deltaTime;
+        float MouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivity * Time.deltaTime;
 
         xRotation -= MouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
