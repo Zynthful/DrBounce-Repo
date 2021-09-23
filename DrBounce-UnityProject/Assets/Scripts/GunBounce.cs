@@ -7,7 +7,7 @@ public class GunBounce : MonoBehaviour
     [SerializeField] bool returning; 
     [SerializeField] float forceMod;
     [SerializeField] bool canThrow;
-    [SerializeField] string[] bounceableTags;
+    [SerializeField] LayerMask bounceableLayers;
     [SerializeField] Transform weaponHolderTransform = null;
     Vector3 handPosition;
     Vector3 originPoint;
@@ -24,7 +24,7 @@ public class GunBounce : MonoBehaviour
     public delegate void PickUp();
     public static event PickUp OnPickUp;
 
-    //event for the gun hits the floor, causing the gun ti lose it's charge
+    //event for the gun hits the floor, causing the gun to lose it's charge
     public delegate void GunDropped();
     public static event GunDropped OnFloorCollision;
 
@@ -101,17 +101,14 @@ public class GunBounce : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        foreach(string tag in bounceableTags)
+        if (bounceableLayers == collision.gameObject.layer)
         {
-            if (collision.transform.CompareTag(tag))
-            {
-                Debug.Log("Collided");
-                BounceFeedback?.PlayFeedbacks();
-                collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
-                rb.velocity = Vector3.zero;
-                returning = true;
-                inFlight = true;
-            }
+            Debug.Log("Collided");
+            BounceFeedback?.PlayFeedbacks();
+            collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
+            rb.velocity = Vector3.zero;
+            returning = true;
+            inFlight = true;
         }
 
     }
