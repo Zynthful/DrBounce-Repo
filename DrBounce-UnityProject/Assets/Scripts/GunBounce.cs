@@ -9,6 +9,7 @@ public class GunBounce : MonoBehaviour
     [SerializeField] bool canThrow;
     [SerializeField] LayerMask bounceableLayers;
     [SerializeField] Transform weaponHolderTransform = null;
+    List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Vector3 handPosition;
     Vector3 originPoint;
     Rigidbody rb;
@@ -37,6 +38,12 @@ public class GunBounce : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll;
         transform.parent = weaponHolderTransform;
         transform.rotation = Quaternion.identity;
+
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+        foreach(Collider col in colliders)
+        {
+            physicMaterials.Add(col.material);
+        }
     }
 
     private void Update()
@@ -60,12 +67,6 @@ public class GunBounce : MonoBehaviour
         {
             transform.rotation = weaponHolderTransform.rotation;
         }
-        if(returning)
-        {
-            returning = false;
-            Vector3 dir = (originPoint - transform.position).normalized;
-            rb.velocity = new Vector3(dir.x, .3f, dir.z) * forceMod; 
-        }
     }
 
     public void Thrown(Vector3 position)
@@ -81,6 +82,11 @@ public class GunBounce : MonoBehaviour
         originPoint = position;
         Vector3 dir = transform.forward;
         rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * forceMod;
+
+        foreach(PhysicMaterial mat in physicMaterials)
+        {
+            mat.dynamicFriction = 0.2f; mat.bounciness = .2f;
+        }
     }
 
     void ResetScript()
@@ -90,13 +96,14 @@ public class GunBounce : MonoBehaviour
             child.gameObject.layer = 7;
 
         returning = false;
+        canThrow = true;
+        inFlight = false;
+
         rb.velocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints.FreezeAll;
         transform.parent = weaponHolderTransform;
         transform.localPosition = handPosition;
         transform.rotation = weaponHolderTransform.rotation;
-        canThrow = true;
-        inFlight = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -109,25 +116,38 @@ public class GunBounce : MonoBehaviour
             rb.velocity = Vector3.zero;
             returning = true;
             inFlight = true;
+            Vector3 dir = (originPoint - transform.position).normalized;
+            rb.velocity = new Vector3(dir.x, .3f, dir.z) * forceMod;
         }
 
+        //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
+        if (collision.contacts[0].normal.normalized.y > .80f)
+        {
+            foreach (PhysicMaterial mat in physicMaterials)
+            {
+                mat.dynamicFriction = 0.85f; mat.bounciness = 0;
+            }
+            returning = true;
+            OnFloorCollision?.Invoke();
+            inFlight = false;
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && !transform.parent) 
+        if (other.CompareTag("Player"))
+        {
+            Debug.LogWarning("I can tell it's the player but something went wrong");
+        }
+
+        if (other.CompareTag("Player") && !transform.parent && returning) 
         {
             if (inFlight) { OnPickUp?.Invoke(); }
             CatchFeedback?.PlayFeedbacks();
             ResetScript();
         }
 
-        //occures when the gun hits the floor, removing charge from the gun
-        if (other.gameObject.layer == 6) 
-        {
-            OnFloorCollision?.Invoke();
-            inFlight = false;
-        }
+        
         
     }
 }
