@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     [SerializeField] private Gun shooter = null;
+    [SerializeField] private GameObject bullet;
 
     [Header("Damage")]
     private int damage = 1;     //current damage value
@@ -58,6 +59,8 @@ public class Shooting : MonoBehaviour
             {
                 damage = shooter.baseDamage;
             }
+
+            //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
 
             Debug.LogWarning("BANG!!!");
             Debug.LogWarning("You shot for " + damage);
