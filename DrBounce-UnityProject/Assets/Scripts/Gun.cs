@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gun", menuName = "ScriptableObject/Gun", order = 0)]
 public class Gun : ScriptableObject
 {
-    public int baseDamage;
-    public int damageModifier;
-    public int amountOfChargesGiven;
-    public float fireRate = 0.9f;
+    public int baseDamage;    //default damage of the gun 
+    public int damageModifier;    //multiplied with the amount of bounces 
+    public int amountOfChargesGiven;    //amount of charges given when you rebound the gun
+    public float fireRate;    //time between shots
 }
