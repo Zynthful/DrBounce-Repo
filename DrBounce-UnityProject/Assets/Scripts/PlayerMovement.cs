@@ -21,11 +21,12 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
 
-    private Vector2 test;
-
     public InputMaster controls;
 
     private bool isDashing = false;
+    public int dashesBeforeLanding;
+    private int dashesPerformed = 0;
+
 
     private void Awake()
     {
@@ -37,9 +38,13 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0)
+        if (isGrounded)
         {
-            velocity.y = 0f;
+            dashesPerformed = 0;
+            if (velocity.y < 0)
+            {
+                velocity.y = 0f;
+            }
         }
 
         float x = controls.Player.Movement.ReadValue<Vector2>().x;
@@ -54,14 +59,22 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        if(isDashing == true)
+
+
+        if (isDashing == true && dashesPerformed < dashesBeforeLanding)
         {
-            float x2 = controls.Player.Movement.ReadValue<Vector2>().x;
-            float z2 = controls.Player.Movement.ReadValue<Vector2>().y;
+            dashesPerformed += 1;
+            if (controls.Player.Movement.ReadValue<Vector2>().y != 0)
+            {
+                Vector3 move2 = transform.forward * z;
+                controller.Move(move2 * dashStrength * speed * Time.deltaTime);
+            }
 
-            Vector3 move2 = transform.right * x + transform.forward * z;
-
-            controller.Move(move2 * dashStrength * speed * Time.deltaTime);
+            else if (controls.Player.Movement.ReadValue<Vector2>().x != 0)
+            {
+                Vector3 move2 = transform.right * x;
+                controller.Move(move2 * dashStrength * speed * Time.deltaTime);
+            }
         }
     }
 
