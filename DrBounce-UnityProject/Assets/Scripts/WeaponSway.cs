@@ -24,14 +24,10 @@ public class WeaponSway : MonoBehaviour
     void Start()
     {
         midPoint = transform.localPosition;
-
     }
 
     void Update()
     {
-        //make this not jittery
-        //maybe have like a max and min rotation?
-
         if (transform.childCount != 0)
         {
             HorizontalSway();
@@ -58,28 +54,28 @@ public class WeaponSway : MonoBehaviour
 
     private void VerticalSway()
     {
+        //change this to new input :)
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
         Vector3 localPosition = transform.localPosition;
 
         if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
-        {
             timer = 0.0f;
-        }
         else
         {
             waveSlice = Mathf.Sin(timer);
             timer = timer + bobSpeed;
 
             if (timer > Mathf.PI * 2)
-            {
                 timer = timer - (Mathf.PI * 2);
-            }
         }
 
         if (waveSlice != 0)
         {
+            //when the values change between 0 and 1 it smoothly interpolates which is a problem :(
+            //maybe it can be fixed with the new input system
+
             float translateChange = waveSlice * bobDistance;
             float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
