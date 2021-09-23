@@ -18,6 +18,16 @@ public class GunBounce : MonoBehaviour
     public MMFeedbacks CatchFeedback;
     public MMFeedbacks BounceHitFeedback;
 
+    private bool inFlight;
+
+    //event for sending amount of bounces to the shooting script
+    public delegate void PickUp();
+    public static event PickUp OnPickUp;
+
+    //event for the gun hits the floor, causing the gun ti lose it's charge
+    public delegate void GunDropped();
+    public static event GunDropped OnFloorCollision;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,6 +97,7 @@ public class GunBounce : MonoBehaviour
         transform.localPosition = handPosition;
         transform.rotation = cam.transform.rotation;
         canThrow = true;
+        inFlight = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -100,6 +111,7 @@ public class GunBounce : MonoBehaviour
                 collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
                 rb.velocity = Vector3.zero;
                 returning = true;
+                inFlight = true;
             }
         }
 
@@ -107,10 +119,19 @@ public class GunBounce : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !transform.parent)
+        if (other.CompareTag("Player") && !transform.parent) 
         {
+            if (inFlight) { OnPickUp?.Invoke(); }
             CatchFeedback?.PlayFeedbacks();
             ResetScript();
         }
+
+        //occures when the gun hits the floor, removing charge from the gun
+        if (other.gameObject.layer == 6) 
+        {
+            OnFloorCollision?.Invoke();
+            inFlight = false;
+        }
+        
     }
 }
