@@ -49,44 +49,5 @@ public class Enemy : MonoBehaviour
                 GetComponent<MeshRenderer>().material.color = Color.red;
                 break;
         }
-
-        #if UNITY_EDITOR
-        currentType = eType;
-        #endif
     }
-
-    private void Update()
-    {
-        #if UNITY_EDITOR
-        CheckSwitch();
-        #endif
-    }
-
-#if UNITY_EDITOR
-    EnemyTypes currentType;
-
-    private void CheckSwitch()
-    {
-        if (eType != currentType)
-        {
-            switch (eType)
-            {
-                case EnemyTypes.BlueBack:
-                    GetComponent<MeshRenderer>().material.color = Color.blue;
-                    break;
-
-                case EnemyTypes.YellowUp:
-                    GetComponent<MeshRenderer>().material.color = Color.yellow;
-                    break;
-
-                case EnemyTypes.RedForward:
-                    GetComponent<MeshRenderer>().material.color = Color.red;
-                    break;
-            }
-
-            currentType = eType;
-        }
-    }
-
-#endif
 }
