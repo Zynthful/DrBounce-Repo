@@ -89,6 +89,25 @@ public class GunBounce : MonoBehaviour
         }
     }
 
+    void BounceBack()
+    {
+        Vector3 dir = (originPoint - transform.position).normalized;
+        rb.velocity = new Vector3(dir.x, dir.y + .3f, dir.z) * forceMod;
+    }
+
+    void BounceUp(Transform enemyTransform)
+    {
+        transform.position = new Vector3(enemyTransform.position.x, enemyTransform.position.y + (enemyTransform.localScale.y / 2), enemyTransform.position.z);
+        rb.velocity = Vector3.up * forceMod;
+    }
+
+    void BounceForward(Transform enemyTransform)
+    {
+        transform.position = (2 * enemyTransform.position) - transform.position;
+        Vector3 dir = (transform.position - originPoint).normalized;
+        rb.velocity = new Vector3(dir.x, dir.y + .3f, dir.z) * forceMod;
+    }
+
     void ResetScript()
     {
         gameObject.layer = 7;
@@ -108,20 +127,31 @@ public class GunBounce : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (bounceableLayers == collision.gameObject.layer)
+        if (!transform.parent && bounceableLayers == (bounceableLayers | 1 << collision.gameObject.layer))
         {
-            Debug.Log("Collided");
-            BounceFeedback?.PlayFeedbacks();
-            collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
-            rb.velocity = Vector3.zero;
             returning = true;
             inFlight = true;
-            Vector3 dir = (originPoint - transform.position).normalized;
-            rb.velocity = new Vector3(dir.x, .3f, dir.z) * forceMod;
-        }
 
+            BounceFeedback?.PlayFeedbacks();
+            collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
+
+            switch (collision.gameObject.GetComponent<Enemy>().eType)
+            {
+                case Enemy.EnemyTypes.BlueBack:
+                    BounceBack();
+                    return;
+
+                case Enemy.EnemyTypes.YellowUp:
+                    BounceUp(collision.transform);
+                    return;
+
+                case Enemy.EnemyTypes.RedForward:
+                    BounceForward(collision.transform);
+                    return;
+            }
+        }
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
-        if (collision.contacts[0].normal.normalized.y > .80f)
+        else if (collision.contacts[0].normal.normalized.y > .80f)
         {
             foreach (PhysicMaterial mat in physicMaterials)
             {
@@ -135,19 +165,11 @@ public class GunBounce : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Debug.LogWarning("I can tell it's the player but something went wrong");
-        }
-
         if (other.CompareTag("Player") && !transform.parent && returning) 
         {
             if (inFlight) { OnPickUp?.Invoke(); }
             CatchFeedback?.PlayFeedbacks();
             ResetScript();
         }
-
-        
-        
     }
 }
