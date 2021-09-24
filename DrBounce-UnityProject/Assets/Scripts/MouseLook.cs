@@ -6,10 +6,17 @@ using UnityEngine.InputSystem;
 public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
-     
+
+    public float controllerSensitivity = 150f;
+
     public Transform playerBody;
 
     float xRotation = 0f;
+
+    float controllerX;
+    float controllerY;
+    float xRotationC = 0f;
+
     // Start is called before the first frame update
 
     public InputMaster controls;
@@ -34,5 +41,17 @@ public class MouseLook : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         playerBody.Rotate(Vector3.up * mouseX);
+
+        if (Gamepad.current != null)
+        {
+            float controllerX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity * Time.deltaTime;
+            float controllerY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity * Time.deltaTime;
+
+            xRotationC -= controllerY;
+            xRotationC = Mathf.Clamp(xRotationC, -90f, 90f);
+
+            transform.localRotation = Quaternion.Euler(xRotationC, 0, 0);
+            playerBody.Rotate(Vector3.up * controllerX);
+        }
     }
 }
