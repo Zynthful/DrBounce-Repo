@@ -10,6 +10,7 @@ public class GunBounce : MonoBehaviour
     [SerializeField] LayerMask bounceableLayers;
     [SerializeField] Transform weaponHolderTransform = null;
     [SerializeField] [Range(0.01f, 1f)] float BounceAwayAngleThreshold;
+    [SerializeField] [Range(0.6f, 2.5f)] float sideBounceAngleThreshold;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Vector3 handPosition;
     Vector3 originPoint;
@@ -105,17 +106,20 @@ public class GunBounce : MonoBehaviour
     void BounceForward(Collision collision)
     {
         Vector3 dir = (transform.position - originPoint).normalized;
-        Debug.Log("Y Bounce angle: " + collision.contacts[0].normal.normalized.y);
+
+        Vector3 newPos = transform.position;
         if ((dir.y < -BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y > 0) || (dir.y > BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y < 0))
         {
-            transform.position = new Vector3((2 * collision.transform.position.x) - transform.position.x, collision.transform.position.y + (collision.transform.localScale.y / 2), (2 * collision.transform.position.z) - transform.position.z); ;
-            dir = (transform.position - collision.transform.position).normalized;
+            newPos = new Vector3((2 * collision.transform.position.x) - (transform.position.x * Mathf.Abs(dir.x)), transform.position.y, (2 * collision.transform.position.z) - (transform.position.z * Mathf.Abs(dir.z)));
+            dir.y = -dir.y;
         }
         else
         {
-            transform.position = new Vector3((2 * collision.transform.position.x) - transform.position.x, transform.position.y, (2 * collision.transform.position.z) - transform.position.z);
+            newPos = new Vector3((2 * collision.transform.position.x) - (transform.position.x * Mathf.Abs(dir.x)), collision.transform.position.y + (collision.transform.localScale.y / 2), (2 * collision.transform.position.z) - (transform.position.z * Mathf.Abs(dir.z))); ;
         }
-        rb.velocity = new Vector3(dir.x, dir.y + .3f, dir.z) * forceMod;
+
+        transform.position = newPos;
+        rb.velocity = new Vector3(dir.x, dir.y + .25f, dir.z) * forceMod;
     }
 
     void ResetScript()
