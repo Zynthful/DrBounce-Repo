@@ -9,6 +9,7 @@ public class GunBounce : MonoBehaviour
     [SerializeField] bool canThrow;
     [SerializeField] LayerMask bounceableLayers;
     [SerializeField] Transform weaponHolderTransform = null;
+    [SerializeField] [Range(0.01f, 1f)] float BounceAwayAngleThreshold;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Vector3 handPosition;
     Vector3 originPoint;
@@ -101,10 +102,19 @@ public class GunBounce : MonoBehaviour
         rb.velocity = Vector3.up * forceMod;
     }
 
-    void BounceForward(Transform enemyTransform)
+    void BounceForward(Collision collision)
     {
-        transform.position = (2 * enemyTransform.position) - transform.position;
         Vector3 dir = (transform.position - originPoint).normalized;
+        Debug.Log("Y Bounce angle: " + collision.contacts[0].normal.normalized.y);
+        if ((dir.y < -BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y > 0) || (dir.y > BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y < 0))
+        {
+            transform.position = new Vector3((2 * collision.transform.position.x) - transform.position.x, collision.transform.position.y + (collision.transform.localScale.y / 2), (2 * collision.transform.position.z) - transform.position.z); ;
+            dir = (transform.position - collision.transform.position).normalized;
+        }
+        else
+        {
+            transform.position = new Vector3((2 * collision.transform.position.x) - transform.position.x, transform.position.y, (2 * collision.transform.position.z) - transform.position.z);
+        }
         rb.velocity = new Vector3(dir.x, dir.y + .3f, dir.z) * forceMod;
     }
 
@@ -146,7 +156,7 @@ public class GunBounce : MonoBehaviour
                     return;
 
                 case Enemy.EnemyTypes.RedForward:
-                    BounceForward(collision.transform);
+                    BounceForward(collision);
                     return;
             }
         }
