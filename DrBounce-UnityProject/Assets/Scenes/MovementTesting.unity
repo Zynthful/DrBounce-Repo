@@ -412,10 +412,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3684288668969068230, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
-      propertyPath: Active
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5587670236240770451, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
       propertyPath: BounceHitFeedback
       value: 
@@ -468,20 +464,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6058571724689869196, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
-      propertyPath: Feedbacks.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6058571724689869196, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
-      propertyPath: Feedbacks.Array.data[0]
-      value: 
-      objectReference: {fileID: 255519706}
-    - target: {fileID: 6058571724689869196, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
-      propertyPath: Feedbacks.Array.data[1]
-      value: 
-      objectReference: {fileID: 255519704}
-    m_RemovedComponents:
-    - {fileID: 3684288668969068230, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
 --- !u!1001 &115770690
 PrefabInstance:
@@ -2493,125 +2476,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &255519702 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3208291316935067588, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
-  m_PrefabInstance: {fileID: 99893780}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &255519704
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255519702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c27131831afa28b499cb120fc9059997, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: Particles Play
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    InitialDelay: 0
-    CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  Mode: 0
-  BoundParticleSystem: {fileID: 1798729478}
-  MoveToPosition: 0
-  RandomParticleSystems: []
---- !u!114 &255519706
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255519702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50b723ef43c645c42998408748e4170f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: Field of View
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    InitialDelay: 0
-    CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  Channel: 0
-  Duration: 1
-  ResetShakerValuesAfterShake: 1
-  ResetTargetValuesAfterShake: 1
-  RelativeFieldOfView: 0
-  ShakeFieldOfView:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.18451223
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.718954
-      value: 0
-      inSlope: -3.472824
-      outSlope: -3.472824
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.10007969
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  RemapFieldOfViewZero: 90
-  RemapFieldOfViewOne: 120
 --- !u!43 &306534653
 Mesh:
   m_ObjectHideFlags: 0
@@ -13120,67 +12984,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &992643240 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5587670236126169277, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
-  m_PrefabInstance: {fileID: 99893780}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &992643247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992643240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b8594b6c8c7fe478fab3b86d0b62db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Channel: 0
-  ShakeDuration: 0.5
-  PlayOnAwake: 0
-  Interruptible: 1
-  AlwaysResetTargetValuesAfterShake: 0
-  Shaking: 0
-  ForwardDirection: 1
-  TimescaleMode: 0
-  RelativeFieldOfView: 0
-  ShakeFieldOfView:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  RemapFieldOfViewZero: 90
-  RemapFieldOfViewOne: 120
 --- !u!43 &1018280314
 Mesh:
   m_ObjectHideFlags: 0
@@ -26650,11 +26453,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!198 &1798729478 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1053662857981288573, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
-  m_PrefabInstance: {fileID: 99893780}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1799439436
 Mesh:
   m_ObjectHideFlags: 0
