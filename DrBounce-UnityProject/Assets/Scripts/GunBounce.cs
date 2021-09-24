@@ -115,11 +115,13 @@ public class GunBounce : MonoBehaviour
     {
         Vector3 dir = (transform.position - originPoint).normalized;
 
+
+        Debug.Log(dir.y + "  " + collision.contacts[0].normal.normalized.y);
         Vector3 newPos = transform.position;
         if ((dir.y < -BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y > 0) || (dir.y > BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y < 0))
         {
             newPos = new Vector3((2 * collision.transform.position.x) - transform.position.x, transform.position.y, (2 * collision.transform.position.z) - transform.position.z);
-            dir.y = -dir.y;
+            dir.y = -dir.y - .5f;
         }
         else
         {
@@ -127,6 +129,7 @@ public class GunBounce : MonoBehaviour
         }
 
         transform.position = newPos;
+        originPoint = newPos;
         rb.velocity = new Vector3(dir.x, dir.y + .25f, dir.z) * forceMod;
     }
 
