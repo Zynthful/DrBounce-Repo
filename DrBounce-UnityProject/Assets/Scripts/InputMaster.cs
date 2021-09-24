@@ -49,6 +49,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""RecallGun"",
+                    ""type"": ""Button"",
+                    ""id"": ""c59cad59-5098-482b-b35f-e45d94edc138"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ThrowGun"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7f9b13c-02ba-4148-8fc0-cb0bfadead58"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -161,6 +177,39 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4a9b64a-59f9-492d-8c4d-8abd07ef0e2e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ThrowGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""017240aa-a0ce-42d8-a43a-cd8c5ed84858"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""RecallGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff54b5f9-2cd5-4fb7-82f8-988a4806ad6b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""RecallGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -201,6 +250,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_RecallGun = m_Player.FindAction("RecallGun", throwIfNotFound: true);
+        m_Player_ThrowGun = m_Player.FindAction("ThrowGun", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -254,6 +305,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_RecallGun;
+    private readonly InputAction m_Player_ThrowGun;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -262,6 +315,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @RecallGun => m_Wrapper.m_Player_RecallGun;
+        public InputAction @ThrowGun => m_Wrapper.m_Player_ThrowGun;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +338,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @RecallGun.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecallGun;
+                @RecallGun.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecallGun;
+                @RecallGun.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecallGun;
+                @ThrowGun.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowGun;
+                @ThrowGun.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowGun;
+                @ThrowGun.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowGun;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -299,6 +360,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @RecallGun.started += instance.OnRecallGun;
+                @RecallGun.performed += instance.OnRecallGun;
+                @RecallGun.canceled += instance.OnRecallGun;
+                @ThrowGun.started += instance.OnThrowGun;
+                @ThrowGun.performed += instance.OnThrowGun;
+                @ThrowGun.canceled += instance.OnThrowGun;
             }
         }
     }
@@ -327,5 +394,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnRecallGun(InputAction.CallbackContext context);
+        void OnThrowGun(InputAction.CallbackContext context);
     }
 }

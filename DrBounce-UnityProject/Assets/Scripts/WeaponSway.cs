@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponSway : MonoBehaviour
 {
@@ -19,7 +20,14 @@ public class WeaponSway : MonoBehaviour
     private float waveSlice = 0f;
     private float xVelocity = 0f;
 
+    public InputMaster controls;
+
     private Vector3 midPoint = new Vector3();
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+    }
 
     void Start()
     {
@@ -37,7 +45,7 @@ public class WeaponSway : MonoBehaviour
 
     private void HorizontalSway()
     {
-        float moveX = -Input.GetAxis("Mouse X") * viewmodelSwayAmount;
+        float moveX = -Mouse.current.delta.x.ReadValue() * viewmodelSwayAmount;
 
         xVelocity = Mathf.Lerp(xVelocity, moveX, snappiness * Time.deltaTime);
 
@@ -55,8 +63,8 @@ public class WeaponSway : MonoBehaviour
     private void VerticalSway()
     {
         //change this to new input :)
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = controls.Player.Movement.ReadValue<Vector2>().x;
+        float horizontal = controls.Player.Movement.ReadValue<Vector2>().y;
 
         Vector3 localPosition = transform.localPosition;
 

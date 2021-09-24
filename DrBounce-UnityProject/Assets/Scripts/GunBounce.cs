@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 public class GunBounce : MonoBehaviour
 {
@@ -12,9 +13,12 @@ public class GunBounce : MonoBehaviour
     [SerializeField] [Range(0.01f, 1f)] float BounceAwayAngleThreshold;
     [SerializeField] [Range(0.6f, 2.5f)] float sideBounceAngleThreshold;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
+    bool throwGunDelay;
     Vector3 handPosition;
     Vector3 originPoint;
     Rigidbody rb;
+
+    public InputMaster controls;
 
     [Header("Feedbacks")]
     public MMFeedbacks BounceFeedback;
@@ -48,18 +52,11 @@ public class GunBounce : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.F) && canThrow)
-        {
-            canThrow = false;
-            Thrown(transform.position);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse2))
-        {
-            ResetScript();
-        }
+        controls = new InputMaster();
+        controls.Player.RecallGun.performed += _ => ResetScript();
+        controls.Player.ThrowGun.performed += _ => throwGunDelay = true;
     }
 
     // Update is called once per frame
@@ -69,25 +66,36 @@ public class GunBounce : MonoBehaviour
         {
             transform.rotation = weaponHolderTransform.rotation;
         }
+
+        if (throwGunDelay)
+        {
+            throwGunDelay = false;
+            Thrown();
+        }
     }
 
-    public void Thrown(Vector3 position)
+    public void Thrown()
     {
-        //when we get out of prototype we need to made the world model seperate from the fp model
-        gameObject.layer = 0;
-        foreach (Transform child in transform) 
-            child.gameObject.layer = 0;
-
-        returning = false;
-        rb.constraints = RigidbodyConstraints.None;
-        transform.parent = null;
-        originPoint = position;
-        Vector3 dir = transform.forward;
-        rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * forceMod;
-
-        foreach(PhysicMaterial mat in physicMaterials)
+        if (canThrow)
         {
-            mat.dynamicFriction = 0.2f; mat.bounciness = .2f;
+            canThrow = false;
+            
+            //when we get out of prototype we need to made the world model seperate from the fp model
+            gameObject.layer = 0;
+            foreach (Transform child in transform)
+                child.gameObject.layer = 0;
+
+            returning = false;
+            rb.constraints = RigidbodyConstraints.None;
+            transform.parent = null;
+            originPoint = transform.position;
+            Vector3 dir = transform.forward;
+            rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * forceMod;
+
+            foreach (PhysicMaterial mat in physicMaterials)
+            {
+                mat.dynamicFriction = 0.2f; mat.bounciness = .2f;
+            }
         }
     }
 
@@ -110,12 +118,12 @@ public class GunBounce : MonoBehaviour
         Vector3 newPos = transform.position;
         if ((dir.y < -BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y > 0) || (dir.y > BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y < 0))
         {
-            newPos = new Vector3((2 * collision.transform.position.x) - (transform.position.x * Mathf.Abs(dir.x)), transform.position.y, (2 * collision.transform.position.z) - (transform.position.z * Mathf.Abs(dir.z)));
+            newPos = new Vector3((2 * collision.transform.position.x) - transform.position.x, transform.position.y, (2 * collision.transform.position.z) - transform.position.z);
             dir.y = -dir.y;
         }
         else
         {
-            newPos = new Vector3((2 * collision.transform.position.x) - (transform.position.x * Mathf.Abs(dir.x)), collision.transform.position.y + (collision.transform.localScale.y / 2), (2 * collision.transform.position.z) - (transform.position.z * Mathf.Abs(dir.z))); ;
+            newPos = new Vector3(collision.transform.position.x + ((collision.transform.localScale.x / 2) * dir.x), collision.transform.position.y + (collision.transform.localScale.y / 2), collision.transform.position.z + ((collision.transform.localScale.z / 2) * dir.z));
         }
 
         transform.position = newPos;
@@ -124,6 +132,9 @@ public class GunBounce : MonoBehaviour
 
     void ResetScript()
     {
+        if(!transform.parent)
+            throwGunDelay = false;
+
         gameObject.layer = 7;
         foreach (Transform child in transform)
             child.gameObject.layer = 7;
@@ -185,5 +196,17 @@ public class GunBounce : MonoBehaviour
             CatchFeedback?.PlayFeedbacks();
             ResetScript();
         }
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.ThrowGun.performed -= _ => Thrown();
+        controls.Player.RecallGun.performed -= _ => ResetScript();
+        controls.Disable();
     }
 }
