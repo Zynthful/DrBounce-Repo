@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MoreMountains.Feedbacks;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+
+    [Header("Feedbacks")]
+    public MMFeedbacks DashFeedback;
+   
 
     Vector3 velocity;
     bool isGrounded;
@@ -94,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
             isDashing = true;
             yield return new WaitForSeconds(dashLength);
             dashesPerformed += 1;
+            DashFeedback?.PlayFeedbacks();
             isDashing = false;
         }
         else 
