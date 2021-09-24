@@ -96,10 +96,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded != true)
         {
+            DashFeedback?.PlayFeedbacks();
             isDashing = true;
             yield return new WaitForSeconds(dashLength);
             dashesPerformed += 1;
-            DashFeedback?.PlayFeedbacks();
+            
             isDashing = false;
         }
         else 
