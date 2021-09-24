@@ -6,6 +6,7 @@ public class Shooting : MonoBehaviour
 {
     [SerializeField] private Gun shooter = null;
     [SerializeField] private GameObject bullet;
+    public InputMaster controls;
 
     [Header("Damage")]
     private int damage = 1;     //current damage value
@@ -32,21 +33,29 @@ public class Shooting : MonoBehaviour
         timeSinceLastShot += Time.deltaTime;
     }
 
+    private void Awake()
+    {
+        controls = new InputMaster();
+        controls.Player.Shoot.performed += _ => Shoot();
+    }
+
     private void OnEnable()
     {
+        controls.Enable();
         GunBounce.OnPickUp += Bounce;
         GunBounce.OnFloorCollision += Reset;
     }
 
     private void OnDisable()
     {
+        controls.Disable();
         GunBounce.OnPickUp -= Bounce;
         GunBounce.OnFloorCollision += Reset;
     }
 
     private void Shoot() 
     {
-        if (transform.parent != null && Input.GetMouseButtonDown(0) && timeSinceLastShot > shooter.fireRate)    //checks the object has a parent and is not already shooting
+        if (transform.parent != null && timeSinceLastShot > shooter.fireRate)    //checks the object has a parent and is not already shooting
         {
             timeSinceLastShot = 0;
 
