@@ -40,7 +40,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            dashesPerformed = 0;
+            if(dashesPerformed > 0)
+            {
+                StartCoroutine(Dash());
+            }
             if (velocity.y < 0)
             {
                 velocity.y = 0f;
@@ -60,10 +63,8 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
 
-
         if (isDashing == true && dashesPerformed < dashesBeforeLanding)
         {
-            dashesPerformed += 1;
             if (controls.Player.Movement.ReadValue<Vector2>().y != 0)
             {
                 Vector3 move2 = transform.forward * z;
@@ -92,7 +93,13 @@ public class PlayerMovement : MonoBehaviour
         {
             isDashing = true;
             yield return new WaitForSeconds(dashLength);
+            dashesPerformed += 1;
             isDashing = false;
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.1f);
+            dashesPerformed = 0;
         }
     }
 
