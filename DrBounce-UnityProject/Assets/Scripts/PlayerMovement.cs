@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if(dashesPerformed > 0)
             {
-                StartCoroutine(Dash());
+                StartCoroutine(StopDash());
             }
             if (velocity.y < 0)
             {
@@ -96,11 +96,15 @@ public class PlayerMovement : MonoBehaviour
             dashesPerformed += 1;
             isDashing = false;
         }
-        else
+        else 
         {
-            yield return new WaitForSeconds(0.1f);
-            dashesPerformed = 0;
+            //this.transform.localScale = new Vector3 (0.5f, 1f, 1f);
         }
+    }
+    IEnumerator StopDash()
+    {
+        yield return new WaitForSeconds(0.1f);
+        dashesPerformed = 0;
     }
 
     private void OnEnable()
