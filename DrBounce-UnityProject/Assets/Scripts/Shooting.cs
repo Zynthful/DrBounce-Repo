@@ -28,8 +28,6 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Shoot();
-
         timeSinceLastShot += Time.deltaTime;
     }
 
