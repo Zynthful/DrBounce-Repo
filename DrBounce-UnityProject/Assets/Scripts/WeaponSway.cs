@@ -19,7 +19,7 @@ public class WeaponSway : MonoBehaviour
     private float waveSlice = 0f;
     private float xVelocity = 0f;
 
-    private float verticalOld = 0.001f; //if this starts at 0 veticalbob doesnt work lmao
+    private float verticalOld = 0f;
 
     public InputMaster controls;
 
@@ -50,11 +50,11 @@ public class WeaponSway : MonoBehaviour
 
         xVelocity = Mathf.Lerp(xVelocity, moveX, snappiness * Time.deltaTime);
 
-        transform.localEulerAngles = Vector3.RotateTowards(transform.forward, Vector3.zero, Time.deltaTime * returnToStartSpeed, 0.0f);
+        transform.localEulerAngles = Vector3.RotateTowards(transform.forward, Vector3.zero, Time.deltaTime * returnToStartSpeed, 0);
 
         transform.Rotate(Vector3.up, xVelocity);
 
-        transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y, 0f);
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
     }
 
     // this will work a lot better if i can get the players velocity directly but for now scuffed method will do :)
@@ -63,38 +63,32 @@ public class WeaponSway : MonoBehaviour
         Vector2 input = controls.Player.Movement.ReadValue<Vector2>();
         Vector3 localPosition = transform.localPosition;
 
-        float invert = (input.y + input.x) >= 0 ? 1 : -1;
-
-        if (verticalOld == 0f)
-            timer = 0.0f;
+        if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
+            timer = 0;
         else
         {
-            waveSlice = Mathf.Sin(timer);
+            waveSlice = (Mathf.Sin(timer) + 1) * 0.5f;
             timer += bobSpeed;
 
             if (timer > Mathf.PI * 2)
                 timer -= (Mathf.PI * 2);
         }
 
-
-        Debug.Log(timer);
-
-        // this is to optimise but there is a very very small chance that this will just stop running if waveslice and verticalold are 0 which is kind of funny to me
         if (waveSlice != 0)
         {
             float translateChange = waveSlice * bobDistance;
             float totalAxes = Mathf.Abs(input.y) + Mathf.Abs(input.x);
-            totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
+            totalAxes = Mathf.Clamp(totalAxes, 0, 1);
 
             verticalOld += ((totalAxes * 2) - 1) * bobTransitionSpeed;
             verticalOld = Mathf.Clamp(verticalOld, 0, 1);
 
-            translateChange = verticalOld * translateChange * invert;
-            localPosition.z = midPoint.z + translateChange;
+            translateChange *= verticalOld;
+            localPosition.y = midPoint.y - translateChange;
         }
         else
         {
-            localPosition.z = midPoint.z;
+            localPosition.y = midPoint.y;
         }
 
         transform.localPosition = localPosition;
