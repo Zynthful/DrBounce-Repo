@@ -5,20 +5,21 @@ using UnityEngine.InputSystem;
 
 public class WeaponSway : MonoBehaviour
 {
-    [SerializeField]
-    private float bobSpeed = 1f;
-    [SerializeField]
-    private float bobDistance = 1f;
-    [SerializeField]
-    private float viewmodelSwayAmount = 1f;
-    [SerializeField]
-    private float viewmodelReturnToStartSpeed = 3f;
-    [SerializeField]
-    private float snappiness = 1f;
+    [Header("Forward Bob")]
+    [SerializeField] private float bobSpeed = 1f; // this should be added to velocity in future
+    [SerializeField] private float bobDistance = 1f; // max distance of bob
+    [SerializeField] private float bobTransitionSpeed = 0.01f;
+
+    [Header("Horizontal Sway")]
+    [SerializeField] private float swayAmount = 1f;
+    [SerializeField] private float returnToStartSpeed = 3f;
+    [SerializeField] private float snappiness = 1f;
 
     private float timer = 0f;
     private float waveSlice = 0f;
     private float xVelocity = 0f;
+
+    private float verticalOld = 0.001f; //if this starts at 0 veticalbob doesnt work lmao
 
     public InputMaster controls;
 
@@ -39,55 +40,56 @@ public class WeaponSway : MonoBehaviour
         if (transform.childCount != 0)
         {
             HorizontalSway();
-            VerticalSway();
+            VerticalBob();
         }
     }
 
     private void HorizontalSway()
     {
-        float moveX = -Mouse.current.delta.x.ReadValue() * viewmodelSwayAmount;
+        float moveX = -Mouse.current.delta.x.ReadValue() * swayAmount;
 
         xVelocity = Mathf.Lerp(xVelocity, moveX, snappiness * Time.deltaTime);
 
-        Vector3 targetDirection = Vector3.zero;
-
-        float singleStep = viewmodelReturnToStartSpeed * Time.deltaTime;
-
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
-
-        transform.localEulerAngles = newDirection;
+        transform.localEulerAngles = Vector3.RotateTowards(transform.forward, Vector3.zero, Time.deltaTime * returnToStartSpeed, 0.0f);
 
         transform.Rotate(Vector3.up, xVelocity);
+
+        transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y, 0f);
     }
 
-    private void VerticalSway()
+    // this will work a lot better if i can get the players velocity directly but for now scuffed method will do :)
+    private void VerticalBob()
     {
-        //change this to new input :)
-        float vertical = controls.Player.Movement.ReadValue<Vector2>().x;
-        float horizontal = controls.Player.Movement.ReadValue<Vector2>().y;
-
+        Vector2 input = controls.Player.Movement.ReadValue<Vector2>();
         Vector3 localPosition = transform.localPosition;
 
-        if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
+        float invert = (input.y + input.x) >= 0 ? 1 : -1;
+
+        if (verticalOld == 0f)
             timer = 0.0f;
         else
         {
             waveSlice = Mathf.Sin(timer);
-            timer = timer + bobSpeed;
+            timer += bobSpeed;
 
             if (timer > Mathf.PI * 2)
-                timer = timer - (Mathf.PI * 2);
+                timer -= (Mathf.PI * 2);
         }
 
+
+        Debug.Log(timer);
+
+        // this is to optimise but there is a very very small chance that this will just stop running if waveslice and verticalold are 0 which is kind of funny to me
         if (waveSlice != 0)
         {
-            //when the values change between 0 and 1 it smoothly interpolates which is a problem :(
-            //maybe it can be fixed with the new input system
-
             float translateChange = waveSlice * bobDistance;
-            float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
+            float totalAxes = Mathf.Abs(input.y) + Mathf.Abs(input.x);
             totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
-            translateChange = totalAxes * translateChange;
+
+            verticalOld += ((totalAxes * 2) - 1) * bobTransitionSpeed;
+            verticalOld = Mathf.Clamp(verticalOld, 0, 1);
+
+            translateChange = verticalOld * translateChange * invert;
             localPosition.z = midPoint.z + translateChange;
         }
         else
@@ -96,5 +98,15 @@ public class WeaponSway : MonoBehaviour
         }
 
         transform.localPosition = localPosition;
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
 }
