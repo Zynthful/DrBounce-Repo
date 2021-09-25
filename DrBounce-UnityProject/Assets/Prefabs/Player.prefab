@@ -108,6 +108,86 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &2677388527681910835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8312137195647732619}
+  - component: {fileID: 6565917891331500461}
+  - component: {fileID: 312058665906554131}
+  m_Layer: 7
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8312137195647732619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677388527681910835}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5587670236240770455}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6565917891331500461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677388527681910835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd1ff8582d01294083b56ac9ad8a7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: f67264980d1e8e049afac84c0276f968, type: 2}
+  chargeRTPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ced433d3ff542e94fb6babb0551958cc, type: 2}
+--- !u!114 &312058665906554131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677388527681910835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6565917891331500461}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: PlayShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3208291316935067588
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +623,7 @@ GameObject:
   - component: {fileID: 5587670236240770452}
   - component: {fileID: 5587670236240770448}
   - component: {fileID: 5587670236240770451}
+  - component: {fileID: 4949567449814967032}
   m_Layer: 7
   m_Name: Gun
   m_TagString: Untagged
@@ -566,6 +647,7 @@ Transform:
   - {fileID: 5587670237693741566}
   - {fileID: 5587670236463760749}
   - {fileID: 5587670236743795882}
+  - {fileID: 8312137195647732619}
   m_Father: {fileID: 899843016412897590}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -622,6 +704,21 @@ MonoBehaviour:
   BounceFeedback: {fileID: 5587670236463760747}
   CatchFeedback: {fileID: 5587670236743795880}
   BounceHitFeedback: {fileID: 0}
+--- !u!114 &4949567449814967032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587670236240770454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982caf2ccfb6f6d4ea3c161b3e029259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shooter: {fileID: 11400000, guid: ef9fd904008473b49a84f3370ddb11d5, type: 2}
+  bullet: {fileID: 3709306784266464277, guid: ae61c80a9568c9447bf09dc3a98be2c2, type: 3}
+  onShoot: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
 --- !u!1 &5587670236342556204
 GameObject:
   m_ObjectHideFlags: 0

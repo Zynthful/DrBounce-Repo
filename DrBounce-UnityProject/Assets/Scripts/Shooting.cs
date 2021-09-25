@@ -18,6 +18,9 @@ public class Shooting : MonoBehaviour
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
 
+    [Header("Events")]
+    [SerializeField]
+    private GameEventInt onShoot = null;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +71,8 @@ public class Shooting : MonoBehaviour
             }
 
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
+
+            onShoot?.Raise(damage);
 
             Debug.LogWarning("BANG!!!");
             Debug.LogWarning("You shot for " + damage);

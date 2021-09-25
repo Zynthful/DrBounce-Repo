@@ -13,12 +13,32 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID GUN_CATCH = 4103136129U;
+        static const AkUniqueID GUN_COLLIDE = 1454043598U;
+        static const AkUniqueID GUN_EQUIP = 3448936664U;
+        static const AkUniqueID GUN_SHOOT = 3498111913U;
+        static const AkUniqueID GUN_THROW = 3098426972U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
     } // namespace EVENTS
+
+    namespace STATES
+    {
+        namespace NEW_STATE_GROUP
+        {
+            static const AkUniqueID GROUP = 2012657067U;
+
+            namespace STATE
+            {
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace NEW_STATE_GROUP
+
+    } // namespace STATES
 
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
+        static const AkUniqueID PLAYER_GUN_CHARGE = 1641787780U;
         static const AkUniqueID RPM = 796049864U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
         static const AkUniqueID SS_AIR_FREEFALL = 3002758120U;
