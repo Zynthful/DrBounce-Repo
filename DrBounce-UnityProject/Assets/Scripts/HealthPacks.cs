@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class HealthPacks : MonoBehaviour
 {
-    private int amountHealed;
+    private int amountHealed = 50;
 
-    private int amountOfBounces = 0;
-    private int healModifier = 3;
+    private bool hasBounced = false;
+    private int healModifier = 2;
+
 
     private bool pickupable;
 
