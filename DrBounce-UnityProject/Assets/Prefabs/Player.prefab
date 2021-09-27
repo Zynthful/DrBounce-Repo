@@ -324,7 +324,7 @@ MonoBehaviour:
   Timing:
     TimescaleMode: 0
     InitialDelay: 0
-    CooldownDuration: 0
+    CooldownDuration: 2
     ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
@@ -718,6 +718,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 11400000, guid: ef9fd904008473b49a84f3370ddb11d5, type: 2}
   bullet: {fileID: 3709306784266464277, guid: ae61c80a9568c9447bf09dc3a98be2c2, type: 3}
+  fpsCam: {fileID: 0}
+  damage: 10
   onShoot: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
 --- !u!1 &5587670236342556204
 GameObject:
@@ -1216,6 +1218,7 @@ MonoBehaviour:
     m_Bits: 64
   DashFeedback: {fileID: 6058571724689869196}
   dashesBeforeLanding: 1
+  cooldownTime: 2
 --- !u!65 &5587670236924705795
 BoxCollider:
   m_ObjectHideFlags: 0
