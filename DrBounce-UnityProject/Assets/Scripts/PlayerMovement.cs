@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     public int dashesBeforeLanding;
     private int dashesPerformed = 0;
 
+    private bool cooldown = false;
+    public float cooldownTime = 2;
+
 
     private void Awake()
     {
@@ -70,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDashing == true && dashesPerformed < dashesBeforeLanding)
         {
+            cooldown = true;
             if (controls.Player.Movement.ReadValue<Vector2>().y != 0)
             {
                 Vector3 move2 = transform.forward * z;
@@ -96,17 +100,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded != true)
         {
-            DashFeedback?.PlayFeedbacks();
-            isDashing = true;
-            yield return new WaitForSeconds(dashLength);
-            dashesPerformed += 1;
-            
-            isDashing = false;
+            if(cooldown == false)
+            {
+                DashFeedback?.PlayFeedbacks();
+                isDashing = true;
+                yield return new WaitForSeconds(dashLength);
+                dashesPerformed += 1;
+
+                isDashing = false;
+            }
+
+            else
+            {
+                yield return new WaitForSeconds(cooldownTime);
+                cooldown = false;
+            }
         }
-        else 
-        {
-            //this.transform.localScale = new Vector3 (0.5f, 1f, 1f);
-        }
+
     }
     IEnumerator StopDash()
     {
