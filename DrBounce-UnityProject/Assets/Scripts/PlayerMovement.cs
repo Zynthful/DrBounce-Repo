@@ -19,10 +19,6 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    [Header("Feedbacks")]
-    public MMFeedbacks DashFeedback;
-   
-
     public Vector3 velocity;
     bool isGrounded;
 
@@ -35,6 +31,10 @@ public class PlayerMovement : MonoBehaviour
     private bool cooldown = false;
     public float cooldownTime = 2;
 
+    private bool isCrouching;
+
+    [Header("Feedbacks")]
+    public MMFeedbacks DashFeedback;
 
     private void Awake()
     {
@@ -44,6 +44,12 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        if(controls.Player.Dash.ReadValue<float>() == 0 && isCrouching == true)
+        {
+            Debug.Log("HeeHoo, I am not crouching");
+            //Add Un-Crouch code
+            isCrouching = false;
+        }
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
 
         if (isGrounded)
@@ -101,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded != true) //If the player is on the ground when they've pressed the dash button
         {
-            if(cooldown == false) //And if the dash cooldown isn't active
+            if (cooldown == false) //And if the dash cooldown isn't active
             {
                 DashFeedback?.PlayFeedbacks(); //Play feedback
                 isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
@@ -116,6 +122,13 @@ public class PlayerMovement : MonoBehaviour
                 yield return new WaitForSeconds(cooldownTime); //If the cooldown is active, wait for cooldown time set, until setting cooldown as false
                 cooldown = false;
             }
+        }
+
+        else
+        {
+            print("Heehoo, I am crouching.");
+            //Add Crouch Code
+            isCrouching = true;
         }
 
     }
