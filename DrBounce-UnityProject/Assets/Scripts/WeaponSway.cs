@@ -12,8 +12,17 @@ public class WeaponSway : MonoBehaviour
 
     [Header("Horizontal Sway")]
     [SerializeField] private float swayAmount = 1f;
-    [SerializeField] private float returnToStartSpeed = 3f;
+    [SerializeField] private float rotateToStartSpeed = 3f;
     [SerializeField] private float snappiness = 1f;
+
+    [Header("Dash/Jump Offset")]
+    [SerializeField] private float returnToStartSpeed = 1f;
+    [SerializeField] private float jumpDistance = 1f;
+    [SerializeField] private float dashDistance = 1f;
+
+    [Header("Falling")]
+    [SerializeField] private float offsetMultiplier = 5f;
+    [SerializeField] private float terminalVelocity = 15f;
 
     private float timer = 0f;
     private float waveSlice = 0f;
@@ -24,10 +33,14 @@ public class WeaponSway : MonoBehaviour
     public InputMaster controls;
 
     private Vector3 midPoint = new Vector3();
+    
+    [SerializeField] private PlayerMovement movement;
 
     private void Awake()
     {
         controls = new InputMaster();
+        //controls.Player.Jump.performed += _ => Offset(Vector3.down, jumpDistance);
+        //controls.Player.Dash.performed += _ => Offset(Vector3.back, dashDistance);
     }
 
     void Start()
@@ -41,8 +54,12 @@ public class WeaponSway : MonoBehaviour
         {
             HorizontalSway();
             VerticalBob();
+            //ReturnToStart();
+            //Falling(movement.velocity.y);
         }
     }
+
+    //brain rot
 
     private void HorizontalSway()
     {
@@ -50,7 +67,7 @@ public class WeaponSway : MonoBehaviour
 
         xVelocity = Mathf.Lerp(xVelocity, moveX, snappiness * Time.deltaTime);
 
-        transform.localEulerAngles = Vector3.RotateTowards(transform.forward, Vector3.zero, Time.deltaTime * returnToStartSpeed, 0);
+        transform.localEulerAngles = Vector3.RotateTowards(transform.forward, Vector3.zero, Time.deltaTime * rotateToStartSpeed, 0);
 
         transform.Rotate(Vector3.up, xVelocity);
 
@@ -71,7 +88,7 @@ public class WeaponSway : MonoBehaviour
             timer += bobSpeed;
 
             if (timer > Mathf.PI * 2)
-                timer -= (Mathf.PI * 2);
+                timer -= Mathf.PI * 2;
         }
 
         if (waveSlice != 0)
@@ -80,7 +97,7 @@ public class WeaponSway : MonoBehaviour
             float totalAxes = Mathf.Abs(input.y) + Mathf.Abs(input.x);
             totalAxes = Mathf.Clamp(totalAxes, 0, 1);
 
-            verticalOld += ((totalAxes * 2) - 1) * bobTransitionSpeed;
+            verticalOld += ((totalAxes * 2) - 1) * bobTransitionSpeed; // when axes are big become big
             verticalOld = Mathf.Clamp(verticalOld, 0, 1);
 
             translateChange *= verticalOld;
@@ -92,6 +109,35 @@ public class WeaponSway : MonoBehaviour
         }
 
         transform.localPosition = localPosition;
+    }
+
+    private void Falling(float yVelocity)
+    {
+        if (!movement.isGrounded && yVelocity != 0f)
+        {
+            yVelocity = 1 - (1 / (yVelocity + 1)); // make it between zero and one when there is no terminal velocity
+            yVelocity = Mathf.Clamp(yVelocity, -1f, 1f);
+            float offset = Mathf.Sqrt(Mathf.Abs((2f * yVelocity) - Mathf.Pow(yVelocity, 2f)));
+            if (yVelocity > 0)
+                offset *= -1;
+
+            offset = Mathf.Clamp(offset, -1f, 1f);
+            transform.localPosition = offset * offsetMultiplier * Vector3.up;
+        }
+        
+    }
+
+    private void Offset(Vector3 direction, float amount)
+    {
+        transform.localPosition += direction * amount;
+
+        //naythumb
+    }
+
+    private void ReturnToStart()
+    {
+        //lerp toward midpoint
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, midPoint, Time.deltaTime * returnToStartSpeed);
     }
 
     private void OnEnable()
