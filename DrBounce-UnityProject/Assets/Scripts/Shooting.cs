@@ -29,6 +29,8 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     private GameEventInt onShoot = null;
 
+    [Header("Feedbacks")]
+    public MMFeedbacks BasicShootFeedback;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +78,7 @@ public class Shooting : MonoBehaviour
             {
                 damage = shooter.baseDamage;
             }
-
+            BasicShootFeedback?.PlayFeedbacks();
             RaycastHit Hitinfo;
             if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, range))
             {
