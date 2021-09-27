@@ -8,8 +8,11 @@ public class Shooting : MonoBehaviour
     [SerializeField] private GameObject bullet;
     public InputMaster controls;
 
+    private float range = 100f;
+    public Camera fpsCam;
+
     [Header("Damage")]
-    private int damage = 1;     //current damage value
+    public int damage = 10;     //current damage value
 
     [Header("Charges")]
     private int amountOfBounces = 0;    //amount of times the gun has been bounced successfully
@@ -70,12 +73,22 @@ public class Shooting : MonoBehaviour
                 damage = shooter.baseDamage;
             }
 
+            RaycastHit Hitinfo;
+            if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, range))
+            {
+                print(Hitinfo.transform.name + " hit!");
+                Enemy enemy = Hitinfo.transform.GetComponent<Enemy>();
+                if(enemy != null)
+                {
+                    enemy.TakeDamage(damage);
+                }
+            }
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
 
             onShoot?.Raise(damage);
 
-            Debug.LogWarning("BANG!!!");
-            Debug.LogWarning("You shot for " + damage);
+            //Debug.LogWarning("BANG!!!");
+            //Debug.LogWarning("You shot for " + damage);
         }
     }
 

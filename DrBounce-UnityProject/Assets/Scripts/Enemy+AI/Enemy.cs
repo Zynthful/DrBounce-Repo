@@ -11,6 +11,16 @@ public class Enemy : MonoBehaviour
         RedForward,
     }
 
+    public float health = 5f;
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
     public EnemyTypes eType;
 
     Enemy()
@@ -30,7 +40,8 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        Destroy(null);
+        print("That's right baby! Our dog, " + this.name + ", is dead!");
+        Destroy(gameObject);
     }
 
     private void Start()
