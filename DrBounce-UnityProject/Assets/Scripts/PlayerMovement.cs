@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Feedbacks")]
     public MMFeedbacks DashFeedback;
-   
 
+    public static Transform player;
     Vector3 velocity;
     bool isGrounded;
 
@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         controls = new InputMaster();
         controls.Player.Jump.performed += _ => Jump();
         controls.Player.Dash.performed += _ => StartCoroutine(Dash());
+        player = this.transform;
     }
     void Update()
     {

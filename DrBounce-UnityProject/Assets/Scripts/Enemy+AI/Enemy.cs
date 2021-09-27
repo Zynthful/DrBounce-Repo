@@ -5,6 +5,9 @@ using MoreMountains.Feedbacks;
 
 public class Enemy : MonoBehaviour
 {
+    public float viewDist;
+    public float sightAngle;
+
     public enum EnemyTypes
     {
         BlueBack,
@@ -23,7 +26,10 @@ public class Enemy : MonoBehaviour
             Die();
         }
     }
+
     public EnemyTypes eType;
+
+    public bool canSeePlayer;
 
     [Header("Feedbacks")]
     public MMFeedbacks HitFeedback;
@@ -36,6 +42,34 @@ public class Enemy : MonoBehaviour
     ~Enemy()
     {
         Die();
+    }
+
+    protected void FixedUpdate()
+    {
+        PlayerLosCheck();
+    }
+
+    protected bool PlayerLosCheck()
+    {
+        if(Vector3.Dot(transform.TransformDirection(Vector3.forward), (PlayerMovement.player.position - transform.position).normalized) > (90 - sightAngle) / 90)
+        {
+            RaycastHit hit;
+
+            Ray ray = new Ray(transform.position, PlayerMovement.player.position);
+
+            Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - transform.position).normalized * viewDist, Color.green);
+
+            if (Physics.Raycast(ray, out hit, viewDist) && hit.transform.CompareTag("Player"))
+            {
+                Debug.Log("SEE PLAYER IN FRONT OF ME");
+                return true;
+            }
+            else
+            {
+                Debug.Log(hit.transform.name);
+            }
+        }
+        return false;
     }
 
     protected GameObject Shoot()
