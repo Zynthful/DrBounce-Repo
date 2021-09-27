@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 public class Shooting : MonoBehaviour
 {
     [SerializeField] private Gun shooter = null;
     [SerializeField] private GameObject bullet;
+
     public InputMaster controls;
+
+
 
     private float range = 100f;
     public Camera fpsCam;

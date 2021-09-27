@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        HitFeedback?.PlayFeedbacks();
         health -= amount;
         if (health <= 0)
         {
@@ -22,6 +24,9 @@ public class Enemy : MonoBehaviour
         }
     }
     public EnemyTypes eType;
+
+    [Header("Feedbacks")]
+    public MMFeedbacks HitFeedback;
 
     Enemy()
     {
