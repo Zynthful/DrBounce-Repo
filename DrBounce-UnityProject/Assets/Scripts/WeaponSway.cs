@@ -111,21 +111,21 @@ public class WeaponSway : MonoBehaviour
         transform.localPosition = localPosition;
     }
 
-    private void Falling(float yVelocity)
-    {
-        if (!movement.isGrounded && yVelocity != 0f)
-        {
-            yVelocity = 1 - (1 / (yVelocity + 1)); // make it between zero and one when there is no terminal velocity
-            yVelocity = Mathf.Clamp(yVelocity, -1f, 1f);
-            float offset = Mathf.Sqrt(Mathf.Abs((2f * yVelocity) - Mathf.Pow(yVelocity, 2f)));
-            if (yVelocity > 0)
-                offset *= -1;
+    //private void Falling(float yVelocity)
+    //{
+    //    if (!movement.isGrounded && yVelocity != 0f)
+    //    {
+    //        yVelocity = 1 - (1 / (yVelocity + 1)); // make it between zero and one when there is no terminal velocity
+    //        yVelocity = Mathf.Clamp(yVelocity, -1f, 1f);
+    //        float offset = Mathf.Sqrt(Mathf.Abs((2f * yVelocity) - Mathf.Pow(yVelocity, 2f)));
+    //        if (yVelocity > 0)
+    //            offset *= -1;
 
-            offset = Mathf.Clamp(offset, -1f, 1f);
-            transform.localPosition = offset * offsetMultiplier * Vector3.up;
-        }
+    //        offset = Mathf.Clamp(offset, -1f, 1f);
+    //        transform.localPosition = offset * offsetMultiplier * Vector3.up;
+    //    }
         
-    }
+    //}
 
     private void Offset(Vector3 direction, float amount)
     {
