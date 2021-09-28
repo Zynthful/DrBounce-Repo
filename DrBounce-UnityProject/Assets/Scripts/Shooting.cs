@@ -31,6 +31,9 @@ public class Shooting : MonoBehaviour
 
     [Header("Feedbacks")]
     public MMFeedbacks BasicShootFeedback;
+    public MMFeedbacks ChargedFeedback;
+
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,7 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         timeSinceLastShot += Time.deltaTime;
+        CheckifCharged();
     }
 
     private void Awake()
@@ -71,12 +75,15 @@ public class Shooting : MonoBehaviour
 
             if (chargesLeft > 0)
             {
+                ChargedFeedback?.PlayFeedbacks();
                 damage = shooter.baseDamage * amountOfBounces * shooter.damageModifier;
                 chargesLeft--;
             }
             else 
             {
+                ChargedFeedback?.StopFeedbacks();
                 damage = shooter.baseDamage;
+
             }
             BasicShootFeedback?.PlayFeedbacks();
             RaycastHit Hitinfo;
@@ -101,7 +108,17 @@ public class Shooting : MonoBehaviour
     private void Bounce() 
     {
         amountOfBounces++;
+        ChargedFeedback?.PlayFeedbacks();
         chargesLeft = shooter.amountOfChargesGiven;
+    }
+
+    private void CheckifCharged()
+    {
+        if (chargesLeft <= 0)
+        {
+            anim.SetTrigger("NoCharge");
+            ChargedFeedback?.StopFeedbacks();
+        }
     }
 
     private void Reset()
