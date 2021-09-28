@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         if(controls.Player.Dash.ReadValue<float>() == 0 && isCrouching == true)
         {
             Debug.Log("HeeHoo, I am not crouching");
+            GetComponent<CharacterController>().height *= 2;
             //Add Un-Crouch code
             isCrouching = false;
         }
@@ -72,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         float z = controls.Player.Movement.ReadValue<Vector2>().y;
 
 
-        Vector3 move = transform.right * x + transform.forward * z; //Creates a value to move the player in local space based on this value.
+        Vector3 move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
 
         controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
 
@@ -132,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
         {
             print("Heehoo, I am crouching.");
             //Add Crouch Code
+            GetComponent<CharacterController>().height /=2 ;
             isCrouching = true;
         }
 
