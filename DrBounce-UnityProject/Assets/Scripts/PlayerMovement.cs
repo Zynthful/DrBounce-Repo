@@ -37,24 +37,36 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isCrouching;
 
+    private CharacterController charController;
+    private float playerHeight;
+    public float crouchSpeed = 5;
+    //private float playerHeight;
 
 
     private void Awake()
     {
+        charController = GetComponent<CharacterController>();
+        playerHeight = charController.height;
+
         controls = new InputMaster(); //Creates a new InputMaster to gain access to mapped controls
         controls.Player.Jump.performed += _ => Jump(); //When the jump action is activated in Input Master, activate the Jump function.
         controls.Player.Dash.performed += _ => StartCoroutine(Dash());
-        player = this.transform;
+        player = transform;
     }
     void Update()
     {
-        if(controls.Player.Dash.ReadValue<float>() == 0 && isCrouching == true)
+        if(controls.Player.Dash.ReadValue<float>() == 1)
         {
-            Debug.Log("HeeHoo, I am not crouching");
-            GetComponent<CharacterController>().height *= 2;
-            //Add Un-Crouch code
-            isCrouching = false;
+            print("Heehoo, I am crouching.");
+            //Add Crouch Code
+            GetComponent<CharacterController>().height *= 0.5f;
         }
+
+        float h = playerHeight;
+        float lastHeight = charController.height;
+        charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
+        transform.position += new Vector3((charController.height - lastHeight) / 2,0,0);
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
 
         if (isGrounded)
@@ -127,14 +139,6 @@ public class PlayerMovement : MonoBehaviour
                 yield return new WaitForSeconds(cooldownTime); //If the cooldown is active, wait for cooldown time set, until setting cooldown as false
                 cooldown = false;
             }
-        }
-
-        else
-        {
-            print("Heehoo, I am crouching.");
-            //Add Crouch Code
-            GetComponent<CharacterController>().height /=2 ;
-            isCrouching = true;
         }
 
     }
