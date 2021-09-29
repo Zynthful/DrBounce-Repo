@@ -14,6 +14,10 @@ public class Enemy : MonoBehaviour
 
     ObjectPooler pool;
 
+    [Header("Feedbacks")]
+    public MMFeedbacks HitFeedback;
+    public MMFeedbacks DeathFeedback;
+
     public enum EnemyTypes
     {
         BlueBack,
@@ -29,6 +33,7 @@ public class Enemy : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
+            DeathFeedback?.PlayFeedbacks();
             Die();
         }
     }
@@ -37,8 +42,7 @@ public class Enemy : MonoBehaviour
 
     public bool canSeePlayer;
 
-    [Header("Feedbacks")]
-    public MMFeedbacks HitFeedback;
+    
 
     Enemy()
     {
@@ -95,7 +99,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         print("That's right baby! Our dog, " + this.name + ", is dead!");
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     private void Start()
