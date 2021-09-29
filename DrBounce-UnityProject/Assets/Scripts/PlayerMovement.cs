@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         float h = playerHeight;
         float lastHeight = charController.height;
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
-        transform.position += new Vector3((charController.height - lastHeight) / 2, 0, 0);
+        transform.position += new Vector3(((charController.height - lastHeight) / 2) * Time.deltaTime, 0, 0);
 
         if (charController.height == playerHeight)
         {
@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
             {
-                velocity.y = 0f;
+                velocity.y = -2f;
             }
         }
 
