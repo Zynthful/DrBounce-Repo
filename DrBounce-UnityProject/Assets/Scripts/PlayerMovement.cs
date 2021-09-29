@@ -39,11 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController charController;
     private float playerHeight;
-    public float crouchSpeed = 5;
     //private float playerHeight;
-
-    private bool templower = false;
-
 
     private void Awake()
     {
@@ -57,26 +53,19 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (controls.Player.Dash.ReadValue<float>() == 1 && isCrouching == true)
-        {
-            print("Heehoo, I am crouching.");
-            templower = true;
-            //Add Crouch Code
-            GetComponent<CharacterController>().height *= 0.5f;
-        }
-        if (controls.Player.Dash.ReadValue<float>() == 0 && templower == true)
-        {
-            if (isCrouching == true)
-            {
-                groundCheck.position -= new Vector3(0, 0.4f, 0);
-            }
-            templower = false;
-        }
-
         float h = playerHeight;
+        if (controls.Player.Dash.ReadValue<float>() == 1 && isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
+        {
+            print("Heehoo, I am a crouching.");
+            h = playerHeight * 0.5f;
+        }
+        if (controls.Player.Dash.ReadValue<float>() == 0 && isCrouching == true)
+        {
+            print("Heehoo, I am no longer a crouching");
+        }
         float lastHeight = charController.height;
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
-        transform.position += new Vector3(((charController.height - lastHeight) / 2) * Time.deltaTime, 0, 0);
+        transform.localPosition += new Vector3 (0, (charController.height - lastHeight) / 2, 0);
 
         if (charController.height == playerHeight)
         {
@@ -163,7 +152,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             isCrouching = true;
-            groundCheck.position += new Vector3(0, 0.4f, 0);
         }
 
     }
