@@ -81,7 +81,7 @@ public class Shooting : MonoBehaviour
             }
             else 
             {
-                ChargedFeedback?.StopFeedbacks();
+                //ChargedFeedback?.StopFeedbacks();
                 damage = shooter.baseDamage;
 
             }
@@ -118,6 +118,11 @@ public class Shooting : MonoBehaviour
         {
             anim.SetTrigger("NoCharge");
             ChargedFeedback?.StopFeedbacks();
+        }
+
+        if (chargesLeft >= 1)
+        {
+            ChargedFeedback?.PlayFeedbacks();
         }
     }
 
