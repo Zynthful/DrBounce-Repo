@@ -42,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
     public float crouchSpeed = 5;
     //private float playerHeight;
 
+    private bool templower = false;
+
 
     private void Awake()
     {
@@ -55,19 +57,28 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if(controls.Player.Dash.ReadValue<float>() == 1 && isCrouching == true)
+        if (controls.Player.Dash.ReadValue<float>() == 1 && isCrouching == true)
         {
             print("Heehoo, I am crouching.");
+            templower = true;
             //Add Crouch Code
             GetComponent<CharacterController>().height *= 0.5f;
+        }
+        if (controls.Player.Dash.ReadValue<float>() == 0 && templower == true)
+        {
+            if (isCrouching == true)
+            {
+                groundCheck.position -= new Vector3(0, 0.4f, 0);
+            }
+            templower = false;
         }
 
         float h = playerHeight;
         float lastHeight = charController.height;
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
-        transform.position += new Vector3((charController.height - lastHeight) / 2,0,0);
+        transform.position += new Vector3((charController.height - lastHeight) / 2, 0, 0);
 
-        if(charController.height == playerHeight)
+        if (charController.height == playerHeight)
         {
             isCrouching = false;
         }
@@ -152,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             isCrouching = true;
+            groundCheck.position += new Vector3(0, 0.4f, 0);
         }
 
     }
