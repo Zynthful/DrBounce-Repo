@@ -105,12 +105,14 @@ public class GunBounce : MonoBehaviour
     {
         Vector3 dir = (originPoint - transform.position).normalized;
         rb.velocity = new Vector3(dir.x, dir.y + .3f, dir.z) * forceMod;
+        originPoint = transform.position;
     }
 
     void BounceUp(Transform enemyTransform)
     {
         transform.position = new Vector3(enemyTransform.position.x, enemyTransform.position.y + (enemyTransform.localScale.y / 2), enemyTransform.position.z);
         rb.velocity = Vector3.up * forceMod;
+        originPoint = transform.position;
     }
 
     void BounceForward(Collision collision)
@@ -122,12 +124,14 @@ public class GunBounce : MonoBehaviour
         Vector3 newPos = transform.position;
         if ((dir.y < -BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y > 0) || (dir.y > BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y < 0))
         {
+            Debug.Log("Top/Bottom bounce");
             newPos = new Vector3((2 * collision.transform.position.x) - transform.position.x, transform.position.y, (2 * collision.transform.position.z) - transform.position.z);
             dir.y = -dir.y - .5f;
         }
         else
         {
             newPos = new Vector3(collision.transform.position.x + ((collision.transform.localScale.x / 2) * dir.x), collision.transform.position.y + (collision.transform.localScale.y / 2), collision.transform.position.z + ((collision.transform.localScale.z / 2) * dir.z));
+            dir.y = .2f;
         }
 
         transform.position = newPos;
