@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if(controls.Player.Dash.ReadValue<float>() == 1)
+        if(controls.Player.Dash.ReadValue<float>() == 1 && isCrouching == true)
         {
             print("Heehoo, I am crouching.");
             //Add Crouch Code
@@ -66,6 +66,11 @@ public class PlayerMovement : MonoBehaviour
         float lastHeight = charController.height;
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
         transform.position += new Vector3((charController.height - lastHeight) / 2,0,0);
+
+        if(charController.height == playerHeight)
+        {
+            isCrouching = false;
+        }
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
 
@@ -122,13 +127,17 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Dash()
     {
+        isCrouching = false;
         if (isGrounded != true) //If the player is on the ground when they've pressed the dash button
         {
             if (cooldown == false) //And if the dash cooldown isn't active
             {
                 DashFeedback?.PlayFeedbacks(); //Play feedback
                 isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
+                float oldGravity = gravity;
+                gravity = 0;
                 yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
+                gravity = oldGravity;
                 dashesPerformed += 1;
 
                 isDashing = false;
@@ -139,6 +148,10 @@ public class PlayerMovement : MonoBehaviour
                 yield return new WaitForSeconds(cooldownTime); //If the cooldown is active, wait for cooldown time set, until setting cooldown as false
                 cooldown = false;
             }
+        }
+        else
+        {
+            isCrouching = true;
         }
 
     }
