@@ -25,8 +25,8 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     /// </summary>
     public void OnObjectSpawn()
     {
-        transform.parent = null;
         rb = GetComponent<Rigidbody>();
+        Debug.Log(dir);
         rb.velocity = dir * speed * Time.fixedDeltaTime;
 
         StartCoroutine(DieTime());
@@ -90,7 +90,7 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     // Basic checks to see if the player should take damage or not
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<BulletMovement>())
+        if (!other.GetComponent<BulletMovement>() && !other.GetComponent<Enemy>())
         {
             if (other.CompareTag("Player"))
             {
