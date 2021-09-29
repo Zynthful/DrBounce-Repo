@@ -7,6 +7,12 @@ public class Enemy : MonoBehaviour
 {
     public float viewDist;
     public float sightAngle;
+    public float rateOfFire;
+    public BulletType bullet;
+
+    bool shootDelay;
+
+    ObjectPooler pool;
 
     public enum EnemyTypes
     {
@@ -36,7 +42,7 @@ public class Enemy : MonoBehaviour
 
     Enemy()
     {
-
+        pool = ObjectPooler.Instance;
     }
 
     ~Enemy()
@@ -46,7 +52,7 @@ public class Enemy : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        PlayerLosCheck();
+        Shoot();
     }
 
     protected bool PlayerLosCheck()
@@ -55,18 +61,16 @@ public class Enemy : MonoBehaviour
         {
             RaycastHit hit;
 
-            Ray ray = new Ray(transform.position, PlayerMovement.player.position);
-
-            Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - transform.position).normalized * viewDist, Color.green);
+            Ray ray = new Ray(transform.position, (PlayerMovement.player.position - transform.position).normalized);
 
             if (Physics.Raycast(ray, out hit, viewDist) && hit.transform.CompareTag("Player"))
             {
-                Debug.Log("SEE PLAYER IN FRONT OF ME");
+                Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - transform.position).normalized * viewDist, Color.green);
                 return true;
             }
             else
             {
-                Debug.Log(hit.transform.name);
+                Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - transform.position).normalized * viewDist, Color.red);
             }
         }
         return false;
@@ -74,6 +78,17 @@ public class Enemy : MonoBehaviour
 
     protected GameObject Shoot()
     {
+        if(PlayerLosCheck())
+        {
+            if(!shootDelay)
+            {
+                shootDelay = true;
+                StartCoroutine(ShotDelay(rateOfFire));
+                pool.SpawnBulletFromPool("Bullet", transform.position, Quaternion.identity, (PlayerMovement.player.position - transform.position).normalized, bullet, null);
+                Debug.Log((PlayerMovement.player.position - transform.position).normalized);
+            }
+            
+        }
         return null;
     }
 
@@ -85,19 +100,28 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        pool = ObjectPooler.Instance;
+        Material mat = GetComponent<MeshRenderer>().material;
         switch (eType)
         {
             case EnemyTypes.BlueBack:
-                GetComponent<MeshRenderer>().material.color = Color.blue;
+                mat.color = Color.blue;
                 break;
 
             case EnemyTypes.YellowUp:
-                GetComponent<MeshRenderer>().material.color = Color.yellow;
+                mat.color = Color.yellow;
                 break;
 
             case EnemyTypes.RedForward:
-                GetComponent<MeshRenderer>().material.color = Color.red;
+                mat.color = Color.red;
                 break;
         }
+        GetComponent<MeshRenderer>().material = mat;
+    }
+
+    IEnumerator ShotDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        shootDelay = false;
     }
 }

@@ -14,6 +14,7 @@ public class GunBounce : MonoBehaviour
     [SerializeField] [Range(0.6f, 2.5f)] float sideBounceAngleThreshold;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     bool throwGunDelay;
+    Transform owner; // The player
     Vector3 handPosition;
     Vector3 originPoint;
     Rigidbody rb;
@@ -38,6 +39,7 @@ public class GunBounce : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        owner = transform.parent.root;
         handPosition = transform.localPosition;
         canThrow = true;
         rb = GetComponent<Rigidbody>();
@@ -193,7 +195,7 @@ public class GunBounce : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && !transform.parent && returning) 
+        if (other.transform.root == owner && !transform.parent && returning) 
         {
             if (inFlight) { OnPickUp?.Invoke(); }
             CatchFeedback?.PlayFeedbacks();
