@@ -7,6 +7,12 @@ public class Enemy : MonoBehaviour
 {
     public float viewDist;
     public float sightAngle;
+    public float rateOfFire;
+    public BulletType bullet;
+
+    bool shootDelay;
+
+    ObjectPooler pool;
 
     public enum EnemyTypes
     {
@@ -36,7 +42,7 @@ public class Enemy : MonoBehaviour
 
     Enemy()
     {
-
+        pool = ObjectPooler.Instance;
     }
 
     ~Enemy()
@@ -46,7 +52,7 @@ public class Enemy : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        PlayerLosCheck();
+        
     }
 
     protected bool PlayerLosCheck()
@@ -74,6 +80,16 @@ public class Enemy : MonoBehaviour
 
     protected GameObject Shoot()
     {
+        if(PlayerLosCheck())
+        {
+            if(!shootDelay)
+            {
+                shootDelay = true;
+                StartCoroutine(ShotDelay(rateOfFire));
+                pool.SpawnBulletFromPool("Bullet", transform.position, Quaternion.identity, (PlayerMovement.player.position - transform.position).normalized, bullet, null);
+            }
+            
+        }
         return null;
     }
 
@@ -85,19 +101,28 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        pool = ObjectPooler.Instance;
+        Material mat = GetComponent<MeshRenderer>().material;
         switch (eType)
         {
             case EnemyTypes.BlueBack:
-                GetComponent<MeshRenderer>().material.color = Color.blue;
+                mat.color = Color.blue;
                 break;
 
             case EnemyTypes.YellowUp:
-                GetComponent<MeshRenderer>().material.color = Color.yellow;
+                mat.color = Color.yellow;
                 break;
 
             case EnemyTypes.RedForward:
-                GetComponent<MeshRenderer>().material.color = Color.red;
+                mat.color = Color.red;
                 break;
         }
+        GetComponent<MeshRenderer>().material = mat;
+    }
+
+    IEnumerator ShotDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        shootDelay = false;
     }
 }
