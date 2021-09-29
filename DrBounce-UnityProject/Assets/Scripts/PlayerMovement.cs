@@ -8,37 +8,37 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
 
+    [Header("Base Movement")]
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
+    public static Transform player;
+    public InputMaster controls;
 
+    [Header("Dashing")]
     public float dashStrength = 25f;
     public float dashLength = 0.1f;
+    public int dashesBeforeLanding;
+    public float cooldownTime = 2;
+    private bool cooldown = false;
+    private bool isDashing = false;
+    private int dashesPerformed = 0;
 
+    [Header("Ground Checking")]
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public float groundDistance = 0.4f;
+    bool isGrounded;
+    public Vector3 velocity;
 
     [Header("Feedbacks")]
     public MMFeedbacks DashFeedback;
 
-    public static Transform player;
-    Vector3 velocity;
-    bool isGrounded;
-
-    public InputMaster controls;
-
-    private bool isDashing = false;
-    public int dashesBeforeLanding;
-    private int dashesPerformed = 0;
-
-    private bool cooldown = false;
-    public float cooldownTime = 2;
-
+    //Crouching:
     private bool isCrouching;
-
     private CharacterController charController;
     private float playerHeight;
+    private float oldSpeed;
     //private float playerHeight;
 
     private void Awake()
@@ -53,30 +53,31 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        print(isCrouching);
         float h = playerHeight;
         if (controls.Player.Dash.ReadValue<float>() == 1 && isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
         {
-            print("Heehoo, I am a crouching.");
             h = playerHeight * 0.5f;
+            print("Heehoo, I am a crouching.");
+
         }
         if (controls.Player.Dash.ReadValue<float>() == 0 && isCrouching == true)
         {
+            speed = oldSpeed;
             print("Heehoo, I am no longer a crouching");
+            isCrouching = false;
         }
         float lastHeight = charController.height;
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
         transform.localPosition += new Vector3 (0, (charController.height - lastHeight) / 2, 0);
 
-        if (charController.height == playerHeight)
-        {
-            isCrouching = false;
-        }
-
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
 
         if (isGrounded)
         {
-            if(dashesPerformed > 0)
+            isDashing = false;
+            dashesPerformed = 0;
+            if (dashesPerformed > 0)
             {
                 StartCoroutine(StopDash()); //Starts coroutine stopdash, which waits a split second after hitting the ground to reset the dash counter.
             }
@@ -85,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = -2f;
             }
         }
-
         float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
         float z = controls.Player.Movement.ReadValue<Vector2>().y;
 
@@ -152,6 +152,8 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             isCrouching = true;
+            oldSpeed = speed;
+            speed /= 2;
         }
 
     }
