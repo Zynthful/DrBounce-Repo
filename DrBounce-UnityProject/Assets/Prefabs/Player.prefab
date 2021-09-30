@@ -1762,6 +1762,8 @@ GameObject:
   m_Component:
   - component: {fileID: 899843016412897590}
   - component: {fileID: 6446166435967452834}
+  - component: {fileID: 108581955465625814}
+  - component: {fileID: 3979080727528194958}
   m_Layer: 0
   m_Name: Weapon Holder
   m_TagString: Untagged
@@ -1809,6 +1811,62 @@ MonoBehaviour:
   offsetMultiplier: 1
   offsetMax: 0.1
   movement: {fileID: 5587670236924705796}
+--- !u!114 &108581955465625814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6531182893470873665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 5ec36698f37a6c04a9b8ea92292716cd, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6446166435967452834}
+        m_TargetAssemblyTypeName: WeaponSway, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3979080727528194958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6531182893470873665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 539dc31165069b14ead0a76396611171, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6446166435967452834}
+        m_TargetAssemblyTypeName: WeaponSway, Assembly-CSharp
+        m_MethodName: Dash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6663724852485678701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2444,14 +2502,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
---- !u!4 &607529983028472092 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
-  m_PrefabInstance: {fileID: 1145277912412507895}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &226782933602530214 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
+  m_PrefabInstance: {fileID: 1145277912412507895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &607529983028472092 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
   m_PrefabInstance: {fileID: 1145277912412507895}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1171614818522279220
