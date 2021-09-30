@@ -73,6 +73,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_PrevLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""77a2b363-166c-49c2-ae47-2736e9618cb3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_NextLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1ede88c-1987-4c06-be7c-61f1c5865bee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -416,6 +432,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d220c5d-4671-4f61-8ca5-dcba108892af"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdd9ffde-f5f0-4530-8705-71b9ed4ce61b"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -459,6 +497,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_RecallGun = m_Player.FindAction("RecallGun", throwIfNotFound: true);
         m_Player_ThrowGun = m_Player.FindAction("ThrowGun", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_DEBUG_PrevLevel = m_Player.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
+        m_Player_DEBUG_NextLevel = m_Player.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -515,6 +555,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_RecallGun;
     private readonly InputAction m_Player_ThrowGun;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_DEBUG_PrevLevel;
+    private readonly InputAction m_Player_DEBUG_NextLevel;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -526,6 +568,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @RecallGun => m_Wrapper.m_Player_RecallGun;
         public InputAction @ThrowGun => m_Wrapper.m_Player_ThrowGun;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @DEBUG_PrevLevel => m_Wrapper.m_Player_DEBUG_PrevLevel;
+        public InputAction @DEBUG_NextLevel => m_Wrapper.m_Player_DEBUG_NextLevel;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -556,6 +600,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @DEBUG_PrevLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
+                @DEBUG_NextLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -581,6 +631,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @DEBUG_PrevLevel.started += instance.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.performed += instance.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.canceled += instance.OnDEBUG_PrevLevel;
+                @DEBUG_NextLevel.started += instance.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.performed += instance.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.canceled += instance.OnDEBUG_NextLevel;
             }
         }
     }
@@ -612,5 +668,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnRecallGun(InputAction.CallbackContext context);
         void OnThrowGun(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnDEBUG_PrevLevel(InputAction.CallbackContext context);
+        void OnDEBUG_NextLevel(InputAction.CallbackContext context);
     }
 }
