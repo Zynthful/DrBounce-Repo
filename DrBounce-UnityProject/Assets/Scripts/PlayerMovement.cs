@@ -34,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Feedbacks")]
     public MMFeedbacks DashFeedback;
 
+    [Header("Events")]
+    [SerializeField] private GameEvent onJump = null;
+    [SerializeField] private GameEvent onDash = null;
+
     //Crouching:
     private bool isCrouching;
     private CharacterController charController;
@@ -122,6 +126,8 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+
+            onJump?.Raise();
         }
     }
 
@@ -136,6 +142,9 @@ public class PlayerMovement : MonoBehaviour
                 isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
                 float oldGravity = gravity;
                 gravity = 0;
+
+                onDash?.Raise();
+
                 yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
                 gravity = oldGravity;
                 dashesPerformed += 1;

@@ -40,8 +40,7 @@ public class WeaponSway : MonoBehaviour
     private void Awake()
     {
         controls = new InputMaster();
-        controls.Player.Jump.performed += _ => Offset(Vector3.down, jumpDistance);
-        controls.Player.Dash.performed += _ => Offset(Vector3.back, dashDistance);
+
     }
 
     void Start()
@@ -149,6 +148,13 @@ public class WeaponSway : MonoBehaviour
         }
         */
     }
+
+    private Vector3 MoveTowardsBob(Vector3 position, Vector3 bobPosition)
+    {
+        float speed = Mathf.Pow(Mathf.Abs(Vector3.Distance(transform.localPosition, bobPosition)), returnToBobSpeed);
+        return Vector3.MoveTowards(position, bobPosition, Time.deltaTime * speed);
+    }
+
     // check for if the action is avaliable in future
     private void Offset(Vector3 direction, float amount)
     {
@@ -157,10 +163,14 @@ public class WeaponSway : MonoBehaviour
         //naythumb
     }
 
-    private Vector3 MoveTowardsBob(Vector3 position, Vector3 bobPosition)
+    public void Jump()
     {
-        float speed = Mathf.Pow(Mathf.Abs(Vector3.Distance(transform.localPosition, bobPosition)), returnToBobSpeed);
-        return Vector3.MoveTowards(position, bobPosition, Time.deltaTime * speed);
+        Offset(Vector3.down, jumpDistance);
+    }
+
+    public void Dash()
+    {
+        Offset(Vector3.back, dashDistance);
     }
 
     private void OnEnable()
