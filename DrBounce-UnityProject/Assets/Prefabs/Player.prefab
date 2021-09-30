@@ -1418,15 +1418,16 @@ MonoBehaviour:
   jumpHeight: 3
   dashStrength: 3
   dashLength: 0.2
+  dashesBeforeLanding: 3
+  cooldownTime: 0.5
   groundCheck: {fileID: 5587670236342556205}
-  groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  groundDistance: 0.4
+  isGrounded: 0
+  velocity: {x: 0, y: 0, z: 0}
   DashFeedback: {fileID: 6058571724689869196}
-  dashesBeforeLanding: 3
-  cooldownTime: 0.5
-  crouchSpeed: 5
 --- !u!1 &5587670237550731325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,15 +1820,15 @@ MonoBehaviour:
   bobSpeed: 0.03
   bobDistance: 0.02
   bobTransitionSpeed: 0.01
-  swayAmount: 0.25
+  swayAmount: 0.35
   rotateToStartSpeed: 3
   snappiness: 10
-  returnToStartSpeed: 2
-  jumpDistance: 1
-  dashDistance: 1
-  offsetMultiplier: 5
-  terminalVelocity: 15
-  movement: {fileID: 0}
+  returnToBobSpeed: 0.75
+  jumpDistance: 0.1
+  dashDistance: 0.125
+  offsetMultiplier: 1
+  offsetMax: 0.1
+  movement: {fileID: 5587670236924705796}
 --- !u!1 &6663724852485678701
 GameObject:
   m_ObjectHideFlags: 0

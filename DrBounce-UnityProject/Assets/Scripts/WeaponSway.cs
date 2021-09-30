@@ -16,19 +16,20 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float snappiness = 1f;
 
     [Header("Dash/Jump Offset")]
-    [SerializeField] private float returnToStartSpeed = 1f;
+    [SerializeField] private float returnToBobSpeed = 1f;
     [SerializeField] private float jumpDistance = 1f;
     [SerializeField] private float dashDistance = 1f;
 
     [Header("Falling")]
     [SerializeField] private float offsetMultiplier = 5f;
-    [SerializeField] private float terminalVelocity = 15f;
+    [SerializeField] private float offsetMax = 1f;
 
     private float timer = 0f;
     private float waveSlice = 0f;
     private float xVelocity = 0f;
 
     private float verticalOld = 0f;
+    private float speedOld = 0f;
 
     public InputMaster controls;
 
@@ -39,8 +40,8 @@ public class WeaponSway : MonoBehaviour
     private void Awake()
     {
         controls = new InputMaster();
-        //controls.Player.Jump.performed += _ => Offset(Vector3.down, jumpDistance);
-        //controls.Player.Dash.performed += _ => Offset(Vector3.back, dashDistance);
+        controls.Player.Jump.performed += _ => Offset(Vector3.down, jumpDistance);
+        controls.Player.Dash.performed += _ => Offset(Vector3.back, dashDistance);
     }
 
     void Start()
@@ -53,14 +54,16 @@ public class WeaponSway : MonoBehaviour
         if (transform.childCount != 0)
         {
             HorizontalSway();
-            VerticalBob();
-            //ReturnToStart();
-            //Falling(movement.velocity.y);
+
+            Vector3 bobPos = CalculateVerticalBob();
+            Vector3 newPos = MoveTowardsBob(transform.localPosition, bobPos);
+            newPos = Falling(movement.velocity.y, newPos);
+
+            transform.localPosition = newPos;
         }
     }
 
-    //brain rot
-
+    // why is this the easiest part of the feature
     private void HorizontalSway()
     {
         float moveX = -Mouse.current.delta.x.ReadValue() * swayAmount;
@@ -75,13 +78,21 @@ public class WeaponSway : MonoBehaviour
     }
 
     // this will work a lot better if i can get the players velocity directly but for now scuffed method will do :)
-    private void VerticalBob()
+    private Vector3 CalculateVerticalBob()
     {
         Vector2 input = controls.Player.Movement.ReadValue<Vector2>();
-        Vector3 localPosition = transform.localPosition;
+        Vector3 localPosition = Vector3.up * verticalOld;
 
         if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
+        {
+            if (speedOld == 0)
+            {
+                return localPosition;
+            }
+
             timer = 0;
+        }
+            
         else
         {
             waveSlice = (Mathf.Sin(timer) + 1) * 0.5f;
@@ -97,10 +108,10 @@ public class WeaponSway : MonoBehaviour
             float totalAxes = Mathf.Abs(input.y) + Mathf.Abs(input.x);
             totalAxes = Mathf.Clamp(totalAxes, 0, 1);
 
-            verticalOld += ((totalAxes * 2) - 1) * bobTransitionSpeed; // when axes are big become big
-            verticalOld = Mathf.Clamp(verticalOld, 0, 1);
+            speedOld += ((totalAxes * 2) - 1) * bobTransitionSpeed; // when axes are big become big
+            speedOld = Mathf.Clamp(speedOld, 0, 1);
 
-            translateChange *= verticalOld;
+            translateChange *= speedOld;
             localPosition.y = midPoint.y - translateChange;
         }
         else
@@ -108,25 +119,37 @@ public class WeaponSway : MonoBehaviour
             localPosition.y = midPoint.y;
         }
 
-        transform.localPosition = localPosition;
+        verticalOld = localPosition.y;
+
+        return localPosition;
     }
 
-    //private void Falling(float yVelocity)
-    //{
-    //    if (!movement.isGrounded && yVelocity != 0f)
-    //    {
-    //        yVelocity = 1 - (1 / (yVelocity + 1)); // make it between zero and one when there is no terminal velocity
-    //        yVelocity = Mathf.Clamp(yVelocity, -1f, 1f);
-    //        float offset = Mathf.Sqrt(Mathf.Abs((2f * yVelocity) - Mathf.Pow(yVelocity, 2f)));
-    //        if (yVelocity > 0)
-    //            offset *= -1;
+    private Vector3 Falling(float yVelocity, Vector3 pos)
+    {
+        if (!movement.isGrounded)
+        {
+            float fallingOffset = Mathf.Clamp(Mathf.Pow(Mathf.Clamp(yVelocity, -10, 10), offsetMultiplier), offsetMax * -1, offsetMax) * Time.deltaTime;
+            pos.y -= fallingOffset;
+        }
 
-    //        offset = Mathf.Clamp(offset, -1f, 1f);
-    //        transform.localPosition = offset * offsetMultiplier * Vector3.up;
-    //    }
-        
-    //}
+        return pos;
 
+        // this code is not what we need but i just dont want to lose it :(
+        /*
+        if (!movement.isGrounded && yVelocity != 0f)
+        {
+            yVelocity = yVelocity / terminalVelocity;
+            yVelocity = Mathf.Clamp(yVelocity, -1f, 1f);
+            float offset = Mathf.Sqrt(Mathf.Abs((2f * yVelocity) - Mathf.Pow(yVelocity, 2f)));
+            if (yVelocity > 0)
+                offset *= -1;
+
+            offset = Mathf.Clamp(offset, -1f, 1f);
+            transform.localPosition = offset * offsetMultiplier * Vector3.up;
+        }
+        */
+    }
+    // check for if the action is avaliable in future
     private void Offset(Vector3 direction, float amount)
     {
         transform.localPosition += direction * amount;
@@ -134,10 +157,10 @@ public class WeaponSway : MonoBehaviour
         //naythumb
     }
 
-    private void ReturnToStart()
+    private Vector3 MoveTowardsBob(Vector3 position, Vector3 bobPosition)
     {
-        //lerp toward midpoint
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, midPoint, Time.deltaTime * returnToStartSpeed);
+        float speed = Mathf.Pow(Mathf.Abs(Vector3.Distance(transform.localPosition, bobPosition)), returnToBobSpeed);
+        return Vector3.MoveTowards(position, bobPosition, Time.deltaTime * speed);
     }
 
     private void OnEnable()

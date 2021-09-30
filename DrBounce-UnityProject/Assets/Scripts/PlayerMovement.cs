@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundMask;
     public float groundDistance = 0.4f;
-    bool isGrounded;
+    [HideInInspector] public bool isGrounded;
     public Vector3 velocity;
 
     [Header("Feedbacks")]
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        print(isCrouching);
+        //print(isCrouching);
         float h = playerHeight;
         if (controls.Player.Dash.ReadValue<float>() == 1 && isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
         {
