@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -42,6 +43,22 @@ public class PauseMenu : MonoBehaviour
         {
             onUnpause?.Raise();
         }
+    }
+
+    public void LoadScene(int index)
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(index);
+    }
+
+    public void QuitToDesktop()
+    {
+        Time.timeScale = 1;
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private void OnEnable()
