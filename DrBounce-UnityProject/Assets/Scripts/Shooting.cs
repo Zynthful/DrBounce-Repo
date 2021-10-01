@@ -85,14 +85,23 @@ public class Shooting : MonoBehaviour
 
             if(chargesLeft > 0)
                 HandleComboShot();
-            else 
+            else if(currentGunMode == GunModes.Basic || chargesLeft <= 0)
             {
                 //ChargedFeedback?.StopFeedbacks();
                 damage = shooter.baseDamage;
-
+                
+                RaycastHit Hitinfo;
+                if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, range))
+                {
+                    print(Hitinfo.transform.name + " hit!");
+                    Enemy enemy = Hitinfo.transform.GetComponent<Enemy>();
+                    if(enemy != null)
+                    {
+                        enemy.TakeDamage(damage);
+                    }
+                }
             }
             BasicShootFeedback?.PlayFeedbacks();
-            
             
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
 
@@ -105,24 +114,12 @@ public class Shooting : MonoBehaviour
 
     private void HandleComboShot()
     {
-    
     	ChargedFeedback?.PlayFeedbacks();
     	
         switch(currentGunMode){
             case GunModes.Basic:
                 damage = (int)(shooter.baseDamage * amountOfBounces * shooter.damageModifier);
                 chargesLeft--;
-
-                RaycastHit Hitinfo;
-                if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, range))
-                {
-                    print(Hitinfo.transform.name + " hit!");
-                    Enemy enemy = Hitinfo.transform.GetComponent<Enemy>();
-                    if(enemy != null)
-                    {
-                        enemy.TakeDamage(damage);
-                    }
-                }
                 break;
 
             case GunModes.Explosives:
