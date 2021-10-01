@@ -129,6 +129,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
+            if(isCrouching == true)
+            {
+                Crouch();
+            }
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
 
             onJump?.Raise();
