@@ -49,6 +49,7 @@ public class Shooting : MonoBehaviour
     [Header("Feedbacks")]
     public MMFeedbacks BasicShootFeedback;
     public MMFeedbacks ChargedFeedback;
+    public MMFeedbacks FirstChargedShotFeedback;
 
     public Animator anim;
     // Start is called before the first frame update
@@ -92,6 +93,7 @@ public class Shooting : MonoBehaviour
 
             if(chargesLeft > 0)
                 HandleComboShot();
+                
             else if(currentGunMode == GunModes.Basic || chargesLeft <= 0)
             {
                 //ChargedFeedback?.StopFeedbacks();
@@ -130,6 +132,7 @@ public class Shooting : MonoBehaviour
                 break;
 
             case GunModes.Explosives:
+                FirstChargedShotFeedback?.PlayFeedbacks();
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", transform.position + transform.TransformDirection(Vector3.forward).normalized * 2.5f, Quaternion.identity, transform.TransformDirection(Vector3.forward).normalized, explosiveShotType, null);
                 obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
                 Reset();
