@@ -76,7 +76,7 @@ public class Shooting : MonoBehaviour
             if (chargesLeft > 0)
             {
                 ChargedFeedback?.PlayFeedbacks();
-                damage = shooter.baseDamage * amountOfBounces * shooter.damageModifier;
+                damage = (int)(shooter.baseDamage * amountOfBounces * shooter.damageModifier);
                 chargesLeft--;
             }
             else 
