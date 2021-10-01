@@ -25,7 +25,11 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     /// </summary>
     public virtual void OnObjectSpawn()
     {
-        rb = GetComponent<Rigidbody>();
+        if(!rb)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        
         Debug.Log(dir);
         rb.velocity = dir * speed * Time.fixedDeltaTime;
 
