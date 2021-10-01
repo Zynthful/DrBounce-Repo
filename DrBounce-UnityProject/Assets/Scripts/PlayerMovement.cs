@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private bool cooldown = false;
     private bool isDashing = false;
     private int dashesPerformed = 0;
+    public bool noMoveAfterDashOnOff;
+    public float noMovementTime;
 
     [Header("Ground Checking")]
     public Transform groundCheck;
@@ -61,17 +63,9 @@ public class PlayerMovement : MonoBehaviour
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
-        if (controls.Player.Crouch.ReadValue<float>() == 1 && isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
+        if (isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
         {
             h = playerHeight * 0.5f;
-            print("Heehoo, I am a crouching.");
-
-        }
-        if (controls.Player.Crouch.ReadValue<float>() == 0 && isCrouching == true)
-        {
-            speed = oldSpeed;
-            print("Heehoo, I am no longer a crouching");
-            isCrouching = false;
         }
         float lastHeight = charController.height;
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
@@ -137,6 +131,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
+            if(isCrouching == true)
+            {
+                Crouch();
+            }
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
 
             onJump?.Raise();
@@ -145,14 +143,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Dash()
     {
-        isCrouching = false;
         if (isGrounded != true && cooldown == false && isDashing == false) //If the player isn't on the ground, if they're not cooling down, and if they're not already dashing.
         {
+            isCrouching = false;
             StartCoroutine(CoolDownTest());
 
             onDash?.Raise();
 
             StartCoroutine(EnableDisableDash());
+            StartCoroutine(NoMoveAfterDash());
+            
         }
     }
 
@@ -160,9 +160,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if(isGrounded == true)
         {
-            isCrouching = true;
-            oldSpeed = speed;
-            speed /= 2;
+            if (isCrouching == true)
+            {
+                print("Heehoo, I am no longer a crouching");
+                isCrouching = false;
+                speed = oldSpeed;
+            }
+            else
+            {
+                print("Heehoo, I am a crouching.");
+                isCrouching = true;
+                oldSpeed = speed;
+                speed /= 2;
+            }
         }
     }
 
@@ -191,6 +201,18 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         dashesPerformed = 0;
+    }
+
+    IEnumerator NoMoveAfterDash()
+    {
+        yield return new WaitForSeconds(dashLength);
+        if(noMoveAfterDashOnOff == true)
+        {
+            float previousSpeed = speed;
+            speed = 0;
+            yield return new WaitForSeconds(noMovementTime);
+            speed = previousSpeed;
+        }
     }
 
     private void OnEnable() //Enables and disables the local version of controls as the gameobject is enabled and disabled.
