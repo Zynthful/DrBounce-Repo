@@ -124,6 +124,11 @@ public class PlayerMovement : MonoBehaviour
                 controller.Move(move2 * dashStrength * speed * Time.deltaTime); //Do the same, to the side.
                 //The X axis is an else if, as it ensures that if the player is holding both Up and Right on the arrowkeys while dashing, they only dash forward
             }
+            else
+            {
+                Vector3 move2 = transform.forward;
+                controller.Move(move2 * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+            }
         }
         #endregion
     }
@@ -144,7 +149,6 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded != true && cooldown == false && isDashing == false) //If the player isn't on the ground, if they're not cooling down, and if they're not already dashing.
         {
             StartCoroutine(CoolDownTest());
-            DashFeedback?.PlayFeedbacks(); //Play feedback
 
             onDash?.Raise();
 
@@ -156,7 +160,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if(isGrounded == true)
         {
-                    print("Crooch");
             isCrouching = true;
             oldSpeed = speed;
             speed /= 2;
@@ -165,13 +168,18 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator EnableDisableDash()
     {
+        isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
+
         float oldGravity = gravity;
         gravity = 0;
-        isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
+        DashFeedback?.PlayFeedbacks(); //Play feedback
+
         yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
-        isDashing = false;
+
         gravity = oldGravity;
         dashesPerformed += 1;
+
+        isDashing = false;
     }
 
     IEnumerator CoolDownTest()
