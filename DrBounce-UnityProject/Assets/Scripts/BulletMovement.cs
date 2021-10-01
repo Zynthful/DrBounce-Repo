@@ -32,12 +32,12 @@ public class BulletMovement : MonoBehaviour, IPooledObject
         StartCoroutine(DieTime());
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         objectPool = ObjectPooler.Instance;
     }
 
-    private List<BezierCurve> GenerateCurves()
+    protected List<BezierCurve> GenerateCurves()
     {
         List<BezierCurve> tempCurves = new List<BezierCurve> { };
 
@@ -58,7 +58,7 @@ public class BulletMovement : MonoBehaviour, IPooledObject
         return tempCurves;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         /* BEZIER CURVE CODE IF WANTED/NEEDED LATER IN PROJECT
         if (isSnowfall && !overrideMovement)
@@ -101,7 +101,7 @@ public class BulletMovement : MonoBehaviour, IPooledObject
         }
     }
 
-    IEnumerator DieTime()
+    protected virtual IEnumerator DieTime()
     {
         // Lifetime for the bullet
         yield return new WaitForSeconds(lifetime);

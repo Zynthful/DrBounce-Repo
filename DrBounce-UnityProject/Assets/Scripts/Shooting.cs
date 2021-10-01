@@ -8,9 +8,19 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Gun shooter = null;
     [SerializeField] private GameObject bullet;
 
+    public enum GunModes
+    {
+        Basic,
+        Explosives,
+    }
+
+    [SerializeField] private GunModes currentGunMode;
+
+    private ObjectPooler pool;
+
+    [SerializeField] BulletType explosiveShotType;
+
     public InputMaster controls;
-
-
 
     private float range = 100f;
     public Camera fpsCam;
@@ -37,7 +47,7 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        pool = ObjectPooler.Instance;
     }
 
     // Update is called once per frame
@@ -73,12 +83,8 @@ public class Shooting : MonoBehaviour
         {
             timeSinceLastShot = 0;
 
-            if (chargesLeft > 0)
-            {
-                ChargedFeedback?.PlayFeedbacks();
-                damage = shooter.baseDamage * amountOfBounces * shooter.damageModifier;
-                chargesLeft--;
-            }
+            if(chargesLeft > 0)
+                HandleComboShot();
             else 
             {
                 //ChargedFeedback?.StopFeedbacks();
@@ -86,22 +92,41 @@ public class Shooting : MonoBehaviour
 
             }
             BasicShootFeedback?.PlayFeedbacks();
-            RaycastHit Hitinfo;
-            if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, range))
-            {
-                print(Hitinfo.transform.name + " hit!");
-                Enemy enemy = Hitinfo.transform.GetComponent<Enemy>();
-                if(enemy != null)
-                {
-                    enemy.TakeDamage(damage);
-                }
-            }
+            
+            
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
 
             onShoot?.Raise(damage);
 
             //Debug.LogWarning("BANG!!!");
             //Debug.LogWarning("You shot for " + damage);
+        }
+    }
+
+    private void HandleComboShot()
+    {
+        switch(currentGunMode){
+            case GunModes.Basic:
+                damage = shooter.baseDamage * amountOfBounces * shooter.damageModifier;
+                chargesLeft--;
+
+                RaycastHit Hitinfo;
+                if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, range))
+                {
+                    print(Hitinfo.transform.name + " hit!");
+                    Enemy enemy = Hitinfo.transform.GetComponent<Enemy>();
+                    if(enemy != null)
+                    {
+                        enemy.TakeDamage(damage);
+                    }
+                }
+                break;
+
+            case GunModes.Explosives:
+                GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", transform.position + transform.TransformDirection(Vector3.forward).normalized * 2.5f, Quaternion.identity, transform.TransformDirection(Vector3.forward).normalized, explosiveShotType, null);
+                obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
+                ChargedFeedback?.StopFeedbacks(); Reset();
+                break;
         }
     }
 
