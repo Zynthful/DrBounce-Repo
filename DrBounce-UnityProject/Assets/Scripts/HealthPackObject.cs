@@ -6,5 +6,5 @@ using UnityEngine;
 public class HealthPackObject : ScriptableObject
 {
     public int Health = 50;
-    public int healModifier = 2;
+    public float healModifier = 2;
 }

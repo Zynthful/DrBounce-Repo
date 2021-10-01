@@ -37,6 +37,8 @@ public class Health : MonoBehaviour
     private void Damage(int amount) 
     {
         health -= amount;
+        Debug.Log(health); 
+
         if (health <= 0) 
         {
             DIE();
@@ -60,11 +62,13 @@ public class Health : MonoBehaviour
     {
         HealthPack.OnEntered += RecieveRequest;
         HealthPack.OnActivated += Heal;
+        BulletMovement.OnHit += Damage;
     }
 
     private void OnDisable()
     {
         HealthPack.OnEntered -= RecieveRequest;
         HealthPack.OnActivated -= Heal;
+        BulletMovement.OnHit -= Damage;
     }
 }

@@ -19,6 +19,9 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     public float bezierPower = -.025f;
     float currentProgress;
 
+    public delegate void Hit(int value);
+    public static event Hit OnHit;
+
     /// <summary>
     /// This function is called when the object pooling system recycles this object
     /// The function will reset all bullet values and variables to default
@@ -95,6 +98,8 @@ public class BulletMovement : MonoBehaviour, IPooledObject
             if (other.CompareTag("Player"))
             {
                 //other.GetComponent<Health>().Damage(dam);
+
+                OnHit?.Invoke(dam);
             }
 
             gameObject.SetActive(false);
