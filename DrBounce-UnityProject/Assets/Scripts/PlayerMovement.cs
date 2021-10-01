@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private bool cooldown = false;
     private bool isDashing = false;
     private int dashesPerformed = 0;
+    public bool noMoveAfterDashOnOff;
+    public float noMovementTime;
 
     [Header("Ground Checking")]
     public Transform groundCheck;
@@ -149,6 +151,8 @@ public class PlayerMovement : MonoBehaviour
             onDash?.Raise();
 
             StartCoroutine(EnableDisableDash());
+            StartCoroutine(NoMoveAfterDash());
+            
         }
     }
 
@@ -197,6 +201,18 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         dashesPerformed = 0;
+    }
+
+    IEnumerator NoMoveAfterDash()
+    {
+        yield return new WaitForSeconds(dashLength);
+        if(noMoveAfterDashOnOff == true)
+        {
+            float previousSpeed = speed;
+            speed = 0;
+            yield return new WaitForSeconds(noMovementTime);
+            speed = previousSpeed;
+        }
     }
 
     private void OnEnable() //Enables and disables the local version of controls as the gameobject is enabled and disabled.
