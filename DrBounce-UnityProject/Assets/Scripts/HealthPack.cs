@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class HealthPack : MonoBehaviour
 {
-    private int storedHealing = 50;
+    [SerializeField] private HealthPackObject healthPack = null;
 
     private bool hasBounced = false;
-    private int healModifier = 2;
-
 
     private bool isPickupable = false;
-
-    private bool activated = false;
+        private bool activated = false;
 
     public delegate void Entered();
     public static event Entered OnEntered;
@@ -31,7 +28,7 @@ public class HealthPack : MonoBehaviour
     {
         if (isPickupable && activated)
         {
-            OnActivated?.Invoke(storedHealing);
+            OnActivated?.Invoke((int)healthPack.Health);
             Destroy(this.gameObject);
         }
     }
