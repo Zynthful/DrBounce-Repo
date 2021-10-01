@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     public MMFeedbacks HitFeedback;
     public MMFeedbacks DeathFeedback;
 
+    //need this for floating text
+    public MMFeedbackFloatingText HitText;
     public enum EnemyTypes
     {
         BlueBack,
@@ -29,6 +31,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        //set hit text value before it is sent off to spawner
+        HitText.Value = amount.ToString();
         HitFeedback?.PlayFeedbacks();
         health -= amount;
         if (health <= 0)
