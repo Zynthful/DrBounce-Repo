@@ -36,8 +36,15 @@ public class Shooting : MonoBehaviour
     private float timeSinceLastShot = 0;
 
     [Header("Events")]
+    // Passes damage fired
     [SerializeField]
     private GameEventInt onShoot = null;
+    // Passes amountOfBounces
+    [SerializeField]
+    private GameEventInt onBounce = null;
+    // Passes chargesLeft
+    [SerializeField]
+    private GameEventInt onGainCharge = null;
 
     [Header("Feedbacks")]
     public MMFeedbacks BasicShootFeedback;
@@ -139,6 +146,9 @@ public class Shooting : MonoBehaviour
         ChargedFeedback?.StopFeedbacks();
         ChargedFeedback?.PlayFeedbacks();
         chargesLeft = shooter.amountOfChargesGiven;
+
+        onBounce?.Raise(amountOfBounces);
+        onGainCharge?.Raise(chargesLeft);
     }
 
     private void CheckifCharged()

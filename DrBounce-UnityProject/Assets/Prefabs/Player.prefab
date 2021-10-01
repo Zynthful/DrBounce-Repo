@@ -265,6 +265,8 @@ GameObject:
   - component: {fileID: 8312137195647732619}
   - component: {fileID: 6565917891331500461}
   - component: {fileID: 312058665906554131}
+  - component: {fileID: 4658609419792141874}
+  - component: {fileID: 6534474088648951600}
   m_Layer: 7
   m_Name: Audio
   m_TagString: Untagged
@@ -302,10 +304,18 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: f67264980d1e8e049afac84c0276f968, type: 2}
-  chargeRTPC:
+  bounceEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  damageRTPC:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: ced433d3ff542e94fb6babb0551958cc, type: 2}
+  chargesRTPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &312058665906554131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +335,62 @@ MonoBehaviour:
       - m_Target: {fileID: 6565917891331500461}
         m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
         m_MethodName: PlayShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4658609419792141874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677388527681910835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9d2693e15688753468f4083136d8ffa6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6565917891331500461}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: PlayBounce
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6534474088648951600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677388527681910835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6565917891331500461}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: UpdateChargesRTPC
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -939,6 +1005,8 @@ MonoBehaviour:
   fpsCam: {fileID: 5587670236126169273}
   damage: 10
   onShoot: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
+  onBounce: {fileID: 0}
+  onGainCharge: {fileID: 0}
   BasicShootFeedback: {fileID: 4545366999181130698}
   ChargedFeedback: {fileID: 4578051724829632361}
   anim: {fileID: 5862399666288358020}
@@ -2939,14 +3007,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e3b58aeb5d45804eb1d00a1e85cd6e5, type: 3}
---- !u!4 &7657612724989820975 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8921264690610799571, guid: 8e3b58aeb5d45804eb1d00a1e85cd6e5, type: 3}
-  m_PrefabInstance: {fileID: 1264382071423370236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &6469476515774164189 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 5207232466269728545, guid: 8e3b58aeb5d45804eb1d00a1e85cd6e5, type: 3}
+  m_PrefabInstance: {fileID: 1264382071423370236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7657612724989820975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8921264690610799571, guid: 8e3b58aeb5d45804eb1d00a1e85cd6e5, type: 3}
   m_PrefabInstance: {fileID: 1264382071423370236}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4237425980925279635
