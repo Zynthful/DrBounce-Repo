@@ -89,6 +89,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""08741584-245b-4eae-b1c1-0eb5c17aeb6e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -454,6 +462,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""DEBUG_NextLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f145941f-8093-456b-b604-4c866a5a7563"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -548,6 +567,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_DEBUG_PrevLevel = m_Player.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
         m_Player_DEBUG_NextLevel = m_Player.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -609,6 +629,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_DEBUG_PrevLevel;
     private readonly InputAction m_Player_DEBUG_NextLevel;
+    private readonly InputAction m_Player_Crouch;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -622,6 +643,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @DEBUG_PrevLevel => m_Wrapper.m_Player_DEBUG_PrevLevel;
         public InputAction @DEBUG_NextLevel => m_Wrapper.m_Player_DEBUG_NextLevel;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -658,6 +680,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DEBUG_NextLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
                 @DEBUG_NextLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
                 @DEBUG_NextLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
+                @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -689,6 +714,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DEBUG_NextLevel.started += instance.OnDEBUG_NextLevel;
                 @DEBUG_NextLevel.performed += instance.OnDEBUG_NextLevel;
                 @DEBUG_NextLevel.canceled += instance.OnDEBUG_NextLevel;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
             }
         }
     }
@@ -755,6 +783,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnDEBUG_PrevLevel(InputAction.CallbackContext context);
         void OnDEBUG_NextLevel(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

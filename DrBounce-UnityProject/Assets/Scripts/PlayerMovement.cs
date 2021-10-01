@@ -52,7 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
         controls = new InputMaster(); //Creates a new InputMaster to gain access to mapped controls
         controls.Player.Jump.performed += _ => Jump(); //When the jump action is activated in Input Master, activate the Jump function.
-        controls.Player.Dash.performed += _ => StartCoroutine(Dash());
+        controls.Player.Dash.performed += _ => Dash();
+        controls.Player.Crouch.performed += _ => Crouch();
         player = transform;
     }
     void Update()
@@ -60,13 +61,13 @@ public class PlayerMovement : MonoBehaviour
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
-        if (controls.Player.Dash.ReadValue<float>() == 1 && isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
+        if (controls.Player.Crouch.ReadValue<float>() == 1 && isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
         {
             h = playerHeight * 0.5f;
             print("Heehoo, I am a crouching.");
 
         }
-        if (controls.Player.Dash.ReadValue<float>() == 0 && isCrouching == true)
+        if (controls.Player.Crouch.ReadValue<float>() == 0 && isCrouching == true)
         {
             speed = oldSpeed;
             print("Heehoo, I am no longer a crouching");
@@ -74,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         }
         float lastHeight = charController.height;
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
-        transform.localPosition += new Vector3 (0, (charController.height - lastHeight) / 2, 0);
+        transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
 
         #endregion
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
@@ -87,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
             if (dashesPerformed > 0)
             {
                 StartCoroutine(StopDash()); //Starts coroutine stopdash, which waits a split second after hitting the ground to reset the dash counter.
-            }
+            } //This delay is to prevent the player being able to dash just before they hit the ground.
             if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
             {
                 velocity.y = -2f;
@@ -110,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing == true && dashesPerformed < dashesBeforeLanding)
         {
             cooldown = true;
+
             if (controls.Player.Movement.ReadValue<Vector2>().y != 0) //If player is moving in the Y axis
             {
                 Vector3 move2 = transform.forward * z;
@@ -136,36 +138,40 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator Dash()
+    void Dash()
     {
         isCrouching = false;
-        if (isGrounded != true) //If the player is on the ground when they've pressed the dash button
+        if (isGrounded != true && cooldown == false && isDashing == false) //If the player isn't on the ground, if they're not cooling down, and if they're not already dashing.
         {
-            if (cooldown == false) //And if the dash cooldown isn't active
-            {
-                StartCoroutine(CoolDownTest());
-                print("Successful Dash");
-                DashFeedback?.PlayFeedbacks(); //Play feedback
-                isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
-                float oldGravity = gravity;
-                gravity = 0;
+            StartCoroutine(CoolDownTest());
+            DashFeedback?.PlayFeedbacks(); //Play feedback
 
-                onDash?.Raise();
+            onDash?.Raise();
 
-                yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
-                gravity = oldGravity;
-                dashesPerformed += 1;
-
-                isDashing = false;
-            }
+            StartCoroutine(EnableDisableDash());
         }
-        else
+    }
+
+    void Crouch()
+    {
+        if(isGrounded == true)
         {
+                    print("Crooch");
             isCrouching = true;
             oldSpeed = speed;
             speed /= 2;
         }
+    }
 
+    IEnumerator EnableDisableDash()
+    {
+        float oldGravity = gravity;
+        gravity = 0;
+        isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
+        yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
+        isDashing = false;
+        gravity = oldGravity;
+        dashesPerformed += 1;
     }
 
     IEnumerator CoolDownTest()
