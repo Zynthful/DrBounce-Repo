@@ -5,33 +5,52 @@ using UnityEngine;
 public class ExplosiveShot : BulletMovement
 {
     public int comboSize;
+    [SerializeField] float explosionSizeMultiplier;
+    [SerializeField] int maxComboSize;
     private SphereCollider explosionTrigger;
 
-    // Start is called before the first frame update
-    override void Start()
+    [SerializeField] [Range(10f, 1000f)] float expansionSpeed;
+    private MeshRenderer shotRenderer;
+    private Rigidbody rb;
+
+    public override void OnObjectSpawn()
     {
-        objectPool = ObjectPooler.Instance;
-        explosionTrigger = transform.GetComponentInChildren<SphereCollider>();
+        if(shotRenderer == null)
+        {
+            explosionTrigger = transform.GetComponentInChildren<SphereCollider>();
+            shotRenderer = GetComponentInChildren<MeshRenderer>();
+            rb = GetComponent<Rigidbody>();
+        }
+        
+        shotRenderer.enabled = true;
         explosionTrigger.enabled = false;
+        
+        base.OnObjectSpawn();
     }
 
-   public override void OnCollisionEnter(Collider other)
+   public void OnCollisionEnter(Collision other)
     {
-        if (!other.GetComponent<BulletMovement>() && !PlayerMovement.player.root)
+        if (!other.transform.GetComponent<BulletMovement>() && other.transform.root != PlayerMovement.player.root)
         {
             explosionTrigger.enabled = true;
 
-            StartCoroutine(ExplosionExpansion);
+            GetComponentInChildren<MeshRenderer>().enabled = false; GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-            gameObject.SetActive(false);
+            StartCoroutine(ExplosionExpansion());
         }
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        return;
     }
 
     IEnumerator ExplosionExpansion()
     {
-        while(explosionTrigger.)
+        while(explosionTrigger.radius < explosionSizeMultiplier * Mathf.Clamp(comboSize, 1, maxComboSize))
         {
-
+            explosionTrigger.radius += ((comboSize * explosionSizeMultiplier) / expansionSpeed);
+            yield return new WaitForSeconds(Time.deltaTime);
         }
         yield return new WaitForSeconds(2);
         gameObject.SetActive(false);

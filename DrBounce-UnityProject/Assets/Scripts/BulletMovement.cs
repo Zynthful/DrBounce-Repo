@@ -23,7 +23,7 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     /// This function is called when the object pooling system recycles this object
     /// The function will reset all bullet values and variables to default
     /// </summary>
-    public void OnObjectSpawn()
+    public virtual void OnObjectSpawn()
     {
         rb = GetComponent<Rigidbody>();
         Debug.Log(dir);
