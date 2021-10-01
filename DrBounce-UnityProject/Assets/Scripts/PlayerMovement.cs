@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        #region Crouching
         //print(isCrouching);
         float h = playerHeight;
         if (controls.Player.Dash.ReadValue<float>() == 1 && isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
@@ -75,8 +76,10 @@ public class PlayerMovement : MonoBehaviour
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
         transform.localPosition += new Vector3 (0, (charController.height - lastHeight) / 2, 0);
 
+        #endregion
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
 
+        #region DashStopping
         if (isGrounded)
         {
             isDashing = false;
@@ -90,19 +93,20 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = -2f;
             }
         }
+        #endregion
+
+        #region Movement
         float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
         float z = controls.Player.Movement.ReadValue<Vector2>().y;
 
 
         Vector3 move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
-
         controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
-
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-
         controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
+        #endregion
 
-
+        #region Dashing
         if (isDashing == true && dashesPerformed < dashesBeforeLanding)
         {
             cooldown = true;
@@ -119,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
                 //The X axis is an else if, as it ensures that if the player is holding both Up and Right on the arrowkeys while dashing, they only dash forward
             }
         }
+        #endregion
     }
 
     private void Jump()
@@ -138,6 +143,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (cooldown == false) //And if the dash cooldown isn't active
             {
+                StartCoroutine(CoolDownTest());
+                print("Successful Dash");
                 DashFeedback?.PlayFeedbacks(); //Play feedback
                 isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
                 float oldGravity = gravity;
@@ -151,12 +158,6 @@ public class PlayerMovement : MonoBehaviour
 
                 isDashing = false;
             }
-
-            else
-            {
-                yield return new WaitForSeconds(cooldownTime); //If the cooldown is active, wait for cooldown time set, until setting cooldown as false
-                cooldown = false;
-            }
         }
         else
         {
@@ -165,6 +166,12 @@ public class PlayerMovement : MonoBehaviour
             speed /= 2;
         }
 
+    }
+
+    IEnumerator CoolDownTest()
+    {
+        yield return new WaitForSeconds(cooldownTime); //If the cooldown is active, wait for cooldown time set, until setting cooldown as false
+        cooldown = false;
     }
     IEnumerator StopDash()
     {
