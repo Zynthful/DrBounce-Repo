@@ -141,9 +141,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Dash()
     {
-        isCrouching = false;
         if (isGrounded != true && cooldown == false && isDashing == false) //If the player isn't on the ground, if they're not cooling down, and if they're not already dashing.
         {
+            isCrouching = false;
             StartCoroutine(CoolDownTest());
 
             onDash?.Raise();
