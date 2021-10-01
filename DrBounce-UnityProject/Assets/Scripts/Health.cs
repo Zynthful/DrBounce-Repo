@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class Health : MonoBehaviour
     public delegate void CurrentHealth();
     public static event CurrentHealth ReportHealth;
 
+    [SerializeField] private Slider slider = null;
+
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -27,6 +31,8 @@ public class Health : MonoBehaviour
     {
         health += amount;
 
+        UpdateUI();
+
         if (health > maxHealth) 
         {
             health = maxHealth;
@@ -37,7 +43,8 @@ public class Health : MonoBehaviour
     private void Damage(int amount) 
     {
         health -= amount;
-        Debug.Log(health); 
+
+        UpdateUI();
 
         if (health <= 0) 
         {
@@ -56,6 +63,16 @@ public class Health : MonoBehaviour
     private void DIE() 
     {
         Debug.Log("DIE (►__◄)");
+    }
+
+    private void UpdateUI()
+    {
+        if(slider != null)
+        {
+            float healthPercent = ((float)health / (float)maxHealth) * 100;
+            slider.value = healthPercent;
+        }
+
     }
 
     private void OnEnable()
