@@ -108,6 +108,7 @@ public class Shooting : MonoBehaviour
     private void Bounce() 
     {
         amountOfBounces++;
+        ChargedFeedback?.StopFeedbacks();
         ChargedFeedback?.PlayFeedbacks();
         chargesLeft = shooter.amountOfChargesGiven;
     }
