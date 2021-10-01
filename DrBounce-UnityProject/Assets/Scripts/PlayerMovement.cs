@@ -61,17 +61,9 @@ public class PlayerMovement : MonoBehaviour
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
-        if (controls.Player.Crouch.ReadValue<float>() == 1 && isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
+        if (isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
         {
             h = playerHeight * 0.5f;
-            print("Heehoo, I am a crouching.");
-
-        }
-        if (controls.Player.Crouch.ReadValue<float>() == 0 && isCrouching == true)
-        {
-            speed = oldSpeed;
-            print("Heehoo, I am no longer a crouching");
-            isCrouching = false;
         }
         float lastHeight = charController.height;
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
@@ -160,9 +152,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if(isGrounded == true)
         {
-            isCrouching = true;
-            oldSpeed = speed;
-            speed /= 2;
+            if (isCrouching == true)
+            {
+                print("Heehoo, I am no longer a crouching");
+                isCrouching = false;
+                speed = oldSpeed;
+            }
+            else
+            {
+                print("Heehoo, I am a crouching.");
+                isCrouching = true;
+                oldSpeed = speed;
+                speed /= 2;
+            }
         }
     }
 
