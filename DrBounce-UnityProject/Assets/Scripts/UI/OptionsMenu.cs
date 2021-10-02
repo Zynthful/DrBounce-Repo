@@ -6,26 +6,57 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
     [Header("Events")]
+
     // Passes mouse sensitivity value
     [SerializeField]
     private GameEventFloat onMouseSensChange = null;
-    // Passes whether crouch mode is Toggle (1/true) or Hold (0/false) - this is an int because Unity's dropdowns pass ints through OnValueChanged()
+
+    // Passes controller sensitivity value
+    [SerializeField]
+    private GameEventFloat onControllerSensChange = null;
+
+    // Passes crouch mode: 1 = Toggle, 0 = Hold - this is an int because Unity's dropdowns pass ints through OnValueChanged()
     [SerializeField]
     private GameEventInt onIsCrouchToggle = null;
 
-    private void Start()
-    {
-        
-    }
+    /*
+    private bool hasUnsavedChanges = false;
 
-    public void SetSensitivity(float value)
+    public bool CheckUnsavedChanges()
+    {
+        return hasUnsavedChanges;
+    }
+    */
+
+    public void SetMouseSensitivity(float value)
     {
         onMouseSensChange?.Raise(value);
-        // PlayerPrefs.SetFloat("Mouse Sensitivity", value);
+        PlayerPrefs.SetFloat("Options/MouseSensitivity", value);
+        // hasUnsavedChanges = true;
+
+        Save();
     }
 
+    public void SetControllerSensitivity(float value)
+    {
+        onControllerSensChange?.Raise(value);
+        PlayerPrefs.SetFloat("Options/ControllerSensitivity", value);
+        // hasUnsavedChanges = true;
+
+        Save();
+    }
     public void SetCrouchMode(int value)
     {
         onIsCrouchToggle?.Raise(value);
+        PlayerPrefs.SetInt("Options/CrouchMode", value);
+        // hasUnsavedChanges = true;
+
+        Save();
     }
+
+    public void Save()
+    {
+        PlayerPrefs.Save();
+    }
+
 }

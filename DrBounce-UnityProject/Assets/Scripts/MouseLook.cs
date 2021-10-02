@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
-
     public float controllerSensitivity = 150f;
 
     public Transform playerBody;
@@ -28,6 +27,10 @@ public class MouseLook : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        // Initialise sensitivity as according to player prefs, or to default if pref does not exist
+        SetMouseSensitivity(PlayerPrefs.GetFloat("Options/MouseSensitivity", mouseSensitivity));
+        SetControllerSensitivity(PlayerPrefs.GetFloat("Options/ControllerSensitivity", controllerSensitivity));
     }
 
     // Update is called once per frame
@@ -55,8 +58,12 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-    public void SetSensitivity(float value)
+    public void SetMouseSensitivity(float value)
     {
         mouseSensitivity = value;
+    }
+    public void SetControllerSensitivity(float value)
+    {
+        controllerSensitivity = value;
     }
 }
