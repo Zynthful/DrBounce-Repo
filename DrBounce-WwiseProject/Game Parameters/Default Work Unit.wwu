@@ -3,13 +3,33 @@
 	<GameParameters>
 		<WorkUnit Name="Default Work Unit" ID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}" PersistMode="Standalone">
 			<ChildrenList>
-				<GameParameter Name="Player_Gun_Charge" ID="{C94EEC60-053D-48CD-A06A-6635F35C5E41}">
-					<PropertyList>
-						<Property Name="InitialValue" Type="Real64" Value="1"/>
-						<Property Name="Max" Type="Real64" Value="20"/>
-						<Property Name="Min" Type="Real64" Value="1"/>
-					</PropertyList>
-				</GameParameter>
+				<Folder Name="Player" ID="{FE740B2A-DE78-465E-A676-BDF93CFDEF0A}" ShortID="76839822">
+					<ChildrenList>
+						<Folder Name="Gun" ID="{3174DDB3-5702-4368-8E81-558A2B9BA082}" ShortID="335200605">
+							<ChildrenList>
+								<GameParameter Name="Player_Gun_Damage" ID="{C94EEC60-053D-48CD-A06A-6635F35C5E41}">
+									<PropertyList>
+										<Property Name="InitialValue" Type="Real64" Value="1"/>
+										<Property Name="Max" Type="Real64" Value="20"/>
+										<Property Name="Min" Type="Real64" Value="1"/>
+									</PropertyList>
+								</GameParameter>
+								<GameParameter Name="Player_Gun_NumOfCharges" ID="{336257D0-FD65-43ED-8A93-0EC61AD829F0}">
+									<PropertyList>
+										<Property Name="InitialValue" Type="Real64" Value="0"/>
+									</PropertyList>
+								</GameParameter>
+								<GameParameter Name="Player_Gun_NumOfBounces" ID="{8451E7EA-2B3B-4793-8F39-FAF075C2E31D}">
+									<PropertyList>
+										<Property Name="InitialValue" Type="Real64" Value="0"/>
+										<Property Name="Max" Type="Real64" Value="99"/>
+									</PropertyList>
+								</GameParameter>
+							</ChildrenList>
+						</Folder>
+						<GameParameter Name="Player_Health_Percentage" ID="{BDE197B6-8BCD-45F3-81C5-2D1074DAA0F1}"/>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</GameParameters>

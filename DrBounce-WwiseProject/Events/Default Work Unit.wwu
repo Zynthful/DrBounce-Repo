@@ -43,7 +43,7 @@
 								<Action Name="" ID="{39F8EDFE-812C-4776-9BA8-39B4200224BF}" ShortID="99691336">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+											<ObjectRef Name="SFX_Gun_Equip_Draft_1_lowerpitch" ID="{10626C7A-8C24-4F16-8714-D316AC10FAAE}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -61,6 +61,13 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
+								<Action Name="" ID="{706F8A2E-9997-43D3-AFD5-26B223100CC1}" ShortID="876610052">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Gun_Charged_Draft_4" ID="{37E73E46-E29A-4D24-8D25-B35C523EB57C}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
 							</ChildrenList>
 						</Event>
 						<Event Name="Gun_Collide" ID="{E34870CE-A51A-40AA-BF06-BD595B34E0D0}">
@@ -69,6 +76,36 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Gun_Charged_Loop" ID="{1FD630F0-A0B7-45A9-8393-4A5305D3248B}">
+							<ChildrenList>
+								<Action Name="" ID="{6441907A-CA63-4416-A80B-98DB7B883A08}" ShortID="1017734039">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Gun_Bounce_Enemy" ID="{101F1357-D625-4651-8686-829FE0520A41}">
+							<ChildrenList>
+								<Action Name="" ID="{44AD956E-3734-4FA5-A574-DF404403EAAE}" ShortID="282233365">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="41"/>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Redneck_Rolls_Dice" ID="{6AE6BE30-4FF7-4603-A035-924457DF7735}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

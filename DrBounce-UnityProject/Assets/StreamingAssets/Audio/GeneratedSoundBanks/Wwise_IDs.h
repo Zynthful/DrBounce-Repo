@@ -13,7 +13,9 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID GUN_BOUNCE_ENEMY = 1677136213U;
         static const AkUniqueID GUN_CATCH = 4103136129U;
+        static const AkUniqueID GUN_CHARGED_LOOP = 2059876165U;
         static const AkUniqueID GUN_COLLIDE = 1454043598U;
         static const AkUniqueID GUN_EQUIP = 3448936664U;
         static const AkUniqueID GUN_SHOOT = 3498111913U;
@@ -38,7 +40,10 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
-        static const AkUniqueID PLAYER_GUN_CHARGE = 1641787780U;
+        static const AkUniqueID PLAYER_GUN_DAMAGE = 3340891403U;
+        static const AkUniqueID PLAYER_GUN_NUMOFBOUNCES = 1762700618U;
+        static const AkUniqueID PLAYER_GUN_NUMOFCHARGES = 854337950U;
+        static const AkUniqueID PLAYER_HEALTH_PERCENTAGE = 3361892810U;
         static const AkUniqueID RPM = 796049864U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
         static const AkUniqueID SS_AIR_FREEFALL = 3002758120U;

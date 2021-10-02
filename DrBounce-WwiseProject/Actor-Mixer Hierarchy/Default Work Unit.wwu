@@ -26,113 +26,219 @@
 						<ActiveSource Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{3EA16A4C-1481-4D2B-9769-AE1E35CE0E2B}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
-				<BlendContainer Name="Gun_Shoot_Charge" ID="{BBA763BA-27FB-4D61-BF90-EE33F2677E4C}" ShortID="247174539">
-					<PropertyList>
-						<Property Name="Volume" Type="Real64">
-							<ValueList>
-								<Value>-8</Value>
-							</ValueList>
-						</Property>
-					</PropertyList>
-					<ReferenceList>
-						<Reference Name="Conversion">
-							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-						</Reference>
-						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-						</Reference>
-					</ReferenceList>
+				<Folder Name="Player" ID="{BEA6B17B-8F56-4372-BD7D-A26D0CB668D9}" ShortID="351425049">
 					<ChildrenList>
-						<Sound Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1" ID="{6133D7CF-3124-41E2-99B7-FE5C858173EF}" ShortID="955235752">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-								</Reference>
-							</ReferenceList>
+						<Folder Name="Gun" ID="{96099805-4BDC-4705-BDAD-0E3FA6F8D8EA}" ShortID="208678441">
 							<ChildrenList>
-								<AudioFileSource Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1" ID="{CCCCFDFA-927E-42C6-888D-0A432BED7EED}">
-									<Language>SFX</Language>
-									<AudioFile>DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="458719144"/>
-									</MediaIDList>
-								</AudioFileSource>
+								<BlendContainer Name="Gun_Shoot_Charge" ID="{BBA763BA-27FB-4D61-BF90-EE33F2677E4C}" ShortID="247174539">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-8</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1" ID="{6133D7CF-3124-41E2-99B7-FE5C858173EF}" ShortID="955235752">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1" ID="{CCCCFDFA-927E-42C6-888D-0A432BED7EED}">
+													<Language>SFX</Language>
+													<AudioFile>DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="458719144"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1" ID="{CCCCFDFA-927E-42C6-888D-0A432BED7EED}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="DrBounce_SFX_Gun_Shoot_Charged_Draft_1" ID="{EC05ED1A-06F6-42AD-856D-73C7F5E46E47}" ShortID="993500469">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-4</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_2" ID="{BAC9441A-3C4C-4414-AD62-D5CB6A75BB0A}">
+													<Language>SFX</Language>
+													<AudioFile>DrBounce_SFX_Gun_Shoot_Uncharged_Draft_2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="125409131"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_2" ID="{BAC9441A-3C4C-4414-AD62-D5CB6A75BB0A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<ObjectLists/>
+									<BlendTrackList>
+										<BlendTrack Name="New Blend Track" ID="{E3B496EC-DCDD-4907-8291-33659EE0EE52}" ShortID="144087020">
+											<PropertyList>
+												<Property Name="EnableCrossFading" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="LayerCrossFadeControlInput">
+													<ObjectRef Name="Player_Gun_Damage" ID="{C94EEC60-053D-48CD-A06A-6635F35C5E41}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+												</Reference>
+											</ReferenceList>
+											<BlendTrackAssocList>
+												<BlendTrackAssoc>
+													<ItemRef Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1" ID="{6133D7CF-3124-41E2-99B7-FE5C858173EF}"/>
+													<CrossfadingInfo>
+														<LeftEdgePos>1</LeftEdgePos>
+														<LeftFadingMode>Automatic</LeftFadingMode>
+														<RightEdgePos>19.9995</RightEdgePos>
+														<RightFadingMode>None</RightFadingMode>
+														<RightFadingSegmentShape>Exp3</RightFadingSegmentShape>
+													</CrossfadingInfo>
+												</BlendTrackAssoc>
+												<BlendTrackAssoc>
+													<ItemRef Name="DrBounce_SFX_Gun_Shoot_Charged_Draft_1" ID="{EC05ED1A-06F6-42AD-856D-73C7F5E46E47}"/>
+													<CrossfadingInfo>
+														<LeftEdgePos>3.57703706624606</LeftEdgePos>
+														<LeftFadingMode>Manual</LeftFadingMode>
+														<LeftFadingPos>8.61148738170347</LeftFadingPos>
+														<RightEdgePos>20</RightEdgePos>
+														<RightFadingMode>Automatic</RightFadingMode>
+													</CrossfadingInfo>
+												</BlendTrackAssoc>
+											</BlendTrackAssocList>
+										</BlendTrack>
+									</BlendTrackList>
+								</BlendContainer>
+								<Sound Name="SFX_Gun_Charged_Draft_4" ID="{37E73E46-E29A-4D24-8D25-B35C523EB57C}" ShortID="589577621">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Gun_Charged_Draft_4" ID="{0B034385-4404-49CD-96B4-D196B4C7B707}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Gun_Charged_Draft_4.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="433525132"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Gun_Charged_Draft_4" ID="{0B034385-4404-49CD-96B4-D196B4C7B707}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" ShortID="309545891">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-10</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Gun_Charged_Loop_Draft_3" ID="{415F4A6B-F6DB-4367-B978-BDABEB9E9279}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Gun_Charged_Loop_Draft_3.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="397801328"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Gun_Charged_Loop_Draft_3" ID="{415F4A6B-F6DB-4367-B978-BDABEB9E9279}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Gun_Equip_Draft_1_lowerpitch" ID="{10626C7A-8C24-4F16-8714-D316AC10FAAE}" ShortID="975152200">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-7</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Gun_Equip_Draft_1_lowerpitch" ID="{6BA299CF-535C-48CE-A4ED-36FA5E32FC04}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Gun_Equip_Draft_1_lowerpitch.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="182925024"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Gun_Equip_Draft_1_lowerpitch" ID="{6BA299CF-535C-48CE-A4ED-36FA5E32FC04}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
-							<ObjectLists/>
-							<ActiveSourceList>
-								<ActiveSource Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1" ID="{CCCCFDFA-927E-42C6-888D-0A432BED7EED}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
-						<Sound Name="DrBounce_SFX_Gun_Shoot_Charged_Draft_1" ID="{EC05ED1A-06F6-42AD-856D-73C7F5E46E47}" ShortID="993500469">
-							<PropertyList>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-7</Value>
-									</ValueList>
-								</Property>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_2" ID="{BAC9441A-3C4C-4414-AD62-D5CB6A75BB0A}">
-									<Language>SFX</Language>
-									<AudioFile>DrBounce_SFX_Gun_Shoot_Uncharged_Draft_2.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="125409131"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ObjectLists/>
-							<ActiveSourceList>
-								<ActiveSource Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_2" ID="{BAC9441A-3C4C-4414-AD62-D5CB6A75BB0A}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
+						</Folder>
 					</ChildrenList>
-					<ObjectLists/>
-					<BlendTrackList>
-						<BlendTrack Name="New Blend Track" ID="{E3B496EC-DCDD-4907-8291-33659EE0EE52}" ShortID="144087020">
-							<PropertyList>
-								<Property Name="EnableCrossFading" Type="bool" Value="True"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="LayerCrossFadeControlInput">
-									<ObjectRef Name="Player_Gun_Charge" ID="{C94EEC60-053D-48CD-A06A-6635F35C5E41}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
-								</Reference>
-							</ReferenceList>
-							<BlendTrackAssocList>
-								<BlendTrackAssoc>
-									<ItemRef Name="DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1" ID="{6133D7CF-3124-41E2-99B7-FE5C858173EF}"/>
-									<CrossfadingInfo>
-										<LeftEdgePos>1</LeftEdgePos>
-										<LeftFadingMode>Automatic</LeftFadingMode>
-										<RightEdgePos>19.9995</RightEdgePos>
-										<RightFadingMode>None</RightFadingMode>
-										<RightFadingSegmentShape>Exp3</RightFadingSegmentShape>
-									</CrossfadingInfo>
-								</BlendTrackAssoc>
-								<BlendTrackAssoc>
-									<ItemRef Name="DrBounce_SFX_Gun_Shoot_Charged_Draft_1" ID="{EC05ED1A-06F6-42AD-856D-73C7F5E46E47}"/>
-									<CrossfadingInfo>
-										<LeftEdgePos>3.57703706624606</LeftEdgePos>
-										<LeftFadingMode>Manual</LeftFadingMode>
-										<LeftFadingPos>8.61148738170347</LeftFadingPos>
-										<RightEdgePos>20</RightEdgePos>
-										<RightFadingMode>Automatic</RightFadingMode>
-									</CrossfadingInfo>
-								</BlendTrackAssoc>
-							</BlendTrackAssocList>
-						</BlendTrack>
-					</BlendTrackList>
-				</BlendContainer>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>
