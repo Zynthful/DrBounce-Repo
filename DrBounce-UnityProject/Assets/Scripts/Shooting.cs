@@ -63,6 +63,16 @@ public class Shooting : MonoBehaviour
     {
         timeSinceLastShot += Time.deltaTime;
         CheckifCharged();
+
+        RaycastHit Reticleinfo;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Reticleinfo, range))
+        {
+            Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                print(enemy.transform.name + " is being hovered over!");
+            }
+        }
     }
 
     private void Awake()
