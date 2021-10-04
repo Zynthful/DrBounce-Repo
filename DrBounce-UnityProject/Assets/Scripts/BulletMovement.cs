@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 public class BulletMovement : MonoBehaviour, IPooledObject
 {
@@ -21,6 +22,9 @@ public class BulletMovement : MonoBehaviour, IPooledObject
 
     public delegate void Hit(int value);
     public static event Hit OnHit;
+
+    [Header("Feedbacks")]
+    public MMFeedbacks DamageFeedback;
 
     /// <summary>
     /// This function is called when the object pooling system recycles this object
@@ -104,6 +108,7 @@ public class BulletMovement : MonoBehaviour, IPooledObject
                 //other.GetComponent<Health>().Damage(dam);
 
                 OnHit?.Invoke(dam);
+                DamageFeedback?.PlayFeedbacks();
             }
 
             gameObject.SetActive(false);
