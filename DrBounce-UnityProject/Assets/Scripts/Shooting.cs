@@ -35,6 +35,7 @@ public class Shooting : MonoBehaviour
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
 
+
     [Header("Events")]
     // Passes damage fired
     [SerializeField]
@@ -46,10 +47,13 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     private GameEventInt onGainCharge = null;
 
+
     [Header("Feedbacks")]
     public MMFeedbacks BasicShootFeedback;
     public MMFeedbacks ChargedFeedback;
     public MMFeedbacks FirstChargedShotFeedback;
+    [SerializeField] ParticleSystem chargedShotPS;
+
 
     public Animator anim;
     // Start is called before the first frame update
@@ -84,15 +88,11 @@ public class Shooting : MonoBehaviour
     private void OnEnable()
     {
         controls.Enable();
-        GunBounce.OnPickUp += Bounce;
-        GunBounce.OnFloorCollision += Reset;
     }
 
     private void OnDisable()
     {
         controls.Disable();
-        GunBounce.OnPickUp -= Bounce;
-        GunBounce.OnFloorCollision += Reset;
     }
 
     private void Shoot() 
@@ -150,15 +150,19 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void Bounce() 
+    public void Bounce() 
     {
         amountOfBounces++;
-        ChargedFeedback?.StopFeedbacks();
-        ChargedFeedback?.PlayFeedbacks();
-        chargesLeft = shooter.amountOfChargesGiven;
+        ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
 
         onBounce?.Raise(amountOfBounces);
         onGainCharge?.Raise(chargesLeft);
+    }
+
+    public void Catch()
+    {
+        chargesLeft = shooter.amountOfChargesGiven;
+        ChargedFeedback?.PlayFeedbacks();
     }
 
     private void CheckifCharged()
@@ -166,7 +170,7 @@ public class Shooting : MonoBehaviour
         if (chargesLeft <= 0)
         {
             anim.SetTrigger("NoCharge");
-            ChargedFeedback?.StopFeedbacks();
+            ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
         }
 
         if (chargesLeft >= 1)
@@ -175,8 +179,10 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void Reset()
+    public void Reset()
     {
+        ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
+        anim.SetTrigger("NoCharge");
         amountOfBounces = 0;
         chargesLeft = 0;
     }

@@ -28,13 +28,11 @@ public class GunBounce : MonoBehaviour
 
     private bool inFlight;
 
-    //event for sending amount of bounces to the shooting script
-    public delegate void PickUp();
-    public static event PickUp OnPickUp;
-
-    //event for the gun hits the floor, causing the gun to lose it's charge
-    public delegate void GunDropped();
-    public static event GunDropped OnFloorCollision;
+    // EVENTS GO HERE:
+    [SerializeField] private GameEvent onBounce = null;
+    [SerializeField] private GameEvent onPickup = null;
+    [SerializeField] private GameEvent onCatch = null;
+    [SerializeField] private GameEvent onDropped = null;
 
     // Start is called before the first frame update
     void Start()
@@ -148,6 +146,7 @@ public class GunBounce : MonoBehaviour
         foreach (Transform child in transform)
             child.gameObject.layer = 7;
 
+
         returning = false;
         canThrow = true;
         inFlight = false;
@@ -165,6 +164,8 @@ public class GunBounce : MonoBehaviour
         {
             returning = true;
             inFlight = true;
+
+            onBounce?.Raise();
 
             BounceFeedback?.PlayFeedbacks();
             collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
@@ -192,7 +193,7 @@ public class GunBounce : MonoBehaviour
                 mat.dynamicFriction = 0.85f; mat.bounciness = 0;
             }
             returning = true;
-            OnFloorCollision?.Invoke();
+            onDropped?.Raise();
             inFlight = false;
         }
     }
@@ -201,7 +202,8 @@ public class GunBounce : MonoBehaviour
     {
         if (other.transform.root == owner && !transform.parent && returning) 
         {
-            if (inFlight) { OnPickUp?.Invoke(); }
+            if (inFlight) { onCatch?.Raise(); }
+            else { onPickup?.Raise(); }
             CatchFeedback?.PlayFeedbacks();
             ResetScript();
         }
