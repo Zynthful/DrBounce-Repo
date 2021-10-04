@@ -12,10 +12,6 @@ public class MouseLook : MonoBehaviour
 
     float xRotation = 0f;
 
-    float controllerX;
-    float controllerY;
-    float xRotationC = 0f;
-
     // Start is called before the first frame update
 
     public InputMaster controls;
@@ -36,26 +32,26 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivity * Time.deltaTime;
-        float MouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivity * Time.deltaTime;
-
-        xRotation -= MouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        playerBody.Rotate(Vector3.up * mouseX);
+        float conX = 0;
+        float conY = 0;
 
         if (Gamepad.current != null)
         {
-            float controllerX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity * Time.deltaTime;
-            float controllerY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity * Time.deltaTime;
-
-            xRotationC -= controllerY;
-            xRotationC = Mathf.Clamp(xRotationC, -90f, 90f);
-
-            transform.localRotation = Quaternion.Euler(xRotationC, 0, 0);
-            playerBody.Rotate(Vector3.up * controllerX);
+            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity * 100f * Time.deltaTime;
+            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity * 100f * Time.deltaTime;
         }
+
+        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivity * 100f * Time.deltaTime;
+        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivity * 100f * Time.deltaTime;
+
+        float camX = conX + mouseX;
+        float camY = conY + mouseY;
+
+        xRotation -= camY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        playerBody.Rotate(Vector3.up * camX);
     }
 
     public void SetMouseSensitivity(float value)
