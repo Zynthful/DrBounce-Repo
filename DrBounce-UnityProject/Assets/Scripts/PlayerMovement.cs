@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
 
         #endregion
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
 
         #region DashStopping
         if (isGrounded)
