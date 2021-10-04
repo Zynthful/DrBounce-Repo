@@ -32,17 +32,19 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.s_Instance.paused) { return; }
+
         float conX = 0;
         float conY = 0;
 
         if (Gamepad.current != null)
         {
-            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity * 100f * Time.deltaTime;
-            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity * 100f * Time.deltaTime;
+            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity * 10f * Time.deltaTime;
+            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity * 10f * Time.deltaTime;
         }
 
-        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivity * 100f * Time.deltaTime;
-        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivity * 100f * Time.deltaTime;
+        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivity * 10f * Time.deltaTime;
+        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivity * 10f * Time.deltaTime;
 
         float camX = conX + mouseX;
         float camY = conY + mouseY;

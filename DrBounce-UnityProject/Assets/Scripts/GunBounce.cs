@@ -56,7 +56,16 @@ public class GunBounce : MonoBehaviour
     {
         controls = new InputMaster();
         controls.Player.RecallGun.performed += _ => ResetScript();
-        controls.Player.ThrowGun.performed += _ => throwGunDelay = true;
+        controls.Player.ThrowGun.performed += _ => SetThrowGunDelay();
+    }
+
+    // Delay throwing to avoid recalling immediately after throwing
+    public void SetThrowGunDelay()
+    {
+        if (!GameManager.s_Instance.paused)
+        {
+            throwGunDelay = true;
+        }
     }
 
     // Update is called once per frame
@@ -76,7 +85,7 @@ public class GunBounce : MonoBehaviour
 
     public void Thrown()
     {
-        if (canThrow)
+        if (!GameManager.s_Instance.paused && canThrow)
         {
             canThrow = false;
             
@@ -139,23 +148,26 @@ public class GunBounce : MonoBehaviour
 
     void ResetScript()
     {
-        if(!transform.parent)
-            throwGunDelay = false;
+        if (!GameManager.s_Instance.paused)
+        {
+            if (!transform.parent)
+                throwGunDelay = false;
 
-        gameObject.layer = 7;
-        foreach (Transform child in transform)
-            child.gameObject.layer = 7;
+            gameObject.layer = 7;
+            foreach (Transform child in transform)
+                child.gameObject.layer = 7;
 
 
-        returning = false;
-        canThrow = true;
-        inFlight = false;
+            returning = false;
+            canThrow = true;
+            inFlight = false;
 
-        rb.velocity = Vector3.zero;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        transform.parent = weaponHolderTransform;
-        transform.localPosition = handPosition;
-        transform.rotation = weaponHolderTransform.rotation;
+            rb.velocity = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            transform.parent = weaponHolderTransform;
+            transform.localPosition = handPosition;
+            transform.rotation = weaponHolderTransform.rotation;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -97,7 +97,11 @@ public class Shooting : MonoBehaviour
 
     private void Shoot() 
     {
-        if (transform.parent != null && timeSinceLastShot > shooter.fireRate)    //checks the object has a parent and is not already shooting
+        // Checks:
+        //  - Is not paused
+        //  - Object has a parent
+        //  - Is not already shooting
+        if (!GameManager.s_Instance.paused && transform.parent != null && timeSinceLastShot > shooter.fireRate)  
         {
             timeSinceLastShot = 0;
 

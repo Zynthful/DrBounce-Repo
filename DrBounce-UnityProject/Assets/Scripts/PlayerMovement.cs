@@ -60,6 +60,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
+        float z = controls.Player.Movement.ReadValue<Vector2>().y;
+
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
@@ -91,14 +94,13 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Movement
-        float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
-        float z = controls.Player.Movement.ReadValue<Vector2>().y;
-
-
-        Vector3 move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
-        controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
-        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-        controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
+        if (!GameManager.s_Instance.paused)
+        {
+            Vector3 move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
+            controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
+            velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
+            controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
+        }
         #endregion
 
         #region Dashing
@@ -129,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (isGrounded)
+        if (!GameManager.s_Instance.paused && isGrounded)
         {
             if(isCrouching == true)
             {
@@ -143,7 +145,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Dash()
     {
-        if (isGrounded != true && cooldown == false && isDashing == false) //If the player isn't on the ground, if they're not cooling down, and if they're not already dashing.
+        // Checks:
+        // - If the game isn't paused
+        // - Not on the ground
+        // - Not cooling down
+        // - Not already dashing
+        if (!GameManager.s_Instance.paused && isGrounded != true && cooldown == false && isDashing == false)
         {
             isCrouching = false;
             StartCoroutine(CoolDownTest());
@@ -158,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Crouch()
     {
-        if(isGrounded == true)
+        if(!GameManager.s_Instance.paused && isGrounded == true)
         {
             if (isCrouching == true)
             {
