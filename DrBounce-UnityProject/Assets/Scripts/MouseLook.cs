@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 100f;
-    public float controllerSensitivity = 150f;
+    public float mouseSensitivity = 4.0f;
+    public float controllerSensitivity = 7.0f;
 
     public Transform playerBody;
 
@@ -39,12 +39,12 @@ public class MouseLook : MonoBehaviour
 
         if (Gamepad.current != null)
         {
-            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity * 10f * Time.deltaTime;
-            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity * 10f * Time.deltaTime;
+            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity * 80.0f * Time.deltaTime;
+            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity * 80.0f * Time.deltaTime;
         }
 
-        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivity * 10f * Time.deltaTime;
-        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivity * 10f * Time.deltaTime;
+        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivity * 10.0f * Time.deltaTime;
+        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivity * 10.0f * Time.deltaTime;
 
         float camX = conX + mouseX;
         float camY = conY + mouseY;
