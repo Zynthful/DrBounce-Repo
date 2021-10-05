@@ -23,20 +23,6 @@ namespace AK
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
     } // namespace EVENTS
 
-    namespace STATES
-    {
-        namespace NEW_STATE_GROUP
-        {
-            static const AkUniqueID GROUP = 2012657067U;
-
-            namespace STATE
-            {
-                static const AkUniqueID NONE = 748895195U;
-            } // namespace STATE
-        } // namespace NEW_STATE_GROUP
-
-    } // namespace STATES
-
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
