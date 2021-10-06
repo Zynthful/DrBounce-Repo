@@ -400,7 +400,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ff54b5f9-2cd5-4fb7-82f8-988a4806ad6b"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -411,7 +411,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2ffa1bbb-9d0e-4fd2-8846-2809bd736077"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
