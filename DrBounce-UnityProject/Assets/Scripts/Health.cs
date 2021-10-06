@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
 {
     private int health = 100;
     private int maxHealth = 100;
+    private float minHealth = 0;
 
     public delegate void CurrentHealth();
     public static event CurrentHealth ReportHealth;
@@ -30,6 +31,9 @@ public class Health : MonoBehaviour
     public MMFeedbacks DamageFeedback;
     public MMFeedbacks DeathFeedback;
 
+    public MMProgressBar progressBar;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +49,7 @@ public class Health : MonoBehaviour
     private void Heal(int amount) 
     {
         onHeal?.Raise(amount);
+        progressBar.UpdateBar(health, minHealth, maxHealth);
 
         health += amount;
 
@@ -64,6 +69,8 @@ public class Health : MonoBehaviour
 
         health -= amount;
 
+        progressBar.UpdateBar(health, minHealth, maxHealth);
+
         onHealthChange?.Raise(100.0f * ((float) health / (float)maxHealth));
 
         if (health <= 0) 
@@ -73,6 +80,9 @@ public class Health : MonoBehaviour
             Invoke("DIE",0.230f);
         }
     }
+
+
+
 
     private void RecieveRequest()
     {
