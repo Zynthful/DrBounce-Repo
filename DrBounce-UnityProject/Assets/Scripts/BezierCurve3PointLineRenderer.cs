@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+
+[RequireComponent(typeof(LineRenderer))]
 public class BezierCurve3PointLineRenderer : MonoBehaviour
 {
 
@@ -12,15 +13,38 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
     private Transform point2;
     [SerializeField]
     private Transform point3;
-    [SerializeField]
+
     private LineRenderer lineRenderer;
 
     [SerializeField]
     private int vertexCount = 12;
 
+    [SerializeField]
+    private float colourDistance = 20f;
+
+    private Material mat = null;
+
+    [SerializeField]
+    private Color colourClose = Color.blue;
+
+    [SerializeField]
+    private Color colourFar = Color.red;
+
+
+    private void Start()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+        mat = lineRenderer.material;
+
+        lineRenderer.startColor = colourClose;
+        lineRenderer.endColor = colourFar;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.s_Instance.paused) { return; }
+
         if (!lineRenderer.enabled) { return; }
 
         point2.localPosition = new Vector3(0, 0, Vector3.Distance(point1.position, point3.position) / 2);
@@ -33,7 +57,9 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
         }
         lineRenderer.positionCount = pointList.Count;
         lineRenderer.SetPositions(pointList.ToArray());
-    }
+
+        mat.SetColor("_Color", Color.Lerp(colourClose, colourFar, Mathf.Clamp(Vector3.Distance(point1.position, point3.position) / colourDistance, 0, 1)));
+    } 
 
     public Vector3 QuadraticBezierCurve(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
