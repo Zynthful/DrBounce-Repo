@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public float sightAngle;
     public float rateOfFire;
     public BulletType bullet;
+    protected bool amDead;
 
     bool shootDelay;
 
@@ -37,6 +38,7 @@ public class Enemy : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
+            GetComponent<Collider>().enabled = false;
             DeathFeedback?.PlayFeedbacks();
             Die();
         }
@@ -60,7 +62,8 @@ public class Enemy : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        Shoot();
+        if (!amDead)
+            Shoot();
     }
 
     protected bool PlayerLosCheck()
@@ -102,6 +105,7 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        amDead = true;
         print("That's right baby! Our dog, " + this.name + ", is dead!");
         //Destroy(gameObject);
     }

@@ -6,7 +6,7 @@ using MoreMountains.Feedbacks;
 public class BulletMovement : MonoBehaviour, IPooledObject
 {
 
-    Rigidbody rb;
+    protected Rigidbody rb;
     public float speed;
     public Vector3 dir;
     public int dam;

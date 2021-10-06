@@ -11,20 +11,20 @@ public class ExplosiveShot : BulletMovement
 
     [SerializeField] [Range(10f, 1000f)] float expansionSpeed;
     private MeshRenderer shotRenderer;
-    private Rigidbody rb;
 
     public override void OnObjectSpawn()
     {
-        if(!shotRenderer)
+        base.OnObjectSpawn();
+        if (!shotRenderer)
         {
             explosionTrigger = transform.GetComponentInChildren<SphereCollider>().gameObject;
             shotRenderer = GetComponentInChildren<MeshRenderer>();
         }
-        
+
         shotRenderer.enabled = true;
         explosionTrigger.SetActive(false);
         
-        base.OnObjectSpawn();
+        rb.constraints = RigidbodyConstraints.None;
     }
 
    public void OnCollisionEnter(Collision other)
@@ -32,6 +32,8 @@ public class ExplosiveShot : BulletMovement
         if (!other.transform.GetComponent<BulletMovement>() && other.transform.root != PlayerMovement.player.root)
         {
             explosionTrigger.SetActive(true);
+
+            rb.constraints = RigidbodyConstraints.FreezeAll;
 
             GetComponentInChildren<MeshRenderer>().enabled = false; GetComponent<Rigidbody>().velocity = Vector3.zero;
 
