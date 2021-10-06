@@ -19,6 +19,11 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private GameEventInt onIsCrouchToggle = null;
 
+    [SerializeField]
+    private GameEventFloat onInitialiseMouseSens = null;
+    [SerializeField]
+    private GameEventFloat onInitialiseControllerSens = null;
+
     /*
     private bool hasUnsavedChanges = false;
 
@@ -27,6 +32,12 @@ public class OptionsMenu : MonoBehaviour
         return hasUnsavedChanges;
     }
     */
+
+    private void Start()
+    {
+        onInitialiseMouseSens?.Raise(PlayerPrefs.GetFloat("Options/MouseSensitivity"));
+        onInitialiseControllerSens?.Raise(PlayerPrefs.GetFloat("Options/ControllerSensitivity"));
+    }
 
     public void SetMouseSensitivity(float value)
     {
@@ -53,6 +64,7 @@ public class OptionsMenu : MonoBehaviour
 
         Save();
     }
+
 
     public void Save()
     {

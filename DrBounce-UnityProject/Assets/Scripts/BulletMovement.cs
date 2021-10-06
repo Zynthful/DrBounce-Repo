@@ -23,6 +23,8 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     public delegate void Hit(int value);
     public static event Hit OnHit;
 
+    [SerializeField] private LayerMask ignoreBullet;
+
     [Header("Feedbacks")]
     public MMFeedbacks DamageFeedback;
 
@@ -71,6 +73,8 @@ public class BulletMovement : MonoBehaviour, IPooledObject
 
     protected virtual void Update()
     {
+        print(ignoreBullet.value);
+
         /* BEZIER CURVE CODE IF WANTED/NEEDED LATER IN PROJECT
         if (isSnowfall && !overrideMovement)
         {
@@ -111,7 +115,12 @@ public class BulletMovement : MonoBehaviour, IPooledObject
                 DamageFeedback?.PlayFeedbacks();
             }
 
-            gameObject.SetActive(false);
+
+            if (other.gameObject.layer == ignoreBullet)
+            {
+                gameObject.SetActive(false);
+            }
+
         }
     }
 
