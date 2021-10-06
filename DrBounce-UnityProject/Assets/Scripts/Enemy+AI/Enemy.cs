@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
 
     //need this for floating text
     public MMFeedbackFloatingText HitText;
+
+    public EnemyAudio enemyAudio = null;
+
     public enum EnemyTypes
     {
         BlueBack,

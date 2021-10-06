@@ -182,8 +182,11 @@ public class GunBounce : MonoBehaviour
             BounceFeedback?.PlayFeedbacks();
             collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
 
+            EnemyAudio audio = collision.gameObject.GetComponent<Enemy>()?.enemyAudio;
+            audio?.PlayBounce();
+
             switch (collision.gameObject.GetComponent<Enemy>().eType)
-            {
+            {                            
                 case Enemy.EnemyTypes.BlueBack:
                     BounceBack();
                     return;
