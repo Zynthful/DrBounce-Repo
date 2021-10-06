@@ -35,6 +35,11 @@ public class Health : MonoBehaviour
         onHealthChange?.Raise(100.0f * ((float)health / (float)maxHealth));
     }
 
+    private void Update()
+    {
+        //print(health);
+    }
+
     private void Heal(int amount) 
     {
         onHeal?.Raise(amount);
@@ -61,8 +66,9 @@ public class Health : MonoBehaviour
 
         if (health <= 0) 
         {
+            Debug.Log("mortis");
             DeathFeedback?.PlayFeedbacks();
-            Invoke("DIE",2f);
+            //Invoke("DIE",2f);
         }
     }
 
