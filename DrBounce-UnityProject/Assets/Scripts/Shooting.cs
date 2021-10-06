@@ -52,6 +52,8 @@ public class Shooting : MonoBehaviour
     public MMFeedbacks BasicShootFeedback;
     public MMFeedbacks ChargedFeedback;
     public MMFeedbacks FirstChargedShotFeedback;
+    public MMFeedbacks HoverOverFeedback;
+    public MMFeedbacks RegularReticleFeedback;
     [SerializeField] ParticleSystem chargedShotPS;
 
 
@@ -74,7 +76,12 @@ public class Shooting : MonoBehaviour
             Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
+                HoverOverFeedback?.PlayFeedbacks();
                 print(enemy.transform.name + " is being hovered over!");
+            }
+            else
+            {
+                RegularReticleFeedback?.PlayFeedbacks();
             }
         }
     }
