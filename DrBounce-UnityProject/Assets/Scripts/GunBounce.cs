@@ -28,11 +28,15 @@ public class GunBounce : MonoBehaviour
 
     private bool inFlight;
 
-    // EVENTS GO HERE:
-    [SerializeField] private GameEvent onBounce = null;
-    [SerializeField] private GameEvent onPickup = null;
-    [SerializeField] private GameEvent onCatch = null;
-    [SerializeField] private GameEvent onDropped = null;
+    [Header("Events")]
+    [SerializeField]
+    private GameEvent onBounce = null;
+    [SerializeField]
+    private GameEvent onPickup = null;
+    [SerializeField]
+    private GameEvent onCatch = null;
+    [SerializeField]
+    private GameEvent onDropped = null;
 
     // Start is called before the first frame update
     void Start()
