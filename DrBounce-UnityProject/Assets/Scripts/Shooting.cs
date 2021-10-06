@@ -76,11 +76,13 @@ public class Shooting : MonoBehaviour
             Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
+                RegularReticleFeedback?.StopFeedbacks();
                 HoverOverFeedback?.PlayFeedbacks();
                 print(enemy.transform.name + " is being hovered over!");
             }
             else
             {
+                HoverOverFeedback?.StopFeedbacks();
                 RegularReticleFeedback?.PlayFeedbacks();
             }
         }
@@ -155,7 +157,7 @@ public class Shooting : MonoBehaviour
 
             case GunModes.Explosives:
                 FirstChargedShotFeedback?.PlayFeedbacks();
-                GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", transform.position + transform.TransformDirection(Vector3.forward).normalized * 2.5f, Quaternion.identity, transform.TransformDirection(Vector3.forward).normalized, explosiveShotType, null);
+                GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.identity, fpsCam.transform.TransformDirection(Vector3.forward).normalized, explosiveShotType, null);
                 obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
                 Reset();
                 break;
