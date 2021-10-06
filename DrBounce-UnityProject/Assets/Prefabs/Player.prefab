@@ -1654,6 +1654,8 @@ MonoBehaviour:
   BasicShootFeedback: {fileID: 4545366999181130698}
   ChargedFeedback: {fileID: 4578051724829632361}
   FirstChargedShotFeedback: {fileID: 3547416809378264515}
+  HoverOverFeedback: {fileID: 0}
+  RegularReticleFeedback: {fileID: 0}
   chargedShotPS: {fileID: 6341533568631161365}
   anim: {fileID: 5862399666288358020}
 --- !u!114 &1184454670035969583
@@ -2267,7 +2269,9 @@ MonoBehaviour:
   controller: {fileID: 5587670236924705797}
   speed: 8
   gravity: -19.62
-  jumpHeight: 4
+  jumpPeak: 3
+  jumpMin: 1
+  jumpSpeed: 1.1
   dashStrength: 4
   dashLength: 0.2
   dashesBeforeLanding: 2
@@ -3467,7 +3471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5207232466269728545, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.9964248
+      value: 0.5018111
       objectReference: {fileID: 0}
     - target: {fileID: 5207232466269728545, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size
