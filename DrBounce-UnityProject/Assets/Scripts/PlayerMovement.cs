@@ -9,30 +9,30 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
 
     [Header("Base Movement")]
-    public float speed = 12f;
-    public float gravity = -9.81f;
+    public float speed = 8f;
+    public float gravity = -19.81f;
     public static Transform player;
     public InputMaster controls;
 
     [Header("Jump")]
     public float jumpPeak = 3f;
     public float jumpMin = 1f;
-    public float jumpSpeed = 1.1f;
+    public float jumpSpeed = 1f;
     private bool jump = false;
     private float jumpHeight = 0f;
     private bool prevJump = false;
     private float prevGrav;
 
     [Header("Dashing")]
-    public float dashStrength = 25f;
-    public float dashLength = 0.1f;
+    public float dashStrength = 4f;
+    public float dashLength = 0.2f;
     public int dashesBeforeLanding;
-    public float cooldownTime = 2;
+    public float cooldownTime = 0.5f;
+    public bool noMoveAfterDashOnOff;
+    public float noMovementTime;
     private bool cooldown = false;
     private bool isDashing = false;
     private int dashesPerformed = 0;
-    public bool noMoveAfterDashOnOff;
-    public float noMovementTime;
 
     [Header("Ground Checking")]
     public Transform groundCheck;
@@ -154,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
             }
             jumpHeight += 0.3f;
 
-            if(jumpHeight >= jumpPeak)
+            if (jumpHeight >= jumpPeak)
             {
                 gravity *= jumpSpeed;
                 jumpHeight = 0;
@@ -162,7 +162,8 @@ public class PlayerMovement : MonoBehaviour
                 prevJump = false;
             }
         }
-        if(controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
+
+        if (controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
         {
             gravity *= jumpSpeed;
             jumpHeight = 0;
