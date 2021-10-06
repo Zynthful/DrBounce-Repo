@@ -26,6 +26,7 @@ public class Health : MonoBehaviour
 
     [Header("Feedbacks")]
     public MMFeedbacks DamageFeedback;
+    public MMFeedbacks DeathFeedback;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +61,8 @@ public class Health : MonoBehaviour
 
         if (health <= 0) 
         {
-            DIE();
+            DeathFeedback?.PlayFeedbacks();
+            Invoke("DIE",2f);
         }
     }
 
