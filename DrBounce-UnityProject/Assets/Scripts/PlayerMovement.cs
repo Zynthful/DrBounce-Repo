@@ -11,9 +11,16 @@ public class PlayerMovement : MonoBehaviour
     [Header("Base Movement")]
     public float speed = 12f;
     public float gravity = -9.81f;
-    public float jumpHeight = 3f;
     public static Transform player;
     public InputMaster controls;
+
+    [Header("Jump")]
+    public float jumpPeak = 3f;
+    public float jumpMin = 1f;
+    public float jumpSpeed = 1.1f;
+    private bool jump = false;
+    private float jumpHeight = 0f;
+    private bool prevJump = false;
 
     [Header("Dashing")]
     public float dashStrength = 25f;
@@ -127,6 +134,38 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         #endregion
+
+        #region Jumping
+
+        if(jump == true)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+        }
+
+        if (controls.Player.Jump.ReadValue<float>() == 1)
+        {
+            if (prevJump == false)
+            {
+                jumpHeight += jumpMin;
+                prevJump = true;
+            }
+
+            jumpHeight += 0.3f;
+
+            if(jumpHeight >= jumpPeak)
+            {
+                jumpHeight = 0;
+                jump = false;
+                prevJump = false;
+            }
+        }
+        else
+        {
+            jumpHeight = 0;
+            jump = false;
+            prevJump = false;
+        }
+        #endregion
     }
 
     private void Jump()
@@ -135,10 +174,9 @@ public class PlayerMovement : MonoBehaviour
         {
             if(isCrouching == true)
             {
-                Crouch();
+                Crouch(); //Un-crouches the player before jumping
             }
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-
+            jump = true;
             onJump?.Raise();
         }
     }
