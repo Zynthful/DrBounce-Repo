@@ -90,6 +90,7 @@ public class Shooting : MonoBehaviour
     {
         controls = new InputMaster();
         controls.Player.Shoot.performed += _ => Shoot();
+        controls.Player.RecallGun.performed += _ => Reset();
     }
 
     private void OnEnable()
