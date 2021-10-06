@@ -2,39 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [RequireComponent(typeof(LineRenderer))]
 public class BezierCurve3PointLineRenderer : MonoBehaviour
 {
 
-    [SerializeField]
-    private Transform point1;
-    [SerializeField]
-    private Transform point2;
-    [SerializeField]
-    private Transform point3;
+    [SerializeField] private Transform point1;
+    [SerializeField] private Transform point2;
+    [SerializeField] private Transform point3;
 
     private LineRenderer lineRenderer;
 
-    [SerializeField]
-    private int vertexCount = 12;
+    [SerializeField] private int vertexCount = 12;
 
-    [SerializeField]
-    private float colourDistance = 20f;
+    [SerializeField] private float colourDistance = 20f;
 
     private Material mat = null;
 
-    [SerializeField]
-    private Color colourClose = Color.blue;
+    [SerializeField] private Color colourClose = Color.blue;
 
-    [SerializeField]
-    private Color colourFar = Color.red;
+    [SerializeField] private Color colourFar = Color.red;
 
 
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        mat = lineRenderer.material;
+        mat = lineRenderer.sharedMaterial;
 
         lineRenderer.startColor = colourClose;
         lineRenderer.endColor = colourFar;
@@ -55,11 +47,14 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
             Vector3 bezierpoint = QuadraticBezierCurve(ratio, point1.position, point2.position, point3.position);
             pointList.Add(bezierpoint);
         }
+
         lineRenderer.positionCount = pointList.Count;
         lineRenderer.SetPositions(pointList.ToArray());
 
-        mat.SetColor("_Color", Color.Lerp(colourClose, colourFar, Mathf.Clamp(Vector3.Distance(point1.position, point3.position) / colourDistance, 0, 1)));
-    } 
+
+        lineRenderer.endColor = Color.Lerp(colourClose, colourFar, Mathf.Clamp(Vector3.Distance(point1.position, point3.position) / colourDistance, 0, 1));
+        //mat.SetColor("_Color", Color.Lerp(colourClose, colourFar, Mathf.Clamp(Vector3.Distance(point1.position, point3.position) / colourDistance, 0, 1)));
+    }
 
     public Vector3 QuadraticBezierCurve(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
