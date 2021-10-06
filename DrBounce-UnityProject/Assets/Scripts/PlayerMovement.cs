@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private bool jump = false;
     private float jumpHeight = 0f;
     private bool prevJump = false;
+    private float prevGrav;
 
     [Header("Dashing")]
     public float dashStrength = 25f;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        prevGrav = gravity;
         charController = GetComponent<CharacterController>();
         playerHeight = charController.height;
 
@@ -87,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         #region DashStopping
         if (isGrounded)
         {
+            gravity = prevGrav;
             isDashing = false;
             dashesPerformed = 0;
             if (dashesPerformed > 0)
@@ -149,18 +152,19 @@ public class PlayerMovement : MonoBehaviour
                 jumpHeight += jumpMin;
                 prevJump = true;
             }
-
             jumpHeight += 0.3f;
 
             if(jumpHeight >= jumpPeak)
             {
+                gravity *= jumpSpeed;
                 jumpHeight = 0;
                 jump = false;
                 prevJump = false;
             }
         }
-        else
+        if(controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
         {
+            gravity *= jumpSpeed;
             jumpHeight = 0;
             jump = false;
             prevJump = false;
@@ -172,6 +176,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused && isGrounded)
         {
+            gravity = prevGrav;
             if(isCrouching == true)
             {
                 Crouch(); //Un-crouches the player before jumping
