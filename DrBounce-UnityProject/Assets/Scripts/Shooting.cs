@@ -37,16 +37,21 @@ public class Shooting : MonoBehaviour
 
 
     [Header("Events")]
+
     // Passes damage fired
     [SerializeField]
     private GameEventInt onShoot = null;
+
     // Passes amountOfBounces
     [SerializeField]
     private GameEventInt onBounce = null;
+
     // Passes chargesLeft
     [SerializeField]
-    private GameEventInt onGainCharge = null;
+    private GameEventInt onChargeUpdate = null;
 
+    [SerializeField]
+    private GameEvent onCatch = null;
 
     [Header("Feedbacks")]
     public MMFeedbacks BasicShootFeedback;
@@ -152,7 +157,7 @@ public class Shooting : MonoBehaviour
         switch(currentGunMode){
             case GunModes.Basic:
                 damage = (int)(shooter.baseDamage * amountOfBounces * shooter.damageModifier);
-                chargesLeft--;
+                AddCharge(-1);
                 break;
 
             case GunModes.Explosives:
@@ -170,12 +175,11 @@ public class Shooting : MonoBehaviour
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
 
         onBounce?.Raise(amountOfBounces);
-        onGainCharge?.Raise(chargesLeft);
     }
 
     public void Catch()
     {
-        chargesLeft = shooter.amountOfChargesGiven;
+        AddCharge(-chargesLeft + shooter.amountOfChargesGiven); // Set chargesLeft = shooter.amountOfChargesGiven
         ChargedFeedback?.PlayFeedbacks();
     }
 
@@ -198,6 +202,13 @@ public class Shooting : MonoBehaviour
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
         anim.SetTrigger("NoCharge");
         amountOfBounces = 0;
-        chargesLeft = 0;
+        AddCharge(-chargesLeft); // Set chargesLeft = 0
+    }
+
+    // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
+    public void AddCharge(int value)
+    {
+        chargesLeft += value;
+        onChargeUpdate?.Raise(chargesLeft);
     }
 }
