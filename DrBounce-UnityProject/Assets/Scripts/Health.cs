@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MoreMountains.Feedbacks;
+using UnityEngine.SceneManagement;
 
 
 public class Health : MonoBehaviour
@@ -68,7 +69,7 @@ public class Health : MonoBehaviour
         {
             Debug.Log("mortis");
             DeathFeedback?.PlayFeedbacks();
-            //Invoke("DIE",2f);
+            Invoke("DIE",0.230f);
         }
     }
 
@@ -82,6 +83,8 @@ public class Health : MonoBehaviour
 
     private void DIE() 
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
         Debug.Log("DIE (►__◄)");
     }
 
