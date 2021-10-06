@@ -13,11 +13,12 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID ENEMY_GUN_BOUNCE_IMPACT = 177975784U;
         static const AkUniqueID GUN_BOUNCE_ENEMY = 1677136213U;
         static const AkUniqueID GUN_CATCH = 4103136129U;
         static const AkUniqueID GUN_CHARGED_LOOP = 2059876165U;
         static const AkUniqueID GUN_COLLIDE = 1454043598U;
-        static const AkUniqueID GUN_EQUIP = 3448936664U;
+        static const AkUniqueID GUN_PICKUP = 4088467408U;
         static const AkUniqueID GUN_SHOOT = 3498111913U;
         static const AkUniqueID GUN_THROW = 3098426972U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;

@@ -34,7 +34,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-8</Value>
+												<Value>-6</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -144,36 +144,6 @@
 										</BlendTrack>
 									</BlendTrackList>
 								</BlendContainer>
-								<Sound Name="SFX_Gun_Charged_Draft_4" ID="{37E73E46-E29A-4D24-8D25-B35C523EB57C}" ShortID="589577621">
-									<PropertyList>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_Gun_Charged_Draft_4" ID="{0B034385-4404-49CD-96B4-D196B4C7B707}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_Gun_Charged_Draft_4.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="433525132"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ObjectLists/>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_Gun_Charged_Draft_4" ID="{0B034385-4404-49CD-96B4-D196B4C7B707}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
 								<Sound Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" ShortID="309545891">
 									<PropertyList>
 										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
@@ -209,7 +179,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-7</Value>
+												<Value>-15</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -241,7 +211,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-8</Value>
+														<Value>-13</Value>
 													</ValueList>
 													<RTPCList>
 														<RTPC Name="" ID="{F4565C07-C330-4B8C-B1A6-EBE3C004B99B}" ShortID="528825144">
@@ -267,7 +237,7 @@
 																	</Point>
 																	<Point>
 																		<XPos>2</XPos>
-																		<YPos>-0</YPos>
+																		<YPos>0</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -317,7 +287,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-8</Value>
+														<Value>-13</Value>
 													</ValueList>
 													<RTPCList>
 														<RTPC Name="" ID="{95C9DA15-0EF7-47E6-9CD6-B61BDB46B4DC}" ShortID="100139941">
@@ -343,7 +313,7 @@
 																	</Point>
 																	<Point>
 																		<XPos>4</XPos>
-																		<YPos>-0</YPos>
+																		<YPos>0</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -388,7 +358,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-8</Value>
+														<Value>-13</Value>
 													</ValueList>
 													<RTPCList>
 														<RTPC Name="" ID="{DB9DB36F-ED89-4384-8ADA-6047BEFE15B5}" ShortID="708883545">
@@ -464,7 +434,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-8</Value>
+														<Value>-13</Value>
 													</ValueList>
 													<RTPCList>
 														<RTPC Name="" ID="{FC769F9F-9A65-422F-A53C-E4639568DD4B}" ShortID="979805620">
@@ -525,7 +495,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-8</Value>
+														<Value>-13</Value>
 													</ValueList>
 													<RTPCList>
 														<RTPC Name="" ID="{00B221D3-EA8F-4420-8F9E-108DC0F187CE}" ShortID="343362056">
@@ -599,6 +569,150 @@
 										</Sound>
 									</ChildrenList>
 								</Folder>
+								<BlendContainer Name="Gun_Catch_Charge" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" ShortID="482317063">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="SFX_Gun_Charged_Draft_4" ID="{37E73E46-E29A-4D24-8D25-B35C523EB57C}" ShortID="589577621">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_Gun_Charged_Draft_4" ID="{0B034385-4404-49CD-96B4-D196B4C7B707}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_Gun_Charged_Draft_4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="433525132"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_Gun_Charged_Draft_4" ID="{0B034385-4404-49CD-96B4-D196B4C7B707}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<ObjectLists/>
+									<BlendTrackList>
+										<BlendTrack Name="Charge" ID="{E1F0DD36-92AA-4B8B-94F1-D84EA79E939C}" ShortID="520735659">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<RTPCList>
+														<RTPC Name="" ID="{066CAFFB-B80F-4A85-8D98-642ACC1C803E}" ShortID="263303080">
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<ObjectRef Name="Player_Gun_NumOfCharges" ID="{336257D0-FD65-43ED-8A93-0EC61AD829F0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+																</Reference>
+															</ReferenceList>
+															<Curve Name="" ID="{264B8364-5A1A-4477-A4C7-5E9AA93DC26E}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>1</XPos>
+																		<YPos>0</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>10</XPos>
+																		<YPos>0</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</RTPC>
+													</RTPCList>
+												</Property>
+											</PropertyList>
+											<BlendTrackAssocList>
+												<BlendTrackAssoc>
+													<ItemRef Name="SFX_Gun_Charged_Draft_4" ID="{37E73E46-E29A-4D24-8D25-B35C523EB57C}"/>
+												</BlendTrackAssoc>
+											</BlendTrackAssocList>
+										</BlendTrack>
+									</BlendTrackList>
+								</BlendContainer>
+								<RandomSequenceContainer Name="Gun_Bounce_Impact_Enemy" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" ShortID="902046903">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>15</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>200</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Enemy_Gun_Bounce_Impact" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="DB_SFX_Bounce_Draft_1" ID="{BB81856E-BDBE-4994-8090-37C3604BB288}" ShortID="17103133">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DB_SFX_Bounce_Draft_1" ID="{81F01FB2-DF34-4015-A3C2-E9C7F14A9D5E}">
+													<Language>SFX</Language>
+													<AudioFile>DB_SFX_Bounce_Draft_1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="835380942"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DB_SFX_Bounce_Draft_1" ID="{81F01FB2-DF34-4015-A3C2-E9C7F14A9D5E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<ObjectLists/>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>

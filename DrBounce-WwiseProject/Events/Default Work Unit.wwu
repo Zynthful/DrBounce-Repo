@@ -38,7 +38,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_Equip" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}">
+						<Event Name="Gun_PickUp" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}">
 							<ChildrenList>
 								<Action Name="" ID="{39F8EDFE-812C-4776-9BA8-39B4200224BF}" ShortID="99691336">
 									<ReferenceList>
@@ -57,14 +57,14 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Gun_Equip" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
+											<ObjectRef Name="Gun_PickUp" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{706F8A2E-9997-43D3-AFD5-26B223100CC1}" ShortID="876610052">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Gun_Charged_Draft_4" ID="{37E73E46-E29A-4D24-8D25-B35C523EB57C}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+											<ObjectRef Name="Gun_Catch_Charge" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -126,6 +126,21 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="SFX_Gun_Rebound_Feedback_5" ID="{36BEB311-B5F8-425C-8D03-F5719E2D97C3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Enemy" ID="{1B1E654D-564F-47AE-9FF7-FD4251AEA5BD}" ShortID="681773210">
+					<ChildrenList>
+						<Event Name="Enemy_Gun_Bounce_Impact" ID="{145EE972-B19C-4CE3-881B-2A4F630E0483}">
+							<ChildrenList>
+								<Action Name="" ID="{EE52427C-C3AE-4F5A-9F54-780DD0F0A7A9}" ShortID="466842576">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Gun_Bounce_Impact_Enemy" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
