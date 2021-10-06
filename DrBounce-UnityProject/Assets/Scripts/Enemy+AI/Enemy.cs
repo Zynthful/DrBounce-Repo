@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Enemy : MonoBehaviour
     public float rateOfFire;
     public BulletType bullet;
     protected bool amDead;
+    protected MMHealthBar _targetHealthBar;
 
     bool shootDelay;
 
@@ -31,15 +33,18 @@ public class Enemy : MonoBehaviour
         RedForward,
     }
 
-    public float health = 5f;
+    protected float _minimumHealth = 0f;
+    [SerializeField] protected float _maximumHealth = 20f;
+    protected float _currentHealth = 5f;
 
     public void TakeDamage(float amount)
     {
         //set hit text value before it is sent off to spawner
         HitText.Value = amount.ToString();
         HitFeedback?.PlayFeedbacks();
-        health -= amount;
-        if (health <= 0)
+        _currentHealth -= amount;
+        UpdateEnemyHealthBar();
+        if (_currentHealth <= 0)
         {
             GetComponent<Collider>().enabled = false;
             DeathFeedback?.PlayFeedbacks();
@@ -115,6 +120,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        _currentHealth = _maximumHealth;
         pool = ObjectPooler.Instance;
         Material mat = GetComponent<MeshRenderer>().material;
         switch (eType)
@@ -132,6 +138,19 @@ public class Enemy : MonoBehaviour
                 break;
         }
         GetComponent<MeshRenderer>().material = mat;
+    }
+
+    private void Awake()
+    {
+        _targetHealthBar = this.gameObject.GetComponent<MMHealthBar>();
+    }
+
+    public virtual void UpdateEnemyHealthBar()
+    {
+        if (_targetHealthBar != null)
+        {
+            _targetHealthBar.UpdateBar(_currentHealth, _minimumHealth, _maximumHealth, true);
+        }
     }
 
     IEnumerator ShotDelay(float delay)
