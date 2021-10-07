@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
         #region Jumping
 
-        if(jump == true)
+        if (jump == true)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
@@ -152,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpHeight += jumpMin;
                 prevJump = true;
             }
-            jumpHeight += 0.3f;
+            jumpHeight += (5f * Time.deltaTime);
 
             if (jumpHeight >= jumpPeak)
             {
