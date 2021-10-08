@@ -97,6 +97,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AimAssist"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a72784a-10fc-419b-89f0-c16208e7a319"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -484,6 +492,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3d0f819-f76e-4d42-a5bc-116c7c61159e"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""AimAssist"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""19b5f60f-ba86-4241-a258-aebc6468e5c9"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AimAssist"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -579,6 +609,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_DEBUG_PrevLevel = m_Player.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
         m_Player_DEBUG_NextLevel = m_Player.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_AimAssist = m_Player.FindAction("AimAssist", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -641,6 +672,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_DEBUG_PrevLevel;
     private readonly InputAction m_Player_DEBUG_NextLevel;
     private readonly InputAction m_Player_Crouch;
+    private readonly InputAction m_Player_AimAssist;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -655,6 +687,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @DEBUG_PrevLevel => m_Wrapper.m_Player_DEBUG_PrevLevel;
         public InputAction @DEBUG_NextLevel => m_Wrapper.m_Player_DEBUG_NextLevel;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @AimAssist => m_Wrapper.m_Player_AimAssist;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -694,6 +727,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @AimAssist.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimAssist;
+                @AimAssist.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimAssist;
+                @AimAssist.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimAssist;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -728,6 +764,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
+                @AimAssist.started += instance.OnAimAssist;
+                @AimAssist.performed += instance.OnAimAssist;
+                @AimAssist.canceled += instance.OnAimAssist;
             }
         }
     }
@@ -795,6 +834,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDEBUG_PrevLevel(InputAction.CallbackContext context);
         void OnDEBUG_NextLevel(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnAimAssist(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

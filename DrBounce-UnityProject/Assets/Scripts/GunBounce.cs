@@ -13,6 +13,8 @@ public class GunBounce : MonoBehaviour
     [SerializeField] [Range(0.01f, 1f)] float BounceAwayAngleThreshold;
     [SerializeField] [Range(0.6f, 2.5f)] float sideBounceAngleThreshold;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
+    Collider[] gunColliders;
+    [SerializeField] BoxCollider catchCollider;
     bool throwGunDelay;
     Transform owner; // The player
     Vector3 handPosition;
@@ -20,13 +22,15 @@ public class GunBounce : MonoBehaviour
     Rigidbody rb;
 
     public InputMaster controls;
+    public Vector3 currentVel; // Used to influence aim assist to be less snappy.
+    private bool exitedPlayer; // Controls when the gun can be caught by waiting until it's left the player's hitbox
 
     [Header("Feedbacks")]
     public MMFeedbacks BounceFeedback;
     public MMFeedbacks CatchFeedback;
     public MMFeedbacks BounceHitFeedback;
 
-    private bool inFlight;
+    public bool inFlight;
 
     [Header("Events")]
     [SerializeField]
@@ -49,8 +53,8 @@ public class GunBounce : MonoBehaviour
         transform.parent = weaponHolderTransform;
         transform.rotation = Quaternion.identity;
 
-        Collider[] colliders = GetComponentsInChildren<Collider>();
-        foreach(Collider col in colliders)
+        gunColliders = GetComponentsInChildren<Collider>();
+        foreach(Collider col in gunColliders)
         {
             physicMaterials.Add(col.material);
         }
@@ -85,6 +89,23 @@ public class GunBounce : MonoBehaviour
             throwGunDelay = false;
             Thrown();
         }
+
+        if (!transform.parent && !exitedPlayer)
+        {
+            bool fail = false;
+            foreach (Collider col in gunColliders)
+            {
+                if (catchCollider.bounds.Intersects(col.bounds))
+                {
+                    fail = true; exitedPlayer = false;
+                    break;
+                }
+            }
+            if (!fail)
+            {
+                exitedPlayer = true;
+            }
+        }
     }
 
     public void Thrown()
@@ -103,7 +124,7 @@ public class GunBounce : MonoBehaviour
             transform.parent = null;
             originPoint = transform.position;
             Vector3 dir = transform.forward;
-            rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * forceMod;
+            rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * forceMod; currentVel = rb.velocity;
 
             foreach (PhysicMaterial mat in physicMaterials)
             {
@@ -131,7 +152,6 @@ public class GunBounce : MonoBehaviour
         Vector3 dir = (transform.position - originPoint).normalized;
 
 
-        Debug.Log(dir.y + "  " + collision.contacts[0].normal.normalized.y);
         Vector3 newPos = transform.position;
         if ((dir.y < -BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y > 0) || (dir.y > BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y < 0))
         {
@@ -148,6 +168,7 @@ public class GunBounce : MonoBehaviour
         transform.position = newPos;
         originPoint = newPos;
         rb.velocity = new Vector3(dir.x, dir.y + .25f, dir.z) * forceMod;
+        
     }
 
     void ResetScript()
@@ -161,7 +182,7 @@ public class GunBounce : MonoBehaviour
             foreach (Transform child in transform)
                 child.gameObject.layer = 7;
 
-
+            exitedPlayer = false;
             returning = false;
             canThrow = true;
             inFlight = false;
@@ -171,6 +192,7 @@ public class GunBounce : MonoBehaviour
             transform.parent = weaponHolderTransform;
             transform.localPosition = handPosition;
             transform.rotation = weaponHolderTransform.rotation;
+            currentVel = Vector3.zero;
         }
     }
 
@@ -193,16 +215,17 @@ public class GunBounce : MonoBehaviour
             {                            
                 case Enemy.EnemyTypes.BlueBack:
                     BounceBack();
-                    return;
+                    break;
 
                 case Enemy.EnemyTypes.YellowUp:
                     BounceUp(collision.transform);
-                    return;
+                    break;
 
                 case Enemy.EnemyTypes.RedForward:
                     BounceForward(collision);
-                    return;
+                    break;
             }
+            currentVel = rb.velocity;
         }
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
         else if (collision.contacts[0].normal.normalized.y > .80f)
@@ -219,10 +242,11 @@ public class GunBounce : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.root == owner && !transform.parent && returning) 
+        if (other.transform.root == owner && !transform.parent)
         {
-            if (inFlight) { onCatch?.Raise(); }
-            else { onPickup?.Raise(); }
+            if (returning && inFlight) { onCatch?.Raise(); }
+            else if (exitedPlayer) { Debug.Log("Stop here"); onPickup?.Raise(); }
+            else { return; }
             CatchFeedback?.PlayFeedbacks();
             ResetScript();
         }
