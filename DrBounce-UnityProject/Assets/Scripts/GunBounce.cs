@@ -25,6 +25,7 @@ public class GunBounce : MonoBehaviour
     public MMFeedbacks BounceFeedback;
     public MMFeedbacks CatchFeedback;
     public MMFeedbacks PickupFeedback;
+    public MMFeedbacks MagnetCallFeedback;
     public MMFeedbacks BounceHitFeedback;
 
     private bool inFlight;
@@ -172,6 +173,7 @@ public class GunBounce : MonoBehaviour
             transform.parent = weaponHolderTransform;
             transform.localPosition = handPosition;
             transform.rotation = weaponHolderTransform.rotation;
+            MagnetCallFeedback?.PlayFeedbacks();
         }
     }
 
