@@ -61,6 +61,9 @@ public class Shooting : MonoBehaviour
     public MMFeedbacks RegularReticleFeedback;
     [SerializeField] ParticleSystem chargedShotPS;
 
+    [Header("Vibrations")]
+    public VibrationManager vibrationManager;
+
 
     public Animator anim;
     // Start is called before the first frame update
@@ -139,6 +142,7 @@ public class Shooting : MonoBehaviour
                     }
                 }
             }
+            vibrationManager.BasicShotVibration();
             BasicShootFeedback?.PlayFeedbacks();
             
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
