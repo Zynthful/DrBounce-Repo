@@ -24,6 +24,7 @@ public class GunBounce : MonoBehaviour
     [Header("Feedbacks")]
     public MMFeedbacks BounceFeedback;
     public MMFeedbacks CatchFeedback;
+    public MMFeedbacks PickupFeedback;
     public MMFeedbacks BounceHitFeedback;
 
     private bool inFlight;
@@ -221,9 +222,9 @@ public class GunBounce : MonoBehaviour
     {
         if (other.transform.root == owner && !transform.parent && returning) 
         {
-            if (inFlight) { onCatch?.Raise(); }
-            else { onPickup?.Raise(); }
-            CatchFeedback?.PlayFeedbacks();
+            if (inFlight) { onCatch?.Raise(); CatchFeedback?.PlayFeedbacks(); }
+            else { onPickup?.Raise(); PickupFeedback?.PlayFeedbacks(); }
+            
             ResetScript();
         }
     }
