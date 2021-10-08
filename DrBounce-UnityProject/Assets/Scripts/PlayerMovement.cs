@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
                 prevJump = true;
             }
 
-            jumpHeight += (5f * Time.fixedDeltaTime);
+            jumpHeight += (5f * (Time.fixedDeltaTime / 2));
         }
 
         #endregion
