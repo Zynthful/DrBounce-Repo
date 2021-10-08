@@ -140,13 +140,6 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-
-    }
-
-    private void FixedUpdate()
-    {
-        #region Jumping
-
         if (jump == true)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
@@ -159,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpHeight += jumpMin;
                 prevJump = true;
             }
-            jumpHeight += (5f * Time.deltaTime);
+            jumpHeight += (5f * Time.fixedDeltaTime);
         }
 
         if (jumpHeight >= jumpPeak && jump == true)
@@ -168,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
             print(jumpPeak + "B");
             jumpHeight = 0;
             jump = false;
-            
+
             gravity *= jumpSpeed;
         }
 
@@ -179,6 +172,13 @@ public class PlayerMovement : MonoBehaviour
             jumpHeight = 0;
             jump = false;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        #region Jumping
+
+        
         #endregion
     }
     private void Jump()
