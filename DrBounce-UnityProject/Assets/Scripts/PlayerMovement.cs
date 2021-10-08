@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private bool cooldown = false;
     private bool isDashing = false;
     private int dashesPerformed = 0;
+    private bool feedbackPlayed = false;
 
     [Header("Ground Checking")]
     public Transform groundCheck;
@@ -91,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
         {
             gravity = prevGrav;
             isDashing = false;
+            feedbackPlayed = false;
             prevJump = false;
 
             dashesPerformed = 0;
@@ -118,6 +120,11 @@ public class PlayerMovement : MonoBehaviour
         #region Dashing
         if (isDashing == true && dashesPerformed < dashesBeforeLanding)
         {
+            if(feedbackPlayed == false)
+            {
+                DashFeedback?.PlayFeedbacks(); //Play feedback
+                feedbackPlayed = true;
+            }
             cooldown = true;
 
             if (controls.Player.Movement.ReadValue<Vector2>().y != 0) //If player is moving in the Y axis
@@ -174,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
             jump = false;
         }
 
-        if (controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
+        else if (controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
         {
             gravity *= jumpSpeed;
             jumpHeight = 0;
@@ -241,7 +248,6 @@ public class PlayerMovement : MonoBehaviour
 
         float oldGravity = gravity;
         gravity = 0;
-        DashFeedback?.PlayFeedbacks(); //Play feedback
 
         yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
 
@@ -255,6 +261,10 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownTime); //If the cooldown is active, wait for cooldown time set, until setting cooldown as false
         cooldown = false;
+        if(dashesPerformed < dashesBeforeLanding)
+        {
+            feedbackPlayed = false;
+        }
     }
     IEnumerator StopDash()
     {
