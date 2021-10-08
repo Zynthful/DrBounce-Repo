@@ -7,16 +7,32 @@ public class MagnetAA : MonoBehaviour
 
     public InputMaster controls;
     [SerializeField] GunBounce gun;
-    [SerializeField] [Range(0.0f, 10.0f)] private float aimAssistMaxRange;
+    [Range(0.0f, 10.0f)] public float aimAssistMaxRange;
     [SerializeField] private float aimAssistForce;
+    [SerializeField] GameEventBool assistEvent;
     bool assistActive;
     Rigidbody rb;
 
     private void Awake()
     {
         controls = new InputMaster();
-        controls.Player.ThrowGun.started += _ => assistActive = true;
-        controls.Player.ThrowGun.canceled += _ => assistActive = false;
+        controls.Player.ThrowGun.started += _ => AssistStarted();
+        controls.Player.ThrowGun.canceled += _ => AssistEnded();
+    }
+
+    void AssistStarted()
+    {
+        if (!gun.transform.parent)
+        {
+            assistActive = true; assistEvent.Raise(true);
+        }
+    }
+    void AssistEnded() 
+    {
+        if (assistActive)
+        {
+            assistActive = false; assistEvent.Raise(false);
+        }
     }
 
     // Start is called before the first frame update
@@ -52,8 +68,8 @@ public class MagnetAA : MonoBehaviour
 
     private void OnDisable()
     {
-        controls.Player.ThrowGun.started -= _ => assistActive = true;
-        controls.Player.ThrowGun.canceled -= _ => assistActive = false;
+        controls.Player.ThrowGun.started -= _ => AssistStarted();
+        controls.Player.ThrowGun.canceled -= _ => AssistEnded();
         controls.Disable();
     }
 }
