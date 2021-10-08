@@ -96,9 +96,9 @@ public class GunBounce : MonoBehaviour
             canThrow = false;
             
             //when we get out of prototype we need to made the world model seperate from the fp model
-            gameObject.layer = 0;
+            gameObject.layer = 3;
             foreach (Transform child in transform)
-                child.gameObject.layer = 0;
+                child.gameObject.layer = 3;
 
             returning = false;
             rb.constraints = RigidbodyConstraints.None;
