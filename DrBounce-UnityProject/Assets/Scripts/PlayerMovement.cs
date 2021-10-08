@@ -91,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
         {
             gravity = prevGrav;
             isDashing = false;
+            prevJump = false;
+
             dashesPerformed = 0;
             if (dashesPerformed > 0)
             {
@@ -138,6 +140,11 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
+
+    }
+
+    private void FixedUpdate()
+    {
         #region Jumping
 
         if (jump == true)
@@ -153,18 +160,21 @@ public class PlayerMovement : MonoBehaviour
                 prevJump = true;
             }
             jumpHeight += (5f * Time.deltaTime);
-
-            if (jumpHeight >= jumpPeak)
-            {
-                gravity *= jumpSpeed;
-                jumpHeight = 0;
-                jump = false;
-                prevJump = false;
-            }
         }
 
-        if (controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
+        if (jumpHeight >= jumpPeak)
         {
+            print(jumpHeight + "A");
+            print(jumpPeak + "B");
+            jumpHeight = 0;
+            jump = false;
+            
+            gravity *= jumpSpeed;
+        }
+
+        else if (controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
+        {
+            print("fallinga");
             gravity *= jumpSpeed;
             jumpHeight = 0;
             jump = false;
@@ -172,7 +182,6 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
     }
-
     private void Jump()
     {
         if (!GameManager.s_Instance.paused && isGrounded)
