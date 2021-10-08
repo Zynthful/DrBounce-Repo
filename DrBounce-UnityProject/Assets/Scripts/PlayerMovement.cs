@@ -152,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
 
-        if (controls.Player.Jump.ReadValue<float>() == 1)
+        if (controls.Player.Jump.ReadValue<float>() == 1 && jump == true)
         {
             if (prevJump == false)
             {
@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
             jumpHeight += (5f * Time.deltaTime);
         }
 
-        if (jumpHeight >= jumpPeak)
+        if (jumpHeight >= jumpPeak && jump == true)
         {
             print(jumpHeight + "A");
             print(jumpPeak + "B");
@@ -178,7 +178,6 @@ public class PlayerMovement : MonoBehaviour
             gravity *= jumpSpeed;
             jumpHeight = 0;
             jump = false;
-            prevJump = false;
         }
         #endregion
     }
