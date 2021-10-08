@@ -5,31 +5,33 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class BezierCurve3PointLineRenderer : MonoBehaviour
 {
+    private LineRenderer lineRenderer;
 
     [SerializeField] private Transform point1;
     [SerializeField] private Transform point2;
     [SerializeField] private Transform point3;
 
-    private LineRenderer lineRenderer;
-
     [SerializeField] private int vertexCount = 12;
 
-    [SerializeField] private float colourDistance = 20f;
-
-    private Material mat = null;
+    private float colourDistance = 3.5f;
 
     [SerializeField] private Color colourClose = Color.blue;
-
     [SerializeField] private Color colourFar = Color.red;
 
+    [SerializeField] private MagnetAA mAA = null;
 
     private void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        mat = lineRenderer.sharedMaterial;
+        if (mAA != null)
+        {
+            colourDistance = mAA.aimAssistMaxRange;
+        }
 
-        lineRenderer.startColor = colourClose;
-        lineRenderer.endColor = colourFar;
+        lineRenderer = GetComponent<LineRenderer>();
+
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(colourClose, 0.0f), new GradientColorKey(colourFar, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) });
+        lineRenderer.colorGradient = gradient;
     }
 
     // Update is called once per frame
@@ -51,9 +53,10 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
         lineRenderer.positionCount = pointList.Count;
         lineRenderer.SetPositions(pointList.ToArray());
 
-
-        lineRenderer.endColor = Color.Lerp(colourClose, colourFar, Mathf.Clamp(Vector3.Distance(point1.position, point3.position) / colourDistance, 0, 1));
-        //mat.SetColor("_Color", Color.Lerp(colourClose, colourFar, Mathf.Clamp(Vector3.Distance(point1.position, point3.position) / colourDistance, 0, 1)));
+        Gradient gradient = new Gradient();
+        Color endColour = Color.Lerp(colourClose, colourFar, Mathf.Clamp(Vector3.Distance(point1.position, point3.position) / colourDistance, 0, 1));
+        gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(colourClose, 0.0f), new GradientColorKey(endColour, 1.0f / (Vector3.Distance(point1.position, point3.position) / colourDistance)) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) });
+        lineRenderer.colorGradient = gradient;
     }
 
     public Vector3 QuadraticBezierCurve(float t, Vector3 p0, Vector3 p1, Vector3 p2)
