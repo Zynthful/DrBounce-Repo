@@ -158,6 +158,12 @@ public class PlayerMovement : MonoBehaviour
             jumpHeight += (5f * Time.fixedDeltaTime);
         }
 
+        #endregion
+    }
+
+    private void FixedUpdate()
+    {
+
         if (jumpHeight >= jumpPeak && jump == true)
         {
             print(jumpHeight + "A");
@@ -174,11 +180,6 @@ public class PlayerMovement : MonoBehaviour
             jumpHeight = 0;
             jump = false;
         }
-        #endregion
-    }
-
-    private void FixedUpdate()
-    {
     }
     private void Jump()
     {
