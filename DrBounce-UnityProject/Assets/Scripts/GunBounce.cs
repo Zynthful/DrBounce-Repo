@@ -248,7 +248,7 @@ public class GunBounce : MonoBehaviour
         if (other.transform.root == owner && !transform.parent)
         {
             if (returning && inFlight) { onCatch?.Raise(); CatchFeedback?.PlayFeedbacks();}
-            else if (exitedPlayer) { onPickup?.Raise(); PickupFeedback?.PlayFeedbacks()}
+            else if (exitedPlayer) { onPickup?.Raise(); PickupFeedback?.PlayFeedbacks(); }
             else { return; }
             ResetScript();
         }
