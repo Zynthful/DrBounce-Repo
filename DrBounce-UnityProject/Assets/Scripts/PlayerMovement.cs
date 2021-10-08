@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpPeak = 3f;
     public float jumpMin = 1f;
     public float jumpSpeed = 1f;
+    public float jumpStopSpeed;
     private bool jump = false;
     private float jumpHeight = 0f;
     private bool prevJump = false;
@@ -93,11 +94,6 @@ public class PlayerMovement : MonoBehaviour
         #region DashStopping
         if (isGrounded)
         {
-            gravity = prevGrav;
-            isDashing = false;
-            feedbackPlayed = false;
-            prevJump = false;
-
             dashesPerformed = 0;
             if (dashesPerformed > 0)
             {
@@ -121,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Dashing
-        if (isDashing == true && dashesPerformed < dashesBeforeLanding)
+        if (isDashing == true)
         {
             if(feedbackPlayed == false)
             {
@@ -150,46 +146,49 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-        #region jump
-        if (jump == true)
-        {
-            velocity.y = (Mathf.Sqrt(jumpHeight * -2 * gravity));
 
-        }
 
-        if (controls.Player.Jump.ReadValue<float>() == 1 && jump == true)
-        {
-            if (prevJump == false)
-            {
-                jumpHeight += jumpMin;
-                prevJump = true;
-            }
 
-            jumpHeight += (5f * (Time.fixedDeltaTime / 4));
-        }
-
-        #endregion
     }
 
     private void FixedUpdate()
     {
+        #region jump
 
-        if (jumpHeight >= jumpPeak && jump == true)
+        if(jump == true)
         {
-            print(jumpHeight + "A");
-            print(jumpPeak + "B");
+            velocity.y = (Mathf.Sqrt(jumpHeight * -2 * gravity));
 
-            gravity *= jumpSpeed;
-            jumpHeight = 0;
-            jump = false;
+            if (controls.Player.Jump.ReadValue<float>() == 1)
+            {
+                if (prevJump == false)
+                {
+                    prevJump = true;
+                    jumpHeight += jumpMin;
+                }
+
+                jumpHeight += (5f * Time.deltaTime);
+            }
+
+            else
+            {
+                print("Midhop");
+                jumpHeight = 0;
+                velocity.y -= jumpStopSpeed;
+                gravity *= jumpSpeed;
+                jump = false;
+            }
+
+            if (jumpHeight >= jumpPeak)
+            {
+                jumpHeight = 0;
+                velocity.y -= jumpStopSpeed;
+                gravity *= jumpSpeed;
+                jump = false;
+            }
         }
 
-        else if (controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
-        {
-            gravity *= jumpSpeed;
-            jumpHeight = 0;
-            jump = false;
-        }
+        #endregion
     }
     private void Jump()
     {
@@ -200,6 +199,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 Crouch(); //Un-crouches the player before jumping
             }
+            print("Fuck");
+            gravity = prevGrav;
+            isDashing = false;
+            feedbackPlayed = false;
+            prevJump = false;
             jump = true;
             onJump?.Raise();
         }
@@ -248,17 +252,24 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator EnableDisableDash()
     {
-        isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
+        if(dashesPerformed < dashesBeforeLanding)
+        {
+            isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
 
-        float oldGravity = gravity;
-        gravity = 0;
+            velocity.y = 0;
+            jumpHeight = 0;
+            jump = false;
 
-        yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
+            float oldGravity = gravity;
+            gravity = 0;
 
-        gravity = oldGravity;
-        dashesPerformed += 1;
+            yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
 
-        isDashing = false;
+            gravity = oldGravity;
+            dashesPerformed += 1;
+
+            isDashing = false;
+        }
     }
 
     IEnumerator CoolDownTest()
