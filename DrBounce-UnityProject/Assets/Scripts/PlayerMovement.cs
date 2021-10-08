@@ -45,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Feedbacks")]
     public MMFeedbacks DashFeedback;
 
+    [Header("Vibrations")]
+    public VibrationManager vibrationManager;
+
     [Header("Events")]
     [SerializeField] private GameEvent onJump = null;
     [SerializeField] private GameEvent onDash = null;
@@ -211,6 +214,7 @@ public class PlayerMovement : MonoBehaviour
         // - Not already dashing
         if (!GameManager.s_Instance.paused && isGrounded != true && cooldown == false && isDashing == false)
         {
+            vibrationManager.DashVibration();
             isCrouching = false;
             StartCoroutine(CoolDownTest());
 
