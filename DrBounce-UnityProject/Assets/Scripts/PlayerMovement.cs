@@ -140,9 +140,11 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
+        #region jump
         if (jump == true)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+            velocity.y = (Mathf.Sqrt(jumpHeight * -2 * gravity));
+
         }
 
         if (controls.Player.Jump.ReadValue<float>() == 1 && jump == true)
@@ -152,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpHeight += jumpMin;
                 prevJump = true;
             }
+
             jumpHeight += (5f * Time.fixedDeltaTime);
         }
 
@@ -159,27 +162,23 @@ public class PlayerMovement : MonoBehaviour
         {
             print(jumpHeight + "A");
             print(jumpPeak + "B");
-            jumpHeight = 0;
-            jump = false;
 
             gravity *= jumpSpeed;
+            jumpHeight = 0;
+            jump = false;
         }
 
-        else if (controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
+        if (controls.Player.Jump.ReadValue<float>() == 0 && jump == true)
         {
-            print("fallinga");
             gravity *= jumpSpeed;
             jumpHeight = 0;
             jump = false;
         }
+        #endregion
     }
 
     private void FixedUpdate()
     {
-        #region Jumping
-
-        
-        #endregion
     }
     private void Jump()
     {
