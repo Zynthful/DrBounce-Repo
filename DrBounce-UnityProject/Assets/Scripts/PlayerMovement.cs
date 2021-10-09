@@ -205,6 +205,7 @@ public class PlayerMovement : MonoBehaviour
             feedbackPlayed = false;
             prevJump = false;
             jump = true;
+            vibrationManager.JumpVibration();
             onJump?.Raise();
         }
     }

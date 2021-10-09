@@ -41,6 +41,6 @@ public class VibrationManager : MonoBehaviour
 
     public void JumpVibration()
     {
-        MMVibrationManager.Haptic(CatchingHapticType, false, true, this);
+        MMVibrationManager.Haptic(jumpHapticType, false, true, this);
     }
 }
