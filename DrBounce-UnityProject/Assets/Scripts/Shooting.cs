@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
+using MoreMountains.NiceVibrations;
 
 public class Shooting : MonoBehaviour
 {
@@ -166,6 +167,7 @@ public class Shooting : MonoBehaviour
 
             case GunModes.Explosives:
                 FirstChargedShotFeedback?.PlayFeedbacks();
+                vibrationManager.ChargedShotVibration();
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.identity, fpsCam.transform.TransformDirection(Vector3.forward).normalized, explosiveShotType, null);
                 obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
                 Reset();
@@ -193,11 +195,13 @@ public class Shooting : MonoBehaviour
         {
             anim.SetTrigger("NoCharge");
             ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
+            MMVibrationManager.StopContinuousHaptic();
         }
 
         if (chargesLeft >= 1)
         {
             ChargedFeedback?.PlayFeedbacks();
+            vibrationManager.ActiveChargeVibration();
         }
     }
 
