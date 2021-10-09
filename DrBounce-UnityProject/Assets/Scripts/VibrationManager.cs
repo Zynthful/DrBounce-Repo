@@ -6,11 +6,12 @@ using MoreMountains.NiceVibrations;
 public class VibrationManager : MonoBehaviour
 {
 
-    public HapticTypes dashHapticType = HapticTypes.LightImpact;
-    public HapticTypes shootingHapticType = HapticTypes.LightImpact;
-    public HapticTypes ChargedShootingHapticType = HapticTypes.LightImpact;
-    public HapticTypes TakeDamageHapticType = HapticTypes.LightImpact;
-    public HapticTypes CatchingHapticType = HapticTypes.LightImpact;
+    public HapticTypes dashHapticType = HapticTypes.None;
+    public HapticTypes jumpHapticType = HapticTypes.None;
+    public HapticTypes shootingHapticType = HapticTypes.None;
+    public HapticTypes ChargedShootingHapticType = HapticTypes.None;
+    public HapticTypes TakeDamageHapticType = HapticTypes.None;
+    public HapticTypes CatchingHapticType = HapticTypes.None;
     // Start is called before the first frame update
 
     public void DashVibration()
@@ -34,6 +35,11 @@ public class VibrationManager : MonoBehaviour
     }
 
     public void CatchVibration()
+    {
+        MMVibrationManager.Haptic(CatchingHapticType, false, true, this);
+    }
+
+    public void JumpVibration()
     {
         MMVibrationManager.Haptic(CatchingHapticType, false, true, this);
     }

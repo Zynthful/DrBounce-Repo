@@ -32,6 +32,9 @@ public class GunBounce : MonoBehaviour
     public MMFeedbacks MagnetCallFeedback;
     public MMFeedbacks BounceHitFeedback;
 
+    [Header("Vibrations")]
+    public VibrationManager vibrationManager;
+
     public bool inFlight;
 
     [Header("Events")]
@@ -247,7 +250,7 @@ public class GunBounce : MonoBehaviour
     {
         if (other.transform.root == owner && !transform.parent)
         {
-            if (returning && inFlight) { onCatch?.Raise(); CatchFeedback?.PlayFeedbacks();}
+            if (returning && inFlight) { onCatch?.Raise(); CatchFeedback?.PlayFeedbacks(); vibrationManager.CatchVibration(); }
             else if (exitedPlayer) { onPickup?.Raise(); PickupFeedback?.PlayFeedbacks(); }
             else { return; }
             ResetScript();
