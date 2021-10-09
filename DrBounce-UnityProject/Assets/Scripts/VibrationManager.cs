@@ -17,7 +17,7 @@ public class VibrationManager : MonoBehaviour
     public HapticTypes TakeDamageHapticType = HapticTypes.None;
     public HapticTypes CatchingHapticType = HapticTypes.None;
     //public HapticTypes activeChargeHapticType = HapticTypes.None;
-    public HapticTypes magnetAimAssistHapticType = HapticTypes.None;
+    //public HapticTypes magnetAimAssistHapticType = HapticTypes.None;
     // Start is called before the first frame update
 
     public void DashVibration()
@@ -52,7 +52,7 @@ public class VibrationManager : MonoBehaviour
 
     public void MagnetAimAssitVibration()
     {
-        MMVibrationManager.Haptic(magnetAimAssistHapticType, false, true, this);
+        MMVibrationManager.ContinuousHaptic(0.3f, 0.8f, 3.5f, HapticTypes.None, this, true);
     }
 
     public void ActiveChargeVibration()

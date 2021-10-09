@@ -33,6 +33,8 @@ public class Health : MonoBehaviour
 
     public MMProgressBar progressBar;
 
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +66,7 @@ public class Health : MonoBehaviour
     private void Damage(int amount) 
     {
         DamageFeedback?.PlayFeedbacks();
+        
 
         onDamage?.Raise(amount);
 
