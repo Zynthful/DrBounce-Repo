@@ -54,7 +54,7 @@ public class MagnetAA : MonoBehaviour
     void MoveObjects()
     {
         float currentDistance = Vector3.Distance(transform.position, gun.transform.position);
-        if (!gun.transform.parent && currentDistance < aimAssistMaxRange && gun.inFlight)
+        if (!gun.transform.parent && currentDistance < aimAssistMaxRange)
         {
             float mag = rb.velocity.magnitude;
             rb.velocity = (rb.velocity + ((transform.position - gun.transform.position).normalized * aimAssistForce / currentDistance)).normalized * mag;
