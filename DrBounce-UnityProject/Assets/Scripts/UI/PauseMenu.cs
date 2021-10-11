@@ -21,6 +21,12 @@ public class PauseMenu : MonoBehaviour
     {
         controls = new InputMaster();
         controls.Menu.Pause.performed += _ => Pause();
+
+        // Unpause game on Awake
+        // Note: if the game ever needs to start paused for whatever reason, this will need to be changed
+        Time.timeScale = 1.0f;
+        onUnpause?.Raise();
+        onPauseStateChange?.Raise(false);
     }
 
     public void Pause()
@@ -43,22 +49,6 @@ public class PauseMenu : MonoBehaviour
         {
             onUnpause?.Raise();
         }
-    }
-
-    public void LoadScene(int index)
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(index);
-    }
-
-    public void QuitToDesktop()
-    {
-        Time.timeScale = 1;
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 
     private void OnEnable()
