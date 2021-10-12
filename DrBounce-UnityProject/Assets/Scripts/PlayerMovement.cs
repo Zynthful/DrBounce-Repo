@@ -17,8 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump")]
     public float jumpPeak = 3f;
     public float jumpMin = 1f;
-    public float jumpSpeed = 1f;
-    public float jumpStopSpeed;
+    public float floatiness;
     private bool jump = false;
     private float jumpHeight = 0f;
     private bool prevJump = false;
@@ -72,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Crouch.performed += _ => Crouch();
         player = transform;
     }
-    void Update()
+    void FixedUpdate()
     {
         float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
         float z = controls.Player.Movement.ReadValue<Vector2>().y;
@@ -101,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
             } //This delay is to prevent the player being able to dash just before they hit the ground.
             if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
             {
-                velocity.y = -2f;
+                velocity.y = (-40f * Time.fixedDeltaTime);
             }
         }
         #endregion
@@ -146,16 +145,9 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-
-
-
-    }
-
-    private void FixedUpdate()
-    {
         #region jump
 
-        if(jump == true)
+        if (jump == true)
         {
             velocity.y = (Mathf.Sqrt(jumpHeight * -2 * gravity));
 
@@ -167,24 +159,24 @@ public class PlayerMovement : MonoBehaviour
                     jumpHeight += jumpMin;
                 }
 
-                jumpHeight += (5f * Time.deltaTime);
+                jumpHeight += (5f * Time.fixedDeltaTime);
             }
 
             else
             {
+                jump = false;
                 print("Midhop");
                 jumpHeight = 0;
-                velocity.y -= jumpStopSpeed;
-                gravity *= jumpSpeed;
-                jump = false;
+                velocity.y -= floatiness;
+
             }
 
             if (jumpHeight >= jumpPeak)
             {
-                jumpHeight = 0;
-                velocity.y -= jumpStopSpeed;
-                gravity *= jumpSpeed;
                 jump = false;
+                jumpHeight = 0;
+                velocity.y -= floatiness;
+
             }
         }
 
@@ -199,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Crouch(); //Un-crouches the player before jumping
             }
-            print("Fuck");
+
             gravity = prevGrav;
             isDashing = false;
             feedbackPlayed = false;
