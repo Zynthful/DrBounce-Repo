@@ -35,11 +35,15 @@ public class PlayerMovement : MonoBehaviour
     private int dashesPerformed = 0;
     private bool feedbackPlayed = false;
 
-    [Header("Ground Checking")]
+    [Header("Ground+Head Checking")]
     public Transform groundCheck;
+    public Transform headCheck;
     public LayerMask groundMask;
+    public LayerMask headMask;
     public float groundDistance = 0.4f;
+    public float headDistance = 0.4f;
     [HideInInspector] public bool isGrounded;
+    [HideInInspector] public bool headIsTouchingSomething;
     public Vector3 velocity;
 
     [Header("Feedbacks")]
@@ -89,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
         #endregion
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
+        headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
 
         #region DashStopping
         if (isGrounded)
@@ -102,6 +107,22 @@ public class PlayerMovement : MonoBehaviour
             {
                 velocity.y = (-40f * Time.fixedDeltaTime);
             }
+        }
+
+        if (headIsTouchingSomething)
+        {
+            velocity.y = (-40f * Time.fixedDeltaTime);
+            if (isCrouching == true)
+            {
+                isGrounded = false;
+                cooldown = true;
+            }
+        }
+
+        if(!headIsTouchingSomething && isCrouching == true)
+        {
+            isGrounded = true;
+            cooldown = false;
         }
         #endregion
 
@@ -230,13 +251,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isCrouching == true)
             {
-                print("Heehoo, I am no longer a crouching");
                 isCrouching = false;
                 speed = oldSpeed;
             }
             else
             {
-                print("Heehoo, I am a crouching.");
                 isCrouching = true;
                 oldSpeed = speed;
                 speed /= 2;
