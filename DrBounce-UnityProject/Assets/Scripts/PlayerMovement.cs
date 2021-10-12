@@ -153,11 +153,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (controls.Player.Jump.ReadValue<float>() == 1)
             {
-                if (prevJump == false)
-                {
-                    prevJump = true;
-                    jumpHeight += jumpMin;
-                }
 
                 jumpHeight += (5f * Time.fixedDeltaTime);
             }
@@ -186,6 +181,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused && isGrounded)
         {
+            if (prevJump == false)
+            {
+                prevJump = true;
+                jumpHeight += (jumpMin);
+            }
+
             gravity = prevGrav;
             if(isCrouching == true)
             {
