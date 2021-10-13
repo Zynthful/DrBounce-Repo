@@ -10,6 +10,7 @@ public class GunThrowing : MonoBehaviour
     [SerializeField] bool canThrow;
     [SerializeField] LayerMask bounceableLayers;
     [SerializeField] Transform weaponHolderTransform = null;
+    [SerializeField] bool startOnPlayer;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Collider[] gunColliders;
     [SerializeField] BoxCollider catchCollider;
@@ -48,12 +49,22 @@ public class GunThrowing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        owner = transform.parent.root;
-        handPosition = transform.localPosition;
-        canThrow = true;
+        owner = PlayerMovement.player;
+        
+        if(startOnPlayer)
+        {
+            handPosition = transform.localPosition;
+            canThrow = true;
+            transform.parent = weaponHolderTransform;
+        }
+        else
+        {
+            canThrow = false;
+        }
+
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        transform.parent = weaponHolderTransform;
+
         transform.rotation = Quaternion.identity;
 
         gunColliders = GetComponentsInChildren<Collider>();

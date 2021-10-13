@@ -48,13 +48,16 @@ public class Bouncing : MonoBehaviour
         Vector3[] vectors = new Vector3[3];
         Vector3 dir = (position - origin).normalized;
 
-        vectors[0] = position;
+        //vectors[0] = position;
         /*if ((dir.y < -BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y > 0) || (dir.y > BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y < 0))
         {
             Debug.Log("Top/Bottom bounce");
             vectors[0] = new Vector3((2 * collision.transform.position.x) - position.x, position.y, (2 * collision.transform.position.z) - position.z);
             dir.y = -dir.y - .5f;
         } else { */
+
+        //(2 * enemyTransform.position) - transform.position
+
         vectors[0] = new Vector3(collision.transform.position.x + ((collision.transform.localScale.x / 2) * dir.x), collision.transform.position.y + (collision.transform.localScale.y / 2), collision.transform.position.z + ((collision.transform.localScale.z / 2) * dir.z));
         dir.y = .2f;
 
