@@ -113,22 +113,22 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth = _maximumHealth;
         pool = ObjectPooler.Instance;
-        Material mat = null;
-        switch (GetComponent<Bouncing>().bType)
-        {
-            case Bouncing.BounceType.Back:
-                mat = materials[0];
-                break;
+        // Material mat = null;
+        // switch (GetComponent<Bouncing>().bType)
+        // {
+        //     case Bouncing.BounceType.Back:
+        //         mat = materials[0];
+        //         break;
 
-            case Bouncing.BounceType.Up:
-                mat = materials[1];
-                break;
+        //     case Bouncing.BounceType.Up:
+        //         mat = materials[1];
+        //         break;
 
-            case Bouncing.BounceType.Away:
-                mat = materials[2];
-                break;
-        }
-        GetComponent<MeshRenderer>().material = mat;
+        //     case Bouncing.BounceType.Away:
+        //         mat = materials[2];
+        //         break;
+        // }
+        // GetComponent<MeshRenderer>().material = mat;
     }
 
     private void Awake()

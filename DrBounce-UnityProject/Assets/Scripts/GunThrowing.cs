@@ -196,6 +196,7 @@ public class GunThrowing : MonoBehaviour
             }
             transform.position = returnVectors[0];
             originPoint = returnVectors[1];
+            rb.velocity = returnVectors[2];
             currentVel = rb.velocity;
         }
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
