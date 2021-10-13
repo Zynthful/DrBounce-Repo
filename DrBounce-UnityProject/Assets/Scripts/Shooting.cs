@@ -218,4 +218,12 @@ public class Shooting : MonoBehaviour
         chargesLeft += value;
         onChargeUpdate?.Raise(chargesLeft);
     }
+
+    public void Dropped() 
+    {
+        if (!transform.parent)  //if the gun is dropped and has no parent
+        {
+            Reset();
+        }
+    }
 }
