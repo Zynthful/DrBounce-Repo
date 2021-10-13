@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
-public class GunBounce : MonoBehaviour
+public class GunThrowing : MonoBehaviour
 {
     [SerializeField] bool returning; 
-    [SerializeField] float forceMod;
+    [SerializeField] float throwForceMod;
     [SerializeField] bool canThrow;
     [SerializeField] LayerMask bounceableLayers;
     [SerializeField] Transform weaponHolderTransform = null;
-    [SerializeField] [Range(0.01f, 1f)] float BounceAwayAngleThreshold;
-    [SerializeField] [Range(0.6f, 2.5f)] float sideBounceAngleThreshold;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Collider[] gunColliders;
     [SerializeField] BoxCollider catchCollider;
@@ -129,51 +127,13 @@ public class GunBounce : MonoBehaviour
             transform.parent = null;
             originPoint = transform.position;
             Vector3 dir = transform.forward;
-            rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * forceMod; currentVel = rb.velocity;
+            rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * throwForceMod; currentVel = rb.velocity;
 
             foreach (PhysicMaterial mat in physicMaterials)
             {
                 mat.dynamicFriction = 0.2f; mat.bounciness = .2f;
             }
         }
-    }
-
-    void BounceBack()
-    {
-        Vector3 dir = (originPoint - transform.position).normalized;
-        rb.velocity = new Vector3(dir.x, dir.y + .3f, dir.z) * forceMod;
-        originPoint = transform.position;
-    }
-
-    void BounceUp(Transform enemyTransform)
-    {
-        transform.position = new Vector3(enemyTransform.position.x, enemyTransform.position.y + (enemyTransform.localScale.y / 2), enemyTransform.position.z);
-        rb.velocity = Vector3.up * forceMod;
-        originPoint = transform.position;
-    }
-
-    void BounceForward(Collision collision)
-    {
-        Vector3 dir = (transform.position - originPoint).normalized;
-
-
-        Vector3 newPos = transform.position;
-        if ((dir.y < -BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y > 0) || (dir.y > BounceAwayAngleThreshold && collision.contacts[0].normal.normalized.y < 0))
-        {
-            Debug.Log("Top/Bottom bounce");
-            newPos = new Vector3((2 * collision.transform.position.x) - transform.position.x, transform.position.y, (2 * collision.transform.position.z) - transform.position.z);
-            dir.y = -dir.y - .5f;
-        }
-        else
-        {
-            newPos = new Vector3(collision.transform.position.x + ((collision.transform.localScale.x / 2) * dir.x), collision.transform.position.y + (collision.transform.localScale.y / 2), collision.transform.position.z + ((collision.transform.localScale.z / 2) * dir.z));
-            dir.y = .2f;
-        }
-
-        transform.position = newPos;
-        originPoint = newPos;
-        rb.velocity = new Vector3(dir.x, dir.y + .25f, dir.z) * forceMod;
-        
     }
 
     void ResetScript()
@@ -217,20 +177,25 @@ public class GunBounce : MonoBehaviour
             EnemyAudio audio = collision.gameObject.GetComponent<Enemy>()?.enemyAudio;
             audio?.PlayBounce();
 
-            switch (collision.gameObject.GetComponent<Enemy>().eType)
+            Vector3[] returnVectors = new Vector3[2];
+
+            Bouncing b = collision.gameObject.GetComponent<Bouncing>();
+            switch (b.bType)
             {                            
-                case Enemy.EnemyTypes.BlueBack:
-                    BounceBack();
+                case Bouncing.BounceType.Back:
+                    returnVectors = b.BounceBack(transform.position, originPoint);
                     break;
 
-                case Enemy.EnemyTypes.YellowUp:
-                    BounceUp(collision.transform);
+                case Bouncing.BounceType.Up:
+                    returnVectors = b.BounceUp(collision.transform, transform.position);
                     break;
 
-                case Enemy.EnemyTypes.RedForward:
-                    BounceForward(collision);
+                case Bouncing.BounceType.Away:
+                    returnVectors = b.BounceForward(collision, transform.position, originPoint);
                     break;
             }
+            transform.position = returnVectors[0];
+            originPoint = returnVectors[1];
             currentVel = rb.velocity;
         }
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun

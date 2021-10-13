@@ -26,13 +26,6 @@ public class Enemy : MonoBehaviour
 
     public EnemyAudio enemyAudio = null;
 
-    public enum EnemyTypes
-    {
-        BlueBack,
-        YellowUp,
-        RedForward,
-    }
-
     protected float _minimumHealth = 0f;
     [SerializeField] protected float _maximumHealth = 20f;
     protected float _currentHealth = 5f;
@@ -52,11 +45,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public EnemyTypes eType;
-
     public bool canSeePlayer;
 
-    
+    [SerializeField] List<Material> materials = new List<Material>{};
 
     Enemy()
     {
@@ -122,19 +113,19 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth = _maximumHealth;
         pool = ObjectPooler.Instance;
-        Material mat = GetComponent<MeshRenderer>().material;
-        switch (eType)
+        Material mat = null;
+        switch (GetComponent<Bouncing>().bType)
         {
-            case EnemyTypes.BlueBack:
-                mat.color = Color.blue;
+            case Bouncing.BounceType.Back:
+                mat = materials[0];
                 break;
 
-            case EnemyTypes.YellowUp:
-                mat.color = Color.yellow;
+            case Bouncing.BounceType.Up:
+                mat = materials[1];
                 break;
 
-            case EnemyTypes.RedForward:
-                mat.color = Color.red;
+            case Bouncing.BounceType.Away:
+                mat = materials[2];
                 break;
         }
         GetComponent<MeshRenderer>().material = mat;

@@ -6,7 +6,7 @@ public class MagnetAA : MonoBehaviour
 {
 
     public InputMaster controls;
-    [SerializeField] GunBounce gun;
+    [SerializeField] GunThrowing gun;
     [Range(0.0f, 10.0f)] public float aimAssistMaxRange;
     [SerializeField] private float aimAssistForce;
     [SerializeField] GameEventBool assistEvent;
@@ -39,7 +39,7 @@ public class MagnetAA : MonoBehaviour
     void Start()
     {
         if (!gun)
-            gun = PlayerMovement.player.GetComponentInChildren<GunBounce>();
+            gun = PlayerMovement.player.GetComponentInChildren<GunThrowing>();
             if(!rb)
                 rb = gun.GetComponent<Rigidbody>();
     }
