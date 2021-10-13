@@ -7,7 +7,7 @@ using MoreMountains.NiceVibrations;
 public class Shooting : MonoBehaviour
 {
     [SerializeField] private Gun shooter = null;
-    [SerializeField] private GameObject bullet;
+    //[SerializeField] private GameObject bullet;
 
     public enum GunModes
     {
@@ -15,11 +15,9 @@ public class Shooting : MonoBehaviour
         Explosives,
     }
 
-    [SerializeField] private GunModes currentGunMode;
+    //[SerializeField] private GunModes currentGunMode;
 
     private ObjectPooler pool;
-
-    [SerializeField] BulletType explosiveShotType;
 
     public InputMaster controls;
 
@@ -124,10 +122,9 @@ public class Shooting : MonoBehaviour
         {
             timeSinceLastShot = 0;
 
-            if(chargesLeft > 0)
-                HandleComboShot();
+            if(chargesLeft > 0) HandleComboShot();
                 
-            else if(currentGunMode == GunModes.Basic || chargesLeft <= 0)
+            else if(shooter.chargeShot == GunModes.Basic || chargesLeft <= 0)
             {
                 //ChargedFeedback?.StopFeedbacks();
                 damage = shooter.baseDamage;
@@ -159,7 +156,8 @@ public class Shooting : MonoBehaviour
     {
     	ChargedFeedback?.PlayFeedbacks();
     	
-        switch(currentGunMode){
+        switch(shooter.chargeShot)
+        {
             case GunModes.Basic:
                 damage = (int)(shooter.baseDamage * amountOfBounces * shooter.damageModifier);
                 AddCharge(-1);
@@ -168,9 +166,10 @@ public class Shooting : MonoBehaviour
             case GunModes.Explosives:
                 FirstChargedShotFeedback?.PlayFeedbacks();
                 vibrationManager.ChargedShotVibration();
-                GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.identity, fpsCam.transform.TransformDirection(Vector3.forward).normalized, explosiveShotType, null);
+                GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.identity, fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
                 obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
-                Reset();
+                //Reset();
+                AddCharge(-1);
                 break;
         }
     }
