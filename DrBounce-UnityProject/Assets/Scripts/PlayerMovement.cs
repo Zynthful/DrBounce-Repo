@@ -268,6 +268,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
 
+            print("Gromit");
             vibrationManager.DashVibration();
             onDash?.Raise();
 
