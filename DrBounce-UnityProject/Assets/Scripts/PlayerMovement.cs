@@ -233,13 +233,12 @@ public class PlayerMovement : MonoBehaviour
         // - Not already dashing
         if (!GameManager.s_Instance.paused && isGrounded != true && cooldown == false && isDashing == false)
         {
-            vibrationManager.DashVibration();
+            StartCoroutine(EnableDisableDash());
+
             isCrouching = false;
             StartCoroutine(CoolDownTest());
 
-            onDash?.Raise();
 
-            StartCoroutine(EnableDisableDash());
             StartCoroutine(NoMoveAfterDash());
             
         }
@@ -268,6 +267,9 @@ public class PlayerMovement : MonoBehaviour
         if(dashesPerformed < dashesBeforeLanding)
         {
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
+
+            vibrationManager.DashVibration();
+            onDash?.Raise();
 
             velocity.y = 0;
             jumpHeight = 0;
