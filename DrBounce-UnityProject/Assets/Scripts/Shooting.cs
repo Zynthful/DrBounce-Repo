@@ -237,6 +237,7 @@ public class Shooting : MonoBehaviour
     {
         if (!transform.parent)  //if the gun is dropped and has no parent
         {
+            vibrationManager.StopActiveCharge();
             Reset();
         }
     }

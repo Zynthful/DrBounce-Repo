@@ -18,7 +18,9 @@ public class VibrationManager : MonoBehaviour
     [Header("Misc")]
     public HapticTypes TakeDamageHapticType = HapticTypes.None;
     public HapticTypes CatchingHapticType = HapticTypes.None;
+    [Header("Stop")]
     public HapticTypes StopMagnetHapticType = HapticTypes.None;
+    public HapticTypes StopActiveHapticType = HapticTypes.None;
     [SerializeField] float MagnetIntensity;
     [SerializeField] float MagnetSharpness;
     //public HapticTypes activeChargeHapticType = HapticTypes.None;
@@ -74,5 +76,10 @@ public class VibrationManager : MonoBehaviour
     {
         MMVibrationManager.Haptic(StopMagnetHapticType, false, true, this);
 
+    }
+
+    public void StopActiveCharge()
+    {
+        MMVibrationManager.Haptic(StopActiveHapticType, false, true, this);
     }
 }
