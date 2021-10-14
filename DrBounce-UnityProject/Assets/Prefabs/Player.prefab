@@ -1004,12 +1004,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8312137195647732619}
   - component: {fileID: 6565917891331500461}
-  - component: {fileID: 312058665906554131}
   - component: {fileID: 4658609419792141874}
   - component: {fileID: 6534474088648951600}
   - component: {fileID: 5901140364785077774}
   - component: {fileID: 7086029408254847670}
   - component: {fileID: 5767551669161815429}
+  - component: {fileID: 4439029113847046052}
+  - component: {fileID: 2648202681466608179}
   m_Layer: 7
   m_Name: Audio
   m_TagString: Untagged
@@ -1043,10 +1044,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd1ff8582d01294083b56ac9ad8a7fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootEvent:
+  unchargedShotEvent:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: f67264980d1e8e049afac84c0276f968, type: 2}
+  chargedShotEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a660340b7dbf87945837a3268e7a4a9f, type: 2}
   bounceEvent:
     idInternal: 0
     valueGuidInternal: 
@@ -1059,10 +1064,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 3bfc69b7e3debb943a1cb71bedc904f4, type: 2}
-  damageRTPC:
+  chargedDamageMultiplierRTPC:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ced433d3ff542e94fb6babb0551958cc, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: eee11160c9667284ab73367291da5b0a, type: 2}
   amountOfBouncesRTPC:
     idInternal: 0
     valueGuidInternal: 
@@ -1071,34 +1076,6 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: c09815531622016498a8f5f386840037, type: 2}
---- !u!114 &312058665906554131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: PlayShoot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4658609419792141874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1230,6 +1207,74 @@ MonoBehaviour:
       - m_Target: {fileID: 6565917891331500461}
         m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
         m_MethodName: PlayPickUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4439029113847046052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677388527681910835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6565917891331500461}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: PlayUnchargedShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2648202681466608179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677388527681910835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 12bb0888fa469484ab53924a198df142, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6565917891331500461}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: UpdateChargedDamageMultiplierRTPC
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6565917891331500461}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: PlayChargedShot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1921,7 +1966,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 4
+  mouseSensitivityX: 0
+  mouseSensitivityY: 0
   controllerSensitivity: 7
+  controllerSensitivityX: 0
+  controllerSensitivityY: 0
   playerBody: {fileID: 5587670236924705794}
 --- !u!114 &5587670236126169270
 MonoBehaviour:
@@ -2310,10 +2359,11 @@ MonoBehaviour:
   shooter: {fileID: 11400000, guid: 34ebdf3d76725604b9d80bfbb06e0b83, type: 2}
   fpsCam: {fileID: 5587670236126169273}
   damage: 10
-  onShoot: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
+  onUnchargedShot: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
+  onChargedShot: {fileID: 11400000, guid: 12bb0888fa469484ab53924a198df142, type: 2}
   onBounce: {fileID: 11400000, guid: 9d2693e15688753468f4083136d8ffa6, type: 2}
   onChargeUpdate: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
-  onCatch: {fileID: 0}
+  onCatch: {fileID: 11400000, guid: 4b56bb7bbb80eaa4c85ae3ad717f8680, type: 2}
   BasicShootFeedback: {fileID: 4545366999181130698}
   ChargedFeedback: {fileID: 4578051724829632361}
   FirstChargedShotFeedback: {fileID: 3547416809378264515}
@@ -4992,14 +5042,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
---- !u!1 &226782933602530214 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
-  m_PrefabInstance: {fileID: 1145277912412507895}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &607529983028472092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
+  m_PrefabInstance: {fileID: 1145277912412507895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &226782933602530214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
   m_PrefabInstance: {fileID: 1145277912412507895}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1171614818522279220
@@ -5366,14 +5416,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb8e4632ee082a48831f130aa43b03f, type: 3}
---- !u!198 &2863027119451706262 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 774573748673975391, guid: 4fb8e4632ee082a48831f130aa43b03f, type: 3}
-  m_PrefabInstance: {fileID: 3243811396977461193}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7036788958780139562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5522511563666206691, guid: 4fb8e4632ee082a48831f130aa43b03f, type: 3}
+  m_PrefabInstance: {fileID: 3243811396977461193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2863027119451706262 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 774573748673975391, guid: 4fb8e4632ee082a48831f130aa43b03f, type: 3}
   m_PrefabInstance: {fileID: 3243811396977461193}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4237425980925279635
@@ -5785,16 +5835,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
---- !u!4 &2775308873326521633 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6494944190041087730, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-  m_PrefabInstance: {fileID: 8980544769641886675}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &528051218827863877 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8932131379237180566, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-  m_PrefabInstance: {fileID: 8980544769641886675}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4098264073751305583 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4935585192611819196, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
@@ -5806,6 +5846,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d783d5a83cd0a254dabfd5cb96326cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2775308873326521633 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6494944190041087730, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
+  m_PrefabInstance: {fileID: 8980544769641886675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &528051218827863877 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8932131379237180566, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
+  m_PrefabInstance: {fileID: 8980544769641886675}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5915030066188885458 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3366200351887633921, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}

@@ -21,7 +21,8 @@ namespace AK
         static const AkUniqueID GUN_COLLIDE = 1454043598U;
         static const AkUniqueID GUN_OUTOFCHARGE = 4040174975U;
         static const AkUniqueID GUN_PICKUPFROMGROUND = 822196729U;
-        static const AkUniqueID GUN_SHOOT = 3498111913U;
+        static const AkUniqueID GUN_SHOOT_CHARGED = 2638828604U;
+        static const AkUniqueID GUN_SHOOT_UNCHARGED = 1084131995U;
         static const AkUniqueID GUN_THROW = 3098426972U;
         static const AkUniqueID JUMP = 3833651337U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
@@ -30,7 +31,7 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
-        static const AkUniqueID PLAYER_GUN_DAMAGE = 3340891403U;
+        static const AkUniqueID PLAYER_GUN_CHARGED_SHOT_DAMAGE_MULTIPLIER = 813830513U;
         static const AkUniqueID PLAYER_GUN_NUMOFBOUNCES = 1762700618U;
         static const AkUniqueID PLAYER_GUN_NUMOFCHARGES = 854337950U;
         static const AkUniqueID PLAYER_HEALTH_PERCENTAGE = 3361892810U;
