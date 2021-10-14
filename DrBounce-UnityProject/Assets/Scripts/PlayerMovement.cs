@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        print("Cole smells");
         prevGrav = gravity;
         charController = GetComponent<CharacterController>();
         playerHeight = charController.height;
