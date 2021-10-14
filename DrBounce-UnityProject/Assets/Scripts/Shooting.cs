@@ -34,24 +34,34 @@ public class Shooting : MonoBehaviour
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
 
-
+    #region Events
     [Header("Events")]
 
-    // Passes damage fired
     [SerializeField]
-    private GameEventInt onShoot = null;
+    private GameEvent onUnchargedShot = null;
 
-
-    // Passes chargesLeft
     [SerializeField]
+    [Tooltip("Passes amountOfBounces")]
+    private GameEventInt onChargedShotCombo = null;
+
+    [SerializeField]
+    private GameEvent onChargedShotFired = null;
+
+    [SerializeField]
+    [Tooltip("Passes amountOfBounces")]
+    private GameEventInt onBounce = null;
+
+    [SerializeField]
+    [Tooltip("Passes chargesLeft")]
     private GameEventInt onChargeUpdate = null;
 
     [SerializeField]
     private GameEvent onCatch = null;
 
-    [SerializeField] GameEvent onChargesEmpty = null;
+    [SerializeField]
+    private GameEvent onChargesEmpty = null;
 
-    [SerializeField] GameEvent onChargedShotFired = null;
+    #endregion
 
     [Header("Feedbacks")]
     public MMFeedbacks BasicShootFeedback;
@@ -124,9 +134,12 @@ public class Shooting : MonoBehaviour
             timeSinceLastShot = 0;
 
             if(chargesLeft > 0) HandleComboShot();
-                
-            else if(shooter.chargeShot == GunModes.Basic || chargesLeft <= 0)
+
+            // Is it an uncharged/basic shot?  
+            else if (shooter.chargeShot == GunModes.Basic || chargesLeft <= 0)
             {
+                onUnchargedShot?.Raise();
+
                 //ChargedFeedback?.StopFeedbacks();
                 damage = shooter.baseDamage;
                 
@@ -148,8 +161,6 @@ public class Shooting : MonoBehaviour
             
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
 
-            onShoot?.Raise(damage);
-
             //Debug.LogWarning("BANG!!!");
             //Debug.LogWarning("You shot for " + damage);
         }
@@ -157,9 +168,7 @@ public class Shooting : MonoBehaviour
 
     private void HandleComboShot()
     {
-    	ChargedFeedback?.PlayFeedbacks();
-    	
-        onChargedShotFired?.Raise();
+    	ChargedFeedback?.PlayFeedbacks();	
 
         switch(shooter.chargeShot)
         {
@@ -177,6 +186,9 @@ public class Shooting : MonoBehaviour
                 AddCharge(-1);
                 break;
         }
+
+        onChargedShotCombo?.Raise(amountOfBounces);
+        onChargedShotFired?.Raise();
     }
 
     public void Bounce(int bounceCount) 
