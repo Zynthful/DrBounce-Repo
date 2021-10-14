@@ -36,7 +36,9 @@ public class MouseLook : MonoBehaviour
         SetControllerSensitivity(PlayerPrefs.GetFloat("Options/ControllerSensitivity", controllerSensitivity));
 
         mouseSensitivityX = mouseSensitivityY = mouseSensitivity;
-        controllerSensitivityX = mouseSensitivityY = mouseSensitivity;
+        // controllerSensitivityX = mouseSensitivityY = mouseSensitivity;
+        controllerSensitivityX = controllerSensitivity;
+        controllerSensitivityY = controllerSensitivity;
     }
 
     // Update is called once per frame
@@ -64,6 +66,8 @@ public class MouseLook : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         playerBody.Rotate(Vector3.up * camX);
+
+        print(controllerSensitivityY);
     }
 
     public void SetMouseSensitivity(float value)
@@ -74,6 +78,7 @@ public class MouseLook : MonoBehaviour
     public void SetControllerSensitivity(float value)
     {
         controllerSensitivity = value;
-        controllerSensitivityX = mouseSensitivityY = mouseSensitivity;
+        controllerSensitivityX = controllerSensitivity;
+        controllerSensitivityY = controllerSensitivity;
     }
 }
