@@ -13,6 +13,8 @@ public class VibrationManager : MonoBehaviour
     [Header("Shooting")]
     public HapticTypes shootingHapticType = HapticTypes.None;
     public HapticTypes ChargedShootingHapticType = HapticTypes.None;
+    [SerializeField] float ChargeIntensity;
+    [SerializeField] float ChargeSharpness;
     [Header("Misc")]
     public HapticTypes TakeDamageHapticType = HapticTypes.None;
     public HapticTypes CatchingHapticType = HapticTypes.None;
@@ -57,6 +59,6 @@ public class VibrationManager : MonoBehaviour
 
     public void ActiveChargeVibration()
     {
-        MMVibrationManager.ContinuousHaptic(0.3f, 0.8f, 3.5f, HapticTypes.None, this, true);
+        MMVibrationManager.ContinuousHaptic(ChargeIntensity,ChargeSharpness, 3.5f, HapticTypes.None, this, true);
     }
 }
