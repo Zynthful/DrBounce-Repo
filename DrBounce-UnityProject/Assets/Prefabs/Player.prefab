@@ -1043,10 +1043,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd1ff8582d01294083b56ac9ad8a7fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootEvent:
+  unchargedShotEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: f67264980d1e8e049afac84c0276f968, type: 2}
+    WwiseObjectReference: {fileID: 0}
+  chargedShotEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   bounceEvent:
     idInternal: 0
     valueGuidInternal: 
@@ -1059,10 +1063,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 3bfc69b7e3debb943a1cb71bedc904f4, type: 2}
-  damageRTPC:
+  chargedDamageMultiplierRTPC:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ced433d3ff542e94fb6babb0551958cc, type: 2}
+    WwiseObjectReference: {fileID: 0}
   amountOfBouncesRTPC:
     idInternal: 0
     valueGuidInternal: 
@@ -1083,7 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
+  Event: {fileID: 0}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -2316,7 +2320,7 @@ MonoBehaviour:
   shooter: {fileID: 11400000, guid: 34ebdf3d76725604b9d80bfbb06e0b83, type: 2}
   fpsCam: {fileID: 5587670236126169273}
   damage: 10
-  onShoot: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
+  onShoot: {fileID: 0}
   onChargeUpdate: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
   onCatch: {fileID: 0}
   onChargesEmpty: {fileID: 11400000, guid: fef44d5d95f0b6b44a7d7740b8061a88, type: 2}
@@ -2493,7 +2497,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5587670236342556204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.705, z: 0}
+  m_LocalPosition: {x: 0, y: -1.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5587670236924705794}
@@ -2977,7 +2981,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.45
+  m_Height: 2.4
   m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0
