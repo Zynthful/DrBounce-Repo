@@ -12,13 +12,15 @@ public class GunThrowing : MonoBehaviour
     [SerializeField] Transform weaponHolderTransform = null;
     [SerializeField] bool startOnPlayer;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
-    Collider[] gunColliders;
+    Collider[] gunColliders = null;
     [SerializeField] BoxCollider catchCollider;
     bool throwGunDelay;
     Transform owner; // The player
     Vector3 handPosition;
     Vector3 originPoint;
     Rigidbody rb;
+
+    int amountOfBounces;
 
     public InputMaster controls;
     public Vector3 currentVel; // Used to influence aim assist to be less snappy.
@@ -38,7 +40,7 @@ public class GunThrowing : MonoBehaviour
 
     [Header("Events")]
     [SerializeField]
-    private GameEvent onBounce = null;
+    private GameEventInt onBounce = null;
     [SerializeField]
     private GameEvent onPickup = null;
     [SerializeField]
@@ -59,6 +61,8 @@ public class GunThrowing : MonoBehaviour
         }
         else
         {
+            handPosition = new Vector3(.4f, -.2f, .65f);
+            exitedPlayer = true;
             canThrow = false;
         }
 
@@ -68,6 +72,12 @@ public class GunThrowing : MonoBehaviour
         transform.rotation = Quaternion.identity;
 
         gunColliders = GetComponentsInChildren<Collider>();
+        if(gunColliders == new Collider[0])
+        {
+            gunColliders = new Collider[1] {GetComponent<Collider>()};
+        }
+
+        Debug.Log(gunColliders);
         foreach(Collider col in gunColliders)
         {
             physicMaterials.Add(col.material);
@@ -180,7 +190,7 @@ public class GunThrowing : MonoBehaviour
             returning = true;
             inFlight = true;
 
-            onBounce?.Raise();
+            amountOfBounces++; onBounce?.Raise(amountOfBounces);
 
             BounceFeedback?.PlayFeedbacks();
             collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
@@ -218,6 +228,7 @@ public class GunThrowing : MonoBehaviour
                 mat.dynamicFriction = 0.85f; mat.bounciness = 0;
             }
             returning = true;
+            amountOfBounces = 0;
             onDropped?.Raise();
             inFlight = false;
         }
@@ -227,11 +238,28 @@ public class GunThrowing : MonoBehaviour
     {
         if (other.transform.root == owner && !transform.parent)
         {
+            if(!catchCollider)
+            {
+                catchCollider = other.GetComponentInChildren<BoxCollider>();
+                weaponHolderTransform = WeaponSway.weaponHolderTransform;
+            }
+
             if (returning && inFlight) { onCatch?.Raise(); CatchFeedback?.PlayFeedbacks(); vibrationManager.CatchVibration(); }
             else if (exitedPlayer) { onPickup?.Raise(); PickupFeedback?.PlayFeedbacks(); }
             else { return; }
             ResetScript();
         }
+    }
+
+    public void ChargesEmpty()
+    {
+        amountOfBounces = 0;
+    }
+
+    public void ChargedShotFired()
+    {
+        if(amountOfBounces > 0)
+            amountOfBounces--;
     }
 
     private void OnEnable()

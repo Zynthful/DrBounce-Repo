@@ -37,10 +37,12 @@ public class WeaponSway : MonoBehaviour
     
     [SerializeField] private PlayerMovement movement;
 
+    public static Transform weaponHolderTransform;
+
     private void Awake()
     {
         controls = new InputMaster();
-
+        weaponHolderTransform = transform;
     }
 
     void Start()

@@ -61,6 +61,8 @@ public class Bouncing : MonoBehaviour
         vectors[0] = new Vector3(collision.transform.position.x + ((collision.transform.localScale.x / 2) * dir.x), collision.transform.position.y + (collision.transform.localScale.y / 2), collision.transform.position.z + ((collision.transform.localScale.z / 2) * dir.z));
         dir.y = .2f;
 
+        Debug.Log(vectors[0]);
+
         vectors[1] = transform.position;
         vectors[2] = new Vector3(dir.x, dir.y + .25f, dir.z) * bounceForceMod;
 

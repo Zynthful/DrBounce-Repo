@@ -41,9 +41,6 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     private GameEventInt onShoot = null;
 
-    // Passes amountOfBounces
-    [SerializeField]
-    private GameEventInt onBounce = null;
 
     // Passes chargesLeft
     [SerializeField]
@@ -51,6 +48,10 @@ public class Shooting : MonoBehaviour
 
     [SerializeField]
     private GameEvent onCatch = null;
+
+    [SerializeField] GameEvent onChargesEmpty = null;
+
+    [SerializeField] GameEvent onChargedShotFired = null;
 
     [Header("Feedbacks")]
     public MMFeedbacks BasicShootFeedback;
@@ -142,6 +143,8 @@ public class Shooting : MonoBehaviour
             }
             vibrationManager.BasicShotVibration();
             BasicShootFeedback?.PlayFeedbacks();
+
+            onChargesEmpty?.Raise();
             
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
 
@@ -156,6 +159,8 @@ public class Shooting : MonoBehaviour
     {
     	ChargedFeedback?.PlayFeedbacks();
     	
+        onChargedShotFired?.Raise();
+
         switch(shooter.chargeShot)
         {
             case GunModes.Basic:
@@ -174,12 +179,10 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    public void Bounce() 
+    public void Bounce(int bounceCount) 
     {
-        amountOfBounces++;
+        amountOfBounces = bounceCount;
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
-
-        onBounce?.Raise(amountOfBounces);
     }
 
     public void Catch()
@@ -208,7 +211,6 @@ public class Shooting : MonoBehaviour
     {
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
         anim.SetTrigger("NoCharge");
-        amountOfBounces = 0;
         AddCharge(-chargesLeft); // Set chargesLeft = 0
     }
 
