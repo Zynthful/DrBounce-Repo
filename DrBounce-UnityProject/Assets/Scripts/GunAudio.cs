@@ -6,7 +6,9 @@ public class GunAudio : MonoBehaviour
 {
     [Header("Events")]
     [SerializeField]
-    private AK.Wwise.Event shootEvent = null;
+    private AK.Wwise.Event unchargedShotEvent = null;
+    [SerializeField]
+    private AK.Wwise.Event chargedShotEvent = null;
     [SerializeField]
     private AK.Wwise.Event bounceEvent = null;
     [SerializeField]
@@ -16,24 +18,25 @@ public class GunAudio : MonoBehaviour
 
     [Header("RTPCs")]
     [SerializeField]
-    private AK.Wwise.RTPC damageRTPC = null;
+    private AK.Wwise.RTPC chargedDamageMultiplierRTPC = null;
     [SerializeField]
     private AK.Wwise.RTPC amountOfBouncesRTPC = null;
     [SerializeField]
     private AK.Wwise.RTPC chargesRTPC = null;
 
-    public void PlayShoot(int damage)
+    public void PlayUnchargedShot()
     {
-        damageRTPC.SetValue(gameObject, damage);
-        shootEvent.Post(gameObject);
+        unchargedShotEvent.Post(gameObject);
     }
-
+    public void PlayChargedShot()
+    {
+        chargedShotEvent.Post(gameObject);
+    }
     public void PlayBounce(int amountOfBounces)
     {
         amountOfBouncesRTPC.SetValue(gameObject, amountOfBounces);
         bounceEvent.Post(gameObject);
     }
-
     public void PlayPickUp()
     {
         pickUpFromGroundEvent.Post(gameObject);
@@ -42,7 +45,10 @@ public class GunAudio : MonoBehaviour
     {
         catchEvent.Post(gameObject);
     }
-
+    public void UpdateChargedDamageMultiplierRTPC(int value)
+    {
+        chargedDamageMultiplierRTPC.SetValue(gameObject, value);
+    }
     public void UpdateChargesRTPC(int value)
     {
         chargesRTPC.SetValue(gameObject, value);

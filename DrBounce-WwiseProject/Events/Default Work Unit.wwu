@@ -16,12 +16,12 @@
 				</Event>
 				<Folder Name="Gun" ID="{6EBB3BA9-A023-45E8-B8F4-F26E9DEDBD3E}" ShortID="973542599">
 					<ChildrenList>
-						<Event Name="Gun_Shoot" ID="{8F8B59A1-5C24-4239-B362-19E40B247799}">
+						<Event Name="Gun_Shoot_Uncharged" ID="{8F8B59A1-5C24-4239-B362-19E40B247799}">
 							<ChildrenList>
 								<Action Name="" ID="{EA736E60-FDDA-4F4E-BF99-7B38B3B2AD88}" ShortID="656185561">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Gun_Shoot_Charge" ID="{BBA763BA-27FB-4D61-BF90-EE33F2677E4C}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+											<ObjectRef Name="Gun_Shoot_Uncharged" ID="{BBA763BA-27FB-4D61-BF90-EE33F2677E4C}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -163,6 +163,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Gun_Shoot_Charged" ID="{F6D7B027-5AE7-445F-B5A3-4E14A8983CB0}">
+							<ChildrenList>
+								<Action Name="" ID="{2915F09B-A14C-4F48-83D5-2C661FDD4E91}" ShortID="999375873">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Gun_Shoot_Charged" ID="{23572DF4-5D69-4B74-8F21-B39BC9D4433A}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
