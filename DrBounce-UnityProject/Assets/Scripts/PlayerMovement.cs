@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         float h = playerHeight;
         if (isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
         {
-            h = playerHeight * 0.5f;
+            h = playerHeight * 0.35f;
         }
         float lastHeight = charController.height;
         charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
