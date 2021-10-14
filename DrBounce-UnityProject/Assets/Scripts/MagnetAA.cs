@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MoreMountains.NiceVibrations;
 public class MagnetAA : MonoBehaviour
 {
 
@@ -12,6 +12,9 @@ public class MagnetAA : MonoBehaviour
     [SerializeField] GameEventBool assistEvent;
     bool assistActive;
     Rigidbody rb;
+
+    [Header("Vibrations")]
+    public VibrationManager vibrationManager;
 
     private void Awake()
     {
@@ -24,14 +27,20 @@ public class MagnetAA : MonoBehaviour
     {
         if (!gun.transform.parent)
         {
+            Debug.Log("mag on");
             assistActive = true; assistEvent.Raise(true);
+            vibrationManager.ActiveMagnetAssist();
+
         }
     }
     void AssistEnded() 
     {
         if (assistActive)
         {
+            Debug.Log("mag off");
+            vibrationManager.StopMagnet();
             assistActive = false; assistEvent.Raise(false);
+            
         }
     }
 
