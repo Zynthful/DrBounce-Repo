@@ -7,7 +7,7 @@ public class MagnetAA : MonoBehaviour
 
     public InputMaster controls;
     [SerializeField] GunThrowing gun;
-    [Range(0.0f, 10.0f)] public float aimAssistMaxRange;
+    [Range(0.0f, 50f)] public float aimAssistMaxRange;
     [SerializeField] private float aimAssistForce;
     [SerializeField] GameEventBool assistEvent;
     bool assistActive;
