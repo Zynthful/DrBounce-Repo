@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameEvent onDash = null;
 
     //Crouching:
-    private bool isCrouching;
+    public bool isCrouching;
     private CharacterController charController;
     private float playerHeight;
     private float oldSpeed;
