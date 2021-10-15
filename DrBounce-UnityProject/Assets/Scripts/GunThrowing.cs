@@ -87,7 +87,7 @@ public class GunThrowing : MonoBehaviour
     private void Awake()
     {
         controls = new InputMaster();
-        controls.Player.RecallGun.performed += _ => ResetScript();
+        controls.Player.RecallGun.performed += _ => RecallGun();
         controls.Player.ThrowGun.performed += _ => SetThrowGunDelay();
     }
 
@@ -183,6 +183,12 @@ public class GunThrowing : MonoBehaviour
         }
     }
 
+    private void RecallGun()
+    {
+        amountOfBounces = 0;
+        ResetScript();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (!transform.parent && bounceableLayers == (bounceableLayers | 1 << collision.gameObject.layer))
@@ -250,6 +256,8 @@ public class GunThrowing : MonoBehaviour
             ResetScript();
         }
     }
+
+
 
     public void ChargesEmpty()
     {
