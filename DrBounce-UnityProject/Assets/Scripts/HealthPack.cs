@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthPack : MonoBehaviour
 {
-    [SerializeField] private HealthPackObject healthPack = null;
+    //[SerializeField] private HealthPackObject healthPack = null;
 
     public delegate void Activated(int value);
     public static event Activated OnActivated;
@@ -13,6 +13,10 @@ public class HealthPack : MonoBehaviour
 
     private int amountOfBounces;
     private bool healing;
+
+    [Header("Healing Values")]
+    [SerializeField] private int minAmountHealed;
+    [SerializeField] private int MaxAmountHealed;
 
     [Header("Quadratic Values")]
     [Tooltip("Caps max healing, heals less")]
@@ -29,6 +33,10 @@ public class HealthPack : MonoBehaviour
     {
         //cc Daniel Neale 2021
         a *= -1;    //flips the a value
+        if (MaxAmountHealed > MaxXValue()) 
+        {
+            MaxAmountHealed = MaxXValue();
+        }
     }
 
     // Update is called once per frame
@@ -99,11 +107,11 @@ public class HealthPack : MonoBehaviour
 
         if (amountOfBounces == 0)   //default healing value
         {
-            healAmount = 33;
+            healAmount = minAmountHealed;
         }
         else if (amountOfBounces > topOfCurve)    //stop you going down the healing curve
         {
-            healAmount = 100;
+            healAmount = MaxAmountHealed;
         }
         else
         {
@@ -120,10 +128,13 @@ public class HealthPack : MonoBehaviour
 
     private int MaxXValue() 
     {
-        float maxX = (-b) / (2 * a);
-        float maxY = Equation(maxX);
+        return Mathf.RoundToInt((-b) / (2 * a));
+    }
 
-        return Mathf.RoundToInt(maxX);
+    private int MaxYValue()
+    {
+        float maxX = (-b) / (2 * a);
+        return Mathf.RoundToInt(Equation(maxX));
     }
 
     private void StopHealing() 
