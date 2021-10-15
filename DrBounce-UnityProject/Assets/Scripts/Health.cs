@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    private int health = 100;
-    private int maxHealth = 100;
+    private static int health = 100;
+    private static int maxHealth = 100;
     private float minHealth = 0;
 
     public delegate void CurrentHealth();
@@ -104,15 +104,24 @@ public class Health : MonoBehaviour
 
     private void OnEnable()
     {
-        HealthPack.OnEntered += RecieveRequest;
         HealthPack.OnActivated += Heal;
         BulletMovement.OnHit += Damage;
     }
 
     private void OnDisable()
     {
-        HealthPack.OnEntered -= RecieveRequest;
         HealthPack.OnActivated -= Heal;
         BulletMovement.OnHit -= Damage;
+    }
+
+    public static int ReturnHealth() 
+    {
+        return health;
+    }
+
+    public static bool ReturnHealthNotMax()
+    {
+        return (health < maxHealth);
+
     }
 }

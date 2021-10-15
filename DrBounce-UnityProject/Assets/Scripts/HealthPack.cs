@@ -6,16 +6,13 @@ public class HealthPack : MonoBehaviour
 {
     [SerializeField] private HealthPackObject healthPack = null;
 
-    private bool hasBounced = false;
-
-    private bool isPickupable = false;
-        private bool activated = false;
-
-    public delegate void Entered();
-    public static event Entered OnEntered;
-
     public delegate void Activated(int value);
     public static event Activated OnActivated;
+
+    public InputMaster controls;
+
+    private int amountOfBounces;
+    private bool healing;
 
     // Start is called before the first frame update
     void Start()
@@ -26,42 +23,85 @@ public class HealthPack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPickupable && activated)
+
+    }
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+        controls.Player.Shoot.performed += _ => StartCoroutine(Healing());
+        controls.Player.Shoot.canceled += _ => StopHealing();
+    }
+
+    public void Bounce(int bounceCount)
+    {
+        amountOfBounces = bounceCount;
+        //feedback for when the when the health pack is catched
+    }
+
+    public void Dropped()
+    {
+        if (!transform.parent)  //if the health pack is dropped and has no parent
         {
-            OnActivated?.Invoke((int)healthPack.Health);
+            amountOfBounces = 0;
+            //feedback for when the health pack losses its charge
+        }
+    }
+
+    private void Heal() 
+    {
+        if (transform.parent && Health.ReturnHealthNotMax())   //checks if the health pack has a parent, please come back dad and if you are not at max health
+        {
+            //where you heal
+            healing = false;
+            OnActivated?.Invoke(HealingEquation(amountOfBounces));
             Destroy(this.gameObject);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private IEnumerator Healing() 
     {
-        if (other.gameObject?.tag == "Player")
+        healing = true;
+        yield return new WaitForSeconds(0.2f);
+        if (healing) 
         {
-            isPickupable = true;
-            OnEntered?.Invoke();
+            Heal();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private int HealingEquation(int amountOfBounces) 
     {
-        if (other.gameObject?.tag == "Player")
+
+        float healAmount;
+
+        if (amountOfBounces == 0)   //default healing value
         {
-            isPickupable = false;
+            healAmount = 33;
         }
+        else if (amountOfBounces > 5)    //stop you going down the healing curve
+        {
+            healAmount = 100;
+        }
+        else
+        {
+            float a = 0.5f;
+            float b = 11.5f;
+            float c = 55f;
+
+            healAmount = Mathf.Pow(amountOfBounces, 2) * -a;
+            healAmount += (amountOfBounces * b);
+            healAmount += c;
+        }
+
+        return Mathf.RoundToInt(healAmount);
     }
 
-    private void CanHeal()
+    private void StopHealing() 
     {
-        activated = true;
-    }
-
-    private void OnEnable()
-    {
-        Health.ReportHealth += CanHeal;
-    }
-
-    private void OnDisable()
-    {
-        Health.ReportHealth -= CanHeal;
+        if (healing) 
+        {
+            healing = false;
+        }
+        
     }
 }
