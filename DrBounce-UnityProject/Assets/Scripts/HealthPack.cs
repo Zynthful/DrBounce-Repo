@@ -14,16 +14,27 @@ public class HealthPack : MonoBehaviour
     private int amountOfBounces;
     private bool healing;
 
+    [Header("Quadratic Values")]
+    [Tooltip("Caps max healing, heals less")]
+    [SerializeField] private float a;
+
+    [Tooltip("Makes each bounce heal more")]
+    [SerializeField] private float b;
+
+    [Tooltip("Heal more will less bounces")]
+    [SerializeField] private float c;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        //cc Daniel Neale 2021
+        a *= -1;    //flips the a value
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        MaxXValue();
     }
 
 
@@ -65,7 +76,7 @@ public class HealthPack : MonoBehaviour
         {
             //where you heal
             healing = false;
-            OnActivated?.Invoke(HealingEquation(amountOfBounces));
+            OnActivated?.Invoke(HealingAmpuntCalc(amountOfBounces));
             Destroy(this.gameObject);
         }
     }
@@ -80,31 +91,39 @@ public class HealthPack : MonoBehaviour
         }
     }
 
-    private int HealingEquation(int amountOfBounces) 
+    private int HealingAmpuntCalc(int amountOfBounces) 
     {
 
         float healAmount;
+        int topOfCurve = MaxXValue();
 
         if (amountOfBounces == 0)   //default healing value
         {
             healAmount = 33;
         }
-        else if (amountOfBounces > 5)    //stop you going down the healing curve
+        else if (amountOfBounces > topOfCurve)    //stop you going down the healing curve
         {
             healAmount = 100;
         }
         else
         {
-            float a = 0.5f;
-            float b = 11.5f;
-            float c = 55f;
-
-            healAmount = Mathf.Pow(amountOfBounces, 2) * -a;
-            healAmount += (amountOfBounces * b);
-            healAmount += c;
+            healAmount = Equation(amountOfBounces);
         }
 
         return Mathf.RoundToInt(healAmount);
+    }
+
+    private int Equation(float x)  //-0.5x^2 + 11.5x + 55
+    {
+        return Mathf.RoundToInt( Mathf.Pow(x, 2) * a + (amountOfBounces * b) + c);
+    }
+
+    private int MaxXValue() 
+    {
+        float maxX = (-b) / (2 * a);
+        float maxY = Equation(maxX);
+
+        return Mathf.RoundToInt(maxX);
     }
 
     private void StopHealing() 
@@ -113,6 +132,5 @@ public class HealthPack : MonoBehaviour
         {
             healing = false;
         }
-        
     }
 }
