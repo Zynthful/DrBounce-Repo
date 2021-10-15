@@ -19,6 +19,7 @@ namespace AK
         static const AkUniqueID GUN_CATCH = 4103136129U;
         static const AkUniqueID GUN_CHARGED = 4177359644U;
         static const AkUniqueID GUN_COLLIDE = 1454043598U;
+        static const AkUniqueID GUN_EXPLOSIVE_EXPLODE = 3628444963U;
         static const AkUniqueID GUN_OUTOFCHARGE = 4040174975U;
         static const AkUniqueID GUN_PICKUPFROMGROUND = 822196729U;
         static const AkUniqueID GUN_SHOOT_CHARGED = 2638828604U;

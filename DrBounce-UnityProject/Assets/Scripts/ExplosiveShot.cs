@@ -13,6 +13,9 @@ public class ExplosiveShot : BulletMovement
     [SerializeField] [Range(10f, 1000f)] float expansionSpeed;
     private MeshRenderer shotRenderer;
 
+    [SerializeField]
+    private ExplosiveShotAudio shotAudio = null;
+
     public override void OnObjectSpawn()
     {
         base.OnObjectSpawn();
@@ -33,6 +36,8 @@ public class ExplosiveShot : BulletMovement
     {
         if (!other.transform.GetComponent<BulletMovement>() && other.transform.root != PlayerMovement.player.root)
         {
+            shotAudio?.PlayExplode();
+
             explosionTrigger.SetActive(true);
             if (comboSize > 1 && explosionDamageMultiplier > 0)
                 dam = (int)(dam * comboSize * explosionDamageMultiplier);
