@@ -26,6 +26,17 @@ public class HealthPack : MonoBehaviour
 
     }
 
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
     private void Awake()
     {
         controls = new InputMaster();
@@ -35,7 +46,7 @@ public class HealthPack : MonoBehaviour
 
     public void Bounce(int bounceCount)
     {
-        amountOfBounces = bounceCount;
+        amountOfBounces++; //= bounceCount;
         //feedback for when the when the health pack is catched
     }
 
@@ -50,7 +61,7 @@ public class HealthPack : MonoBehaviour
 
     private void Heal() 
     {
-        if (transform.parent && Health.ReturnHealthNotMax())   //checks if the health pack has a parent, please come back dad and if you are not at max health
+        if (transform.parent && Health.ReturnHealthNotMax())   //(checks if the health pack has a parent, please come back dad) and if you are not at max health
         {
             //where you heal
             healing = false;
