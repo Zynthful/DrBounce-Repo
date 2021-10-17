@@ -3050,8 +3050,8 @@ MonoBehaviour:
   jumpMin: 2
   floatiness: 3.5
   dashStrength: 4
-  dashLength: 0.2
-  dashesBeforeLanding: 1
+  dashLength: 0.3
+  dashesBeforeLanding: 2
   cooldownTime: 0.5
   noMoveAfterDashOnOff: 0
   noMovementTime: 0.1
@@ -3072,6 +3072,7 @@ MonoBehaviour:
   vibrationManager: {fileID: 0}
   onJump: {fileID: 11400000, guid: 5ec36698f37a6c04a9b8ea92292716cd, type: 2}
   onDash: {fileID: 11400000, guid: 539dc31165069b14ead0a76396611171, type: 2}
+  isCrouching: 0
 --- !u!114 &2207795691488889897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3443,6 +3444,9 @@ MonoBehaviour:
   bobSpeed: 0.2
   bobDistance: 0.05
   bobTransitionSpeed: 0.05
+  bobSpeedC: 0.5
+  bobDistanceC: 0.5
+  bobTransitionSpeedC: 0.005
   swayAmount: 0.35
   rotateToStartSpeed: 3
   snappiness: 10
