@@ -26,10 +26,12 @@ public class JellyWobble : MonoBehaviour
     }
     private void Update()
     {
+        if (GameManager.s_Instance.paused) { return; }
+
         time += Time.deltaTime;
         // decrease wobble over time
-        wobbleAmountToAddX = Mathf.Lerp(wobbleAmountToAddX, 0, Time.deltaTime * (Recovery));
-        wobbleAmountToAddZ = Mathf.Lerp(wobbleAmountToAddZ, 0, Time.deltaTime * (Recovery));
+        wobbleAmountToAddX = Mathf.Lerp(wobbleAmountToAddX, 0, Time.deltaTime * Recovery);
+        wobbleAmountToAddZ = Mathf.Lerp(wobbleAmountToAddZ, 0, Time.deltaTime * Recovery);
 
         // make a sine wave of the decreasing wobble
         pulse = 2 * Mathf.PI * WobbleSpeed;
@@ -37,8 +39,14 @@ public class JellyWobble : MonoBehaviour
         wobbleAmountZ = wobbleAmountToAddZ * Mathf.Sin(pulse * time);
 
         // send it to the shader
-        rend.material.SetFloat("_WobbleX", wobbleAmountX);
-        rend.material.SetFloat("_WobbleZ", wobbleAmountZ);
+        foreach(Material material in rend.materials)
+        {
+            if (material.HasProperty("_WobbleX"))
+            {
+                material.SetFloat("_WobbleX", wobbleAmountX);
+                material.SetFloat("_WobbleZ", wobbleAmountZ);
+            }
+        }
 
         // velocity
         velocity = (lastPos - transform.position) / Time.deltaTime;
