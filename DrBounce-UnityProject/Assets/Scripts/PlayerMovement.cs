@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpHeight = 0f;
     private bool prevJump = false;
     private float prevGrav;
+    private float mayJump;
 
     [Header("Dashing")]
     public float dashStrength = 4f;
@@ -102,11 +103,13 @@ public class PlayerMovement : MonoBehaviour
         #region GroundChecking
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
-        #endregion
 
-        #region DashStopping
+        print(mayJump);
+        mayJump -= Time.deltaTime;
         if (isGrounded)
         {
+            mayJump = 0.5f;
+
             dashesPerformed = 0;
             if (dashesPerformed > 0)
             {
@@ -237,7 +240,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
-        if (!GameManager.s_Instance.paused && isGrounded)
+        if (!GameManager.s_Instance.paused && mayJump >= 0)
         {
             if (prevJump == false)
             {
