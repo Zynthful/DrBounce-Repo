@@ -17,12 +17,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump")]
     public float jumpPeak = 3f;
     public float jumpMin = 1f;
+    [Tooltip("The higher the value, the heavier the player is.")]
     public float floatiness;
+    [Tooltip("Set between 1 and 0, with 1 being lots of time and 0 being none")]
+    public float coyoteTime;
+    private float oldCoyoteTime;
     private bool jump = false;
     private float jumpHeight = 0f;
     private bool prevJump = false;
     private float prevGrav;
-    private float mayJump;
     private bool hasJumped = false;
 
     [Header("Dashing")]
@@ -74,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        oldCoyoteTime = coyoteTime;
         oldGroundDistance = groundDistance;
         prevGrav = gravity;
         charController = GetComponent<CharacterController>();
@@ -105,10 +109,10 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
 
-        mayJump -= Time.deltaTime;
+        coyoteTime -= Time.deltaTime;
         if (isGrounded)
         {
-            mayJump = 0.5f;
+            coyoteTime = oldCoyoteTime;
             hasJumped = false;
             dashesPerformed = 0;
             if (dashesPerformed > 0)
@@ -224,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
-        if (!GameManager.s_Instance.paused && mayJump > 0 && hasJumped == false)
+        if (!GameManager.s_Instance.paused && coyoteTime > 0 && hasJumped == false)
         {
             
             if (prevJump == false)
