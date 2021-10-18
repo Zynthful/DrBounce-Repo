@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private bool prevJump = false;
     private float prevGrav;
     private float mayJump;
+    private bool hasJumped = false;
 
     [Header("Dashing")]
     public float dashStrength = 4f;
@@ -104,12 +105,11 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
 
-        print(mayJump);
         mayJump -= Time.deltaTime;
         if (isGrounded)
         {
             mayJump = 0.5f;
-
+            hasJumped = false;
             dashesPerformed = 0;
             if (dashesPerformed > 0)
             {
@@ -154,24 +154,6 @@ public class PlayerMovement : MonoBehaviour
 
         #endregion
 
-        #region CoyoteTime
-        if (controls.Player.Movement.ReadValue<Vector2>().x != 0 || controls.Player.Movement.ReadValue<Vector2>().y != 0)
-        {
-            print("Test");
-            if (hasIncreasedGroundDistance == false)
-            {
-                hasIncreasedGroundDistance = true;
-                groundDistance = (oldGroundDistance * 2f);
-            }
-        }
-
-        else
-        {
-            groundDistance = oldGroundDistance;
-            hasIncreasedGroundDistance = false;
-        }
-        #endregion
-
         #region Dashing
         if (isDashing == true)
         {
@@ -210,6 +192,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (jump == true)
         {
+            hasJumped = true;
+
             velocity.y = (Mathf.Sqrt(jumpHeight * -2 * gravity));
 
             if (controls.Player.Jump.ReadValue<float>() == 1)
@@ -240,8 +224,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
-        if (!GameManager.s_Instance.paused && mayJump >= 0)
+        if (!GameManager.s_Instance.paused && mayJump > 0 && hasJumped == false)
         {
+            
             if (prevJump == false)
             {
                 prevJump = true;
@@ -249,7 +234,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             gravity = prevGrav;
-            if(isCrouching == true)
+            if (isCrouching == true)
             {
                 Crouch(); //Un-crouches the player before jumping
             }
@@ -258,9 +243,15 @@ public class PlayerMovement : MonoBehaviour
             isDashing = false;
             feedbackPlayed = false;
             prevJump = false;
+
             jump = true;
             vibrationManager.JumpVibration();
             onJump?.Raise();
+        }
+        else
+        {
+            print("Test");
+            
         }
     }
 
