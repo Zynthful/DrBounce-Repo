@@ -20,6 +20,7 @@ public class GunThrowing : MonoBehaviour
     Vector3 originPoint;
     Rigidbody rb;
 
+    SwitchHeldItem inventory;
     int amountOfBounces;
 
     public InputMaster controls;
@@ -52,7 +53,8 @@ public class GunThrowing : MonoBehaviour
     void Start()
     {
         owner = PlayerMovement.player;
-        
+        inventory = SwitchHeldItem.instance;
+
         if(startOnPlayer)
         {
             handPosition = transform.localPosition;
@@ -154,6 +156,11 @@ public class GunThrowing : MonoBehaviour
             {
                 mat.dynamicFriction = 0.2f; mat.bounciness = .2f;
             }
+
+            if(inventory.currentHeldTransform == transform)
+            {
+                inventory.currentHeldTransform = null; inventory.SwitchActiveItem();
+            }
         }
     }
 
@@ -180,13 +187,18 @@ public class GunThrowing : MonoBehaviour
             transform.rotation = weaponHolderTransform.rotation;
             MagnetCallFeedback?.PlayFeedbacks();
             currentVel = Vector3.zero;
+
+            inventory.OnPickupItem(transform);
         }
     }
 
     private void RecallGun()
     {
-        amountOfBounces = 0;
-        ResetScript();
+        if (startOnPlayer)
+        {
+            amountOfBounces = 0;
+            ResetScript();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
