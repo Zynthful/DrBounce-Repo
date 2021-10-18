@@ -20,6 +20,8 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
 
     [SerializeField] private MagnetAA mAA = null;
 
+    private bool magnetise = false;
+
     private void Start()
     {
         if (mAA != null)
@@ -37,9 +39,20 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.s_Instance.paused) { return; }
+        if (GameManager.s_Instance.paused) return;
 
-        if (!lineRenderer.enabled) { return; }
+        lineRenderer.enabled = magnetise;
+
+        if (magnetise)
+        {
+            if (Vector3.Distance(point1.position, point3.position) > colourDistance || Vector3.Distance(point1.position, point3.position) < 1f)
+            {
+                lineRenderer.enabled = false;
+                return;
+            }
+        }
+        else 
+            return;
 
         point2.localPosition = new Vector3(0, 0, Vector3.Distance(point1.position, point3.position) / 2);
 
@@ -57,6 +70,12 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
         Color endColour = Color.Lerp(colourClose, colourFar, Mathf.Clamp(Vector3.Distance(point1.position, point3.position) / colourDistance, 0, 1));
         gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(colourClose, 0.0f), new GradientColorKey(endColour, 1.0f / (Vector3.Distance(point1.position, point3.position) / colourDistance)) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) });
         lineRenderer.colorGradient = gradient;
+    }
+
+    public void isMag(bool mag)
+    {
+        Debug.Log("yes itsaworkin and its " + mag);
+        magnetise = mag;
     }
 
     public Vector3 QuadraticBezierCurve(float t, Vector3 p0, Vector3 p1, Vector3 p2)
