@@ -33,27 +33,42 @@ public class Health : MonoBehaviour
 
     public MMProgressBar progressBar;
 
-    
+    bool canSetStartingHealth = true;
 
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+
         onHealthChange?.Raise(100.0f * ((float)health / (float)maxHealth));
+        progressBar.UpdateBar(health, minHealth, maxHealth);
     }
 
     private void Update()
     {
         //print(health);
+        if (canSetStartingHealth) UpdatedStartingHealth();
+    }
+
+    private void UpdatedStartingHealth()   //doesn't work in start : (
+    {
+        //health = 1;
+        //progressBar.UpdateBar(health, minHealth, maxHealth);
+        //Damage(0);
+        canSetStartingHealth = false;
     }
 
     private void Heal(int amount) 
     {
+        //print("i am healing: " + amount);
+
         onHeal?.Raise(amount);
-        progressBar.UpdateBar(health, minHealth, maxHealth);
+
 
         health += amount;
+
+        progressBar.UpdateBar(health, minHealth, maxHealth);
 
         if (health > maxHealth) 
         {
@@ -78,7 +93,7 @@ public class Health : MonoBehaviour
 
         if (health <= 0) 
         {
-            Debug.Log("mortis");
+            //Debug.Log("mortis");
             DeathFeedback?.PlayFeedbacks();
             Invoke("DIE",0.230f);
         }
