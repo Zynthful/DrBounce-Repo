@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public int dashesBeforeLanding;
     public float cooldownTime = 0.5f;
     public bool noMoveAfterDashOnOff;
+    public float extendedNoGravTime = 0.1f;
     public float noMovementTime;
     private bool cooldown = false;
     private bool isDashing = false;
@@ -65,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        print("Cole smells");
         prevGrav = gravity;
         charController = GetComponent<CharacterController>();
         playerHeight = charController.height;
@@ -140,24 +140,21 @@ public class PlayerMovement : MonoBehaviour
         #region Dashing
         if (isDashing == true)
         {
-            if(feedbackPlayed == false)
+            if (feedbackPlayed == false)
             {
                 DashFeedback?.PlayFeedbacks(); //Play feedback
                 feedbackPlayed = true;
             }
             cooldown = true;
 
-            if (controls.Player.Movement.ReadValue<Vector2>().y != 0) //If player is moving in the Y axis
+            if (controls.Player.Movement.ReadValue<Vector2>().x != 0 || controls.Player.Movement.ReadValue<Vector2>().y != 0) //Else if the player is moving in the X axis
             {
-                Vector3 move2 = transform.forward * z;
-                controller.Move(move2 * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
-            }
+                float x2 = controls.Player.Movement.ReadValue<Vector2>().x;
+                float z2 = controls.Player.Movement.ReadValue<Vector2>().y;
 
-            else if (controls.Player.Movement.ReadValue<Vector2>().x != 0) //Else if the player is moving in the X axis
-            {
-                Vector3 move2 = transform.right * x;
-                controller.Move(move2 * dashStrength * speed * Time.deltaTime); //Do the same, to the side.
-                //The X axis is an else if, as it ensures that if the player is holding both Up and Right on the arrowkeys while dashing, they only dash forward
+                Vector3 move = (transform.right * x + transform.forward * z).normalized;
+
+                controller.Move(move * dashStrength * speed * Time.deltaTime);
             }
             else
             {
@@ -265,7 +262,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator EnableDisableDash()
     {
-        if(dashesPerformed < dashesBeforeLanding)
+        if (dashesPerformed < dashesBeforeLanding)
         {
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
 
@@ -282,10 +279,12 @@ public class PlayerMovement : MonoBehaviour
 
             yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
 
-            gravity = oldGravity;
             dashesPerformed += 1;
 
             isDashing = false;
+
+            yield return new WaitForSeconds(extendedNoGravTime);
+            gravity = oldGravity;
         }
     }
 
