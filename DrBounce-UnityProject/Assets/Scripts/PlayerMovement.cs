@@ -151,30 +151,35 @@ public class PlayerMovement : MonoBehaviour
         #region Dashing
         if (isDashing == true)
         {
-            if (feedbackPlayed == false)
+            if(hasDashed == false)
             {
-                DashFeedback?.PlayFeedbacks(); //Play feedback
-                feedbackPlayed = true;
-            }
-            cooldown = true;
+                if (feedbackPlayed == false)
+                {
+                    DashFeedback?.PlayFeedbacks(); //Play feedback
+                    feedbackPlayed = true;
+                }
+                cooldown = true;
 
-            if(dashLocker == false)
+                if (dashLocker == false)
+                {
+                    dashLocker = true;
+                    x2 = controls.Player.Movement.ReadValue<Vector2>().x;
+                    z2 = controls.Player.Movement.ReadValue<Vector2>().y;
+                    print("Testis");
+                }
+                Vector3 move = (transform.right * x2 + transform.forward * z2).normalized;
+
+                controller.Move(move * dashStrength * speed * Time.deltaTime);
+            }
+
+
+            if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
             {
-                dashLocker = true;
-                x2 = controls.Player.Movement.ReadValue<Vector2>().x;
-                z2 = controls.Player.Movement.ReadValue<Vector2>().y;
-                print("Testis");
+                Vector3 move2 = transform.forward;
+                controller.Move(move2 * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+                hasDashed = true;
+                controls.Player.Movement.Disable();
             }
-            Vector3 move = (transform.right * x2 + transform.forward * z2).normalized;
-
-            controller.Move(move * dashStrength * speed * Time.deltaTime);
-
-            //if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
-            //{
-            //    Vector3 move2 = transform.forward;
-            //    controller.Move(move2 * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
-                
-            //}
         }
         #endregion
 
@@ -298,6 +303,8 @@ public class PlayerMovement : MonoBehaviour
             isDashing = false;
             dashLocker = false;
             movementBlocker = false;
+            hasDashed = false;
+            controls.Player.Movement.Enable();
 
             yield return new WaitForSeconds(extendedNoGravTime);
             gravity = oldGravity;
