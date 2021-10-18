@@ -28,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
     public float dashLength = 0.2f;
     public int dashesBeforeLanding;
     public float cooldownTime = 0.5f;
-    public bool noMoveAfterDashOnOff;
     public float extendedNoGravTime = 0.1f;
     public float noMovementTime;
     private bool cooldown = false;
@@ -51,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool headIsTouchingSomething;
     public Vector3 velocity;
+    private float oldGroundDistance;
+    private bool hasIncreasedGroundDistance = false;
 
     [Header("Feedbacks")]
     public MMFeedbacks DashFeedback;
@@ -71,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        oldGroundDistance = groundDistance;
         prevGrav = gravity;
         charController = GetComponent<CharacterController>();
         playerHeight = charController.height;
@@ -96,8 +98,11 @@ public class PlayerMovement : MonoBehaviour
         transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
 
         #endregion
+
+        #region GroundChecking
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
+        #endregion
 
         #region DashStopping
         if (isGrounded)
@@ -133,19 +138,35 @@ public class PlayerMovement : MonoBehaviour
         #region Movement
         if (!GameManager.s_Instance.paused && movementBlocker == false)
         {
+
             float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
             float z = controls.Player.Movement.ReadValue<Vector2>().y;
 
             Vector3 move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
             controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
         }
-        else
-        {
-            print("Cheese");
-        }
+
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
         controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
 
+        #endregion
+
+        #region CoyoteTime
+        if (controls.Player.Movement.ReadValue<Vector2>().x != 0 || controls.Player.Movement.ReadValue<Vector2>().y != 0)
+        {
+            print("Test");
+            if (hasIncreasedGroundDistance == false)
+            {
+                hasIncreasedGroundDistance = true;
+                groundDistance = (oldGroundDistance * 2f);
+            }
+        }
+
+        else
+        {
+            groundDistance = oldGroundDistance;
+            hasIncreasedGroundDistance = false;
+        }
         #endregion
 
         #region Dashing
@@ -165,7 +186,6 @@ public class PlayerMovement : MonoBehaviour
                     dashLocker = true;
                     x2 = controls.Player.Movement.ReadValue<Vector2>().x;
                     z2 = controls.Player.Movement.ReadValue<Vector2>().y;
-                    print("Testis");
                 }
                 Vector3 move = (transform.right * x2 + transform.forward * z2).normalized;
 
@@ -254,10 +274,6 @@ public class PlayerMovement : MonoBehaviour
 
             isCrouching = false;
             StartCoroutine(CoolDownTest());
-
-
-            StartCoroutine(NoMoveAfterDash());
-            
         }
     }
 
@@ -326,18 +342,7 @@ public class PlayerMovement : MonoBehaviour
         dashesPerformed = 0;
     }
 
-    IEnumerator NoMoveAfterDash()
-    {
-        yield return new WaitForSeconds(dashLength);
-        if(noMoveAfterDashOnOff == true)
-        {
-            float previousSpeed = speed;
-            speed = 0;
-            yield return new WaitForSeconds(noMovementTime);
-            speed = previousSpeed;
-        }
-    }
-
+    #region BrackeysMoment
     private void OnEnable() //Enables and disables the local version of controls as the gameobject is enabled and disabled.
     {
         controls.Enable();
@@ -347,4 +352,5 @@ public class PlayerMovement : MonoBehaviour
     {
         controls.Disable();
     }
+    #endregion
 }
