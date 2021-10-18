@@ -35,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     private int dashesPerformed = 0;
     private bool feedbackPlayed = false;
+    private bool dashLocker = false;
+    private bool movementBlocker = false;
+    private bool hasDashed = false;
+    private float x2;
+    private float z2;
 
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
@@ -78,8 +83,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
-        float z = controls.Player.Movement.ReadValue<Vector2>().y;
 
         #region Crouching
         //print(isCrouching);
@@ -128,13 +131,21 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Movement
-        if (!GameManager.s_Instance.paused)
+        if (!GameManager.s_Instance.paused && movementBlocker == false)
         {
+            float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
+            float z = controls.Player.Movement.ReadValue<Vector2>().y;
+
             Vector3 move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
             controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
-            velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-            controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
         }
+        else
+        {
+            print("Cheese");
+        }
+        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
+        controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
+
         #endregion
 
         #region Dashing
@@ -147,20 +158,23 @@ public class PlayerMovement : MonoBehaviour
             }
             cooldown = true;
 
-            if (controls.Player.Movement.ReadValue<Vector2>().x != 0 || controls.Player.Movement.ReadValue<Vector2>().y != 0) //Else if the player is moving in the X axis
+            if(dashLocker == false)
             {
-                float x2 = controls.Player.Movement.ReadValue<Vector2>().x;
-                float z2 = controls.Player.Movement.ReadValue<Vector2>().y;
-
-                Vector3 move = (transform.right * x + transform.forward * z).normalized;
-
-                controller.Move(move * dashStrength * speed * Time.deltaTime);
+                dashLocker = true;
+                x2 = controls.Player.Movement.ReadValue<Vector2>().x;
+                z2 = controls.Player.Movement.ReadValue<Vector2>().y;
+                print("Testis");
             }
-            else
-            {
-                Vector3 move2 = transform.forward;
-                controller.Move(move2 * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
-            }
+            Vector3 move = (transform.right * x2 + transform.forward * z2).normalized;
+
+            controller.Move(move * dashStrength * speed * Time.deltaTime);
+
+            //if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
+            //{
+            //    Vector3 move2 = transform.forward;
+            //    controller.Move(move2 * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+                
+            //}
         }
         #endregion
 
@@ -265,8 +279,8 @@ public class PlayerMovement : MonoBehaviour
         if (dashesPerformed < dashesBeforeLanding)
         {
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
+            movementBlocker = true;
 
-            print("Gromit");
             vibrationManager.DashVibration();
             onDash?.Raise();
 
@@ -282,6 +296,8 @@ public class PlayerMovement : MonoBehaviour
             dashesPerformed += 1;
 
             isDashing = false;
+            dashLocker = false;
+            movementBlocker = false;
 
             yield return new WaitForSeconds(extendedNoGravTime);
             gravity = oldGravity;
