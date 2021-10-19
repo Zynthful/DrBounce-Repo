@@ -45,6 +45,11 @@ public class PlayerMovement : MonoBehaviour
     private float x2;
     private float z2;
 
+    [Header("Sliding")]
+    public float slideTime;
+    public float slideStrength;
+    private bool isSliding = false;
+
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
     public Transform headCheck;
@@ -95,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
-        if (isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
+        if (isCrouching == true || isSliding == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
         {
             h = playerHeight * 0.35f;
         }
@@ -135,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(!headIsTouchingSomething && isCrouching == true)
+        if (!headIsTouchingSomething && isCrouching == true)
         {
             isGrounded = true;
             cooldown = false;
@@ -161,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
         #region Dashing
         if (isDashing == true)
         {
-            if(hasDashed == false)
+            if (hasDashed == false)
             {
                 if (feedbackPlayed == false)
                 {
@@ -225,6 +230,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         #endregion
+
+        #region Slide
+        if (isSliding == true)
+        {
+            Vector3 move2 = transform.forward;
+            controller.Move(move2 * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+        }
+        #endregion
     }
     private void Jump()
     {
@@ -279,20 +292,37 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!GameManager.s_Instance.paused && isGrounded == true)
         {
-            if (isCrouching == true)
+            if (isCrouching == false)
             {
+                if(controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
+                {
+                    print("Crouch");
+                    isCrouching = true;
+                    oldSpeed = speed;
+                    speed /= 2;
+                }
+                else
+                {
+                    StartCoroutine(EnableDisableSlide());
+                }
+            }
+
+            else
+            {
+                print("UnCrouch");
                 isCrouching = false;
                 speed = oldSpeed;
             }
-            else
-            {
-                isCrouching = true;
-                oldSpeed = speed;
-                speed /= 2;
-            }
         }
+
     }
 
+    IEnumerator EnableDisableSlide()
+    {
+        isSliding = true;
+        yield return new WaitForSeconds(slideTime);
+        isSliding = false;
+    }
     IEnumerator EnableDisableDash()
     {
         if (dashesPerformed < dashesBeforeLanding)
