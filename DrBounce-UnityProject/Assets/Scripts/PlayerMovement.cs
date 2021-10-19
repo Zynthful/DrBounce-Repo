@@ -333,6 +333,12 @@ public class PlayerMovement : MonoBehaviour
         isSliding = true;
         yield return new WaitForSeconds(slideTime);
         isSliding = false;
+        if (headIsTouchingSomething)
+        {
+            isCrouching = true;
+            oldSpeed = speed;
+            speed /= 2;
+        }
     }
     IEnumerator EnableDisableDash()
     {
