@@ -100,13 +100,16 @@ public class PlayerMovement : MonoBehaviour
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
-        if (isCrouching == true || isSliding == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
+        if (isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
         {
             h = playerHeight * 0.35f;
         }
-        float lastHeight = charController.height;
-        charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
-        transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+        if(isSliding == false)
+        {
+            float lastHeight = charController.height;
+            charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
+            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+        }
 
         #endregion
 
@@ -236,6 +239,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 move2 = transform.forward;
             controller.Move(move2 * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+        }
+
+        if (isSliding == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
+        {
+            h = playerHeight * 0.35f;
+            float lastHeight = charController.height;
+            charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
+            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
         }
         #endregion
     }
