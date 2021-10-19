@@ -49,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     public float slideTime;
     public float slideStrength;
     private bool isSliding = false;
+    private bool slideDirectionDecided = false;
+    private Vector3 slideDirection;
 
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
@@ -237,12 +239,17 @@ public class PlayerMovement : MonoBehaviour
         #region Slide
         if (isSliding == true)
         {
-            Vector3 move2 = transform.forward;
-            controller.Move(move2 * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+            if (slideDirectionDecided == false)
+            {
+                slideDirectionDecided = true;
+                slideDirection = transform.forward;
+            }
+            controller.Move(slideDirection * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
         }
 
         if (isSliding == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
         {
+            cooldown = true;
             h = playerHeight * 0.35f;
             float lastHeight = charController.height;
             charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
@@ -331,9 +338,13 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator EnableDisableSlide()
     {
         isSliding = true;
-        yield return new WaitForSeconds(slideTime);
+        yield return new WaitForSeconds(slideTime); //Performs the slide section of update until the set slideTime is up
         isSliding = false;
-        if (headIsTouchingSomething)
+
+        slideDirectionDecided = false;
+        cooldown = false;
+
+        if (headIsTouchingSomething) //Keeps the player crouched if they finish their slide underneath a small gap.
         {
             isCrouching = true;
             oldSpeed = speed;
