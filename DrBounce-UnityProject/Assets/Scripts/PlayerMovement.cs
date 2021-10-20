@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -19.81f;
     public static Transform player;
     public InputMaster controls;
+    public Vector3 move;
 
     [Header("Jump")]
     public float jumpPeak = 3f;
@@ -165,15 +166,18 @@ public class PlayerMovement : MonoBehaviour
 
             if (isSliding == false)
             {
-                Vector3 move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
+                move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
                 controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
             }
             else
             {
-                Vector3 move = (tempRight * x); //Creates a value to move the player in local space based on this value.
-                controller.Move (move * strafeStrength * Time.deltaTime); //uses move value to move the player.
+                move = (tempRight * x); //Creates a value to move the player in local space based on this value.
+                controller.Move(move * strafeStrength * Time.deltaTime); //uses move value to move the player.
             }
         }
+        //EARLY MOMENTUM SYSTEM - DOESN'T RESET! 
+        //velocity.x += move.x;
+        //velocity.z += move.z;
 
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
         controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
@@ -198,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
                     x2 = controls.Player.Movement.ReadValue<Vector2>().x;
                     z2 = controls.Player.Movement.ReadValue<Vector2>().y;
                 }
-                Vector3 move = (transform.right * x2 + transform.forward * z2).normalized;
+                move = (transform.right * x2 + transform.forward * z2).normalized;
 
                 controller.Move(move * dashStrength * speed * Time.deltaTime);
             }
@@ -206,8 +210,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
             {
-                Vector3 move2 = transform.forward;
-                controller.Move(move2 * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+                move = transform.forward;
+                controller.Move(move * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
                 hasDashed = true;
                 controls.Player.Movement.Disable();
             }
@@ -266,6 +270,7 @@ public class PlayerMovement : MonoBehaviour
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
 
             controller.Move(slideDirection * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+            Debug.Log(slideDirection * slideStrength * speed * Time.deltaTime);
         }
         #endregion
     }
