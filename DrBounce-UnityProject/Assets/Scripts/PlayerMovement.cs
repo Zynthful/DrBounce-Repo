@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Sliding")]
     public float slideTime;
     public float slideStrength;
-    private bool isSliding = false;
+    public bool isSliding = false;
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
 

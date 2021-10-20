@@ -29,6 +29,9 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float offsetMultiplier = 5f;
     [SerializeField] private float offsetMax = 1f;
 
+    [Header("Sliding")]
+    [SerializeField] private float slideOffset = -0.25f;
+
     private float timer = 0f;
     private float waveSlice = 0f;
     private float xVelocity = 0f;
@@ -59,7 +62,7 @@ public class WeaponSway : MonoBehaviour
     {
         if (transform.childCount != 0)
         {
-            Vector3 bobPos;
+            Vector3 bobPos, newPos;
 
             if (!movement.isCrouching)
             {
@@ -71,7 +74,13 @@ public class WeaponSway : MonoBehaviour
             }
 
             HorizontalSway();
-            Vector3 newPos = MoveTowardsBob(transform.localPosition, bobPos);
+
+            if (movement.isSliding)
+            {
+                bobPos = Vector3.up * slideOffset;
+            }
+            
+            newPos = MoveTowardsBob(transform.localPosition, bobPos);
             newPos = Falling(movement.velocity.y, newPos);
 
             transform.localPosition = newPos;
