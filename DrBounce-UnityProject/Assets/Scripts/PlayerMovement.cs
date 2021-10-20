@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     public float strafeStrength;
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
-    private Vector3 tempRight;
+    private Vector3 slideLeftRight;
 
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                move = (tempRight * x); //Creates a value to move the player in local space based on this value.
+                move = (slideLeftRight * x); //Creates a value to move the player in local space based on this value.
                 controller.Move(move * strafeStrength * Time.deltaTime); //uses move value to move the player.
             }
         }
@@ -259,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 slideDirectionDecided = true;
                 slideDirection = transform.forward;
-                tempRight = transform.right;
+                slideLeftRight = transform.right;
             }
 
             cooldown = true;
@@ -270,7 +270,6 @@ public class PlayerMovement : MonoBehaviour
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
 
             controller.Move(slideDirection * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
-            Debug.Log(slideDirection * slideStrength * speed * Time.deltaTime);
         }
         #endregion
     }
@@ -301,11 +300,6 @@ public class PlayerMovement : MonoBehaviour
             vibrationManager.JumpVibration();
             onJump?.Raise();
         }
-        else
-        {
-            print("Test");
-            
-        }
     }
 
     void Dash()
@@ -320,7 +314,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(EnableDisableDash());
 
             isCrouching = false;
-            StartCoroutine(CoolDownTest());
+            StartCoroutine(Cooldown());
         }
     }
 
@@ -401,7 +395,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator CoolDownTest()
+    IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(cooldownTime); //If the cooldown is active, wait for cooldown time set, until setting cooldown as false
         cooldown = false;
