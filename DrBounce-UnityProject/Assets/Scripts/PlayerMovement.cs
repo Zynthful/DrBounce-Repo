@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     public float slideTime;
     public float slideStrength;
     public bool isSliding = false;
+    public float strafeStrength;
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
     private Vector3 tempRight;
@@ -96,6 +97,8 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Crouch.performed += _ => Crouch();
         player = transform;
     }
+
+    //||
     void FixedUpdate()
     {
 
@@ -111,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
             float lastHeight = charController.height;
             charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+            groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
         }
 
         #endregion
@@ -167,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 Vector3 move = (tempRight * x); //Creates a value to move the player in local space based on this value.
-                controller.Move (move * speed * Time.deltaTime); //uses move value to move the player.
+                controller.Move (move * strafeStrength * Time.deltaTime); //uses move value to move the player.
             }
         }
 
@@ -252,13 +256,15 @@ public class PlayerMovement : MonoBehaviour
                 slideDirectionDecided = true;
                 slideDirection = transform.forward;
                 tempRight = transform.right;
-
-                cooldown = true;
-                h = playerHeight * 0.35f;
-                float lastHeight = charController.height;
-                charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
-                transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
             }
+
+            cooldown = true;
+            h = playerHeight * 0.35f;
+            float lastHeight = charController.height;
+            charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
+            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+            groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
+
             controller.Move(slideDirection * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
         }
         #endregion
@@ -282,6 +288,7 @@ public class PlayerMovement : MonoBehaviour
 
             gravity = prevGrav;
             isDashing = false;
+            isSliding = false;
             feedbackPlayed = false;
             prevJump = false;
 
