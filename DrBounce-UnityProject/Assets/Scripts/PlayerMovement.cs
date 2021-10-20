@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isSliding = false;
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
+    private Vector3 tempRight;
 
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
@@ -63,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool headIsTouchingSomething;
     public Vector3 velocity;
     private float oldGroundDistance;
-    private bool hasIncreasedGroundDistance = false;
 
     [Header("Feedbacks")]
     public MMFeedbacks DashFeedback;
@@ -159,8 +159,16 @@ public class PlayerMovement : MonoBehaviour
             float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
             float z = controls.Player.Movement.ReadValue<Vector2>().y;
 
-            Vector3 move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
-            controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
+            if (isSliding == false)
+            {
+                Vector3 move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
+                controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
+            }
+            else
+            {
+                Vector3 move = (tempRight * x); //Creates a value to move the player in local space based on this value.
+                controller.Move (move * speed * Time.deltaTime); //uses move value to move the player.
+            }
         }
 
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
@@ -243,17 +251,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 slideDirectionDecided = true;
                 slideDirection = transform.forward;
+                tempRight = transform.right;
+
+                cooldown = true;
+                h = playerHeight * 0.35f;
+                float lastHeight = charController.height;
+                charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
+                transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
             }
             controller.Move(slideDirection * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
-        }
-
-        if (isSliding == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
-        {
-            cooldown = true;
-            h = playerHeight * 0.35f;
-            float lastHeight = charController.height;
-            charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
-            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
         }
         #endregion
     }
