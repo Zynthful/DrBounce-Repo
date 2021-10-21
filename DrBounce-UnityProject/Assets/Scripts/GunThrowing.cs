@@ -10,7 +10,7 @@ public class GunThrowing : MonoBehaviour
     [SerializeField] bool canThrow;
     [SerializeField] LayerMask bounceableLayers;
     [SerializeField] Transform weaponHolderTransform = null;
-    [SerializeField] bool startOnPlayer;
+    [SerializeField] bool startOnPlayer;    // Should the item start on the player or not?
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Collider[] gunColliders = null;
     [SerializeField] BoxCollider catchCollider;
@@ -48,6 +48,8 @@ public class GunThrowing : MonoBehaviour
     private GameEvent onCatch = null;
     [SerializeField]
     private GameEvent onDropped = null;
+    [SerializeField]
+    private GameEvent onRecall = null;
 
     // Start is called before the first frame update
     void Start()
@@ -196,6 +198,7 @@ public class GunThrowing : MonoBehaviour
     {
         if (startOnPlayer)
         {
+            onRecall?.Raise();
             amountOfBounces = 0;
             ResetScript();
         }

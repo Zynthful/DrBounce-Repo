@@ -15,6 +15,8 @@ public class GunAudio : MonoBehaviour
     private AK.Wwise.Event pickUpFromGroundEvent = null;
     [SerializeField]
     private AK.Wwise.Event catchEvent = null;
+    [SerializeField]
+    private AK.Wwise.Event recallEvent = null;
 
     [Header("RTPCs")]
     [SerializeField]
@@ -44,6 +46,10 @@ public class GunAudio : MonoBehaviour
     public void PlayCatch()
     {
         catchEvent.Post(gameObject);
+    }
+    public void PlayRecall()
+    {
+        recallEvent.Post(gameObject);
     }
     public void UpdateChargedDamageMultiplierRTPC(int value)
     {

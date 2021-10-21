@@ -1088,6 +1088,7 @@ GameObject:
   - component: {fileID: 5767551669161815429}
   - component: {fileID: 1197736505044690277}
   - component: {fileID: 8292638452196617810}
+  - component: {fileID: 3701579981251275105}
   m_Layer: 7
   m_Name: Audio
   m_TagString: Untagged
@@ -1141,6 +1142,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 3bfc69b7e3debb943a1cb71bedc904f4, type: 2}
+  recallEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8c1eefc7fb96bd042a4e855a4bbbe988, type: 2}
   chargedDamageMultiplierRTPC:
     idInternal: 0
     valueGuidInternal: 
@@ -1352,6 +1357,34 @@ MonoBehaviour:
       - m_Target: {fileID: 6565917891331500461}
         m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
         m_MethodName: PlayChargedShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3701579981251275105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677388527681910835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c00823c895747804ab0ee56874a5c03b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6565917891331500461}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: PlayRecall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2422,6 +2455,7 @@ MonoBehaviour:
   onPickup: {fileID: 11400000, guid: 8fa8497e3a47c8746af5c3790f606213, type: 2}
   onCatch: {fileID: 11400000, guid: 4b56bb7bbb80eaa4c85ae3ad717f8680, type: 2}
   onDropped: {fileID: 11400000, guid: cb7f18caeeead5845a5f56b683b4debd, type: 2}
+  onRecall: {fileID: 11400000, guid: c00823c895747804ab0ee56874a5c03b, type: 2}
 --- !u!114 &4949567449814967032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3122,6 +3156,7 @@ MonoBehaviour:
   controller: {fileID: 5587670236924705797}
   speed: 8
   gravity: -19.62
+  move: {x: 0, y: 0, z: 0}
   jumpPeak: 3.5
   jumpMin: 2
   floatiness: 3.5
