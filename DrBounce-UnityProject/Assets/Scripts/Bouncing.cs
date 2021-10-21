@@ -44,7 +44,7 @@ public class Bouncing : MonoBehaviour
         return vectors;
     }
 
-    public Vector3[] BounceForward(Collision collision, Vector3 position, Vector3 origin)
+    public Vector3[] BounceForward(Transform collision, Vector3 position, Vector3 origin)
     {
         Vector3[] vectors = new Vector3[3];
         Vector3 dir = (position - origin).normalized;
@@ -59,7 +59,7 @@ public class Bouncing : MonoBehaviour
 
         //(2 * enemyTransform.position) - transform.position
 
-        vectors[0] = new Vector3(collision.transform.position.x + ((collision.transform.localScale.x / 2) * dir.x), collision.transform.position.y + (collision.transform.localScale.y / 2), collision.transform.position.z + ((collision.transform.localScale.z / 2) * dir.z));
+        vectors[0] = new Vector3(collision.position.x + ((collision.localScale.x / 2) * dir.x), collision.position.y + (collision.localScale.y / 2), collision.position.z + ((collision.localScale.z / 2) * dir.z));
         dir.y = .2f;
 
         Debug.Log(vectors[0]);

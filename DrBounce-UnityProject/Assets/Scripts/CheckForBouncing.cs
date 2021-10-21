@@ -11,6 +11,9 @@ public class CheckForBouncing : MonoBehaviour
 
     GunThrowing specialInteractions;
     Rigidbody rb;
+    CharacterController cc;
+    ControllerColliderHit recentHit;
+    Coroutine recentHitRun;
 
     private void Start()
     {
@@ -20,6 +23,11 @@ public class CheckForBouncing : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody>();
+
+        if (!rb)
+        {
+            cc = GetComponent<CharacterController>();
+        }
     }
 
     protected void OnCollisionEnter(Collision collision)
@@ -46,7 +54,7 @@ public class CheckForBouncing : MonoBehaviour
                     break;
 
                 case Bouncing.BounceType.E_Away:
-                    returnVectors = b.BounceForward(collision, transform.position, bounceOriginPoint);
+                    returnVectors = b.BounceForward(collision.transform, transform.position, bounceOriginPoint);
                     break;
 
                 case Bouncing.BounceType.W_Straight:
@@ -58,6 +66,49 @@ public class CheckForBouncing : MonoBehaviour
             rb.velocity = returnVectors[2];
 
             specialInteractions.Bounced(collision);
+        }
+    }
+
+    protected void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (CanBounce() && GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << hit.gameObject.layer) && hit != recentHit)
+        {
+            if (hit.gameObject.GetComponent<Enemy>())
+            {
+                EnemyAudio audio = hit.gameObject.GetComponent<Enemy>()?.enemyAudio;
+                audio?.PlayBounce();
+            }
+
+            Vector3[] returnVectors = new Vector3[2];
+
+            Bouncing b = hit.gameObject.GetComponent<Bouncing>();
+            switch (b.bType)
+            {
+                case Bouncing.BounceType.E_Back:
+                    returnVectors = b.BounceBack(transform.position, bounceOriginPoint);
+                    break;
+
+                case Bouncing.BounceType.E_Up:
+                    returnVectors = b.BounceUp(hit.transform, transform.position);
+                    break;
+
+                case Bouncing.BounceType.E_Away:
+                    returnVectors = b.BounceForward(hit.transform, transform.position, bounceOriginPoint);
+                    break;
+
+                case Bouncing.BounceType.W_Straight:
+                    returnVectors = b.BounceBack(transform.position, bounceOriginPoint);
+                    break;
+            }
+            transform.position = returnVectors[0];
+            bounceOriginPoint = returnVectors[1];
+            cc.velocity.Set(returnVectors[2].x, returnVectors[2].y, returnVectors[2].z);
+
+            recentHit = hit;
+
+            if(recentHitRun != null)
+                StopCoroutine(recentHitRun);
+            recentHitRun = StartCoroutine(RecentBounce(.02f));
         }
     }
 
@@ -113,5 +164,11 @@ public class CheckForBouncing : MonoBehaviour
                 break;
         }
         return false;
+    }
+
+    IEnumerator RecentBounce(float time)
+    {
+        yield return new WaitForSeconds(time);
+        recentHit = null;
     }
 }
