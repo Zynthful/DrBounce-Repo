@@ -153,12 +153,16 @@ public class Shooting : MonoBehaviour
                         enemy.TakeDamage(damage);
                     }
                 }
+
+                BasicShootFeedback?.PlayFeedbacks();
             }
             vibrationManager.BasicShotVibration();
-            BasicShootFeedback?.PlayFeedbacks();
 
-            onChargesEmpty?.Raise();
-            
+            if(chargesLeft <= 0)
+            {
+                onChargesEmpty?.Raise();
+            }
+
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
 
             //Debug.LogWarning("BANG!!!");
@@ -207,7 +211,6 @@ public class Shooting : MonoBehaviour
     {
         if (chargesLeft <= 0)
         {
-            anim.SetTrigger("NoCharge");
             ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
             MMVibrationManager.StopContinuousHaptic();
         }
@@ -217,13 +220,15 @@ public class Shooting : MonoBehaviour
             ChargedFeedback?.PlayFeedbacks();
             vibrationManager.ActiveChargeVibration();
         }
+
+        anim.SetInteger("ChargesLeft", chargesLeft);
     }
 
     public void Reset()
     {
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
-        anim.SetTrigger("NoCharge");
         AddCharge(-chargesLeft); // Set chargesLeft = 0
+        anim.SetInteger("ChargesLeft", chargesLeft);
     }
 
     // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
