@@ -52,6 +52,18 @@ public class GunThrowing : MonoBehaviour
     [SerializeField]
     private GameEvent onRecall = null;
 
+    // COMBO
+    [SerializeField]
+    private GameEventInt onComboUpdateCurrentNum = null;    // Passes currentComboNum
+    [SerializeField]
+    private GameEvent onComboStart = null; // Occurs on first bounce
+    [SerializeField]
+    private GameEvent onComboEnd = null; // Occurs on currentCombo set to 0
+
+    // Number of consecutive bounces in one throw
+    // Resets to 0 when: Catching, amountOfBounces resetting
+    private int currentComboNum = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -174,6 +186,8 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused)
         {
+            SetComboNum(0);
+
             if (!transform.parent)
                 throwGunDelay = false;
             outlineScript.enabled = false;
@@ -214,6 +228,7 @@ public class GunThrowing : MonoBehaviour
         if (collision.contacts[0].normal.normalized.y > .80f && GameManager.bounceableLayers != (GameManager.bounceableLayers | 1 << collision.gameObject.layer)
         {
             AffectPhysics(0.85f, 0f);
+            SetComboNum(0); // Reset combo
 
             returning = true;
             amountOfBounces = 0;
@@ -257,6 +272,9 @@ public class GunThrowing : MonoBehaviour
         BounceFeedback?.PlayFeedbacks();
         collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
 
+		// Increment combo
+        SetComboNum(currentComboNum + 1);
+
         currentVel = rb.velocity;
     }
 
@@ -281,5 +299,22 @@ public class GunThrowing : MonoBehaviour
         controls.Player.ThrowGun.performed -= _ => Thrown();
         controls.Player.RecallGun.performed -= _ => ResetScript();
         controls.Disable();
+    }
+
+    private void SetComboNum(int value)
+    {
+        currentComboNum = value;
+        onComboUpdateCurrentNum?.Raise(value);
+
+        // Start combo if it's the first bounce
+        if (currentComboNum == 1)
+        {
+            onComboStart?.Raise();
+        }
+        // End combo if it is being reset to 0
+        else if (currentComboNum <= 0)
+        {
+            onComboEnd?.Raise();
+        }
     }
 }
