@@ -169,6 +169,7 @@ public class GunThrowing : MonoBehaviour
             foreach (Transform child in transform)
                 child.gameObject.layer = 3;
 
+            onThrown?.Raise();
             returning = false;
             rb.constraints = RigidbodyConstraints.None;
             transform.parent = null;
