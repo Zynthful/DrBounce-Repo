@@ -182,7 +182,8 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused)
         {
-            comboTracker.SetComboNum(0);
+            if(startOnPlayer)
+                comboTracker.SetComboNum(0);
 
             if (!transform.parent)
                 throwGunDelay = false;
@@ -224,7 +225,9 @@ public class GunThrowing : MonoBehaviour
         if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
             AffectPhysics(0.85f, 0f);
-            comboTracker.SetComboNum(0);
+            
+            if(startOnPlayer)
+                comboTracker.SetComboNum(0);
 
             returning = true;
             amountOfBounces = 0;
@@ -268,7 +271,8 @@ public class GunThrowing : MonoBehaviour
         BounceFeedback?.PlayFeedbacks();
         collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
 
-        comboTracker.Increment();
+        if(startOnPlayer)
+            comboTracker.Increment();
 
         currentVel = rb.velocity;
     }
