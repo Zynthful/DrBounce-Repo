@@ -305,6 +305,7 @@ public class PlayerMovement : MonoBehaviour
             isSliding = false;
             feedbackPlayed = false;
             prevJump = false;
+            SlideFeedback?.StopFeedbacks();
 
             jump = true;
             vibrationManager.JumpVibration();
@@ -363,7 +364,7 @@ public class PlayerMovement : MonoBehaviour
         SlideFeedback?.PlayFeedbacks(); //Play feedback
         yield return new WaitForSeconds(slideTime); //Performs the slide section of update until the set slideTime is up
         isSliding = false;
-        SlideFeedback?.StopFeedbacks(); //Play feedback
+        SlideFeedback?.StopFeedbacks(); //stop feedback
 
         slideDirectionDecided = false;
         cooldown = false;
