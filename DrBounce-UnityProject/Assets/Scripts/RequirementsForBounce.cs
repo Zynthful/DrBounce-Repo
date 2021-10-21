@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BounceRequirements", menuName = "ScriptableObjects/HealthPack", order = 0)]
+[CreateAssetMenu(fileName = "BounceRequirements", menuName = "ScriptableObjects/BounceReqs", order = 0)]
 public class RequirementsForBounce : ScriptableObject
 {
     public enum Requirements
