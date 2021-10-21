@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Feedbacks")]
     public MMFeedbacks DashFeedback;
+    public MMFeedbacks SlideFeedback;
 
     [Header("Vibrations")]
     public VibrationManager vibrationManager;
