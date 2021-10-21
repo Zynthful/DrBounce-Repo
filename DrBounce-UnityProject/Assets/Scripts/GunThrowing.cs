@@ -154,10 +154,8 @@ public class GunThrowing : MonoBehaviour
             Vector3 dir = transform.forward;
             rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * throwForceMod; currentVel = rb.velocity;
 
-            foreach (PhysicMaterial mat in physicMaterials)
-            {
-                mat.dynamicFriction = 0.2f; mat.bounciness = .2f;
-            }
+
+            AffectPhysics(0.2f, 0.2f);
 
             if(inventory.currentHeldTransform == transform)
             {
@@ -224,15 +222,15 @@ public class GunThrowing : MonoBehaviour
             Bouncing b = collision.gameObject.GetComponent<Bouncing>();
             switch (b.bType)
             {                            
-                case Bouncing.BounceType.Back:
+                case Bouncing.BounceType.E_Back:
                     returnVectors = b.BounceBack(transform.position, originPoint);
                     break;
 
-                case Bouncing.BounceType.Up:
+                case Bouncing.BounceType.E_Up:
                     returnVectors = b.BounceUp(collision.transform, transform.position);
                     break;
 
-                case Bouncing.BounceType.Away:
+                case Bouncing.BounceType.E_Away:
                     returnVectors = b.BounceForward(collision, transform.position, originPoint);
                     break;
             }
@@ -244,10 +242,8 @@ public class GunThrowing : MonoBehaviour
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
         else if (collision.contacts[0].normal.normalized.y > .80f)
         {
-            foreach (PhysicMaterial mat in physicMaterials)
-            {
-                mat.dynamicFriction = 0.85f; mat.bounciness = 0;
-            }
+            AffectPhysics(0.85f, 0f);
+
             returning = true;
             amountOfBounces = 0;
             onDropped?.Raise();
@@ -269,6 +265,14 @@ public class GunThrowing : MonoBehaviour
             else if (exitedPlayer) { onPickup?.Raise(); PickupFeedback?.PlayFeedbacks(); }
             else { return; }
             ResetScript();
+        }
+    }
+
+    public void AffectPhysics(float dynamicFriction, float bounciness)
+    {
+        foreach (PhysicMaterial mat in physicMaterials)
+        {
+            mat.dynamicFriction = dynamicFriction; mat.bounciness = bounciness;
         }
     }
 
