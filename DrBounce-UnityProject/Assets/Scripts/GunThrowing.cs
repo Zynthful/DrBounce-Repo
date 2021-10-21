@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 public class GunThrowing : MonoBehaviour
 {
-    [SerializeField] bool returning; 
+    [SerializeField] bool returning;
     [SerializeField] float throwForceMod;
     [SerializeField] bool canThrow;
     [SerializeField] LayerMask bounceableLayers;
@@ -39,6 +39,8 @@ public class GunThrowing : MonoBehaviour
 
     public bool inFlight;
 
+    public Outline outlineScript;
+
     [Header("Events")]
     [SerializeField]
     private GameEventInt onBounce = null;
@@ -54,17 +56,22 @@ public class GunThrowing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        outlineScript = GetComponentInChildren<Outline>();
+
         owner = PlayerMovement.player;
         inventory = SwitchHeldItem.instance;
 
         if(startOnPlayer)
         {
+            outlineScript.enabled = false;
             handPosition = transform.localPosition;
             canThrow = true;
             transform.parent = weaponHolderTransform;
+
         }
         else
         {
+            outlineScript.enabled = true;
             handPosition = new Vector3(.4f, -.2f, .65f);
             exitedPlayer = true;
             canThrow = false;
@@ -141,7 +148,7 @@ public class GunThrowing : MonoBehaviour
         if (!GameManager.s_Instance.paused && canThrow)
         {
             canThrow = false;
-            
+            outlineScript.enabled = true;
             //when we get out of prototype we need to made the world model seperate from the fp model
             gameObject.layer = 3;
             foreach (Transform child in transform)
@@ -170,7 +177,7 @@ public class GunThrowing : MonoBehaviour
         {
             if (!transform.parent)
                 throwGunDelay = false;
-
+            outlineScript.enabled = false;
             gameObject.layer = 7;
             foreach (Transform child in transform)
                 child.gameObject.layer = 7;

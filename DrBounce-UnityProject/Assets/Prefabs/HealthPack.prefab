@@ -457,6 +457,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 3bfc69b7e3debb943a1cb71bedc904f4, type: 2}
+  recallEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   chargedDamageMultiplierRTPC:
     idInternal: 0
     valueGuidInternal: 
@@ -839,6 +843,7 @@ GameObject:
   - component: {fileID: 3938577777895811372}
   - component: {fileID: 1109665966}
   - component: {fileID: 1109665967}
+  - component: {fileID: -8020986382379808291}
   m_Layer: 0
   m_Name: HealthPack
   m_TagString: Untagged
@@ -910,10 +915,12 @@ MonoBehaviour:
   BounceHitFeedback: {fileID: 0}
   vibrationManager: {fileID: 0}
   inFlight: 0
+  outlineScript: {fileID: 0}
   onBounce: {fileID: 11400000, guid: d99e755cc809c0e40ae6a5ffbef9c67c, type: 2}
   onPickup: {fileID: 11400000, guid: 8fa8497e3a47c8746af5c3790f606213, type: 2}
   onCatch: {fileID: 11400000, guid: 4b6e9eb10b23ba045b5acd1dd4fc4929, type: 2}
   onDropped: {fileID: 11400000, guid: 1f45f1d051466c24885dfdf2bc26a2cf, type: 2}
+  onRecall: {fileID: 0}
 --- !u!114 &1970128276996852066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,6 +1010,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-8020986382379808291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944194320657019260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 3.41
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &8020119860111748666
 PrefabInstance:
   m_ObjectHideFlags: 0
