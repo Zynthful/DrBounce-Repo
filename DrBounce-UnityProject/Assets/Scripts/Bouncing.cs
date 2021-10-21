@@ -26,12 +26,20 @@ public class Bouncing : MonoBehaviour
 
     public Vector3[] BounceBack(Vector3 position, Vector3 origin)
     {
-
         Vector3[] vectors = new Vector3[3];
         Vector3 dir = (origin - position).normalized;
         vectors[0] = position;
         vectors[1] = position;
         vectors[2] = new Vector3(dir.x, dir.y + .3f, dir.z) * bounceForceMod;
+        return vectors;
+    }
+
+    public Vector3[] PlayerBounceBack(Vector3 dir)
+    {
+        Vector3[] vectors = new Vector3[1];
+        dir = -dir;
+
+        vectors[0] = new Vector3(dir.x, dir.y + .3f, dir.z) * bounceForceMod;
         return vectors;
     }
 
@@ -41,6 +49,15 @@ public class Bouncing : MonoBehaviour
         vectors[0] = new Vector3(enemyTransform.position.x, enemyTransform.position.y + (enemyTransform.localScale.y / 2), enemyTransform.position.z);
         vectors[1] = position;
         vectors[2] = Vector3.up * bounceForceMod;
+        return vectors;
+    }
+
+    public Vector3[] PlayerBounceUp(float gravity)
+    {
+        Vector3[] vectors = new Vector3[1];
+        vectors[0] = Vector3.up;
+
+        vectors[0].y = Mathf.Sqrt(bounceForceMod * -2 * gravity);
         return vectors;
     }
 
@@ -65,7 +82,21 @@ public class Bouncing : MonoBehaviour
         Debug.Log(vectors[0]);
 
         vectors[1] = transform.position;
-        vectors[2] = new Vector3(dir.x, dir.y + .25f, dir.z) * bounceForceMod;
+        vectors[2] = new Vector3(dir.x, dir.y + .25f, dir.z) * bounceForceMod * 10;
+
+        return vectors;
+    }
+
+    public Vector3[] PlayerBounceForward(Transform collision, Vector3 position, Vector3 dir)
+    {
+        Vector3[] vectors = new Vector3[2];
+
+        vectors[0] = new Vector3(collision.position.x + ((collision.localScale.x / 2) * dir.x), collision.position.y + (collision.localScale.y / 2), collision.position.z + ((collision.localScale.z / 2) * dir.z));
+        dir.y = .2f;
+
+        Debug.Log(vectors[0]);
+
+        vectors[1] = new Vector3(dir.x, dir.y + .25f, dir.z) * bounceForceMod;
 
         return vectors;
     }

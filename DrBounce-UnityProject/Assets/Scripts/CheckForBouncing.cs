@@ -12,6 +12,7 @@ public class CheckForBouncing : MonoBehaviour
     GunThrowing specialInteractions;
     Rigidbody rb;
     CharacterController cc;
+    PlayerMovement pm;
     ControllerColliderHit recentHit;
     Coroutine recentHitRun;
 
@@ -27,6 +28,7 @@ public class CheckForBouncing : MonoBehaviour
         if (!rb)
         {
             cc = GetComponent<CharacterController>();
+            pm = GetComponent<PlayerMovement>();
         }
     }
 
@@ -40,7 +42,7 @@ public class CheckForBouncing : MonoBehaviour
                 audio?.PlayBounce();
             }
 
-            Vector3[] returnVectors = new Vector3[2];
+            Vector3[] returnVectors = new Vector3[3];
 
             Bouncing b = collision.gameObject.GetComponent<Bouncing>();
             switch (b.bType)
@@ -79,36 +81,42 @@ public class CheckForBouncing : MonoBehaviour
                 audio?.PlayBounce();
             }
 
-            Vector3[] returnVectors = new Vector3[2];
+            Vector3[] returnVectors = new Vector3[1];
 
             Bouncing b = hit.gameObject.GetComponent<Bouncing>();
             switch (b.bType)
             {
                 case Bouncing.BounceType.E_Back:
-                    returnVectors = b.BounceBack(transform.position, bounceOriginPoint);
+                    returnVectors = b.PlayerBounceBack(cc.velocity.normalized);
                     break;
 
                 case Bouncing.BounceType.E_Up:
-                    returnVectors = b.BounceUp(hit.transform, transform.position);
+                    returnVectors = b.PlayerBounceUp(pm.gravity);
                     break;
 
                 case Bouncing.BounceType.E_Away:
-                    returnVectors = b.BounceForward(hit.transform, transform.position, bounceOriginPoint);
+                    returnVectors = b.PlayerBounceForward(hit.transform, transform.position, cc.velocity.normalized);
                     break;
 
                 case Bouncing.BounceType.W_Straight:
-                    returnVectors = b.BounceBack(transform.position, bounceOriginPoint);
+                    returnVectors = b.PlayerBounceBack(cc.velocity.normalized);
                     break;
             }
-            transform.position = returnVectors[0];
-            bounceOriginPoint = returnVectors[1];
-            cc.velocity.Set(returnVectors[2].x, returnVectors[2].y, returnVectors[2].z);
+            if(returnVectors.Length == 2)
+            {
+                transform.position = returnVectors[0];
+                pm.velocity = returnVectors[1];
+            }
+            else
+            {
+                pm.velocity = returnVectors[0];
+            }
 
             recentHit = hit;
 
             if(recentHitRun != null)
                 StopCoroutine(recentHitRun);
-            recentHitRun = StartCoroutine(RecentBounce(.02f));
+            recentHitRun = StartCoroutine(RecentBounce(3.02f));
         }
     }
 

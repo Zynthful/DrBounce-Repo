@@ -139,6 +139,8 @@ public class PlayerMovement : MonoBehaviour
             if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
             {
                 velocity.y = (-40f * Time.fixedDeltaTime);
+                velocity.x = 0;
+                velocity.z = 0;
             }
         }
 
