@@ -11,11 +11,12 @@ public class Bouncing : MonoBehaviour
 
     public enum BounceType
     {
-        Back,
-        Up,
-        Away,
-        Left,
-        Right,
+        E_Back,
+        E_Up,
+        E_Away,
+        E_Left,
+        E_Right,
+        W_Straight
     }
 
     public BounceType bType;
@@ -82,7 +83,7 @@ public class Bouncing_Editor : Editor
 
         switch (script.bType)
         {
-            case Bouncing.BounceType.Away:
+            case Bouncing.BounceType.E_Away:
                 script.BounceAwayAngleThreshold = EditorGUILayout.FloatField("Bounce Away Angle Threshold", script.BounceAwayAngleThreshold);
                 break;
         }
