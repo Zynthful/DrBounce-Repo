@@ -62,6 +62,7 @@ public class MagnetAA : MonoBehaviour
 
     void MoveObjects()
     {
+        gun.AffectPhysics(0f, 0f);
         float currentDistance = Vector3.Distance(transform.position, gun.transform.position);
         if (!gun.transform.parent && currentDistance < aimAssistMaxRange)
         {
