@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     public float slideStrength;
     public bool isSliding = false;
     public float strafeStrength;
+    public float slideGravity;
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
     private Vector3 slideLeftRight;
@@ -121,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region GroundChecking
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
 
@@ -255,6 +257,11 @@ public class PlayerMovement : MonoBehaviour
         #region Slide
         if (isSliding == true)
         {
+
+            coyoteTime = oldCoyoteTime;
+            gravity = slideGravity;
+            print(isGrounded);
+            isGrounded = true;
             if (slideDirectionDecided == false)
             {
                 slideDirectionDecided = true;
