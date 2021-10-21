@@ -225,7 +225,7 @@ public class GunThrowing : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
-        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.bounceableLayers != (GameManager.bounceableLayers | 1 << collision.gameObject.layer)
+        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.bounceableLayers != (GameManager.bounceableLayers | 1 << collision.gameObject.layer))
         {
             AffectPhysics(0.85f, 0f);
             SetComboNum(0); // Reset combo
