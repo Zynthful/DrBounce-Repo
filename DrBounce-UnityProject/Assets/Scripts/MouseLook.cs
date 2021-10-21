@@ -66,8 +66,6 @@ public class MouseLook : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         playerBody.Rotate(Vector3.up * camX);
-
-        print(controllerSensitivityY);
     }
 
     public void SetMouseSensitivity(float value)
