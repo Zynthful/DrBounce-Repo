@@ -8,7 +8,6 @@ public class GunThrowing : MonoBehaviour
     [SerializeField] bool returning;
     [SerializeField] float throwForceMod;
     [SerializeField] bool canThrow;
-    [SerializeField] LayerMask bounceableLayers;
     [SerializeField] Transform weaponHolderTransform = null;
     [SerializeField] bool startOnPlayer;    // Should the item start on the player or not?
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
@@ -211,43 +210,8 @@ public class GunThrowing : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!transform.parent && bounceableLayers == (bounceableLayers | 1 << collision.gameObject.layer))
-        {
-            returning = true;
-            inFlight = true;
-
-            amountOfBounces++; onBounce?.Raise(amountOfBounces);
-
-            BounceFeedback?.PlayFeedbacks();
-            collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
-
-            EnemyAudio audio = collision.gameObject.GetComponent<Enemy>()?.enemyAudio;
-            audio?.PlayBounce();
-
-            Vector3[] returnVectors = new Vector3[2];
-
-            Bouncing b = collision.gameObject.GetComponent<Bouncing>();
-            switch (b.bType)
-            {                            
-                case Bouncing.BounceType.E_Back:
-                    returnVectors = b.BounceBack(transform.position, originPoint);
-                    break;
-
-                case Bouncing.BounceType.E_Up:
-                    returnVectors = b.BounceUp(collision.transform, transform.position);
-                    break;
-
-                case Bouncing.BounceType.E_Away:
-                    returnVectors = b.BounceForward(collision, transform.position, originPoint);
-                    break;
-            }
-            transform.position = returnVectors[0];
-            originPoint = returnVectors[1];
-            rb.velocity = returnVectors[2];
-            currentVel = rb.velocity;
-        }
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
-        else if (collision.contacts[0].normal.normalized.y > .80f)
+        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.bounceableLayers != (GameManager.bounceableLayers | 1 << collision.gameObject.layer)
         {
             AffectPhysics(0.85f, 0f);
 
@@ -283,7 +247,18 @@ public class GunThrowing : MonoBehaviour
         }
     }
 
+    public void Bounced(Collision collision)
+    {
+        returning = true;
+        inFlight = true;
 
+        amountOfBounces++; onBounce?.Raise(amountOfBounces);
+
+        BounceFeedback?.PlayFeedbacks();
+        collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
+
+        currentVel = rb.velocity;
+    }
 
     public void ChargesEmpty()
     {

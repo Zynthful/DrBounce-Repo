@@ -139,4 +139,9 @@ public class Health : MonoBehaviour
         return (health < maxHealth);
 
     }
+
+    public bool ReturnDead()
+    {
+        return health <= 0;
+    }
 }
