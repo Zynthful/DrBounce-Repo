@@ -46,6 +46,8 @@ public class GunThrowing : MonoBehaviour
     [SerializeField]
     private GameEvent onPickup = null;
     [SerializeField]
+    private GameEvent onThrown = null;
+    [SerializeField]
     private GameEvent onCatch = null;
     [SerializeField]
     private GameEvent onDropped = null;
@@ -72,24 +74,26 @@ public class GunThrowing : MonoBehaviour
         owner = PlayerMovement.player;
         inventory = SwitchHeldItem.instance;
 
-        if(startOnPlayer)
+        rb = GetComponent<Rigidbody>();
+
+        if (startOnPlayer)
         {
             outlineScript.enabled = false;
             handPosition = transform.localPosition;
             canThrow = true;
             transform.parent = weaponHolderTransform;
-
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         else
         {
+            rb.constraints = RigidbodyConstraints.None;
             outlineScript.enabled = true;
             handPosition = new Vector3(.4f, -.2f, .65f);
             exitedPlayer = true;
             canThrow = false;
         }
 
-        rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+
 
         transform.rotation = Quaternion.identity;
 
@@ -225,7 +229,7 @@ public class GunThrowing : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
-        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.bounceableLayers != (GameManager.bounceableLayers | 1 << collision.gameObject.layer))
+        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
             AffectPhysics(0.85f, 0f);
             SetComboNum(0); // Reset combo

@@ -845,6 +845,7 @@ GameObject:
   - component: {fileID: 1109665967}
   - component: {fileID: -8020986382379808291}
   - component: {fileID: 3064377423399258894}
+  - component: {fileID: 5836422059127081718}
   m_Layer: 0
   m_Name: HealthPack
   m_TagString: Untagged
@@ -916,6 +917,7 @@ MonoBehaviour:
   outlineScript: {fileID: 0}
   onBounce: {fileID: 11400000, guid: d99e755cc809c0e40ae6a5ffbef9c67c, type: 2}
   onPickup: {fileID: 11400000, guid: 8fa8497e3a47c8746af5c3790f606213, type: 2}
+  onThrown: {fileID: 11400000, guid: 40c146a822999ac479efc808d76ec139, type: 2}
   onCatch: {fileID: 11400000, guid: 4b6e9eb10b23ba045b5acd1dd4fc4929, type: 2}
   onDropped: {fileID: 11400000, guid: 1f45f1d051466c24885dfdf2bc26a2cf, type: 2}
   onRecall: {fileID: 0}
@@ -1042,6 +1044,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceRequirements: {fileID: 11400000, guid: c7f6d42f7365e8742a76158cad6c30b5, type: 2}
+--- !u!114 &5836422059127081718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944194320657019260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 40c146a822999ac479efc808d76ec139, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3064377423399258894}
+        m_TargetAssemblyTypeName: CheckForBouncing, Assembly-CSharp
+        m_MethodName: ObjectThrown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &8020119860111748666
 PrefabInstance:
   m_ObjectHideFlags: 0

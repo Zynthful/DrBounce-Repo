@@ -24,7 +24,7 @@ public class CheckForBouncing : MonoBehaviour
 
     protected void OnCollisionEnter(Collision collision)
     {
-        if (CanBounce() && GameManager.bounceableLayers == (GameManager.bounceableLayers | 1 << collision.gameObject.layer))
+        if (CanBounce() && GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
             if (collision.gameObject.GetComponent<Enemy>())
             {
@@ -59,6 +59,11 @@ public class CheckForBouncing : MonoBehaviour
 
             specialInteractions.Bounced(collision);
         }
+    }
+
+    public void ObjectThrown()
+    {
+        bounceOriginPoint = transform.position;
     }
 
     public bool CanBounce()
