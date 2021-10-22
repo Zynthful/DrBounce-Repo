@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
 
     bool shootDelay;
 
+    [SerializeField] private GameObject healthPack;
+
     ObjectPooler pool;
 
     [Header("Feedbacks")]
@@ -105,6 +107,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         amDead = true;
+        SwitchHeldItem.instance.AddToList(Instantiate(healthPack, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity, null));
         print("That's right baby! Our dog, " + this.name + ", is dead!");
         //Destroy(gameObject);
     }
