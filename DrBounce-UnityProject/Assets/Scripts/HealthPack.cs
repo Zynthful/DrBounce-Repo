@@ -6,6 +6,8 @@ public class HealthPack : MonoBehaviour
 {
     //[SerializeField] private HealthPackObject healthPack = null;
 
+    [SerializeField] private Vector2[] healingGraph;
+
     public delegate void Activated(int value);
     public static event Activated OnActivated;
 
@@ -14,35 +16,16 @@ public class HealthPack : MonoBehaviour
     private int amountOfBounces;
     private bool healing;
 
-    [Header("Healing Values")]
-    [SerializeField] private int minAmountHealed;   //33
-    [SerializeField] private int MaxAmountHealed;   //100
-
-    [Header("Quadratic Values")]
-    [Tooltip("Caps max healing, heals less")]
-    [SerializeField] private float a;
-
-    [Tooltip("Makes each bounce heal more")]
-    [SerializeField] private float b;
-
-    [Tooltip("Heal more will less bounces")]
-    [SerializeField] private float c;
-
     // Start is called before the first frame update
     void Start()
     {
-        //cc Daniel Neale 2021
-        a *= -1;    //flips the a value
-        if (MaxAmountHealed > MaxXValue()) 
-        {
-            MaxAmountHealed = MaxXValue();
-        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //MaxXValue(); not sure why this is here?
+
     }
 
 
@@ -106,52 +89,14 @@ public class HealthPack : MonoBehaviour
     /// <returns></returns>
     private int HealingAmpuntCalc(int charges) 
     {
-
-        float healAmount;
-        int topOfCurve = MaxXValue();
-
-        if (charges == 0)   //default healing value, no bounces
+        foreach (Vector2 amount in healingGraph) 
         {
-            healAmount = minAmountHealed;
+            if (amount.x == charges)
+            {
+                return Mathf.RoundToInt(amount.y);
+            }
         }
-        else if (charges > topOfCurve)    //stop you going down the healing curve (max heal), several bounces
-        {
-            healAmount = MaxAmountHealed;
-        }
-        else    //occures if the above two don't, at least one bounce
-        {
-            healAmount = Equation(charges);
-        }
-
-;       return Mathf.RoundToInt(healAmount);
-    }
-
-    /// <summary>
-    /// the quadratic equation of the curve
-    /// </summary>
-    /// <param name="x"></param>
-    /// <returns></returns>
-    private int Equation(float x)  //-0.5x^2 + 11.5x + 55
-    {
-        return Mathf.RoundToInt( Mathf.Pow(x, 2) * a + (amountOfBounces * b) + c);
-    }
-
-    /// <summary>
-    /// Calculates the max x value of the curve
-    /// </summary>
-    /// <returns></returns>
-    private int MaxXValue()     
-    {
-        return Mathf.RoundToInt((-b) / (2 * a));
-    }
-
-    /// <summary>
-    /// Calculates the max y value of the curve
-    /// </summary>
-    /// <returns></returns>
-    private int MaxYValue()
-    {
-        return Mathf.RoundToInt(Equation(MaxXValue()));
+        return 0;
     }
 
     private void StopHealing() 

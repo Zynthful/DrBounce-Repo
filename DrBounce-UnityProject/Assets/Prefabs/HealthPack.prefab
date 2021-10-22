@@ -907,6 +907,7 @@ MonoBehaviour:
   startOnPlayer: 0
   catchCollider: {fileID: 0}
   currentVel: {x: 0, y: 0, z: 0}
+  comboTracker: {fileID: 0}
   BounceFeedback: {fileID: 0}
   CatchFeedback: {fileID: 5735390478388877805}
   PickupFeedback: {fileID: 0}
@@ -921,9 +922,6 @@ MonoBehaviour:
   onCatch: {fileID: 11400000, guid: 4b6e9eb10b23ba045b5acd1dd4fc4929, type: 2}
   onDropped: {fileID: 11400000, guid: 1f45f1d051466c24885dfdf2bc26a2cf, type: 2}
   onRecall: {fileID: 0}
-  onComboUpdateCurrentNum: {fileID: 0}
-  onComboStart: {fileID: 0}
-  onComboEnd: {fileID: 0}
 --- !u!114 &1970128276996852066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,11 +934,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb40c334f4aed81459a47757014e350b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAmountHealed: 33
-  MaxAmountHealed: 100
-  a: 0.5
-  b: 11.5
-  c: 55
+  healingGraph:
+  - {x: 0, y: 33}
+  - {x: 1, y: 66}
+  - {x: 2, y: 76}
+  - {x: 3, y: 85}
+  - {x: 4, y: 93}
+  - {x: 5, y: 100}
 --- !u!54 &3938577777895811372
 Rigidbody:
   m_ObjectHideFlags: 0
