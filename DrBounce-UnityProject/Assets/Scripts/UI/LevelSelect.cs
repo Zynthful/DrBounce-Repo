@@ -15,7 +15,14 @@ public class LevelSelect : MonoBehaviour
     [Tooltip("The prefab which is instantiated into the grid")]
     private GameObject levelPrefab = null;
 
-    private void Start()
+    [SerializeField]
+    private SelectableGridNavigation grid = null;
+
+    [SerializeField]
+    [Tooltip("This is overriden by the first level button, however this should be set to the Return button by default if there are no levels.")]
+    private Button defaultSelectedButton = null;
+
+    private void Awake()
     {
         for (int i = 0; i < levels.Length; i++)
         {
@@ -24,18 +31,27 @@ public class LevelSelect : MonoBehaviour
 
             // for some reason i had to make a variable for this???? why???
             int index = levels[i].GetIndex();
-            level.GetComponentInChildren<Button>().onClick.AddListener(() => SceneManager.LoadScene(index));
+            Button button = level.GetComponentInChildren<Button>();
+            button.onClick.AddListener(() => SceneManager.LoadScene(index));
+
+            if (i == 0)
+            {
+                defaultSelectedButton = button;
+            }
 
             // this doesn't work for some reason
             // level.GetComponentInChildren<Button>().onClick.AddListener(() => SceneManager.LoadScene(levels[i].GetIndex()));
+
+            // Add selectable to grid navigation to handle finding selectable navigation
+            grid.AddSelectable(button);
 
             level.GetComponentInChildren<TextMeshProUGUI>().text = levels[i].GetName();
             level.GetComponentInChildren<Image>().sprite = levels[i].GetSprite();
         }
     }
 
-    private void LoadLevel(int index)
+    private void OnEnable()
     {
-        SceneManager.LoadScene(index);
+        defaultSelectedButton.Select();
     }
 }
