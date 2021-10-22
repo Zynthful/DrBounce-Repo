@@ -6,13 +6,9 @@ using UnityEngine.UI;
 public class SelectableNavigationHandler : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("The selectable objects that will have its navigations set. NOTE: This should be ordered top to bottom.")]
+    [Tooltip("The selectable objects that will have its navigations set. NOTE: For vertical, this should be ordered top to bottom. For grids, this should be ordered left to right, starting at the top left.")]
     protected List<Selectable> selectables = null;
 
-    private void OnEnable()
-    {
-        FindNavigation(RemoveUninteractables(selectables));
-    }
 
     public void AddSelectable(Selectable value)
     {
@@ -41,10 +37,6 @@ public class SelectableNavigationHandler : MonoBehaviour
         {
             Navigation nav = new Navigation();
             nav.mode = Navigation.Mode.Explicit;
-
-            nav.selectOnUp = i == 0 ? selectables[selectables.Count - 1] : selectables[i - 1];
-            nav.selectOnDown = i == selectables.Count - 1 ? selectables[0] : selectables[i + 1];
-
             selectables[i].navigation = nav;
         }
     }
