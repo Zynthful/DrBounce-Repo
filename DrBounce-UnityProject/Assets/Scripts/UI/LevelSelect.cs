@@ -50,7 +50,7 @@ public class LevelSelect : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void SelectDefaultButton()
     {
         defaultSelectedButton.Select();
     }

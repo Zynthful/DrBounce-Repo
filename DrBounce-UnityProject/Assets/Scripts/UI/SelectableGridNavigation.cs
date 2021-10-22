@@ -6,23 +6,12 @@ using UnityEngine.UI;
 public class SelectableGridNavigation : SelectableNavigationHandler
 {
     [SerializeField]
-    private GridLayoutGroup grid = null;
-
-    // private int constraintCount = 0;
-
-    [SerializeField]
     private int rowCount;
     [SerializeField]
     private int columnCount;
 
     private void OnEnable()
     {
-        /*
-        if (grid.constraint == GridLayoutGroup.Constraint.FixedColumnCount || grid.constraint == GridLayoutGroup.Constraint.FixedRowCount)
-        {
-            constraintCount = grid.constraintCount;
-        }
-        */
         FindNavigation(RemoveUninteractables(selectables));
     }
 
@@ -51,6 +40,16 @@ public class SelectableGridNavigation : SelectableNavigationHandler
                 // TRUE: loop to last row
                 // FALSE: go to cell on the previous row
                 nav.selectOnUp = j == 0 ? selectables[i + (columnCount * (rowCount - 1))] : selectables[i + (j * columnCount) - columnCount];
+
+                // Is the current cell on the left-most column?
+                // TRUE: loop to right-most column
+                // FALSE: go to cell on the previous column
+                nav.selectOnLeft = i == 0 ? selectables[columnCount - 1 + i + (j * columnCount)] : selectables[i + (j * columnCount) - 1];
+
+                // Is the current cell on the right-most column?
+                // TRUE: loop to left-most column
+                // FALSE: go to cell on the next column
+                nav.selectOnRight = i == columnCount - 1 ? selectables[j * columnCount] : selectables[i + (j * columnCount) + 1];
 
                 selectables[i + (j * columnCount)].navigation = nav;
             }
