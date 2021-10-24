@@ -88,4 +88,9 @@ public class SwitchHeldItem : MonoBehaviour
         controls.Player.SwitchHeld.performed -= _ => SwitchActiveItem();
         controls.Disable();
     }
+
+    public void AddToList(GameObject throwable) 
+    {
+        throwablesInScene.Add(throwable);
+    }
 }
