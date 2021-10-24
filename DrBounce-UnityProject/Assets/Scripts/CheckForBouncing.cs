@@ -34,7 +34,7 @@ public class CheckForBouncing : MonoBehaviour
 
     protected void OnCollisionEnter(Collision collision)
     {
-        if (CanBounce() && GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
+        if (CanBounce(collision.gameObject) && GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
             if (collision.gameObject.GetComponent<Enemy>())
             {
@@ -73,7 +73,7 @@ public class CheckForBouncing : MonoBehaviour
 
     protected void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (CanBounce() && GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << hit.gameObject.layer) && hit != recentHit)
+        if (CanBounce(hit.gameObject) && GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << hit.gameObject.layer) && hit != recentHit)
         {
             if (hit.gameObject.GetComponent<Enemy>())
             {
@@ -125,11 +125,11 @@ public class CheckForBouncing : MonoBehaviour
         bounceOriginPoint = transform.position;
     }
 
-    public bool CanBounce()
+    public bool CanBounce(GameObject other)
     {
         foreach (RequirementsForBounce.Requirements req in bounceRequirements.requirements)
         {
-            if(!HandleReq(req))
+            if(!HandleReq(req, other))
             {
                 return false;
             }
@@ -138,7 +138,7 @@ public class CheckForBouncing : MonoBehaviour
         return true;
     }
 
-    private bool HandleReq(RequirementsForBounce.Requirements req)
+    private bool HandleReq(RequirementsForBounce.Requirements req, GameObject other)
     {
         switch (req)
         {
@@ -168,6 +168,23 @@ public class CheckForBouncing : MonoBehaviour
                 else
                 {
                     return gameObject.activeSelf;
+                }
+                break;
+
+            case RequirementsForBounce.Requirements.onlyBounceAgainstEnemies:
+                if (other.GetComponent<Enemy>())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            case RequirementsForBounce.Requirements.dontBounceAgainstEnemies:
+                if (!other.GetComponent<Enemy>())
+                {
+                    return true;
                 }
                 break;
         }

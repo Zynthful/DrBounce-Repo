@@ -10,6 +10,8 @@ public class RequirementsForBounce : ScriptableObject
         noParent,
         amDead,
         amAlive,
+        onlyBounceAgainstEnemies,
+        dontBounceAgainstEnemies,
     }
 
     public Requirements[] requirements;
