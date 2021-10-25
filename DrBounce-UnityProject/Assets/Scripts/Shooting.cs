@@ -69,6 +69,7 @@ public class Shooting : MonoBehaviour
     public MMFeedbacks FirstChargedShotFeedback;
     public MMFeedbacks HoverOverFeedback;
     public MMFeedbacks RegularReticleFeedback;
+    public MMFeedbacks LoseChargeFeedback;
     [SerializeField] ParticleSystem chargedShotPS;
 
     [Header("Vibrations")]
@@ -246,6 +247,7 @@ public class Shooting : MonoBehaviour
     {
         if (!transform.parent)  //if the gun is dropped and has no parent
         {
+            LoseChargeFeedback.PlayFeedbacks();
             vibrationManager.StopActiveCharge();
             Reset();
         }
