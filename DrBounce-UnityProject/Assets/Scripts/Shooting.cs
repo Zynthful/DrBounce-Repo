@@ -74,12 +74,14 @@ public class Shooting : MonoBehaviour
     [Header("Vibrations")]
     public VibrationManager vibrationManager;
 
+    [SerializeField] private GameEventBool onEnemyHover = null;
 
     public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         pool = ObjectPooler.Instance;
+        onEnemyHover?.Raise(false);
     }
 
     // Update is called once per frame
@@ -94,12 +96,14 @@ public class Shooting : MonoBehaviour
             Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
+                onEnemyHover?.Raise(true);
                 RegularReticleFeedback?.StopFeedbacks();
                 HoverOverFeedback?.PlayFeedbacks();
                 print(enemy.transform.name + " is being hovered over!");
             }
             else
             {
+                onEnemyHover?.Raise(false);
                 HoverOverFeedback?.StopFeedbacks();
                 RegularReticleFeedback?.PlayFeedbacks();
             }
@@ -184,7 +188,7 @@ public class Shooting : MonoBehaviour
             case GunModes.Explosives:
                 FirstChargedShotFeedback?.PlayFeedbacks();
                 vibrationManager.ChargedShotVibration();
-                GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.identity, fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
+                GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
                 obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
                 //Reset();
                 AddCharge(-1);

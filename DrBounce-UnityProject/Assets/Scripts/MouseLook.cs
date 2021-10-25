@@ -15,9 +15,13 @@ public class MouseLook : MonoBehaviour
     public float controllerSensitivityX = 0;
     public float controllerSensitivityY = 0;
 
+    public float controllerAssistSensitivityMultiplier = 0.5f;
+
     public Transform playerBody;
 
     float xRotation = 0f;
+
+    private float currentControllerSensitivityMultiplier = 1f;
 
     // Start is called before the first frame update
 
@@ -53,6 +57,10 @@ public class MouseLook : MonoBehaviour
         {
             conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivityX * 80.0f * Time.deltaTime;
             conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivityY * 80.0f * Time.deltaTime;
+
+            //Aim assist
+            conX *= currentControllerSensitivityMultiplier;
+            conY *= currentControllerSensitivityMultiplier;
         }
 
         float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivityX * 10.0f * Time.deltaTime;
@@ -78,5 +86,10 @@ public class MouseLook : MonoBehaviour
         controllerSensitivity = value;
         controllerSensitivityX = controllerSensitivity;
         controllerSensitivityY = controllerSensitivity;
+    }
+
+    public void IsHovering(bool hover)
+    {
+        currentControllerSensitivityMultiplier = hover ? controllerAssistSensitivityMultiplier : 1f;
     }
 }

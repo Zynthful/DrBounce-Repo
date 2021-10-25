@@ -12383,6 +12383,7 @@ GameObject:
   - component: {fileID: 1688270745}
   - component: {fileID: 3196352783550558967}
   - component: {fileID: 2442139064189664686}
+  - component: {fileID: 5080307069101361746}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12469,6 +12470,7 @@ MonoBehaviour:
   controllerSensitivity: 7
   controllerSensitivityX: 0
   controllerSensitivityY: 0
+  controllerAssistSensitivityMultiplier: 0.3
   playerBody: {fileID: 5587670236924705794}
 --- !u!114 &5587670236126169270
 MonoBehaviour:
@@ -12738,6 +12740,34 @@ MonoBehaviour:
     m_RotationOrder: 4
   RemapIntensityZero: 0
   RemapIntensityOne: 1
+--- !u!114 &5080307069101361746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587670236126169277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533a3c1250a46794ebb7d90413ad4ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: cdd28372f25c79a4c863cc29297d4979, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5587670236126169275}
+        m_TargetAssemblyTypeName: MouseLook, Assembly-CSharp
+        m_MethodName: IsHovering
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5587670236240770454
 GameObject:
   m_ObjectHideFlags: 0
@@ -12889,6 +12919,7 @@ MonoBehaviour:
   RegularReticleFeedback: {fileID: 0}
   chargedShotPS: {fileID: 6341533568631161365}
   vibrationManager: {fileID: 0}
+  onEnemyHover: {fileID: 11400000, guid: cdd28372f25c79a4c863cc29297d4979, type: 2}
   anim: {fileID: 5862399666288358020}
 --- !u!114 &4648697631877843793
 MonoBehaviour:
@@ -15919,14 +15950,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
---- !u!1 &226782933602530214 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
-  m_PrefabInstance: {fileID: 1145277912412507895}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &607529983028472092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
+  m_PrefabInstance: {fileID: 1145277912412507895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &226782933602530214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
   m_PrefabInstance: {fileID: 1145277912412507895}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1171614818522279220
@@ -16214,14 +16245,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
---- !u!198 &6341533568631161365 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5207232466269728545, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
-  m_PrefabInstance: {fileID: 1171614818522279220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7749810402951507687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8921264690610799571, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
+  m_PrefabInstance: {fileID: 1171614818522279220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6341533568631161365 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5207232466269728545, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
   m_PrefabInstance: {fileID: 1171614818522279220}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3243811396977461193
