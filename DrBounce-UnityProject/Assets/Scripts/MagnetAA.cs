@@ -67,7 +67,12 @@ public class MagnetAA : MonoBehaviour
         if (!gun.transform.parent && currentDistance < aimAssistMaxRange)
         {
             float mag = rb.velocity.magnitude;
-            rb.velocity = (rb.velocity + ((transform.position - gun.transform.position).normalized * aimAssistForce / currentDistance)).normalized * mag;
+            if (rb.velocity.magnitude <= .2f)
+            {
+                mag = 2;
+            }
+            mag += Time.deltaTime * aimAssistForce;
+            rb.velocity = ((transform.position - gun.transform.position).normalized * aimAssistForce / currentDistance).normalized * mag;
         }
     }
 
