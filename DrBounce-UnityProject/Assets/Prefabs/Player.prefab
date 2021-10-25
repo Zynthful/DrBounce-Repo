@@ -10643,6 +10643,185 @@ MonoBehaviour:
   m_ChannelMask: 1
   m_Gain: 1
   m_Use2DDistance: 0
+--- !u!1 &804806100892032588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5948498480371536490}
+  - component: {fileID: 9132349321543841975}
+  - component: {fileID: 7881497671204995050}
+  - component: {fileID: 2397408441484728219}
+  - component: {fileID: 6174084917479677189}
+  - component: {fileID: 2040790454555471302}
+  m_Layer: 7
+  m_Name: Bounce Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5948498480371536490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804806100892032588}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8312137195647732619}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9132349321543841975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804806100892032588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44da1b31fb0ad445806d8fc9e02d08d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c5ed9c287ecf84e4a866fc750797c1aa, type: 2}
+  pickUpFromGroundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ef19fd1df45c7ac49ae133fe7b620dd2, type: 2}
+  catchEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 3bfc69b7e3debb943a1cb71bedc904f4, type: 2}
+  numOfBouncesRTPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: f969533357c3a8247b809ff4a0b07a9a, type: 2}
+  chargesRTPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c09815531622016498a8f5f386840037, type: 2}
+--- !u!114 &7881497671204995050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804806100892032588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 8fa8497e3a47c8746af5c3790f606213, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9132349321543841975}
+        m_TargetAssemblyTypeName: BounceAudio, Assembly-CSharp
+        m_MethodName: PlayPickUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2397408441484728219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804806100892032588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4b56bb7bbb80eaa4c85ae3ad717f8680, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9132349321543841975}
+        m_TargetAssemblyTypeName: BounceAudio, Assembly-CSharp
+        m_MethodName: PlayCatch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6174084917479677189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804806100892032588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9d2693e15688753468f4083136d8ffa6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9132349321543841975}
+        m_TargetAssemblyTypeName: BounceAudio, Assembly-CSharp
+        m_MethodName: PlayBounce
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2040790454555471302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804806100892032588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9132349321543841975}
+        m_TargetAssemblyTypeName: BounceAudio, Assembly-CSharp
+        m_MethodName: UpdateChargesRTPC
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &919440774900848416
 GameObject:
   m_ObjectHideFlags: 0
@@ -10941,7 +11120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3887508889852847647}
   m_Layer: 7
-  m_Name: PFX-----
+  m_Name: ---PFX---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10965,7 +11144,7 @@ Transform:
   - {fileID: 4578563069218425638}
   - {fileID: 7036788958780139562}
   m_Father: {fileID: 5587670236240770455}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1755045241739996724
 GameObject:
@@ -11386,17 +11565,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8312137195647732619}
-  - component: {fileID: 6565917891331500461}
-  - component: {fileID: 4658609419792141874}
-  - component: {fileID: 6534474088648951600}
-  - component: {fileID: 5901140364785077774}
-  - component: {fileID: 7086029408254847670}
-  - component: {fileID: 5767551669161815429}
-  - component: {fileID: 1197736505044690277}
-  - component: {fileID: 8292638452196617810}
-  - component: {fileID: 3701579981251275105}
   m_Layer: 7
-  m_Name: Audio
+  m_Name: ---Audio---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11412,294 +11582,12 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6165702016440670018}
+  - {fileID: 5948498480371536490}
   m_Father: {fileID: 5587670236240770455}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6565917891331500461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdd1ff8582d01294083b56ac9ad8a7fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unchargedShotEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: f67264980d1e8e049afac84c0276f968, type: 2}
-  chargedShotEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: a660340b7dbf87945837a3268e7a4a9f, type: 2}
-  bounceEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c5ed9c287ecf84e4a866fc750797c1aa, type: 2}
-  pickUpFromGroundEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ef19fd1df45c7ac49ae133fe7b620dd2, type: 2}
-  catchEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 3bfc69b7e3debb943a1cb71bedc904f4, type: 2}
-  recallEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 8c1eefc7fb96bd042a4e855a4bbbe988, type: 2}
-  chargedDamageMultiplierRTPC:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: eee11160c9667284ab73367291da5b0a, type: 2}
-  amountOfBouncesRTPC:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: f969533357c3a8247b809ff4a0b07a9a, type: 2}
-  chargesRTPC:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c09815531622016498a8f5f386840037, type: 2}
---- !u!114 &4658609419792141874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 9d2693e15688753468f4083136d8ffa6, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: PlayBounce
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6534474088648951600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: UpdateChargesRTPC
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5901140364785077774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: cb7f18caeeead5845a5f56b683b4debd, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: UpdateChargesRTPC
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &7086029408254847670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 4b56bb7bbb80eaa4c85ae3ad717f8680, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: PlayCatch
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5767551669161815429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 8fa8497e3a47c8746af5c3790f606213, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: PlayPickUp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1197736505044690277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: PlayUnchargedShot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8292638452196617810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 12bb0888fa469484ab53924a198df142, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: UpdateChargedDamageMultiplierRTPC
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: PlayChargedShot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &3701579981251275105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677388527681910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: c00823c895747804ab0ee56874a5c03b, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6565917891331500461}
-        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: PlayRecall
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &3208291316935067588
 GameObject:
   m_ObjectHideFlags: 0
@@ -12808,8 +12696,8 @@ Transform:
   m_Children:
   - {fileID: 6904874282673318785}
   - {fileID: 607529983028472092}
-  - {fileID: 3887508889852847647}
   - {fileID: 8312137195647732619}
+  - {fileID: 3887508889852847647}
   - {fileID: 7830209651048970449}
   m_Father: {fileID: 899843016412897590}
   m_RootOrder: 0
@@ -13803,6 +13691,135 @@ Transform:
   m_Father: {fileID: 7830209651048970449}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5934612146519314021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6165702016440670018}
+  - component: {fileID: 1731698375981139529}
+  - component: {fileID: 2955107909283856103}
+  - component: {fileID: 3254086329365507534}
+  m_Layer: 7
+  m_Name: Gun Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6165702016440670018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934612146519314021}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8312137195647732619}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1731698375981139529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934612146519314021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd1ff8582d01294083b56ac9ad8a7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unchargedShotEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: f67264980d1e8e049afac84c0276f968, type: 2}
+  chargedExplosiveShotEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a660340b7dbf87945837a3268e7a4a9f, type: 2}
+  chargedDamageMultiplierRTPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: eee11160c9667284ab73367291da5b0a, type: 2}
+  chargesRTPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c09815531622016498a8f5f386840037, type: 2}
+--- !u!114 &2955107909283856103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934612146519314021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1731698375981139529}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: PlayUnchargedShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3254086329365507534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934612146519314021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 12bb0888fa469484ab53924a198df142, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1731698375981139529}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: UpdateChargedDamageMultiplierRTPC
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1731698375981139529}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: PlayChargedShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6352670012557538595
 GameObject:
   m_ObjectHideFlags: 0
@@ -15817,7 +15834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7830209651048970449}
   m_Layer: 7
-  m_Name: ---Feedbacks-----
+  m_Name: ---Feedbacks---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16072,11 +16089,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
---- !u!1 &226782933602530214 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
-  m_PrefabInstance: {fileID: 1145277912412507895}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &607529983028472092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
@@ -16085,6 +16097,11 @@ Transform:
 --- !u!23 &1739882113275023987 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
+  m_PrefabInstance: {fileID: 1145277912412507895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &226782933602530214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
   m_PrefabInstance: {fileID: 1145277912412507895}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1171614818522279220
@@ -16372,14 +16389,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
---- !u!198 &6341533568631161365 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5207232466269728545, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
-  m_PrefabInstance: {fileID: 1171614818522279220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7749810402951507687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8921264690610799571, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
+  m_PrefabInstance: {fileID: 1171614818522279220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6341533568631161365 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5207232466269728545, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
   m_PrefabInstance: {fileID: 1171614818522279220}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3243811396977461193
@@ -16451,14 +16468,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb8e4632ee082a48831f130aa43b03f, type: 3}
---- !u!198 &2863027119451706262 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 774573748673975391, guid: 4fb8e4632ee082a48831f130aa43b03f, type: 3}
-  m_PrefabInstance: {fileID: 3243811396977461193}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7036788958780139562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5522511563666206691, guid: 4fb8e4632ee082a48831f130aa43b03f, type: 3}
+  m_PrefabInstance: {fileID: 3243811396977461193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2863027119451706262 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 774573748673975391, guid: 4fb8e4632ee082a48831f130aa43b03f, type: 3}
   m_PrefabInstance: {fileID: 3243811396977461193}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4237425980925279635
@@ -16841,14 +16858,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 700ba8c8bbb440645866c27db355e955, type: 3}
---- !u!4 &4578563069218425638 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5055978152595430870, guid: 700ba8c8bbb440645866c27db355e955, type: 3}
-  m_PrefabInstance: {fileID: 8764043967586801392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &4143155732941623543 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4674544814533985799, guid: 700ba8c8bbb440645866c27db355e955, type: 3}
+  m_PrefabInstance: {fileID: 8764043967586801392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4578563069218425638 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5055978152595430870, guid: 700ba8c8bbb440645866c27db355e955, type: 3}
   m_PrefabInstance: {fileID: 8764043967586801392}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8980544769641886675
@@ -16888,7 +16905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866358497386595400, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
       propertyPath: m_Name
-      value: madnet
+      value: Madnet
       objectReference: {fileID: 0}
     - target: {fileID: 5866358497386595400, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
       propertyPath: m_Layer
