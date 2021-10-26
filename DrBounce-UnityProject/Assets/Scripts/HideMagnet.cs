@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class HideMagnet : MonoBehaviour
 {
-    [SerializeField] private GameObject magnet = null;
-    [SerializeField] private Animator magnetAnim = null;
+    private Animator magnetAnim = null;
+
+    private void Awake()
+    {
+        magnetAnim = GetComponent<Animator>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -16,14 +21,10 @@ public class HideMagnet : MonoBehaviour
     public void Reveal()
     {
         magnetAnim.SetTrigger("Reveal");
-
-        //magnet.SetActive(true);
     }
 
     public void Hide()
     {
         magnetAnim.SetTrigger("Drop");
-
-        //magnet.SetActive(false);
     }
 }
