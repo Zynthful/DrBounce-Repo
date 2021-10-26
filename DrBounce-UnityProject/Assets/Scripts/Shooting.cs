@@ -192,6 +192,9 @@ public class Shooting : MonoBehaviour
             case GunModes.Explosives:
                 FirstChargedShotFeedback?.PlayFeedbacks();
                 vibrationManager.ChargedShotVibration();
+
+                shooter.chargeBullet.damage = DamageAmountCalc(amountOfBounces);
+
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
                 obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
                 //Reset();
