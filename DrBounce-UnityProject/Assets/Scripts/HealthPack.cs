@@ -67,7 +67,7 @@ public class HealthPack : MonoBehaviour
         {
             //where you heal
             healing = false;
-            OnActivated?.Invoke(HealingAmpuntCalc(amountOfBounces));
+            OnActivated?.Invoke(HealingAmountCalc(amountOfBounces));
             Destroy(this.gameObject);
         }
     }
@@ -87,14 +87,18 @@ public class HealthPack : MonoBehaviour
     /// </summary>
     /// <param name="amountOfBounces"></param>
     /// <returns></returns>
-    private int HealingAmpuntCalc(int charges) 
+    private int HealingAmountCalc(int charges) 
     {
-        foreach (Vector2 amount in healingGraph) 
+        foreach (Vector2 amount in healingGraph)  //loops through the vector 2 (graph)
         {
             if (amount.x == charges)
             {
                 return Mathf.RoundToInt(amount.y);
             }
+        }
+        if (charges >= healingGraph.Length) //in case you over the max
+        {
+            return Mathf.RoundToInt(healingGraph[healingGraph.Length - 1].y);
         }
         return 0;
     }
