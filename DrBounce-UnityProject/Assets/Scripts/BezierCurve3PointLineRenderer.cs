@@ -21,6 +21,7 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
     [SerializeField] private MagnetAA mAA = null;
 
     private bool magnetise = false;
+    private float oldDistance = 0f;
 
     private void Start()
     {
@@ -39,13 +40,16 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.s_Instance.paused) return;
+        if (GameManager.s_Instance.paused) 
+            return;
+
+        float distance = Vector3.Distance(point1.position, point3.position);
 
         lineRenderer.enabled = magnetise;
 
         if (magnetise)
         {
-            if (Vector3.Distance(point1.position, point3.position) > colourDistance || Vector3.Distance(point1.position, point3.position) < 1f)
+            if (distance > colourDistance || distance < 1f)
             {
                 lineRenderer.enabled = false;
                 return;
@@ -54,7 +58,10 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
         else 
             return;
 
-        point2.localPosition = new Vector3(0, 0, Vector3.Distance(point1.position, point3.position) / 2);
+        if (distance == oldDistance)
+            return;
+
+        point2.localPosition = new Vector3(0, 0, distance / 2);
 
         List<Vector3> pointList = new List<Vector3>();
         for (float ratio = 0; ratio <= 1; ratio += 1.0f / vertexCount)
@@ -67,14 +74,15 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
         lineRenderer.SetPositions(pointList.ToArray());
 
         Gradient gradient = new Gradient();
-        Color endColour = Color.Lerp(colourClose, colourFar, Mathf.Clamp(Vector3.Distance(point1.position, point3.position) / colourDistance, 0, 1));
-        gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(colourClose, 0.0f), new GradientColorKey(endColour, 1.0f / (Vector3.Distance(point1.position, point3.position) / colourDistance)) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) });
+        Color endColour = Color.Lerp(colourClose, colourFar, Mathf.Clamp(distance / colourDistance, 0, 1));
+        gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(colourClose, 0.0f), new GradientColorKey(endColour, 1.0f / (distance / colourDistance)) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) });
         lineRenderer.colorGradient = gradient;
+
+        oldDistance = distance;
     }
 
     public void isMag(bool mag)
     {
-        Debug.Log("yes itsaworkin and its " + mag);
         magnetise = mag;
     }
 
