@@ -113,6 +113,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Healing"",
+                    ""type"": ""Button"",
+                    ""id"": ""899195a3-ba67-4997-9d09-8f535e64f3c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -566,6 +574,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""SwitchHeld"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6be69ae5-7227-443a-992d-4352e7f20e1b"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Healing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81591703-7841-4d3b-8030-8ec094ae1c80"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Healing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -663,6 +693,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_AimAssist = m_Player.FindAction("AimAssist", throwIfNotFound: true);
         m_Player_SwitchHeld = m_Player.FindAction("SwitchHeld", throwIfNotFound: true);
+        m_Player_Healing = m_Player.FindAction("Healing", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -727,6 +758,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_AimAssist;
     private readonly InputAction m_Player_SwitchHeld;
+    private readonly InputAction m_Player_Healing;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -743,6 +775,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @AimAssist => m_Wrapper.m_Player_AimAssist;
         public InputAction @SwitchHeld => m_Wrapper.m_Player_SwitchHeld;
+        public InputAction @Healing => m_Wrapper.m_Player_Healing;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -788,6 +821,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @SwitchHeld.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchHeld;
                 @SwitchHeld.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchHeld;
                 @SwitchHeld.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchHeld;
+                @Healing.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
+                @Healing.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
+                @Healing.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -828,6 +864,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @SwitchHeld.started += instance.OnSwitchHeld;
                 @SwitchHeld.performed += instance.OnSwitchHeld;
                 @SwitchHeld.canceled += instance.OnSwitchHeld;
+                @Healing.started += instance.OnHealing;
+                @Healing.performed += instance.OnHealing;
+                @Healing.canceled += instance.OnHealing;
             }
         }
     }
@@ -897,6 +936,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnAimAssist(InputAction.CallbackContext context);
         void OnSwitchHeld(InputAction.CallbackContext context);
+        void OnHealing(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

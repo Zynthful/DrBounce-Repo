@@ -9,9 +9,11 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Gun shooter = null;
     //[SerializeField] private GameObject bullet;
 
+    public delegate void Activated(int value);
+    public static event Activated OnActivated;
+
     public enum GunModes
     {
-        Basic,
         Explosives,
     }
 
@@ -78,6 +80,9 @@ public class Shooting : MonoBehaviour
     [SerializeField] private GameEventBool onEnemyHover = null;
 
     public Animator anim;
+
+    [SerializeField] private int healAmount = 30;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +93,8 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //print(amountOfBounces);
+
         timeSinceLastShot += Time.deltaTime;
         CheckifCharged();
 
@@ -100,7 +107,7 @@ public class Shooting : MonoBehaviour
                 onEnemyHover?.Raise(true);
                 RegularReticleFeedback?.StopFeedbacks();
                 HoverOverFeedback?.PlayFeedbacks();
-                print(enemy.transform.name + " is being hovered over!");
+                //print(enemy.transform.name + " is being hovered over!");
             }
             else
             {
@@ -116,6 +123,7 @@ public class Shooting : MonoBehaviour
         controls = new InputMaster();
         controls.Player.Shoot.performed += _ => Shoot();
         controls.Player.RecallGun.performed += _ => Reset();
+        controls.Player.Healing.performed += _ => Healing();
     }
 
     private void OnEnable()
@@ -140,18 +148,18 @@ public class Shooting : MonoBehaviour
 
             if(chargesLeft > 0) HandleComboShot();
 
-            // Is it an uncharged/basic shot?  
-            else if (shooter.chargeShot == GunModes.Basic || chargesLeft <= 0)
+            // Is it an uncharged/basic shot?
+            else if (chargesLeft <= 0)
             {
                 onUnchargedShot?.Raise();
 
                 //ChargedFeedback?.StopFeedbacks();
-                damage = shooter.baseDamage;
-                
+                damage = Mathf.RoundToInt(shooter.damageGraph[0].y);
+
                 RaycastHit Hitinfo;
                 if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, range))
                 {
-                    print(Hitinfo.transform.name + " hit!");
+                    //print(Hitinfo.transform.name + " hit!");
                     Enemy enemy = Hitinfo.transform.GetComponent<Enemy>();
                     if(enemy != null)
                     {
@@ -181,11 +189,6 @@ public class Shooting : MonoBehaviour
 
         switch(shooter.chargeShot)
         {
-            case GunModes.Basic:
-                damage = (int)(shooter.baseDamage * amountOfBounces * shooter.damageModifier);
-                AddCharge(-1);
-                break;
-
             case GunModes.Explosives:
                 FirstChargedShotFeedback?.PlayFeedbacks();
                 vibrationManager.ChargedShotVibration();
@@ -193,6 +196,7 @@ public class Shooting : MonoBehaviour
                 obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
                 //Reset();
                 AddCharge(-1);
+                amountOfBounces = 0;
                 break;
         }
 
@@ -234,6 +238,7 @@ public class Shooting : MonoBehaviour
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
         AddCharge(-chargesLeft); // Set chargesLeft = 0
         anim.SetInteger("ChargesLeft", chargesLeft);
+        amountOfBounces = 0;
     }
 
     // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
@@ -250,6 +255,40 @@ public class Shooting : MonoBehaviour
             LoseChargeFeedback.PlayFeedbacks();
             vibrationManager.StopActiveCharge();
             Reset();
+        }
+    }
+
+    private int DamageAmountCalc(int charges)
+    {
+        foreach (Vector2 amount in shooter.damageGraph)  //loops through the vector 2 (graph)
+        {
+            if (amount.x == charges)
+            {
+                return Mathf.RoundToInt(amount.y);
+            }
+        }
+        if (charges >= shooter.damageGraph.Length) //in case you over the max
+        {
+            return Mathf.RoundToInt(shooter.damageGraph[shooter.damageGraph.Length - 1].y);
+        }
+        return 0;
+    }
+
+    private void Healing() 
+    {
+        if (amountOfBounces > 0 && Health.ReturnHealthNotMax()) 
+        {
+            amountOfBounces--;
+            //call a heal function
+
+            OnActivated?.Invoke(healAmount);
+
+            if (amountOfBounces == 0)
+            {
+                LoseChargeFeedback.PlayFeedbacks();
+                vibrationManager.StopActiveCharge();
+                Reset();
+            }
         }
     }
 }
