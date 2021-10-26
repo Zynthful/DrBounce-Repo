@@ -5,6 +5,7 @@ using UnityEngine;
 public class HideMagnet : MonoBehaviour
 {
     [SerializeField] private GameObject magnet = null;
+    [SerializeField] private Animator magnetAnim = null;
 
     // Start is called before the first frame update
     void Start()
@@ -14,11 +15,15 @@ public class HideMagnet : MonoBehaviour
 
     public void Reveal()
     {
-        magnet.SetActive(true);
+        magnetAnim.SetTrigger("Reveal");
+
+        //magnet.SetActive(true);
     }
 
     public void Hide()
     {
-        magnet.SetActive(false);
+        magnetAnim.SetTrigger("Drop");
+
+        //magnet.SetActive(false);
     }
 }
