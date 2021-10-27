@@ -7,14 +7,19 @@ public class ExplosiveShot : BulletMovement
     public int comboSize;
     [SerializeField] float explosionSizeMultiplier;
     [SerializeField] int maxComboSize;
+    [SerializeField] float explosionDamageMultiplier;
     private GameObject explosionTrigger;
 
     [SerializeField] [Range(10f, 1000f)] float expansionSpeed;
     private MeshRenderer shotRenderer;
 
+    [SerializeField]
+    private ExplosiveShotAudio shotAudio = null;
+
     public override void OnObjectSpawn()
     {
         base.OnObjectSpawn();
+        
         if (!shotRenderer)
         {
             explosionTrigger = transform.GetComponentInChildren<SphereCollider>().gameObject;
@@ -31,8 +36,11 @@ public class ExplosiveShot : BulletMovement
     {
         if (!other.transform.GetComponent<BulletMovement>() && other.transform.root != PlayerMovement.player.root)
         {
-            explosionTrigger.SetActive(true);
+            shotAudio?.PlayExplode();
 
+            explosionTrigger.SetActive(true);
+            if (comboSize > 1 && explosionDamageMultiplier > 0)
+                dam = (int)(dam * comboSize * explosionDamageMultiplier);
             rb.constraints = RigidbodyConstraints.FreezeAll;
 
             GetComponentInChildren<MeshRenderer>().enabled = false; GetComponent<Rigidbody>().velocity = Vector3.zero;

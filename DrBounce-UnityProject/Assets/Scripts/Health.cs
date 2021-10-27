@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    private int health = 100;
-    private int maxHealth = 100;
+    private static int health = 100;
+    private static int maxHealth = 100;
     private float minHealth = 0;
 
     public delegate void CurrentHealth();
@@ -33,27 +33,42 @@ public class Health : MonoBehaviour
 
     public MMProgressBar progressBar;
 
-    
+    bool canSetStartingHealth = true;
 
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+
         onHealthChange?.Raise(100.0f * ((float)health / (float)maxHealth));
+        progressBar.UpdateBar(health, minHealth, maxHealth);
     }
 
     private void Update()
     {
         //print(health);
+        if (canSetStartingHealth) UpdatedStartingHealth();
+    }
+
+    private void UpdatedStartingHealth()   //doesn't work in start : (
+    {
+        //health = 1;
+        //progressBar.UpdateBar(health, minHealth, maxHealth);
+        //Damage(0);
+        canSetStartingHealth = false;
     }
 
     private void Heal(int amount) 
     {
+        //print("i am healing: " + amount);
+
         onHeal?.Raise(amount);
-        progressBar.UpdateBar(health, minHealth, maxHealth);
+
 
         health += amount;
+
+        progressBar.UpdateBar(health, minHealth, maxHealth);
 
         if (health > maxHealth) 
         {
@@ -78,7 +93,7 @@ public class Health : MonoBehaviour
 
         if (health <= 0) 
         {
-            Debug.Log("mortis");
+            //Debug.Log("mortis");
             DeathFeedback?.PlayFeedbacks();
             Invoke("DIE",0.230f);
         }
@@ -104,15 +119,31 @@ public class Health : MonoBehaviour
 
     private void OnEnable()
     {
-        HealthPack.OnEntered += RecieveRequest;
         HealthPack.OnActivated += Heal;
+        Shooting.OnActivated += Heal;
         BulletMovement.OnHit += Damage;
     }
 
     private void OnDisable()
     {
-        HealthPack.OnEntered -= RecieveRequest;
         HealthPack.OnActivated -= Heal;
+        Shooting.OnActivated -= Heal;
         BulletMovement.OnHit -= Damage;
+    }
+
+    public static int ReturnHealth() 
+    {
+        return health;
+    }
+
+    public static bool ReturnHealthNotMax()
+    {
+        return (health < maxHealth);
+
+    }
+
+    public bool ReturnDead()
+    {
+        return health <= 0;
     }
 }

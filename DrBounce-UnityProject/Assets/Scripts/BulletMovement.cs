@@ -39,7 +39,6 @@ public class BulletMovement : MonoBehaviour, IPooledObject
             rb = GetComponent<Rigidbody>();
         }
         
-        Debug.Log(dir);
         rb.velocity = dir * speed * Time.fixedDeltaTime;
 
         StartCoroutine(DieTime());

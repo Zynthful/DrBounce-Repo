@@ -4,45 +4,30 @@ using UnityEngine;
 
 public class GunAudio : MonoBehaviour
 {
-    [Header("Events")]
+    [Header("Wwise Events")]
     [SerializeField]
-    private AK.Wwise.Event shootEvent = null;
+    private AK.Wwise.Event unchargedShotEvent = null;
     [SerializeField]
-    private AK.Wwise.Event bounceEvent = null;
-    [SerializeField]
-    private AK.Wwise.Event pickUpFromGroundEvent = null;
-    [SerializeField]
-    private AK.Wwise.Event catchEvent = null;
+    private AK.Wwise.Event chargedExplosiveShotEvent = null;
 
     [Header("RTPCs")]
     [SerializeField]
-    private AK.Wwise.RTPC damageRTPC = null;
-    [SerializeField]
-    private AK.Wwise.RTPC amountOfBouncesRTPC = null;
+    private AK.Wwise.RTPC chargedDamageMultiplierRTPC = null;
     [SerializeField]
     private AK.Wwise.RTPC chargesRTPC = null;
 
-    public void PlayShoot(int damage)
+    public void PlayUnchargedShot()
     {
-        damageRTPC.SetValue(gameObject, damage);
-        shootEvent.Post(gameObject);
+        unchargedShotEvent.Post(gameObject);
     }
-
-    public void PlayBounce(int amountOfBounces)
+    public void PlayChargedShot()
     {
-        amountOfBouncesRTPC.SetValue(gameObject, amountOfBounces);
-        bounceEvent.Post(gameObject);
+        chargedExplosiveShotEvent.Post(gameObject);
     }
-
-    public void PlayPickUp()
+    public void UpdateChargedDamageMultiplierRTPC(int value)
     {
-        pickUpFromGroundEvent.Post(gameObject);
+        chargedDamageMultiplierRTPC.SetValue(gameObject, value);
     }
-    public void PlayCatch()
-    {
-        catchEvent.Post(gameObject);
-    }
-
     public void UpdateChargesRTPC(int value)
     {
         chargesRTPC.SetValue(gameObject, value);

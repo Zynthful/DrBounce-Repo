@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
 
     bool shootDelay;
 
+    [SerializeField] private GameObject healthPack;
+
     ObjectPooler pool;
 
     [Header("Feedbacks")]
@@ -25,13 +27,6 @@ public class Enemy : MonoBehaviour
     public MMFeedbackFloatingText HitText;
 
     public EnemyAudio enemyAudio = null;
-
-    public enum EnemyTypes
-    {
-        BlueBack,
-        YellowUp,
-        RedForward,
-    }
 
     protected float _minimumHealth = 0f;
     [SerializeField] protected float _maximumHealth = 20f;
@@ -52,11 +47,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public EnemyTypes eType;
-
     public bool canSeePlayer;
 
-    
+    [SerializeField] List<Material> materials = new List<Material>{};
 
     Enemy()
     {
@@ -114,6 +107,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         amDead = true;
+        //SwitchHeldItem.instance.AddToList(Instantiate(healthPack, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity, null));
         print("That's right baby! Our dog, " + this.name + ", is dead!");
         //Destroy(gameObject);
     }
@@ -122,22 +116,22 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth = _maximumHealth;
         pool = ObjectPooler.Instance;
-        Material mat = GetComponent<MeshRenderer>().material;
-        switch (eType)
-        {
-            case EnemyTypes.BlueBack:
-                mat.color = Color.blue;
-                break;
+        // Material mat = null;
+        // switch (GetComponent<Bouncing>().bType)
+        // {
+        //     case Bouncing.BounceType.Back:
+        //         mat = materials[0];
+        //         break;
 
-            case EnemyTypes.YellowUp:
-                mat.color = Color.yellow;
-                break;
+        //     case Bouncing.BounceType.Up:
+        //         mat = materials[1];
+        //         break;
 
-            case EnemyTypes.RedForward:
-                mat.color = Color.red;
-                break;
-        }
-        GetComponent<MeshRenderer>().material = mat;
+        //     case Bouncing.BounceType.Away:
+        //         mat = materials[2];
+        //         break;
+        // }
+        // GetComponent<MeshRenderer>().material = mat;
     }
 
     private void Awake()

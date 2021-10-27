@@ -6,11 +6,22 @@ using UnityEngine.InputSystem;
 public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 4.0f;
+
+    public float mouseSensitivityX = 0;
+    public float mouseSensitivityY = 0;
+
     public float controllerSensitivity = 7.0f;
+
+    public float controllerSensitivityX = 0;
+    public float controllerSensitivityY = 0;
+
+    public float controllerAssistSensitivityMultiplier = 0.5f;
 
     public Transform playerBody;
 
     float xRotation = 0f;
+
+    private float currentControllerSensitivityMultiplier = 1f;
 
     // Start is called before the first frame update
 
@@ -27,6 +38,11 @@ public class MouseLook : MonoBehaviour
         // Initialise sensitivity as according to player prefs, or to default if pref does not exist
         SetMouseSensitivity(PlayerPrefs.GetFloat("Options/MouseSensitivity", mouseSensitivity));
         SetControllerSensitivity(PlayerPrefs.GetFloat("Options/ControllerSensitivity", controllerSensitivity));
+
+        mouseSensitivityX = mouseSensitivityY = mouseSensitivity;
+        // controllerSensitivityX = mouseSensitivityY = mouseSensitivity;
+        controllerSensitivityX = controllerSensitivity;
+        controllerSensitivityY = controllerSensitivity;
     }
 
     // Update is called once per frame
@@ -39,12 +55,16 @@ public class MouseLook : MonoBehaviour
 
         if (Gamepad.current != null)
         {
-            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity * 80.0f * Time.deltaTime;
-            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity * 80.0f * Time.deltaTime;
+            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivityX * 80.0f * Time.deltaTime;
+            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivityY * 80.0f * Time.deltaTime;
+
+            //Aim assist
+            conX *= currentControllerSensitivityMultiplier;
+            conY *= currentControllerSensitivityMultiplier;
         }
 
-        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivity * 10.0f * Time.deltaTime;
-        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivity * 10.0f * Time.deltaTime;
+        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivityX * 10.0f * Time.deltaTime;
+        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivityY * 10.0f * Time.deltaTime;
 
         float camX = conX + mouseX;
         float camY = conY + mouseY;
@@ -59,9 +79,17 @@ public class MouseLook : MonoBehaviour
     public void SetMouseSensitivity(float value)
     {
         mouseSensitivity = value;
+        mouseSensitivityX = mouseSensitivityY = mouseSensitivity;
     }
     public void SetControllerSensitivity(float value)
     {
         controllerSensitivity = value;
+        controllerSensitivityX = controllerSensitivity;
+        controllerSensitivityY = controllerSensitivity;
+    }
+
+    public void IsHovering(bool hover)
+    {
+        currentControllerSensitivityMultiplier = hover ? controllerAssistSensitivityMultiplier : 1f;
     }
 }

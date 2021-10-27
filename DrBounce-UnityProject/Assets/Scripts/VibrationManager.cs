@@ -13,9 +13,16 @@ public class VibrationManager : MonoBehaviour
     [Header("Shooting")]
     public HapticTypes shootingHapticType = HapticTypes.None;
     public HapticTypes ChargedShootingHapticType = HapticTypes.None;
+    [SerializeField] float ChargeIntensity;
+    [SerializeField] float ChargeSharpness;
     [Header("Misc")]
     public HapticTypes TakeDamageHapticType = HapticTypes.None;
     public HapticTypes CatchingHapticType = HapticTypes.None;
+    [Header("Stop")]
+    public HapticTypes StopMagnetHapticType = HapticTypes.None;
+    public HapticTypes StopActiveHapticType = HapticTypes.None;
+    [SerializeField] float MagnetIntensity;
+    [SerializeField] float MagnetSharpness;
     //public HapticTypes activeChargeHapticType = HapticTypes.None;
     //public HapticTypes magnetAimAssistHapticType = HapticTypes.None;
     // Start is called before the first frame update
@@ -57,6 +64,22 @@ public class VibrationManager : MonoBehaviour
 
     public void ActiveChargeVibration()
     {
-        MMVibrationManager.ContinuousHaptic(0.3f, 0.8f, 3.5f, HapticTypes.None, this, true);
+        MMVibrationManager.ContinuousHaptic(ChargeIntensity,ChargeSharpness, 3.5f, HapticTypes.None, this, true);
+    }
+
+    public void ActiveMagnetAssist()
+    {
+        MMVibrationManager.ContinuousHaptic(MagnetIntensity, MagnetSharpness, 3.5f, HapticTypes.None, this, true);
+    }
+
+    public void StopMagnet()
+    {
+        MMVibrationManager.Haptic(StopMagnetHapticType, false, true, this);
+
+    }
+
+    public void StopActiveCharge()
+    {
+        MMVibrationManager.Haptic(StopActiveHapticType, false, true, this);
     }
 }

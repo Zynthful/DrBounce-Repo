@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MoreMountains.NiceVibrations;
 public class MagnetAA : MonoBehaviour
 {
 
     public InputMaster controls;
-    [SerializeField] GunBounce gun;
-    [Range(0.0f, 10.0f)] public float aimAssistMaxRange;
+    [SerializeField] GunThrowing gun;
+    [Range(0.0f, 50f)] public float aimAssistMaxRange;
     [SerializeField] private float aimAssistForce;
     [SerializeField] GameEventBool assistEvent;
     bool assistActive;
     Rigidbody rb;
+
+    [Header("Vibrations")]
+    public VibrationManager vibrationManager;
 
     private void Awake()
     {
@@ -24,14 +27,20 @@ public class MagnetAA : MonoBehaviour
     {
         if (!gun.transform.parent)
         {
+            Debug.Log("mag on");
             assistActive = true; assistEvent.Raise(true);
+            vibrationManager.ActiveMagnetAssist();
+
         }
     }
     void AssistEnded() 
     {
         if (assistActive)
         {
+            Debug.Log("mag off");
+            vibrationManager.StopMagnet();
             assistActive = false; assistEvent.Raise(false);
+            
         }
     }
 
@@ -39,7 +48,7 @@ public class MagnetAA : MonoBehaviour
     void Start()
     {
         if (!gun)
-            gun = PlayerMovement.player.GetComponentInChildren<GunBounce>();
+            gun = PlayerMovement.player.GetComponentInChildren<GunThrowing>();
             if(!rb)
                 rb = gun.GetComponent<Rigidbody>();
     }
@@ -53,11 +62,17 @@ public class MagnetAA : MonoBehaviour
 
     void MoveObjects()
     {
+        gun.AffectPhysics(0f, 0f);
         float currentDistance = Vector3.Distance(transform.position, gun.transform.position);
-        if (!gun.transform.parent && currentDistance < aimAssistMaxRange && gun.inFlight)
+        if (!gun.transform.parent && currentDistance < aimAssistMaxRange)
         {
             float mag = rb.velocity.magnitude;
-            rb.velocity = (rb.velocity + ((transform.position - gun.transform.position).normalized * aimAssistForce / currentDistance)).normalized * mag;
+            if (rb.velocity.magnitude <= .2f)
+            {
+                mag = 2;
+            }
+            mag += Time.deltaTime * aimAssistForce;
+            rb.velocity = ((transform.position - gun.transform.position).normalized * aimAssistForce / currentDistance).normalized * mag;
         }
     }
 

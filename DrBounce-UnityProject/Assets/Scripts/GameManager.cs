@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager s_Instance = null;
+    public LayerMask bounceableLayers = 9; // Set this to the layer mask of any bounceable terrain/enemies
 
     [HideInInspector]
     public bool paused = false;

@@ -5,10 +5,15 @@ using UnityEngine.InputSystem;
 
 public class WeaponSway : MonoBehaviour
 {
-    [Header("Forward Bob")]
+    [Header("Vertical Bob")]
     [SerializeField] private float bobSpeed = 1f; // this should be added to velocity in future
     [SerializeField] private float bobDistance = 1f; // max distance of bob
     [SerializeField] private float bobTransitionSpeed = 0.01f;
+
+    [Header("Vertical Bob Crouched")]
+    [SerializeField] private float bobSpeedC = .5f; // this should be added to velocity in future
+    [SerializeField] private float bobDistanceC = .5f; // max distance of bob
+    [SerializeField] private float bobTransitionSpeedC = 0.005f;
 
     [Header("Horizontal Sway")]
     [SerializeField] private float swayAmount = 1f;
@@ -24,6 +29,9 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float offsetMultiplier = 5f;
     [SerializeField] private float offsetMax = 1f;
 
+    [Header("Sliding")]
+    [SerializeField] private float slideOffset = -0.25f;
+
     private float timer = 0f;
     private float waveSlice = 0f;
     private float xVelocity = 0f;
@@ -37,10 +45,12 @@ public class WeaponSway : MonoBehaviour
     
     [SerializeField] private PlayerMovement movement;
 
+    public static Transform weaponHolderTransform;
+
     private void Awake()
     {
         controls = new InputMaster();
-
+        weaponHolderTransform = transform;
     }
 
     void Start()
@@ -52,10 +62,25 @@ public class WeaponSway : MonoBehaviour
     {
         if (transform.childCount != 0)
         {
+            Vector3 bobPos, newPos;
+
+            if (!movement.isCrouching)
+            {
+                bobPos = CalculateVerticalBob(bobSpeed, bobDistance, bobTransitionSpeed);
+            }
+            else
+            {
+                bobPos = CalculateVerticalBob(bobSpeedC, bobDistanceC,bobTransitionSpeedC);
+            }
+
             HorizontalSway();
 
-            Vector3 bobPos = CalculateVerticalBob();
-            Vector3 newPos = MoveTowardsBob(transform.localPosition, bobPos);
+            if (movement.isSliding)
+            {
+                bobPos = Vector3.up * slideOffset;
+            }
+            
+            newPos = MoveTowardsBob(transform.localPosition, bobPos);
             newPos = Falling(movement.velocity.y, newPos);
 
             transform.localPosition = newPos;
@@ -67,6 +92,11 @@ public class WeaponSway : MonoBehaviour
     {
         float moveX = -Mouse.current.delta.x.ReadValue() * swayAmount;
 
+        if (Gamepad.current != null)
+        {
+            moveX = -Gamepad.current.rightStick.x.ReadValue() * swayAmount;
+        }
+        
         xVelocity = Mathf.Lerp(xVelocity, moveX, snappiness * Time.deltaTime);
 
         transform.localEulerAngles = Vector3.RotateTowards(transform.forward, Vector3.zero, Time.deltaTime * rotateToStartSpeed, 0);
@@ -77,16 +107,16 @@ public class WeaponSway : MonoBehaviour
     }
 
     // this will work a lot better if i can get the players velocity directly but for now scuffed method will do :)
-    private Vector3 CalculateVerticalBob()
+    private Vector3 CalculateVerticalBob(float bobS, float bobD, float bobTS)
     {
         Vector2 input = controls.Player.Movement.ReadValue<Vector2>();
-        Vector3 localPosition = Vector3.up * verticalOld;
+        Vector3 position = Vector3.up * verticalOld;
 
         if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
         {
             if (speedOld == 0)
             {
-                return localPosition;
+                return position;
             }
 
             timer = 0;
@@ -95,7 +125,7 @@ public class WeaponSway : MonoBehaviour
         else
         {
             waveSlice = (Mathf.Sin(timer) + 1) * 0.5f;
-            timer += bobSpeed;
+            timer += bobS;
 
             if (timer > Mathf.PI * 2)
                 timer -= Mathf.PI * 2;
@@ -103,24 +133,24 @@ public class WeaponSway : MonoBehaviour
 
         if (waveSlice != 0)
         {
-            float translateChange = waveSlice * bobDistance;
+            float translateChange = waveSlice * bobD;
             float totalAxes = Mathf.Abs(input.y) + Mathf.Abs(input.x);
             totalAxes = Mathf.Clamp(totalAxes, 0, 1);
 
-            speedOld += ((totalAxes * 2) - 1) * bobTransitionSpeed; // when axes are big become big
+            speedOld += ((totalAxes * 2) - 1) * bobTS; // when axes are big become big
             speedOld = Mathf.Clamp(speedOld, 0, 1);
 
             translateChange *= speedOld;
-            localPosition.y = midPoint.y - translateChange;
+            position.y = midPoint.y - translateChange;
         }
         else
         {
-            localPosition.y = midPoint.y;
+            position.y = midPoint.y;
         }
 
-        verticalOld = localPosition.y;
+        verticalOld = position.y;
 
-        return localPosition;
+        return position;
     }
 
     private Vector3 Falling(float yVelocity, Vector3 pos)
@@ -151,7 +181,7 @@ public class WeaponSway : MonoBehaviour
 
     private Vector3 MoveTowardsBob(Vector3 position, Vector3 bobPosition)
     {
-        float speed = Mathf.Pow(Mathf.Abs(Vector3.Distance(transform.localPosition, bobPosition)), returnToBobSpeed);
+        float speed = Mathf.Pow(Vector3.Distance(position, bobPosition), returnToBobSpeed);
         return Vector3.MoveTowards(position, bobPosition, Time.deltaTime * speed);
     }
 

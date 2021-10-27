@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,7 +9,12 @@ public class PauseMenu : MonoBehaviour
 
     public InputMaster controls;
 
-    [Header("Events")]
+    [Header("Pause Settings")]
+    [SerializeField]
+    private bool unpauseOnAwake = true;
+
+
+    [Header("Game Event Declarations")]
     [SerializeField]
     private GameEventBool onPauseStateChange = null;
     [SerializeField]
@@ -17,17 +22,30 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameEvent onUnpause = null;
 
+    [Header("Unity Events")]
+    [SerializeField]
+    private UnityEvent _onPause = null;
+    [SerializeField]
+    private UnityEvent _onUnpause = null;
+    [SerializeField]
+    private BoolEvent _onPauseStateChange = null;
+
     private void Awake()
     {
         controls = new InputMaster();
-        controls.Menu.Pause.performed += _ => Pause();
+
+        if (unpauseOnAwake)
+            SetPaused(false);
     }
 
-    public void Pause()
+    private void InvertPause()
     {
-        paused = !paused;
+        SetPaused(!paused);
+    }
 
-        Time.timeScale = paused ? 0 : 1;
+    public void SetPaused(bool value)
+    {
+        paused = value;
 
         // Update cursor lock state and visibility
         Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
@@ -35,40 +53,28 @@ public class PauseMenu : MonoBehaviour
 
         // Raise events
         onPauseStateChange?.Raise(paused);
+        _onPauseStateChange.Invoke(paused);
         if (paused)
         {
             onPause?.Raise();
+            _onPause.Invoke();
         }
         else
         {
             onUnpause?.Raise();
+            _onUnpause.Invoke();
         }
-    }
-
-    public void LoadScene(int index)
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(index);
-    }
-
-    public void QuitToDesktop()
-    {
-        Time.timeScale = 1;
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 
     private void OnEnable()
     {
+        controls.Menu.Pause.performed += _ => InvertPause();
         controls.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Menu.Pause.performed -= _ => Pause();
+        controls.Menu.Pause.performed -= _ => InvertPause();
         controls.Disable();
     }
 }
