@@ -11,8 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Pause Settings")]
     [SerializeField]
-    private bool unpauseOnAwake = true;
-
+    private bool unpauseOnStart = true;
 
     [Header("Game Event Declarations")]
     [SerializeField]
@@ -33,8 +32,11 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         controls = new InputMaster();
+    }
 
-        if (unpauseOnAwake)
+    private void Start()
+    {
+        if (unpauseOnStart)
             SetPaused(false);
     }
 
