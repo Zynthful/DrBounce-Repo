@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using MoreMountains.NiceVibrations;
 
 public class Shooting : MonoBehaviour
 {
-    [SerializeField] private Gun shooter = null;
-    //[SerializeField] private GameObject bullet;
-
+    //Events
     public delegate void Activated(int value);
     public static event Activated OnActivated;
 
@@ -17,16 +13,15 @@ public class Shooting : MonoBehaviour
         Explosives,
     }
 
-    //[SerializeField] private GunModes currentGunMode;
-
+    [SerializeField] private Gun shooter = null;
+    [SerializeField] private GameEventBool onEnemyHover = null;
     private ObjectPooler pool;
-
     public InputMaster controls;
-
-    private float range = 100f;
     public Camera fpsCam;
+    public Animator anim;
 
     [Header("Damage")]
+    [HideInInspector]
     public int damage = 10;     //current damage value
 
     [Header("Charges")]
@@ -77,12 +72,6 @@ public class Shooting : MonoBehaviour
     [Header("Vibrations")]
     public VibrationManager vibrationManager;
 
-    [SerializeField] private GameEventBool onEnemyHover = null;
-
-    public Animator anim;
-
-    [SerializeField] private int healAmount = 30;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -99,7 +88,7 @@ public class Shooting : MonoBehaviour
         CheckifCharged();
 
         RaycastHit Reticleinfo;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Reticleinfo, range))
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Reticleinfo, shooter.normalRange))
         {
             Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
             if (enemy != null)
@@ -157,7 +146,7 @@ public class Shooting : MonoBehaviour
                 damage = Mathf.RoundToInt(shooter.damageGraph[0].y);
 
                 RaycastHit Hitinfo;
-                if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, range))
+                if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, shooter.normalRange))
                 {
                     //print(Hitinfo.transform.name + " hit!");
                     Enemy enemy = Hitinfo.transform.GetComponent<Enemy>();
@@ -215,7 +204,7 @@ public class Shooting : MonoBehaviour
 
     public void Catch()
     {
-        AddCharge(-chargesLeft + shooter.amountOfChargesGiven); // Set chargesLeft = shooter.amountOfChargesGiven
+        AddCharge(-chargesLeft + shooter.energyGivenAfterBounce); // Set chargesLeft = shooter.amountOfChargesGiven
         ChargedFeedback?.PlayFeedbacks();
     }
 
@@ -284,7 +273,7 @@ public class Shooting : MonoBehaviour
             amountOfBounces--;
             //call a heal function
 
-            OnActivated?.Invoke(healAmount);
+            OnActivated?.Invoke(shooter.healAmount);
 
             if (amountOfBounces == 0)
             {

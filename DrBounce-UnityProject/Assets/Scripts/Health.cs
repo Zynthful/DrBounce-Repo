@@ -55,7 +55,7 @@ public class Health : MonoBehaviour
     {
         //health = 1;
         //progressBar.UpdateBar(health, minHealth, maxHealth);
-        //Damage(0);
+        Damage(30);
         canSetStartingHealth = false;
     }
 
