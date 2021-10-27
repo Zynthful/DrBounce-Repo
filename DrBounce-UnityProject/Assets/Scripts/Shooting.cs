@@ -25,8 +25,8 @@ public class Shooting : MonoBehaviour
     public int damage = 10;     //current damage value
 
     [Header("Charges")]
-    private int amountOfBounces = 0;    //amount of times the gun has been bounced successfully
-    private int chargesLeft = 0;    //current amount of charges left in the gun (reset if dropped)
+    private int gunCharge = 0;    //amount of times the gun has been bounced successfully
+    private int gunEnergy = 0;    //current amount of charges left in the gun (reset if dropped)
 
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
@@ -87,24 +87,7 @@ public class Shooting : MonoBehaviour
         timeSinceLastShot += Time.deltaTime;
         CheckifCharged();
 
-        RaycastHit Reticleinfo;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Reticleinfo, shooter.normalRange))
-        {
-            Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                onEnemyHover?.Raise(true);
-                RegularReticleFeedback?.StopFeedbacks();
-                HoverOverFeedback?.PlayFeedbacks();
-                //print(enemy.transform.name + " is being hovered over!");
-            }
-            else
-            {
-                onEnemyHover?.Raise(false);
-                HoverOverFeedback?.StopFeedbacks();
-                RegularReticleFeedback?.PlayFeedbacks();
-            }
-        }
+        HoverOverEnemy();
     }
 
     private void Awake()
@@ -125,6 +108,28 @@ public class Shooting : MonoBehaviour
         controls.Disable();
     }
 
+    private void HoverOverEnemy() 
+    {
+        RaycastHit Reticleinfo;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Reticleinfo, shooter.normalRange))
+        {
+            Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                onEnemyHover?.Raise(true);
+                RegularReticleFeedback?.StopFeedbacks();
+                HoverOverFeedback?.PlayFeedbacks();
+                //print(enemy.transform.name + " is being hovered over!");
+            }
+            else
+            {
+                onEnemyHover?.Raise(false);
+                HoverOverFeedback?.StopFeedbacks();
+                RegularReticleFeedback?.PlayFeedbacks();
+            }
+        }
+    }
+
     private void Shoot() 
     {
         // Checks:
@@ -135,10 +140,10 @@ public class Shooting : MonoBehaviour
         {
             timeSinceLastShot = 0;
 
-            if(chargesLeft > 0) HandleComboShot();
+            if(gunEnergy > 0) HandleComboShot();
 
             // Is it an uncharged/basic shot?
-            else if (chargesLeft <= 0)
+            else if (gunEnergy <= 0)
             {
                 onUnchargedShot?.Raise();
 
@@ -160,7 +165,7 @@ public class Shooting : MonoBehaviour
             }
             vibrationManager.BasicShotVibration();
 
-            if(chargesLeft <= 0)
+            if(gunEnergy <= 0)
             {
                 onChargesEmpty?.Raise();
             }
@@ -182,62 +187,62 @@ public class Shooting : MonoBehaviour
                 FirstChargedShotFeedback?.PlayFeedbacks();
                 vibrationManager.ChargedShotVibration();
 
-                shooter.chargeBullet.damage = DamageAmountCalc(amountOfBounces);
+                shooter.chargeBullet.damage = DamageAmountCalc(gunCharge);
 
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
-                obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
+                obj.GetComponent<ExplosiveShot>().comboSize = gunCharge;
                 //Reset();
                 AddCharge(-1);
-                amountOfBounces = 0;
+                gunCharge = 0;
                 break;
         }
 
-        onChargedShotCombo?.Raise(amountOfBounces);
+        onChargedShotCombo?.Raise(gunCharge);
         onChargedShotFired?.Raise();
     }
 
     public void Bounce(int bounceCount) 
     {
-        amountOfBounces = bounceCount;
+        gunCharge = bounceCount;
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
     }
 
     public void Catch()
     {
-        AddCharge(-chargesLeft + shooter.energyGivenAfterBounce); // Set chargesLeft = shooter.amountOfChargesGiven
+        AddCharge(-gunEnergy + shooter.energyGivenAfterBounce); // Set chargesLeft = shooter.amountOfChargesGiven
         ChargedFeedback?.PlayFeedbacks();
     }
 
     private void CheckifCharged()
     {
-        if (chargesLeft <= 0)
+        if (gunEnergy <= 0)
         {
             ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
             MMVibrationManager.StopContinuousHaptic();
         }
 
-        if (chargesLeft >= 1)
+        if (gunEnergy >= 1)
         {
             ChargedFeedback?.PlayFeedbacks();
             vibrationManager.ActiveChargeVibration();
         }
 
-        anim.SetInteger("ChargesLeft", chargesLeft);
+        anim.SetInteger("ChargesLeft", gunEnergy);
     }
 
     public void Reset()
     {
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
-        AddCharge(-chargesLeft); // Set chargesLeft = 0
-        anim.SetInteger("ChargesLeft", chargesLeft);
-        amountOfBounces = 0;
+        AddCharge(-gunEnergy); // Set chargesLeft = 0
+        anim.SetInteger("ChargesLeft", gunEnergy);
+        gunCharge = 0;
     }
 
     // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
     public void AddCharge(int value)
     {
-        chargesLeft += value;
-        onChargeUpdate?.Raise(chargesLeft);
+        gunEnergy += value;
+        onChargeUpdate?.Raise(gunEnergy);
     }
 
     public void Dropped() 
@@ -268,14 +273,14 @@ public class Shooting : MonoBehaviour
 
     private void Healing() 
     {
-        if (amountOfBounces > 0 && Health.ReturnHealthNotMax()) 
+        if (gunCharge > 0 && Health.ReturnHealthNotMax()) 
         {
-            amountOfBounces--;
+            gunCharge--;
             //call a heal function
 
             OnActivated?.Invoke(shooter.healAmount);
 
-            if (amountOfBounces == 0)
+            if (gunCharge == 0)
             {
                 LoseChargeFeedback.PlayFeedbacks();
                 vibrationManager.StopActiveCharge();

@@ -72,7 +72,7 @@ public class BulletMovement : MonoBehaviour, IPooledObject
 
     protected virtual void Update()
     {
-        print(ignoreBullet.value);
+        //print(ignoreBullet.value);
 
         /* BEZIER CURVE CODE IF WANTED/NEEDED LATER IN PROJECT
         if (isSnowfall && !overrideMovement)

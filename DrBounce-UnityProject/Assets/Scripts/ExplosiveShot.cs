@@ -39,8 +39,8 @@ public class ExplosiveShot : BulletMovement
             shotAudio?.PlayExplode();
 
             explosionTrigger.SetActive(true);
-            if (comboSize > 1 && explosionDamageMultiplier > 0)
-                dam = (int)(dam * comboSize * explosionDamageMultiplier);
+            //if (comboSize > 1 && explosionDamageMultiplier > 0)
+                //dam = (int)(dam * comboSize * explosionDamageMultiplier);
             rb.constraints = RigidbodyConstraints.FreezeAll;
 
             GetComponentInChildren<MeshRenderer>().enabled = false; GetComponent<Rigidbody>().velocity = Vector3.zero;
