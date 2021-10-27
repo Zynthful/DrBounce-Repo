@@ -22,10 +22,6 @@ public class Gun : ScriptableObject
     public BulletType chargeBullet;   //the bullet the gun will fire when charged
 
     [Range(0, 100)]
-    [Tooltip("amount of energy in the gun once it has bounced")]
-    public int energyGivenAfterBounce;    //amount of charges given when you rebound the gun
-
-    [Range(0, 100)]
     [Tooltip("healAmount int value between 0 and 100")]
     public int healAmount;    //amount healed when using one charge
 

@@ -26,7 +26,6 @@ public class Shooting : MonoBehaviour
 
     [Header("Charges")]
     private int gunCharge = 0;    //amount of times the gun has been bounced successfully
-    private int gunEnergy = 0;    //current amount of charges left in the gun (reset if dropped)
 
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
@@ -140,10 +139,10 @@ public class Shooting : MonoBehaviour
         {
             timeSinceLastShot = 0;
 
-            if(gunEnergy > 0) HandleComboShot();
+            if(gunCharge > 0) HandleComboShot();
 
             // Is it an uncharged/basic shot?
-            else if (gunEnergy <= 0)
+            else if (gunCharge <= 0)
             {
                 onUnchargedShot?.Raise();
 
@@ -165,7 +164,7 @@ public class Shooting : MonoBehaviour
             }
             vibrationManager.BasicShotVibration();
 
-            if(gunEnergy <= 0)
+            if(gunCharge <= 0)
             {
                 onChargesEmpty?.Raise();
             }
@@ -191,8 +190,6 @@ public class Shooting : MonoBehaviour
 
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
                 obj.GetComponent<ExplosiveShot>().comboSize = gunCharge;
-                //Reset();
-                AddCharge(-1);
                 gunCharge = 0;
                 break;
         }
@@ -209,40 +206,31 @@ public class Shooting : MonoBehaviour
 
     public void Catch()
     {
-        AddCharge(-gunEnergy + shooter.energyGivenAfterBounce); // Set chargesLeft = shooter.amountOfChargesGiven
         ChargedFeedback?.PlayFeedbacks();
     }
 
     private void CheckifCharged()
     {
-        if (gunEnergy <= 0)
+        if (gunCharge <= 0)
         {
             ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
             MMVibrationManager.StopContinuousHaptic();
         }
 
-        if (gunEnergy >= 1)
+        if (gunCharge >= 1)
         {
             ChargedFeedback?.PlayFeedbacks();
             vibrationManager.ActiveChargeVibration();
         }
 
-        anim.SetInteger("ChargesLeft", gunEnergy);
+        anim.SetInteger("ChargesLeft", gunCharge);
     }
 
     public void Reset()
     {
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
-        AddCharge(-gunEnergy); // Set chargesLeft = 0
-        anim.SetInteger("ChargesLeft", gunEnergy);
+        anim.SetInteger("ChargesLeft", gunCharge);
         gunCharge = 0;
-    }
-
-    // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
-    public void AddCharge(int value)
-    {
-        gunEnergy += value;
-        onChargeUpdate?.Raise(gunEnergy);
     }
 
     public void Dropped() 
