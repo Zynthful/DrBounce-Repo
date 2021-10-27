@@ -282,7 +282,7 @@ public class Shooting : MonoBehaviour
 
             if (gunCharge == 0)
             {
-                LoseChargeFeedback.PlayFeedbacks();
+                //LoseChargeFeedback.PlayFeedbacks();
                 vibrationManager.StopActiveCharge();
                 Reset();
             }
