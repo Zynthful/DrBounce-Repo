@@ -13,6 +13,9 @@ public class Gun : ScriptableObject
     [Tooltip("normalRange int value between 0 and 1000")]
     public float normalRange;     //the range of uncharged shots
 
+    [Tooltip("can you hold to shoot")]
+    public bool canRepeatShoot;
+
     [Header("Charge Gun Shots")]
 
     [Tooltip("Charge mode of the gun")]

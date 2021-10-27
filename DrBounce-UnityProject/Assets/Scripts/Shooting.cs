@@ -20,6 +20,7 @@ public class Shooting : MonoBehaviour
     public Camera fpsCam;
     public Animator anim;
 
+    private bool repeatedShooting = false;
     [Header("Damage")]
     [HideInInspector]
     public int damage = 10;     //current damage value
@@ -81,18 +82,20 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //print(amountOfBounces);
-
         timeSinceLastShot += Time.deltaTime;
+
         CheckifCharged();
 
         HoverOverEnemy();
+
+        if (repeatedShooting) Shoot();
     }
 
     private void Awake()
     {
         controls = new InputMaster();
         controls.Player.Shoot.performed += _ => Shoot();
+        controls.Player.Shoot.canceled += _ => StopShooting();
         controls.Player.RecallGun.performed += _ => Reset();
         controls.Player.Healing.performed += _ => Healing();
     }
@@ -137,6 +140,8 @@ public class Shooting : MonoBehaviour
         //  - Is not already shooting
         if (!GameManager.s_Instance.paused && transform.parent != null && timeSinceLastShot > shooter.fireRate)  
         {
+            if (shooter.canRepeatShoot) repeatedShooting = true;
+
             timeSinceLastShot = 0;
 
             if(gunCharge > 0) HandleComboShot();
@@ -275,5 +280,9 @@ public class Shooting : MonoBehaviour
                 Reset();
             }
         }
+    }
+    private void StopShooting()
+    {
+        repeatedShooting = false;
     }
 }
