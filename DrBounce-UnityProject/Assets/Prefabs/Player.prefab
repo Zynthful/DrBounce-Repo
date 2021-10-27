@@ -10808,7 +10808,6 @@ GameObject:
   - component: {fileID: 7881497671204995050}
   - component: {fileID: 2397408441484728219}
   - component: {fileID: 6174084917479677189}
-  - component: {fileID: 2040790454555471302}
   m_Layer: 7
   m_Name: Bounce Audio
   m_TagString: Untagged
@@ -10842,6 +10841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44da1b31fb0ad445806d8fc9e02d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objToPost: {fileID: 2677388527681910835}
   bounceEvent:
     idInternal: 0
     valueGuidInternal: 
@@ -10858,10 +10858,6 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: f969533357c3a8247b809ff4a0b07a9a, type: 2}
-  chargesRTPC:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c09815531622016498a8f5f386840037, type: 2}
 --- !u!114 &7881497671204995050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10937,34 +10933,6 @@ MonoBehaviour:
       - m_Target: {fileID: 9132349321543841975}
         m_TargetAssemblyTypeName: BounceAudio, Assembly-CSharp
         m_MethodName: PlayBounce
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2040790454555471302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 804806100892032588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9132349321543841975}
-        m_TargetAssemblyTypeName: BounceAudio, Assembly-CSharp
-        m_MethodName: UpdateChargesRTPC
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12828,8 +12796,8 @@ GameObject:
   - component: {fileID: 4630829604606781029}
   - component: {fileID: 1640784739552115217}
   - component: {fileID: 6120898261974948624}
-  - component: {fileID: 6697736249535972149}
   - component: {fileID: 363868531242563077}
+  - component: {fileID: 2623094241411687630}
   m_Layer: 7
   m_Name: Gun
   m_TagString: Untagged
@@ -12931,6 +12899,7 @@ MonoBehaviour:
   onThrown: {fileID: 11400000, guid: 244aed5e21e1f324eb5bb18bcb00fa61, type: 2}
   onCatch: {fileID: 11400000, guid: 4b56bb7bbb80eaa4c85ae3ad717f8680, type: 2}
   onDropped: {fileID: 11400000, guid: cb7f18caeeead5845a5f56b683b4debd, type: 2}
+  onDroppedAndLostAllCharges: {fileID: 11400000, guid: 1eddc3b13d22ba240b352796ef813b41, type: 2}
   onRecall: {fileID: 11400000, guid: c00823c895747804ab0ee56874a5c03b, type: 2}
 --- !u!114 &4949567449814967032
 MonoBehaviour:
@@ -12949,10 +12918,9 @@ MonoBehaviour:
   fpsCam: {fileID: 5587670236126169273}
   anim: {fileID: 5862399666288358020}
   damage: 10
-  onUnchargedShot: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
-  onChargedShotCombo: {fileID: 11400000, guid: 12bb0888fa469484ab53924a198df142, type: 2}
+  onUnchargedShotFired: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
   onChargedShotFired: {fileID: 11400000, guid: 9762d1a36d8157e4abf500980e74e47d, type: 2}
-  onBounce: {fileID: 11400000, guid: 9d2693e15688753468f4083136d8ffa6, type: 2}
+  onBounceCurrentNum: {fileID: 11400000, guid: 9d2693e15688753468f4083136d8ffa6, type: 2}
   onChargeUpdate: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
   onCatch: {fileID: 11400000, guid: 4b56bb7bbb80eaa4c85ae3ad717f8680, type: 2}
   onChargesEmpty: {fileID: 11400000, guid: fef44d5d95f0b6b44a7d7740b8061a88, type: 2}
@@ -12961,7 +12929,6 @@ MonoBehaviour:
   FirstChargedShotFeedback: {fileID: 3547416809378264515}
   HoverOverFeedback: {fileID: 0}
   RegularReticleFeedback: {fileID: 0}
-  LoseChargeFeedback: {fileID: 1551049667518238682}
   chargedShotPS: {fileID: 6341533568631161365}
   vibrationManager: {fileID: 0}
 --- !u!114 &4648697631877843793
@@ -13011,18 +12978,6 @@ MonoBehaviour:
       - m_Target: {fileID: 4949567449814967032}
         m_TargetAssemblyTypeName: Shooting, Assembly-CSharp
         m_MethodName: Dropped
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1551049667518238682}
-        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
-        m_MethodName: PlayFeedbacks
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13088,34 +13043,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6697736249535972149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587670236240770454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 9762d1a36d8157e4abf500980e74e47d, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5587670236240770451}
-        m_TargetAssemblyTypeName: GunThrowing, Assembly-CSharp
-        m_MethodName: ChargedShotFired
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &363868531242563077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13135,6 +13062,34 @@ MonoBehaviour:
       - m_Target: {fileID: 3641579072279735648}
         m_TargetAssemblyTypeName: CheckForBouncing, Assembly-CSharp
         m_MethodName: ObjectThrown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2623094241411687630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587670236240770454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9762d1a36d8157e4abf500980e74e47d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5587670236240770451}
+        m_TargetAssemblyTypeName: GunThrowing, Assembly-CSharp
+        m_MethodName: ChargedShotFired
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13897,7 +13852,9 @@ GameObject:
   - component: {fileID: 6165702016440670018}
   - component: {fileID: 1731698375981139529}
   - component: {fileID: 2955107909283856103}
-  - component: {fileID: 3254086329365507534}
+  - component: {fileID: 2044305171633495554}
+  - component: {fileID: 6142993196081410961}
+  - component: {fileID: 2737726663633331222}
   m_Layer: 7
   m_Name: Gun Audio
   m_TagString: Untagged
@@ -13931,6 +13888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd1ff8582d01294083b56ac9ad8a7fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objToPost: {fileID: 2677388527681910835}
   unchargedShotEvent:
     idInternal: 0
     valueGuidInternal: 
@@ -13939,14 +13897,18 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: a660340b7dbf87945837a3268e7a4a9f, type: 2}
-  chargedDamageMultiplierRTPC:
+  allChargesLostEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: eee11160c9667284ab73367291da5b0a, type: 2}
-  chargesRTPC:
+    WwiseObjectReference: {fileID: 11400000, guid: 6db5e46c0b953754ab26ca3cdd1276ee, type: 2}
+  chargeRTPC:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: c09815531622016498a8f5f386840037, type: 2}
+  lastShotChargeRTPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a9ce59d83dbf6b8408facc1ccfd3cdfe, type: 2}
 --- !u!114 &2955107909283856103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13975,7 +13937,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3254086329365507534
+--- !u!114 &2044305171633495554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13987,13 +13949,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 12bb0888fa469484ab53924a198df142, type: 2}
+  Event: {fileID: 11400000, guid: 9762d1a36d8157e4abf500980e74e47d, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1731698375981139529}
         m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: UpdateChargedDamageMultiplierRTPC
+        m_MethodName: PlayChargedShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6142993196081410961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934612146519314021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c3b0756814fdb4b88dc111e41a6805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1731698375981139529}
+        m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
+        m_MethodName: SetChargesRTPC
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14003,9 +13993,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2737726663633331222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934612146519314021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1eddc3b13d22ba240b352796ef813b41, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 1731698375981139529}
         m_TargetAssemblyTypeName: GunAudio, Assembly-CSharp
-        m_MethodName: PlayChargedShot
+        m_MethodName: PlayChargesLost
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14204,6 +14210,7 @@ GameObject:
   - component: {fileID: 3104036047357874342}
   - component: {fileID: 1551049667518238682}
   - component: {fileID: 2678729187827693346}
+  - component: {fileID: 9208177875160204183}
   m_Layer: 7
   m_Name: LoseChargeFeedback
   m_TagString: Untagged
@@ -14309,6 +14316,34 @@ MonoBehaviour:
   BoundParticleSystem: {fileID: 6292155450692670362}
   MoveToPosition: 0
   RandomParticleSystems: []
+--- !u!114 &9208177875160204183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6477089991304390945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1eddc3b13d22ba240b352796ef813b41, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1551049667518238682}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6531182893470873665
 GameObject:
   m_ObjectHideFlags: 0
@@ -16293,14 +16328,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57cc56dfe2986cd4fa2214a1699e6f61, type: 3}
---- !u!4 &5001685072662369012 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5055978152595430870, guid: 57cc56dfe2986cd4fa2214a1699e6f61, type: 3}
-  m_PrefabInstance: {fileID: 235312278511816482}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &4871961280154257701 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4674544814533985799, guid: 57cc56dfe2986cd4fa2214a1699e6f61, type: 3}
+  m_PrefabInstance: {fileID: 235312278511816482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5001685072662369012 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5055978152595430870, guid: 57cc56dfe2986cd4fa2214a1699e6f61, type: 3}
   m_PrefabInstance: {fileID: 235312278511816482}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1145277912412507895
@@ -16404,14 +16439,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
---- !u!4 &607529983028472092 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
-  m_PrefabInstance: {fileID: 1145277912412507895}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &226782933602530214 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
+  m_PrefabInstance: {fileID: 1145277912412507895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &607529983028472092 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee3cad1a6dce4b947a83eb4580b8fbf8, type: 3}
   m_PrefabInstance: {fileID: 1145277912412507895}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1171614818522279220
@@ -16699,14 +16734,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
---- !u!198 &6341533568631161365 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5207232466269728545, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
-  m_PrefabInstance: {fileID: 1171614818522279220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7749810402951507687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8921264690610799571, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
+  m_PrefabInstance: {fileID: 1171614818522279220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6341533568631161365 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5207232466269728545, guid: 54a1b8a2a9898b6409a842f30876aca7, type: 3}
   m_PrefabInstance: {fileID: 1171614818522279220}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3243811396977461193
@@ -17082,14 +17117,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04589a1238b0d5a47a9e16d5fe5b5046, type: 3}
---- !u!198 &1053662857981288573 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6459232502206539178, guid: 04589a1238b0d5a47a9e16d5fe5b5046, type: 3}
-  m_PrefabInstance: {fileID: 6286059114104800727}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1053662857981288575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6459232502206539176, guid: 04589a1238b0d5a47a9e16d5fe5b5046, type: 3}
+  m_PrefabInstance: {fileID: 6286059114104800727}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1053662857981288573 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6459232502206539178, guid: 04589a1238b0d5a47a9e16d5fe5b5046, type: 3}
   m_PrefabInstance: {fileID: 6286059114104800727}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6516670219229525840
@@ -17268,14 +17303,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 700ba8c8bbb440645866c27db355e955, type: 3}
---- !u!4 &4578563069218425638 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5055978152595430870, guid: 700ba8c8bbb440645866c27db355e955, type: 3}
-  m_PrefabInstance: {fileID: 8764043967586801392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &4143155732941623543 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4674544814533985799, guid: 700ba8c8bbb440645866c27db355e955, type: 3}
+  m_PrefabInstance: {fileID: 8764043967586801392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4578563069218425638 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5055978152595430870, guid: 700ba8c8bbb440645866c27db355e955, type: 3}
   m_PrefabInstance: {fileID: 8764043967586801392}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8980544769641886675
@@ -17389,9 +17424,24 @@ PrefabInstance:
     - {fileID: 3295264959351242646, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
     - {fileID: 295859313440250963, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
+--- !u!4 &528051218827863877 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8932131379237180566, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
+  m_PrefabInstance: {fileID: 8980544769641886675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5915030066188885458 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3366200351887633921, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
+  m_PrefabInstance: {fileID: 8980544769641886675}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8661537120470487490 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 329532421701624337, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
+  m_PrefabInstance: {fileID: 8980544769641886675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2775308873326521633 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6494944190041087730, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
   m_PrefabInstance: {fileID: 8980544769641886675}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4098264073751305583 stripped
@@ -17405,18 +17455,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d783d5a83cd0a254dabfd5cb96326cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2775308873326521633 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6494944190041087730, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-  m_PrefabInstance: {fileID: 8980544769641886675}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &528051218827863877 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8932131379237180566, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-  m_PrefabInstance: {fileID: 8980544769641886675}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5915030066188885458 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3366200351887633921, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-  m_PrefabInstance: {fileID: 8980544769641886675}
-  m_PrefabAsset: {fileID: 0}

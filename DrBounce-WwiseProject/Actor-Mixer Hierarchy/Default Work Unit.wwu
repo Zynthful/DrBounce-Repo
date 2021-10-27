@@ -102,7 +102,7 @@
 												<RTPC Name="" ID="{C4DB9C1D-D75C-49F2-A7A6-ECB9ADE80233}" ShortID="980123179">
 													<ReferenceList>
 														<Reference Name="ControlInput">
-															<ObjectRef Name="Player_Gun_NumOfCharges" ID="{336257D0-FD65-43ED-8A93-0EC61AD829F0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+															<ObjectRef Name="Player_Gun_Charge" ID="{336257D0-FD65-43ED-8A93-0EC61AD829F0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
 														</Reference>
 													</ReferenceList>
 													<Curve Name="" ID="{ED91711A-658C-43C7-827F-149C50440E2A}">
@@ -616,7 +616,7 @@
 														<RTPC Name="" ID="{066CAFFB-B80F-4A85-8D98-642ACC1C803E}" ShortID="263303080">
 															<ReferenceList>
 																<Reference Name="ControlInput">
-																	<ObjectRef Name="Player_Gun_NumOfCharges" ID="{336257D0-FD65-43ED-8A93-0EC61AD829F0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+																	<ObjectRef Name="Player_Gun_Charge" ID="{336257D0-FD65-43ED-8A93-0EC61AD829F0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
 																</Reference>
 															</ReferenceList>
 															<Curve Name="" ID="{264B8364-5A1A-4477-A4C7-5E9AA93DC26E}">
@@ -714,25 +714,25 @@
 									<PropertyList>
 										<Property Name="Pitch" Type="int32">
 											<RTPCList>
-												<RTPC Name="" ID="{82AD3767-3D59-4A79-81B0-69B01AE895DB}" ShortID="410969612">
+												<RTPC Name="" ID="{40E20A1E-AD91-47C9-9028-DD664919917D}" ShortID="950843040">
 													<ReferenceList>
 														<Reference Name="ControlInput">
-															<ObjectRef Name="Player_Gun_Charged_Shot_Damage_Multiplier" ID="{18CCD239-1692-41C4-81E8-C92ED24F624A}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+															<ObjectRef Name="Player_Gun_Last_Shot_Charge" ID="{D8542F28-8C0B-45CD-B85A-6E71E94606FE}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
 														</Reference>
 													</ReferenceList>
-													<Curve Name="" ID="{91228C5C-183D-4044-AF13-2DF1A229FD98}">
+													<Curve Name="" ID="{149AF2E1-79C7-410F-88E0-767ED5EB80DB}">
 														<PropertyList>
 															<Property Name="Flags" Type="int32" Value="65537"/>
 														</PropertyList>
 														<PointList>
 															<Point>
-																<XPos>1</XPos>
+																<XPos>0</XPos>
 																<YPos>0</YPos>
 																<Flags>5</Flags>
 															</Point>
 															<Point>
-																<XPos>5</XPos>
-																<YPos>-1329</YPos>
+																<XPos>10</XPos>
+																<YPos>-1600</YPos>
 																<Flags>37</Flags>
 															</Point>
 														</PointList>
@@ -853,6 +853,40 @@
 									<ObjectLists/>
 									<ActiveSourceList>
 										<ActiveSource Name="DB_SFX_Gun_Magnet_Impact_Draft_2" ID="{D33D9E49-1C13-4B17-9D2A-4FB29FD2E83A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Windows XP Error Sound" ID="{C48E242C-4D82-4686-89DB-44B3424737A7}" ShortID="292215522">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Windows XP Error Sound" ID="{D101FA6A-57B1-449C-9361-C93560AFBE80}">
+											<Language>SFX</Language>
+											<AudioFile>Windows XP Error Sound.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="243028048"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="Windows XP Error Sound" ID="{D101FA6A-57B1-449C-9361-C93560AFBE80}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>

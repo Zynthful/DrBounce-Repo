@@ -35,21 +35,18 @@ public class Shooting : MonoBehaviour
     [Header("Events")]
 
     [SerializeField]
-    private GameEvent onUnchargedShot = null;
+    private GameEvent onUnchargedShotFired = null;
+
+    [SerializeField]
+    [Tooltip("Passes gunCharge")]
+    private GameEventInt onChargedShotFired = null;
 
     [SerializeField]
     [Tooltip("Passes amountOfBounces")]
-    private GameEventInt onChargedShotCombo = null;
+    private GameEventInt onBounceCurrentNum = null;
 
     [SerializeField]
-    private GameEvent onChargedShotFired = null;
-
-    [SerializeField]
-    [Tooltip("Passes amountOfBounces")]
-    private GameEventInt onBounce = null;
-
-    [SerializeField]
-    [Tooltip("Passes chargesLeft")]
+    [Tooltip("Passes gunCharge")]
     private GameEventInt onChargeUpdate = null;
 
     [SerializeField]
@@ -66,7 +63,6 @@ public class Shooting : MonoBehaviour
     public MMFeedbacks FirstChargedShotFeedback;
     public MMFeedbacks HoverOverFeedback;
     public MMFeedbacks RegularReticleFeedback;
-    public MMFeedbacks LoseChargeFeedback;
     [SerializeField] ParticleSystem chargedShotPS;
 
     [Header("Vibrations")]
@@ -110,6 +106,19 @@ public class Shooting : MonoBehaviour
         controls.Disable();
     }
 
+    // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
+
+    /// <summary>
+    /// Sets gunCharge equal to the input value
+    /// Use this whenever update gunCharge, so it raises onChargeUpdate with it
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetCharge(int value)
+    {
+        gunCharge = value;
+        onChargeUpdate?.Raise(gunCharge);
+    }
+
     private void HoverOverEnemy() 
     {
         RaycastHit Reticleinfo;
@@ -149,7 +158,7 @@ public class Shooting : MonoBehaviour
             // Is it an uncharged/basic shot?
             else if (gunCharge <= 0)
             {
-                onUnchargedShot?.Raise();
+                onUnchargedShotFired?.Raise();
 
                 //ChargedFeedback?.StopFeedbacks();
                 damage = Mathf.RoundToInt(shooter.damageGraph[0].y);
@@ -195,17 +204,15 @@ public class Shooting : MonoBehaviour
 
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
                 obj.GetComponent<ExplosiveShot>().comboSize = gunCharge;
-                gunCharge = 0;
                 break;
         }
-
-        onChargedShotCombo?.Raise(gunCharge);
-        onChargedShotFired?.Raise();
+        onChargedShotFired?.Raise(gunCharge);
+        SetCharge(0);
     }
 
     public void Bounce(int bounceCount) 
     {
-        gunCharge = bounceCount;
+        SetCharge(bounceCount);
         ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
     }
 
@@ -233,16 +240,16 @@ public class Shooting : MonoBehaviour
 
     public void Reset()
     {
-        ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
+        ChargedFeedback?.StopFeedbacks();
+        chargedShotPS.Clear();
         anim.SetInteger("ChargesLeft", gunCharge);
-        gunCharge = 0;
+        SetCharge(0);
     }
 
     public void Dropped() 
     {
         if (!transform.parent)  //if the gun is dropped and has no parent
         {
-            LoseChargeFeedback.PlayFeedbacks();
             vibrationManager.StopActiveCharge();
             Reset();
         }
@@ -268,14 +275,13 @@ public class Shooting : MonoBehaviour
     {
         if (gunCharge > 0 && Health.ReturnHealthNotMax()) 
         {
-            gunCharge--;
+            SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
             //call a heal function
 
             OnActivated?.Invoke(shooter.healAmount);
 
             if (gunCharge == 0)
             {
-                //LoseChargeFeedback.PlayFeedbacks();
                 vibrationManager.StopActiveCharge();
                 Reset();
             }

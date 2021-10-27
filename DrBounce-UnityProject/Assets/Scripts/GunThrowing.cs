@@ -55,6 +55,8 @@ public class GunThrowing : MonoBehaviour
     [SerializeField]
     private GameEvent onDropped = null;
     [SerializeField]
+    private GameEvent onDroppedAndLostAllCharges = null; // Raised only if the item loses charges on drop
+    [SerializeField]
     private GameEvent onRecall = null;
 
     // Start is called before the first frame update
@@ -230,6 +232,11 @@ public class GunThrowing : MonoBehaviour
                 comboTracker.SetComboNum(0);
 
             returning = true;
+
+            // If the item loses all charges on drop
+            if (amountOfBounces != 0)
+                onDroppedAndLostAllCharges?.Raise();
+
             amountOfBounces = 0;
             onDropped?.Raise();
             inFlight = false;
