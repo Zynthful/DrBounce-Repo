@@ -27,7 +27,7 @@ public class GunThrowing : MonoBehaviour
     private bool exitedPlayer; // Controls when the gun can be caught by waiting until it's left the player's hitbox
     //checks if the player has let go of the tigger before throwing again, 
     //to stop spam throwing and catching on controller.
-    private bool hasLetGoOfTrigger;     
+    //private bool hasLetGoOfTrigger;     
 
     [SerializeField]
     private ComboTracker comboTracker = null;
@@ -156,10 +156,9 @@ public class GunThrowing : MonoBehaviour
 
     public void Thrown()
     {
-        if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
+        if (!GameManager.s_Instance.paused && canThrow)
         {
             canThrow = false;
-            hasLetGoOfTrigger = false;
             outlineScript.enabled = true;
             //when we get out of prototype we need to made the world model seperate from the fp model
             gameObject.layer = 3;
@@ -311,13 +310,5 @@ public class GunThrowing : MonoBehaviour
         controls.Player.ThrowGun.performed -= _ => Thrown();
         controls.Player.RecallGun.performed -= _ => ResetScript();
         controls.Disable();
-    }
-
-    private void Update()
-    {
-        if (!Gamepad.current.leftTrigger.IsActuated() && canThrow)  //checks if the player has let go of the left trigger and has the gun in hand
-        {
-            hasLetGoOfTrigger = true;
-        }
     }
 }
