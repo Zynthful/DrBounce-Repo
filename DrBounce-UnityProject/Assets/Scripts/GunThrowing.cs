@@ -18,6 +18,8 @@ public class GunThrowing : MonoBehaviour
     Vector3 handPosition;
     Vector3 originPoint;
     Rigidbody rb;
+    private Coroutine pickupDelayCoroutine;
+    private bool pickupDelayCoroutineRunning;
 
     SwitchHeldItem inventory;
     int amountOfBounces;
@@ -89,8 +91,6 @@ public class GunThrowing : MonoBehaviour
             canThrow = false;
         }
 
-
-
         transform.rotation = Quaternion.identity;
 
         gunColliders = GetComponentsInChildren<Collider>();
@@ -143,7 +143,7 @@ public class GunThrowing : MonoBehaviour
             {
                 if (catchCollider.bounds.Intersects(col.bounds))
                 {
-                    fail = true; exitedPlayer = false;
+                    fail = true;
                     break;
                 }
             }
@@ -158,6 +158,12 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused && canThrow)
         {
+            if (pickupDelayCoroutineRunning) 
+            {
+                StopCoroutine(pickupDelayCoroutine); 
+            }
+            pickupDelayCoroutine = StartCoroutine(EnablePickupAfterTime(0.2f));
+
             canThrow = false;
             outlineScript.enabled = true;
             //when we get out of prototype we need to made the world model seperate from the fp model
@@ -255,6 +261,8 @@ public class GunThrowing : MonoBehaviour
             //stop magnet virbrations
             vibrationManager.StopMagnet();
 
+            Debug.Log("InPlayer and " + exitedPlayer + " and running is " + pickupDelayCoroutineRunning);
+
             if (!catchCollider)
             {
                 catchCollider = other.GetComponentInChildren<BoxCollider>();
@@ -313,5 +321,13 @@ public class GunThrowing : MonoBehaviour
         controls.Player.ThrowGun.performed -= _ => Thrown();
         controls.Player.RecallGun.performed -= _ => ResetScript();
         controls.Disable();
+    }
+
+    IEnumerator EnablePickupAfterTime(float time)
+    {
+        pickupDelayCoroutineRunning = true;
+        yield return new WaitForSeconds(time);
+        exitedPlayer = true;
+        pickupDelayCoroutineRunning = false;
     }
 }
