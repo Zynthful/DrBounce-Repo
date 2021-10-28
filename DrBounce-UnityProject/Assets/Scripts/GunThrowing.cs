@@ -252,7 +252,10 @@ public class GunThrowing : MonoBehaviour
     {
         if (other.transform.root == owner && !transform.parent)
         {
-            if(!catchCollider)
+            //stop magnet virbrations
+            vibrationManager.StopMagnet();
+
+            if (!catchCollider)
             {
                 catchCollider = other.GetComponentInChildren<BoxCollider>();
                 weaponHolderTransform = WeaponSway.weaponHolderTransform;

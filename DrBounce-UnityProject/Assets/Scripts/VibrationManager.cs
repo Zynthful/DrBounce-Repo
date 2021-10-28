@@ -57,10 +57,6 @@ public class VibrationManager : MonoBehaviour
         MMVibrationManager.Haptic(jumpHapticType, false, true, this);
     }
 
-    public void MagnetAimAssitVibration()
-    {
-        MMVibrationManager.ContinuousHaptic(0.3f, 0.8f, 3.5f, HapticTypes.None, this, true);
-    }
 
     public void ActiveChargeVibration()
     {
