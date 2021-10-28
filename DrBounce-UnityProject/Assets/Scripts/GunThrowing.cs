@@ -29,7 +29,7 @@ public class GunThrowing : MonoBehaviour
     private bool exitedPlayer; // Controls when the gun can be caught by waiting until it's left the player's hitbox
     //checks if the player has let go of the tigger before throwing again, 
     //to stop spam throwing and catching on controller.
-    //private bool hasLetGoOfTrigger;     
+    private bool hasLetGoOfTrigger;     
 
     [SerializeField]
     private ComboTracker comboTracker = null;
@@ -156,7 +156,7 @@ public class GunThrowing : MonoBehaviour
 
     public void Thrown()
     {
-        if (!GameManager.s_Instance.paused && canThrow)
+        if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
             if (pickupDelayCoroutineRunning) 
             {
@@ -207,6 +207,7 @@ public class GunThrowing : MonoBehaviour
             returning = false;
             canThrow = true;
             inFlight = false;
+            hasLetGoOfTrigger = false;
 
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -329,5 +330,20 @@ public class GunThrowing : MonoBehaviour
         yield return new WaitForSeconds(time);
         exitedPlayer = true;
         pickupDelayCoroutineRunning = false;
+    }
+
+    private void Update()
+    {
+        if (Gamepad.current != null)
+        {
+            if (!Gamepad.current.leftTrigger.IsActuated() && canThrow)  //checks if the player has let go of the left trigger and has the gun in hand
+            {
+                hasLetGoOfTrigger = true;
+            }
+        }
+        else
+        {
+            hasLetGoOfTrigger = true;
+        }
     }
 }
