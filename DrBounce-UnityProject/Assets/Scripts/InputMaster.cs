@@ -121,6 +121,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d553970-0ef5-485e-89c4-46c9a705dbf6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -596,6 +604,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Healing"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1234a299-8d0a-43c8-87cb-96ff6c3b6469"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -694,6 +713,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_AimAssist = m_Player.FindAction("AimAssist", throwIfNotFound: true);
         m_Player_SwitchHeld = m_Player.FindAction("SwitchHeld", throwIfNotFound: true);
         m_Player_Healing = m_Player.FindAction("Healing", throwIfNotFound: true);
+        m_Player_DEBUG_Pause = m_Player.FindAction("DEBUG_Pause", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -759,6 +779,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_AimAssist;
     private readonly InputAction m_Player_SwitchHeld;
     private readonly InputAction m_Player_Healing;
+    private readonly InputAction m_Player_DEBUG_Pause;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -776,6 +797,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @AimAssist => m_Wrapper.m_Player_AimAssist;
         public InputAction @SwitchHeld => m_Wrapper.m_Player_SwitchHeld;
         public InputAction @Healing => m_Wrapper.m_Player_Healing;
+        public InputAction @DEBUG_Pause => m_Wrapper.m_Player_DEBUG_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -824,6 +846,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Healing.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
                 @Healing.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
                 @Healing.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
+                @DEBUG_Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_Pause;
+                @DEBUG_Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_Pause;
+                @DEBUG_Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_Pause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -867,6 +892,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Healing.started += instance.OnHealing;
                 @Healing.performed += instance.OnHealing;
                 @Healing.canceled += instance.OnHealing;
+                @DEBUG_Pause.started += instance.OnDEBUG_Pause;
+                @DEBUG_Pause.performed += instance.OnDEBUG_Pause;
+                @DEBUG_Pause.canceled += instance.OnDEBUG_Pause;
             }
         }
     }
@@ -937,6 +965,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnAimAssist(InputAction.CallbackContext context);
         void OnSwitchHeld(InputAction.CallbackContext context);
         void OnHealing(InputAction.CallbackContext context);
+        void OnDEBUG_Pause(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

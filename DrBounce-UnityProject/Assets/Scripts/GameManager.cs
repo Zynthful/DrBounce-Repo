@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager s_Instance = null;
     public LayerMask bounceableLayers = 9; // Set this to the layer mask of any bounceable terrain/enemies
+    private InputMaster controls;
 
     [HideInInspector]
     public bool paused = false;
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        controls = new InputMaster();
+        controls.Player.DEBUG_Pause.performed += _ => Stop();
         // Cap fps to 120
         Application.targetFrameRate = 120;
 
@@ -33,4 +36,20 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(s_Instance);
     }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
+    public void Stop() 
+    {
+        Debug.Break();
+    }
+
 }
