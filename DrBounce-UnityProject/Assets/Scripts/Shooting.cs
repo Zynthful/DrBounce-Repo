@@ -63,8 +63,6 @@ public class Shooting : MonoBehaviour
     public MMFeedbacks BasicShootFeedback;
     public MMFeedbacks ChargedFeedback;
     public MMFeedbacks FirstChargedShotFeedback;
-    public MMFeedbacks HoverOverFeedback;
-    public MMFeedbacks RegularReticleFeedback;
     [SerializeField] ParticleSystem chargedShotPS;
 
     [Header("Vibrations")]
@@ -77,7 +75,7 @@ public class Shooting : MonoBehaviour
         SetCharge(gunCharge);
 
         pool = ObjectPooler.Instance;
-        onEnemyHover?.Raise(false);
+        CheckForHoverOverEnemy();
     }
 
     // Update is called once per frame
@@ -85,9 +83,8 @@ public class Shooting : MonoBehaviour
     {
         timeSinceLastShot += Time.deltaTime;
 
-        CheckifCharged();
-
-        HoverOverEnemy();
+        CheckIfCharged();
+        CheckForHoverOverEnemy();
 
         if (repeatedShooting) Shoot();
     }
@@ -141,7 +138,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void HoverOverEnemy() 
+    private void CheckForHoverOverEnemy() 
     {
         RaycastHit Reticleinfo;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Reticleinfo, shooter.normalRange))
@@ -150,15 +147,11 @@ public class Shooting : MonoBehaviour
             if (enemy != null)
             {
                 onEnemyHover?.Raise(true);
-                RegularReticleFeedback?.StopFeedbacks();
-                HoverOverFeedback?.PlayFeedbacks();
                 //print(enemy.transform.name + " is being hovered over!");
             }
             else
             {
                 onEnemyHover?.Raise(false);
-                HoverOverFeedback?.StopFeedbacks();
-                RegularReticleFeedback?.PlayFeedbacks();
             }
         }
     }
@@ -238,7 +231,7 @@ public class Shooting : MonoBehaviour
         ChargedFeedback?.PlayFeedbacks();
     }
 
-    private void CheckifCharged()
+    private void CheckIfCharged()
     {
         if (gunCharge <= 0)
         {
