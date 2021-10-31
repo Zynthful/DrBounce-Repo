@@ -22,6 +22,7 @@ public class Shooting : MonoBehaviour
 
     [Header("Charges")]
     private int gunCharge = 0;    //amount of times the gun has been bounced successfully
+    private bool hasCharge = false;
 
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
@@ -83,7 +84,6 @@ public class Shooting : MonoBehaviour
     {
         timeSinceLastShot += Time.deltaTime;
 
-        CheckIfCharged();
         CheckForHoverOverEnemy();
 
         if (repeatedShooting) Shoot();
@@ -127,21 +127,40 @@ public class Shooting : MonoBehaviour
 
         onChargeUpdate?.Raise(gunCharge);
 
+        CheckIfCharged();
+    }
+
+    public void CheckIfCharged()
+    {
         if (gunCharge >= 1)
         {
-            onHasCharge?.Raise(true);
+            hasCharge = true;
 
+            ChargedFeedback?.PlayFeedbacks();
+
+            // this will need to be rewritten eventually?
             if (transform.parent)
             {
                 onHasChargeAndIsHeld?.Raise(true);
             }
+            else
+            {
+                onHasChargeAndIsHeld?.Raise(false);
+            }
         }
         else
         {
-            onChargesEmpty?.Raise();
-            onHasCharge?.Raise(false);
+            hasCharge = false;
+
             onHasChargeAndIsHeld?.Raise(false);
+            onChargesEmpty?.Raise();
+
+            ChargedFeedback?.StopFeedbacks();
+            chargedShotPS.Clear();
         }
+
+        onHasCharge?.Raise(hasCharge);
+        anim.SetInteger("ChargesLeft", gunCharge);
     }
 
     private void CheckForHoverOverEnemy() 
@@ -233,28 +252,6 @@ public class Shooting : MonoBehaviour
     public void Catch()
     {
         ChargedFeedback?.PlayFeedbacks();
-    }
-
-    public void CheckIfCharged()
-    {
-        if (gunCharge <= 0)
-        {
-            ChargedFeedback?.StopFeedbacks();
-            chargedShotPS.Clear();
-        }
-
-        if (gunCharge >= 1)
-        {
-            ChargedFeedback?.PlayFeedbacks();
-
-            // this will need to be rewritten eventually?
-            if (transform.parent)
-            {
-                onHasChargeAndIsHeld?.Raise(true);
-            }
-        }
-
-        anim.SetInteger("ChargesLeft", gunCharge);
     }
 
     public void Reset()

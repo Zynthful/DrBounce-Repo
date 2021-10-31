@@ -176,6 +176,8 @@ public class GunThrowing : MonoBehaviour
             Vector3 dir = transform.forward;
             rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * throwForceMod; currentVel = rb.velocity;
 
+            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
+            shooting.CheckIfCharged();
 
             AffectPhysics(0.2f, 0.2f);
 
@@ -213,7 +215,11 @@ public class GunThrowing : MonoBehaviour
 
             inventory.OnPickupItem(transform);
 
+            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
+            shooting.CheckIfCharged();
+
             //here
+            // here???
         }
     }
 
@@ -250,9 +256,6 @@ public class GunThrowing : MonoBehaviour
     {
         if (other.transform.root == owner && !transform.parent)
         {
-            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
-            shooting.CheckIfCharged();
-
             Debug.Log("InPlayer and " + exitedPlayer + " and running is " + pickupDelayCoroutineRunning);
 
             if (!catchCollider)
@@ -261,9 +264,20 @@ public class GunThrowing : MonoBehaviour
                 weaponHolderTransform = WeaponSway.weaponHolderTransform;
             }
 
-            if (returning && inFlight) { onCatch?.Raise(); CatchFeedback?.PlayFeedbacks(); }
-            else if (exitedPlayer) { onPickup?.Raise(); PickupFeedback?.PlayFeedbacks(); }
-            else { return; }
+            if (returning && inFlight)
+            {
+                onCatch?.Raise();
+                CatchFeedback?.PlayFeedbacks();
+            }
+
+            else if (exitedPlayer)
+            {
+                onPickup?.Raise();
+                PickupFeedback?.PlayFeedbacks();
+            }
+
+            else return;
+
             ResetScript();
         }
     }
