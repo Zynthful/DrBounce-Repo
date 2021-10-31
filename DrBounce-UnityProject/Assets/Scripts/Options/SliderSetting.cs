@@ -11,9 +11,11 @@ public class SliderSetting : Settings
     [SerializeField]
     protected GameEventFloat onValueChanged = null;
 
+    protected float initialValue = 0;
+
     protected virtual void Start()
     {
-        float initialValue = PlayerPrefs.GetFloat($"Options/{type}/{settingName}", slider.value);
+        initialValue = PlayerPrefs.GetFloat($"Options/{type}/{settingName}", slider.value);
         onValueChanged?.Raise(initialValue);
         slider.value = initialValue;
     }
