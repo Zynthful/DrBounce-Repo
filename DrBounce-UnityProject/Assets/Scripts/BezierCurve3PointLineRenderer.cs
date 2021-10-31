@@ -23,6 +23,10 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
     private bool magnetise = false;
     private float oldDistance = 0f;
 
+    [Header("Events")]
+    [SerializeField]
+    private GameEventBool onIsActiveAndInRange = null;
+
     private void Start()
     {
         if (mAA != null)
@@ -49,10 +53,16 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
 
         if (magnetise)
         {
+            // Is it out of range or within 1m (i.e. being held)?
             if (distance > colourDistance || distance < 1f)
             {
                 lineRenderer.enabled = false;
+                onIsActiveAndInRange?.Raise(false);
                 return;
+            }
+            else
+            {
+                onIsActiveAndInRange?.Raise(true);
             }
         }
         else 
