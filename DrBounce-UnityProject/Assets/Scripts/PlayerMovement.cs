@@ -72,9 +72,6 @@ public class PlayerMovement : MonoBehaviour
     public MMFeedbacks DashFeedback;
     public MMFeedbacks SlideFeedback;
 
-    [Header("Vibrations")]
-    public VibrationManager vibrationManager;
-
     [Header("Events")]
     [SerializeField] private GameEvent onJump = null;
     [SerializeField] private GameEvent onDash = null;
@@ -308,7 +305,6 @@ public class PlayerMovement : MonoBehaviour
             SlideFeedback?.StopFeedbacks();
 
             jump = true;
-            vibrationManager.JumpVibration();
             onJump?.Raise();
         }
     }
@@ -383,7 +379,6 @@ public class PlayerMovement : MonoBehaviour
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
             movementBlocker = true;
 
-            vibrationManager.DashVibration();
             onDash?.Raise();
 
             velocity.y = 0;

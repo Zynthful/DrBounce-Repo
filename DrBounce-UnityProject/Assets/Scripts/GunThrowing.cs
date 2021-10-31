@@ -31,15 +31,15 @@ public class GunThrowing : MonoBehaviour
     //to stop spam throwing and catching on controller.
     private bool hasLetGoOfTrigger;
 
+    [SerializeField]
+    private Shooting shooting = null;
+
     [Header("Feedbacks")]
     public MMFeedbacks BounceFeedback;
     public MMFeedbacks CatchFeedback;
     public MMFeedbacks PickupFeedback;
     public MMFeedbacks MagnetCallFeedback;
     public MMFeedbacks BounceHitFeedback;
-
-    [Header("Vibrations")]
-    public VibrationManager vibrationManager;
 
     public bool inFlight;
 
@@ -250,8 +250,8 @@ public class GunThrowing : MonoBehaviour
     {
         if (other.transform.root == owner && !transform.parent)
         {
-            //stop magnet virbrations
-            vibrationManager.StopMagnet();
+            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
+            shooting.CheckIfCharged();
 
             Debug.Log("InPlayer and " + exitedPlayer + " and running is " + pickupDelayCoroutineRunning);
 
@@ -261,7 +261,7 @@ public class GunThrowing : MonoBehaviour
                 weaponHolderTransform = WeaponSway.weaponHolderTransform;
             }
 
-            if (returning && inFlight) { onCatch?.Raise(); CatchFeedback?.PlayFeedbacks(); vibrationManager.CatchVibration(); }
+            if (returning && inFlight) { onCatch?.Raise(); CatchFeedback?.PlayFeedbacks(); }
             else if (exitedPlayer) { onPickup?.Raise(); PickupFeedback?.PlayFeedbacks(); }
             else { return; }
             ResetScript();

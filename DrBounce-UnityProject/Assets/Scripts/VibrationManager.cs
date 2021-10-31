@@ -32,7 +32,7 @@ public class VibrationManager : MonoBehaviour
         MMVibrationManager.Haptic(dashHapticType, false, true, this);
     }
 
-    public void BasicShotVibration()
+    public void UnchargedShotVibration()
     {
         MMVibrationManager.Haptic(shootingHapticType, false, true, this);
     }
@@ -58,24 +58,27 @@ public class VibrationManager : MonoBehaviour
     }
 
 
-    public void ActiveChargeVibration()
+    public void CheckChargeActiveVibration(bool active)
     {
-        MMVibrationManager.ContinuousHaptic(ChargeIntensity,ChargeSharpness, 3.5f, HapticTypes.None, this, true);
+        if (active)
+        {
+            MMVibrationManager.ContinuousHaptic(ChargeIntensity, ChargeSharpness, 3.5f, HapticTypes.None, this, true);
+        }
+        else
+        {
+            MMVibrationManager.Haptic(StopActiveHapticType, false, true, this);
+        }
     }
 
-    public void ActiveMagnetAssist()
+    public void CheckMagnetActiveVibration(bool active)
     {
-        MMVibrationManager.ContinuousHaptic(MagnetIntensity, MagnetSharpness, 3.5f, HapticTypes.None, this, true);
-    }
-
-    public void StopMagnet()
-    {
-        MMVibrationManager.Haptic(StopMagnetHapticType, false, true, this);
-
-    }
-
-    public void StopActiveCharge()
-    {
-        MMVibrationManager.Haptic(StopActiveHapticType, false, true, this);
+        if (active)
+        {
+            MMVibrationManager.ContinuousHaptic(MagnetIntensity, MagnetSharpness, 3.5f, HapticTypes.None, this, true);
+        }
+        else
+        {
+            MMVibrationManager.Haptic(StopMagnetHapticType, false, true, this);
+        }
     }
 }

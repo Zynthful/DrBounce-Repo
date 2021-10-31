@@ -12828,6 +12828,7 @@ MonoBehaviour:
   startOnPlayer: 1
   catchCollider: {fileID: 217178606593367897}
   currentVel: {x: 0, y: 0, z: 0}
+  shooting: {fileID: 4949567449814967032}
   BounceFeedback: {fileID: 5587670236463760747}
   CatchFeedback: {fileID: 5587670236743795880}
   PickupFeedback: {fileID: 5772517193354484404}
@@ -12863,16 +12864,13 @@ MonoBehaviour:
   onUnchargedShotFired: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
   onChargedShotFired: {fileID: 11400000, guid: 9762d1a36d8157e4abf500980e74e47d, type: 2}
   onChargesEmpty: {fileID: 11400000, guid: fef44d5d95f0b6b44a7d7740b8061a88, type: 2}
-  onDoesHaveCharge: {fileID: 11400000, guid: 0786a6fca12516c40ab4fceb6a748926, type: 2}
+  onHasCharge: {fileID: 11400000, guid: 0786a6fca12516c40ab4fceb6a748926, type: 2}
+  onHasChargeAndIsHeld: {fileID: 11400000, guid: c4a23f868ddcd17419e8b363fe149583, type: 2}
   onFirstGainChargeSinceEmpty: {fileID: 11400000, guid: 11f934499c44da6419ef97f27be17ae9, type: 2}
-  onBounceCurrentNum: {fileID: 11400000, guid: 9d2693e15688753468f4083136d8ffa6, type: 2}
   onEnemyHover: {fileID: 11400000, guid: cdd28372f25c79a4c863cc29297d4979, type: 2}
-  onCatch: {fileID: 11400000, guid: 4b56bb7bbb80eaa4c85ae3ad717f8680, type: 2}
   BasicShootFeedback: {fileID: 4545366999181130698}
   ChargedFeedback: {fileID: 4578051724829632361}
   FirstChargedShotFeedback: {fileID: 3547416809378264515}
-  HoverOverFeedback: {fileID: 0}
-  RegularReticleFeedback: {fileID: 0}
   chargedShotPS: {fileID: 6341533568631161365}
   vibrationManager: {fileID: 0}
 --- !u!114 &4648697631877843793
@@ -17264,17 +17262,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 899843016412897590}
     m_Modifications:
-    - target: {fileID: 264958800887640854, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 329532421701624337, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
       propertyPath: m_Layer
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3295264959351242646, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4720413129284297158, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17293,12 +17283,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5587670236240770451}
     - target: {fileID: 4935585192611819196, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-      propertyPath: aimAssistForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4935585192611819196, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-      propertyPath: aimAssistMaxRange
-      value: 14
+      propertyPath: assistEvent
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5866358497386595400, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
       propertyPath: m_Name
@@ -17352,21 +17338,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -61.688
       objectReference: {fileID: 0}
-    - target: {fileID: 7804652533280481597, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 9101050876889639876, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8201147737814011070, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-    - {fileID: 7945320535471777973, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-    - {fileID: 7804652533280481597, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-    - {fileID: 264958800887640854, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-    - {fileID: 3295264959351242646, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
-    - {fileID: 295859313440250963, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8962ff1cddea70f4fab469669ff191c7, type: 3}
 --- !u!114 &4098264073751305583 stripped
 MonoBehaviour:

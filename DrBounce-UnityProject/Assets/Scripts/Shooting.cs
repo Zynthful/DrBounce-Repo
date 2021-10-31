@@ -45,7 +45,10 @@ public class Shooting : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Occurs on charge update. Passes whether the gun has charge or not")]
-    private GameEventBool onDoesHaveCharge = null;
+    private GameEventBool onHasCharge = null;
+
+    [Tooltip("Occurs on charge update. Passes whether the gun has charge and is currently being held or not")]
+    public GameEventBool onHasChargeAndIsHeld = null;
 
     [SerializeField]
     private GameEvent onFirstGainChargeSinceEmpty = null;
@@ -64,9 +67,6 @@ public class Shooting : MonoBehaviour
     public MMFeedbacks ChargedFeedback;
     public MMFeedbacks FirstChargedShotFeedback;
     [SerializeField] ParticleSystem chargedShotPS;
-
-    [Header("Vibrations")]
-    public VibrationManager vibrationManager;
 
     // Start is called before the first frame update
     void Start()
@@ -127,14 +127,20 @@ public class Shooting : MonoBehaviour
 
         onChargeUpdate?.Raise(gunCharge);
 
-        if (gunCharge <= 0)
+        if (gunCharge >= 1)
         {
-            onChargesEmpty?.Raise();
-            onDoesHaveCharge?.Raise(false);
+            onHasCharge?.Raise(true);
+
+            if (transform.parent)
+            {
+                onHasChargeAndIsHeld?.Raise(true);
+            }
         }
         else
         {
-            onDoesHaveCharge?.Raise(true);
+            onChargesEmpty?.Raise();
+            onHasCharge?.Raise(false);
+            onHasChargeAndIsHeld?.Raise(false);
         }
     }
 
@@ -175,6 +181,8 @@ public class Shooting : MonoBehaviour
             {
                 onUnchargedShotFired?.Raise();
 
+                BasicShootFeedback?.PlayFeedbacks();
+
                 //ChargedFeedback?.StopFeedbacks();
                 damage = Mathf.RoundToInt(shooter.damageGraph[0].y);
 
@@ -188,10 +196,7 @@ public class Shooting : MonoBehaviour
                         enemy.TakeDamage(damage);
                     }
                 }
-
-                BasicShootFeedback?.PlayFeedbacks();
             }
-            vibrationManager.BasicShotVibration();
 
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
 
@@ -208,7 +213,6 @@ public class Shooting : MonoBehaviour
         {
             case GunModes.Explosives:
                 FirstChargedShotFeedback?.PlayFeedbacks();
-                vibrationManager.ChargedShotVibration();
 
                 shooter.chargeBullet.damage = DamageAmountCalc(gunCharge);
 
@@ -231,18 +235,23 @@ public class Shooting : MonoBehaviour
         ChargedFeedback?.PlayFeedbacks();
     }
 
-    private void CheckIfCharged()
+    public void CheckIfCharged()
     {
         if (gunCharge <= 0)
         {
-            ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
-            MMVibrationManager.StopContinuousHaptic();
+            ChargedFeedback?.StopFeedbacks();
+            chargedShotPS.Clear();
         }
 
         if (gunCharge >= 1)
         {
             ChargedFeedback?.PlayFeedbacks();
-            vibrationManager.ActiveChargeVibration();
+
+            // this will need to be rewritten eventually?
+            if (transform.parent)
+            {
+                onHasChargeAndIsHeld?.Raise(true);
+            }
         }
 
         anim.SetInteger("ChargesLeft", gunCharge);
@@ -260,7 +269,6 @@ public class Shooting : MonoBehaviour
     {
         if (!transform.parent)  //if the gun is dropped and has no parent
         {
-            vibrationManager.StopActiveCharge();
             Reset();
         }
     }
@@ -292,7 +300,6 @@ public class Shooting : MonoBehaviour
 
             if (gunCharge == 0)
             {
-                vibrationManager.StopActiveCharge();
                 Reset();
             }
         }

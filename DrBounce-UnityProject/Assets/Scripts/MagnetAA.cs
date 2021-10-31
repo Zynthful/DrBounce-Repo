@@ -9,12 +9,12 @@ public class MagnetAA : MonoBehaviour
     [SerializeField] GunThrowing gun;
     [Range(0.0f, 50f)] public float aimAssistMaxRange;
     [SerializeField] private float aimAssistForce;
-    [SerializeField] GameEventBool assistEvent;
     bool assistActive;
     Rigidbody rb;
 
-    [Header("Vibrations")]
-    public VibrationManager vibrationManager;
+    [Header("Events")]
+    [SerializeField]
+    private GameEventBool onIsActive = null;
 
     private void Awake()
     {
@@ -27,20 +27,16 @@ public class MagnetAA : MonoBehaviour
     {
         if (!gun.transform.parent)
         {
-            Debug.Log("mag on");
-            assistActive = true; assistEvent.Raise(true);
-            vibrationManager.ActiveMagnetAssist();
-
+            assistActive = true;
+            onIsActive?.Raise(true);
         }
     }
-    void AssistEnded() 
+    void AssistEnded()
     {
         if (assistActive)
         {
-            Debug.Log("mag off");
-            vibrationManager.StopMagnet();
-            assistActive = false; assistEvent.Raise(false);
-            
+            assistActive = false;
+            onIsActive?.Raise(false);
         }
     }
 
