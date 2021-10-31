@@ -29,10 +29,7 @@ public class GunThrowing : MonoBehaviour
     private bool exitedPlayer; // Controls when the gun can be caught by waiting until it's left the player's hitbox
     //checks if the player has let go of the tigger before throwing again, 
     //to stop spam throwing and catching on controller.
-    private bool hasLetGoOfTrigger;     
-
-    [SerializeField]
-    private ComboTracker comboTracker = null;
+    private bool hasLetGoOfTrigger;
 
     [Header("Feedbacks")]
     public MMFeedbacks BounceFeedback;
@@ -193,9 +190,6 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused)
         {
-            if(startOnPlayer)
-                comboTracker.SetComboNum(0);
-
             if (!transform.parent)
                 throwGunDelay = false;
             outlineScript.enabled = false;
@@ -239,9 +233,6 @@ public class GunThrowing : MonoBehaviour
         if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
             AffectPhysics(0.85f, 0f);
-            
-            if(startOnPlayer)
-                comboTracker.SetComboNum(0);
 
             returning = true;
 
@@ -294,9 +285,6 @@ public class GunThrowing : MonoBehaviour
 
         BounceFeedback?.PlayFeedbacks();
         collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
-
-        if(startOnPlayer)
-            comboTracker.Increment();
 
         currentVel = rb.velocity;
     }

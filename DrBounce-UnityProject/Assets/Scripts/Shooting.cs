@@ -4,17 +4,12 @@ using MoreMountains.NiceVibrations;
 
 public class Shooting : MonoBehaviour
 {
-    //Events
-    public delegate void Activated(int value);
-    public static event Activated OnActivated;
-
     public enum GunModes
     {
         Explosives,
     }
 
     [SerializeField] private Gun shooter = null;
-    [SerializeField] private GameEventBool onEnemyHover = null;
     private ObjectPooler pool;
     public InputMaster controls;
     public Camera fpsCam;
@@ -35,25 +30,32 @@ public class Shooting : MonoBehaviour
     [Header("Events")]
 
     [SerializeField]
-    private GameEvent onUnchargedShotFired = null;
-
-    [SerializeField]
-    [Tooltip("Passes gunCharge")]
-    private GameEventInt onChargedShotFired = null;
-
-    [SerializeField]
-    [Tooltip("Passes amountOfBounces")]
-    private GameEventInt onBounceCurrentNum = null;
-
-    [SerializeField]
-    [Tooltip("Passes gunCharge")]
+    [Tooltip("Passes gun charge")]
     private GameEventInt onChargeUpdate = null;
 
     [SerializeField]
-    private GameEvent onCatch = null;
+    private GameEvent onUnchargedShotFired = null;
+
+    [SerializeField]
+    [Tooltip("Passes gun charge")]
+    private GameEventInt onChargedShotFired = null;
 
     [SerializeField]
     private GameEvent onChargesEmpty = null;
+
+    [SerializeField]
+    [Tooltip("Occurs on charge update. Passes whether the gun has charge or not")]
+    private GameEventBool onDoesHaveCharge = null;
+
+    [SerializeField]
+    private GameEvent onFirstGainChargeSinceEmpty = null;
+
+    [SerializeField]
+    [Tooltip("Passes whether the player is hovering over an enemy")]
+    private GameEventBool onEnemyHover = null;
+
+    public delegate void Activated(int value);
+    public static event Activated OnActivated;
 
     #endregion
 
@@ -71,6 +73,9 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Initialise charge
+        SetCharge(gunCharge);
+
         pool = ObjectPooler.Instance;
         onEnemyHover?.Raise(false);
     }
@@ -115,8 +120,25 @@ public class Shooting : MonoBehaviour
     /// <param name="value"></param>
     public void SetCharge(int value)
     {
+        // Is the gun gaining charge for the first time since emptied?
+        if (gunCharge <= 0 && value >= 1)
+        {
+            onFirstGainChargeSinceEmpty?.Raise();
+        }
+
         gunCharge = value;
+
         onChargeUpdate?.Raise(gunCharge);
+
+        if (gunCharge <= 0)
+        {
+            onChargesEmpty?.Raise();
+            onDoesHaveCharge?.Raise(false);
+        }
+        else
+        {
+            onDoesHaveCharge?.Raise(true);
+        }
     }
 
     private void HoverOverEnemy() 
@@ -177,11 +199,6 @@ public class Shooting : MonoBehaviour
                 BasicShootFeedback?.PlayFeedbacks();
             }
             vibrationManager.BasicShotVibration();
-
-            if(gunCharge <= 0)
-            {
-                onChargesEmpty?.Raise();
-            }
 
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
 
