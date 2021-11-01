@@ -225,7 +225,7 @@ public class GunThrowing : MonoBehaviour
 
     private void RecallGun()
     {
-        if (startOnPlayer)
+        if (startOnPlayer && transform.parent == null)
         {
             onRecall?.Raise();
             amountOfBounces = 0;

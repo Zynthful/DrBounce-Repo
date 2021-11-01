@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
 
     ObjectPooler pool;
 
+    public delegate void Death();
+    public static event Death OnDeath;
+
     [Header("Feedbacks")]
     public MMFeedbacks HitFeedback;
     public MMFeedbacks DeathFeedback;
@@ -107,6 +110,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         amDead = true;
+        OnDeath?.Invoke();
         //SwitchHeldItem.instance.AddToList(Instantiate(healthPack, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity, null));
         print("That's right baby! Our dog, " + this.name + ", is dead!");
         //Destroy(gameObject);
