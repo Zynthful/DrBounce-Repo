@@ -8,7 +8,7 @@ public class Door : MonoBehaviour
     private new BoxCollider collider = null;
 
     [SerializeField] private GameObject[] enemies;
-    bool test = false;
+    bool isAnEnemyAlive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -16,62 +16,52 @@ public class Door : MonoBehaviour
         collider = GetComponentInChildren<BoxCollider>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if (open) Open();
-        //else Close();
-    }
-
     private void Open() 
     {
-        print("open");
+        //print("open");
         collider.gameObject.SetActive(false);
     }
 
     private void Close() 
     {
-        print("closed");
+        //print("closed");
         collider.gameObject.SetActive(true);
     }
 
-    private void Test() 
+    private void DelayForCheck() 
     {
-        //bool test = CanOpen();
-        //if (test) Open();
-        //else Close();
-
+        Invoke("CanOpen", 8);
     }
 
     private void CanOpen() 
     {
-        test = false;
+        isAnEnemyAlive = false;
         foreach (GameObject enemy in enemies) 
         {
-            if (enemy.activeInHierarchy)
+            if (enemy != null)
             {
-                test = true;
+                isAnEnemyAlive = true;
                 Close();
                 //break;
                 //return false;
             }
         }
-        if (!test) 
+        if (!isAnEnemyAlive) 
         {
             Open();
-            test = false;
+            isAnEnemyAlive = false;
         }
         //return true;
     }
 
     void OnEnable()
     {
-        Enemy.OnDeath += CanOpen;
+        Enemy.OnDeath += DelayForCheck;
     }
 
 
     void OnDisable()
     {
-        Enemy.OnDeath -= CanOpen;
+        Enemy.OnDeath -= DelayForCheck;
     }
 }
