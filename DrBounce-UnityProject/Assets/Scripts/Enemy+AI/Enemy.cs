@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// This and the vairable are used for the doors don't delete
+    /// This and the variable are used for the doors don't delete
     /// </summary>
     /// <returns></returns>
     public bool GetisDead() 
