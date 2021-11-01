@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
     private Vector3 slideLeftRight;
+    private bool hasLetGo = false;
 
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
@@ -202,30 +203,28 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Dashing
-        if (isDashing == true)
+        if (isDashing == true && hasDashed == false)
         {
-            if (hasDashed == false)
+            acceleration = 1;
+            if (feedbackPlayed == false)
             {
-                if (feedbackPlayed == false)
-                {
-                    DashFeedback?.PlayFeedbacks(); //Play feedback
-                    feedbackPlayed = true;
-                }
-                cooldown = true;
-
-                if (dashLocker == false)
-                {
-                    dashLocker = true;
-                    x2 = controls.Player.Movement.ReadValue<Vector2>().x;
-                    z2 = controls.Player.Movement.ReadValue<Vector2>().y;
-                }
-                move = (transform.right * x2 + transform.forward * z2).normalized;
-
-                controller.Move(move * dashStrength * speed * Time.deltaTime);
+                DashFeedback?.PlayFeedbacks(); //Play feedback
+                feedbackPlayed = true;
             }
+            cooldown = true;
+
+            if (dashLocker == false)
+            {
+                dashLocker = true;
+                x2 = controls.Player.Movement.ReadValue<Vector2>().x;
+                z2 = controls.Player.Movement.ReadValue<Vector2>().y;
+            }
+            move = (transform.right * x2 + transform.forward * z2).normalized;
+
+            controller.Move(move * dashStrength * speed * Time.deltaTime);
 
 
-            if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
+            if (move == null)
             {
                 move = transform.forward;
                 controller.Move(move * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
@@ -272,7 +271,15 @@ public class PlayerMovement : MonoBehaviour
         #region Slide
         if (isSliding == true)
         {
-
+            if(controls.Player.Crouch.ReadValue<float>() == 0)
+            {
+                hasLetGo = true;
+            }
+            if (controls.Player.Crouch.ReadValue<float>() == 1 && hasLetGo == true)
+            {
+                isSliding = false;
+            }
+            acceleration = 1;
             coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
             print(isGrounded);
@@ -377,6 +384,7 @@ public class PlayerMovement : MonoBehaviour
         isSliding = false;
         SlideFeedback?.StopFeedbacks(); //stop feedback
 
+        hasLetGo = false;
         slideDirectionDecided = false;
         cooldown = false;
 
