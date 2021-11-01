@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     public static Transform player;
     public InputMaster controls;
     public Vector3 move;
+    [SerializeField]
+    private float acceleration;
+    public float accelerationSpeed;
 
     [Header("Jump")]
     public float jumpPeak = 3f;
@@ -163,12 +166,19 @@ public class PlayerMovement : MonoBehaviour
         if (!GameManager.s_Instance.paused && movementBlocker == false)
         {
 
+            acceleration += Time.deltaTime * accelerationSpeed;
+
+            if (acceleration >= 1)
+            {
+                acceleration = 1;
+            }
+
             float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
             float z = controls.Player.Movement.ReadValue<Vector2>().y;
 
             if (isSliding == false)
             {
-                move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
+                move = (transform.right * x + transform.forward * z).normalized * acceleration; //Creates a value to move the player in local space based on this value.
                 controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
             }
             else
@@ -176,6 +186,11 @@ public class PlayerMovement : MonoBehaviour
                 move = (slideLeftRight * x); //Creates a value to move the player in local space based on this value.
                 controller.Move(move * strafeStrength * Time.deltaTime); //uses move value to move the player.
             }
+        }
+
+        if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
+        {
+            acceleration = 0;
         }
         //EARLY MOMENTUM SYSTEM - DOESN'T RESET! 
         //velocity.x += move.x;
