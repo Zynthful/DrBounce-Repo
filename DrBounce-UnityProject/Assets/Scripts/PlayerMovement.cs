@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
     private Vector3 slideLeftRight;
+    private bool hasLetGo = false;
 
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
@@ -204,8 +205,9 @@ public class PlayerMovement : MonoBehaviour
         #region Dashing
         if (isDashing == true)
         {
-            if (hasDashed == false)
+            if(hasDashed == false)
             {
+                //acceleration = 1;
                 if (feedbackPlayed == false)
                 {
                     DashFeedback?.PlayFeedbacks(); //Play feedback
@@ -224,9 +226,9 @@ public class PlayerMovement : MonoBehaviour
                 controller.Move(move * dashStrength * speed * Time.deltaTime);
             }
 
-
             if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
             {
+                print("Funny");
                 move = transform.forward;
                 controller.Move(move * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
                 hasDashed = true;
@@ -272,7 +274,15 @@ public class PlayerMovement : MonoBehaviour
         #region Slide
         if (isSliding == true)
         {
-
+            if(controls.Player.Crouch.ReadValue<float>() == 0)
+            {
+                hasLetGo = true;
+            }
+            if (controls.Player.Crouch.ReadValue<float>() == 1 && hasLetGo == true)
+            {
+                isSliding = false;
+            }
+            acceleration = 1;
             coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
             print(isGrounded);
@@ -377,6 +387,7 @@ public class PlayerMovement : MonoBehaviour
         isSliding = false;
         SlideFeedback?.StopFeedbacks(); //stop feedback
 
+        hasLetGo = false;
         slideDirectionDecided = false;
         cooldown = false;
 
