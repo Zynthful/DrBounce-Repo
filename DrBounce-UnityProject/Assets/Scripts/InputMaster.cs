@@ -75,22 +75,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""DEBUG_PrevLevel"",
-                    ""type"": ""Button"",
-                    ""id"": ""77a2b363-166c-49c2-ae47-2736e9618cb3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""DEBUG_NextLevel"",
-                    ""type"": ""Button"",
-                    ""id"": ""d1ede88c-1987-4c06-be7c-61f1c5865bee"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""08741584-245b-4eae-b1c1-0eb5c17aeb6e"",
@@ -123,9 +107,33 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""DEBUG_PrevLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""77a2b363-166c-49c2-ae47-2736e9618cb3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_NextLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1ede88c-1987-4c06-be7c-61f1c5865bee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""DEBUG_Pause"",
                     ""type"": ""Button"",
                     ""id"": ""1d553970-0ef5-485e-89c4-46c9a705dbf6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_ReloadScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea74f17e-e2f2-47c7-bf10-8db1facd691e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -486,50 +494,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5d220c5d-4671-4f61-8ca5-dcba108892af"",
-                    ""path"": ""<Keyboard>/leftBracket"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_PrevLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""821e3694-e73d-4e7a-ba9e-680da463857e"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_PrevLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fdd9ffde-f5f0-4530-8705-71b9ed4ce61b"",
-                    ""path"": ""<Keyboard>/rightBracket"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_NextLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fddc900b-c36d-4b53-bcf0-0d872de4c564"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_NextLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f145941f-8093-456b-b604-4c866a5a7563"",
                     ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
@@ -637,6 +601,94 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""DEBUG_Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7e729c6-95da-4481-bbda-7b83ce1fde16"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdd9ffde-f5f0-4530-8705-71b9ed4ce61b"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fddc900b-c36d-4b53-bcf0-0d872de4c564"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""657f3ad6-3c70-4e30-a7d2-f87e4907fa41"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d220c5d-4671-4f61-8ca5-dcba108892af"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""821e3694-e73d-4e7a-ba9e-680da463857e"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23c8ec84-9c4c-4df8-8e09-8e269b8d6897"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""756c5974-cb80-44de-9522-6ea96e96ba76"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -729,13 +781,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_RecallGun = m_Player.FindAction("RecallGun", throwIfNotFound: true);
         m_Player_ThrowGun = m_Player.FindAction("ThrowGun", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
-        m_Player_DEBUG_PrevLevel = m_Player.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
-        m_Player_DEBUG_NextLevel = m_Player.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_AimAssist = m_Player.FindAction("AimAssist", throwIfNotFound: true);
         m_Player_SwitchHeld = m_Player.FindAction("SwitchHeld", throwIfNotFound: true);
         m_Player_Healing = m_Player.FindAction("Healing", throwIfNotFound: true);
+        m_Player_DEBUG_PrevLevel = m_Player.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
+        m_Player_DEBUG_NextLevel = m_Player.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
         m_Player_DEBUG_Pause = m_Player.FindAction("DEBUG_Pause", throwIfNotFound: true);
+        m_Player_DEBUG_ReloadScene = m_Player.FindAction("DEBUG_ReloadScene", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -795,13 +848,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_RecallGun;
     private readonly InputAction m_Player_ThrowGun;
     private readonly InputAction m_Player_Shoot;
-    private readonly InputAction m_Player_DEBUG_PrevLevel;
-    private readonly InputAction m_Player_DEBUG_NextLevel;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_AimAssist;
     private readonly InputAction m_Player_SwitchHeld;
     private readonly InputAction m_Player_Healing;
+    private readonly InputAction m_Player_DEBUG_PrevLevel;
+    private readonly InputAction m_Player_DEBUG_NextLevel;
     private readonly InputAction m_Player_DEBUG_Pause;
+    private readonly InputAction m_Player_DEBUG_ReloadScene;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -813,13 +867,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @RecallGun => m_Wrapper.m_Player_RecallGun;
         public InputAction @ThrowGun => m_Wrapper.m_Player_ThrowGun;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
-        public InputAction @DEBUG_PrevLevel => m_Wrapper.m_Player_DEBUG_PrevLevel;
-        public InputAction @DEBUG_NextLevel => m_Wrapper.m_Player_DEBUG_NextLevel;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @AimAssist => m_Wrapper.m_Player_AimAssist;
         public InputAction @SwitchHeld => m_Wrapper.m_Player_SwitchHeld;
         public InputAction @Healing => m_Wrapper.m_Player_Healing;
+        public InputAction @DEBUG_PrevLevel => m_Wrapper.m_Player_DEBUG_PrevLevel;
+        public InputAction @DEBUG_NextLevel => m_Wrapper.m_Player_DEBUG_NextLevel;
         public InputAction @DEBUG_Pause => m_Wrapper.m_Player_DEBUG_Pause;
+        public InputAction @DEBUG_ReloadScene => m_Wrapper.m_Player_DEBUG_ReloadScene;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -850,12 +905,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @DEBUG_PrevLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
-                @DEBUG_PrevLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
-                @DEBUG_PrevLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
-                @DEBUG_NextLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
-                @DEBUG_NextLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
-                @DEBUG_NextLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
                 @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
@@ -868,9 +917,18 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Healing.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
                 @Healing.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
                 @Healing.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
+                @DEBUG_PrevLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
+                @DEBUG_NextLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
                 @DEBUG_Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_Pause;
                 @DEBUG_Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_Pause;
                 @DEBUG_Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_Pause;
+                @DEBUG_ReloadScene.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_ReloadScene;
+                @DEBUG_ReloadScene.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_ReloadScene;
+                @DEBUG_ReloadScene.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_ReloadScene;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -896,12 +954,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
-                @DEBUG_PrevLevel.started += instance.OnDEBUG_PrevLevel;
-                @DEBUG_PrevLevel.performed += instance.OnDEBUG_PrevLevel;
-                @DEBUG_PrevLevel.canceled += instance.OnDEBUG_PrevLevel;
-                @DEBUG_NextLevel.started += instance.OnDEBUG_NextLevel;
-                @DEBUG_NextLevel.performed += instance.OnDEBUG_NextLevel;
-                @DEBUG_NextLevel.canceled += instance.OnDEBUG_NextLevel;
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
@@ -914,9 +966,18 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Healing.started += instance.OnHealing;
                 @Healing.performed += instance.OnHealing;
                 @Healing.canceled += instance.OnHealing;
+                @DEBUG_PrevLevel.started += instance.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.performed += instance.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.canceled += instance.OnDEBUG_PrevLevel;
+                @DEBUG_NextLevel.started += instance.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.performed += instance.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.canceled += instance.OnDEBUG_NextLevel;
                 @DEBUG_Pause.started += instance.OnDEBUG_Pause;
                 @DEBUG_Pause.performed += instance.OnDEBUG_Pause;
                 @DEBUG_Pause.canceled += instance.OnDEBUG_Pause;
+                @DEBUG_ReloadScene.started += instance.OnDEBUG_ReloadScene;
+                @DEBUG_ReloadScene.performed += instance.OnDEBUG_ReloadScene;
+                @DEBUG_ReloadScene.canceled += instance.OnDEBUG_ReloadScene;
             }
         }
     }
@@ -981,13 +1042,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnRecallGun(InputAction.CallbackContext context);
         void OnThrowGun(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnDEBUG_PrevLevel(InputAction.CallbackContext context);
-        void OnDEBUG_NextLevel(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnAimAssist(InputAction.CallbackContext context);
         void OnSwitchHeld(InputAction.CallbackContext context);
         void OnHealing(InputAction.CallbackContext context);
+        void OnDEBUG_PrevLevel(InputAction.CallbackContext context);
+        void OnDEBUG_NextLevel(InputAction.CallbackContext context);
         void OnDEBUG_Pause(InputAction.CallbackContext context);
+        void OnDEBUG_ReloadScene(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
