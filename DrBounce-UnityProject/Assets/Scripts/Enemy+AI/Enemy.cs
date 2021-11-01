@@ -157,6 +157,10 @@ public class Enemy : MonoBehaviour
         shootDelay = false;
     }
 
+    /// <summary>
+    /// This and the vairable are used for the doors don't delete
+    /// </summary>
+    /// <returns></returns>
     public bool GetisDead() 
     {
         return amDead;

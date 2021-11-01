@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private bool open = false;
-    private new BoxCollider collider = null;
+    [Tooltip("The door then opens and closes")]
+    [SerializeField] private GameObject door = null;
 
+    [Tooltip("All enemies below have to be dead for this door to open")]
     [SerializeField] private GameObject[] enemies;
+
+    private bool open = false;
     bool isAnEnemyAlive = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponentInChildren<BoxCollider>();
+        //door = GetComponentInChildren<GameObject>(); need to get first child not all children
     }
 
     private void Open() 
     {
-        collider.gameObject.SetActive(false);
+        door.SetActive(false);
     }
 
     private void Close() 
     {
-        collider.gameObject.SetActive(true);
+        door.SetActive(true);
     }
 
     private void CanOpen() 
