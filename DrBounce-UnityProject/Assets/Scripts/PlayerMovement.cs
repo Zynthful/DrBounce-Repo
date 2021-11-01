@@ -203,29 +203,32 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Dashing
-        if (isDashing == true && hasDashed == false)
+        if (isDashing == true)
         {
-            acceleration = 1;
-            if (feedbackPlayed == false)
+            if(hasDashed == false)
             {
-                DashFeedback?.PlayFeedbacks(); //Play feedback
-                feedbackPlayed = true;
+                //acceleration = 1;
+                if (feedbackPlayed == false)
+                {
+                    DashFeedback?.PlayFeedbacks(); //Play feedback
+                    feedbackPlayed = true;
+                }
+                cooldown = true;
+
+                if (dashLocker == false)
+                {
+                    dashLocker = true;
+                    x2 = controls.Player.Movement.ReadValue<Vector2>().x;
+                    z2 = controls.Player.Movement.ReadValue<Vector2>().y;
+                }
+                move = (transform.right * x2 + transform.forward * z2).normalized;
+
+                controller.Move(move * dashStrength * speed * Time.deltaTime);
             }
-            cooldown = true;
 
-            if (dashLocker == false)
+            if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
             {
-                dashLocker = true;
-                x2 = controls.Player.Movement.ReadValue<Vector2>().x;
-                z2 = controls.Player.Movement.ReadValue<Vector2>().y;
-            }
-            move = (transform.right * x2 + transform.forward * z2).normalized;
-
-            controller.Move(move * dashStrength * speed * Time.deltaTime);
-
-
-            if (move == null)
-            {
+                print("Funny");
                 move = transform.forward;
                 controller.Move(move * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
                 hasDashed = true;
