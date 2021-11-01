@@ -18,19 +18,12 @@ public class Door : MonoBehaviour
 
     private void Open() 
     {
-        //print("open");
         collider.gameObject.SetActive(false);
     }
 
     private void Close() 
     {
-        //print("closed");
         collider.gameObject.SetActive(true);
-    }
-
-    private void DelayForCheck() 
-    {
-        Invoke("CanOpen", 8);
     }
 
     private void CanOpen() 
@@ -38,12 +31,10 @@ public class Door : MonoBehaviour
         isAnEnemyAlive = false;
         foreach (GameObject enemy in enemies) 
         {
-            if (enemy != null)
+            if (enemy.GetComponent<Enemy>().GetisDead() == false)
             {
                 isAnEnemyAlive = true;
                 Close();
-                //break;
-                //return false;
             }
         }
         if (!isAnEnemyAlive) 
@@ -51,17 +42,16 @@ public class Door : MonoBehaviour
             Open();
             isAnEnemyAlive = false;
         }
-        //return true;
     }
 
     void OnEnable()
     {
-        Enemy.OnDeath += DelayForCheck;
+        Enemy.OnDeath += CanOpen;
     }
 
 
     void OnDisable()
     {
-        Enemy.OnDeath -= DelayForCheck;
+        Enemy.OnDeath -= CanOpen;
     }
 }

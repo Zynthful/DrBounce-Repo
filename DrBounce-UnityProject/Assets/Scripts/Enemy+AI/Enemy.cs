@@ -156,4 +156,9 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(delay);
         shootDelay = false;
     }
+
+    public bool GetisDead() 
+    {
+        return amDead;
+    }
 }
