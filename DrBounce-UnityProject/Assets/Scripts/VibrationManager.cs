@@ -39,11 +39,13 @@ public class VibrationManager : MonoBehaviour
 
     MonoBehaviour magnetAssistMono = null;
 
+    /*
     private void Start()
     {
         activeChargeMono = gameObject.AddComponent<MonoBehaviour>();
         magnetAssistMono = gameObject.AddComponent<MonoBehaviour>();
     }
+    */
 
     public void DashVibration()
     {
