@@ -4,30 +4,24 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    //need to be where the player spawns
+
+    [SerializeField] private GameObject player;     //needs to be manually set
     [SerializeField] private Transform[] checkpoints;
-    private int currentCheckpoint = -1;
 
-    [SerializeField] private GameObject player;
-    private InputMaster controls;
+    private int currentCheckpoint = 0;
 
-    private void Awake()
-    {
-        controls = new InputMaster();
-        controls.Player.Shoot.performed += _ => ReturnToCheckpoint();
-    }
 
     private void ReturnToCheckpoint() 
     {
-        print("return");
+        //print("return");
 
         player.transform.position = checkpoints[currentCheckpoint].position;
-
-        //set player position to there last currentpoint
     }
 
     private void ReachedNextCheckpoint() 
     {
-        print("hit me");
+        //print("hit me");
 
         if (currentCheckpoint < checkpoints.Length)
         {
@@ -37,14 +31,16 @@ public class Checkpoint : MonoBehaviour
 
     void OnEnable()
     {
-        controls.Enable();
         CheckpointHit.OnCollision += ReachedNextCheckpoint;
+        DeathZone.OnPlayerDeath += ReturnToCheckpoint;
+        Health.OnPlayerDeath += ReturnToCheckpoint;
     }
 
 
     void OnDisable()
     {
-        controls.Disable();
-        CheckpointHit.OnCollision += ReachedNextCheckpoint;
+        CheckpointHit.OnCollision -= ReachedNextCheckpoint;
+        DeathZone.OnPlayerDeath -= ReturnToCheckpoint;
+        Health.OnPlayerDeath -= ReturnToCheckpoint;
     }
 }

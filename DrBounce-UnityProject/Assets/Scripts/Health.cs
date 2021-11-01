@@ -16,6 +16,9 @@ public class Health : MonoBehaviour
     public delegate void CurrentHealth();
     public static event CurrentHealth ReportHealth;
 
+    public delegate void PlayerDeath();
+    public static event PlayerDeath OnPlayerDeath;
+
     [Header("Events")]
     // Passes health percentage
     [SerializeField]
@@ -112,7 +115,9 @@ public class Health : MonoBehaviour
 
     private void DIE() 
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        OnPlayerDeath?.Invoke();
 
         Debug.Log("DIE (►__◄)");
     }
