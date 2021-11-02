@@ -1,26 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Declarations")]
+    public EnemyAudio enemyAudio = null;
+    public BulletType bullet;
+    [SerializeField]
+    private GameObject healthPack;
+    private ObjectPooler pool;
+
+    protected bool amDead;
+    private bool shootDelay;
+
+    public bool canSeePlayer;
+
+    [SerializeField]
+    private List<Material> materials = new List<Material> { };
+
+    [Header("Detection Settings")]
     public float viewDist;
     public float sightAngle;
     public float rateOfFire;
-    public BulletType bullet;
-    protected bool amDead;
-    protected MMHealthBar _targetHealthBar;
 
-    bool shootDelay;
-
-    [SerializeField] private GameObject healthPack;
-
-    ObjectPooler pool;
+    [Header("Health Settings")]
+    protected float _minimumHealth = 0f;
+    [SerializeField]
+    protected float _maximumHealth = 20f;
+    protected float _currentHealth = 5f;
 
     public delegate void Death();
     public static event Death OnDeath;
+
+    [Header("Events")]
+    [SerializeField]
+    private UnityEvent onDamaged = null;
+    [SerializeField]
+    private UnityEvent onHeal = null;
+    [SerializeField]
+    private UnityEvent onShoot = null;
+    [SerializeField]
+    private UnityEvent onDeath = null;
 
     [Header("Feedbacks")]
     public MMFeedbacks HitFeedback;
@@ -29,14 +53,19 @@ public class Enemy : MonoBehaviour
     //need this for floating text
     public MMFeedbackFloatingText HitText;
 
-    public EnemyAudio enemyAudio = null;
-
-    protected float _minimumHealth = 0f;
-    [SerializeField] protected float _maximumHealth = 20f;
-    protected float _currentHealth = 5f;
+    protected MMHealthBar _targetHealthBar;
 
     public void TakeDamage(float amount)
     {
+        if (amount >= 0)
+        {
+            onDamaged?.Invoke();
+        }
+        else
+        {
+            onHeal?.Invoke();
+        }
+
         //set hit text value before it is sent off to spawner
         HitText.Value = amount.ToString();
         HitFeedback?.PlayFeedbacks();
@@ -49,10 +78,6 @@ public class Enemy : MonoBehaviour
             Die();
         }
     }
-
-    public bool canSeePlayer;
-
-    [SerializeField] List<Material> materials = new List<Material>{};
 
     Enemy()
     {
@@ -98,6 +123,7 @@ public class Enemy : MonoBehaviour
             if(!shootDelay)
             {
                 shootDelay = true;
+                onShoot?.Invoke();
                 StartCoroutine(ShotDelay(rateOfFire));
                 pool.SpawnBulletFromPool("Bullet", transform.position, Quaternion.identity, (PlayerMovement.player.position - transform.position).normalized, bullet, null);
                 Debug.Log((PlayerMovement.player.position - transform.position).normalized);
@@ -111,6 +137,7 @@ public class Enemy : MonoBehaviour
     {
         amDead = true;
         OnDeath?.Invoke();
+        onDeath?.Invoke();
         //SwitchHeldItem.instance.AddToList(Instantiate(healthPack, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity, null));
         print("That's right baby! Our dog, " + this.name + ", is dead!");
         //Destroy(gameObject);

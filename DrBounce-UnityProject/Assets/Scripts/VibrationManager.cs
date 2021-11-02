@@ -23,7 +23,7 @@ public class VibrationManager : MonoBehaviour
     [SerializeField]
     private float chargeSharpness;
 
-    MonoBehaviour activeChargeMono = null;
+    // MonoBehaviour activeChargeMono = null;
 
     [Header("Health")]
     [SerializeField]
@@ -37,7 +37,7 @@ public class VibrationManager : MonoBehaviour
     [SerializeField]
     private float magnetSharpness;
 
-    MonoBehaviour magnetAssistMono = null;
+    // MonoBehaviour magnetAssistMono = null;
 
     /*
     private void Start()
