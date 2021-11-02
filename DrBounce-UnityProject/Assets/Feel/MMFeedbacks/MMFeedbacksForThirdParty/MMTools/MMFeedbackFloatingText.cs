@@ -110,5 +110,10 @@ namespace MoreMountains.Feedbacks
                 MMFloatingTextSpawnEvent.Trigger(Channel, _playPosition, _value, Direction, Intensity * intensityMultiplier, ForceLifetime, Lifetime, ForceColor, AnimateColorGradient, Timing.TimescaleMode == TimescaleModes.Unscaled);
             }
         }
+
+        public void SetValue(string value)
+        {
+            Value = value;
+        }
     }
 }

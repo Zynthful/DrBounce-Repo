@@ -38,20 +38,19 @@ public class Enemy : MonoBehaviour
 
     [Header("Events")]
     [SerializeField]
-    private UnityEvent onDamaged = null;
+    private UnityEvent<float> onDamaged = null;
     [SerializeField]
-    private UnityEvent onHeal = null;
+    private UnityEvent<float> onHeal = null;
     [SerializeField]
     private UnityEvent onShoot = null;
     [SerializeField]
     private UnityEvent onDeath = null;
 
     [Header("Feedbacks")]
-    public MMFeedbacks HitFeedback;
     public MMFeedbacks DeathFeedback;
 
     //need this for floating text
-    public MMFeedbackFloatingText HitText;
+    //public MMFeedbackFloatingText HitText;
 
     protected MMHealthBar _targetHealthBar;
 
@@ -59,16 +58,13 @@ public class Enemy : MonoBehaviour
     {
         if (amount >= 0)
         {
-            onDamaged?.Invoke();
+            onDamaged?.Invoke(amount);
         }
         else
         {
-            onHeal?.Invoke();
+            onHeal?.Invoke(-amount);
         }
 
-        //set hit text value before it is sent off to spawner
-        HitText.Value = amount.ToString();
-        HitFeedback?.PlayFeedbacks();
         _currentHealth -= amount;
         UpdateEnemyHealthBar();
         if (_currentHealth <= 0)
