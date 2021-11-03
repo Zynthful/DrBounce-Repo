@@ -44,30 +44,15 @@ public class CheckForBouncing : MonoBehaviour
 
             Vector3[] returnVectors = new Vector3[3];
 
-            Bouncing b = collision.gameObject.GetComponent<Bouncing>();
-            switch (b.bType)
+            returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision.transform, bounceOriginPoint);
+            if (returnVectors.Length > 0)
             {
-                case Bouncing.BounceType.E_Back:
-                    returnVectors = b.BounceBack(transform.position, bounceOriginPoint);
-                    break;
+                specialInteractions.Bounced(collision);
 
-                case Bouncing.BounceType.E_Up:
-                    returnVectors = b.BounceUp(collision.transform, transform.position);
-                    break;
-
-                case Bouncing.BounceType.E_Away:
-                    returnVectors = b.BounceForward(collision.transform, transform.position, bounceOriginPoint);
-                    break;
-
-                case Bouncing.BounceType.W_Straight:
-                    returnVectors = b.BounceBack(transform.position, bounceOriginPoint);
-                    break;
+                transform.position = returnVectors[0];
+                bounceOriginPoint = returnVectors[1];
+                rb.velocity = returnVectors[2];
             }
-            transform.position = returnVectors[0];
-            bounceOriginPoint = returnVectors[1];
-            rb.velocity = returnVectors[2];
-
-            specialInteractions.Bounced(collision);
         }
     }
 
@@ -83,40 +68,25 @@ public class CheckForBouncing : MonoBehaviour
 
             Vector3[] returnVectors = new Vector3[1];
 
-            Bouncing b = hit.gameObject.GetComponent<Bouncing>();
-            switch (b.bType)
+            returnVectors = hit.gameObject.GetComponent<Bouncing>().BouncePlayer(transform.position, cc.velocity.normalized, hit.transform);
+            if (returnVectors.Length > 0)
             {
-                case Bouncing.BounceType.E_Back:
-                    returnVectors = b.PlayerBounceBack(cc.velocity.normalized);
-                    break;
-
-                case Bouncing.BounceType.E_Up:
-                    returnVectors = b.PlayerBounceUp(pm.gravity);
-                    break;
-
-                case Bouncing.BounceType.E_Away:
-                    returnVectors = b.PlayerBounceForward(hit.transform, transform.position, cc.velocity.normalized);
-                    break;
-
-                case Bouncing.BounceType.W_Straight:
-                    returnVectors = b.PlayerBounceBack(cc.velocity.normalized);
-                    break;
-            }
-            if(returnVectors.Length == 2)
-            {
-                transform.position = returnVectors[0];
-                pm.velocity = returnVectors[1];
-            }
-            else
-            {
-                pm.velocity = returnVectors[0];
+                if (returnVectors.Length == 2)
+                {
+                    transform.position = returnVectors[0];
+                    pm.velocity = returnVectors[1];
+                }
+                else
+                {
+                    pm.velocity = returnVectors[0];
+                }
             }
 
             recentHit = hit;
 
             if(recentHitRun != null)
                 StopCoroutine(recentHitRun);
-            recentHitRun = StartCoroutine(RecentBounce(3.02f));
+            recentHitRun = StartCoroutine(RecentBounce(.175f));
         }
     }
 

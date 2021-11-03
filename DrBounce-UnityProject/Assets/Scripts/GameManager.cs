@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager s_Instance = null;
+
+    /// <summary>
+    /// gravity here is just set to whatever the PlayerMovement has it set to at the start of runtime, don't try to update this gravity value
+    /// </summary>
+    public static float gravity { get; set; }
+
     public LayerMask bounceableLayers = 9; // Set this to the layer mask of any bounceable terrain/enemies
     private InputMaster controls;
 

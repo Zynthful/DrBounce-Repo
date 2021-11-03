@@ -14,15 +14,12 @@ public class Bouncing : MonoBehaviour
         E_Back,
         E_Up,
         E_Away,
-        E_Left,
-        E_Right,
         W_Straight
     }
 
     public BounceType bType;
 
     [SerializeField] float bounceForceMod;
-    [HideInInspector] [Range(0.01f, 1f)] public float BounceAwayAngleThreshold;
 
     public Vector3[] BounceBack(Vector3 position, Vector3 origin)
     {
@@ -43,10 +40,10 @@ public class Bouncing : MonoBehaviour
         return vectors;
     }
 
-    public Vector3[] BounceUp(Transform enemyTransform, Vector3 position)
+    public Vector3[] BounceUp(Transform collision, Vector3 position)
     {
         Vector3[] vectors = new Vector3[3];
-        vectors[0] = new Vector3(enemyTransform.position.x, enemyTransform.position.y + (enemyTransform.localScale.y / 2), enemyTransform.position.z);
+        vectors[0] = new Vector3(collision.position.x, collision.position.y + (collision.localScale.y / 2), collision.position.z);
         vectors[1] = position;
         vectors[2] = Vector3.up * bounceForceMod;
         return vectors;
@@ -87,26 +84,56 @@ public class Bouncing : MonoBehaviour
 
         return vectors;
     }
-}
 
-#if UNITY_EDITOR
-[CustomEditor(typeof(Bouncing))]
-public class Bouncing_Editor : Editor
-{
-    public override void OnInspectorGUI()
+    public Vector3[] BounceStraight(Transform collision, Vector3 position)
     {
-        DrawDefaultInspector(); // for other non-HideInInspector fields
+        Vector3[] vectors = new Vector3[2];
 
-        Bouncing script = (Bouncing)target;
+        vectors[0] = transform.position;
 
-        switch (script.bType)
+        vectors[1]= collision.TransformDirection(Vector3.forward); vectors[0].y += .25f;
+        vectors[1] *= bounceForceMod;
+
+        return vectors;
+    }
+
+    public Vector3[] BounceObject(Vector3 position, Vector3 direction, Transform collision, Vector3 origin)
+    {
+        switch (bType)
         {
-            case Bouncing.BounceType.E_Away:
-                script.BounceAwayAngleThreshold = EditorGUILayout.FloatField("Bounce Away Angle Threshold", script.BounceAwayAngleThreshold);
-                break;
+            case BounceType.E_Back:
+                return BounceBack(position, origin);
+
+            case BounceType.E_Up:
+                return BounceUp(collision, position);
+
+            case BounceType.E_Away:
+                return BounceForward(collision, position, origin);
+
+            case BounceType.W_Straight:
+                return BounceStraight(collision, position);
         }
-        /*script.iField = EditorGUILayout.ObjectField("I Field", script.iField, typeof(InputField), true) as InputField;
-            script.Template = EditorGUILayout.ObjectField("Template", script.Template, typeof(GameObject), true) as GameObject;*/
+
+        return null;
+    }
+
+    public Vector3[] BouncePlayer(Vector3 position, Vector3 direction, Transform collision)
+    {
+        switch (bType)
+        {
+            case BounceType.E_Back:
+                return PlayerBounceBack(direction);
+
+            case BounceType.E_Up:
+                return PlayerBounceUp(GameManager.gravity);
+
+            case BounceType.E_Away:
+                return PlayerBounceForward(collision, position, direction);
+
+            case BounceType.W_Straight:
+                return BounceStraight(collision, position);
+        }
+
+        return null;
     }
 }
-#endif
