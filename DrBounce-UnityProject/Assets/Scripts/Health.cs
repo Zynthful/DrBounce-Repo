@@ -28,6 +28,8 @@ public class Health : MonoBehaviour
     // Passes health healed
     [SerializeField]
     private GameEventFloat onHeal = null;
+    [SerializeField]
+    private GameEvent onDeath = null;
 
     [Header("Unity Events")]
     // Passes health percentage
@@ -39,10 +41,8 @@ public class Health : MonoBehaviour
     // Passes health healed
     [SerializeField]
     private UnityEvent<float> _onHeal = null;
-
-    [Header("Feedbacks")]
-    public MMFeedbacks DamageFeedback;
-    public MMFeedbacks DeathFeedback;
+    [SerializeField]
+    private UnityEvent _onDeath = null;
 
     public MMProgressBar progressBar;
 
@@ -105,8 +105,6 @@ public class Health : MonoBehaviour
 
     private void Damage(int amount) 
     {
-        DamageFeedback?.PlayFeedbacks();
-
         _onDamage?.Invoke(amount);
         onDamage?.Raise(amount);
 
@@ -120,7 +118,10 @@ public class Health : MonoBehaviour
         if (health <= 0) 
         {
             //Debug.Log("mortis");
-            DeathFeedback?.PlayFeedbacks();
+
+            onDeath?.Raise();
+            _onDeath?.Invoke();
+
             Invoke("DIE", 0.230f);
         }
     }
@@ -135,6 +136,8 @@ public class Health : MonoBehaviour
 
     private void DIE() 
     {
+
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         Debug.Log("DIE (►__◄)");
