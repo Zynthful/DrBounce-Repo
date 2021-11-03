@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine.SceneManagement;
@@ -13,10 +13,12 @@ public class Health : MonoBehaviour
     private static int maxHealth = 100;
     private float minHealth = 0;
 
+    private bool canSetStartingHealth = true;
+
     public delegate void CurrentHealth();
     public static event CurrentHealth ReportHealth;
 
-    [Header("Events")]
+    [Header("Game Events")]
     // Passes health percentage
     [SerializeField]
     private GameEventFloat onHealthChange = null;
@@ -27,21 +29,29 @@ public class Health : MonoBehaviour
     [SerializeField]
     private GameEventFloat onHeal = null;
 
+    [Header("Unity Events")]
+    // Passes health percentage
+    [SerializeField]
+    private UnityEvent<float> _onHealthChange = null;
+    [SerializeField]
+    // Passes damage taken
+    private UnityEvent<float> _onDamage = null;
+    // Passes health healed
+    [SerializeField]
+    private UnityEvent<float> _onHeal = null;
+
     [Header("Feedbacks")]
     public MMFeedbacks DamageFeedback;
     public MMFeedbacks DeathFeedback;
 
     public MMProgressBar progressBar;
 
-    bool canSetStartingHealth = true;
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         health = maxHealth;
 
-        onHealthChange?.Raise(100.0f * ((float)health / (float)maxHealth));
+        onHealthChange?.Raise(GetHealthPercentage());
+        _onHealthChange?.Invoke(GetHealthPercentage());
         progressBar.UpdateBar(health, minHealth, maxHealth);
     }
 
@@ -49,72 +59,6 @@ public class Health : MonoBehaviour
     {
         //print(health);
         if (canSetStartingHealth) UpdatedStartingHealth();
-    }
-
-    private void UpdatedStartingHealth()   //doesn't work in start : (
-    {
-        //health = 1;
-        //progressBar.UpdateBar(health, minHealth, maxHealth);
-        Damage(30);
-        canSetStartingHealth = false;
-    }
-
-    private void Heal(int amount) 
-    {
-        //print("i am healing: " + amount);
-
-        onHeal?.Raise(amount);
-
-
-        health += amount;
-
-        progressBar.UpdateBar(health, minHealth, maxHealth);
-
-        if (health > maxHealth) 
-        {
-            health = maxHealth;  
-        }
-
-        onHealthChange?.Raise(100.0f * ((float)health / (float)maxHealth));
-    }
-
-    private void Damage(int amount) 
-    {
-        DamageFeedback?.PlayFeedbacks();
-        
-
-        onDamage?.Raise(amount);
-
-        health -= amount;
-
-        progressBar.UpdateBar(health, minHealth, maxHealth);
-
-        onHealthChange?.Raise(100.0f * ((float) health / (float)maxHealth));
-
-        if (health <= 0) 
-        {
-            //Debug.Log("mortis");
-            DeathFeedback?.PlayFeedbacks();
-            Invoke("DIE",0.230f);
-        }
-    }
-
-
-
-
-    private void RecieveRequest()
-    {
-        if(health < maxHealth)
-        {
-            ReportHealth?.Invoke();
-        }
-    }
-
-    private void DIE() 
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-        Debug.Log("DIE (►__◄)");
     }
 
     private void OnEnable()
@@ -131,6 +75,71 @@ public class Health : MonoBehaviour
         BulletMovement.OnHit -= Damage;
     }
 
+    private void UpdatedStartingHealth()   //doesn't work in start : (
+    {
+        //health = 1;
+        //progressBar.UpdateBar(health, minHealth, maxHealth);
+        Damage(30);
+        canSetStartingHealth = false;
+    }
+
+    private void Heal(int amount) 
+    {
+        //print("i am healing: " + amount);
+
+        _onHeal?.Invoke(amount);
+        onHeal?.Raise(amount);
+
+        health += amount;
+
+        if (health > maxHealth) 
+        {
+            health = maxHealth;  
+        }
+
+        _onHealthChange?.Invoke(GetHealthPercentage());
+        onHealthChange?.Raise(GetHealthPercentage());
+
+        progressBar.UpdateBar(health, minHealth, maxHealth);
+    }
+
+    private void Damage(int amount) 
+    {
+        DamageFeedback?.PlayFeedbacks();
+
+        _onDamage?.Invoke(amount);
+        onDamage?.Raise(amount);
+
+        health -= amount;
+
+        _onHealthChange?.Invoke(GetHealthPercentage());
+        onHealthChange?.Raise(GetHealthPercentage());
+
+        progressBar.UpdateBar(health, minHealth, maxHealth);
+
+        if (health <= 0) 
+        {
+            //Debug.Log("mortis");
+            DeathFeedback?.PlayFeedbacks();
+            Invoke("DIE", 0.230f);
+        }
+    }
+
+    private void ReceiveRequest()
+    {
+        if(health < maxHealth)
+        {
+            ReportHealth?.Invoke();
+        }
+    }
+
+    private void DIE() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        Debug.Log("DIE (►__◄)");
+    }
+
     public static int ReturnHealth() 
     {
         return health;
@@ -139,7 +148,15 @@ public class Health : MonoBehaviour
     public static bool ReturnHealthNotMax()
     {
         return (health < maxHealth);
+    }
 
+    /// <summary>
+    /// Returns health percentage as a float between 0-100
+    /// </summary>
+    /// <returns></returns>
+    private float GetHealthPercentage()
+    {
+        return 100.0f * (health / maxHealth);
     }
 
     public bool ReturnDead()
