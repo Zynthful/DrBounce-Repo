@@ -100,6 +100,8 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Dash.performed += _ => StartCoroutine(Dash());
         controls.Player.Crouch.performed += _ => Crouch();
         player = transform;
+
+        GameManager.gravity = gravity;
     }
 
     void FixedUpdate()
