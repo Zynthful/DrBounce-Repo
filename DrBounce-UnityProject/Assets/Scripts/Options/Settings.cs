@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Settings : MonoBehaviour
+public abstract class Settings : MonoBehaviour
 {
     protected enum SettingType
     {
@@ -18,7 +17,7 @@ public class Settings : MonoBehaviour
     [SerializeField]
     protected SettingType type = SettingType.Sensitivity;
 
-    public void Save()
+    protected void Save()
     {
         PlayerPrefs.Save();
     }
