@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using MoreMountains.Feedbacks;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+
+    private bool isCrouching;
+    private CharacterController charController;
+    private float playerHeight;
+    private float oldSpeed;
 
     [Header("Base Movement")]
     public float speed = 8f;
@@ -42,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
     private bool cooldown = false;
     private bool isDashing = false;
     private int dashesPerformed = 0;
-    private bool feedbackPlayed = false;
     private bool dashLocker = false;
     private bool movementBlocker = false;
     private bool hasDashed = false;
@@ -72,20 +75,25 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 velocity;
     private float oldGroundDistance;
 
-    [Header("Feedbacks")]
-    public MMFeedbacks DashFeedback;
-    public MMFeedbacks SlideFeedback;
+    [Header("UnityEvents")]
+    [SerializeField]
+    private UnityEvent onJump = null;
+    [SerializeField]
+    private UnityEvent onDash = null;
+    [SerializeField]
+    private UnityEvent onSlide = null;
+    [SerializeField]
+    private UnityEvent onSlideEnd = null;
 
-    [Header("Events")]
-    [SerializeField] private GameEvent onJump = null;
-    [SerializeField] private GameEvent onDash = null;
-
-    //Crouching:
-    public bool isCrouching;
-    private CharacterController charController;
-    private float playerHeight;
-    private float oldSpeed;
-    //private float playerHeight;
+    [Header("Game Events")]
+    [SerializeField]
+    private GameEvent _onJump = null;
+    [SerializeField]
+    private GameEvent _onDash = null;
+    [SerializeField]
+    private GameEvent _onSlide = null;
+    [SerializeField]
+    private GameEvent _onSlideEnd = null;
 
     private void Awake()
     {
@@ -213,11 +221,6 @@ public class PlayerMovement : MonoBehaviour
             if(hasDashed == false)
             {
                 //acceleration = 1;
-                if (feedbackPlayed == false)
-                {
-                    DashFeedback?.PlayFeedbacks(); //Play feedback
-                    feedbackPlayed = true;
-                }
                 cooldown = true;
 
                 if (dashLocker == false)
@@ -329,12 +332,12 @@ public class PlayerMovement : MonoBehaviour
             gravity = prevGrav;
             isDashing = false;
             isSliding = false;
-            feedbackPlayed = false;
             prevJump = false;
-            SlideFeedback?.StopFeedbacks();
 
             jump = true;
-            onJump?.Raise();
+
+            onJump?.Invoke();
+            _onJump?.Raise();
         }
     }
 
@@ -365,6 +368,11 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public bool GetIsCrouching()
+    {
+        return isCrouching;
+    }
+
     IEnumerator Dash()
     {
         // Checks:
@@ -379,7 +387,8 @@ public class PlayerMovement : MonoBehaviour
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
             movementBlocker = true;
 
-            onDash?.Raise();
+            onDash?.Invoke();
+            _onDash?.Raise();
 
             isCrouching = false;
             StartCoroutine(Cooldown());
@@ -409,10 +418,16 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator EnableDisableSlide()
     {
         isSliding = true;
-        SlideFeedback?.PlayFeedbacks(); //Play feedback
+
+        onSlide?.Invoke();
+        _onSlide?.Raise();
+
         yield return new WaitForSeconds(slideTime); //Performs the slide section of update until the set slideTime is up
+
+        onSlideEnd?.Invoke();
+        _onSlideEnd?.Raise();
+
         isSliding = false;
-        SlideFeedback?.StopFeedbacks(); //stop feedback
 
         hasLetGo = false;
         slideDirectionDecided = false;
@@ -430,10 +445,6 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownTime); //If the cooldown is active, wait for cooldown time set, until setting cooldown as false
         cooldown = false;
-        if(dashesPerformed < dashesBeforeLanding)
-        {
-            feedbackPlayed = false;
-        }
     }
 
     IEnumerator StopDash()
