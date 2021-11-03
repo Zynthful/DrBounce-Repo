@@ -206,6 +206,8 @@ public class PlayerMovement : MonoBehaviour
         #region Dashing
         if (isDashing == true)
         {
+            velocity = Vector3.zero;
+
             print("Dreamworks Animation's Shrek Character");
 
             if(hasDashed == false)

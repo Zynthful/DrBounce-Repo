@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
- #if UNITY_EDITOR
- using UnityEditor;
- #endif
-
 public class Bouncing : MonoBehaviour
 {
 
@@ -17,9 +13,22 @@ public class Bouncing : MonoBehaviour
         W_Straight
     }
 
+    public enum AxisDirection
+    {
+        GreenY,
+        RedX,
+        BlueZ,
+        InverseGreen,
+        InverseRed,
+        InverseBlue
+    }
+
     public BounceType bType;
 
     [SerializeField] float bounceForceMod;
+
+    [Space(10)]
+    [SerializeField][Tooltip("This is only necessary for W_Straight enemies")] private AxisDirection facing;
 
     public Vector3[] BounceBack(Vector3 position, Vector3 origin)
     {
@@ -36,7 +45,7 @@ public class Bouncing : MonoBehaviour
         Vector3[] vectors = new Vector3[1];
         dir = -dir;
 
-        vectors[0] = new Vector3(dir.x, dir.y + .3f, dir.z) * bounceForceMod;
+        vectors[0] = new Vector3(dir.x, dir.y + .25f, dir.z) * bounceForceMod;
         return vectors;
     }
 
@@ -80,19 +89,49 @@ public class Bouncing : MonoBehaviour
 
         dir = (new Vector3(vectors[0].x, 0, vectors[0].z) - new Vector3(position.x, 0, position.z)).normalized; dir.y = .2f;
 
-        vectors[1] = new Vector3(dir.x, dir.y + .25f, dir.z) * bounceForceMod;
+        vectors[1] = new Vector3(dir.x, dir.y + .2f, dir.z) * bounceForceMod;
 
         return vectors;
     }
 
     public Vector3[] BounceStraight(Transform collision, Vector3 position)
     {
-        Vector3[] vectors = new Vector3[2];
+        Vector3[] vectors = new Vector3[3];
 
-        vectors[0] = transform.position;
+        Vector3 dir = Vector3.forward;
+        switch (facing)
+        {
+            case AxisDirection.BlueZ:
+                dir = Vector3.forward;
+                break;
 
-        vectors[1]= collision.TransformDirection(Vector3.forward); vectors[0].y += .25f;
-        vectors[1] *= bounceForceMod;
+            case AxisDirection.GreenY:
+                dir = Vector3.up;
+                break;
+
+            case AxisDirection.RedX:
+                dir = Vector3.right;
+                break;
+
+            case AxisDirection.InverseBlue:
+                dir = Vector3.back;
+                break;
+
+            case AxisDirection.InverseGreen:
+                dir = Vector3.down;
+                break;
+
+            case AxisDirection.InverseRed:
+                dir = Vector3.left;
+                break;
+        }
+
+        vectors[0] = position;
+
+        vectors[1] = position;
+
+        vectors[2] = collision.TransformDirection(dir); vectors[1].y += .2f;
+        vectors[2] *= bounceForceMod;
 
         return vectors;
     }

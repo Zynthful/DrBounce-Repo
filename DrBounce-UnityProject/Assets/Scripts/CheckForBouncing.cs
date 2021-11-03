@@ -76,6 +76,11 @@ public class CheckForBouncing : MonoBehaviour
                     transform.position = returnVectors[0];
                     pm.velocity = returnVectors[1];
                 }
+                else if(returnVectors.Length == 3)
+                {
+                    transform.position = returnVectors[0];
+                    pm.velocity = returnVectors[2];
+                }
                 else
                 {
                     pm.velocity = returnVectors[0];
@@ -86,7 +91,7 @@ public class CheckForBouncing : MonoBehaviour
 
             if(recentHitRun != null)
                 StopCoroutine(recentHitRun);
-            recentHitRun = StartCoroutine(RecentBounce(.175f));
+            recentHitRun = StartCoroutine(RecentBounce(.25f));
         }
     }
 

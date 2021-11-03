@@ -298,7 +298,9 @@ public class GunThrowing : MonoBehaviour
         amountOfBounces++; onBounce?.Raise(amountOfBounces);
 
         BounceFeedback?.PlayFeedbacks();
-        collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
+        MMFeedbacks feedbacks = collision.transform.GetComponentInChildren<MMFeedbacks>();
+        if (feedbacks)
+            feedbacks.PlayFeedbacks();
 
         currentVel = rb.velocity;
     }
