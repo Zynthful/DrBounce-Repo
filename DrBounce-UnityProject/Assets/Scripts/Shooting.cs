@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using MoreMountains.Feedbacks;
 using MoreMountains.NiceVibrations;
 
@@ -28,40 +29,55 @@ public class Shooting : MonoBehaviour
     private float timeSinceLastShot = 0;
 
     #region Events
-    [Header("Events")]
 
+    #region UnityEvents
+    [Header("Unity Events")]
+    [SerializeField]
+    private UnityEvent<int> onChargeUpdate = null;
+    [SerializeField]
+    private UnityEvent onUnchargedShotFired = null;
+    [SerializeField]
+    private UnityEvent<int> onChargedShotFired = null;
+    [SerializeField]
+    private UnityEvent onChargesEmpty = null;
+    [SerializeField]
+    private UnityEvent<bool> onHasCharge = null;
+    public UnityEvent<bool> onHasChargeAndIsHeld = null;
+    [SerializeField]
+    private UnityEvent onFirstGainChargeSinceEmpty = null;
+    [SerializeField]
+    private UnityEvent<bool> onEnemyHover = null;
+    #endregion
+
+    #region GameEvents
+    [Header("Game Events")]
     [SerializeField]
     [Tooltip("Passes gun charge")]
-    private GameEventInt onChargeUpdate = null;
-
+    private GameEventInt _onChargeUpdate = null;
     [SerializeField]
-    private GameEvent onUnchargedShotFired = null;
-
+    private GameEvent _onUnchargedShotFired = null;
     [SerializeField]
     [Tooltip("Passes gun charge")]
-    private GameEventInt onChargedShotFired = null;
-
+    private GameEventInt _onChargedShotFired = null;
     [SerializeField]
-    private GameEvent onChargesEmpty = null;
-
+    private GameEvent _onChargesEmpty = null;
     [SerializeField]
     [Tooltip("Occurs on charge update. Passes whether the gun has charge or not")]
-    private GameEventBool onHasCharge = null;
-
+    private GameEventBool _onHasCharge = null;
     [Tooltip("Occurs on charge update. Passes whether the gun has charge and is currently being held or not")]
-    public GameEventBool onHasChargeAndIsHeld = null;
-
+    public GameEventBool _onHasChargeAndIsHeld = null;
     [SerializeField]
-    private GameEvent onFirstGainChargeSinceEmpty = null;
-
+    private GameEvent _onFirstGainChargeSinceEmpty = null;
     [SerializeField]
     [Tooltip("Passes whether the player is hovering over an enemy")]
-    private GameEventBool onEnemyHover = null;
+    private GameEventBool _onEnemyHover = null;
+    #endregion
+
+    #endregion
 
     public delegate void Activated(int value);
     public static event Activated OnActivated;
 
-    #endregion
 
     [Header("Feedbacks")]
     public MMFeedbacks BasicShootFeedback;
@@ -120,12 +136,14 @@ public class Shooting : MonoBehaviour
         // Is the gun gaining charge for the first time since emptied?
         if (gunCharge <= 0 && value >= 1)
         {
-            onFirstGainChargeSinceEmpty?.Raise();
+            onFirstGainChargeSinceEmpty?.Invoke();
+            _onFirstGainChargeSinceEmpty?.Raise();
         }
 
         gunCharge = value;
 
-        onChargeUpdate?.Raise(gunCharge);
+        onChargeUpdate?.Invoke(gunCharge);
+        _onChargeUpdate?.Raise(gunCharge);
 
         CheckIfCharged();
     }
@@ -141,25 +159,30 @@ public class Shooting : MonoBehaviour
             // this will need to be rewritten eventually?
             if (transform.parent)
             {
-                onHasChargeAndIsHeld?.Raise(true);
+                onHasChargeAndIsHeld?.Invoke(true);
+                _onHasChargeAndIsHeld?.Raise(true);
             }
             else
             {
-                onHasChargeAndIsHeld?.Raise(false);
+                onHasChargeAndIsHeld?.Invoke(false);
+                _onHasChargeAndIsHeld?.Raise(false);
             }
         }
         else
         {
             hasCharge = false;
 
-            onHasChargeAndIsHeld?.Raise(false);
-            onChargesEmpty?.Raise();
+            onHasChargeAndIsHeld?.Invoke(false);
+            _onHasChargeAndIsHeld?.Raise(false);
+            onChargesEmpty?.Invoke();
+            _onChargesEmpty?.Raise();
 
             ChargedFeedback?.StopFeedbacks();
             chargedShotPS.Clear();
         }
 
-        onHasCharge?.Raise(hasCharge);
+        onHasCharge?.Invoke(hasCharge);
+        _onHasCharge?.Raise(hasCharge);
         anim.SetInteger("ChargesLeft", gunCharge);
     }
 
@@ -171,12 +194,14 @@ public class Shooting : MonoBehaviour
             Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
-                onEnemyHover?.Raise(true);
+                onEnemyHover?.Invoke(true);
+                _onEnemyHover?.Raise(true);
                 //print(enemy.transform.name + " is being hovered over!");
             }
             else
             {
-                onEnemyHover?.Raise(false);
+                onEnemyHover?.Invoke(false);
+                _onEnemyHover?.Raise(false);
             }
         }
     }
@@ -198,7 +223,8 @@ public class Shooting : MonoBehaviour
             // Is it an uncharged/basic shot?
             else if (gunCharge <= 0)
             {
-                onUnchargedShotFired?.Raise();
+                onUnchargedShotFired?.Invoke();
+                _onUnchargedShotFired?.Raise();
 
                 BasicShootFeedback?.PlayFeedbacks();
 
@@ -239,7 +265,8 @@ public class Shooting : MonoBehaviour
                 obj.GetComponentInChildren<ExplosiveShot>().comboSize = gunCharge;
                 break;
         }
-        onChargedShotFired?.Raise(gunCharge);
+        onChargedShotFired?.Invoke(gunCharge);
+        _onChargedShotFired?.Raise(gunCharge);
         SetCharge(0);
     }
 
