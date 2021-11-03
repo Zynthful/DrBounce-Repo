@@ -14,6 +14,7 @@ public class ExplosiveShot : BulletMovement
     [SerializeField] [Range(10f, 1000f)] float expansionSpeed;
     private MeshRenderer shotRenderer;
     private MeshCollider shotModelCollider;
+    private CheckForBouncing bounceCheck;
 
     [SerializeField]
     private ExplosiveShotAudio shotAudio = null;
@@ -24,11 +25,12 @@ public class ExplosiveShot : BulletMovement
 
         expanding = false;
 
-        if (!shotRenderer)
+        if (!shotRenderer || !explosionTrigger || !shotModelCollider || !bounceCheck)
         {
-            explosionTrigger = transform.GetComponentInChildren<SphereCollider>().gameObject;
-            shotRenderer = GetComponentInChildren<MeshRenderer>();
-            shotModelCollider = shotRenderer.GetComponent<MeshCollider>();
+            explosionTrigger = transform.parent.GetComponentInChildren<SphereCollider>().gameObject;
+            shotRenderer = GetComponent<MeshRenderer>();
+            shotModelCollider = GetComponent<MeshCollider>();
+            bounceCheck = GetComponent<CheckForBouncing>();
         }
 
         shotRenderer.enabled = true;
@@ -40,13 +42,21 @@ public class ExplosiveShot : BulletMovement
 
    public void OnCollisionEnter(Collision other)
     {
-        if (!other.transform.GetComponent<BulletMovement>() && other.transform.root != PlayerMovement.player.root && !expanding)
+        if (!other.transform.GetComponentInChildren<BulletMovement>() && other.transform.root != PlayerMovement.player.root && !expanding)
         {
+            if (GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << other.gameObject.layer))
+            {
+                if (bounceCheck.CanBounce(other.gameObject))
+                {
+                    return;
+                }
+            }
+
             shotAudio?.PlayExplode();
 
             explosionTrigger.SetActive(true);
             //if (comboSize > 1 && explosionDamageMultiplier > 0)
-                //dam = (int)(dam * comboSize * explosionDamageMultiplier);
+            //dam = (int)(dam * comboSize * explosionDamageMultiplier);
             rb.constraints = RigidbodyConstraints.FreezeAll;
 
             shotRenderer.GetComponent<MeshCollider>().enabled = false;

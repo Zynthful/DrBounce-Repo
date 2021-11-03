@@ -96,7 +96,6 @@ public class GunThrowing : MonoBehaviour
             gunColliders = new Collider[1] {GetComponent<Collider>()};
         }
 
-        Debug.Log(gunColliders);
         foreach(Collider col in gunColliders)
         {
             physicMaterials.Add(col.material);
@@ -256,8 +255,6 @@ public class GunThrowing : MonoBehaviour
     {
         if (other.transform.root == owner && !transform.parent)
         {
-            Debug.Log("InPlayer and " + exitedPlayer + " and running is " + pickupDelayCoroutineRunning);
-
             if (!catchCollider)
             {
                 catchCollider = other.GetComponentInChildren<BoxCollider>();

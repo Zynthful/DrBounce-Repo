@@ -236,7 +236,7 @@ public class Shooting : MonoBehaviour
                 shooter.chargeBullet.damage = DamageAmountCalc(gunCharge);
 
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
-                obj.GetComponent<ExplosiveShot>().comboSize = gunCharge;
+                obj.GetComponentInChildren<ExplosiveShot>().comboSize = gunCharge;
                 break;
         }
         onChargedShotFired?.Raise(gunCharge);

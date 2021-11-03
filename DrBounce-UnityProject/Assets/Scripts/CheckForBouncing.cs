@@ -30,6 +30,15 @@ public class CheckForBouncing : MonoBehaviour
             cc = GetComponent<CharacterController>();
             pm = GetComponent<PlayerMovement>();
         }
+
+        if(!cc && !rb)
+        {
+            rb = GetComponentInParent<Rigidbody>();
+            if (!rb)
+                rb = GetComponentInChildren<Rigidbody>();
+        }
+
+        recentHit = null;
     }
 
     protected void OnCollisionEnter(Collision collision)
@@ -47,7 +56,8 @@ public class CheckForBouncing : MonoBehaviour
             returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision.transform, bounceOriginPoint);
             if (returnVectors.Length > 0)
             {
-                specialInteractions.Bounced(collision);
+                if(specialInteractions)
+                    specialInteractions.Bounced(collision);
 
                 transform.position = returnVectors[0];
                 bounceOriginPoint = returnVectors[1];

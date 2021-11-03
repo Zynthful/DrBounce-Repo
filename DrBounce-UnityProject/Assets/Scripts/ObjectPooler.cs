@@ -61,12 +61,22 @@ public class ObjectPooler : MonoBehaviour
 
         objToSpawn.SetActive(true);
 
-        if(mat != null)
+        if (mat != null)
         {
             objToSpawn.GetComponent<Renderer>().material = mat;
         }
 
-        BulletMovement objMov = objToSpawn.GetComponent<BulletMovement>();
+        BulletMovement objMov;
+
+        if (objToSpawn.GetComponent<BulletMovement>())
+        {
+            objMov = objToSpawn.GetComponent<BulletMovement>();
+        }
+        else
+        {
+            objMov = objToSpawn.GetComponentInChildren<BulletMovement>();
+        }
+
         objMov.returnbullet = false;
         objMov.dir = dir;
         objMov.speed = bul.speed;
@@ -75,7 +85,7 @@ public class ObjectPooler : MonoBehaviour
         objToSpawn.transform.localScale = bul.size;
         objToSpawn.transform.position = position;
 
-        IPooledObject pooledObj = objToSpawn.GetComponent<IPooledObject>();
+        IPooledObject pooledObj = objMov.GetComponent<IPooledObject>();
 
         if (pooledObj != null)
         {

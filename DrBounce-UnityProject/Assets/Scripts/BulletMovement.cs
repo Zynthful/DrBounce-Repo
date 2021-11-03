@@ -37,6 +37,8 @@ public class BulletMovement : MonoBehaviour, IPooledObject
         if(!rb)
         {
             rb = GetComponent<Rigidbody>();
+            if (!rb)
+                rb = GetComponentInChildren<Rigidbody>();
         }
         
         rb.velocity = dir * speed * Time.fixedDeltaTime;
