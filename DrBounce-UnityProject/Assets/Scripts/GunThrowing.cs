@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 using MoreMountains.Feedbacks;
+
 public class GunThrowing : MonoBehaviour
 {
     [SerializeField] bool returning;
@@ -34,32 +36,43 @@ public class GunThrowing : MonoBehaviour
     [SerializeField]
     private Shooting shooting = null;
 
-    [Header("Feedbacks")]
-    public MMFeedbacks BounceFeedback;
-    public MMFeedbacks CatchFeedback;
-    public MMFeedbacks PickupFeedback;
-    public MMFeedbacks MagnetCallFeedback;
-    public MMFeedbacks BounceHitFeedback;
-
     public bool inFlight;
 
     public Outline outlineScript;
 
-    [Header("Events")]
+    [Header("Unity Events")]
     [SerializeField]
-    private GameEventInt onBounce = null;
+    private UnityEvent<int> onBounce = null;
     [SerializeField]
-    private GameEvent onPickup = null;
+    private UnityEvent onPickup = null;
     [SerializeField]
-    private GameEvent onThrown = null;
+    private UnityEvent onThrown = null;
     [SerializeField]
-    private GameEvent onCatch = null;
+    private UnityEvent onCatch = null;
     [SerializeField]
-    private GameEvent onDropped = null;
+    private UnityEvent onDropped = null;
     [SerializeField]
-    private GameEvent onDroppedAndLostAllCharges = null; // Raised only if the item loses charges on drop
+    private UnityEvent onDroppedAndLostAllCharges = null; // Invoked only if the item loses charges on drop
     [SerializeField]
-    private GameEvent onRecall = null;
+    private UnityEvent onRecall = null;
+    [SerializeField]
+    private UnityEvent onReset = null;
+
+    [Header("Game Events")]
+    [SerializeField]
+    private GameEventInt _onBounce = null;
+    [SerializeField]
+    private GameEvent _onPickup = null;
+    [SerializeField]
+    private GameEvent _onThrown = null;
+    [SerializeField]
+    private GameEvent _onCatch = null;
+    [SerializeField]
+    private GameEvent _onDropped = null;
+    [SerializeField]
+    private GameEvent _onDroppedAndLostAllCharges = null; // Raised only if the item loses charges on drop
+    [SerializeField]
+    private GameEvent _onRecall = null;
 
     // Start is called before the first frame update
     void Start()
@@ -167,7 +180,9 @@ public class GunThrowing : MonoBehaviour
             foreach (Transform child in transform)
                 child.gameObject.layer = 3;
 
-            onThrown?.Raise();
+            onThrown?.Invoke();
+            _onThrown?.Raise();
+
             returning = false;
             rb.constraints = RigidbodyConstraints.None;
             transform.parent = null;
@@ -209,8 +224,9 @@ public class GunThrowing : MonoBehaviour
             transform.parent = weaponHolderTransform;
             transform.localPosition = handPosition;
             transform.rotation = weaponHolderTransform.rotation;
-            MagnetCallFeedback?.PlayFeedbacks();
             currentVel = Vector3.zero;
+
+            onReset?.Invoke();
 
             inventory.OnPickupItem(transform);
 
@@ -226,7 +242,8 @@ public class GunThrowing : MonoBehaviour
     {
         if (startOnPlayer && transform.parent == null)
         {
-            onRecall?.Raise();
+            onRecall?.Invoke();
+            _onRecall?.Raise();
             amountOfBounces = 0;
             ResetScript();
         }
@@ -243,11 +260,16 @@ public class GunThrowing : MonoBehaviour
 
             // If the item loses all charges on drop
             if (amountOfBounces != 0)
-                onDroppedAndLostAllCharges?.Raise();
+            {
+                onDroppedAndLostAllCharges?.Invoke();
+                _onDroppedAndLostAllCharges?.Raise();
+            }
 
             amountOfBounces = 0;
-            onDropped?.Raise();
             inFlight = false;
+
+            onDropped?.Invoke();
+            _onDropped?.Raise();
         }
     }
 
@@ -263,14 +285,14 @@ public class GunThrowing : MonoBehaviour
 
             if (returning && inFlight)
             {
-                onCatch?.Raise();
-                CatchFeedback?.PlayFeedbacks();
+                onCatch?.Invoke();
+                _onCatch?.Raise();
             }
 
             else if (exitedPlayer)
             {
-                onPickup?.Raise();
-                PickupFeedback?.PlayFeedbacks();
+                onPickup?.Invoke();
+                _onPickup?.Raise();
             }
 
             else return;
@@ -292,9 +314,11 @@ public class GunThrowing : MonoBehaviour
         returning = true;
         inFlight = true;
 
-        amountOfBounces++; onBounce?.Raise(amountOfBounces);
+        amountOfBounces++;
+        
+        onBounce?.Invoke(amountOfBounces);
+        _onBounce?.Raise(amountOfBounces);
 
-        BounceFeedback?.PlayFeedbacks();
         MMFeedbacks feedbacks = collision.transform.GetComponentInChildren<MMFeedbacks>();
         if (feedbacks)
             feedbacks.PlayFeedbacks();

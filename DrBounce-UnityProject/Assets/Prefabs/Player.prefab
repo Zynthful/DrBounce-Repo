@@ -12771,20 +12771,99 @@ MonoBehaviour:
   catchCollider: {fileID: 217178606593367897}
   currentVel: {x: 0, y: 0, z: 0}
   shooting: {fileID: 4949567449814967032}
-  BounceFeedback: {fileID: 5587670236463760747}
-  CatchFeedback: {fileID: 5587670236743795880}
-  PickupFeedback: {fileID: 5772517193354484404}
-  MagnetCallFeedback: {fileID: 8650057482864351910}
-  BounceHitFeedback: {fileID: 0}
   inFlight: 0
   outlineScript: {fileID: 0}
-  onBounce: {fileID: 11400000, guid: 9d2693e15688753468f4083136d8ffa6, type: 2}
-  onPickup: {fileID: 11400000, guid: 8fa8497e3a47c8746af5c3790f606213, type: 2}
-  onThrown: {fileID: 11400000, guid: 244aed5e21e1f324eb5bb18bcb00fa61, type: 2}
-  onCatch: {fileID: 11400000, guid: 4b56bb7bbb80eaa4c85ae3ad717f8680, type: 2}
-  onDropped: {fileID: 11400000, guid: cb7f18caeeead5845a5f56b683b4debd, type: 2}
-  onDroppedAndLostAllCharges: {fileID: 11400000, guid: 1eddc3b13d22ba240b352796ef813b41, type: 2}
-  onRecall: {fileID: 11400000, guid: c00823c895747804ab0ee56874a5c03b, type: 2}
+  onBounce:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5587670236463760747}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPickup:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5772517193354484404}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onThrown:
+    m_PersistentCalls:
+      m_Calls: []
+  onCatch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5587670236743795880}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDropped:
+    m_PersistentCalls:
+      m_Calls: []
+  onDroppedAndLostAllCharges:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1551049667518238682}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onRecall:
+    m_PersistentCalls:
+      m_Calls: []
+  onReset:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8650057482864351910}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onBounce: {fileID: 11400000, guid: 9d2693e15688753468f4083136d8ffa6, type: 2}
+  _onPickup: {fileID: 11400000, guid: 8fa8497e3a47c8746af5c3790f606213, type: 2}
+  _onThrown: {fileID: 11400000, guid: 244aed5e21e1f324eb5bb18bcb00fa61, type: 2}
+  _onCatch: {fileID: 11400000, guid: 4b56bb7bbb80eaa4c85ae3ad717f8680, type: 2}
+  _onDropped: {fileID: 11400000, guid: cb7f18caeeead5845a5f56b683b4debd, type: 2}
+  _onDroppedAndLostAllCharges: {fileID: 11400000, guid: 1eddc3b13d22ba240b352796ef813b41, type: 2}
+  _onRecall: {fileID: 11400000, guid: c00823c895747804ab0ee56874a5c03b, type: 2}
 --- !u!114 &4949567449814967032
 MonoBehaviour:
   m_ObjectHideFlags: 0
