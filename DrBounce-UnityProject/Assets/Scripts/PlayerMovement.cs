@@ -356,7 +356,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isCrouching == false)
             {
-                if(controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
+                if(controls.Player.Movement.ReadValue<Vector2>().y <= 0)
                 {
                     print("Crouch");
                     isCrouching = true;
