@@ -47,6 +47,8 @@ public class Shooting : MonoBehaviour
     private UnityEvent onFirstGainChargeSinceEmpty = null;
     [SerializeField]
     private UnityEvent<bool> onEnemyHover = null;
+    [SerializeField]
+    private UnityEvent onExplosiveShot = null;
     #endregion
 
     #region GameEvents
@@ -71,6 +73,8 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     [Tooltip("Passes whether the player is hovering over an enemy")]
     private GameEventBool _onEnemyHover = null;
+    [SerializeField]
+    private GameEvent _onExplosiveShot = null;
     #endregion
 
     #endregion
@@ -78,11 +82,8 @@ public class Shooting : MonoBehaviour
     public delegate void Activated(int value);
     public static event Activated OnActivated;
 
-
-    [Header("Feedbacks")]
-    public MMFeedbacks BasicShootFeedback;
     public MMFeedbacks ChargedFeedback;
-    public MMFeedbacks FirstChargedShotFeedback;
+
     [SerializeField] ParticleSystem chargedShotPS;
 
     // Start is called before the first frame update
@@ -155,7 +156,6 @@ public class Shooting : MonoBehaviour
             hasCharge = true;
 
             ChargedFeedback?.PlayFeedbacks();
-
             // this will need to be rewritten eventually?
             if (transform.parent)
             {
@@ -226,8 +226,6 @@ public class Shooting : MonoBehaviour
                 onUnchargedShotFired?.Invoke();
                 _onUnchargedShotFired?.Raise();
 
-                BasicShootFeedback?.PlayFeedbacks();
-
                 //ChargedFeedback?.StopFeedbacks();
                 damage = Mathf.RoundToInt(shooter.damageGraph[0].y);
 
@@ -253,11 +251,11 @@ public class Shooting : MonoBehaviour
     private void HandleComboShot()
     {
     	ChargedFeedback?.PlayFeedbacks();	
-
         switch(shooter.chargeShot)
         {
             case GunModes.Explosives:
-                FirstChargedShotFeedback?.PlayFeedbacks();
+                onExplosiveShot?.Invoke();
+                _onExplosiveShot?.Raise();
 
                 shooter.chargeBullet.damage = DamageAmountCalc(gunCharge);
 
@@ -273,7 +271,8 @@ public class Shooting : MonoBehaviour
     public void Bounce(int bounceCount) 
     {
         SetCharge(bounceCount);
-        ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
+        ChargedFeedback?.StopFeedbacks();
+        chargedShotPS.Clear();
     }
 
     public void Catch()

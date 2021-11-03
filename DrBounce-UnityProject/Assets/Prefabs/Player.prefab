@@ -12885,7 +12885,19 @@ MonoBehaviour:
       m_Calls: []
   onUnchargedShotFired:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4545366999181130698}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onChargedShotFired:
     m_PersistentCalls:
       m_Calls: []
@@ -12904,6 +12916,21 @@ MonoBehaviour:
   onEnemyHover:
     m_PersistentCalls:
       m_Calls: []
+  onExplosiveShot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3547416809378264515}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onChargeUpdate: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
   _onUnchargedShotFired: {fileID: 11400000, guid: 6fb485945f78fb243a7f1b29f51650b4, type: 2}
   _onChargedShotFired: {fileID: 11400000, guid: 9762d1a36d8157e4abf500980e74e47d, type: 2}
@@ -12912,9 +12939,8 @@ MonoBehaviour:
   _onHasChargeAndIsHeld: {fileID: 11400000, guid: c4a23f868ddcd17419e8b363fe149583, type: 2}
   _onFirstGainChargeSinceEmpty: {fileID: 11400000, guid: 11f934499c44da6419ef97f27be17ae9, type: 2}
   _onEnemyHover: {fileID: 11400000, guid: cdd28372f25c79a4c863cc29297d4979, type: 2}
-  BasicShootFeedback: {fileID: 4545366999181130698}
+  _onExplosiveShot: {fileID: 11400000, guid: ef6b303fdb4883a42b21e939b6e1f4f7, type: 2}
   ChargedFeedback: {fileID: 4578051724829632361}
-  FirstChargedShotFeedback: {fileID: 3547416809378264515}
   chargedShotPS: {fileID: 6341533568631161365}
 --- !u!114 &4648697631877843793
 MonoBehaviour:
@@ -14164,7 +14190,7 @@ MonoBehaviour:
   Direction: 0
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
-  AutoPlayOnEnable: 0
+  AutoPlayOnEnable: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
