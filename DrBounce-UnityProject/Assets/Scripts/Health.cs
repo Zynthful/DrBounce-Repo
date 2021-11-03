@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using MoreMountains.Feedbacks;
-using MoreMountains.Tools;
 using UnityEngine.SceneManagement;
 
 
@@ -11,7 +9,6 @@ public class Health : MonoBehaviour
 {
     private static int health = 100;
     private static int maxHealth = 100;
-    private float minHealth = 0;
 
     private bool canSetStartingHealth = true;
 
@@ -19,9 +16,12 @@ public class Health : MonoBehaviour
     public static event CurrentHealth ReportHealth;
 
     [Header("Game Events")]
-    // Passes health percentage
+    // Passes health value
     [SerializeField]
     private GameEventFloat onHealthChange = null;
+    // Passes health percentage normalized (between 0-1)
+    [SerializeField]
+    private GameEventFloat onHealthChangeNormalized = null;
     // Passes damage taken
     [SerializeField]
     private GameEventFloat onDamage = null;
@@ -32,11 +32,14 @@ public class Health : MonoBehaviour
     private GameEvent onDeath = null;
 
     [Header("Unity Events")]
-    // Passes health percentage
+    // Passes health value
     [SerializeField]
     private UnityEvent<float> _onHealthChange = null;
+    // Passes health percentage normalized (between 0-1)
     [SerializeField]
+    private UnityEvent<float> _onHealthChangeNormalized = null;
     // Passes damage taken
+    [SerializeField]
     private UnityEvent<float> _onDamage = null;
     // Passes health healed
     [SerializeField]
@@ -44,15 +47,14 @@ public class Health : MonoBehaviour
     [SerializeField]
     private UnityEvent _onDeath = null;
 
-    public MMProgressBar progressBar;
-
     private void Start()
     {
         health = maxHealth;
 
-        onHealthChange?.Raise(GetHealthPercentage());
-        _onHealthChange?.Invoke(GetHealthPercentage());
-        progressBar.UpdateBar(health, minHealth, maxHealth);
+        _onHealthChange?.Invoke(health);
+        _onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
+        onHealthChange?.Raise(health);
+        onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
     }
 
     private void Update()
@@ -77,8 +79,6 @@ public class Health : MonoBehaviour
 
     private void UpdatedStartingHealth()   //doesn't work in start : (
     {
-        //health = 1;
-        //progressBar.UpdateBar(health, minHealth, maxHealth);
         Damage(30);
         canSetStartingHealth = false;
     }
@@ -97,10 +97,10 @@ public class Health : MonoBehaviour
             health = maxHealth;  
         }
 
-        _onHealthChange?.Invoke(GetHealthPercentage());
-        onHealthChange?.Raise(GetHealthPercentage());
-
-        progressBar.UpdateBar(health, minHealth, maxHealth);
+        _onHealthChange?.Invoke(health);
+        _onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
+        onHealthChange?.Raise(health);
+        onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
     }
 
     private void Damage(int amount) 
@@ -110,10 +110,10 @@ public class Health : MonoBehaviour
 
         health -= amount;
 
-        _onHealthChange?.Invoke(GetHealthPercentage());
-        onHealthChange?.Raise(GetHealthPercentage());
-
-        progressBar.UpdateBar(health, minHealth, maxHealth);
+        _onHealthChange?.Invoke(health);
+        _onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
+        onHealthChange?.Raise(health);
+        onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
 
         if (health <= 0) 
         {
@@ -136,8 +136,6 @@ public class Health : MonoBehaviour
 
     private void DIE() 
     {
-
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         Debug.Log("DIE (►__◄)");
@@ -157,9 +155,9 @@ public class Health : MonoBehaviour
     /// Returns health percentage as a float between 0-100
     /// </summary>
     /// <returns></returns>
-    private float GetHealthPercentage()
+    private float GetHealthPercentageNormalized()
     {
-        return 100.0f * (health / maxHealth);
+        return (float)health / (float)maxHealth;
     }
 
     public bool ReturnDead()
