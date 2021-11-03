@@ -905,12 +905,12 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<Custom>
-												<Attenuation Name="Attenuation (Custom)" ID="{9C394769-B0A6-4770-B6A5-CD16D52D5FD3}" ShortID="972240205">
+											<Custom CreatedFrom="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}">
+												<Attenuation Name="Player Body (Custom)" ID="{3777D5EB-A443-4BF4-93CD-DBF521CEF5EA}" ShortID="33698417">
 													<CurveUsageInfoList>
 														<VolumeDryUsage>
 															<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
-																<Curve Name="VolumeDry" ID="{AF17B511-3227-45B6-BF10-2C6199FD45F0}">
+																<Curve Name="VolumeDry" ID="{27C7D070-11A0-4F71-A5D6-DD3098537466}">
 																	<PropertyList>
 																		<Property Name="Flags" Type="int32" Value="3"/>
 																	</PropertyList>
@@ -942,7 +942,25 @@
 															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
 														</HighPassFilterUsage>
 														<SpreadUsage>
-															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+															<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																<Curve Name="Spread" ID="{A4896C0F-D226-4F63-BDEE-139C1D897914}">
+																	<PropertyList>
+																		<Property Name="Flags" Type="int32" Value="1"/>
+																	</PropertyList>
+																	<PointList>
+																		<Point>
+																			<XPos>0</XPos>
+																			<YPos>100</YPos>
+																			<Flags>5</Flags>
+																		</Point>
+																		<Point>
+																			<XPos>100</XPos>
+																			<YPos>0</YPos>
+																			<Flags>37</Flags>
+																		</Point>
+																	</PointList>
+																</Curve>
+															</CurveUsageInfo>
 														</SpreadUsage>
 														<FocusUsage>
 															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
@@ -987,7 +1005,7 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="Dash" ID="{99784119-CC91-41E9-973A-987F9B4C192A}" ShortID="623356621">
 									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>-9</Value>
@@ -996,12 +1014,12 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<Custom>
-												<Attenuation Name="Attenuation (Custom)" ID="{B1DC7101-BF28-48CB-A938-AB56AD106790}" ShortID="81220982">
+											<Custom CreatedFrom="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}">
+												<Attenuation Name="Player Body (Custom)" ID="{549EA6F9-E29C-40F8-9A7B-F33DE7ADE8ED}" ShortID="705412184">
 													<CurveUsageInfoList>
 														<VolumeDryUsage>
 															<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
-																<Curve Name="VolumeDry" ID="{4A232617-AA49-4B83-9AE0-69275CDB1C2E}">
+																<Curve Name="VolumeDry" ID="{CBB10E79-FB54-4A4D-801D-6230EB61A8A9}">
 																	<PropertyList>
 																		<Property Name="Flags" Type="int32" Value="3"/>
 																	</PropertyList>
