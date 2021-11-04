@@ -15,6 +15,7 @@ namespace AK
     {
         static const AkUniqueID DASH = 1942692385U;
         static const AkUniqueID ENEMY_GUN_BOUNCE_IMPACT = 177975784U;
+        static const AkUniqueID FOOTSTEP = 1866025847U;
         static const AkUniqueID GUN_BOUNCE_ENEMY = 1677136213U;
         static const AkUniqueID GUN_CATCH = 4103136129U;
         static const AkUniqueID GUN_CHARGE_LOST = 1899329689U;

@@ -12,9 +12,6 @@ public class EnemyHealth : Health
     [SerializeField]
     private MMHealthBar _targetHealthBar;
 
-    public delegate void OnPlayerDeath();
-    public static event OnPlayerDeath onPlayerDeath;
-
     public delegate void Death();
     public static event Death OnDeath;
 

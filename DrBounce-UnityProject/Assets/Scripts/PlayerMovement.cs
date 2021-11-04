@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float acceleration;
     public float accelerationSpeed;
+    private bool isMoving = false;
 
     [Header("Jump")]
     public float jumpPeak = 3f;
@@ -196,6 +197,9 @@ public class PlayerMovement : MonoBehaviour
                 move = (slideLeftRight * x); //Creates a value to move the player in local space based on this value.
                 controller.Move(move * strafeStrength * Time.deltaTime); //uses move value to move the player.
             }
+
+            // Check if moving
+            isMoving = move != Vector3.zero ? true : false;
         }
 
         if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
@@ -371,6 +375,16 @@ public class PlayerMovement : MonoBehaviour
     public bool GetIsCrouching()
     {
         return isCrouching;
+    }
+
+    public bool GetIsMoving()
+    {
+        return isMoving;
+    }
+
+    public bool GetIsGrounded()
+    {
+        return isGrounded;
     }
 
     IEnumerator Dash()
