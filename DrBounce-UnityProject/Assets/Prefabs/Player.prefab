@@ -12942,6 +12942,7 @@ MonoBehaviour:
   _onExplosiveShot: {fileID: 11400000, guid: ef6b303fdb4883a42b21e939b6e1f4f7, type: 2}
   ChargedFeedback: {fileID: 4578051724829632361}
   chargedShotPS: {fileID: 6341533568631161365}
+  health: {fileID: 2310374646132961174}
 --- !u!114 &4648697631877843793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13577,8 +13578,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5587670236924705794}
   - component: {fileID: 5587670236924705797}
+  - component: {fileID: 2310374646132961174}
   - component: {fileID: 5587670236924705796}
-  - component: {fileID: 2207795691488889897}
   - component: {fileID: 6795235176586945864}
   m_Layer: 9
   m_Name: Player
@@ -13626,6 +13627,76 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2310374646132961174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587670236924705799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb69d9a7e092394bb1e624d7534fce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  deathDelay: 0.23
+  onHealthChange:
+    m_PersistentCalls:
+      m_Calls: []
+  onHealthChangeNormalized:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7766380814449562150}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHeal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 198470632}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1750467636849591062}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onHealthChange: {fileID: 11400000, guid: 0ade52ed31f6d9d45b7359960c47b414, type: 2}
+  _onHealthChangeNormalized: {fileID: 11400000, guid: 82ae9c0fcb2d58143865edc6aa167470, type: 2}
+  _onDamage: {fileID: 11400000, guid: a4cce50167a779043ba317c25da1bc15, type: 2}
+  _onHeal: {fileID: 11400000, guid: ce31a253f1d8f164eaa9bf1d43868711, type: 2}
+  _onDeath: {fileID: 11400000, guid: 3c712b69e3e2ce240a3447a15d098f90, type: 2}
 --- !u!114 &5587670236924705796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13760,74 +13831,6 @@ MonoBehaviour:
   _onDash: {fileID: 11400000, guid: 539dc31165069b14ead0a76396611171, type: 2}
   _onSlide: {fileID: 11400000, guid: 222402d1b4224984abf12511ce8acec0, type: 2}
   _onSlideEnd: {fileID: 11400000, guid: 8f1e983433eef4645aa2191ce74e2dab, type: 2}
---- !u!114 &2207795691488889897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587670236924705799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebf2209fa9a92cb419fb087afe2c2ac3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onHealthChange: {fileID: 11400000, guid: 0ade52ed31f6d9d45b7359960c47b414, type: 2}
-  onHealthChangeNormalized: {fileID: 11400000, guid: 82ae9c0fcb2d58143865edc6aa167470, type: 2}
-  onDamage: {fileID: 11400000, guid: a4cce50167a779043ba317c25da1bc15, type: 2}
-  onHeal: {fileID: 11400000, guid: ce31a253f1d8f164eaa9bf1d43868711, type: 2}
-  onDeath: {fileID: 11400000, guid: 3c712b69e3e2ce240a3447a15d098f90, type: 2}
-  _onHealthChange:
-    m_PersistentCalls:
-      m_Calls: []
-  _onHealthChangeNormalized:
-    m_PersistentCalls:
-      m_Calls: []
-  _onDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7766380814449562150}
-        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
-        m_MethodName: PlayFeedbacks
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _onHeal:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 198470632}
-        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
-        m_MethodName: PlayFeedbacks
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1750467636849591062}
-        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
-        m_MethodName: PlayFeedbacks
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &6795235176586945864
 MonoBehaviour:
   m_ObjectHideFlags: 0

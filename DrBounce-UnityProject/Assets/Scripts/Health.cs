@@ -2,167 +2,144 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
-
 
 public class Health : MonoBehaviour
 {
-    private static int health = 100;
-    private static int maxHealth = 100;
-
-    private bool canSetStartingHealth = true;
-
+    /*
     public delegate void CurrentHealth();
     public static event CurrentHealth ReportHealth;
+    */
 
-    public delegate void PlayerDeath();
-    public static event PlayerDeath OnPlayerDeath;
+    [Header("Health Settings")]
+    protected int health = 100;
 
-    [Header("Events")]
-    // Passes health percentage
     [SerializeField]
-    private GameEventFloat onHealthChange = null;
-    // Passes health percentage normalized (between 0-1)
+    protected int maxHealth = 100;
     [SerializeField]
-    private GameEventFloat onHealthChangeNormalized = null;
-    // Passes damage taken
-    [SerializeField]
-    private GameEventFloat onDamage = null;
-    // Passes health healed
-    [SerializeField]
-    private GameEventFloat onHeal = null;
-    [SerializeField]
-    private GameEvent onDeath = null;
+    private float deathDelay = 0.230f;
+
+    protected bool canSetStartingHealth = true;
 
     [Header("Unity Events")]
     // Passes health value
     [SerializeField]
-    private UnityEvent<float> _onHealthChange = null;
+    protected UnityEvent<float> onHealthChange = null;
     // Passes health percentage normalized (between 0-1)
     [SerializeField]
-    private UnityEvent<float> _onHealthChangeNormalized = null;
+    protected UnityEvent<float> onHealthChangeNormalized = null;
     // Passes damage taken
     [SerializeField]
-    private UnityEvent<float> _onDamage = null;
+    protected UnityEvent<float> onDamage = null;
     // Passes health healed
     [SerializeField]
-    private UnityEvent<float> _onHeal = null;
+    protected UnityEvent<float> onHeal = null;
     [SerializeField]
-    private UnityEvent _onDeath = null;
+    protected UnityEvent onDeath = null;
 
-    private void Start()
+    [Header("Game Events")]
+    // Passes health percentage
+    [SerializeField]
+    private GameEventFloat _onHealthChange = null;
+    // Passes health percentage normalized (between 0-1)
+    [SerializeField]
+    private GameEventFloat _onHealthChangeNormalized = null;
+    // Passes damage taken
+    [SerializeField]
+    private GameEventFloat _onDamage = null;
+    // Passes health healed
+    [SerializeField]
+    private GameEventFloat _onHeal = null;
+    [SerializeField]
+    private GameEvent _onDeath = null;
+
+    protected virtual void Start()
     {
         ResetHealth();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        //print(health);
         if (canSetStartingHealth) UpdatedStartingHealth();
     }
 
-    private void OnEnable()
+    protected virtual void UpdatedStartingHealth()   //doesn't work in start : (
     {
-        HealthPack.OnActivated += Heal;
-        Shooting.OnActivated += Heal;
-        BulletMovement.OnHit += Damage;
-    }
-
-    private void OnDisable()
-    {
-        HealthPack.OnActivated -= Heal;
-        Shooting.OnActivated -= Heal;
-        BulletMovement.OnHit -= Damage;
-    }
-
-    private void UpdatedStartingHealth()   //doesn't work in start : (
-    {
-        Damage(30);
+        // Damage(30);
         canSetStartingHealth = false;
     }
 
-    private void Heal(int amount) 
+    protected virtual void SetHealth(int value)
     {
-        //print("i am healing: " + amount);
+        health = value;
 
-        _onHeal?.Invoke(amount);
-        onHeal?.Raise(amount);
-
-        health += amount;
-
-        if (health > maxHealth) 
+        // Cap health
+        if (health > maxHealth)
         {
-            health = maxHealth;  
+            health = maxHealth;
         }
 
-        InvokeHealthChange();
-    }
-
-    private void Damage(int amount) 
-    {
-        _onDamage?.Invoke(amount);
-        onDamage?.Raise(amount);
-
-        health -= amount;
-
-        InvokeHealthChange();
-
-        if (health <= 0) 
+        else if (GetIsDead())
         {
-            //Debug.Log("mortis");
-
-            onDeath?.Raise();
-            _onDeath?.Invoke();
-
-            Invoke("DIE", 0.230f);
+            Invoke("DIE", deathDelay);
         }
+
+        onHealthChange?.Invoke(health);
+        onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
+        _onHealthChange?.Raise(health);
+        _onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
     }
 
-    private void ReceiveRequest()
+    public virtual void Heal(int amount) 
+    {
+        // print("i am healing: " + amount);
+
+        onHeal?.Invoke(amount);
+        _onHeal?.Raise(amount);
+
+        SetHealth(health + amount);
+    }
+
+    public virtual void Damage(int amount) 
+    {
+        Debug.Log("dmg: " + amount);
+
+        onDamage?.Invoke(amount);
+        _onDamage?.Raise(amount);
+
+        SetHealth(health - amount);
+    }
+
+    /*
+    protected virtual void ReceiveRequest()
     {
         if(health < maxHealth)
         {
             ReportHealth?.Invoke();
         }
     }
+    */
 
-    private void DIE() 
+    protected virtual void DIE() 
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        onDeath?.Invoke();
+        _onDeath?.Raise();
 
-        OnPlayerDeath?.Invoke();
-
-        Debug.Log("DIE (►__◄)");
-
-        ResetHealth();
+        Debug.Log($"DIE (►__◄) {gameObject}");
     }
 
-    /// <summary>
-    /// Calls onHealthChange events, which currently updates the ui baby
-    /// </summary>
-    private void InvokeHealthChange() 
+    protected virtual void ResetHealth() 
     {
-        _onHealthChange?.Invoke(health);
-        _onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
-        onHealthChange?.Raise(health);
-        onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
+        SetHealth(maxHealth);
     }
 
-    private void ResetHealth() 
-    {
-        health = maxHealth;
-
-        InvokeHealthChange();
-    }
-
-    public static int ReturnHealth() 
+    public int GetHealth() 
     {
         return health;
     }
 
-    public static bool ReturnHealthNotMax()
+    public bool GetIsAtFullHealth()
     {
-        return (health < maxHealth);
+        return (health >= maxHealth);
     }
 
     /// <summary>
@@ -174,7 +151,7 @@ public class Health : MonoBehaviour
         return (float)health / (float)maxHealth;
     }
 
-    public bool ReturnDead()
+    public bool GetIsDead()
     {
         return health <= 0;
     }

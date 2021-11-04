@@ -47,7 +47,7 @@ public class CheckForBouncing : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Enemy>())
             {
-                EnemyAudio audio = collision.gameObject.GetComponent<Enemy>()?.enemyAudio;
+                EnemyAudio audio = collision.gameObject.GetComponent<Enemy>()?.GetAudio();
                 audio?.PlayBounce();
             }
 
@@ -72,7 +72,7 @@ public class CheckForBouncing : MonoBehaviour
         {
             if (hit.gameObject.GetComponent<Enemy>())
             {
-                EnemyAudio audio = hit.gameObject.GetComponent<Enemy>()?.enemyAudio;
+                EnemyAudio audio = hit.gameObject.GetComponent<Enemy>()?.GetAudio();
                 audio?.PlayBounce();
             }
 
@@ -135,7 +135,7 @@ public class CheckForBouncing : MonoBehaviour
             case RequirementsForBounce.Requirements.amDead:
                 if (GetComponent<Health>())
                 {
-                    if (GetComponent<Health>().ReturnDead())
+                    if (GetComponent<Health>().GetIsDead())
                         return true;
                 }
                 else
@@ -147,7 +147,7 @@ public class CheckForBouncing : MonoBehaviour
             case RequirementsForBounce.Requirements.amAlive:
                 if (GetComponent<Health>())
                 {
-                    if (!GetComponent<Health>().ReturnDead())
+                    if (!GetComponent<Health>().GetIsDead())
                         return true;
                 }
                 else

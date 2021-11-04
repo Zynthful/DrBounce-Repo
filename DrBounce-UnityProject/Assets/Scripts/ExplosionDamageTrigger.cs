@@ -7,10 +7,10 @@ public class ExplosionDamageTrigger : MonoBehaviour
     [HideInInspector] public int damage;
     private void OnTriggerEnter(Collider other) 
     {
-        Enemy check = other.GetComponent<Enemy>();
+        EnemyHealth check = other.GetComponent<EnemyHealth>();
         if(check)
         {
-            check.TakeDamage(damage);
+            check.Damage(damage);
         }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 962519144952153282}
   - component: {fileID: 962519144952153285}
   - component: {fileID: 1387973275529385780}
+  - component: {fileID: 1333837119961363757}
   - component: {fileID: 38548217340573182}
   - component: {fileID: 3277031726898662851}
   m_Layer: 8
@@ -118,15 +119,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAudio: {fileID: 4044905670104362165}
+  health: {fileID: 1333837119961363757}
   bullet: {fileID: 11400000, guid: ddb9c01b369a12d4f8a496fac71284c3, type: 2}
-  healthPack: {fileID: 8944194320657019260, guid: 6ccf19d6816b28f42ba83ef0ba792246, type: 3}
+  healthPackPrefab: {fileID: 8944194320657019260, guid: 6ccf19d6816b28f42ba83ef0ba792246, type: 3}
   canSeePlayer: 0
   materials: []
   viewDist: 12
   sightAngle: 45
   rateOfFire: 1
-  _maximumHealth: 110
-  onDamaged:
+  onShoot:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1333837119961363757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962519144952153287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a070ac3fbfc409439f88beb3c02265e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 110
+  deathDelay: 0.02
+  onHealthChange:
+    m_PersistentCalls:
+      m_Calls: []
+  onHealthChangeNormalized:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamage:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3626998618547916347}
@@ -156,13 +180,16 @@ MonoBehaviour:
   onHeal:
     m_PersistentCalls:
       m_Calls: []
-  onShoot:
-    m_PersistentCalls:
-      m_Calls: []
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+  _onHealthChange: {fileID: 0}
+  _onHealthChangeNormalized: {fileID: 0}
+  _onDamage: {fileID: 0}
+  _onHeal: {fileID: 0}
+  _onDeath: {fileID: 0}
   DeathFeedback: {fileID: 3924644698427810977}
+  _targetHealthBar: {fileID: 38548217340573182}
 --- !u!114 &38548217340573182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +378,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bType: 0
   bounceForceMod: 14
-  facing: 0
 --- !u!1 &962519145221760157
 GameObject:
   m_ObjectHideFlags: 0

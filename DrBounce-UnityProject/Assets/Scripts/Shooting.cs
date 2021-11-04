@@ -10,7 +10,11 @@ public class Shooting : MonoBehaviour
         Explosives,
     }
 
-    [SerializeField] private Gun shooter = null;
+    [SerializeField]
+    private Gun shooter = null;
+    [SerializeField]
+    private Health health = null;
+
     private ObjectPooler pool;
     public InputMaster controls;
     public Camera fpsCam;
@@ -233,10 +237,10 @@ public class Shooting : MonoBehaviour
                 if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, shooter.normalRange))
                 {
                     //print(Hitinfo.transform.name + " hit!");
-                    Enemy enemy = Hitinfo.transform.GetComponent<Enemy>();
+                    EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
                     if(enemy != null)
                     {
-                        enemy.TakeDamage(damage);
+                        enemy.Damage(damage);
                     }
                 }
             }
@@ -314,7 +318,7 @@ public class Shooting : MonoBehaviour
 
     private void Healing() 
     {
-        if (gunCharge > 0 && Health.ReturnHealthNotMax()) 
+        if (gunCharge > 0 && !health.GetIsAtFullHealth()) 
         {
             SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
             //call a heal function

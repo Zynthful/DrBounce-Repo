@@ -8,13 +8,17 @@ using MoreMountains.Tools;
 public class Enemy : MonoBehaviour
 {
     [Header("Declarations")]
-    public EnemyAudio enemyAudio = null;
-    public BulletType bullet;
     [SerializeField]
-    private GameObject healthPack;
+    private EnemyAudio enemyAudio = null;
+    [SerializeField]
+    private EnemyHealth health = null;
+    [SerializeField]
+    private BulletType bullet;
+    [SerializeField]
+    private GameObject healthPackPrefab;
+
     private ObjectPooler pool;
 
-    protected bool amDead;
     private bool shootDelay;
     private Coroutine shootingDelayCoroutine;
 
@@ -28,54 +32,11 @@ public class Enemy : MonoBehaviour
     public float sightAngle;
     public float rateOfFire;
 
-    [Header("Health Settings")]
-    protected float _minimumHealth = 0f;
-    [SerializeField]
-    protected float _maximumHealth = 20f;
-    protected float _currentHealth = 5f;
-
-    public delegate void Death();
-    public static event Death OnDeath;
-
     [Header("Events")]
     [SerializeField]
-    private UnityEvent<float> onDamaged = null;
-    [SerializeField]
-    private UnityEvent<float> onHeal = null;
-    [SerializeField]
     private UnityEvent onShoot = null;
-    [SerializeField]
-    private UnityEvent onDeath = null;
 
-    [Header("Feedbacks")]
-    public MMFeedbacks DeathFeedback;
-
-    //need this for floating text
-    //public MMFeedbackFloatingText HitText;
-
-    protected MMHealthBar _targetHealthBar;
-
-    public void TakeDamage(float amount)
-    {
-        if (amount >= 0)
-        {
-            onDamaged?.Invoke(amount);
-        }
-        else
-        {
-            onHeal?.Invoke(-amount);
-        }
-
-        _currentHealth -= amount;
-        UpdateEnemyHealthBar();
-        if (_currentHealth <= 0)
-        {
-            GetComponent<Collider>().enabled = false;
-            DeathFeedback?.PlayFeedbacks();
-            Die();
-        }
-    }
-
+    /*
     Enemy()
     {
         pool = ObjectPooler.Instance;
@@ -83,13 +44,16 @@ public class Enemy : MonoBehaviour
 
     ~Enemy()
     {
-        Die();
+        health.DIE();
     }
+    */
 
     protected void FixedUpdate()
     {
-        if (!amDead)
+        if (!health.GetIsDead())
+        {
             Shoot();
+        }
     }
 
     protected bool PlayerLosCheck()
@@ -130,19 +94,17 @@ public class Enemy : MonoBehaviour
         return null;
     }
 
+    /*
     public void Die()
     {
-        amDead = true;
-        OnDeath?.Invoke();
-        onDeath?.Invoke();
         //SwitchHeldItem.instance.AddToList(Instantiate(healthPack, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity, null));
         print("That's right baby! Our dog, " + this.name + ", is dead!");
         //Destroy(gameObject);
     }
+    */
 
     private void Start()
     {
-        _currentHealth = _maximumHealth;
         pool = ObjectPooler.Instance;
         // Material mat = null;
         // switch (GetComponent<Bouncing>().bType)
@@ -162,19 +124,6 @@ public class Enemy : MonoBehaviour
         // GetComponent<MeshRenderer>().material = mat;
     }
 
-    private void Awake()
-    {
-        _targetHealthBar = this.gameObject.GetComponent<MMHealthBar>();
-    }
-
-    public virtual void UpdateEnemyHealthBar()
-    {
-        if (_targetHealthBar != null)
-        {
-            _targetHealthBar.UpdateBar(_currentHealth, _minimumHealth, _maximumHealth, true);
-        }
-    }
-
     IEnumerator ShotDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -182,6 +131,12 @@ public class Enemy : MonoBehaviour
         shootingDelayCoroutine = null;
     }
 
+    public EnemyAudio GetAudio()
+    {
+        return enemyAudio;
+    }
+
+    /*
     /// <summary>
     /// This and the variable are used for the doors don't delete
     /// </summary>
@@ -190,4 +145,5 @@ public class Enemy : MonoBehaviour
     {
         return amDead;
     }
+    */
 }

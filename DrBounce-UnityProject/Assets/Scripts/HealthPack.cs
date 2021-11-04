@@ -63,7 +63,7 @@ public class HealthPack : MonoBehaviour
 
     private void Heal() 
     {
-        if (transform.parent && Health.ReturnHealthNotMax())   //(checks if the health pack has a parent, please come back dad) and if you are not at max health
+        if (transform.parent && GetComponentInParent<Health>().GetIsAtFullHealth())   // checks if the health pack has a parent (please come back dad) and if you are not at max health
         {
             //where you heal
             healing = false;
@@ -72,10 +72,10 @@ public class HealthPack : MonoBehaviour
         }
     }
 
-    private IEnumerator Healing() 
+    private IEnumerator Healing(float delay = 0.2f) 
     {
         healing = true;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(delay);
         if (healing) 
         {
             Heal();

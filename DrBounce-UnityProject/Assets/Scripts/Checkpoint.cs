@@ -33,7 +33,7 @@ public class Checkpoint : MonoBehaviour
     {
         CheckpointHit.OnCollision += ReachedNextCheckpoint;
         DeathZone.OnPlayerDeath += ReturnToCheckpoint;
-        Health.OnPlayerDeath += ReturnToCheckpoint;
+        PlayerHealth.OnPlayerDeath += ReturnToCheckpoint;
     }
 
 
@@ -41,6 +41,6 @@ public class Checkpoint : MonoBehaviour
     {
         CheckpointHit.OnCollision -= ReachedNextCheckpoint;
         DeathZone.OnPlayerDeath -= ReturnToCheckpoint;
-        Health.OnPlayerDeath -= ReturnToCheckpoint;
+        PlayerHealth.OnPlayerDeath -= ReturnToCheckpoint;
     }
 }

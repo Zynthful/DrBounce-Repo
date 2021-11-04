@@ -34,7 +34,7 @@ public class Door : MonoBehaviour
         isAnEnemyAlive = false;
         foreach (GameObject enemy in enemies) 
         {
-            if (enemy.GetComponent<Enemy>().GetisDead() == false)
+            if (!enemy.GetComponent<EnemyHealth>().GetIsDead())
             {
                 isAnEnemyAlive = true;
                 Close();
@@ -49,12 +49,12 @@ public class Door : MonoBehaviour
 
     void OnEnable()
     {
-        Enemy.OnDeath += CanOpen;
+        EnemyHealth.OnDeath += CanOpen;
     }
 
 
     void OnDisable()
     {
-        Enemy.OnDeath -= CanOpen;
+        EnemyHealth.OnDeath -= CanOpen;
     }
 }
