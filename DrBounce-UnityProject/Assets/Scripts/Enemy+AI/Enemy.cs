@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     protected bool amDead;
     private bool shootDelay;
+    private Coroutine shootingDelayCoroutine;
 
     public bool canSeePlayer;
 
@@ -99,7 +100,7 @@ public class Enemy : MonoBehaviour
 
             Ray ray = new Ray(transform.position, (PlayerMovement.player.position - transform.position).normalized);
 
-            if (Physics.Raycast(ray, out hit, viewDist) && hit.transform.CompareTag("Player"))
+            if (Physics.Raycast(ray, out hit, viewDist) && hit.transform.root.CompareTag("Player"))
             {
                 Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - transform.position).normalized * viewDist, Color.green);
                 return true;
@@ -114,13 +115,16 @@ public class Enemy : MonoBehaviour
 
     protected GameObject Shoot()
     {
+        Debug.Log("Check LOS before shooting");
         if(PlayerLosCheck())
         {
-            if(!shootDelay)
+            Debug.Log("Check ShotDelay before shooting");
+            if (!shootDelay && shootingDelayCoroutine == null)
             {
+                Debug.Log("Shoot");
                 shootDelay = true;
                 onShoot?.Invoke();
-                StartCoroutine(ShotDelay(rateOfFire));
+                shootingDelayCoroutine = StartCoroutine(ShotDelay(rateOfFire));
                 pool.SpawnBulletFromPool("Bullet", transform.position, Quaternion.identity, (PlayerMovement.player.position - transform.position).normalized, bullet, null);
                 Debug.Log((PlayerMovement.player.position - transform.position).normalized);
             }
@@ -178,6 +182,7 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         shootDelay = false;
+        shootingDelayCoroutine = null;
     }
 
     /// <summary>
