@@ -53,7 +53,7 @@ public class CheckForBouncing : MonoBehaviour
 
             Vector3[] returnVectors = new Vector3[3];
 
-            returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision.transform, bounceOriginPoint);
+            returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision, bounceOriginPoint);
             if (returnVectors.Length > 0)
             {
                 if(specialInteractions)
@@ -78,7 +78,7 @@ public class CheckForBouncing : MonoBehaviour
 
             Vector3[] returnVectors = new Vector3[1];
 
-            returnVectors = hit.gameObject.GetComponent<Bouncing>().BouncePlayer(transform.position, cc.velocity.normalized, hit.transform);
+            returnVectors = hit.gameObject.GetComponent<Bouncing>().BouncePlayer(transform.position, cc.velocity.normalized, hit);
             if (returnVectors.Length > 0)
             {
                 if (returnVectors.Length == 2)

@@ -27,9 +27,6 @@ public class Bouncing : MonoBehaviour
 
     [SerializeField] float bounceForceMod;
 
-    [Space(10)]
-    [SerializeField][Tooltip("This is only necessary for W_Straight enemies")] private AxisDirection facing;
-
     public Vector3[] BounceBack(Vector3 position, Vector3 origin)
     {
         Vector3[] vectors = new Vector3[3];
@@ -94,49 +91,21 @@ public class Bouncing : MonoBehaviour
         return vectors;
     }
 
-    public Vector3[] BounceStraight(Transform collision, Vector3 position)
+    public Vector3[] BounceStraight(Transform collision, Vector3 normal, Vector3 position)
     {
         Vector3[] vectors = new Vector3[3];
-
-        Vector3 dir = Vector3.forward;
-        switch (facing)
-        {
-            case AxisDirection.BlueZ:
-                dir = Vector3.forward;
-                break;
-
-            case AxisDirection.GreenY:
-                dir = Vector3.up;
-                break;
-
-            case AxisDirection.RedX:
-                dir = Vector3.right;
-                break;
-
-            case AxisDirection.InverseBlue:
-                dir = Vector3.back;
-                break;
-
-            case AxisDirection.InverseGreen:
-                dir = Vector3.down;
-                break;
-
-            case AxisDirection.InverseRed:
-                dir = Vector3.left;
-                break;
-        }
 
         vectors[0] = position;
 
         vectors[1] = position;
 
-        vectors[2] = collision.TransformDirection(dir); vectors[1].y += .2f;
+        vectors[2] = normal.normalized; vectors[2].y += .2f;
         vectors[2] *= bounceForceMod;
 
         return vectors;
     }
 
-    public Vector3[] BounceObject(Vector3 position, Vector3 direction, Transform collision, Vector3 origin)
+    public Vector3[] BounceObject(Vector3 position, Vector3 direction, Collision collision, Vector3 origin)
     {
         switch (bType)
         {
@@ -144,19 +113,19 @@ public class Bouncing : MonoBehaviour
                 return BounceBack(position, origin);
 
             case BounceType.E_Up:
-                return BounceUp(collision, position);
+                return BounceUp(collision.transform, position);
 
             case BounceType.E_Away:
-                return BounceForward(collision, position, origin);
+                return BounceForward(collision.transform, position, origin);
 
             case BounceType.W_Straight:
-                return BounceStraight(collision, position);
+                return BounceStraight(collision.transform, collision.contacts[0].normal, position);
         }
 
         return null;
     }
 
-    public Vector3[] BouncePlayer(Vector3 position, Vector3 direction, Transform collision)
+    public Vector3[] BouncePlayer(Vector3 position, Vector3 direction, ControllerColliderHit collision)
     {
         switch (bType)
         {
@@ -167,10 +136,10 @@ public class Bouncing : MonoBehaviour
                 return PlayerBounceUp(GameManager.gravity);
 
             case BounceType.E_Away:
-                return PlayerBounceForward(collision, position, direction);
+                return PlayerBounceForward(collision.transform, position, direction);
 
             case BounceType.W_Straight:
-                return BounceStraight(collision, position);
+                return BounceStraight(collision.transform, collision.normal, position);
         }
 
         return null;
