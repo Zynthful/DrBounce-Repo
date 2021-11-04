@@ -52,12 +52,7 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        health = maxHealth;
-
-        _onHealthChange?.Invoke(health);
-        _onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
-        onHealthChange?.Raise(health);
-        onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
+        ResetHealth();
     }
 
     private void Update()
@@ -100,10 +95,7 @@ public class Health : MonoBehaviour
             health = maxHealth;  
         }
 
-        _onHealthChange?.Invoke(health);
-        _onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
-        onHealthChange?.Raise(health);
-        onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
+        InvokeHealthChange();
     }
 
     private void Damage(int amount) 
@@ -113,10 +105,7 @@ public class Health : MonoBehaviour
 
         health -= amount;
 
-        _onHealthChange?.Invoke(health);
-        _onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
-        onHealthChange?.Raise(health);
-        onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
+        InvokeHealthChange();
 
         if (health <= 0) 
         {
@@ -144,6 +133,26 @@ public class Health : MonoBehaviour
         OnPlayerDeath?.Invoke();
 
         Debug.Log("DIE (►__◄)");
+
+        ResetHealth();
+    }
+
+    /// <summary>
+    /// Calls onHealthChange events, which currently updates the ui baby
+    /// </summary>
+    private void InvokeHealthChange() 
+    {
+        _onHealthChange?.Invoke(health);
+        _onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
+        onHealthChange?.Raise(health);
+        onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
+    }
+
+    private void ResetHealth() 
+    {
+        health = maxHealth;
+
+        InvokeHealthChange();
     }
 
     public static int ReturnHealth() 
