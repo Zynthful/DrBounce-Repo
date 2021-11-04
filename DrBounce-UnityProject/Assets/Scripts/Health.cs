@@ -91,8 +91,6 @@ public class Health : MonoBehaviour
 
     public virtual void Heal(int amount) 
     {
-        // print("i am healing: " + amount);
-
         onHeal?.Invoke(amount);
         _onHeal?.Raise(amount);
 
@@ -101,8 +99,6 @@ public class Health : MonoBehaviour
 
     public virtual void Damage(int amount) 
     {
-        Debug.Log("dmg: " + amount);
-
         onDamage?.Invoke(amount);
         _onDamage?.Raise(amount);
 
@@ -124,7 +120,7 @@ public class Health : MonoBehaviour
         onDeath?.Invoke();
         _onDeath?.Raise();
 
-        Debug.Log($"DIE (►__◄) {gameObject}");
+        // Debug.Log($"DIE (►__◄), {gameObject.name}");
     }
 
     protected virtual void ResetHealth() 

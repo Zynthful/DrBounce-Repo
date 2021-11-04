@@ -1,43 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
-    [Tooltip("The door then opens and closes")]
-    [SerializeField] private GameObject door = null;
-
-    [Tooltip("All enemies below have to be dead for this door to open")]
-    [SerializeField] private GameObject[] enemies;
-
     private bool open = false;
-    bool isAnEnemyAlive = false;
+    private bool isAnEnemyAlive = false;
+
+    [Header("Declarations")]
+    /*
+    [Tooltip("The door then opens and closes")]
+    [SerializeField]
+    private GameObject door = null;
+    */
+    [Tooltip("All enemies below have to be dead for this door to open")]
+    [SerializeField]
+    private GameObject[] enemies;
+
+    [Header("Unity Events")]
+    [SerializeField]
+    private UnityEvent onOpen = null;
+    [SerializeField]
+    private UnityEvent onClose = null;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //door = GetComponentInChildren<GameObject>(); need to get first child not all children
+
+        CheckIfCanOpen();
     }
 
     private void Open() 
     {
-        door.SetActive(false);
+        // door.SetActive(false);
+
+        onOpen?.Invoke();
     }
 
     private void Close() 
     {
-        door.SetActive(true);
+        // door.SetActive(true);
+
+        onClose?.Invoke();
     }
 
-    private void CanOpen() 
+    private void CheckIfCanOpen() 
     {
         isAnEnemyAlive = false;
         foreach (GameObject enemy in enemies) 
-        {
-            if (!enemy.GetComponent<EnemyHealth>().GetIsDead())
+        {        
+            if (enemy != null)
             {
-                isAnEnemyAlive = true;
-                Close();
+                if (!enemy.GetComponent<EnemyHealth>().GetIsDead())
+                {
+                    isAnEnemyAlive = true;
+                    Close();
+                }
             }
         }
         if (!isAnEnemyAlive) 
@@ -49,12 +69,12 @@ public class Door : MonoBehaviour
 
     void OnEnable()
     {
-        EnemyHealth.OnDeath += CanOpen;
+        EnemyHealth.OnDeath += CheckIfCanOpen;
     }
 
 
     void OnDisable()
     {
-        EnemyHealth.OnDeath -= CanOpen;
+        EnemyHealth.OnDeath -= CheckIfCanOpen;
     }
 }
