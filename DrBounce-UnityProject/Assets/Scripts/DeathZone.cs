@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class DeathZone : MonoBehaviour
 {
+    public delegate void PlayerDeath();
+    public static event PlayerDeath OnPlayerDeath;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -16,7 +19,9 @@ public class DeathZone : MonoBehaviour
     /// </summary>
     private void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //reloads the current scene
+
+        OnPlayerDeath?.Invoke();
     }
 }
