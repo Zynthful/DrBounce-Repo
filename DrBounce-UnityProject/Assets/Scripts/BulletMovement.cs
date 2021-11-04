@@ -25,9 +25,6 @@ public class BulletMovement : MonoBehaviour, IPooledObject
 
     [SerializeField] private LayerMask ignoreBullet;
 
-    [Header("Feedbacks")]
-    public MMFeedbacks DamageFeedback;
-
     /// <summary>
     /// This function is called when the object pooling system recycles this object
     /// The function will reset all bullet values and variables to default
@@ -113,7 +110,6 @@ public class BulletMovement : MonoBehaviour, IPooledObject
                 //other.GetComponent<Health>().Damage(dam);
 
                 OnHit?.Invoke(dam);
-                DamageFeedback?.PlayFeedbacks();
             }
 
 
