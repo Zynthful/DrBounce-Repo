@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectableVerticalNavigation : SelectableNavigationHandler
+public class SelectableVerticalNavigation : SelectableNavigation
 {
     private void OnEnable()
     {
         FindNavigation(RemoveUninteractables(selectables));
     }
 
-    public override void FindNavigation(List<Selectable> selectables)
+    protected override void FindNavigation(List<Selectable> selectables)
     {
         for (int i = 0; i < selectables.Count; i++)
         {

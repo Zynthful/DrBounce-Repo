@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectableNavigationHandler : MonoBehaviour
+public abstract class SelectableNavigation : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("The selectable objects that will have its navigations set. NOTE: For vertical, this should be ordered top to bottom. For grids, this should be ordered left to right, starting at the top left.")]
     protected List<Selectable> selectables = null;
-
 
     public void AddSelectable(Selectable value)
     {
@@ -31,7 +30,7 @@ public class SelectableNavigationHandler : MonoBehaviour
         return tempSelectables;
     }
 
-    public virtual void FindNavigation(List<Selectable> selectables)
+    protected virtual void FindNavigation(List<Selectable> selectables)
     {
         for (int i = 0; i < selectables.Count; i++)
         {
