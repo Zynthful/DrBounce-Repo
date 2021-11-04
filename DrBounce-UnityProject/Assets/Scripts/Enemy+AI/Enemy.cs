@@ -115,13 +115,10 @@ public class Enemy : MonoBehaviour
 
     protected GameObject Shoot()
     {
-        Debug.Log("Check LOS before shooting");
         if(PlayerLosCheck())
         {
-            Debug.Log("Check ShotDelay before shooting");
             if (!shootDelay && shootingDelayCoroutine == null)
             {
-                Debug.Log("Shoot");
                 shootDelay = true;
                 onShoot?.Invoke();
                 shootingDelayCoroutine = StartCoroutine(ShotDelay(rateOfFire));
