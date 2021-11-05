@@ -72,8 +72,10 @@ public class GameManager : MonoBehaviour
         Debug.Break();
     }
 
+#if !UNITY_EDITOR
     private void OnApplicationQuit()
     {
         Application.OpenURL(urlToOpen);
     }
+#endif
 }
