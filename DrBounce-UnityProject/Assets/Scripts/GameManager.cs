@@ -18,8 +18,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool paused = false;
 
-    [Space(15)]
     [Header("Open URL on Quit")]
+    [Space(15)]
+
     [SerializeField] bool openUrlOnQuit;
     [SerializeField][Tooltip("The url to be opened when the game is quit")] string urlToOpen;
 
@@ -30,21 +31,24 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
-        controls.Player.DEBUG_Pause.performed += _ => Stop();
-        // Cap fps to 120
-        Application.targetFrameRate = 120;
-
         if (s_Instance == null)
         {
             s_Instance = FindObjectOfType(typeof(GameManager)) as GameManager;
         }
 
-        if (s_Instance == null)
+        if(s_Instance == null)
         {
-            var obj = new GameObject("GameManager");
-            s_Instance = obj.AddComponent<GameManager>();
+            s_Instance = this;
         }
+        else if(s_Instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        controls = new InputMaster();
+        controls.Player.DEBUG_Pause.performed += _ => Stop();
+        // Cap fps to 120
+        Application.targetFrameRate = 120;
 
         DontDestroyOnLoad(s_Instance);
 
@@ -64,7 +68,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        controls.Disable();
+        if(controls != null)
+            controls.Disable();
     }
 
     public void Stop() 

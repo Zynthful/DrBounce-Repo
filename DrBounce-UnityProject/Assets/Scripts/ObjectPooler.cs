@@ -18,7 +18,15 @@ public class ObjectPooler : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = FindObjectOfType(typeof(ObjectPooler)) as ObjectPooler;
+        }
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 
     #endregion
@@ -50,7 +58,6 @@ public class ObjectPooler : MonoBehaviour
 
     public GameObject SpawnBulletFromPool(string tag, Vector3 position, Quaternion rotation, Vector3 dir, BulletType bul, Material mat)
     {
-
         if (!poolDictionary.ContainsKey(tag))
         {
             Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
