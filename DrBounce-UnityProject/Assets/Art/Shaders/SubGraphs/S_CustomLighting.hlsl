@@ -22,6 +22,8 @@ struct CustomLightingData {
     float3 albedo;
     float3 specColor;
     float smoothness;
+
+    //remove this???
     float ambientOcclusion;
 
     // Baked lighting
@@ -47,7 +49,7 @@ float3 CustomLightHandling(CustomLightingData d, Light light) {
     float3 radiance = light.color * (light.distanceAttenuation * light.shadowAttenuation);
 
     float diffuse = saturate(dot(d.normalWS, light.direction));
-    diffuse = smoothstep(0.49, 0.5, diffuse);
+    diffuse = smoothstep(0.24, 0.25, diffuse);
 
     float specularDot = saturate(dot(d.normalWS, normalize(light.direction + d.viewDirectionWS)));
     float specular = pow(specularDot, GetSmoothnessPower(d.smoothness)) * diffuse;
