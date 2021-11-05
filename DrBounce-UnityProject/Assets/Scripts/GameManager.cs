@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool paused = false;
 
+    [Space(15)]
+    [Header("Open URL on Quit")]
+    [SerializeField] bool openUrlOnQuit;
+    [SerializeField][Tooltip("The url to be opened when the game is quit")] string urlToOpen;
+
     public void SetPaused(bool value)
     {
         paused = value;
@@ -67,4 +72,8 @@ public class GameManager : MonoBehaviour
         Debug.Break();
     }
 
+    private void OnApplicationQuit()
+    {
+        Application.OpenURL(urlToOpen);
+    }
 }
