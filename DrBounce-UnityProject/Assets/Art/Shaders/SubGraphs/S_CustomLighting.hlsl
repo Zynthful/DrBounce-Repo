@@ -20,6 +20,7 @@ struct CustomLightingData {
 
     // Surface attributes
     float3 albedo;
+    float3 specColor;
     float smoothness;
     float ambientOcclusion;
 
@@ -46,11 +47,15 @@ float3 CustomLightHandling(CustomLightingData d, Light light) {
     float3 radiance = light.color * (light.distanceAttenuation * light.shadowAttenuation);
 
     float diffuse = saturate(dot(d.normalWS, light.direction));
+
     diffuse = smoothstep(0.49, 0.5, diffuse);
+
     float specularDot = saturate(dot(d.normalWS, normalize(light.direction + d.viewDirectionWS)));
     float specular = pow(specularDot, GetSmoothnessPower(d.smoothness)) * diffuse;
 
-    float3 color = d.albedo * radiance * (diffuse + specular);
+    specular = smoothstep(0.005, 0.01, specular);
+
+    float3 color = (d.albedo * radiance * diffuse) + (specular * d.specColor);
 
     return color;
 }
@@ -90,7 +95,7 @@ float3 CalculateCustomLighting(CustomLightingData d) {
 }
 
 void CalculateCustomLighting_float(float3 Position, float3 Normal, float3 ViewDirection,
-    float3 Albedo, float Smoothness, float AmbientOcclusion,
+    float3 Albedo, float3 SpecColor, float Smoothness, float AmbientOcclusion,
     float2 LightmapUV,
     out float3 Color) {
 
@@ -99,6 +104,7 @@ void CalculateCustomLighting_float(float3 Position, float3 Normal, float3 ViewDi
     d.normalWS = Normal;
     d.viewDirectionWS = ViewDirection;
     d.albedo = Albedo;
+    d.specColor = SpecColor;
     d.smoothness = Smoothness;
     d.ambientOcclusion = AmbientOcclusion;
 
