@@ -47,15 +47,13 @@ float3 CustomLightHandling(CustomLightingData d, Light light) {
     float3 radiance = light.color * (light.distanceAttenuation * light.shadowAttenuation);
 
     float diffuse = saturate(dot(d.normalWS, light.direction));
-
     diffuse = smoothstep(0.49, 0.5, diffuse);
 
     float specularDot = saturate(dot(d.normalWS, normalize(light.direction + d.viewDirectionWS)));
     float specular = pow(specularDot, GetSmoothnessPower(d.smoothness)) * diffuse;
-
     specular = smoothstep(0.005, 0.01, specular);
 
-    float3 color = (d.albedo * radiance * diffuse) + (specular * d.specColor);
+    float3 color = radiance * ((d.albedo * diffuse) + (d.specColor * specular));
 
     return color;
 }
@@ -66,8 +64,7 @@ float3 CalculateCustomLighting(CustomLightingData d) {
 
     // In preview, estimate diffuse + specular
     float3 lightDir = float3(0.5, 0.5, 0);
-    float intensity = saturate(dot(d.normalWS, lightDir)) +
-        pow(saturate(dot(d.normalWS, normalize(d.viewDirectionWS + lightDir))), GetSmoothnessPower(d.smoothness));
+    float intensity = saturate(dot(d.normalWS, lightDir)) + pow(saturate(dot(d.normalWS, normalize(d.viewDirectionWS + lightDir))), GetSmoothnessPower(d.smoothness));
     return d.albedo * intensity;
 #else
     // Get the main light. Located in URP/ShaderLibrary/Lighting.hlsl
