@@ -48,14 +48,21 @@ float3 CustomLightHandling(CustomLightingData d, Light light) {
 
     float3 radiance = light.color * (light.distanceAttenuation * light.shadowAttenuation);
 
-    float diffuse = saturate(dot(d.normalWS, light.direction));
+    float NdotL = dot(d.normalWS, light.direction);
+
+    float diffuse = saturate(NdotL);
     diffuse = smoothstep(0.24, 0.25, diffuse);
 
     float specularDot = saturate(dot(d.normalWS, normalize(light.direction + d.viewDirectionWS)));
     float specular = pow(specularDot, GetSmoothnessPower(d.smoothness)) * diffuse;
     specular = smoothstep(0.005, 0.01, specular);
 
-    float3 color = radiance * ((d.albedo * diffuse) + (d.specColor * specular));
+
+    float3 rimDot = 1 - dot(d.viewDirectionWS, d.normalWS);
+    float rimIntensity = rimDot * pow(NdotL, 0.15);
+    float3 rim = smoothstep(0.71, 0.72, rimIntensity);
+
+    float3 color = radiance * ((d.albedo * diffuse) + (d.specColor * specular + rim));
 
     return color;
 }
