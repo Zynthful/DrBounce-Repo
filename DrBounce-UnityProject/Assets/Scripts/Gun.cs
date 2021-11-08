@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Gun", menuName = "ScriptableObject/Gun", order = 0)]
+[CreateAssetMenu(fileName = "Gun", menuName = "ScriptableObjects/Gun", order = 0)]
 public class Gun : ScriptableObject
 {
     [Header("Normal Gun Shots")]
