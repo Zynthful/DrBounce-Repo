@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -52,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
     private bool hasDashed = false;
     private float x2;
     private float z2;
+    [SerializeField]
+    private TextMeshProUGUI dashUI;
 
     [Header("Sliding")]
     public float slideTime;
@@ -144,6 +147,9 @@ public class PlayerMovement : MonoBehaviour
             coyoteTime = oldCoyoteTime;
             hasJumped = false;
             dashesPerformed = 0;
+
+            dashUI.text = ("Dashes: " + (dashesBeforeLanding - dashesPerformed));
+
             if (dashesPerformed > 0)
             {
                 StartCoroutine(StopDash()); //Starts coroutine stopdash, which waits a split second after hitting the ground to reset the dash counter.
@@ -426,6 +432,8 @@ public class PlayerMovement : MonoBehaviour
 
             yield return new WaitForSeconds(extendedNoGravTime);
             gravity = oldGravity;
+
+            dashUI.text = ("Dashes: " + (dashesBeforeLanding - dashesPerformed));
         }
     }
 
