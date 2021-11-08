@@ -20,6 +20,8 @@ public class Health : MonoBehaviour
 
     protected bool canSetStartingHealth = true;
 
+    private bool dead = false;
+
     [Header("Unity Events")]
     // Passes health value
     [SerializeField]
@@ -117,6 +119,8 @@ public class Health : MonoBehaviour
 
     protected virtual void DIE() 
     {
+        dead = true;
+
         onDeath?.Invoke();
         _onDeath?.Raise();
 
@@ -125,6 +129,7 @@ public class Health : MonoBehaviour
 
     protected virtual void ResetHealth() 
     {
+        dead = false;
         SetHealth(maxHealth);
     }
 
