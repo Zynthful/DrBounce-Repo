@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -55,6 +56,10 @@ public class PlayerMovement : MonoBehaviour
     private float z2;
     [SerializeField]
     private TextMeshProUGUI dashUI;
+    [SerializeField]
+    private Slider timeBeforeDash;
+
+    private float oldValue;
 
     [Header("Sliding")]
     public float slideTime;
@@ -106,18 +111,24 @@ public class PlayerMovement : MonoBehaviour
         prevGrav = gravity;
         charController = GetComponent<CharacterController>();
         playerHeight = charController.height;
+        GameManager.gravity = gravity;
 
         controls = new InputMaster(); //Creates a new InputMaster to gain access to mapped controls
         controls.Player.Jump.performed += _ => Jump(); //When the jump action is activated in Input Master, activate the Jump function.
         controls.Player.Dash.performed += _ => StartCoroutine(Dash());
         controls.Player.Crouch.performed += _ => Crouch();
         player = transform;
-
-        GameManager.gravity = gravity;
     }
 
     void FixedUpdate()
     {
+        if(isDashing == true)
+        {
+            float test = timeBeforeDash.value;
+            float b = ((1 - (dashesPerformed + 1f / dashesBeforeLanding)));
+            timeBeforeDash.value = Mathf.Lerp(timeBeforeDash.value, b * 100, 0.15f);
+        }
+
 
         #region Crouching
         //print(isCrouching);
@@ -149,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
             dashesPerformed = 0;
 
             dashUI.text = ("Dashes: " + (dashesBeforeLanding - dashesPerformed));
+            timeBeforeDash.value = 100;
 
             if (dashesPerformed > 0)
             {
@@ -433,6 +445,7 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(extendedNoGravTime);
             gravity = oldGravity;
 
+            //timeBeforeDash.value -= 50;
             dashUI.text = ("Dashes: " + (dashesBeforeLanding - dashesPerformed));
         }
     }
