@@ -25,7 +25,7 @@ public class Bouncing : MonoBehaviour
 
     public BounceType bType;
 
-    [SerializeField] float bounceForceMod;
+    [SerializeField] float bounceForceMod = 14;
 
     public Vector3[] BounceBack(Vector3 position, Vector3 origin)
     {
