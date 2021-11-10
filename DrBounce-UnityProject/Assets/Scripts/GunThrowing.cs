@@ -23,10 +23,29 @@ public class GunThrowing : MonoBehaviour
     private Coroutine pickupDelayCoroutine;
     private bool pickupDelayCoroutineRunning;
 
+    // Coyote Time variables (gun collision time before drop charges)
+    private struct coyote
+    {
+        public Collision hitObject;
+        public Coroutine coyoteCoroutine;
+
+        public coyote(Collision col, Coroutine cor)
+        {
+            hitObject = col;
+            coyoteCoroutine = cor;
+        }
+    }
+    private List<coyote> hitObjects = new List<coyote> { };
+    [Header("Coyote Time")]
+    [Space(10)]
+    [SerializeField] private float coyoteTimeDuration;
+    
+
     SwitchHeldItem inventory;
     int amountOfBounces;
 
     public InputMaster controls;
+    [Space(10)]
     public Vector3 currentVel; // Used to influence aim assist to be less snappy.
     private bool exitedPlayer; // Controls when the gun can be caught by waiting until it's left the player's hitbox
     //checks if the player has let go of the tigger before throwing again, 
@@ -173,6 +192,7 @@ public class GunThrowing : MonoBehaviour
             }
             pickupDelayCoroutine = StartCoroutine(EnablePickupAfterTime(0.2f));
 
+            ResetCoyoteTimes();
             canThrow = false;
             outlineScript.enabled = true;
             //when we get out of prototype we need to made the world model seperate from the fp model
@@ -213,6 +233,7 @@ public class GunThrowing : MonoBehaviour
             foreach (Transform child in transform)
                 child.gameObject.layer = 7;
 
+            ResetCoyoteTimes();
             exitedPlayer = false;
             returning = false;
             canThrow = true;
@@ -254,22 +275,26 @@ public class GunThrowing : MonoBehaviour
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
         if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
+            hitObjects.Add(new coyote(collision, StartCoroutine(CoyoteTimeForPickup(collision))));
+
             AffectPhysics(0.85f, 0f);
+        }
+    }
 
-            returning = true;
-
-            // If the item loses all charges on drop
-            if (amountOfBounces != 0)
+    private void OnCollisionExit(Collision collision)
+    {
+        //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
+        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
+        {
+            for(int i = 0; i < hitObjects.Count; i++)
             {
-                onDroppedAndLostAllCharges?.Invoke();
-                _onDroppedAndLostAllCharges?.Raise();
+                if(hitObjects[i].hitObject == collision)
+                {
+                    StopCoroutine(hitObjects[i].coyoteCoroutine);
+                    hitObjects.RemoveAt(i);
+                    break;
+                }
             }
-
-            amountOfBounces = 0;
-            inFlight = false;
-
-            onDropped?.Invoke();
-            _onDropped?.Raise();
         }
     }
 
@@ -357,6 +382,42 @@ public class GunThrowing : MonoBehaviour
         pickupDelayCoroutineRunning = false;
     }
 
+    private void ResetCoyoteTimes()
+    {
+        foreach (coyote coy in hitObjects)
+        {
+            StopCoroutine(coy.coyoteCoroutine);
+        }
+        hitObjects.Clear();
+    }
+
+    IEnumerator CoyoteTimeForPickup(Collision hit)
+    {
+        yield return new WaitForSeconds(coyoteTimeDuration);
+        for (int i = 0; i < hitObjects.Count; i++)
+        {
+            if (hitObjects[i].hitObject == hit)
+            {
+                returning = false;
+
+                // If the item loses all charges on drop
+                if (amountOfBounces != 0)
+                {
+                    onDroppedAndLostAllCharges?.Invoke();
+                    _onDroppedAndLostAllCharges?.Raise();
+                }
+
+                amountOfBounces = 0;
+                inFlight = false;
+
+                onDropped?.Invoke();
+                _onDropped?.Raise();
+
+                ResetCoyoteTimes();
+            }
+        }
+
+    }
     private void Update()
     {
         if (Gamepad.current != null)
