@@ -9,6 +9,8 @@ public class CheckpointHit : MonoBehaviour
 
     private bool activated = false;
 
+    public static CheckpointHit checkpointInstance = null;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && !activated)
@@ -16,5 +18,24 @@ public class CheckpointHit : MonoBehaviour
             activated = true;
             OnCollision?.Invoke();
         }
+    }
+
+    private void Awake()
+    {
+        if (checkpointInstance == null)
+        {
+            checkpointInstance = FindObjectOfType(typeof(CheckpointHit)) as CheckpointHit;
+        }
+
+        if (checkpointInstance == null)
+        {
+            checkpointInstance = this;
+        }
+        else if (checkpointInstance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
     }
 }
