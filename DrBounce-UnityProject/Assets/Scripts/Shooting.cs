@@ -236,10 +236,7 @@ public class Shooting : MonoBehaviour
                 RaycastHit Hitinfo;
                 if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, shooter.normalRange))
                 {
-                    if (Hitinfo.transform.GetComponent<Spin>() != null) 
-                    {
-                        Hitinfo.transform.GetComponent<Spin>().OnStart(Vector3.Magnitude(Hitinfo.normal));
-                    }
+                    Hitinfo.transform.GetComponent<Spin>()?.OnStart(Vector3.Magnitude(Hitinfo.normal));
 
                     //print(Hitinfo.transform.name + " hit!");
                     EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
