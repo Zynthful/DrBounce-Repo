@@ -46,17 +46,24 @@ public class Spin : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        //good enough :)
         hitDirection = Vector3.Dot(collision.transform.forward, transform.position);
-        spinTimer = spinLength > 0 ? 1f : -1f;
-
-        spinTimer = spinLength;
-        rotate = true;
+        OnStart(hitDirection);
     }
     
     private void OnStop()
     {
         spinTimer = spinLength;
         rotate = false;
+    }
+
+    public void OnStart(float value) 
+    {
+        hitDirection = value;
+
+        //good enough :)
+        spinTimer = spinLength > 0 ? 1f : -1f;
+
+        spinTimer = spinLength;
+        rotate = true;
     }
 }
