@@ -5,21 +5,33 @@ using UnityEngine.InputSystem;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 4.0f;
+    [Header("Declarations")]
+    [SerializeField]
+    private Transform playerBody;
 
-    public float mouseSensitivityX = 0;
-    public float mouseSensitivityY = 0;
+    [Header("Mouse Sensitivity Settings")]
+    [SerializeField]
+    private float defaultMouseSensitivity = 4.0f;
+    //[SerializeField]
+    private float mouseSensitivityX = 0.0f;
+    //[SerializeField]
+    private float mouseSensitivityY = 0.0f;
 
-    public float controllerSensitivity = 7.0f;
+    private float currentMouseSensitivity = 4.0f;
 
-    public float controllerSensitivityX = 0;
-    public float controllerSensitivityY = 0;
+    [Header("Controller Sensitivity Settings")]
+    [SerializeField]
+    private float defaultControllerSensitivity = 7.0f;
+    //[SerializeField]
+    private float controllerSensitivityX = 0.0f;
+    //[SerializeField]
+    private float controllerSensitivityY = 0.0f;
+    [SerializeField]
+    private float controllerAssistSensitivityMultiplier = 0.5f;
 
-    public float controllerAssistSensitivityMultiplier = 0.5f;
+    private float currentControllerSensitivity = 7.0f;
 
-    public Transform playerBody;
-
-    float xRotation = 0f;
+    private float xRotation = 0f;
 
     private float currentControllerSensitivityMultiplier = 1f;
 
@@ -31,22 +43,22 @@ public class MouseLook : MonoBehaviour
     {
         controls = new InputMaster();
     }
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
 
         // Initialise sensitivity as according to player prefs, or to default if pref does not exist
-        SetMouseSensitivity(PlayerPrefs.GetFloat("Options/MouseSensitivity", mouseSensitivity));
-        SetControllerSensitivity(PlayerPrefs.GetFloat("Options/ControllerSensitivity", controllerSensitivity));
+        SetMouseSensitivity(PlayerPrefs.GetFloat("Options/Sensitivity/MouseSensitivity", defaultMouseSensitivity));
+        SetControllerSensitivity(PlayerPrefs.GetFloat("Options/Sensitivity/ControllerSensitivity", defaultControllerSensitivity));
 
-        mouseSensitivityX = mouseSensitivityY = mouseSensitivity;
+        // mouseSensitivityX = mouseSensitivityY = currentMouseSensitivity;
         // controllerSensitivityX = mouseSensitivityY = mouseSensitivity;
-        controllerSensitivityX = controllerSensitivity;
-        controllerSensitivityY = controllerSensitivity;
+        // controllerSensitivityX = currentMouseSensitivity;
+        // controllerSensitivityY = currentMouseSensitivity;
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (GameManager.s_Instance.paused) { return; }
 
@@ -55,16 +67,16 @@ public class MouseLook : MonoBehaviour
 
         if (Gamepad.current != null)
         {
-            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivityX * 80.0f * Time.deltaTime;
-            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivityY * 80.0f * Time.deltaTime;
+            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivityX * 50.0f * Time.deltaTime;
+            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivityY * 50.0f * Time.deltaTime;
 
-            //Aim assist
+            // Aim assist
             conX *= currentControllerSensitivityMultiplier;
             conY *= currentControllerSensitivityMultiplier;
         }
 
-        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivityX * 10.0f * Time.deltaTime;
-        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivityY * 10.0f * Time.deltaTime;
+        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivityX * 3.5f * Time.deltaTime;
+        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivityY * 3.5f * Time.deltaTime;
 
         float camX = conX + mouseX;
         float camY = conY + mouseY;
@@ -78,14 +90,15 @@ public class MouseLook : MonoBehaviour
 
     public void SetMouseSensitivity(float value)
     {
-        mouseSensitivity = value;
-        mouseSensitivityX = mouseSensitivityY = mouseSensitivity;
+        currentMouseSensitivity = value;
+        mouseSensitivityX = mouseSensitivityY = currentMouseSensitivity;
     }
+
     public void SetControllerSensitivity(float value)
     {
-        controllerSensitivity = value;
-        controllerSensitivityX = controllerSensitivity;
-        controllerSensitivityY = controllerSensitivity;
+        currentControllerSensitivity = value;
+        controllerSensitivityX = currentControllerSensitivity;
+        controllerSensitivityY = currentControllerSensitivity;
     }
 
     public void IsHovering(bool hover)
