@@ -54,10 +54,6 @@ public class PlayerMovement : MonoBehaviour
     private bool hasDashed = false;
     private float x2;
     private float z2;
-    [SerializeField]
-    private TextMeshProUGUI dashUI;
-    [SerializeField]
-    private Slider timeBeforeDash;
 
     private float dashSliderTime = 0f;
 
@@ -103,6 +99,8 @@ public class PlayerMovement : MonoBehaviour
     private GameEvent _onSlide = null;
     [SerializeField]
     private GameEvent _onSlideEnd = null;
+    [SerializeField]
+    private GameEventFloat onDashSliderValue = null;
 
     private void Awake()
     {
@@ -131,7 +129,8 @@ public class PlayerMovement : MonoBehaviour
             float a = (1f - (((float)dashesPerformed + 1f) / (float)dashesBeforeLanding)) * 100f;
             float t = 1f - Mathf.Clamp(dashSliderTime / dashLength, 0, 1);
             float dashSliderPos = Mathf.Lerp(a, b, Mathf.SmoothStep(0, 1, t));
-            timeBeforeDash.value = dashSliderPos;
+
+            onDashSliderValue?.Raise(dashSliderPos);
         }
 
 
@@ -164,8 +163,7 @@ public class PlayerMovement : MonoBehaviour
             hasJumped = false;
             dashesPerformed = 0;
 
-            dashUI.text = ("Dashes: " + (dashesBeforeLanding - dashesPerformed));
-            timeBeforeDash.value = 100;
+            onDashSliderValue?.Raise(100);
 
             if (dashesPerformed > 0)
             {
@@ -448,9 +446,6 @@ public class PlayerMovement : MonoBehaviour
 
             yield return new WaitForSeconds(extendedNoGravTime);
             gravity = oldGravity;
-
-            //timeBeforeDash.value -= 50;
-            dashUI.text = ("Dashes: " + (dashesBeforeLanding - dashesPerformed));
         }
     }
 
