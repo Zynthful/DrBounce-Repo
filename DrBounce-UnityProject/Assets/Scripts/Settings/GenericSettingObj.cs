@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Settings : MonoBehaviour
+public abstract class GenericSettingObj : ScriptableObject
 {
     protected enum SettingType
     {
@@ -22,12 +22,8 @@ public abstract class Settings : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    /*
-    private bool hasUnsavedChanges = false;
-
-    public bool CheckUnsavedChanges()
+    public virtual void Initialise()
     {
-        return hasUnsavedChanges;
+
     }
-    */
 }
