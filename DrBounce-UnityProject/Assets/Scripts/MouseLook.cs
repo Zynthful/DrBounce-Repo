@@ -8,10 +8,12 @@ public class MouseLook : MonoBehaviour
     [Header("Declarations")]
     [SerializeField]
     private Transform playerBody;
+    [SerializeField]
+    private FloatSetting mouseSensSetting = null;
+    [SerializeField]
+    private FloatSetting controllerSensSetting = null;
 
     [Header("Mouse Sensitivity Settings")]
-    [SerializeField]
-    private float defaultMouseSensitivity = 4.0f;
     //[SerializeField]
     private float mouseSensitivityX = 0.0f;
     //[SerializeField]
@@ -20,8 +22,6 @@ public class MouseLook : MonoBehaviour
     private float currentMouseSensitivity = 4.0f;
 
     [Header("Controller Sensitivity Settings")]
-    [SerializeField]
-    private float defaultControllerSensitivity = 7.0f;
     //[SerializeField]
     private float controllerSensitivityX = 0.0f;
     //[SerializeField]
@@ -35,21 +35,19 @@ public class MouseLook : MonoBehaviour
 
     private float currentControllerSensitivityMultiplier = 1f;
 
-    // Start is called before the first frame update
-
     public InputMaster controls;
 
     private void Awake()
     {
         controls = new InputMaster();
     }
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
 
-        // Initialise sensitivity as according to player prefs, or to default if pref does not exist
-        SetMouseSensitivity(PlayerPrefs.GetFloat("Options/Sensitivity/MouseSensitivity", defaultMouseSensitivity));
-        SetControllerSensitivity(PlayerPrefs.GetFloat("Options/Sensitivity/ControllerSensitivity", defaultControllerSensitivity));
+        SetMouseSensitivity(mouseSensSetting.GetCurrentValue());
+        SetControllerSensitivity(controllerSensSetting.GetCurrentValue());
 
         // mouseSensitivityX = mouseSensitivityY = currentMouseSensitivity;
         // controllerSensitivityX = mouseSensitivityY = mouseSensitivity;
@@ -57,7 +55,6 @@ public class MouseLook : MonoBehaviour
         // controllerSensitivityY = currentMouseSensitivity;
     }
 
-    // Update is called once per frame
     private void LateUpdate()
     {
         if (GameManager.s_Instance.paused) { return; }

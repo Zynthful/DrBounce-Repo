@@ -13,7 +13,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField]
     private GlobalRTPCSetting[] rtpcSettings = null;
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < intSettings.Length; i++)
         {
