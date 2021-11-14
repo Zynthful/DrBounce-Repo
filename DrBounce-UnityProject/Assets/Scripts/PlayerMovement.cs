@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Slider timeBeforeDash;
 
-    private float oldValue;
+    private float dashSliderTime = 0f;
 
     [Header("Sliding")]
     public float slideTime;
@@ -120,13 +120,18 @@ public class PlayerMovement : MonoBehaviour
         player = transform;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if(isDashing == true)
+        //@cole :)
+        if (isDashing == true)
         {
-            float test = timeBeforeDash.value;
-            float b = ((1 - (dashesPerformed + 1f / dashesBeforeLanding)));
-            timeBeforeDash.value = Mathf.Lerp(timeBeforeDash.value, b * 100, 0.15f);
+            dashSliderTime += Time.deltaTime;
+
+            float b = (1f - ((float)dashesPerformed / (float)dashesBeforeLanding)) * 100f;
+            float a = (1f - (((float)dashesPerformed + 1f) / (float)dashesBeforeLanding)) * 100f;
+            float t = 1f - Mathf.Clamp(dashSliderTime / dashLength, 0, 1);
+            float dashSliderPos = Mathf.Lerp(a, b, Mathf.SmoothStep(0, 1, t));
+            timeBeforeDash.value = dashSliderPos;
         }
 
 
@@ -237,8 +242,6 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing == true)
         {
             velocity = Vector3.zero;
-
-            print("Dreamworks Animation's Shrek Character");
 
             if(hasDashed == false)
             {
@@ -417,6 +420,7 @@ public class PlayerMovement : MonoBehaviour
         if (!GameManager.s_Instance.paused && isGrounded != true && cooldown == false && isDashing == false && dashesPerformed < dashesBeforeLanding)
         {
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
+            dashSliderTime = 0f;
             movementBlocker = true;
 
             onDash?.Invoke();
