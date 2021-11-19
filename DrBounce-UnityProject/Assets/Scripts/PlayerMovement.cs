@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
     private Vector3 slideLeftRight;
-    private bool test = false;
+    private bool headCheckPerformed = false;
     private bool hasLetGo = false;
 
     [Header("Ground+Head Checking")]
@@ -334,18 +334,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
         {
-            isSliding = false;
+            DisableSlide();
 
-            onSlideEnd?.Invoke();
-            _onSlideEnd?.Raise();
-
-            hasLetGo = false;
-            slideDirectionDecided = false;
-            cooldown = false;
-
-            if (headIsTouchingSomething && test == false) //Keeps the player crouched if they finish their slide underneath a small gap.
+            if (headIsTouchingSomething && headCheckPerformed == false) //Keeps the player crouched if they finish their slide underneath a small gap.
             {
-                test = true;
+                headCheckPerformed = true;
                 isCrouching = true;
                 oldSpeed = speed;
                 speed /= 2;
@@ -373,7 +366,10 @@ public class PlayerMovement : MonoBehaviour
 
             gravity = prevGrav;
             isDashing = false;
-            isSliding = false;
+            if(isSliding == true)
+            {
+                DisableSlide();
+            }
             prevJump = false;
 
             jump = true;
@@ -471,31 +467,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //IEnumerator EnableDisableSlide()
-    //{
-    //    isSliding = true;
+    void DisableSlide()
+    {
+        onSlideEnd?.Invoke();
+        _onSlideEnd?.Raise();
 
-    //    onSlide?.Invoke();
-    //    _onSlide?.Raise();
+        isSliding = false;
 
-    //    yield return new WaitForSeconds(slideTime); //Performs the slide section of update until the set slideTime is up
-
-    //    onSlideEnd?.Invoke();
-    //    _onSlideEnd?.Raise();
-
-    //    isSliding = false;
-
-    //    hasLetGo = false;
-    //    slideDirectionDecided = false;
-    //    cooldown = false;
-
-    //    if (headIsTouchingSomething) //Keeps the player crouched if they finish their slide underneath a small gap.
-    //    {
-    //        isCrouching = true;
-    //        oldSpeed = speed;
-    //        speed /= 2;
-    //    }
-    //}
+        hasLetGo = false;
+        slideDirectionDecided = false;
+        cooldown = false;
+    }
 
     IEnumerator Cooldown()
     {
