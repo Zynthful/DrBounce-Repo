@@ -66,8 +66,8 @@ public class PlayerMovement : MonoBehaviour
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
     private Vector3 slideLeftRight;
+    private bool test = false;
     private bool hasLetGo = false;
-    private bool holdingSlide = false;
 
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
@@ -332,21 +332,20 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(slideDirection * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
         }
 
-        if (controls.Player.Crouch.ReadValue<float>() == 0) //Stops the player from Sliding
+        if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
         {
             isSliding = false;
 
             onSlideEnd?.Invoke();
             _onSlideEnd?.Raise();
 
-            isSliding = false;
-
             hasLetGo = false;
             slideDirectionDecided = false;
             cooldown = false;
 
-            if (headIsTouchingSomething) //Keeps the player crouched if they finish their slide underneath a small gap.
+            if (headIsTouchingSomething && test == false) //Keeps the player crouched if they finish their slide underneath a small gap.
             {
+                test = true;
                 isCrouching = true;
                 oldSpeed = speed;
                 speed /= 2;
