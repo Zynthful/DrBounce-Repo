@@ -8,6 +8,8 @@ public class BouncyEnemy : Enemy
     private BtNode m_root;
     private Blackboard m_blackboard;
 
+    public bool searching;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +24,10 @@ public class BouncyEnemy : Enemy
 
     protected BtNode createTree()
     {
-        // This is the last thing we'll do
-        return null;
+        BtNode Move = new Sequence();
+        BtNode Attack = new Sequence();
+
+        return new Sequence(new CheckIfStunned(), Move, Attack);
     }
 
     // Update is called once per frame
