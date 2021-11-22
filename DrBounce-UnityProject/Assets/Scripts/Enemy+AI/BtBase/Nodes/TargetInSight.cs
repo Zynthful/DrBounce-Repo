@@ -4,39 +4,33 @@ using UnityEngine;
 
 public class TargetInSight : BtNode
 {
-    public delegate NodeState ActionNodeDelegate(Blackboard blackboard);
-    private ActionNodeDelegate m_action;
+    private float m_distanceLimit = 10;
 
-    public TargetInSight(ActionNodeDelegate action)
+    public TargetInSight()
     {
-        m_action = action;
-        reset();
+        //m_distanceLimit = distanceLimit;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (m_nodeState != NodeState.RUNNING)
+        if (blackboard.target == null)
         {
-            return m_nodeState;
+            return NodeState.FAILURE;
         }
 
-        switch (m_action(blackboard))
+        float distance = (blackboard.owner.transform.position - blackboard.target.transform.position).magnitude;
+        if (distance < m_distanceLimit)
         {
-            case NodeState.SUCCESS:
-                m_nodeState = NodeState.SUCCESS;
-                return m_nodeState;
-            case NodeState.RUNNING:
-                m_nodeState = NodeState.RUNNING;
-                return m_nodeState;
-            case NodeState.FAILURE:
-            default:
-                m_nodeState = NodeState.FAILURE;
-                return m_nodeState;
+            return NodeState.SUCCESS;
+        }
+        else
+        {
+            return NodeState.FAILURE;
         }
     }
 
     public override string getName()
     {
-        return "Action";
+        return "TargetInSight";
     }
 }
