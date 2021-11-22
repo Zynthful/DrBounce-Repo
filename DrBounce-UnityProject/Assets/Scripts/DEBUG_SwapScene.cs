@@ -13,6 +13,12 @@ public class DEBUG_SwapScene : MonoBehaviour
         controls = new InputMaster();
         controls.Player.DEBUG_PrevLevel.performed += _ => BackLevel();
         controls.Player.DEBUG_NextLevel.performed += _ => NextLevel();
+        controls.Player.DEBUG_ReloadScene.performed += _ => ReloadScene();
+    }
+
+    private void ReloadScene() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     // Update is called once per frame
@@ -41,8 +47,8 @@ public class DEBUG_SwapScene : MonoBehaviour
 
     private void OnDisable()
     {
-        controls.Player.DEBUG_NextLevel.performed -= _ => NextLevel();
-        controls.Player.DEBUG_PrevLevel.performed -= _ => BackLevel();
+        //controls.Player.DEBUG_NextLevel.performed -= _ => NextLevel();
+        //controls.Player.DEBUG_PrevLevel.performed -= _ => BackLevel();
         controls.Disable();
     }
 }

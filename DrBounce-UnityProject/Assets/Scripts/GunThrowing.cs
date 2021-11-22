@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 using MoreMountains.Feedbacks;
+
 public class GunThrowing : MonoBehaviour
 {
     [SerializeField] bool returning;
@@ -18,44 +20,78 @@ public class GunThrowing : MonoBehaviour
     Vector3 handPosition;
     Vector3 originPoint;
     Rigidbody rb;
+    private Coroutine pickupDelayCoroutine;
+    private bool pickupDelayCoroutineRunning;
+
+    // Coyote Time variables (gun collision time before drop charges)
+    private struct coyote
+    {
+        public Collision hitObject;
+        public Coroutine coyoteCoroutine;
+
+        public coyote(Collision col, Coroutine cor)
+        {
+            hitObject = col;
+            coyoteCoroutine = cor;
+        }
+    }
+    private List<coyote> hitObjects = new List<coyote> { };
+    [Header("Coyote Time")]
+    [Space(10)]
+    [SerializeField] private float coyoteTimeDuration;
+    
 
     SwitchHeldItem inventory;
     int amountOfBounces;
 
     public InputMaster controls;
+    [Space(10)]
     public Vector3 currentVel; // Used to influence aim assist to be less snappy.
     private bool exitedPlayer; // Controls when the gun can be caught by waiting until it's left the player's hitbox
+    //checks if the player has let go of the tigger before throwing again, 
+    //to stop spam throwing and catching on controller.
+    private bool hasLetGoOfTrigger;
 
     [SerializeField]
-    private ComboTracker comboTracker = null;
-
-    [Header("Feedbacks")]
-    public MMFeedbacks BounceFeedback;
-    public MMFeedbacks CatchFeedback;
-    public MMFeedbacks PickupFeedback;
-    public MMFeedbacks MagnetCallFeedback;
-    public MMFeedbacks BounceHitFeedback;
-
-    [Header("Vibrations")]
-    public VibrationManager vibrationManager;
+    private Shooting shooting = null;
 
     public bool inFlight;
 
     public Outline outlineScript;
 
-    [Header("Events")]
+    [Header("Unity Events")]
     [SerializeField]
-    private GameEventInt onBounce = null;
+    private UnityEvent<int> onBounce = null;
     [SerializeField]
-    private GameEvent onPickup = null;
+    private UnityEvent onPickup = null;
     [SerializeField]
-    private GameEvent onThrown = null;
+    private UnityEvent onThrown = null;
     [SerializeField]
-    private GameEvent onCatch = null;
+    private UnityEvent onCatch = null;
     [SerializeField]
-    private GameEvent onDropped = null;
+    private UnityEvent onDropped = null;
     [SerializeField]
-    private GameEvent onRecall = null;
+    private UnityEvent onDroppedAndLostAllCharges = null; // Invoked only if the item loses charges on drop
+    [SerializeField]
+    private UnityEvent onRecall = null;
+    [SerializeField]
+    private UnityEvent onReset = null;
+
+    [Header("Game Events")]
+    [SerializeField]
+    private GameEventInt _onBounce = null;
+    [SerializeField]
+    private GameEvent _onPickup = null;
+    [SerializeField]
+    private GameEvent _onThrown = null;
+    [SerializeField]
+    private GameEvent _onCatch = null;
+    [SerializeField]
+    private GameEvent _onDropped = null;
+    [SerializeField]
+    private GameEvent _onDroppedAndLostAllCharges = null; // Raised only if the item loses charges on drop
+    [SerializeField]
+    private GameEvent _onRecall = null;
 
     // Start is called before the first frame update
     void Start()
@@ -84,8 +120,6 @@ public class GunThrowing : MonoBehaviour
             canThrow = false;
         }
 
-
-
         transform.rotation = Quaternion.identity;
 
         gunColliders = GetComponentsInChildren<Collider>();
@@ -94,7 +128,6 @@ public class GunThrowing : MonoBehaviour
             gunColliders = new Collider[1] {GetComponent<Collider>()};
         }
 
-        Debug.Log(gunColliders);
         foreach(Collider col in gunColliders)
         {
             physicMaterials.Add(col.material);
@@ -138,7 +171,7 @@ public class GunThrowing : MonoBehaviour
             {
                 if (catchCollider.bounds.Intersects(col.bounds))
                 {
-                    fail = true; exitedPlayer = false;
+                    fail = true;
                     break;
                 }
             }
@@ -151,8 +184,15 @@ public class GunThrowing : MonoBehaviour
 
     public void Thrown()
     {
-        if (!GameManager.s_Instance.paused && canThrow)
+        if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
+            if (pickupDelayCoroutineRunning) 
+            {
+                StopCoroutine(pickupDelayCoroutine); 
+            }
+            pickupDelayCoroutine = StartCoroutine(EnablePickupAfterTime(0.2f));
+
+            ResetCoyoteTimes();
             canThrow = false;
             outlineScript.enabled = true;
             //when we get out of prototype we need to made the world model seperate from the fp model
@@ -160,7 +200,9 @@ public class GunThrowing : MonoBehaviour
             foreach (Transform child in transform)
                 child.gameObject.layer = 3;
 
-            onThrown?.Raise();
+            onThrown?.Invoke();
+            _onThrown?.Raise();
+
             returning = false;
             rb.constraints = RigidbodyConstraints.None;
             transform.parent = null;
@@ -168,6 +210,8 @@ public class GunThrowing : MonoBehaviour
             Vector3 dir = transform.forward;
             rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * throwForceMod; currentVel = rb.velocity;
 
+            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
+            shooting.CheckIfCharged();
 
             AffectPhysics(0.2f, 0.2f);
 
@@ -182,9 +226,6 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused)
         {
-            if(startOnPlayer)
-                comboTracker.SetComboNum(0);
-
             if (!transform.parent)
                 throwGunDelay = false;
             outlineScript.enabled = false;
@@ -192,28 +233,38 @@ public class GunThrowing : MonoBehaviour
             foreach (Transform child in transform)
                 child.gameObject.layer = 7;
 
+            ResetCoyoteTimes();
             exitedPlayer = false;
             returning = false;
             canThrow = true;
             inFlight = false;
+            hasLetGoOfTrigger = false;
 
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             transform.parent = weaponHolderTransform;
             transform.localPosition = handPosition;
             transform.rotation = weaponHolderTransform.rotation;
-            MagnetCallFeedback?.PlayFeedbacks();
             currentVel = Vector3.zero;
 
+            onReset?.Invoke();
+
             inventory.OnPickupItem(transform);
+
+            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
+            shooting.CheckIfCharged();
+
+            //here
+            // here???
         }
     }
 
     private void RecallGun()
     {
-        if (startOnPlayer)
+        if (startOnPlayer && transform.parent == null)
         {
-            onRecall?.Raise();
+            onRecall?.Invoke();
+            _onRecall?.Raise();
             amountOfBounces = 0;
             ResetScript();
         }
@@ -224,15 +275,26 @@ public class GunThrowing : MonoBehaviour
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
         if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
-            AffectPhysics(0.85f, 0f);
-            
-            if(startOnPlayer)
-                comboTracker.SetComboNum(0);
+            hitObjects.Add(new coyote(collision, StartCoroutine(CoyoteTimeForPickup(collision))));
 
-            returning = true;
-            amountOfBounces = 0;
-            onDropped?.Raise();
-            inFlight = false;
+            AffectPhysics(0.85f, 0f);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
+        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
+        {
+            for(int i = 0; i < hitObjects.Count; i++)
+            {
+                if(hitObjects[i].hitObject == collision)
+                {
+                    StopCoroutine(hitObjects[i].coyoteCoroutine);
+                    hitObjects.RemoveAt(i);
+                    break;
+                }
+            }
         }
     }
 
@@ -240,15 +302,26 @@ public class GunThrowing : MonoBehaviour
     {
         if (other.transform.root == owner && !transform.parent)
         {
-            if(!catchCollider)
+            if (!catchCollider)
             {
                 catchCollider = other.GetComponentInChildren<BoxCollider>();
                 weaponHolderTransform = WeaponSway.weaponHolderTransform;
             }
 
-            if (returning && inFlight) { onCatch?.Raise(); CatchFeedback?.PlayFeedbacks(); vibrationManager.CatchVibration(); }
-            else if (exitedPlayer) { onPickup?.Raise(); PickupFeedback?.PlayFeedbacks(); }
-            else { return; }
+            if (returning && inFlight)
+            {
+                onCatch?.Invoke();
+                _onCatch?.Raise();
+            }
+
+            else if (exitedPlayer)
+            {
+                onPickup?.Invoke();
+                _onPickup?.Raise();
+            }
+
+            else return;
+
             ResetScript();
         }
     }
@@ -266,13 +339,14 @@ public class GunThrowing : MonoBehaviour
         returning = true;
         inFlight = true;
 
-        amountOfBounces++; onBounce?.Raise(amountOfBounces);
+        amountOfBounces++;
+        
+        onBounce?.Invoke(amountOfBounces);
+        _onBounce?.Raise(amountOfBounces);
 
-        BounceFeedback?.PlayFeedbacks();
-        collision.transform.GetComponentInChildren<MMFeedbacks>().PlayFeedbacks();
-
-        if(startOnPlayer)
-            comboTracker.Increment();
+        MMFeedbacks feedbacks = collision.transform.GetComponentInChildren<MMFeedbacks>();
+        if (feedbacks)
+            feedbacks.PlayFeedbacks();
 
         currentVel = rb.velocity;
     }
@@ -298,5 +372,64 @@ public class GunThrowing : MonoBehaviour
         controls.Player.ThrowGun.performed -= _ => Thrown();
         controls.Player.RecallGun.performed -= _ => ResetScript();
         controls.Disable();
+    }
+
+    IEnumerator EnablePickupAfterTime(float time)
+    {
+        pickupDelayCoroutineRunning = true;
+        yield return new WaitForSeconds(time);
+        exitedPlayer = true;
+        pickupDelayCoroutineRunning = false;
+    }
+
+    private void ResetCoyoteTimes()
+    {
+        foreach (coyote coy in hitObjects)
+        {
+            StopCoroutine(coy.coyoteCoroutine);
+        }
+        hitObjects.Clear();
+    }
+
+    IEnumerator CoyoteTimeForPickup(Collision hit)
+    {
+        yield return new WaitForSeconds(coyoteTimeDuration);
+        for (int i = 0; i < hitObjects.Count; i++)
+        {
+            if (hitObjects[i].hitObject == hit)
+            {
+                returning = false;
+
+                // If the item loses all charges on drop
+                if (amountOfBounces != 0)
+                {
+                    onDroppedAndLostAllCharges?.Invoke();
+                    _onDroppedAndLostAllCharges?.Raise();
+                }
+
+                amountOfBounces = 0;
+                inFlight = false;
+
+                onDropped?.Invoke();
+                _onDropped?.Raise();
+
+                ResetCoyoteTimes();
+            }
+        }
+
+    }
+    private void Update()
+    {
+        if (Gamepad.current != null)
+        {
+            if (!Gamepad.current.leftTrigger.IsActuated() && canThrow)  //checks if the player has let go of the left trigger and has the gun in hand
+            {
+                hasLetGoOfTrigger = true;
+            }
+        }
+        else
+        {
+            hasLetGoOfTrigger = true;
+        }
     }
 }

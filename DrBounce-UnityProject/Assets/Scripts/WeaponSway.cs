@@ -64,7 +64,7 @@ public class WeaponSway : MonoBehaviour
         {
             Vector3 bobPos, newPos;
 
-            if (!movement.isCrouching)
+            if (!movement.GetIsCrouching())
             {
                 bobPos = CalculateVerticalBob(bobSpeed, bobDistance, bobTransitionSpeed);
             }

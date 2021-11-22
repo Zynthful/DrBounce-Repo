@@ -1,127 +1,120 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using MoreMountains.Feedbacks;
 using MoreMountains.NiceVibrations;
 
 public class Shooting : MonoBehaviour
 {
-    [SerializeField] private Gun shooter = null;
-    //[SerializeField] private GameObject bullet;
-
-    public delegate void Activated(int value);
-    public static event Activated OnActivated;
-
     public enum GunModes
     {
         Explosives,
     }
 
-    //[SerializeField] private GunModes currentGunMode;
+    [SerializeField]
+    private Gun shooter = null;
+    [SerializeField]
+    private Health health = null;
 
     private ObjectPooler pool;
-
     public InputMaster controls;
-
-    private float range = 100f;
     public Camera fpsCam;
+    public Animator anim;
 
+    private bool repeatedShooting = false;
     [Header("Damage")]
+    [HideInInspector]
     public int damage = 10;     //current damage value
 
     [Header("Charges")]
-    private int amountOfBounces = 0;    //amount of times the gun has been bounced successfully
-    private int chargesLeft = 0;    //current amount of charges left in the gun (reset if dropped)
+    private int gunCharge = 0;    //amount of times the gun has been bounced successfully
+    private bool hasCharge = false;
 
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
 
     #region Events
-    [Header("Events")]
 
+    #region UnityEvents
+    [Header("Unity Events")]
     [SerializeField]
-    private GameEvent onUnchargedShot = null;
+    private UnityEvent<int> onChargeUpdate = null;
+    [SerializeField]
+    private UnityEvent onUnchargedShotFired = null;
+    [SerializeField]
+    private UnityEvent<int> onChargedShotFired = null;
+    [SerializeField]
+    private UnityEvent onChargesEmpty = null;
+    [SerializeField]
+    private UnityEvent<bool> onHasCharge = null;
+    public UnityEvent<bool> onHasChargeAndIsHeld = null;
+    [SerializeField]
+    private UnityEvent onFirstGainChargeSinceEmpty = null;
+    [SerializeField]
+    private UnityEvent<bool> onEnemyHover = null;
+    [SerializeField]
+    private UnityEvent onExplosiveShot = null;
+    #endregion
 
+    #region GameEvents
+    [Header("Game Events")]
     [SerializeField]
-    [Tooltip("Passes amountOfBounces")]
-    private GameEventInt onChargedShotCombo = null;
-
+    [Tooltip("Passes gun charge")]
+    private GameEventInt _onChargeUpdate = null;
     [SerializeField]
-    private GameEvent onChargedShotFired = null;
-
+    private GameEvent _onUnchargedShotFired = null;
     [SerializeField]
-    [Tooltip("Passes amountOfBounces")]
-    private GameEventInt onBounce = null;
-
+    [Tooltip("Passes gun charge")]
+    private GameEventInt _onChargedShotFired = null;
     [SerializeField]
-    [Tooltip("Passes chargesLeft")]
-    private GameEventInt onChargeUpdate = null;
-
+    private GameEvent _onChargesEmpty = null;
     [SerializeField]
-    private GameEvent onCatch = null;
-
+    [Tooltip("Occurs on charge update. Passes whether the gun has charge or not")]
+    private GameEventBool _onHasCharge = null;
+    [Tooltip("Occurs on charge update. Passes whether the gun has charge and is currently being held or not")]
+    public GameEventBool _onHasChargeAndIsHeld = null;
     [SerializeField]
-    private GameEvent onChargesEmpty = null;
+    private GameEvent _onFirstGainChargeSinceEmpty = null;
+    [SerializeField]
+    [Tooltip("Passes whether the player is hovering over an enemy")]
+    private GameEventBool _onEnemyHover = null;
+    [SerializeField]
+    private GameEvent _onExplosiveShot = null;
+    #endregion
 
     #endregion
 
-    [Header("Feedbacks")]
-    public MMFeedbacks BasicShootFeedback;
+    public delegate void Activated(int value);
+    public static event Activated OnActivated;
+
     public MMFeedbacks ChargedFeedback;
-    public MMFeedbacks FirstChargedShotFeedback;
-    public MMFeedbacks HoverOverFeedback;
-    public MMFeedbacks RegularReticleFeedback;
-    public MMFeedbacks LoseChargeFeedback;
+
     [SerializeField] ParticleSystem chargedShotPS;
-
-    [Header("Vibrations")]
-    public VibrationManager vibrationManager;
-
-    [SerializeField] private GameEventBool onEnemyHover = null;
-
-    public Animator anim;
-
-    [SerializeField] private int healAmount = 30;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Initialise charge
+        SetCharge(gunCharge);
+
         pool = ObjectPooler.Instance;
-        onEnemyHover?.Raise(false);
+        CheckForHoverOverEnemy();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //print(amountOfBounces);
-
         timeSinceLastShot += Time.deltaTime;
-        CheckifCharged();
 
-        RaycastHit Reticleinfo;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Reticleinfo, range))
-        {
-            Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                onEnemyHover?.Raise(true);
-                RegularReticleFeedback?.StopFeedbacks();
-                HoverOverFeedback?.PlayFeedbacks();
-                //print(enemy.transform.name + " is being hovered over!");
-            }
-            else
-            {
-                onEnemyHover?.Raise(false);
-                HoverOverFeedback?.StopFeedbacks();
-                RegularReticleFeedback?.PlayFeedbacks();
-            }
-        }
+        CheckForHoverOverEnemy();
+
+        if (repeatedShooting) Shoot();
     }
 
     private void Awake()
     {
         controls = new InputMaster();
         controls.Player.Shoot.performed += _ => Shoot();
+        controls.Player.Shoot.canceled += _ => StopShooting();
         controls.Player.RecallGun.performed += _ => Reset();
         controls.Player.Healing.performed += _ => Healing();
     }
@@ -136,6 +129,87 @@ public class Shooting : MonoBehaviour
         controls.Disable();
     }
 
+    // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
+
+    /// <summary>
+    /// Sets gunCharge equal to the input value
+    /// Use this whenever update gunCharge, so it raises onChargeUpdate with it
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetCharge(int value)
+    {
+        // Is the gun gaining charge for the first time since emptied?
+        if (gunCharge <= 0 && value >= 1)
+        {
+            onFirstGainChargeSinceEmpty?.Invoke();
+            _onFirstGainChargeSinceEmpty?.Raise();
+        }
+
+        gunCharge = value;
+
+        onChargeUpdate?.Invoke(gunCharge);
+        _onChargeUpdate?.Raise(gunCharge);
+
+        CheckIfCharged();
+    }
+
+    public void CheckIfCharged()
+    {
+        if (gunCharge >= 1)
+        {
+            hasCharge = true;
+
+            ChargedFeedback?.PlayFeedbacks();
+            // this will need to be rewritten eventually?
+            if (transform.parent)
+            {
+                onHasChargeAndIsHeld?.Invoke(true);
+                _onHasChargeAndIsHeld?.Raise(true);
+            }
+            else
+            {
+                onHasChargeAndIsHeld?.Invoke(false);
+                _onHasChargeAndIsHeld?.Raise(false);
+            }
+        }
+        else
+        {
+            hasCharge = false;
+
+            onHasChargeAndIsHeld?.Invoke(false);
+            _onHasChargeAndIsHeld?.Raise(false);
+            onChargesEmpty?.Invoke();
+            _onChargesEmpty?.Raise();
+
+            ChargedFeedback?.StopFeedbacks();
+            chargedShotPS.Clear();
+        }
+
+        onHasCharge?.Invoke(hasCharge);
+        _onHasCharge?.Raise(hasCharge);
+        anim.SetInteger("ChargesLeft", gunCharge);
+    }
+
+    private void CheckForHoverOverEnemy() 
+    {
+        RaycastHit Reticleinfo;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Reticleinfo, shooter.normalRange))
+        {
+            Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                onEnemyHover?.Invoke(true);
+                _onEnemyHover?.Raise(true);
+                //print(enemy.transform.name + " is being hovered over!");
+            }
+            else
+            {
+                onEnemyHover?.Invoke(false);
+                _onEnemyHover?.Raise(false);
+            }
+        }
+    }
+
     private void Shoot() 
     {
         // Checks:
@@ -144,36 +218,33 @@ public class Shooting : MonoBehaviour
         //  - Is not already shooting
         if (!GameManager.s_Instance.paused && transform.parent != null && timeSinceLastShot > shooter.fireRate)  
         {
+            if (shooter.canRepeatShoot) repeatedShooting = true;
+
             timeSinceLastShot = 0;
 
-            if(chargesLeft > 0) HandleComboShot();
+            if(gunCharge > 0) HandleComboShot();
 
             // Is it an uncharged/basic shot?
-            else if (chargesLeft <= 0)
+            else if (gunCharge <= 0)
             {
-                onUnchargedShot?.Raise();
+                onUnchargedShotFired?.Invoke();
+                _onUnchargedShotFired?.Raise();
 
                 //ChargedFeedback?.StopFeedbacks();
                 damage = Mathf.RoundToInt(shooter.damageGraph[0].y);
 
                 RaycastHit Hitinfo;
-                if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, range))
+                if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, shooter.normalRange))
                 {
+                    Hitinfo.transform.GetComponent<Spin>()?.OnStart(Vector3.Magnitude(Hitinfo.normal));
+
                     //print(Hitinfo.transform.name + " hit!");
-                    Enemy enemy = Hitinfo.transform.GetComponent<Enemy>();
+                    EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
                     if(enemy != null)
                     {
-                        enemy.TakeDamage(damage);
+                        enemy.Damage(damage);
                     }
                 }
-
-                BasicShootFeedback?.PlayFeedbacks();
-            }
-            vibrationManager.BasicShotVibration();
-
-            if(chargesLeft <= 0)
-            {
-                onChargesEmpty?.Raise();
             }
 
             //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
@@ -186,77 +257,47 @@ public class Shooting : MonoBehaviour
     private void HandleComboShot()
     {
     	ChargedFeedback?.PlayFeedbacks();	
-
         switch(shooter.chargeShot)
         {
             case GunModes.Explosives:
-                FirstChargedShotFeedback?.PlayFeedbacks();
-                vibrationManager.ChargedShotVibration();
+                onExplosiveShot?.Invoke();
+                _onExplosiveShot?.Raise();
 
-                shooter.chargeBullet.damage = DamageAmountCalc(amountOfBounces);
+                shooter.chargeBullet.damage = DamageAmountCalc(gunCharge);
 
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
-                obj.GetComponent<ExplosiveShot>().comboSize = amountOfBounces;
-                //Reset();
-                AddCharge(-1);
-                amountOfBounces = 0;
+                obj.GetComponentInChildren<ExplosiveShot>().comboSize = gunCharge;
                 break;
         }
-
-        onChargedShotCombo?.Raise(amountOfBounces);
-        onChargedShotFired?.Raise();
+        onChargedShotFired?.Invoke(gunCharge);
+        _onChargedShotFired?.Raise(gunCharge);
+        SetCharge(0);
     }
 
     public void Bounce(int bounceCount) 
     {
-        amountOfBounces = bounceCount;
-        ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
+        SetCharge(bounceCount);
+        ChargedFeedback?.StopFeedbacks();
+        chargedShotPS.Clear();
     }
 
     public void Catch()
     {
-        AddCharge(-chargesLeft + shooter.amountOfChargesGiven); // Set chargesLeft = shooter.amountOfChargesGiven
         ChargedFeedback?.PlayFeedbacks();
-    }
-
-    private void CheckifCharged()
-    {
-        if (chargesLeft <= 0)
-        {
-            ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
-            MMVibrationManager.StopContinuousHaptic();
-        }
-
-        if (chargesLeft >= 1)
-        {
-            ChargedFeedback?.PlayFeedbacks();
-            vibrationManager.ActiveChargeVibration();
-        }
-
-        anim.SetInteger("ChargesLeft", chargesLeft);
     }
 
     public void Reset()
     {
-        ChargedFeedback?.StopFeedbacks(); chargedShotPS.Clear();
-        AddCharge(-chargesLeft); // Set chargesLeft = 0
-        anim.SetInteger("ChargesLeft", chargesLeft);
-        amountOfBounces = 0;
-    }
-
-    // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
-    public void AddCharge(int value)
-    {
-        chargesLeft += value;
-        onChargeUpdate?.Raise(chargesLeft);
+        ChargedFeedback?.StopFeedbacks();
+        chargedShotPS.Clear();
+        anim.SetInteger("ChargesLeft", gunCharge);
+        SetCharge(0);
     }
 
     public void Dropped() 
     {
         if (!transform.parent)  //if the gun is dropped and has no parent
         {
-            LoseChargeFeedback.PlayFeedbacks();
-            vibrationManager.StopActiveCharge();
             Reset();
         }
     }
@@ -279,19 +320,21 @@ public class Shooting : MonoBehaviour
 
     private void Healing() 
     {
-        if (amountOfBounces > 0 && Health.ReturnHealthNotMax()) 
+        if (gunCharge > 0 && !health.GetIsAtFullHealth()) 
         {
-            amountOfBounces--;
+            SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
             //call a heal function
 
-            OnActivated?.Invoke(healAmount);
+            OnActivated?.Invoke(shooter.healAmount);
 
-            if (amountOfBounces == 0)
+            if (gunCharge == 0)
             {
-                LoseChargeFeedback.PlayFeedbacks();
-                vibrationManager.StopActiveCharge();
                 Reset();
             }
         }
+    }
+    private void StopShooting()
+    {
+        repeatedShooting = false;
     }
 }

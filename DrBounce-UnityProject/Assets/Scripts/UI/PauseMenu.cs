@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class PauseMenu : MonoBehaviour
 {
     private bool paused = false;
+    private bool hasPausedOnce = false; // Has the player paused at least once since initialisation?
 
     public InputMaster controls;
 
     [Header("Pause Settings")]
     [SerializeField]
-    private bool unpauseOnAwake = true;
-
+    private bool unpauseOnStart = true;
 
     [Header("Game Event Declarations")]
     [SerializeField]
@@ -21,6 +21,8 @@ public class PauseMenu : MonoBehaviour
     private GameEvent onPause = null;
     [SerializeField]
     private GameEvent onUnpause = null;
+    [SerializeField]
+    private GameEvent onUnpauseAfterPause = null;
 
     [Header("Unity Events")]
     [SerializeField]
@@ -28,13 +30,18 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private UnityEvent _onUnpause = null;
     [SerializeField]
+    private UnityEvent _onUnpauseAfterPause = null;
+    [SerializeField]
     private BoolEvent _onPauseStateChange = null;
 
     private void Awake()
     {
         controls = new InputMaster();
+    }
 
-        if (unpauseOnAwake)
+    private void Start()
+    {
+        if (unpauseOnStart)
             SetPaused(false);
     }
 
@@ -56,6 +63,7 @@ public class PauseMenu : MonoBehaviour
         _onPauseStateChange.Invoke(paused);
         if (paused)
         {
+            hasPausedOnce = true;
             onPause?.Raise();
             _onPause.Invoke();
         }
@@ -63,6 +71,12 @@ public class PauseMenu : MonoBehaviour
         {
             onUnpause?.Raise();
             _onUnpause.Invoke();
+
+            if (hasPausedOnce)
+            {
+                onUnpauseAfterPause?.Raise();
+                _onUnpauseAfterPause.Invoke();
+            }
         }
     }
 

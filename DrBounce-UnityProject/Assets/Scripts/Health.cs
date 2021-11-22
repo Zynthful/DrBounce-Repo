@@ -1,148 +1,158 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using MoreMountains.Feedbacks;
-using MoreMountains.Tools;
-using UnityEngine.SceneManagement;
-
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    private static int health = 100;
-    private static int maxHealth = 100;
-    private float minHealth = 0;
-
+    /*
     public delegate void CurrentHealth();
     public static event CurrentHealth ReportHealth;
+    */
 
-    [Header("Events")]
-    // Passes health percentage
+    [Header("Health Settings")]
+    protected int health = 100;
+
     [SerializeField]
-    private GameEventFloat onHealthChange = null;
+    protected int maxHealth = 100;
+    [SerializeField]
+    private float deathDelay = 0.230f;
+
+    protected bool canSetStartingHealth = true;
+
+    private bool dead = false;
+
+    [Header("Unity Events")]
+    // Passes health value
+    [SerializeField]
+    protected UnityEvent<float> onHealthChange = null;
+    // Passes health percentage normalized (between 0-1)
+    [SerializeField]
+    protected UnityEvent<float> onHealthChangeNormalized = null;
     // Passes damage taken
     [SerializeField]
-    private GameEventFloat onDamage = null;
+    protected UnityEvent<float> onDamage = null;
     // Passes health healed
     [SerializeField]
-    private GameEventFloat onHeal = null;
+    protected UnityEvent<float> onHeal = null;
+    [SerializeField]
+    protected UnityEvent onDeath = null;
 
-    [Header("Feedbacks")]
-    public MMFeedbacks DamageFeedback;
-    public MMFeedbacks DeathFeedback;
+    [Header("Game Events")]
+    // Passes health percentage
+    [SerializeField]
+    private GameEventFloat _onHealthChange = null;
+    // Passes health percentage normalized (between 0-1)
+    [SerializeField]
+    private GameEventFloat _onHealthChangeNormalized = null;
+    // Passes damage taken
+    [SerializeField]
+    private GameEventFloat _onDamage = null;
+    // Passes health healed
+    [SerializeField]
+    private GameEventFloat _onHeal = null;
+    [SerializeField]
+    private GameEvent _onDeath = null;
 
-    public MMProgressBar progressBar;
-
-    bool canSetStartingHealth = true;
-
-
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        health = maxHealth;
-
-        onHealthChange?.Raise(100.0f * ((float)health / (float)maxHealth));
-        progressBar.UpdateBar(health, minHealth, maxHealth);
+        ResetHealth();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        //print(health);
         if (canSetStartingHealth) UpdatedStartingHealth();
     }
 
-    private void UpdatedStartingHealth()   //doesn't work in start : (
+    protected virtual void UpdatedStartingHealth()   //doesn't work in start : (
     {
-        //health = 1;
-        //progressBar.UpdateBar(health, minHealth, maxHealth);
-        //Damage(0);
+        // Damage(30);
         canSetStartingHealth = false;
     }
 
-    private void Heal(int amount) 
+    protected virtual void SetHealth(int value)
     {
-        //print("i am healing: " + amount);
+        health = value;
 
-        onHeal?.Raise(amount);
-
-
-        health += amount;
-
-        progressBar.UpdateBar(health, minHealth, maxHealth);
-
-        if (health > maxHealth) 
+        // Cap health
+        if (health > maxHealth)
         {
-            health = maxHealth;  
+            health = maxHealth;
         }
 
-        onHealthChange?.Raise(100.0f * ((float)health / (float)maxHealth));
-    }
-
-    private void Damage(int amount) 
-    {
-        DamageFeedback?.PlayFeedbacks();
-        
-
-        onDamage?.Raise(amount);
-
-        health -= amount;
-
-        progressBar.UpdateBar(health, minHealth, maxHealth);
-
-        onHealthChange?.Raise(100.0f * ((float) health / (float)maxHealth));
-
-        if (health <= 0) 
+        else if (GetIsDead())
         {
-            //Debug.Log("mortis");
-            DeathFeedback?.PlayFeedbacks();
-            Invoke("DIE",0.230f);
+            Invoke("DIE", deathDelay);
         }
+
+        onHealthChange?.Invoke(health);
+        onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
+        _onHealthChange?.Raise(health);
+        _onHealthChangeNormalized?.Raise(GetHealthPercentageNormalized());
     }
 
+    public virtual void Heal(int amount) 
+    {
+        onHeal?.Invoke(amount);
+        _onHeal?.Raise(amount);
 
+        SetHealth(health + amount);
+    }
 
+    public virtual void Damage(int amount) 
+    {
+        onDamage?.Invoke(amount);
+        _onDamage?.Raise(amount);
 
-    private void RecieveRequest()
+        SetHealth(health - amount);
+    }
+
+    /*
+    protected virtual void ReceiveRequest()
     {
         if(health < maxHealth)
         {
             ReportHealth?.Invoke();
         }
     }
+    */
 
-    private void DIE() 
+    protected virtual void DIE() 
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        dead = true;
 
-        Debug.Log("DIE (►__◄)");
+        onDeath?.Invoke();
+        _onDeath?.Raise();
+
+        // Debug.Log($"DIE (►__◄), {gameObject.name}");
     }
 
-    private void OnEnable()
+    protected virtual void ResetHealth() 
     {
-        HealthPack.OnActivated += Heal;
-        Shooting.OnActivated += Heal;
-        BulletMovement.OnHit += Damage;
+        dead = false;
+        SetHealth(maxHealth);
     }
 
-    private void OnDisable()
-    {
-        HealthPack.OnActivated -= Heal;
-        Shooting.OnActivated -= Heal;
-        BulletMovement.OnHit -= Damage;
-    }
-
-    public static int ReturnHealth() 
+    public int GetHealth() 
     {
         return health;
     }
 
-    public static bool ReturnHealthNotMax()
+    public bool GetIsAtFullHealth()
     {
-        return (health < maxHealth);
-
+        return (health >= maxHealth);
     }
 
-    public bool ReturnDead()
+    /// <summary>
+    /// Returns health percentage as a float between 0-100
+    /// </summary>
+    /// <returns></returns>
+    private float GetHealthPercentageNormalized()
+    {
+        return (float)health / (float)maxHealth;
+    }
+
+    public bool GetIsDead()
     {
         return health <= 0;
     }

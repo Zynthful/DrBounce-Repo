@@ -18,7 +18,15 @@ public class ObjectPooler : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = FindObjectOfType(typeof(ObjectPooler)) as ObjectPooler;
+        }
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 
     #endregion
@@ -50,7 +58,6 @@ public class ObjectPooler : MonoBehaviour
 
     public GameObject SpawnBulletFromPool(string tag, Vector3 position, Quaternion rotation, Vector3 dir, BulletType bul, Material mat)
     {
-
         if (!poolDictionary.ContainsKey(tag))
         {
             Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
@@ -61,12 +68,22 @@ public class ObjectPooler : MonoBehaviour
 
         objToSpawn.SetActive(true);
 
-        if(mat != null)
+        if (mat != null)
         {
             objToSpawn.GetComponent<Renderer>().material = mat;
         }
 
-        BulletMovement objMov = objToSpawn.GetComponent<BulletMovement>();
+        BulletMovement objMov;
+
+        if (objToSpawn.GetComponent<BulletMovement>())
+        {
+            objMov = objToSpawn.GetComponent<BulletMovement>();
+        }
+        else
+        {
+            objMov = objToSpawn.GetComponentInChildren<BulletMovement>();
+        }
+
         objMov.returnbullet = false;
         objMov.dir = dir;
         objMov.speed = bul.speed;
@@ -75,7 +92,7 @@ public class ObjectPooler : MonoBehaviour
         objToSpawn.transform.localScale = bul.size;
         objToSpawn.transform.position = position;
 
-        IPooledObject pooledObj = objToSpawn.GetComponent<IPooledObject>();
+        IPooledObject pooledObj = objMov.GetComponent<IPooledObject>();
 
         if (pooledObj != null)
         {

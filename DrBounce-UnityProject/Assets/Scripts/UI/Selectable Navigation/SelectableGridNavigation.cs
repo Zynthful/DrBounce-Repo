@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectableGridNavigation : SelectableNavigationHandler
+public class SelectableGridNavigation : SelectableNavigation
 {
     [SerializeField]
     private int rowCount;
@@ -22,7 +22,7 @@ public class SelectableGridNavigation : SelectableNavigationHandler
     }
 
     // to do: make this not copy paste code from SelectableNavigationHandler
-    public override void FindNavigation(List<Selectable> selectables)
+    protected override void FindNavigation(List<Selectable> selectables)
     {
         for (int j = 0; j < rowCount; j++)
         {

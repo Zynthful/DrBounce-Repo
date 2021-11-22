@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BounceAudio : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject objToPost = null;
+    
     [Header("Wwise Events")]
     [SerializeField]
     private AK.Wwise.Event bounceEvent = null;
@@ -15,24 +18,18 @@ public class BounceAudio : MonoBehaviour
     [Header("RTPCs")]
     [SerializeField]
     private AK.Wwise.RTPC numOfBouncesRTPC = null;
-    [SerializeField]
-    private AK.Wwise.RTPC chargesRTPC = null;
 
     public void PlayBounce(int amountOfBounces)
     {
-        numOfBouncesRTPC.SetValue(gameObject, amountOfBounces);
-        bounceEvent.Post(gameObject);
+        numOfBouncesRTPC.SetValue(objToPost, amountOfBounces);
+        bounceEvent.Post(objToPost);
     }
     public void PlayPickUp()
     {
-        pickUpFromGroundEvent.Post(gameObject);
+        pickUpFromGroundEvent.Post(objToPost);
     }
     public void PlayCatch()
     {
-        catchEvent.Post(gameObject);
-    }
-        public void UpdateChargesRTPC(int value)
-    {
-        chargesRTPC.SetValue(gameObject, value);
+        catchEvent.Post(objToPost);
     }
 }

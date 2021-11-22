@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using MoreMountains.Feedbacks;
+using UnityEngine.Events;
+using TMPro;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+
+    private bool isCrouching;
+    private CharacterController charController;
+    private float playerHeight;
+    private float oldSpeed;
 
     [Header("Base Movement")]
     public float speed = 8f;
@@ -14,6 +20,10 @@ public class PlayerMovement : MonoBehaviour
     public static Transform player;
     public InputMaster controls;
     public Vector3 move;
+    [SerializeField]
+    private float acceleration;
+    public float accelerationSpeed;
+    private bool isMoving = false;
 
     [Header("Jump")]
     public float jumpPeak = 3f;
@@ -39,12 +49,13 @@ public class PlayerMovement : MonoBehaviour
     private bool cooldown = false;
     private bool isDashing = false;
     private int dashesPerformed = 0;
-    private bool feedbackPlayed = false;
     private bool dashLocker = false;
     private bool movementBlocker = false;
     private bool hasDashed = false;
     private float x2;
     private float z2;
+
+    private float dashSliderTime = 0f;
 
     [Header("Sliding")]
     public float slideTime;
@@ -55,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
     private bool slideDirectionDecided = false;
     private Vector3 slideDirection;
     private Vector3 slideLeftRight;
+    private bool headCheckPerformed = false;
+    private bool hasLetGo = false;
 
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
@@ -68,23 +81,27 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 velocity;
     private float oldGroundDistance;
 
-    [Header("Feedbacks")]
-    public MMFeedbacks DashFeedback;
-    public MMFeedbacks SlideFeedback;
+    [Header("UnityEvents")]
+    [SerializeField]
+    private UnityEvent onJump = null;
+    [SerializeField]
+    private UnityEvent onDash = null;
+    [SerializeField]
+    private UnityEvent onSlide = null;
+    [SerializeField]
+    private UnityEvent onSlideEnd = null;
 
-    [Header("Vibrations")]
-    public VibrationManager vibrationManager;
-
-    [Header("Events")]
-    [SerializeField] private GameEvent onJump = null;
-    [SerializeField] private GameEvent onDash = null;
-
-    //Crouching:
-    public bool isCrouching;
-    private CharacterController charController;
-    private float playerHeight;
-    private float oldSpeed;
-    //private float playerHeight;
+    [Header("Game Events")]
+    [SerializeField]
+    private GameEvent _onJump = null;
+    [SerializeField]
+    private GameEvent _onDash = null;
+    [SerializeField]
+    private GameEvent _onSlide = null;
+    [SerializeField]
+    private GameEvent _onSlideEnd = null;
+    [SerializeField]
+    private GameEventFloat onDashSliderValue = null;
 
     private void Awake()
     {
@@ -93,17 +110,30 @@ public class PlayerMovement : MonoBehaviour
         prevGrav = gravity;
         charController = GetComponent<CharacterController>();
         playerHeight = charController.height;
+        GameManager.gravity = gravity;
 
         controls = new InputMaster(); //Creates a new InputMaster to gain access to mapped controls
         controls.Player.Jump.performed += _ => Jump(); //When the jump action is activated in Input Master, activate the Jump function.
-        controls.Player.Dash.performed += _ => Dash();
+        controls.Player.Dash.performed += _ => StartCoroutine(Dash());
         controls.Player.Crouch.performed += _ => Crouch();
         player = transform;
     }
 
-    //||
-    void FixedUpdate()
+    private void FixedUpdate()
     {
+        //@cole :)
+        if (isDashing == true)
+        {
+            dashSliderTime += Time.deltaTime;
+
+            float b = (1f - ((float)dashesPerformed / (float)dashesBeforeLanding)) * 100f;
+            float a = (1f - (((float)dashesPerformed + 1f) / (float)dashesBeforeLanding)) * 100f;
+            float t = 1f - Mathf.Clamp(dashSliderTime / dashLength, 0, 1);
+            float dashSliderPos = Mathf.Lerp(a, b, Mathf.SmoothStep(0, 1, t));
+
+            onDashSliderValue?.Raise(dashSliderPos);
+        }
+
 
         #region Crouching
         //print(isCrouching);
@@ -112,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
         {
             h = playerHeight * 0.35f;
         }
-        if(isSliding == false)
+        if (isSliding == false)
         {
             float lastHeight = charController.height;
             charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
@@ -133,6 +163,9 @@ public class PlayerMovement : MonoBehaviour
             coyoteTime = oldCoyoteTime;
             hasJumped = false;
             dashesPerformed = 0;
+
+            onDashSliderValue?.Raise(100);
+
             if (dashesPerformed > 0)
             {
                 StartCoroutine(StopDash()); //Starts coroutine stopdash, which waits a split second after hitting the ground to reset the dash counter.
@@ -166,12 +199,19 @@ public class PlayerMovement : MonoBehaviour
         if (!GameManager.s_Instance.paused && movementBlocker == false)
         {
 
+            acceleration += Time.deltaTime * accelerationSpeed;
+
+            if (acceleration >= 1)
+            {
+                acceleration = 1;
+            }
+
             float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
             float z = controls.Player.Movement.ReadValue<Vector2>().y;
 
             if (isSliding == false)
             {
-                move = (transform.right * x + transform.forward * z).normalized; //Creates a value to move the player in local space based on this value.
+                move = (transform.right * x + transform.forward * z).normalized * acceleration; //Creates a value to move the player in local space based on this value.
                 controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
             }
             else
@@ -179,6 +219,14 @@ public class PlayerMovement : MonoBehaviour
                 move = (slideLeftRight * x); //Creates a value to move the player in local space based on this value.
                 controller.Move(move * strafeStrength * Time.deltaTime); //uses move value to move the player.
             }
+
+            // Check if moving
+            isMoving = move != Vector3.zero ? true : false;
+        }
+
+        if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
+        {
+            acceleration = 0;
         }
         //EARLY MOMENTUM SYSTEM - DOESN'T RESET! 
         //velocity.x += move.x;
@@ -192,13 +240,11 @@ public class PlayerMovement : MonoBehaviour
         #region Dashing
         if (isDashing == true)
         {
+            velocity = Vector3.zero;
+
             if (hasDashed == false)
             {
-                if (feedbackPlayed == false)
-                {
-                    DashFeedback?.PlayFeedbacks(); //Play feedback
-                    feedbackPlayed = true;
-                }
+                //acceleration = 1;
                 cooldown = true;
 
                 if (dashLocker == false)
@@ -211,7 +257,6 @@ public class PlayerMovement : MonoBehaviour
 
                 controller.Move(move * dashStrength * speed * Time.deltaTime);
             }
-
 
             if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
             {
@@ -258,9 +303,14 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Slide
+
         if (isSliding == true)
         {
-
+            //if (controls.Player.Crouch.ReadValue<float>() == 1 && hasLetGo == true)
+            //{
+            //    isSliding = false;
+            //}
+            acceleration = 1;
             coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
             print(isGrounded);
@@ -281,9 +331,23 @@ public class PlayerMovement : MonoBehaviour
 
             controller.Move(slideDirection * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
         }
+
+        if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
+        {
+            DisableSlide();
+
+            if (headIsTouchingSomething && headCheckPerformed == false) //Keeps the player crouched if they finish their slide underneath a small gap.
+            {
+                headCheckPerformed = true;
+                isCrouching = true;
+                oldSpeed = speed;
+                speed /= 2;
+            }
+        }
+
         #endregion
     }
-    private void Jump()
+    void Jump()
     {
         if (!GameManager.s_Instance.paused && coyoteTime > 0 && hasJumped == false)
         {
@@ -302,30 +366,16 @@ public class PlayerMovement : MonoBehaviour
 
             gravity = prevGrav;
             isDashing = false;
-            isSliding = false;
-            feedbackPlayed = false;
+            if(isSliding == true)
+            {
+                DisableSlide();
+            }
             prevJump = false;
-            SlideFeedback?.StopFeedbacks();
 
             jump = true;
-            vibrationManager.JumpVibration();
-            onJump?.Raise();
-        }
-    }
 
-    void Dash()
-    {
-        // Checks:
-        // - If the game isn't paused
-        // - Not on the ground
-        // - Not cooling down
-        // - Not already dashing
-        if (!GameManager.s_Instance.paused && isGrounded != true && cooldown == false && isDashing == false)
-        {
-            StartCoroutine(EnableDisableDash());
-
-            isCrouching = false;
-            StartCoroutine(Cooldown());
+            onJump?.Invoke();
+            _onJump?.Raise();
         }
     }
 
@@ -335,22 +385,23 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isCrouching == false)
             {
-                if(controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
+                if(controls.Player.Movement.ReadValue<Vector2>().y <= 0)
                 {
-                    print("Crouch");
                     isCrouching = true;
                     oldSpeed = speed;
                     speed /= 2;
                 }
                 else
                 {
-                    StartCoroutine(EnableDisableSlide());
+                    isSliding = true;
+
+                    onSlide?.Invoke();
+                    _onSlide?.Raise();
                 }
             }
 
             else
             {
-                print("UnCrouch");
                 isCrouching = false;
                 speed = oldSpeed;
             }
@@ -358,33 +409,41 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    IEnumerator EnableDisableSlide()
+    public bool GetIsCrouching()
     {
-        isSliding = true;
-        SlideFeedback?.PlayFeedbacks(); //Play feedback
-        yield return new WaitForSeconds(slideTime); //Performs the slide section of update until the set slideTime is up
-        isSliding = false;
-        SlideFeedback?.StopFeedbacks(); //stop feedback
-
-        slideDirectionDecided = false;
-        cooldown = false;
-
-        if (headIsTouchingSomething) //Keeps the player crouched if they finish their slide underneath a small gap.
-        {
-            isCrouching = true;
-            oldSpeed = speed;
-            speed /= 2;
-        }
+        return isCrouching;
     }
-    IEnumerator EnableDisableDash()
+
+    public bool GetIsMoving()
     {
-        if (dashesPerformed < dashesBeforeLanding)
+        return isMoving;
+    }
+
+    public bool GetIsGrounded()
+    {
+        return isGrounded;
+    }
+
+    IEnumerator Dash()
+    {
+        // Checks:
+        // - If the game isn't paused
+        // - Not on the ground
+        // - Not cooling down
+        // - Not already dashing
+        // - If the player has enough dashes remaining
+
+        if (!GameManager.s_Instance.paused && isGrounded != true && cooldown == false && isDashing == false && dashesPerformed < dashesBeforeLanding)
         {
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
+            dashSliderTime = 0f;
             movementBlocker = true;
 
-            vibrationManager.DashVibration();
-            onDash?.Raise();
+            onDash?.Invoke();
+            _onDash?.Raise();
+
+            isCrouching = false;
+            StartCoroutine(Cooldown());
 
             velocity.y = 0;
             jumpHeight = 0;
@@ -408,15 +467,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void DisableSlide()
+    {
+        onSlideEnd?.Invoke();
+        _onSlideEnd?.Raise();
+
+        isSliding = false;
+
+        hasLetGo = false;
+        slideDirectionDecided = false;
+        cooldown = false;
+    }
+
     IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(cooldownTime); //If the cooldown is active, wait for cooldown time set, until setting cooldown as false
         cooldown = false;
-        if(dashesPerformed < dashesBeforeLanding)
-        {
-            feedbackPlayed = false;
-        }
     }
+
     IEnumerator StopDash()
     {
         yield return new WaitForSeconds(0.1f);

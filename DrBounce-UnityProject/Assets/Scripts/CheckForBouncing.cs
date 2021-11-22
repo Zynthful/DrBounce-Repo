@@ -30,6 +30,15 @@ public class CheckForBouncing : MonoBehaviour
             cc = GetComponent<CharacterController>();
             pm = GetComponent<PlayerMovement>();
         }
+
+        if(!cc && !rb)
+        {
+            rb = GetComponentInParent<Rigidbody>();
+            if (!rb)
+                rb = GetComponentInChildren<Rigidbody>();
+        }
+
+        recentHit = null;
     }
 
     protected void OnCollisionEnter(Collision collision)
@@ -38,36 +47,22 @@ public class CheckForBouncing : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Enemy>())
             {
-                EnemyAudio audio = collision.gameObject.GetComponent<Enemy>()?.enemyAudio;
+                EnemyAudio audio = collision.gameObject.GetComponent<Enemy>()?.GetAudio();
                 audio?.PlayBounce();
             }
 
             Vector3[] returnVectors = new Vector3[3];
 
-            Bouncing b = collision.gameObject.GetComponent<Bouncing>();
-            switch (b.bType)
+            returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision, bounceOriginPoint);
+            if (returnVectors.Length > 0)
             {
-                case Bouncing.BounceType.E_Back:
-                    returnVectors = b.BounceBack(transform.position, bounceOriginPoint);
-                    break;
+                if(specialInteractions)
+                    specialInteractions.Bounced(collision);
 
-                case Bouncing.BounceType.E_Up:
-                    returnVectors = b.BounceUp(collision.transform, transform.position);
-                    break;
-
-                case Bouncing.BounceType.E_Away:
-                    returnVectors = b.BounceForward(collision.transform, transform.position, bounceOriginPoint);
-                    break;
-
-                case Bouncing.BounceType.W_Straight:
-                    returnVectors = b.BounceBack(transform.position, bounceOriginPoint);
-                    break;
+                transform.position = returnVectors[0];
+                bounceOriginPoint = returnVectors[1];
+                rb.velocity = returnVectors[2];
             }
-            transform.position = returnVectors[0];
-            bounceOriginPoint = returnVectors[1];
-            rb.velocity = returnVectors[2];
-
-            specialInteractions.Bounced(collision);
         }
     }
 
@@ -77,46 +72,36 @@ public class CheckForBouncing : MonoBehaviour
         {
             if (hit.gameObject.GetComponent<Enemy>())
             {
-                EnemyAudio audio = hit.gameObject.GetComponent<Enemy>()?.enemyAudio;
+                EnemyAudio audio = hit.gameObject.GetComponent<Enemy>()?.GetAudio();
                 audio?.PlayBounce();
             }
 
             Vector3[] returnVectors = new Vector3[1];
 
-            Bouncing b = hit.gameObject.GetComponent<Bouncing>();
-            switch (b.bType)
+            returnVectors = hit.gameObject.GetComponent<Bouncing>().BouncePlayer(transform.position, cc.velocity.normalized, hit);
+            if (returnVectors.Length > 0)
             {
-                case Bouncing.BounceType.E_Back:
-                    returnVectors = b.PlayerBounceBack(cc.velocity.normalized);
-                    break;
-
-                case Bouncing.BounceType.E_Up:
-                    returnVectors = b.PlayerBounceUp(pm.gravity);
-                    break;
-
-                case Bouncing.BounceType.E_Away:
-                    returnVectors = b.PlayerBounceForward(hit.transform, transform.position, cc.velocity.normalized);
-                    break;
-
-                case Bouncing.BounceType.W_Straight:
-                    returnVectors = b.PlayerBounceBack(cc.velocity.normalized);
-                    break;
-            }
-            if(returnVectors.Length == 2)
-            {
-                transform.position = returnVectors[0];
-                pm.velocity = returnVectors[1];
-            }
-            else
-            {
-                pm.velocity = returnVectors[0];
+                if (returnVectors.Length == 2)
+                {
+                    transform.position = returnVectors[0];
+                    pm.velocity = returnVectors[1];
+                }
+                else if(returnVectors.Length == 3)
+                {
+                    transform.position = returnVectors[0];
+                    pm.velocity = returnVectors[2];
+                }
+                else
+                {
+                    pm.velocity = returnVectors[0];
+                }
             }
 
             recentHit = hit;
 
             if(recentHitRun != null)
                 StopCoroutine(recentHitRun);
-            recentHitRun = StartCoroutine(RecentBounce(3.02f));
+            recentHitRun = StartCoroutine(RecentBounce(.25f));
         }
     }
 
@@ -150,7 +135,7 @@ public class CheckForBouncing : MonoBehaviour
             case RequirementsForBounce.Requirements.amDead:
                 if (GetComponent<Health>())
                 {
-                    if (GetComponent<Health>().ReturnDead())
+                    if (GetComponent<Health>().GetIsDead())
                         return true;
                 }
                 else
@@ -162,7 +147,7 @@ public class CheckForBouncing : MonoBehaviour
             case RequirementsForBounce.Requirements.amAlive:
                 if (GetComponent<Health>())
                 {
-                    if (!GetComponent<Health>().ReturnDead())
+                    if (!GetComponent<Health>().GetIsDead())
                         return true;
                 }
                 else

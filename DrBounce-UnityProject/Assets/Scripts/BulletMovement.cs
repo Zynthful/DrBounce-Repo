@@ -25,9 +25,6 @@ public class BulletMovement : MonoBehaviour, IPooledObject
 
     [SerializeField] private LayerMask ignoreBullet;
 
-    [Header("Feedbacks")]
-    public MMFeedbacks DamageFeedback;
-
     /// <summary>
     /// This function is called when the object pooling system recycles this object
     /// The function will reset all bullet values and variables to default
@@ -37,6 +34,8 @@ public class BulletMovement : MonoBehaviour, IPooledObject
         if(!rb)
         {
             rb = GetComponent<Rigidbody>();
+            if (!rb)
+                rb = GetComponentInChildren<Rigidbody>();
         }
         
         rb.velocity = dir * speed * Time.fixedDeltaTime;
@@ -72,7 +71,7 @@ public class BulletMovement : MonoBehaviour, IPooledObject
 
     protected virtual void Update()
     {
-        print(ignoreBullet.value);
+        //print(ignoreBullet.value);
 
         /* BEZIER CURVE CODE IF WANTED/NEEDED LATER IN PROJECT
         if (isSnowfall && !overrideMovement)
@@ -111,7 +110,6 @@ public class BulletMovement : MonoBehaviour, IPooledObject
                 //other.GetComponent<Health>().Damage(dam);
 
                 OnHit?.Invoke(dam);
-                DamageFeedback?.PlayFeedbacks();
             }
 
 
