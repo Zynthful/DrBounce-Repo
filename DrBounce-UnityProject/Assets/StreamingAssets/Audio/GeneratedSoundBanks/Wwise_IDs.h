@@ -13,6 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID BOUNCE = 1496458317U;
         static const AkUniqueID DASH = 1942692385U;
         static const AkUniqueID ENEMY_GUN_BOUNCE_IMPACT = 177975784U;
         static const AkUniqueID FOOTSTEP = 1866025847U;

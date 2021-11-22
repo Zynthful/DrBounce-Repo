@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bouncing : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class Bouncing : MonoBehaviour
     public BounceType bType;
 
     [SerializeField] float bounceForceMod = 14;
+
+    [Header("Events")]
+    [SerializeField]
+    private UnityEvent onBounceAny = null;  // Invoked when any bounce occurs
 
     public Vector3[] BounceBack(Vector3 position, Vector3 origin)
     {
@@ -107,6 +112,8 @@ public class Bouncing : MonoBehaviour
 
     public Vector3[] BounceObject(Vector3 position, Vector3 direction, Collision collision, Vector3 origin)
     {
+        onBounceAny?.Invoke();
+
         switch (bType)
         {
             case BounceType.E_Back:
@@ -127,6 +134,8 @@ public class Bouncing : MonoBehaviour
 
     public Vector3[] BouncePlayer(Vector3 position, Vector3 direction, ControllerColliderHit collision)
     {
+        onBounceAny?.Invoke();
+
         switch (bType)
         {
             case BounceType.E_Back:
