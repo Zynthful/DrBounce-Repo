@@ -12,6 +12,8 @@ public class BouncyEnemy : Enemy
     public bool searching;
     public bool recentlyAttacked;
     public bool canAttack;
+    public bool canMove;
+    public int currentTargetIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -27,14 +29,49 @@ public class BouncyEnemy : Enemy
 
     protected BtNode createTree()
     {
-        BtNode Move = new Sequence();
+        BtNode Move = createMovementTree();
 
-        BtNode CanSee = new Selector(new TargetInSight(), new Search());
-        BtNode LookAt = new Selector(CanSee, new AfterAttacked());
-        BtNode CheckForTarget = new Sequence(new IsClose(sightRange), LookAt, new Callout());
-        BtNode Attack = new Sequence(CheckForTarget, new AttackTarget(m_blackboard));
+        BtNode Attack = createAttackingTree();
 
-        return new Sequence(new CheckIfStunned(), Move, Attack);
+        return new Selector(new CheckIfStunned(), Attack, Move);
+    }
+
+    protected BtNode createMovementTree()
+    {
+        BtNode Move;
+        if (canMove)
+        {
+            // Movement Node Section
+            BtNode GetPatrolPoint = new Sequence(new IsClose(2f), new TargetNext("PatrolPoint"));
+            BtNode TowardsPatrolPoint = new Sequence(new IsTargeting("PatrolPoint"), new TowardsTarget());
+            BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose("PatrolPoint"));
+            Move = new Sequence(new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
+        }
+        else
+        {
+            Move = new Sequence();
+        }
+
+        return Move;
+    }
+
+    protected BtNode createAttackingTree()
+    {
+        BtNode Attack;
+        if (canAttack)
+        {
+            // Attack Node Section
+            BtNode CanSee = new Selector(new TargetInSight(), new Search());
+            BtNode LookAt = new Selector(CanSee, new AfterAttacked());
+            BtNode CheckForTarget = new Sequence(new IsClose(sightRange), LookAt, new Callout());
+            Attack = new Sequence(new IsNotReloading(), CheckForTarget, new AttackTarget(m_blackboard));
+        }
+        else
+        {
+            Attack = new Sequence();
+        }
+
+        return Attack;
     }
 
     // Update is called once per frame

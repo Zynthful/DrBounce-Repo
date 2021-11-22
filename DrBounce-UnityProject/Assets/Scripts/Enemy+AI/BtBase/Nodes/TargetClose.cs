@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetPlayer : BtNode {
+public class TargetClose : BtNode {
     private string m_targetTag;
 
-    public TargetPlayer(string targetTag) {
+    public TargetClose(string targetTag) {
         this.m_targetTag = targetTag;
     }
 
@@ -33,6 +33,6 @@ public class TargetPlayer : BtNode {
 
     public override string getName()
     {
-        return "TargetPlayer";
+        return "TargetClose";
     }
 }
