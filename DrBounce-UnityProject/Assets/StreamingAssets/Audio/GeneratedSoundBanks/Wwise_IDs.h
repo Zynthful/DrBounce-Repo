@@ -13,7 +13,8 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID BOUNCE = 1496458317U;
+        static const AkUniqueID BOUNCE_OBJECT = 2365089589U;
+        static const AkUniqueID BOUNCE_PLAYER = 2376949343U;
         static const AkUniqueID DASH = 1942692385U;
         static const AkUniqueID ENEMY_GUN_BOUNCE_IMPACT = 177975784U;
         static const AkUniqueID FOOTSTEP = 1866025847U;
@@ -38,6 +39,7 @@ namespace AK
     {
         static const AkUniqueID MASTERVOLUME = 2918011349U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
+        static const AkUniqueID OBJECTSIZE = 1059072663U;
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
         static const AkUniqueID PLAYER_GUN_CHARGE = 1641787780U;
         static const AkUniqueID PLAYER_GUN_LAST_SHOT_CHARGE = 1990407938U;

@@ -31,6 +31,10 @@ public class Bouncing : MonoBehaviour
     [Header("Events")]
     [SerializeField]
     private UnityEvent onBounceAny = null;  // Invoked when any bounce occurs
+    [SerializeField]
+    private UnityEvent onBouncePlayer = null; // Invoked when the player bounces off of it
+    [SerializeField]
+    private UnityEvent onBounceObject = null; // Invoked when an object other than the player bounces off of it
 
     public Vector3[] BounceBack(Vector3 position, Vector3 origin)
     {
@@ -113,6 +117,7 @@ public class Bouncing : MonoBehaviour
     public Vector3[] BounceObject(Vector3 position, Vector3 direction, Collision collision, Vector3 origin)
     {
         onBounceAny?.Invoke();
+        onBounceObject?.Invoke();
 
         switch (bType)
         {
@@ -135,6 +140,7 @@ public class Bouncing : MonoBehaviour
     public Vector3[] BouncePlayer(Vector3 position, Vector3 direction, ControllerColliderHit collision)
     {
         onBounceAny?.Invoke();
+        onBouncePlayer?.Invoke();
 
         switch (bType)
         {
