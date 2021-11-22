@@ -5,5 +5,5 @@ using UnityEngine;
 public class Blackboard {
     public GameObject owner;
     public GameObject target;
-
+    public BouncyEnemy aiController;
 }
