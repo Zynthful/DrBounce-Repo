@@ -4,31 +4,34 @@ using UnityEngine;
 
 public class Search : BtNode
 {
-    private float m_distanceLimit = 10;
-
+    /// <summary>
+    /// Used to get variables from else where (custimisation)
+    /// </summary>
     public Search()
     {
-        //m_distanceLimit = distanceLimit;
     }
 
+    /// <summary>
+    /// need to return true or false
+    /// </summary>
+    /// <param name="blackboard"></param>
+    /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (blackboard.target == null)
-        {
-            return NodeState.FAILURE;
-        }
-
-        float distance = (blackboard.owner.transform.position - blackboard.target.transform.position).magnitude;
-        if (distance < m_distanceLimit)
+        if (true)
         {
             return NodeState.SUCCESS;
         }
-        else
+        else if (false)
         {
             return NodeState.FAILURE;
         }
     }
 
+    /// <summary>
+    /// needs to return name of node
+    /// </summary>
+    /// <returns></returns>
     public override string getName()
     {
         return "Search";

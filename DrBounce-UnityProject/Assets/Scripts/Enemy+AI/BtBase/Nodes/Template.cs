@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetInSight : BtNode
+public class Template : BtNode
 {
     /// <summary>
     /// Used to get variables from else where (custimisation)
     /// </summary>
-    public TargetInSight()
+    public Template()
     {
     }
 
@@ -34,6 +34,6 @@ public class TargetInSight : BtNode
     /// <returns></returns>
     public override string getName()
     {
-        return "TargetInSight";
+        return "Template";
     }
 }
