@@ -16,6 +16,7 @@ public class BouncyEnemy : Enemy
             m_root = createTree();
             m_blackboard = new Blackboard();
             m_blackboard.owner = gameObject;
+            m_blackboard.aiController = this;
         }
     }
 
