@@ -76,6 +76,8 @@ public class GunThrowing : MonoBehaviour
     private UnityEvent onRecall = null;
     [SerializeField]
     private UnityEvent onReset = null;
+    [SerializeField]
+    private UnityEvent onDroppedPreCoyote = null;
 
     [Header("Game Events")]
     [SerializeField]
@@ -92,6 +94,8 @@ public class GunThrowing : MonoBehaviour
     private GameEvent _onDroppedAndLostAllCharges = null; // Raised only if the item loses charges on drop
     [SerializeField]
     private GameEvent _onRecall = null;
+    [SerializeField]
+    private GameEvent _onDroppedPreCoyote = null;
 
     // Start is called before the first frame update
     void Start()
@@ -275,6 +279,8 @@ public class GunThrowing : MonoBehaviour
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
         if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
+            onDroppedPreCoyote?.Invoke();
+            _onDroppedPreCoyote?.Raise();
             hitObjects.Add(new coyote(collision, StartCoroutine(CoyoteTimeForPickup(collision))));
 
             AffectPhysics(0.85f, 0f);
@@ -393,6 +399,7 @@ public class GunThrowing : MonoBehaviour
 
     IEnumerator CoyoteTimeForPickup(Collision hit)
     {
+
         yield return new WaitForSeconds(coyoteTimeDuration);
         for (int i = 0; i < hitObjects.Count; i++)
         {
