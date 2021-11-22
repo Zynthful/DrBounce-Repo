@@ -7,8 +7,11 @@ public class BouncyEnemy : Enemy
 
     private BtNode m_root;
     private Blackboard m_blackboard;
+    private float sightRange;
 
     public bool searching;
+    public bool recentlyAttacked;
+    public bool canAttack;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +28,11 @@ public class BouncyEnemy : Enemy
     protected BtNode createTree()
     {
         BtNode Move = new Sequence();
-        BtNode Attack = new Sequence();
+
+        BtNode CanSee = new Selector(new TargetInSight(), new Search());
+        BtNode LookAt = new Selector(CanSee, new AfterAttacked());
+        BtNode CheckForTarget = new Sequence(new IsClose(sightRange), LookAt, new Callout());
+        BtNode Attack = new Sequence(CheckForTarget, new AttackTarget(m_blackboard));
 
         return new Sequence(new CheckIfStunned(), Move, Attack);
     }
