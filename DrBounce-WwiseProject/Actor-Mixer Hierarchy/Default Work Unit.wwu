@@ -1459,6 +1459,66 @@
 						</Folder>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Enemy" ID="{6A3CC841-C4DE-495A-BC34-D312A43CC922}" ShortID="767532842">
+					<ChildrenList>
+						<Folder Name="Slime Bullet" ID="{BF8D213F-49FC-4786-A0E1-493098351B65}" ShortID="492577266">
+							<ChildrenList>
+								<Sound Name="DB_SFX_Enemy_Bullet_Impact_Player" ID="{E7C3FA33-7511-4593-AA89-B39CA4B21B2D}" ShortID="776499550">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{9ED41E9B-9BBB-4907-AD68-32D8D3E7C79A}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-100"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="DB_SFX_Player_Injured_By_Enemy_Bullet_Draft_4" ID="{348238EB-D9C6-4E45-8D58-9A9A8E615C66}">
+											<Language>SFX</Language>
+											<AudioFile>DB_SFX_Player_Injured_By_Enemy_Bullet_Draft_4.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="957695793"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="DB_SFX_Player_Injured_By_Enemy_Bullet_Draft_4" ID="{348238EB-D9C6-4E45-8D58-9A9A8E615C66}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</Folder>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

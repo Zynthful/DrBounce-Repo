@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MoreMountains.Feedbacks;
+using UnityEngine.Events;
 
 public class BulletMovement : MonoBehaviour, IPooledObject
 {
-
     protected Rigidbody rb;
     public float speed;
     public Vector3 dir;
@@ -20,10 +19,19 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     public float bezierPower = -.025f;
     float currentProgress;
 
+    [SerializeField]
+    private LayerMask[] layersToIgnore = null;
+
+    [Header("Events")]
+    [SerializeField]
+    private UnityEvent<GameObject> onHitAny = null;
+    [SerializeField]
+    private UnityEvent<GameObject> onHitPlayer = null;
+    [SerializeField]
+    private UnityEvent<GameObject> onHitAnyExceptPlayer = null;
+
     public delegate void Hit(int value);
     public static event Hit OnHit;
-
-    [SerializeField] private LayerMask ignoreBullet;
 
     /// <summary>
     /// This function is called when the object pooling system recycles this object
@@ -100,26 +108,42 @@ public class BulletMovement : MonoBehaviour, IPooledObject
         */
     }
 
-    // Basic checks to see if the player should take damage or not
+    // Check for what we've hit (ignored layer, non-ignored layer/player)
     public virtual void OnTriggerEnter(Collider other)
     {
         if (!other.GetComponent<BulletMovement>() && !other.GetComponent<Enemy>())
         {
-            if (other.CompareTag("Player"))
+            // Check for any ignored layers, and if we haven't found one, we've hit something not ignored
+            bool foundIgnoredLayer = false;
+            for (int i = 0; i < layersToIgnore.Length; i++)
             {
-                //other.GetComponent<Health>().Damage(dam);
-
-                OnHit?.Invoke(dam);
+                // Check if colliding object's layer matches ignored layer (h e l p)
+                if ((layersToIgnore[i].value & (1 << other.gameObject.layer)) > 0)
+                {
+                    foundIgnoredLayer = true;
+                    break;
+                }
             }
-
-
-            if (other.gameObject.layer == ignoreBullet)
+            if (!foundIgnoredLayer)
             {
+                if (other.CompareTag("Player"))
+                {
+                    //other.GetComponent<Health>().Damage(dam);
+
+                    onHitPlayer?.Invoke(other.gameObject);
+                    onHitAny?.Invoke(other.gameObject);
+                    OnHit?.Invoke(dam);
+                }
+                else
+                {
+                    onHitAny?.Invoke(other.gameObject);
+                    onHitAnyExceptPlayer?.Invoke(other.gameObject);
+                }
+
                 gameObject.SetActive(false);
             }
-
-        }
     }
+}
 
     protected virtual IEnumerator DieTime()
     {
