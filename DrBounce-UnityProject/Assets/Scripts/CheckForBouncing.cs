@@ -16,6 +16,8 @@ public class CheckForBouncing : MonoBehaviour
     ControllerColliderHit recentHit;
     Coroutine recentHitRun;
 
+    private int numOfPlayerBounces = 0;
+
     private void Start()
     {
         if (GetComponent<GunThrowing>())
@@ -78,7 +80,8 @@ public class CheckForBouncing : MonoBehaviour
 
             Vector3[] returnVectors = new Vector3[1];
 
-            returnVectors = hit.gameObject.GetComponent<Bouncing>().BouncePlayer(transform.position, cc.velocity.normalized, hit);
+            SetNumOfPlayerBounces(numOfPlayerBounces + 1);
+            returnVectors = hit.gameObject.GetComponent<Bouncing>().BouncePlayer(transform.position, cc.velocity.normalized, hit, numOfPlayerBounces);
             if (returnVectors.Length > 0)
             {
                 if (returnVectors.Length == 2)
@@ -180,5 +183,15 @@ public class CheckForBouncing : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         recentHit = null;
+    }
+
+    public void SetNumOfPlayerBounces(int value)
+    {
+        numOfPlayerBounces = value;
+    }
+
+    public int GetNumOfPlayerBounces()
+    {
+        return numOfPlayerBounces;
     }
 }

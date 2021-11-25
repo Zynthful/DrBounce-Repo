@@ -13996,6 +13996,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1932
+  bounceableMask:
+    serializedVersion: 2
+    m_Bits: 256
   headMask:
     serializedVersion: 2
     m_Bits: 1676
@@ -14088,11 +14091,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onLandOnNonBounceableGround:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6795235176586945864}
+        m_TargetAssemblyTypeName: CheckForBouncing, Assembly-CSharp
+        m_MethodName: SetNumOfPlayerBounces
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onJump: {fileID: 11400000, guid: 5ec36698f37a6c04a9b8ea92292716cd, type: 2}
   _onDash: {fileID: 11400000, guid: 539dc31165069b14ead0a76396611171, type: 2}
   _onSlide: {fileID: 11400000, guid: 222402d1b4224984abf12511ce8acec0, type: 2}
   _onSlideEnd: {fileID: 11400000, guid: 8f1e983433eef4645aa2191ce74e2dab, type: 2}
   onDashSliderValue: {fileID: 11400000, guid: 10358fb3fbf445d438b72c3697f949ef, type: 2}
+  _onLandOnNonBounceableGround: {fileID: 11400000, guid: ee527fdfc37115b4bbb04df5506816a0, type: 2}
 --- !u!114 &6795235176586945864
 MonoBehaviour:
   m_ObjectHideFlags: 0

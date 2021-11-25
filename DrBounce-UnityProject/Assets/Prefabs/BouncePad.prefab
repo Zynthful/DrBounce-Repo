@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6985263034887912892}
+  - component: {fileID: 5878247683391166293}
   - component: {fileID: 3887282011329150842}
   - component: {fileID: 3274923085036134949}
   m_Layer: 0
@@ -32,6 +33,23 @@ Transform:
   m_Father: {fileID: 7911476636658178911}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5878247683391166293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330914808370255690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888eddfa4f975c34ca4c541ad9ad0b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rtpc:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8836aae43d2106d4ab17ae6343abab4d, type: 2}
+  assignedObject: {fileID: 1330914808370255690}
 --- !u!114 &3887282011329150842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,12 +519,24 @@ MonoBehaviour:
   onBouncePlayer:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 5878247683391166293}
+        m_TargetAssemblyTypeName: WwiseRTPC, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 3274923085036134949}
         m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
         m_MethodName: HandleEvent
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6817154968581657202}
+          m_ObjectArgument: {fileID: 1330914808370255690}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public Transform headCheck;
     public LayerMask groundMask;
+    public LayerMask bounceableMask;
     public LayerMask headMask;
     public float groundDistance = 0.4f;
     public float headDistance = 0.4f;
@@ -90,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
     private UnityEvent onSlide = null;
     [SerializeField]
     private UnityEvent onSlideEnd = null;
+    [SerializeField]
+    private UnityEvent onLandOnNonBounceableGround = null;
 
     [Header("Game Events")]
     [SerializeField]
@@ -102,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
     private GameEvent _onSlideEnd = null;
     [SerializeField]
     private GameEventFloat onDashSliderValue = null;
+    [SerializeField]
+    private GameEvent _onLandOnNonBounceableGround = null;
 
     private void Awake()
     {
@@ -158,8 +163,17 @@ public class PlayerMovement : MonoBehaviour
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
 
         coyoteTime -= Time.deltaTime;
+
         if (isGrounded)
         {
+            // Is the ground we landed on NOT bounceable?
+            // todo: make this not call every frame whilst on non-bounceable ground :(
+            if (!Physics.CheckSphere(groundCheck.position, groundDistance, bounceableMask))
+            {
+                onLandOnNonBounceableGround?.Invoke();
+                _onLandOnNonBounceableGround?.Raise();
+            }
+
             coyoteTime = oldCoyoteTime;
             hasJumped = false;
             dashesPerformed = 0;

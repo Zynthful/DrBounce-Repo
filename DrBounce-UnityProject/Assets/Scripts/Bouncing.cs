@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class Bouncing : MonoBehaviour
 {
-
     public enum BounceType
     {
         E_Back,
@@ -32,7 +31,7 @@ public class Bouncing : MonoBehaviour
     [SerializeField]
     private UnityEvent onBounceAny = null;  // Invoked when any bounce occurs
     [SerializeField]
-    private UnityEvent onBouncePlayer = null; // Invoked when the player bounces off of it
+    private UnityEvent<int> onBouncePlayer = null; // Invoked when the player bounces off of it
     [SerializeField]
     private UnityEvent onBounceObject = null; // Invoked when an object other than the player bounces off of it
 
@@ -137,10 +136,10 @@ public class Bouncing : MonoBehaviour
         return null;
     }
 
-    public Vector3[] BouncePlayer(Vector3 position, Vector3 direction, ControllerColliderHit collision)
+    public Vector3[] BouncePlayer(Vector3 position, Vector3 direction, ControllerColliderHit collision, int numOfBounces)
     {
         onBounceAny?.Invoke();
-        onBouncePlayer?.Invoke();
+        onBouncePlayer?.Invoke(numOfBounces);
 
         switch (bType)
         {
