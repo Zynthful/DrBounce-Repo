@@ -240,17 +240,6 @@
 				</Folder>
 				<Folder Name="Enemy" ID="{1B1E654D-564F-47AE-9FF7-FD4251AEA5BD}" ShortID="681773210">
 					<ChildrenList>
-						<Event Name="Enemy_Gun_Bounce_Impact" ID="{145EE972-B19C-4CE3-881B-2A4F630E0483}">
-							<ChildrenList>
-								<Action Name="" ID="{EE52427C-C3AE-4F5A-9F54-780DD0F0A7A9}" ShortID="466842576">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Bounce_Impact_Enemy" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
 						<Folder Name="Bullet" ID="{BBD4EA8D-27F2-4987-B84E-69B9E38FA72D}" ShortID="181870034">
 							<ChildrenList>
 								<Event Name="Enemy_Bullet_Impact_Player" ID="{CD4F0CCF-5783-4CEB-A997-756E7567BEAC}">
@@ -265,6 +254,37 @@
 									</ChildrenList>
 								</Event>
 								<Event Name="Enemy_Bullet_Impact_Surface" ID="{01260D73-2E30-44BD-8B0C-D5DE22974262}"/>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Bouncing" ID="{46694129-CD7B-4619-9963-6E3848DC6843}" ShortID="904866695">
+							<ChildrenList>
+								<Event Name="Enemy_Gun_Bounce_Impact" ID="{145EE972-B19C-4CE3-881B-2A4F630E0483}">
+									<ChildrenList>
+										<Action Name="" ID="{EE52427C-C3AE-4F5A-9F54-780DD0F0A7A9}" ShortID="466842576">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Gun_Bounce_Impact_Enemy" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Health" ID="{6D799F90-053F-4505-A8FD-F03727B4D5C2}" ShortID="747942249">
+							<ChildrenList>
+								<Event Name="Enemy_Health_Injured" ID="{FCCA1507-ECE7-43C3-9D31-9AEC95DC9B8B}">
+									<ChildrenList>
+										<Action Name="" ID="{A51E7441-1848-402B-83CB-108C207379A1}" ShortID="411264353">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DB_SFX_Enemy_Injured_Draft_1" ID="{17E127A1-0A1E-4D82-A369-62ABD46D5AC0}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Enemy_Health_Death" ID="{9E33BC64-B73D-4A5D-A8DE-54DD3EADAA78}"/>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
