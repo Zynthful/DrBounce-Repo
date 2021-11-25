@@ -80,7 +80,10 @@ public class GameManager : MonoBehaviour
 #if !UNITY_EDITOR
     private void OnApplicationQuit()
     {
-        Application.OpenURL(urlToOpen);
+        if (openUrlOnQuit)
+        {
+            Application.OpenURL(urlToOpen);
+        }
     }
 #endif
 }
