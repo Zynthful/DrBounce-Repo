@@ -1245,40 +1245,6 @@
 					<ChildrenList>
 						<Folder Name="Bounce Pad" ID="{C9745771-D898-4AC0-8034-F3BB46B7D67D}" ShortID="1016464325">
 							<ChildrenList>
-								<Sound Name="DB_SFX_Bounce_Pad_Bounce_Player" ID="{5242C679-FF45-49D9-9062-5AD02079B8BC}" ShortID="924331248">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-5</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="Bounce Pad" ID="{5A72D2F8-E82B-4417-9E7D-EC86F79D0469}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="DB_SFX_Player_Bounce_Pad_Draft_2" ID="{F46EFA2B-F8C9-4475-AFFF-DFE6B2FEC73A}">
-											<Language>SFX</Language>
-											<AudioFile>DB_SFX_Player_Bounce_Pad_Draft_2.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="301926696"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ObjectLists/>
-									<ActiveSourceList>
-										<ActiveSource Name="DB_SFX_Player_Bounce_Pad_Draft_2" ID="{F46EFA2B-F8C9-4475-AFFF-DFE6B2FEC73A}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
 								<Sound Name="DB_SFX_Bounce_Pad_Bounce_Object" ID="{BBA28ED5-84FC-4D7B-A730-F18055FE889B}" ShortID="470433093">
 									<PropertyList>
 										<Property Name="Pitch" Type="int32">
@@ -1455,6 +1421,238 @@
 										<ActiveSource Name="DB_SFX_Bounce_Pad_Bounce_Object" ID="{6F150858-9661-4BB2-82A6-3C857145A504}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<BlendContainer Name="DB_SFX_Bounce_Pad_Bounce_Player" ID="{798EFDC7-52FB-45F5-A03E-1EDA186610EB}" ShortID="1058825470">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Bounce Pad" ID="{5A72D2F8-E82B-4417-9E7D-EC86F79D0469}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer" ID="{C594199E-FC4D-4AEB-B710-C768D412B286}" ShortID="85194018">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer" ID="{BA3476D2-D09B-4809-BA87-4B60155EDC3A}">
+													<Language>SFX</Language>
+													<AudioFile>DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="669994136"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer" ID="{BA3476D2-D09B-4809-BA87-4B60155EDC3A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<BlendContainer Name="DB_SFX_Bounce_Pad_Bounce_Player_First" ID="{C3847D67-40DF-409A-AB95-F8E54F4DA95A}" ShortID="675017690">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<RTPCList>
+														<RTPC Name="" ID="{5F374D1B-EEFF-4040-9E8C-72149B15123B}" ShortID="571247674">
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<ObjectRef Name="BouncePad_NumOfBounces" ID="{1E5091A7-1B06-4968-A32E-0C0739C0B13C}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+																</Reference>
+															</ReferenceList>
+															<Curve Name="" ID="{6E3544B8-954B-43AD-969F-28DC107FC5D2}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>0</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>1.999</XPos>
+																		<YPos>0</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>2</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>5</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</RTPC>
+													</RTPCList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_Bounce_Pad_Bounce_Player_FirstBounce" ID="{15D63707-0092-45CD-B08B-2909F094D796}" ShortID="798168281">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Bounce_Pad_Bounce_Player_FirstBounce" ID="{53FB040B-5CF8-4121-858E-1B7F4DEB0B56}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Bounce_Pad_Bounce_Player_FirstBounce.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="229729602"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Bounce_Pad_Bounce_Player_FirstBounce" ID="{53FB040B-5CF8-4121-858E-1B7F4DEB0B56}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</BlendContainer>
+										<BlendContainer Name="DB_SFX_Bounce_Pad_Bounce_Player_Consecutive" ID="{3A6E14D4-6A56-43A5-B3DD-2A1A8634920C}" ShortID="542009324">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<RTPCList>
+														<RTPC Name="" ID="{B2956C26-EED3-4EBB-BD45-E2ED59CE5C4B}" ShortID="383370617">
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<ObjectRef Name="BouncePad_NumOfBounces" ID="{1E5091A7-1B06-4968-A32E-0C0739C0B13C}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+																</Reference>
+															</ReferenceList>
+															<Curve Name="" ID="{674BB3DC-01C1-4718-9855-FFC88247A8E6}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="65537"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>0</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>1</XPos>
+																		<YPos>0</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>5</XPos>
+																		<YPos>1200</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</RTPC>
+													</RTPCList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<RTPCList>
+														<RTPC Name="" ID="{D376598E-F783-4D60-B0F2-CC3AD0DB1113}" ShortID="57359683">
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<ObjectRef Name="BouncePad_NumOfBounces" ID="{1E5091A7-1B06-4968-A32E-0C0739C0B13C}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+																</Reference>
+															</ReferenceList>
+															<Curve Name="" ID="{0E36FFAD-3E97-4864-9D9D-D44C097BC56A}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>1.999</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>2</XPos>
+																		<YPos>0</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>5</XPos>
+																		<YPos>0</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</RTPC>
+													</RTPCList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_Bounce_Pad_Bounce_Player_ConsecutiveBounce" ID="{F41DCF18-14E4-4FCB-90F6-C7DD63577E17}" ShortID="287789442">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Bounce_Pad_Bounce_Player_ConsecutiveBounce" ID="{0B457688-46FD-49C7-B32A-1823B2977C58}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Bounce_Pad_Bounce_Player_ConsecutiveBounce.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="500989044"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Bounce_Pad_Bounce_Player_ConsecutiveBounce" ID="{0B457688-46FD-49C7-B32A-1823B2977C58}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</BlendContainer>
+									</ChildrenList>
+									<ObjectLists/>
+								</BlendContainer>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
@@ -1464,6 +1662,13 @@
 						<Folder Name="Slime Bullet" ID="{BF8D213F-49FC-4786-A0E1-493098351B65}" ShortID="492577266">
 							<ChildrenList>
 								<Sound Name="DB_SFX_Enemy_Bullet_Impact_Player" ID="{C1DC0423-7A8A-4B89-90EB-5D156CEA3D13}" ShortID="55205266">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>

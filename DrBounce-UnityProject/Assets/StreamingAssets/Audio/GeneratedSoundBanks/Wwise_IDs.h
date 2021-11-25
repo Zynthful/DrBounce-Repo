@@ -39,6 +39,7 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID BOUNCEPAD_NUMOFBOUNCES = 856530565U;
         static const AkUniqueID MASTERVOLUME = 2918011349U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
         static const AkUniqueID OBJECTSIZE = 1059072663U;
