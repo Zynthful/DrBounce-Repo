@@ -1424,6 +1424,19 @@
 								<BlendContainer Name="DB_SFX_Bounce_Pad_Bounce_Player" ID="{798EFDC7-52FB-45F5-A03E-1EDA186610EB}" ShortID="1058825470">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{EED6EA84-47B9-4D48-B610-4012F98867E4}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-300"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>-4</Value>
@@ -1543,39 +1556,6 @@
 										</BlendContainer>
 										<BlendContainer Name="DB_SFX_Bounce_Pad_Bounce_Player_Consecutive" ID="{3A6E14D4-6A56-43A5-B3DD-2A1A8634920C}" ShortID="542009324">
 											<PropertyList>
-												<Property Name="Pitch" Type="int32">
-													<RTPCList>
-														<RTPC Name="" ID="{B2956C26-EED3-4EBB-BD45-E2ED59CE5C4B}" ShortID="383370617">
-															<ReferenceList>
-																<Reference Name="ControlInput">
-																	<ObjectRef Name="BouncePad_NumOfBounces" ID="{1E5091A7-1B06-4968-A32E-0C0739C0B13C}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
-																</Reference>
-															</ReferenceList>
-															<Curve Name="" ID="{674BB3DC-01C1-4718-9855-FFC88247A8E6}">
-																<PropertyList>
-																	<Property Name="Flags" Type="int32" Value="65537"/>
-																</PropertyList>
-																<PointList>
-																	<Point>
-																		<XPos>0</XPos>
-																		<YPos>0</YPos>
-																		<Flags>5</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>1</XPos>
-																		<YPos>0</YPos>
-																		<Flags>0</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>5</XPos>
-																		<YPos>1200</YPos>
-																		<Flags>37</Flags>
-																	</Point>
-																</PointList>
-															</Curve>
-														</RTPC>
-													</RTPCList>
-												</Property>
 												<Property Name="Volume" Type="Real64">
 													<RTPCList>
 														<RTPC Name="" ID="{D376598E-F783-4D60-B0F2-CC3AD0DB1113}" ShortID="57359683">
