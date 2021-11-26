@@ -177,12 +177,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7273102444321697995}
+        m_TargetAssemblyTypeName: WwiseRTPC, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onInjured:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 6993296262394879778}
         m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
         m_MethodName: HandleEvent
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6934631128390378777}
+          m_ObjectArgument: {fileID: 3191157929360465381}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -200,7 +215,7 @@ MonoBehaviour:
         m_MethodName: HandleEvent
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6252557339512048768}
+          m_ObjectArgument: {fileID: 3191157929360465381}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -210,6 +225,7 @@ MonoBehaviour:
   _onHealthChange: {fileID: 0}
   _onHealthChangeNormalized: {fileID: 0}
   _onDamage: {fileID: 0}
+  _onInjured: {fileID: 0}
   _onHeal: {fileID: 0}
   _onDeath: {fileID: 0}
   DeathFeedback: {fileID: 3924644698427810977}
@@ -689,6 +705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4216198890021323320}
+  - component: {fileID: 7273102444321697995}
   - component: {fileID: 4044905670104362165}
   - component: {fileID: 8302032078188560728}
   m_Layer: 8
@@ -714,6 +731,23 @@ Transform:
   m_Father: {fileID: 962519144952153284}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7273102444321697995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3191157929360465381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888eddfa4f975c34ca4c541ad9ad0b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rtpc:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 73bbd6323fc745048836484d6158177c, type: 2}
+  assignedObject: {fileID: 6252557339512048768}
 --- !u!114 &4044905670104362165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,6 +1072,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7736083451794625886}
+  - component: {fileID: 8026040915889718943}
   - component: {fileID: 2230954696144919611}
   - component: {fileID: 8381011555328235111}
   m_Layer: 0
@@ -1061,6 +1096,23 @@ Transform:
   m_Father: {fileID: 4216198890021323320}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8026040915889718943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252557339512048768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888eddfa4f975c34ca4c541ad9ad0b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rtpc:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 73bbd6323fc745048836484d6158177c, type: 2}
+  assignedObject: {fileID: 6252557339512048768}
 --- !u!114 &2230954696144919611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1121,6 +1173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7720760333439041021}
+  - component: {fileID: 1092545617476547725}
   - component: {fileID: 702063581606051949}
   - component: {fileID: 6993296262394879778}
   m_Layer: 0
@@ -1144,6 +1197,23 @@ Transform:
   m_Father: {fileID: 4216198890021323320}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1092545617476547725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934631128390378777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888eddfa4f975c34ca4c541ad9ad0b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rtpc:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 73bbd6323fc745048836484d6158177c, type: 2}
+  assignedObject: {fileID: 6934631128390378777}
 --- !u!114 &702063581606051949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1639,14 +1709,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09c9de5f68ddb86459914689021da771, type: 3}
---- !u!198 &102941565221459443 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 954172692143662282, guid: 09c9de5f68ddb86459914689021da771, type: 3}
-  m_PrefabInstance: {fileID: 887314460433985849}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5319313739997148468 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5008460616589788173, guid: 09c9de5f68ddb86459914689021da771, type: 3}
+  m_PrefabInstance: {fileID: 887314460433985849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &102941565221459443 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 954172692143662282, guid: 09c9de5f68ddb86459914689021da771, type: 3}
   m_PrefabInstance: {fileID: 887314460433985849}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6641894842248865152

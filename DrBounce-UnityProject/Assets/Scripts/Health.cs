@@ -31,7 +31,10 @@ public class Health : MonoBehaviour
     protected UnityEvent<float> onHealthChangeNormalized = null;
     // Passes damage taken
     [SerializeField]
-    protected UnityEvent<float> onDamage = null;
+    protected UnityEvent<float> onDamage = null;    // Triggers when taking damage
+    // Passes damage taken
+    [SerializeField]
+    protected UnityEvent<float> onInjured = null;   // Triggers when taking damage BUT NOT dying as a result of it
     // Passes health healed
     [SerializeField]
     protected UnityEvent<float> onHeal = null;
@@ -47,7 +50,10 @@ public class Health : MonoBehaviour
     private GameEventFloat _onHealthChangeNormalized = null;
     // Passes damage taken
     [SerializeField]
-    private GameEventFloat _onDamage = null;
+    private GameEventFloat _onDamage = null;    // Triggers when taking damage
+    // Passes damage taken
+    [SerializeField]
+    private GameEventFloat _onInjured = null;   // Triggers when taking damage but not dying as a result of it
     // Passes health healed
     [SerializeField]
     private GameEventFloat _onHeal = null;
@@ -105,6 +111,13 @@ public class Health : MonoBehaviour
         _onDamage?.Raise(amount);
 
         SetHealth(health - amount);
+
+        // Only call injured events if we're not dead after taking damage
+        if (!GetIsDead())
+        {
+            onInjured?.Invoke(amount);
+            _onInjured?.Raise(amount);
+        }
     }
 
     /*

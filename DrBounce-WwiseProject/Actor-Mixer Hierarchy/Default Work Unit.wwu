@@ -1678,10 +1678,71 @@
 								<Sound Name="DB_SFX_Enemy_Death_Draft_3" ID="{A8341F40-E425-44A2-8FDB-1FA0DB35BB33}" ShortID="308782557">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="BypassEffect0" Type="bool">
+											<RTPCList>
+												<RTPC Name="" ID="{DF8CD0B7-A792-46BF-9DC1-28B54ACBF051}" ShortID="968015235">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{8E7B2CDF-9852-4C9D-AC5B-C5A1E49DB726}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="65537"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>1</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>100</XPos>
+																<YPos>0</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1000</XPos>
+																<YPos>0</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
+										</Property>
 										<Property Name="InitialDelay" Type="Real64">
-											<ValueList>
-												<Value>0.06</Value>
-											</ValueList>
+											<RTPCList>
+												<RTPC Name="" ID="{493228C7-9ADC-47FB-A86D-42CE8D86836A}" ShortID="314725200">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{AFE2AB73-F573-46BF-A21F-D5C9E5DC0806}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="1"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>0.06</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>100</XPos>
+																<YPos>0.09</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1000</XPos>
+																<YPos>0.09</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
 										</Property>
 										<Property Name="Pitch" Type="int32">
 											<ModifierList>
@@ -1697,9 +1758,6 @@
 											</ModifierList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-5</Value>
-											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{7ADF040D-F378-4347-9C1B-EC89C8D8926B}">
@@ -1711,6 +1769,37 @@
 													</Modifier>
 												</ModifierInfo>
 											</ModifierList>
+											<RTPCList>
+												<RTPC Name="" ID="{0C774C62-B17E-462A-8941-156A5229B64F}" ShortID="254565589">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{430EB84C-7FF2-4A96-8F81-3623280EDAF1}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="3"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>-7</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>100</XPos>
+																<YPos>-4</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1000</XPos>
+																<YPos>-4</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
 										</Property>
 									</PropertyList>
 									<ReferenceList>
@@ -1719,6 +1808,17 @@
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="Effect0">
+											<Custom>
+												<Effect Name="Wwise Delay (Custom)" ID="{EB0BDB4E-4A69-4FFC-8336-7064FEF6C15E}" ShortID="744635329" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+													<PropertyList>
+														<Property Name="DelayTime" Type="Real32" Value="0.2"/>
+														<Property Name="Feedback" Type="Real32" Value="35"/>
+														<Property Name="WetDryMix" Type="Real32" Value="8"/>
+													</PropertyList>
+												</Effect>
+											</Custom>
 										</Reference>
 										<Reference Name="OutputBus">
 											<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
@@ -1758,11 +1858,39 @@
 													</Modifier>
 												</ModifierInfo>
 											</ModifierList>
+											<RTPCList>
+												<RTPC Name="" ID="{ABA03C0D-F158-457F-BD1A-71FF01D19A49}" ShortID="954448442">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{A3EF9C1C-81BB-4373-9166-8CF73C827E8F}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="65537"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>0</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>100</XPos>
+																<YPos>-200</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1000</XPos>
+																<YPos>-200</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{A81008DA-6E46-47A4-B1B2-1828992EACC0}">
@@ -1774,6 +1902,37 @@
 													</Modifier>
 												</ModifierInfo>
 											</ModifierList>
+											<RTPCList>
+												<RTPC Name="" ID="{62C657C6-72CB-4F0E-BF30-1E5EF7EE0A29}" ShortID="1059826045">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{35726838-CB77-4C65-A489-5350B0F3D044}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="3"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>-6</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>100</XPos>
+																<YPos>-3</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1000</XPos>
+																<YPos>-3</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
 										</Property>
 									</PropertyList>
 									<ReferenceList>
