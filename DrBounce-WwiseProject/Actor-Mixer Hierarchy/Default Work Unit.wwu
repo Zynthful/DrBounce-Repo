@@ -1695,7 +1695,7 @@
 						</Folder>
 						<Folder Name="Health" ID="{0F88BCE0-419C-4CCF-B5D4-3E0A0FC3D550}" ShortID="473146949">
 							<ChildrenList>
-								<Sound Name="DB_SFX_Enemy_Injured_Draft_1" ID="{17E127A1-0A1E-4D82-A369-62ABD46D5AC0}" ShortID="324236696">
+								<Sound Name="DB_SFX_Enemy_Death_Draft_3" ID="{A8341F40-E425-44A2-8FDB-1FA0DB35BB33}" ShortID="308782557">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="InitialDelay" Type="Real64">
@@ -1706,11 +1706,11 @@
 										<Property Name="Pitch" Type="int32">
 											<ModifierList>
 												<ModifierInfo>
-													<Modifier Name="" ID="{13288D93-C1FF-4E25-8F44-F454886FADC1}">
+													<Modifier Name="" ID="{E6B1362B-80C1-4B80-A06F-525E7CC07894}">
 														<PropertyList>
 															<Property Name="Enabled" Type="bool" Value="True"/>
 															<Property Name="Max" Type="Real64" Value="200"/>
-															<Property Name="Min" Type="Real64" Value="-350"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -1718,8 +1718,19 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-6</Value>
+												<Value>-5</Value>
 											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{7ADF040D-F378-4347-9C1B-EC89C8D8926B}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="1"/>
+															<Property Name="Min" Type="Real64" Value="-1"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
 										</Property>
 									</PropertyList>
 									<ReferenceList>
@@ -1734,17 +1745,80 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="DB_SFX_Enemy_Injured_Draft_1" ID="{E038F29A-8221-4809-87E0-85837912F305}">
+										<AudioFileSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{9ECFFDD9-BD3F-4404-8AFC-8BB4A3CB76FD}">
 											<Language>SFX</Language>
-											<AudioFile>DB_SFX_Enemy_Injured_Draft_1.wav</AudioFile>
+											<AudioFile>DB_SFX_Enemy_Death_Draft_3.wav</AudioFile>
 											<MediaIDList>
-												<MediaID ID="771539005"/>
+												<MediaID ID="980807061"/>
 											</MediaIDList>
 										</AudioFileSource>
 									</ChildrenList>
 									<ObjectLists/>
 									<ActiveSourceList>
-										<ActiveSource Name="DB_SFX_Enemy_Injured_Draft_1" ID="{E038F29A-8221-4809-87E0-85837912F305}" Platform="Linked"/>
+										<ActiveSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{9ECFFDD9-BD3F-4404-8AFC-8BB4A3CB76FD}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="DB_SFX_Enemy_Injured_Draft_2" ID="{F97F6A37-3780-4042-ACB3-C7244C9868AE}" ShortID="1026287889">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="InitialDelay" Type="Real64">
+											<ValueList>
+												<Value>0.06</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{7E6E14A8-7DB4-4D2B-A091-C03D4A404449}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="250"/>
+															<Property Name="Min" Type="Real64" Value="-250"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{A81008DA-6E46-47A4-B1B2-1828992EACC0}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="1"/>
+															<Property Name="Min" Type="Real64" Value="-1"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="DB_SFX_Enemy_Injured_Draft_2" ID="{793C0652-5B7E-4DD1-B5EF-41D50FB50E4F}">
+											<Language>SFX</Language>
+											<AudioFile>DB_SFX_Enemy_Injured_Draft_2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="335593347"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="DB_SFX_Enemy_Injured_Draft_2" ID="{793C0652-5B7E-4DD1-B5EF-41D50FB50E4F}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
