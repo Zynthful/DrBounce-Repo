@@ -57,6 +57,8 @@ public class Checkpoint : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.FindWithTag("Player");
+
         if (checkpointManagerInstance == null)
         {
             checkpointManagerInstance = FindObjectOfType(typeof(Checkpoint)) as Checkpoint;
@@ -76,9 +78,6 @@ public class Checkpoint : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
-        player = GameObject.FindWithTag("Player");
-        print(player);
-
         player.transform.position = checkpoints[currentCheckpoint].position;
     }
 }
