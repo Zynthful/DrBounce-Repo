@@ -11,8 +11,10 @@ public class SliderSetting : Settings
     [SerializeField]
     protected Slider slider = null;
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
+        valueText.text = setting.GetCurrentValue().ToString();
         slider.minValue = setting.GetMinValue();
         slider.maxValue = setting.GetMaxValue();
         slider.value = setting.GetCurrentValue();

@@ -13,6 +13,7 @@ public class VolumeSetting : SliderSetting
         slider.minValue = rtpcSetting.GetMinValue();
         slider.maxValue = rtpcSetting.GetMaxValue();
         slider.value = rtpcSetting.GetCurrentValue();
+        valueText.text = rtpcSetting.GetCurrentValue().ToString();
     }
 
     protected override void OnEnable()
