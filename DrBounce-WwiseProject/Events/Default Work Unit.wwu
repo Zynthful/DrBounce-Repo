@@ -14,230 +14,6 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Folder Name="Gun" ID="{6EBB3BA9-A023-45E8-B8F4-F26E9DEDBD3E}" ShortID="973542599">
-					<ChildrenList>
-						<Event Name="Gun_Shoot_Uncharged" ID="{8F8B59A1-5C24-4239-B362-19E40B247799}">
-							<ChildrenList>
-								<Action Name="" ID="{EA736E60-FDDA-4F4E-BF99-7B38B3B2AD88}" ShortID="656185561">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Shoot_Uncharged" ID="{BBA763BA-27FB-4D61-BF90-EE33F2677E4C}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Throw" ID="{399151D9-9F0E-4359-9BBC-755EBD837D4B}">
-							<ChildrenList>
-								<Action Name="" ID="{736D9A58-73CE-45B9-AE49-70CB684A809F}" ShortID="870303987">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_PickUpFromGround" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}">
-							<ChildrenList>
-								<Action Name="" ID="{39F8EDFE-812C-4776-9BA8-39B4200224BF}" ShortID="99691336">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Gun_Equip_Draft_1_lowerpitch" ID="{10626C7A-8C24-4F16-8714-D316AC10FAAE}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Catch" ID="{4C37F9AD-9D14-422A-9797-F0B3CEDDFFD7}">
-							<ChildrenList>
-								<Action Name="" ID="{F03D2F0C-715C-4EB6-8855-B850EB002EE5}" ShortID="271835669">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="41"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_PickUpFromGround" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{16AC6F41-B06C-4ACF-A5B2-6AC40AF9D009}" ShortID="108088610">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="41"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Charged" ID="{1FD630F0-A0B7-45A9-8393-4A5305D3248B}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Collide" ID="{E34870CE-A51A-40AA-BF06-BD595B34E0D0}">
-							<ChildrenList>
-								<Action Name="" ID="{CA273F5D-D36B-42FC-B032-F93A135C2023}" ShortID="1028708825">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Charged" ID="{1FD630F0-A0B7-45A9-8393-4A5305D3248B}">
-							<ChildrenList>
-								<Action Name="" ID="{D866B551-1A4D-4C17-9879-F4F1071204B4}" ShortID="31595146">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Catch_Charge" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{6441907A-CA63-4416-A80B-98DB7B883A08}" ShortID="1017734039">
-									<PropertyList>
-										<Property Name="FadeTime" Type="Real64" Value="3"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Bounce_Enemy" ID="{101F1357-D625-4651-8686-829FE0520A41}">
-							<ChildrenList>
-								<Action Name="" ID="{98CC66A1-9EAA-42F8-AD37-A3016F25D701}" ShortID="570568990">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Gun_Rebound_Feedback_1" ID="{C716CE9D-C8B4-412C-870A-1E945C81AABF}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{B47461DD-2B90-4705-957B-06D86C3A4F58}" ShortID="453499137">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Gun_Rebound_Feedback_2" ID="{3C6FEF2C-6FE7-4639-925D-B31A91354F58}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{A5B9ABF0-2630-4F43-BA25-B2DE885970BB}" ShortID="211277462">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Gun_Rebound_Feedback_3" ID="{667F0495-61DB-4371-84B9-034F6488ABDE}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{715A454D-D0E0-4238-84E7-7ABFEDE07D49}" ShortID="892518085">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Gun_Rebound_Feedback_4" ID="{7A6CED24-590D-46FE-BF1E-8354769E3534}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{6F53AE7D-CC79-42FE-9230-BEF1EDC79494}" ShortID="909734684">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Gun_Rebound_Feedback_5" ID="{36BEB311-B5F8-425C-8D03-F5719E2D97C3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_OutOfCharge" ID="{75915A2E-25F0-4901-95B8-4BA659554186}">
-							<ChildrenList>
-								<Action Name="" ID="{E23B2F48-9E01-4068-B9B4-A4F0F50C7766}" ShortID="881437830">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="2"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Catch_Charge" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{058CBEFC-8727-40FD-9070-37026914D0BF}" ShortID="842842791">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="2"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Shoot_Charged" ID="{F6D7B027-5AE7-445F-B5A3-4E14A8983CB0}">
-							<ChildrenList>
-								<Action Name="" ID="{2915F09B-A14C-4F48-83D5-2C661FDD4E91}" ShortID="999375873">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Shoot_Charged" ID="{23572DF4-5D69-4B74-8F21-B39BC9D4433A}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Explosive_Explode" ID="{E31E608E-1EF9-4AF2-9802-10F31AF2E868}">
-							<ChildrenList>
-								<Action Name="" ID="{B8E3ED35-F40D-457A-85D9-0788FCF13D22}" ShortID="269891323">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="DB_SFX_Gun_Charged_Explosive_Impact_Explosion_Draft_3" ID="{38877AED-7009-46C3-814B-C3FBB17AAADA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Recall" ID="{C84A4462-9A55-4FB1-B3BB-3781178727B1}">
-							<ChildrenList>
-								<Action Name="" ID="{C6C6B37D-9762-4EBA-B5E2-42DC8AC084F4}" ShortID="12087058">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="41"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Magnet_Impact" ID="{028806C1-B906-4ED9-8AE6-19614234117F}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{F1DD0CA6-38E8-4698-9AA5-F4EA1E1E1A01}" ShortID="262689445">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="41"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Catch" ID="{4C37F9AD-9D14-422A-9797-F0B3CEDDFFD7}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Magnet_Impact" ID="{028806C1-B906-4ED9-8AE6-19614234117F}">
-							<ChildrenList>
-								<Action Name="" ID="{31EF2884-2E75-4EA9-BEEE-6C33093FE4F2}" ShortID="277401726">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="DB_SFX_Gun_Magnet_Impact_Draft_2" ID="{A93C0F40-EBF9-4A18-94AE-A1D1C424C660}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Charge_Lost" ID="{16DC8C0A-52EB-4709-9064-9A589D3C10EB}">
-							<ChildrenList>
-								<Action Name="" ID="{9836380E-6C7A-4A66-8F93-7ECF9E7178E1}" ShortID="794838078">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="DB_SFX_Gun_Charge_Lost_Draft_2" ID="{5360BBE4-9A1B-4579-BFD9-25F1C3C81B30}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-					</ChildrenList>
-				</Folder>
 				<Folder Name="Enemy" ID="{1B1E654D-564F-47AE-9FF7-FD4251AEA5BD}" ShortID="681773210">
 					<ChildrenList>
 						<Folder Name="Bullet" ID="{BBD4EA8D-27F2-4987-B84E-69B9E38FA72D}" ShortID="181870034">
@@ -347,6 +123,246 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Gun" ID="{6EBB3BA9-A023-45E8-B8F4-F26E9DEDBD3E}" ShortID="973542599">
+							<ChildrenList>
+								<Folder Name="Shoot" ID="{1C27BF28-7EF7-4C10-AD8B-0DEECA6D8F67}" ShortID="292782226">
+									<ChildrenList>
+										<Event Name="Gun_Shoot_Uncharged" ID="{8F8B59A1-5C24-4239-B362-19E40B247799}">
+											<ChildrenList>
+												<Action Name="" ID="{EA736E60-FDDA-4F4E-BF99-7B38B3B2AD88}" ShortID="656185561">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_Shoot_Uncharged" ID="{BBA763BA-27FB-4D61-BF90-EE33F2677E4C}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Gun_Shoot_Charged_Explosive" ID="{F6D7B027-5AE7-445F-B5A3-4E14A8983CB0}">
+											<ChildrenList>
+												<Action Name="" ID="{2915F09B-A14C-4F48-83D5-2C661FDD4E91}" ShortID="999375873">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_Shoot_Charged" ID="{23572DF4-5D69-4B74-8F21-B39BC9D4433A}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Charge" ID="{6E6BD568-9756-4862-82A6-D7707746B6B0}" ShortID="936780703">
+									<ChildrenList>
+										<Event Name="Gun_Charge_Lost" ID="{16DC8C0A-52EB-4709-9064-9A589D3C10EB}">
+											<ChildrenList>
+												<Action Name="" ID="{9836380E-6C7A-4A66-8F93-7ECF9E7178E1}" ShortID="794838078">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="DB_SFX_Gun_Charge_Lost_Draft_2" ID="{5360BBE4-9A1B-4579-BFD9-25F1C3C81B30}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Gun_Charged" ID="{1FD630F0-A0B7-45A9-8393-4A5305D3248B}">
+											<ChildrenList>
+												<Action Name="" ID="{D866B551-1A4D-4C17-9879-F4F1071204B4}" ShortID="31595146">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_Catch_Charge" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{6441907A-CA63-4416-A80B-98DB7B883A08}" ShortID="1017734039">
+													<PropertyList>
+														<Property Name="FadeTime" Type="Real64" Value="3"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Gun_OutOfCharge" ID="{75915A2E-25F0-4901-95B8-4BA659554186}">
+											<ChildrenList>
+												<Action Name="" ID="{E23B2F48-9E01-4068-B9B4-A4F0F50C7766}" ShortID="881437830">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_Catch_Charge" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{058CBEFC-8727-40FD-9070-37026914D0BF}" ShortID="842842791">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Environment Interactions" ID="{A7FB212B-CD7C-4A25-829D-B337C363B2ED}" ShortID="364807358">
+									<ChildrenList>
+										<Event Name="Gun_Collide" ID="{E34870CE-A51A-40AA-BF06-BD595B34E0D0}">
+											<ChildrenList>
+												<Action Name="" ID="{CA273F5D-D36B-42FC-B032-F93A135C2023}" ShortID="1028708825">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Gun_Explosive_Explode" ID="{E31E608E-1EF9-4AF2-9802-10F31AF2E868}">
+											<ChildrenList>
+												<Action Name="" ID="{B8E3ED35-F40D-457A-85D9-0788FCF13D22}" ShortID="269891323">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="DB_SFX_Gun_Charged_Explosive_Impact_Explosion_Draft_3" ID="{38877AED-7009-46C3-814B-C3FBB17AAADA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Gun_Bounce_Feedback" ID="{101F1357-D625-4651-8686-829FE0520A41}">
+											<ChildrenList>
+												<Action Name="" ID="{98CC66A1-9EAA-42F8-AD37-A3016F25D701}" ShortID="570568990">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SFX_Gun_Rebound_Feedback_1" ID="{C716CE9D-C8B4-412C-870A-1E945C81AABF}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{B47461DD-2B90-4705-957B-06D86C3A4F58}" ShortID="453499137">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SFX_Gun_Rebound_Feedback_2" ID="{3C6FEF2C-6FE7-4639-925D-B31A91354F58}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{A5B9ABF0-2630-4F43-BA25-B2DE885970BB}" ShortID="211277462">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SFX_Gun_Rebound_Feedback_3" ID="{667F0495-61DB-4371-84B9-034F6488ABDE}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{715A454D-D0E0-4238-84E7-7ABFEDE07D49}" ShortID="892518085">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SFX_Gun_Rebound_Feedback_4" ID="{7A6CED24-590D-46FE-BF1E-8354769E3534}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{6F53AE7D-CC79-42FE-9230-BEF1EDC79494}" ShortID="909734684">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SFX_Gun_Rebound_Feedback_5" ID="{36BEB311-B5F8-425C-8D03-F5719E2D97C3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Interactions - Throwing, Catching, Magnet" ID="{D3DC4103-B80C-4428-BB91-28842CC6CFBE}" ShortID="447433777">
+									<ChildrenList>
+										<Event Name="Gun_Throw" ID="{399151D9-9F0E-4359-9BBC-755EBD837D4B}">
+											<ChildrenList>
+												<Action Name="" ID="{736D9A58-73CE-45B9-AE49-70CB684A809F}" ShortID="870303987">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Gun_PickUpFromGround" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}">
+											<ChildrenList>
+												<Action Name="" ID="{39F8EDFE-812C-4776-9BA8-39B4200224BF}" ShortID="99691336">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SFX_Gun_Equip_Draft_1_lowerpitch" ID="{10626C7A-8C24-4F16-8714-D316AC10FAAE}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Gun_Recall" ID="{C84A4462-9A55-4FB1-B3BB-3781178727B1}">
+											<ChildrenList>
+												<Action Name="" ID="{C6C6B37D-9762-4EBA-B5E2-42DC8AC084F4}" ShortID="12087058">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="41"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_Magnet_Impact" ID="{028806C1-B906-4ED9-8AE6-19614234117F}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{F1DD0CA6-38E8-4698-9AA5-F4EA1E1E1A01}" ShortID="262689445">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="41"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_Catch" ID="{4C37F9AD-9D14-422A-9797-F0B3CEDDFFD7}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Gun_Catch" ID="{4C37F9AD-9D14-422A-9797-F0B3CEDDFFD7}">
+											<ChildrenList>
+												<Action Name="" ID="{F03D2F0C-715C-4EB6-8855-B850EB002EE5}" ShortID="271835669">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="41"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_PickUpFromGround" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{16AC6F41-B06C-4ACF-A5B2-6AC40AF9D009}" ShortID="108088610">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="41"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_Charged" ID="{1FD630F0-A0B7-45A9-8393-4A5305D3248B}" WorkUnitID="{8348917E-205A-4290-A4C0-D425B674D15F}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Gun_Magnet_Impact" ID="{028806C1-B906-4ED9-8AE6-19614234117F}">
+											<ChildrenList>
+												<Action Name="" ID="{31EF2884-2E75-4EA9-BEEE-6C33093FE4F2}" ShortID="277401726">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="DB_SFX_Gun_Magnet_Impact_Draft_2" ID="{A93C0F40-EBF9-4A18-94AE-A1D1C424C660}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>

@@ -22,7 +22,7 @@ namespace AK
         static const AkUniqueID ENEMY_HEALTH_DEATH = 2932285363U;
         static const AkUniqueID ENEMY_HEALTH_INJURED = 3919011194U;
         static const AkUniqueID FOOTSTEP = 1866025847U;
-        static const AkUniqueID GUN_BOUNCE_ENEMY = 1677136213U;
+        static const AkUniqueID GUN_BOUNCE_FEEDBACK = 2862887114U;
         static const AkUniqueID GUN_CATCH = 4103136129U;
         static const AkUniqueID GUN_CHARGE_LOST = 1899329689U;
         static const AkUniqueID GUN_CHARGED = 4177359644U;
@@ -32,7 +32,7 @@ namespace AK
         static const AkUniqueID GUN_OUTOFCHARGE = 4040174975U;
         static const AkUniqueID GUN_PICKUPFROMGROUND = 822196729U;
         static const AkUniqueID GUN_RECALL = 3913364763U;
-        static const AkUniqueID GUN_SHOOT_CHARGED = 2638828604U;
+        static const AkUniqueID GUN_SHOOT_CHARGED_EXPLOSIVE = 2558587136U;
         static const AkUniqueID GUN_SHOOT_UNCHARGED = 1084131995U;
         static const AkUniqueID GUN_THROW = 3098426972U;
         static const AkUniqueID JUMP = 3833651337U;
