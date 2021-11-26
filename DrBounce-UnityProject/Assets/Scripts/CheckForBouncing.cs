@@ -47,11 +47,6 @@ public class CheckForBouncing : MonoBehaviour
     {
         if (CanBounce(collision.gameObject) && GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
-            if (collision.gameObject.GetComponent<Enemy>())
-            {
-                EnemyAudio audio = collision.gameObject.GetComponent<Enemy>()?.GetAudio();
-                audio?.PlayBounce();
-            }
 
             Vector3[] returnVectors = new Vector3[3];
 
@@ -72,12 +67,6 @@ public class CheckForBouncing : MonoBehaviour
     {
         if (CanBounce(hit.gameObject) && GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << hit.gameObject.layer) && hit != recentHit)
         {
-            if (hit.gameObject.GetComponent<Enemy>())
-            {
-                EnemyAudio audio = hit.gameObject.GetComponent<Enemy>()?.GetAudio();
-                audio?.PlayBounce();
-            }
-
             Vector3[] returnVectors = new Vector3[1];
 
             SetNumOfPlayerBounces(numOfPlayerBounces + 1);
