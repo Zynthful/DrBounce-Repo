@@ -36,6 +36,7 @@ namespace AK
         static const AkUniqueID GUN_SHOOT_UNCHARGED = 1084131995U;
         static const AkUniqueID GUN_THROW = 3098426972U;
         static const AkUniqueID JUMP = 3833651337U;
+        static const AkUniqueID PLAYER_THROW = 65181031U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
     } // namespace EVENTS
 

@@ -282,10 +282,13 @@
 									<ChildrenList>
 										<Event Name="Gun_Throw" ID="{399151D9-9F0E-4359-9BBC-755EBD837D4B}">
 											<ChildrenList>
-												<Action Name="" ID="{736D9A58-73CE-45B9-AE49-70CB684A809F}" ShortID="870303987">
+												<Action Name="" ID="{361889B7-A64F-4DAA-94AB-AE4752DDCFE8}" ShortID="599371350">
+													<PropertyList>
+														<Property Name="Delay" Type="Real64" Value="0.1"/>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Gun_Throw" ID="{7783DC4E-C1EC-40F0-8111-44D1BEF13FAF}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -365,6 +368,17 @@
 								</Folder>
 							</ChildrenList>
 						</Folder>
+						<Event Name="Player_Throw" ID="{F318A32A-4E88-431D-A483-8573B1602C3F}">
+							<ChildrenList>
+								<Action Name="" ID="{AE829DCB-8AB0-4C81-AAE8-EC4D4A58342D}" ShortID="780693348">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Player_Throw" ID="{70E7C959-6EA2-4ED4-8D30-3520B955FD20}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Environment" ID="{C80EE8E8-8B3F-4DF8-88EC-93B68BF607BF}" ShortID="893870429">
