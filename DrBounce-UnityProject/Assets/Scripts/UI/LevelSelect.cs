@@ -59,7 +59,6 @@ public class LevelSelect : MonoBehaviour
 
     public void SelectLevel(string level)
     {
-        Debug.Log(level);
         onSelectLevelToLoad.Invoke(level);
     }
 
