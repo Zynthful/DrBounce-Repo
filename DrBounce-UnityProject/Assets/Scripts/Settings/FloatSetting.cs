@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Float Setting", menuName = "ScriptableObjects/Settings/Float")]
-public class FloatSetting : GenericSettingObj
+public class FloatSetting : SettingData
 {
     [SerializeField]
     protected GameEventFloat onValueChanged = null;

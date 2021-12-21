@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Int Setting", menuName = "ScriptableObjects/Settings/Int")]
-public class IntSetting : GenericSettingObj
+public class IntSetting : SettingData
 {
     [SerializeField]
     private GameEventInt onValueChanged = null;
