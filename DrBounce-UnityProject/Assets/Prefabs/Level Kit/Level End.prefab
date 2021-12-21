@@ -45,6 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5878c5c55185e4aa4f1b9fb9f7b60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  condition: 0
+  trigger: {fileID: 7399401890724256850}
+  onLevelComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  _onLevelComplete: {fileID: 11400000, guid: 0822a2d09b8dce7478284e246107bb32, type: 2}
 --- !u!1 &591008932698169921
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7309410642387901354}
   - component: {fileID: 7399401890724256850}
+  - component: {fileID: 2885639702256642190}
   m_Layer: 3
   m_Name: Trigger Zone
   m_TagString: Untagged
@@ -391,7 +398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5435914853992929566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 591008932604269980}
@@ -425,6 +432,19 @@ MonoBehaviour:
   onLostDetection:
     m_PersistentCalls:
       m_Calls: []
+--- !u!135 &2885639702256642190
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435914853992929566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8209414559366821519
 GameObject:
   m_ObjectHideFlags: 0

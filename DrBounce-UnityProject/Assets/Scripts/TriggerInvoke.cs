@@ -14,14 +14,10 @@ public class TriggerInvoke : MonoBehaviour
     private bool detected = false;
 
     [Header("Events")]
-    [SerializeField]
-    private UnityEvent<GameObject> onPreDetect = null;
-    [SerializeField]
-    private UnityEvent<GameObject> onDetect = null;
-    [SerializeField]
-    private UnityEvent<GameObject> onDetectStay = null;
-    [SerializeField]
-    private UnityEvent onLostDetection = null;
+    public UnityEvent<GameObject> onPreDetect = null;
+    public UnityEvent<GameObject> onDetect = null;
+    public UnityEvent<GameObject> onDetectStay = null;
+    public UnityEvent onLostDetection = null;
 
     private void OnTriggerEnter(Collider other)
     {
