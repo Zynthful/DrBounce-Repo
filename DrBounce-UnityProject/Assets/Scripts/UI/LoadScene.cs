@@ -10,4 +10,10 @@ public class LoadScene : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(index);
     }
+
+    public void LoadSceneByName(string name)
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(name);
+    }
 }

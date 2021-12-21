@@ -6,23 +6,22 @@ using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/Level")]
 
-public class LevelObj : ScriptableObject
+public class LevelData : ScriptableObject
 {
     [SerializeField]
     private string levelName = "New Level";
 
     [SerializeField]
-    private int sceneIndex = 0;
+    private string sceneName = "Scene Name";
 
     [SerializeField]
     private Sprite previewSprite = null;
 
-    public void SetName(string value) { levelName = value; }
-    public string GetName() { return levelName; }
+    public void SetLevelName(string value) { levelName = value; }
+    public string GetLevelName() { return levelName; }
 
-    public void SetIndex(int value) { sceneIndex = value; }
-
-    public int GetIndex() { return sceneIndex; }
+    public void SetSceneName(string value) { sceneName = value; }
+    public string GetSceneName() { return sceneName; }
 
     public void SetSprite(Sprite value) { previewSprite = value; }
     public Sprite GetSprite() { return previewSprite; }
