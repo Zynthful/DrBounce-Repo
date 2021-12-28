@@ -11,8 +11,9 @@ public class DropdownSetting : Settings
     [SerializeField]
     private TMP_Dropdown dropdown = null;
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         dropdown.value = setting.GetCurrentValue();
     }
 

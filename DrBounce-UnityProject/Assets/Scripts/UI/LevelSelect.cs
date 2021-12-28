@@ -34,7 +34,7 @@ public class LevelSelect : MonoBehaviour
             // this is cringe because we're instantiating the levels at runtime
             // todo: either remove this or make an editor script for this
             GameObject level = Instantiate(levelPrefab, transform);
-            level.name = $"LVL_{levels[i].GetLevelName()}";
+            level.name = $"{levels[i].GetLevelName()}";
 
             // for some reason i had to make a variable for this???? why???
             string sceneName = levels[i].GetSceneName();
