@@ -3,15 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public abstract class SelectableNavigation : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("The selectable objects that will have its navigations set. NOTE: For vertical, this should be ordered top to bottom. For grids, this should be ordered left to right, starting at the top left.")]
     protected List<Selectable> selectables = null;
+
+    protected virtual void Start()
+    {
+        #if UNITY_EDITOR
+        if (UnityEditor.EditorApplication.isPlaying)
+        {
+            FindNavigation();
+        }
+        #else
+        FindNavigation();
+        #endif
+    }
+
+    protected virtual List<Selectable> FindSelectables()
+    {
+        List<Selectable> selectables = new List<Selectable>();
+        foreach (Selectable selectable in transform.GetComponentsInChildren<Selectable>())
+        {
+            selectables.Add(selectable);
+        }
+        return selectables;
+    }
 
     public virtual void AddSelectable(Selectable value)
     {
-        selectables.Add(value);
+        selectables?.Add(value);
+    }
+
+    public virtual void ClearInteractables()
+    {
+        selectables?.Clear();
     }
 
     protected virtual List<Selectable> RemoveUninteractables(List<Selectable> selectables)
@@ -30,18 +56,8 @@ public abstract class SelectableNavigation : MonoBehaviour
         return tempSelectables;
     }
 
-    public virtual void ClearInteractables()
+    public virtual void FindNavigation()
     {
-        selectables.Clear();
-    }
-
-    protected virtual void FindNavigation(List<Selectable> selectables)
-    {
-        for (int i = 0; i < selectables.Count; i++)
-        {
-            Navigation nav = new Navigation();
-            nav.mode = Navigation.Mode.Explicit;
-            selectables[i].navigation = nav;
-        }
+        selectables = RemoveUninteractables(FindSelectables());
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class SelectableGridNavigation : SelectableNavigation
 {
     [SerializeField]
@@ -10,20 +11,15 @@ public class SelectableGridNavigation : SelectableNavigation
     [SerializeField]
     private int columnCount;
 
-    private void OnEnable()
-    {
-        FindNavigation(RemoveUninteractables(selectables));
-    }
-
     // to do: dynamically find row and column count rather than having to input it in inspector
     private void GetRowAndColumnCount()
     {
 
     }
 
-    // to do: make this not copy paste code from SelectableNavigationHandler
-    protected override void FindNavigation(List<Selectable> selectables)
+    public override void FindNavigation()
     {
+        base.FindNavigation();
         for (int j = 0; j < rowCount; j++)
         {
             for (int i = 0; i < columnCount; i++)
