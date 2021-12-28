@@ -3,6 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gun", menuName = "ScriptableObjects/Gun", order = 0)]
 public class Gun : ScriptableObject
 {
+    [Tooltip("do you use all charges upon using one")]
+    public bool useAllChargesOnUse;
+
     [Header("Normal Gun Shots")]
 
     [Range(0.0f, 10f)]
@@ -24,12 +27,13 @@ public class Gun : ScriptableObject
     [Tooltip("Bullet that is fired when the gun is charged")]
     public BulletType chargeBullet;   //the bullet the gun will fire when charged
 
-    [Range(0, 100)]
-    [Tooltip("healAmount int value between 0 and 100")]
-    public int healAmount;    //amount healed when using one charge
-
     [Header("Damage")]
 
     [Tooltip("X = amount of charges, Y = damage delt")]
     public Vector2[] damageGraph;   //allows for each charge state to be set in the insector as well as base damage
+
+    [Header("Healing")]
+
+    [Tooltip("X = amount of charges, Y = health healed")]
+    public Vector2[] healGraph;   //allows for each charge state to be set in the insector as well as base healing
 }

@@ -20,10 +20,9 @@ public class Shooting : MonoBehaviour
     public Camera fpsCam;
     public Animator anim;
 
-    private bool repeatedShooting = false;
     [Header("Damage")]
     [HideInInspector]
-    public int damage = 10;     //current damage value
+    private int damage = 0;     //current damage value
 
     [Header("Charges")]
     private int gunCharge = 0;    //amount of times the gun has been bounced successfully
@@ -31,6 +30,8 @@ public class Shooting : MonoBehaviour
 
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
+
+    private bool repeatedShooting = false;
 
     #region Events
 
@@ -271,7 +272,15 @@ public class Shooting : MonoBehaviour
         }
         onChargedShotFired?.Invoke(gunCharge);
         _onChargedShotFired?.Raise(gunCharge);
-        SetCharge(0);
+
+        if (shooter.useAllChargesOnUse)
+        {
+            SetCharge(0);
+        }
+        else
+        {
+            SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
+        }
     }
 
     public void Bounce(int bounceCount) 
@@ -318,14 +327,37 @@ public class Shooting : MonoBehaviour
         return 0;
     }
 
+    private int HealAmountCalc(int charges)
+    {
+        foreach (Vector2 amount in shooter.healGraph)  //loops through the vector 2 (graph)
+        {
+            if (amount.x == charges)
+            {
+                return Mathf.RoundToInt(amount.y);
+            }
+        }
+        if (charges >= shooter.healGraph.Length) //in case you over the max
+        {
+            return Mathf.RoundToInt(shooter.healGraph[shooter.healGraph.Length - 1].y);
+        }
+        return 0;
+    }
+
     private void Healing() 
     {
         if (gunCharge > 0 && !health.GetIsAtFullHealth()) 
         {
-            SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
-            //call a heal function
+            int healAmount = HealAmountCalc(gunCharge);
+            OnActivated?.Invoke(healAmount);    //calls the player heal function
 
-            OnActivated?.Invoke(shooter.healAmount);
+            if (shooter.useAllChargesOnUse)
+            {
+                SetCharge(0);
+            }
+            else
+            {
+                SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
+            }
 
             if (gunCharge == 0)
             {
