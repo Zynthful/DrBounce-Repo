@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using MoreMountains.Feedbacks;
 using MoreMountains.NiceVibrations;
@@ -264,7 +264,7 @@ public class Shooting : MonoBehaviour
                 onExplosiveShot?.Invoke();
                 _onExplosiveShot?.Raise();
 
-                shooter.chargeBullet.damage = DamageAmountCalc(gunCharge);
+                shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, gunCharge);
 
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
                 obj.GetComponentInChildren<ExplosiveShot>().comboSize = gunCharge;
@@ -311,43 +311,27 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private int DamageAmountCalc(int charges)
+    private int GraphCalculator(Vector2[] graph, int charges) //🐌
     {
-        foreach (Vector2 amount in shooter.damageGraph)  //loops through the vector 2 (graph)
+        foreach (Vector2 amount in graph)  //loops through the vector 2 (graph)
         {
             if (amount.x == charges)
             {
                 return Mathf.RoundToInt(amount.y);
             }
         }
-        if (charges >= shooter.damageGraph.Length) //in case you over the max
+        if (charges >= graph.Length) //in case you over the max
         {
-            return Mathf.RoundToInt(shooter.damageGraph[shooter.damageGraph.Length - 1].y);
+            return Mathf.RoundToInt(graph[graph.Length - 1].y);
         }
-        return 0;
-    }
-
-    private int HealAmountCalc(int charges)
-    {
-        foreach (Vector2 amount in shooter.healGraph)  //loops through the vector 2 (graph)
-        {
-            if (amount.x == charges)
-            {
-                return Mathf.RoundToInt(amount.y);
-            }
-        }
-        if (charges >= shooter.healGraph.Length) //in case you over the max
-        {
-            return Mathf.RoundToInt(shooter.healGraph[shooter.healGraph.Length - 1].y);
-        }
-        return 0;
+        return 0; // you lose you get nothing
     }
 
     private void Healing() 
     {
         if (gunCharge > 0 && !health.GetIsAtFullHealth()) 
         {
-            int healAmount = HealAmountCalc(gunCharge);
+            int healAmount = GraphCalculator(shooter.healGraph, gunCharge);
             OnActivated?.Invoke(healAmount);    //calls the player heal function
 
             if (shooter.useAllChargesOnUse)
