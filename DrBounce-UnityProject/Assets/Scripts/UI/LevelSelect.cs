@@ -6,11 +6,14 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 
+[ExecuteInEditMode]
 public class LevelSelect : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Level scriptable objects")]
     private LevelData[] levels = null;
+
+    private List<GameObject> levelObjects = new List<GameObject>();
     
     [SerializeField]
     [Tooltip("The prefab which is instantiated into the grid")]
@@ -23,17 +26,102 @@ public class LevelSelect : MonoBehaviour
     [Tooltip("This is overriden by the first level button, however this should be set to the Return button by default if there are no levels.")]
     private Button defaultSelectedButton = null;
 
+    private Button initialSelectedButton = null;
+
     [Header("Events")]
     [SerializeField]
     private UnityEvent<string> onSelectLevelToLoad = null;
 
+    private void OnValidate()
+    {
+        /*
+        #if UNITY_EDITOR
+        RegenerateLevels();
+        #endif
+        */
+    }
+
     private void Awake()
+    {
+        #if UNITY_EDITOR
+        if (UnityEditor.EditorApplication.isPlaying)
+        {
+            RegenerateLevels();
+        }
+        #else
+        RegenerateLevels();
+        #endif
+    }
+
+
+    /// <summary>
+    /// Clears all current levels, then generates them again.
+    /// </summary>
+    public void RegenerateLevels()
+    {
+        ClearLevels();
+        GenerateLevels();
+        initialSelectedButton = defaultSelectedButton;
+    }
+
+    /// <summary>
+    /// Clears all level objects and destroys all children of this object.
+    /// </summary>
+    private void ClearLevels()
+    {
+        /*
+        for (int i = 0; i < levelObjects.Count; i++)
+        {
+            #if UNITY_EDITOR
+            DestroyImmediate(levelObjects[i]);
+            #else
+            Destroy(levelObjects[i];
+            #endif
+        }
+        */
+
+        GameObject[] children = new GameObject[transform.childCount];
+        int i = 0;
+
+        // Find all child objects before destroying them
+        foreach (Transform child in transform)
+        {
+            children[i] = child.gameObject;
+            i++;
+        }
+
+        // Destroy the child.
+        // https://youtu.be/EQ8jy7jQ3yY
+        foreach (GameObject obj in children)
+        {
+            #if UNITY_EDITOR
+            // Use relative Destroy method based on whether we're in playmode or not
+            if (UnityEditor.EditorApplication.isPlaying)
+            {
+                Destroy(obj.gameObject);
+            }
+            else
+            {
+                DestroyImmediate(obj.gameObject);
+            }
+            #else
+            Destroy(child.gameObject);
+            #endif
+        }
+
+        levelObjects.Clear();
+        grid.ClearInteractables();
+    }
+
+    /// <summary>
+    /// Generates level objects from the level data. When the level's button is clicked, it selects the level.
+    /// </summary>
+    private void GenerateLevels()
     {
         for (int i = 0; i < levels.Length; i++)
         {
-            // this is cringe because we're instantiating the levels at runtime
-            // todo: either remove this or make an editor script for this
             GameObject level = Instantiate(levelPrefab, transform);
+            levelObjects.Add(level);
             level.name = $"{levels[i].GetLevelName()}";
 
             // for some reason i had to make a variable for this???? why???
@@ -43,7 +131,7 @@ public class LevelSelect : MonoBehaviour
 
             if (i == 0)
             {
-                defaultSelectedButton = button;
+                initialSelectedButton = button;
             }
 
             // this doesn't work for some reason

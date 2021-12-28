@@ -9,7 +9,7 @@ public abstract class SelectableNavigation : MonoBehaviour
     [Tooltip("The selectable objects that will have its navigations set. NOTE: For vertical, this should be ordered top to bottom. For grids, this should be ordered left to right, starting at the top left.")]
     protected List<Selectable> selectables = null;
 
-    public void AddSelectable(Selectable value)
+    public virtual void AddSelectable(Selectable value)
     {
         selectables.Add(value);
     }
@@ -28,6 +28,11 @@ public abstract class SelectableNavigation : MonoBehaviour
         }
 
         return tempSelectables;
+    }
+
+    public virtual void ClearInteractables()
+    {
+        selectables.Clear();
     }
 
     protected virtual void FindNavigation(List<Selectable> selectables)
