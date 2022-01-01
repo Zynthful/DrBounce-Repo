@@ -88,6 +88,7 @@ public class Shooting : MonoBehaviour
     public static event Activated OnActivated;
 
     public MMFeedbacks ChargedFeedback;
+    public GameObject impactEffect;
 
     [SerializeField] ParticleSystem chargedShotPS;
 
@@ -238,6 +239,7 @@ public class Shooting : MonoBehaviour
                 if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, shooter.normalRange))
                 {
                     Hitinfo.transform.GetComponent<Spin>()?.OnStart(Vector3.Magnitude(Hitinfo.normal));
+                    Instantiate(impactEffect, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
 
                     //print(Hitinfo.transform.name + " hit!");
                     EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
