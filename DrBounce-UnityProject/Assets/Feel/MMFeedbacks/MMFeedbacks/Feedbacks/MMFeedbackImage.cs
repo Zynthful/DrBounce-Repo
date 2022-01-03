@@ -26,6 +26,8 @@ namespace MoreMountains.Feedbacks
         /// the Image to affect when playing the feedback
         [Tooltip("the Image to affect when playing the feedback")]
         public Image BoundImage;
+        [Tooltip("if we should automatically enable the image object when this feedback is triggered")]
+        public bool AutoEnableImage = true;
         /// whether the feedback should affect the Image instantly or over a period of time
         [Tooltip("whether the feedback should affect the Image instantly or over a period of time")]
         public Modes Mode = Modes.OverTime;
@@ -113,7 +115,10 @@ namespace MoreMountains.Feedbacks
         {
             if (Active)
             {
-                Turn(true);
+                if (AutoEnableImage)
+                {
+                    Turn(true);
+                }
                 switch (Mode)
                 {
                     case Modes.Instant:
