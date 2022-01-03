@@ -13,9 +13,9 @@ public class DecalManager : MonoBehaviour
         
     }
 
-    public void SpawnDecal(Transform t, DecalAsset decalToSpawn, float decalScale)
+    public void SpawnDecal(Vector3 t, Vector3 normal, DecalAsset decalToSpawn, float decalScale)
     {
-        spawnedDecals.Add(CreateDecal(t.localPosition.x, t.localPosition.y, decalScale, decalToSpawn));
+        spawnedDecals.Add(CreateDecal(t, normal, decalScale, decalToSpawn));
 
         foreach (var decal in spawnedDecals)
         {
@@ -34,15 +34,16 @@ public class DecalManager : MonoBehaviour
         }
     }
 
-    private DecalMesh CreateDecal(float localX, float localY, float decalScale, DecalAsset decalToSpawn)
+    private DecalMesh CreateDecal(Vector3 localPos, Vector3 normal, float decalScale, DecalAsset decalToSpawn)
     {
         // create game object as child of the spawner
-        GameObject decalObject = new GameObject($"Spawned Decal ({localX.ToString("F3")},{localY.ToString("F3")})");
+        GameObject decalObject = new GameObject($"Spawned Decal ({localPos.x.ToString("F3")},{localPos.y.ToString("F3")})");
         decalObject.transform.SetParent(this.transform, false);
 
         // set the transform however you wish, keeping in mind that rotation affects how it'll be projected
-        decalObject.transform.localPosition = new Vector3(localX, localY, 0f);
+        decalObject.transform.localPosition = localPos;
         decalObject.transform.localScale = new Vector3(decalScale, decalScale, 1f);
+        decalObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, normal);
 
         // needs a MeshFilter and MeshRenderer to render the decal
         decalObject.AddComponent<MeshFilter>();
@@ -71,7 +72,7 @@ public class DecalManager : MonoBehaviour
 
         // set up what the decal will project against
         // if you skip this it'll default to projecting against any nearby static meshes
-        decal.ShouldUseSceneStaticMeshes = false;
+        decal.ShouldUseSceneStaticMeshes = true;
         //decal.MeshesToProjectAgainst = this.MeshesToProjectAgainst;
 
         return decal;

@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using MoreMountains.Feedbacks;
 using MoreMountains.NiceVibrations;
+using SamDriver.Decal;
 
 public class Shooting : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class Shooting : MonoBehaviour
     {
         Explosives,
     }
+
+    [SerializeField]
+    private DecalManager decalM = null;
+    [SerializeField]
+    private DecalAsset bulletDecal = null;
 
     [SerializeField]
     private Gun shooter = null;
@@ -269,6 +275,8 @@ public class Shooting : MonoBehaviour
                 {
                     Hitinfo.transform.GetComponent<Spin>()?.OnStart(Vector3.Magnitude(Hitinfo.normal));
                     Instantiate(impactEffect, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
+                    Debug.Log(Hitinfo.point);
+                    decalM.SpawnDecal(Hitinfo.point, Hitinfo.normal, bulletDecal, 0.5f);
 
                     //print(Hitinfo.transform.name + " hit!");
                     EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
