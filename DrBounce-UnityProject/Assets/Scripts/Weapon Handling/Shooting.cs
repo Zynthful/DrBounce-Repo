@@ -32,6 +32,7 @@ public class Shooting : MonoBehaviour
     private float timeSinceLastShot = 0;
 
     private bool repeatedShooting = false;
+    private bool charging;
 
     #region Events
 
@@ -117,6 +118,11 @@ public class Shooting : MonoBehaviour
         controls = new InputMaster();
         controls.Player.Shoot.performed += _ => Shoot();
         controls.Player.Shoot.canceled += _ => StopShooting();
+
+        controls.Player.ChargeShot.performed += _ => ChargeShot();
+        controls.Player.ChargeShot.started += _ => StartCharging();
+        controls.Player.ChargeShot.canceled += _ => StopCharging();
+
         controls.Player.RecallGun.performed += _ => Reset();
         controls.Player.Healing.performed += _ => Healing();
     }
@@ -129,6 +135,22 @@ public class Shooting : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
+    }
+
+    private void StartCharging() 
+    {
+        charging = true;
+    }
+
+    private void StopCharging()
+    {
+        charging = false;
+    }
+
+    private void ChargeShot() 
+    {
+        charging = false;
+        if (gunCharge > 0) HandleComboShot(true);
     }
 
     // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
@@ -218,13 +240,13 @@ public class Shooting : MonoBehaviour
         //  - Is not paused
         //  - Object has a parent
         //  - Is not already shooting
-        if (!GameManager.s_Instance.paused && transform.parent != null && timeSinceLastShot > shooter.fireRate)  
+        if (!GameManager.s_Instance.paused && transform.parent != null && timeSinceLastShot > shooter.fireRate && !charging)  
         {
             if (shooter.canRepeatShoot) repeatedShooting = true;
 
             timeSinceLastShot = 0;
 
-            if(gunCharge > 0) HandleComboShot();
+            if(gunCharge > 0) HandleComboShot(false);
 
             // Is it an uncharged/basic shot?
             else if (gunCharge <= 0)
@@ -257,9 +279,12 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void HandleComboShot()
+    private void HandleComboShot(bool hold)
     {
-    	ChargedFeedback?.PlayFeedbacks();	
+        int chargeUsed = 1;
+        if (hold) chargeUsed = gunCharge;
+
+        ChargedFeedback?.PlayFeedbacks();	
         switch(shooter.chargeShot)
         {
             case GunModes.Explosives:
@@ -269,7 +294,7 @@ public class Shooting : MonoBehaviour
                 shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, gunCharge);
 
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
-                obj.GetComponentInChildren<ExplosiveShot>().comboSize = gunCharge;
+                obj.GetComponentInChildren<ExplosiveShot>().comboSize = chargeUsed;
                 break;
         }
         onChargedShotFired?.Invoke(gunCharge);
@@ -281,7 +306,7 @@ public class Shooting : MonoBehaviour
         }
         else
         {
-            SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
+            SetCharge(gunCharge - chargeUsed);   // Minus 1 from gunCharge
         }
     }
 

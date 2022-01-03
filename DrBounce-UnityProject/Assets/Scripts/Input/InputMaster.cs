@@ -137,6 +137,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ChargeShot"",
+                    ""type"": ""Button"",
+                    ""id"": ""ebed77c9-f23c-4e2b-92b4-5a8662c557fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -689,6 +697,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""DEBUG_ReloadScene"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1714de82-3328-4993-908d-3785e690e5ca"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.6)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChargeShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb30a9b4-613d-4955-8439-a0365db51a44"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.6)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChargeShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -882,6 +912,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_DEBUG_NextLevel = m_Player.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
         m_Player_DEBUG_Pause = m_Player.FindAction("DEBUG_Pause", throwIfNotFound: true);
         m_Player_DEBUG_ReloadScene = m_Player.FindAction("DEBUG_ReloadScene", throwIfNotFound: true);
+        m_Player_ChargeShot = m_Player.FindAction("ChargeShot", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -952,6 +983,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_DEBUG_NextLevel;
     private readonly InputAction m_Player_DEBUG_Pause;
     private readonly InputAction m_Player_DEBUG_ReloadScene;
+    private readonly InputAction m_Player_ChargeShot;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -971,6 +1003,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @DEBUG_NextLevel => m_Wrapper.m_Player_DEBUG_NextLevel;
         public InputAction @DEBUG_Pause => m_Wrapper.m_Player_DEBUG_Pause;
         public InputAction @DEBUG_ReloadScene => m_Wrapper.m_Player_DEBUG_ReloadScene;
+        public InputAction @ChargeShot => m_Wrapper.m_Player_ChargeShot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1025,6 +1058,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DEBUG_ReloadScene.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_ReloadScene;
+                @ChargeShot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeShot;
+                @ChargeShot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeShot;
+                @ChargeShot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeShot;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1074,6 +1110,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DEBUG_ReloadScene.started += instance.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.performed += instance.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.canceled += instance.OnDEBUG_ReloadScene;
+                @ChargeShot.started += instance.OnChargeShot;
+                @ChargeShot.performed += instance.OnChargeShot;
+                @ChargeShot.canceled += instance.OnChargeShot;
             }
         }
     }
@@ -1179,6 +1218,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDEBUG_NextLevel(InputAction.CallbackContext context);
         void OnDEBUG_Pause(InputAction.CallbackContext context);
         void OnDEBUG_ReloadScene(InputAction.CallbackContext context);
+        void OnChargeShot(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
