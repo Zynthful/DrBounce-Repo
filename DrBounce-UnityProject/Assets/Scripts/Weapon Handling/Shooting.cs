@@ -139,16 +139,19 @@ public class Shooting : MonoBehaviour
 
     private void StartCharging() 
     {
+        //print("start");
         charging = true;
     }
 
     private void StopCharging()
     {
+        //print("stop");
         charging = false;
     }
 
     private void ChargeShot() 
     {
+        //print("shot, stop");
         charging = false;
         if (gunCharge > 0) HandleComboShot(true);
     }
@@ -220,13 +223,17 @@ public class Shooting : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Reticleinfo, shooter.normalRange))
         {
             Enemy enemy = Reticleinfo.transform.GetComponent<Enemy>();
-            if (enemy != null)
+            if (enemy != null)  //no charge, and over an enemy
             {
                 onEnemyHover?.Invoke(true);
                 _onEnemyHover?.Raise(true);
                 //print(enemy.transform.name + " is being hovered over!");
             }
-            else
+            else if (enemy != null && gunCharge > 0)   //has charge, and is over an enemy
+            {
+                //funny feedback time
+            }
+            else   //could or could not have charge, and is NOT over an enemy
             {
                 onEnemyHover?.Invoke(false);
                 _onEnemyHover?.Raise(false);
@@ -246,7 +253,7 @@ public class Shooting : MonoBehaviour
 
             timeSinceLastShot = 0;
 
-            if(gunCharge > 0) HandleComboShot(false);
+            if(gunCharge > 0 && !charging) HandleComboShot(false);
 
             // Is it an uncharged/basic shot?
             else if (gunCharge <= 0)
