@@ -333,7 +333,7 @@ public class Shooting : MonoBehaviour
     {
         ChargedFeedback?.StopFeedbacks();
         chargedShotPS.Clear();
-        anim.SetInteger("ChargesLeft", gunCharge);
+        if (anim != null) anim.SetInteger("ChargesLeft", gunCharge);
         SetCharge(0);
     }
 

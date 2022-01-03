@@ -57,7 +57,7 @@ public class GunThrowing : MonoBehaviour
 
     public bool inFlight;
 
-    public Outline outlineScript;
+    //public Outline outlineScript;
 
     [Header("Unity Events")]
     [SerializeField]
@@ -100,7 +100,7 @@ public class GunThrowing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        outlineScript = GetComponentInChildren<Outline>();
+        //outlineScript = GetComponentInChildren<Outline>();
 
         owner = PlayerMovement.player;
         inventory = SwitchHeldItem.instance;
@@ -109,7 +109,7 @@ public class GunThrowing : MonoBehaviour
 
         if (startOnPlayer)
         {
-            outlineScript.enabled = false;
+            //outlineScript.enabled = false;
             handPosition = transform.localPosition;
             canThrow = true;
             transform.parent = weaponHolderTransform;
@@ -118,7 +118,7 @@ public class GunThrowing : MonoBehaviour
         else
         {
             rb.constraints = RigidbodyConstraints.None;
-            outlineScript.enabled = true;
+            //outlineScript.enabled = true;
             handPosition = new Vector3(.4f, -.2f, .65f);
             exitedPlayer = true;
             canThrow = false;
@@ -198,7 +198,7 @@ public class GunThrowing : MonoBehaviour
 
             ResetCoyoteTimes();
             canThrow = false;
-            outlineScript.enabled = true;
+            //outlineScript.enabled = true;
             //when we get out of prototype we need to made the world model seperate from the fp model
             gameObject.layer = 3;
             foreach (Transform child in transform)
@@ -232,7 +232,7 @@ public class GunThrowing : MonoBehaviour
         {
             if (!transform.parent)
                 throwGunDelay = false;
-            outlineScript.enabled = false;
+            //outlineScript.enabled = false;
             gameObject.layer = 7;
             foreach (Transform child in transform)
                 child.gameObject.layer = 7;
@@ -438,5 +438,7 @@ public class GunThrowing : MonoBehaviour
         {
             hasLetGoOfTrigger = true;
         }
+
+        //print(canThrow);
     }
 }
