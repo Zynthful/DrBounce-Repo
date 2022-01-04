@@ -104,6 +104,7 @@ public class Shooting : MonoBehaviour
     public GameObject impactEffect;
 
     [SerializeField] ParticleSystem chargedShotPS;
+    [SerializeField] Material bulletDecalMaterial;
 
     // Start is called before the first frame update
     private void Start()
@@ -322,7 +323,7 @@ public class Shooting : MonoBehaviour
                     }
                     else
                     {
-                        decalM.SpawnDecal(Hitinfo.point, Hitinfo.normal, 0.4f);
+                        decalM.SpawnDecal(Hitinfo.point, Hitinfo.normal, 0.4f, bulletDecalMaterial);
                     }
                 }
             }
