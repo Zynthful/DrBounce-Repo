@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using MoreMountains.Feedbacks;
 using MoreMountains.NiceVibrations;
+using SamDriver.Decal;
 
 public class Shooting : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Shooting : MonoBehaviour
     {
         Explosives,
     }
+
+    [SerializeField]
+    private DecalManager decalM = null;
 
     [SerializeField]
     private Gun shooter = null;
@@ -315,6 +319,10 @@ public class Shooting : MonoBehaviour
                     if (enemy != null)
                     {
                         enemy.Damage(damage);
+                    }
+                    else
+                    {
+                        decalM.SpawnDecal(Hitinfo.point, Hitinfo.transform.gameObject.GetComponent<MeshFilter>(), Hitinfo.normal, 0.5f);
                     }
                 }
             }
