@@ -72,9 +72,10 @@ public class RebindUI : MonoBehaviour
         {
             // Load binding overrides from PlayerPrefs, if they exist
             InputManager.LoadBindingOverride(actionName);
-        }
 
-        UpdateInfo();
+            UpdateBindingInfo();
+            UpdateUI();
+        }
     }
 
     private void OnDisable()
@@ -84,11 +85,6 @@ public class RebindUI : MonoBehaviour
     }
 
     private void OnValidate()
-    {
-        UpdateInfo();
-    }
-
-    private void UpdateInfo()
     {
         if (inputActionReference != null)
         {
