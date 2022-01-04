@@ -72,7 +72,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""0de4bb50-dd38-4346-8e6d-db9b81f0c5e6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Hold(duration=0.02)""
                 },
                 {
                     ""name"": ""Crouch"",
@@ -144,7 +144,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""ebed77c9-f23c-4e2b-92b4-5a8662c557fa"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Hold(duration=0.01)""
                 }
             ],
             ""bindings"": [
@@ -702,9 +702,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""1714de82-3328-4993-908d-3785e690e5ca"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.6)"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""ChargeShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -713,9 +713,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""fb30a9b4-613d-4955-8439-a0365db51a44"",
                     ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.6)"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""ChargeShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

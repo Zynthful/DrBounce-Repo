@@ -27,7 +27,6 @@ public class Shooting : MonoBehaviour
     public Animator anim;
 
     [Header("Damage")]
-    [HideInInspector]
     private int damage = 0;     //current damage value
 
     [Header("Charges")]
@@ -37,7 +36,15 @@ public class Shooting : MonoBehaviour
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
 
-    private bool repeatedShooting = false;
+    [SerializeField]
+    [Tooltip("Duration in seconds that the shoot button must be held in order to fully charge a max charge shot.")]
+    private float holdTimeToFullCharge = 1.0f;
+    [SerializeField]
+    [Tooltip("Duration in seconds that the shoot button must be held before cancelling does NOT trigger a regular shot.")]
+    private float holdTimeThreshold = 0.3f;
+
+    private float currentHoldTime = 0.0f;
+    private bool holdingShoot = false;
     private bool charging;
 
     #region Events
@@ -61,6 +68,8 @@ public class Shooting : MonoBehaviour
     private UnityEvent<bool> onEnemyHover = null;
     [SerializeField]
     private UnityEvent onExplosiveShot = null;
+    [SerializeField]
+    private UnityEvent<float> onChargingMaxShotProgress = null;
     #endregion
 
     #region GameEvents
@@ -100,7 +109,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] ParticleSystem chargedShotPS;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // Initialise charge
         SetCharge(gunCharge);
@@ -110,56 +119,85 @@ public class Shooting : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
 
         CheckForHoverOverEnemy();
 
-        if (repeatedShooting) Shoot();
+        if (shooter.canRepeatShoot && holdingShoot)
+        {
+            Shoot();
+        }
+
+        if (charging)
+        {
+            currentHoldTime += Time.deltaTime;
+            onChargingMaxShotProgress.Invoke(currentHoldTime / holdTimeToFullCharge);
+        }
     }
 
     private void Awake()
     {
         controls = new InputMaster();
-        controls.Player.Shoot.performed += _ => Shoot();
-        controls.Player.Shoot.canceled += _ => StopShooting();
-
-        controls.Player.ChargeShot.performed += _ => ChargeShot();
-        controls.Player.ChargeShot.started += _ => StartCharging();
-        controls.Player.ChargeShot.canceled += _ => StopCharging();
-
-        controls.Player.RecallGun.performed += _ => Reset();
-        controls.Player.Healing.performed += _ => Healing();
     }
 
     private void OnEnable()
     {
         controls.Enable();
+
+        controls.Player.Shoot.performed += _ => Shoot();
+
+        controls.Player.ChargeShot.started += _ => TryStartCharging();
+        controls.Player.ChargeShot.canceled += _ => ReleaseCharge();
+
+        controls.Player.RecallGun.performed += _ => Reset();
+        controls.Player.Healing.performed += _ => Healing();
     }
 
     private void OnDisable()
     {
         controls.Disable();
+
+        controls.Player.Shoot.performed -= _ => Shoot();
+
+        controls.Player.ChargeShot.started -= _ => TryStartCharging();
+        controls.Player.ChargeShot.canceled -= _ => ReleaseCharge();
+
+        controls.Player.RecallGun.performed -= _ => Reset();
+        controls.Player.Healing.performed -= _ => Healing();
     }
 
-    private void StartCharging() 
+    private void TryStartCharging() 
     {
-        //print("start");
-        charging = true;
+        holdingShoot = true;
+
+        // Only begin charging max charge shot if we have charge
+        if (gunCharge > 0)
+        {
+            charging = true;
+        }
     }
 
-    private void StopCharging()
+    private void ReleaseCharge()
     {
-        //print("stop");
-        charging = false;
-    }
+        if (charging)
+        {
+            charging = false;
+            // Release a max charged shot if we've held charge for long enough
+            if (currentHoldTime > holdTimeToFullCharge)
+            {
+                HandleChargedShot(gunCharge);
+            }
+            // Cancel into a regular shot if we haven't reached the threshold
+            else if (currentHoldTime < holdTimeThreshold)
+            {
+                Shoot();
+            }
+            currentHoldTime = 0.0f;
+        }
 
-    private void ChargeShot() 
-    {
-        //print("shot, stop");
-        charging = false;
-        if (gunCharge > 0) HandleComboShot(true);
+        holdingShoot = false;
     }
 
     // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
@@ -255,14 +293,16 @@ public class Shooting : MonoBehaviour
         //  - Is not already shooting
         if (!GameManager.s_Instance.paused && transform.parent != null && timeSinceLastShot > shooter.fireRate && !charging)  
         {
-            if (shooter.canRepeatShoot) repeatedShooting = true;
-
             timeSinceLastShot = 0;
 
-            if(gunCharge > 0 && !charging) HandleComboShot(false);
+            // Are we trying to fire a single charged shot?
+            if (gunCharge > 0)
+            {
+                HandleChargedShot(1);
+            }
 
             // Is it an uncharged/basic shot?
-            else if (gunCharge <= 0)
+            else
             {
                 onUnchargedShotFired?.Invoke();
                 _onUnchargedShotFired?.Raise();
@@ -271,7 +311,7 @@ public class Shooting : MonoBehaviour
                 damage = Mathf.RoundToInt(shooter.damageGraph[0].y);
 
                 RaycastHit Hitinfo;
-                if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, shooter.normalRange))
+                if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, shooter.normalRange))
                 {
                     Hitinfo.transform.GetComponent<Spin>()?.OnStart(Vector3.Magnitude(Hitinfo.normal));
                     Instantiate(impactEffect, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
@@ -280,7 +320,7 @@ public class Shooting : MonoBehaviour
 
                     //print(Hitinfo.transform.name + " hit!");
                     EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
-                    if(enemy != null)
+                    if (enemy != null)
                     {
                         enemy.Damage(damage);
                     }
@@ -294,10 +334,9 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void HandleComboShot(bool hold)
+    private void HandleChargedShot(int chargeUsed)
     {
-        int chargeUsed = 1;
-        if (hold) chargeUsed = gunCharge;
+        Debug.Log($"FIRING CHARGES: {chargeUsed}");
 
         ChargedFeedback?.PlayFeedbacks();	
         switch(shooter.chargeShot)
@@ -390,9 +429,5 @@ public class Shooting : MonoBehaviour
                 Reset();
             }
         }
-    }
-    private void StopShooting()
-    {
-        repeatedShooting = false;
     }
 }
