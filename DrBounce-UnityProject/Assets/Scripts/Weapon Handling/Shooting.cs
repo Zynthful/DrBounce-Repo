@@ -120,7 +120,6 @@ public class Shooting : MonoBehaviour
     [SerializeField] Material bulletDecalMaterial;
 
     private bool maxDamage;
-    private bool keepDivDamage = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -156,6 +155,7 @@ public class Shooting : MonoBehaviour
         {
             print("Max Charge!");
             maxShotCharged = true;
+            //maxDamage keeps track of a held charge shot for damage calculations
             maxDamage = true;
             onMaxShotCharged?.Invoke();
         }
@@ -374,7 +374,6 @@ public class Shooting : MonoBehaviour
         if (chargeUsed == gunCharge)
         {
             onMaxShotFired?.Invoke(chargeUsed);
-            keepDivDamage = false;
         }
         else if (chargeUsed == 1)
         {
@@ -389,18 +388,18 @@ public class Shooting : MonoBehaviour
                 onExplosiveShot?.Invoke();
                 _onExplosiveShot?.Raise();
 
-                if (maxDamage)
+                if (maxDamage) //if charge shot has been held down
                 {
-                    print("MaxShotCharged");
+                    //Do standard damage multiplied by the number of charges
                     shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, gunCharge) * gunCharge;
                     maxDamage = false;
                 }
 
-                else if (keepDivDamage == false)
+                //If charge shot hasn't been held down (consecutive charge shot)
+                else
                 {
-                    print("DividedDamage");
-                    keepDivDamage = true;
-                    shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, gunCharge);
+                    //do standard damage for 1 charge - currently 100
+                    shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, 1);
                 }
 
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
