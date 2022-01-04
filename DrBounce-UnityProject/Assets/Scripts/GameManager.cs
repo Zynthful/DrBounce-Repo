@@ -63,8 +63,11 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        controls.Player.DEBUG_Pause.performed -= _ => Stop();
-        controls.Disable();
+        if (controls != null)
+        {
+            controls.Player.DEBUG_Pause.performed -= _ => Stop();
+            controls.Disable();
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

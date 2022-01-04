@@ -168,10 +168,8 @@ public class Shooting : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Player.Shoot.performed += _ => Shoot();
-
-        controls.Player.ChargeShot.started += _ => TryStartCharging();
-        controls.Player.ChargeShot.canceled += _ => ReleaseCharge();
+        controls.Player.Shoot.started += _ => TryStartCharging();
+        controls.Player.Shoot.canceled += _ => ReleaseCharge();
 
         controls.Player.RecallGun.performed += _ => Reset();
         controls.Player.Healing.performed += _ => Healing();
@@ -181,10 +179,8 @@ public class Shooting : MonoBehaviour
 
     private void OnDisable()
     {
-        controls.Player.Shoot.performed -= _ => Shoot();
-
-        controls.Player.ChargeShot.started -= _ => TryStartCharging();
-        controls.Player.ChargeShot.canceled -= _ => ReleaseCharge();
+        controls.Player.Shoot.started -= _ => TryStartCharging();
+        controls.Player.Shoot.canceled -= _ => ReleaseCharge();
 
         controls.Player.RecallGun.performed -= _ => Reset();
         controls.Player.Healing.performed -= _ => Healing();
@@ -194,10 +190,10 @@ public class Shooting : MonoBehaviour
 
     private void TryStartCharging() 
     {
+        holdingShoot = true;
+
         if (!GameManager.s_Instance.paused && transform.parent != null)
         {
-            holdingShoot = true;
-
             // Only begin charging max charge shot if we have charge
             if (gunCharge > 0)
             {
@@ -209,6 +205,8 @@ public class Shooting : MonoBehaviour
 
     private void ReleaseCharge()
     {
+        holdingShoot = false;
+
         if (!GameManager.s_Instance.paused && transform.parent != null && maxShotCharging)
         {
             maxShotCharging = false;
@@ -231,8 +229,6 @@ public class Shooting : MonoBehaviour
             }
             currentHoldTime = 0.0f;
         }
-
-        holdingShoot = false;
     }
 
     /// <summary>
