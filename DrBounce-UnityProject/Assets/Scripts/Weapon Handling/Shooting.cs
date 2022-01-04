@@ -119,6 +119,9 @@ public class Shooting : MonoBehaviour
     [SerializeField] ParticleSystem chargedShotPS;
     [SerializeField] Material bulletDecalMaterial;
 
+    private bool maxDamage;
+    private bool keepDivDamage = false;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -151,7 +154,9 @@ public class Shooting : MonoBehaviour
 
         if (currentHoldTime > holdTimeToFullCharge && !maxShotCharged)
         {
+            print("Max Charge!");
             maxShotCharged = true;
+            maxDamage = true;
             onMaxShotCharged?.Invoke();
         }
     }
@@ -369,6 +374,7 @@ public class Shooting : MonoBehaviour
         if (chargeUsed == gunCharge)
         {
             onMaxShotFired?.Invoke(chargeUsed);
+            keepDivDamage = false;
         }
         else if (chargeUsed == 1)
         {
@@ -383,7 +389,19 @@ public class Shooting : MonoBehaviour
                 onExplosiveShot?.Invoke();
                 _onExplosiveShot?.Raise();
 
-                shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, gunCharge);
+                if (maxDamage)
+                {
+                    print("MaxShotCharged");
+                    shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, gunCharge) * gunCharge;
+                    maxDamage = false;
+                }
+
+                else if (keepDivDamage == false)
+                {
+                    print("DividedDamage");
+                    keepDivDamage = true;
+                    shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, gunCharge);
+                }
 
                 GameObject obj = pool.SpawnBulletFromPool("ExplosiveShot", (PlayerMovement.player.position + (Vector3.up * (PlayerMovement.player.localScale.y / 8f))) + (fpsCam.transform.TransformDirection(Vector3.forward).normalized * 2.5f), Quaternion.Euler(fpsCam.transform.TransformDirection(Vector3.forward)), fpsCam.transform.TransformDirection(Vector3.forward).normalized, shooter.chargeBullet, null);
                 obj.GetComponentInChildren<ExplosiveShot>().comboSize = chargeUsed;
