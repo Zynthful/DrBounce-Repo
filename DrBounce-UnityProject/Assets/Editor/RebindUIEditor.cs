@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(RebindUI))]
+[CustomEditor(typeof(RebindUI)), CanEditMultipleObjects]
 public class RebindUIEditor : Editor
 {
     public override void OnInspectorGUI()

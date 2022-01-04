@@ -64,18 +64,18 @@ public class RebindUI : MonoBehaviour
 
     private void OnEnable()
     {
-        // Listen to button onClick events
-        rebindButton.onClick.AddListener(() => Rebind());
-        resetButton.onClick.AddListener(() => ResetBinding());
-
         if (inputActionReference != null)
         {
             // Load binding overrides from PlayerPrefs, if they exist
             InputManager.LoadBindingOverride(actionName);
-
-            UpdateBindingInfo();
-            UpdateUI();
         }
+
+        // Listen to button onClick events
+        rebindButton.onClick.AddListener(() => Rebind());
+        resetButton.onClick.AddListener(() => ResetBinding());
+
+        UpdateBindingInfo();
+        UpdateUI();
     }
 
     private void OnDisable()
@@ -86,11 +86,8 @@ public class RebindUI : MonoBehaviour
 
     private void OnValidate()
     {
-        if (inputActionReference != null)
-        {
-            UpdateBindingInfo();
-            UpdateUI();
-        }
+        UpdateBindingInfo();
+        UpdateUI();
     }
 
     private void Rebind()
@@ -129,11 +126,19 @@ public class RebindUI : MonoBehaviour
     /// </summary>
     private void UpdateBindingInfo()
     {
-        actionName = inputActionReference.action.name;
-
-        if (inputActionReference.action.bindings.Count > selectedBinding)
+        if (inputActionReference != null)
         {
-            inputBinding = inputActionReference.action.bindings[selectedBinding];
+            actionName = inputActionReference.action.name;
+            if (inputActionReference.action.bindings.Count > selectedBinding)
+            {
+                inputBinding = inputActionReference.action.bindings[selectedBinding];
+                bindingIndex = selectedBinding;
+            }
+        }
+        else
+        {
+            actionName = null;
+            inputBinding = new InputBinding();
             bindingIndex = selectedBinding;
         }
     }
@@ -143,21 +148,29 @@ public class RebindUI : MonoBehaviour
     /// </summary>
     private void UpdateUI()
     {
-        if (actionText != null)
+        if (inputActionReference != null)
         {
-            actionText.text = actionName;
-        }
+            if (actionText != null)
+            {
+                actionText.text = actionName;
+            }
 
-        if (rebindText != null)
+            if (rebindText != null)
+            {
+                if (Application.isPlaying)
+                {
+                    rebindText.text = InputManager.GetBindingName(actionName, bindingIndex);
+                }
+                else
+                {
+                    rebindText.text = inputActionReference.action.GetBindingDisplayString(bindingIndex);
+                }
+            }
+        }
+        else
         {
-            if (Application.isPlaying)
-            {
-                rebindText.text = InputManager.GetBindingName(actionName, bindingIndex);
-            }
-            else
-            {
-                rebindText.text = inputActionReference.action.GetBindingDisplayString(bindingIndex);
-            }
+            rebindText.text = "No Action Selected";
+            actionText.text = "No Action Selected";
         }
     }
 
