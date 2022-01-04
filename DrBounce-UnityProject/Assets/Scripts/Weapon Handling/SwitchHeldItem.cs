@@ -11,14 +11,21 @@ public class SwitchHeldItem : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
-        controls.Player.SwitchHeld.performed += _ => SwitchActiveItem();
         instance = this;
+
+        controls = InputManager.inputMaster;
     }
 
     private void OnEnable()
     {
+        controls.Player.SwitchHeld.performed += _ => SwitchActiveItem();
         controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.SwitchHeld.performed -= _ => SwitchActiveItem();
+        controls.Disable();
     }
 
     // Start is called before the first frame update
@@ -81,12 +88,6 @@ public class SwitchHeldItem : MonoBehaviour
             
             currentHeldTransform.gameObject.SetActive(true);
         }
-    }
-
-    private void OnDisable()
-    {
-        controls.Player.SwitchHeld.performed -= _ => SwitchActiveItem();
-        controls.Disable();
     }
 
     public void AddToList(GameObject throwable) 

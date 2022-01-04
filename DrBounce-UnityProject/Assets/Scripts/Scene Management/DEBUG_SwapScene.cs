@@ -10,10 +10,23 @@ public class DEBUG_SwapScene : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
+        controls = InputManager.inputMaster;
+    }
+
+    private void OnEnable()
+    {
         controls.Player.DEBUG_PrevLevel.performed += _ => BackLevel();
         controls.Player.DEBUG_NextLevel.performed += _ => NextLevel();
         controls.Player.DEBUG_ReloadScene.performed += _ => ReloadScene();
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.DEBUG_PrevLevel.performed -= _ => BackLevel();
+        controls.Player.DEBUG_NextLevel.performed -= _ => NextLevel();
+        controls.Player.DEBUG_ReloadScene.performed -= _ => ReloadScene();
+        controls.Disable();
     }
 
     private void ReloadScene() 
@@ -38,17 +51,5 @@ public class DEBUG_SwapScene : MonoBehaviour
             currentSceneIndex++;
         }
         SceneManager.LoadSceneAsync(currentSceneIndex, LoadSceneMode.Single);
-    }
-
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        //controls.Player.DEBUG_NextLevel.performed -= _ => NextLevel();
-        //controls.Player.DEBUG_PrevLevel.performed -= _ => BackLevel();
-        controls.Disable();
     }
 }

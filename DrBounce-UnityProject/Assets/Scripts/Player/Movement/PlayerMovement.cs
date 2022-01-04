@@ -117,12 +117,28 @@ public class PlayerMovement : MonoBehaviour
         playerHeight = charController.height;
         GameManager.gravity = gravity;
 
-        controls = new InputMaster(); //Creates a new InputMaster to gain access to mapped controls
+        controls = InputManager.inputMaster;
+
+        player = transform;
+    }
+
+    #region BrackeysMoment
+    private void OnEnable() //Enables and disables the local version of controls as the gameobject is enabled and disabled.
+    {
         controls.Player.Jump.performed += _ => Jump(); //When the jump action is activated in Input Master, activate the Jump function.
         controls.Player.Dash.performed += _ => StartCoroutine(Dash());
         controls.Player.Crouch.performed += _ => Crouch();
-        player = transform;
+        controls.Enable();
     }
+
+    private void OnDisable()//Brackeys Moment
+    {
+        controls.Disable();
+        controls.Player.Jump.performed -= _ => Jump();
+        controls.Player.Dash.performed -= _ => StartCoroutine(Dash());
+        controls.Player.Crouch.performed -= _ => Crouch();
+    }
+    #endregion
 
     private void FixedUpdate()
     {
@@ -504,16 +520,4 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         dashesPerformed = 0;
     }
-
-    #region BrackeysMoment
-    private void OnEnable() //Enables and disables the local version of controls as the gameobject is enabled and disabled.
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()//Brackeys Moment
-    {
-        controls.Disable();
-    }
-    #endregion
 }

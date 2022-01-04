@@ -140,9 +140,21 @@ public class GunThrowing : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
+        controls = InputManager.inputMaster;
+    }
+
+    private void OnEnable()
+    {
         controls.Player.RecallGun.performed += _ => RecallGun();
         controls.Player.ThrowGun.performed += _ => SetThrowGunDelay();
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.ThrowGun.performed -= _ => Thrown();
+        controls.Player.RecallGun.performed -= _ => ResetScript();
+        controls.Disable();
     }
 
     // Delay throwing to avoid recalling immediately after throwing
@@ -366,18 +378,6 @@ public class GunThrowing : MonoBehaviour
     {
         if(amountOfBounces > 0)
             amountOfBounces--;
-    }
-
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Player.ThrowGun.performed -= _ => Thrown();
-        controls.Player.RecallGun.performed -= _ => ResetScript();
-        controls.Disable();
     }
 
     IEnumerator EnablePickupAfterTime(float time)

@@ -18,9 +18,21 @@ public class MagnetAA : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
+        controls = InputManager.inputMaster;
+    }
+
+    private void OnEnable()
+    {
         controls.Player.ThrowGun.started += _ => AssistStarted();
         controls.Player.ThrowGun.canceled += _ => AssistEnded();
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.ThrowGun.started -= _ => AssistStarted();
+        controls.Player.ThrowGun.canceled -= _ => AssistEnded();
+        controls.Disable();
     }
 
     void AssistStarted()
@@ -70,17 +82,5 @@ public class MagnetAA : MonoBehaviour
             mag += Time.deltaTime * aimAssistForce;
             rb.velocity = ((transform.position - gun.transform.position).normalized * aimAssistForce / currentDistance).normalized * mag;
         }
-    }
-
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Player.ThrowGun.started -= _ => AssistStarted();
-        controls.Player.ThrowGun.canceled -= _ => AssistEnded();
-        controls.Disable();
     }
 }

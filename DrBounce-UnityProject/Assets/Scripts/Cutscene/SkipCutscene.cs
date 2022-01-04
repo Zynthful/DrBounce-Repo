@@ -35,21 +35,21 @@ public class SkipCutscene : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
+        controls = InputManager.inputMaster;
     }
 
     private void OnEnable()
     {
-        controls.Enable();
         controls.Cutscene.SkipCutscene.started += _ => StartSkip();
         controls.Cutscene.SkipCutscene.canceled += _ => ResetProgress();
+        controls.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Disable();
         controls.Cutscene.SkipCutscene.started -= _ => StartSkip();
         controls.Cutscene.SkipCutscene.canceled -= _ => ResetProgress();
+        controls.Disable();
     }
 
     private void Start()

@@ -163,13 +163,11 @@ public class Shooting : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
+        controls = InputManager.inputMaster;
     }
 
     private void OnEnable()
     {
-        controls.Enable();
-
         controls.Player.Shoot.performed += _ => Shoot();
 
         controls.Player.ChargeShot.started += _ => TryStartCharging();
@@ -177,12 +175,12 @@ public class Shooting : MonoBehaviour
 
         controls.Player.RecallGun.performed += _ => Reset();
         controls.Player.Healing.performed += _ => Healing();
+
+        controls.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Disable();
-
         controls.Player.Shoot.performed -= _ => Shoot();
 
         controls.Player.ChargeShot.started -= _ => TryStartCharging();
@@ -190,6 +188,8 @@ public class Shooting : MonoBehaviour
 
         controls.Player.RecallGun.performed -= _ => Reset();
         controls.Player.Healing.performed -= _ => Healing();
+
+        controls.Disable();
     }
 
     private void TryStartCharging() 

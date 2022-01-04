@@ -36,13 +36,25 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
+        controls = InputManager.inputMaster;
     }
 
     private void Start()
     {
         if (unpauseOnStart)
             SetPaused(false);
+    }
+
+    private void OnEnable()
+    {
+        controls.Menu.Pause.performed += _ => InvertPause();
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Menu.Pause.performed -= _ => InvertPause();
+        controls.Disable();
     }
 
     private void InvertPause()
@@ -78,17 +90,5 @@ public class PauseMenu : MonoBehaviour
                 _onUnpauseAfterPause.Invoke();
             }
         }
-    }
-
-    private void OnEnable()
-    {
-        controls.Menu.Pause.performed += _ => InvertPause();
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Menu.Pause.performed -= _ => InvertPause();
-        controls.Disable();
     }
 }

@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        controls = new InputMaster();
-        controls.Player.DEBUG_Pause.performed += _ => Stop();
+        controls = InputManager.inputMaster;
+
         // Cap fps to 120
         Application.targetFrameRate = 120;
 
@@ -55,21 +55,22 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
-
     private void OnEnable()
     {
+        controls.Player.DEBUG_Pause.performed += _ => Stop();
         controls.Enable();
     }
 
     private void OnDisable()
     {
-        if(controls != null)
-            controls.Disable();
+        controls.Player.DEBUG_Pause.performed -= _ => Stop();
+        controls.Disable();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Stop() 

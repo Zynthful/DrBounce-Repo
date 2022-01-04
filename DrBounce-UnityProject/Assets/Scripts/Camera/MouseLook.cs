@@ -35,13 +35,6 @@ public class MouseLook : MonoBehaviour
 
     private float currentControllerSensitivityMultiplier = 1f;
 
-    public InputMaster controls;
-
-    private void Awake()
-    {
-        controls = new InputMaster();
-    }
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

@@ -39,7 +39,7 @@ public class WeaponSway : MonoBehaviour
     private float verticalOld = 0f;
     private float speedOld = 0f;
 
-    public InputMaster controls;
+    private InputMaster controls;
 
     private Vector3 midPoint = new Vector3();
     
@@ -49,16 +49,27 @@ public class WeaponSway : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
+        controls = InputManager.inputMaster;
+
         weaponHolderTransform = transform;
     }
 
-    void Start()
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
+    private void Start()
     {
         midPoint = transform.localPosition;
     }
 
-    void Update()
+    private void Update()
     {
         if (transform.childCount != 0)
         {
@@ -107,6 +118,7 @@ public class WeaponSway : MonoBehaviour
     }
 
     // this will work a lot better if i can get the players velocity directly but for now scuffed method will do :)
+    // i agree :) -jamie
     private Vector3 CalculateVerticalBob(float bobS, float bobD, float bobTS)
     {
         Vector2 input = controls.Player.Movement.ReadValue<Vector2>();
@@ -201,15 +213,5 @@ public class WeaponSway : MonoBehaviour
     public void Dash()
     {
         Offset(Vector3.back, dashDistance);
-    }
-
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
     }
 }

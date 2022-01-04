@@ -16,34 +16,23 @@ public class HealthPack : MonoBehaviour
     private int amountOfBounces;
     private bool healing;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-
+        controls = InputManager.inputMaster;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     private void OnEnable()
     {
+        controls.Player.Shoot.performed += _ => StartCoroutine(Healing());
+        controls.Player.Shoot.canceled += _ => StopHealing();
         controls.Enable();
     }
 
     private void OnDisable()
     {
+        controls.Player.Shoot.performed -= _ => StartCoroutine(Healing());
+        controls.Player.Shoot.canceled -= _ => StopHealing();
         controls.Disable();
-    }
-
-    private void Awake()
-    {
-        controls = new InputMaster();
-        controls.Player.Shoot.performed += _ => StartCoroutine(Healing());
-        controls.Player.Shoot.canceled += _ => StopHealing();
     }
 
     public void Bounce(int bounceCount)
