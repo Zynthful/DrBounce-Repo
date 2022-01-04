@@ -5,18 +5,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New String Setting", menuName = "ScriptableObjects/Settings/String")]
 public class StringSetting : SettingData
 {
+    protected string currentValue = null;
+
+    [Header("Events")]
     [SerializeField]
     protected GameEventString onValueChanged = null;
+    [SerializeField]
+    protected GameEventString onResetToDefault = null;
 
+    [Header("Value Settings")]
     [SerializeField]
     protected string defaultValue = null;
-
-    protected string currentValue = null;
 
     public override void Initialise()
     {
         base.Initialise();
-        currentValue = PlayerPrefs.GetString($"Options/{type}/{settingName}", defaultValue);
+        currentValue = PlayerPrefs.GetString($"Options/{type}/{subType}/{settingName}", defaultValue);
         onValueChanged?.Raise(currentValue);
     }
 
@@ -24,9 +28,16 @@ public class StringSetting : SettingData
     {
         currentValue = value;
         onValueChanged?.Raise(value);
-        PlayerPrefs.SetString($"Options/{type}/{settingName}", value);
+        PlayerPrefs.SetString($"Options/{type}/{subType}/{settingName}", value);
 
         Save();
+    }
+
+    public override void ResetToDefault()
+    {
+        SetValue(defaultValue);
+        onResetToDefault?.Raise(defaultValue);
+        base.ResetToDefault();
     }
 
     public string GetCurrentValue()

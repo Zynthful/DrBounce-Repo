@@ -8,9 +8,29 @@ public abstract class Settings : MonoBehaviour
     [SerializeField]
     protected TextMeshProUGUI valueText = null;
 
-    protected virtual void Start()
+    protected virtual void Awake()
+    {
+        UpdateUI();
+    }
+
+    protected virtual void OnEnable()
+    {
+        UpdateUI();
+    }
+
+    protected virtual void OnDisable()
+    {
+        UpdateUI();
+    }
+
+    protected virtual void UpdateUI()
     {
 
+    }
+
+    protected virtual void ResetToDefault()
+    {
+        UpdateUI();
     }
 
     /*

@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Global RTPC Setting", menuName = "ScriptableObjects/Settings/GlobalRTPC")]
 public class GlobalRTPCSetting : FloatSetting
 {
+    [Header("RTPC")]
     [SerializeField]
-    private AK.Wwise.RTPC rtpc = null;
+    protected AK.Wwise.RTPC rtpc = null;
 
     public override void Initialise()
     {
@@ -18,5 +19,12 @@ public class GlobalRTPCSetting : FloatSetting
     {
         base.SetValue(value);
         rtpc.SetGlobalValue(value);
+        onResetToDefault?.Raise(defaultValue);
+    }
+
+    public override void ResetToDefault()
+    {
+        SetValue(defaultValue);
+        base.ResetToDefault();
     }
 }
