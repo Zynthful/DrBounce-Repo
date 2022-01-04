@@ -25,7 +25,12 @@ public class RebindUIEditor : Editor
 
         // Display binding input info in inspector
         GUILayout.Label("Selected Binding :)", headerStyle);
-        GUILayout.Label($"Path: {rebindUI.GetInputPath()}", bindingStyle);
-        GUILayout.Label($"Group: {rebindUI.GetInputGroup()}", bindingStyle);
+        GUILayout.Label($"Path: {rebindUI.GetInputBinding().path}", bindingStyle);
+        GUILayout.Label($"Group: {rebindUI.GetInputBinding().groups}", bindingStyle);
+        string composite = rebindUI.GetInputBinding().isComposite ? "Yes" : "No";
+        GUILayout.Label($"Is Composite: {composite}", bindingStyle);
+        GUILayout.Label($"Interactions: {rebindUI.GetInputBinding().interactions}", bindingStyle);
+        GUILayout.Label($"Processors: {rebindUI.GetInputBinding().processors}", bindingStyle);
+        GUILayout.Label($"ID: {rebindUI.GetInputBinding().id}", bindingStyle);
     }
 }
