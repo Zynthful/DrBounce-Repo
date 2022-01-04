@@ -56,6 +56,8 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     private UnityEvent<int> onChargedShotFired = null;
     [SerializeField]
+    private UnityEvent onSingleChargeShotFired = null;
+    [SerializeField]
     private UnityEvent onChargesEmpty = null;
     [SerializeField]
     private UnityEvent<bool> onHasCharge = null;
@@ -367,6 +369,10 @@ public class Shooting : MonoBehaviour
         if (chargeUsed == gunCharge)
         {
             onMaxShotFired?.Invoke(chargeUsed);
+        }
+        else if (chargeUsed == 1)
+        {
+            onSingleChargeShotFired?.Invoke();
         }
 
         ChargedFeedback?.PlayFeedbacks();
