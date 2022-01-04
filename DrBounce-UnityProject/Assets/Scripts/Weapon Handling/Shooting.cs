@@ -42,7 +42,8 @@ public class Shooting : MonoBehaviour
 
     private float currentHoldTime = 0.0f;
     private bool holdingShoot = false;
-    private bool charging;
+    private bool maxShotCharging = false;
+    private bool maxShotCharged = false;
 
     #region Events
 
@@ -65,8 +66,18 @@ public class Shooting : MonoBehaviour
     private UnityEvent<bool> onEnemyHover = null;
     [SerializeField]
     private UnityEvent onExplosiveShot = null;
+
+    [Header("Max Charge Shot Unity Events")]
     [SerializeField]
-    private UnityEvent<float> onChargingMaxShotProgress = null;
+    private UnityEvent<float> onChargingMaxShotProgress = null;     // Every frame that the max shot is charging. Passes progress as a percentage between 0-1.
+    [SerializeField]
+    private UnityEvent onChargeMaxShotBegin = null;                 // When starting to charge the max shot by holding the button
+    [SerializeField]
+    private UnityEvent onChargeMaxShotCancel = null;                // When cancelling the max shot charge by letting go of the button too early
+    [SerializeField]
+    private UnityEvent onMaxShotCharged = null;                     // When the max shot has been fully charged (but not fired)
+    [SerializeField]
+    private UnityEvent<int> onMaxShotFired = null;                  // When the max shot has been fired. Passes number of charges consumed.
     #endregion
 
     #region GameEvents
@@ -129,10 +140,17 @@ public class Shooting : MonoBehaviour
             Shoot();
         }
 
-        if (charging)
+        // Handle max shot charging timer
+        if (maxShotCharging)
         {
             currentHoldTime += Time.deltaTime;
             onChargingMaxShotProgress.Invoke(currentHoldTime / holdTimeToFullCharge);
+        }
+
+        if (currentHoldTime > holdTimeToFullCharge && !maxShotCharged)
+        {
+            maxShotCharged = true;
+            onMaxShotCharged?.Invoke();
         }
     }
 
@@ -174,24 +192,32 @@ public class Shooting : MonoBehaviour
         // Only begin charging max charge shot if we have charge
         if (gunCharge > 0)
         {
-            charging = true;
+            onChargeMaxShotBegin?.Invoke();
+            maxShotCharging = true;
         }
     }
 
     private void ReleaseCharge()
     {
-        if (charging)
+        if (maxShotCharging)
         {
-            charging = false;
-            // Release a max charged shot if we've held charge for long enough
-            if (currentHoldTime > holdTimeToFullCharge)
+            maxShotCharging = false;
+            // Release a max charged shot if we've fully charged
+            if (maxShotCharged)
             {
+                maxShotCharged = false;
                 HandleChargedShot(gunCharge);
             }
             // Cancel into a regular shot if we haven't reached the threshold
             else if (currentHoldTime < holdTimeThreshold)
             {
+                onChargeMaxShotCancel?.Invoke();
                 Shoot();
+            }
+            // Cancel without firing a regular shot
+            else
+            {
+                onChargeMaxShotCancel?.Invoke();
             }
             currentHoldTime = 0.0f;
         }
@@ -290,7 +316,7 @@ public class Shooting : MonoBehaviour
         //  - Is not paused
         //  - Object has a parent
         //  - Is not already shooting
-        if (!GameManager.s_Instance.paused && transform.parent != null && timeSinceLastShot > shooter.fireRate && !charging)  
+        if (!GameManager.s_Instance.paused && transform.parent != null && timeSinceLastShot > shooter.fireRate && !maxShotCharging)  
         {
             timeSinceLastShot = 0;
 
@@ -337,9 +363,13 @@ public class Shooting : MonoBehaviour
 
     private void HandleChargedShot(int chargeUsed)
     {
-        Debug.Log($"FIRING CHARGES: {chargeUsed}");
+        if (chargeUsed == gunCharge)
+        {
+            onMaxShotFired?.Invoke(chargeUsed);
+        }
 
-        ChargedFeedback?.PlayFeedbacks();	
+        ChargedFeedback?.PlayFeedbacks();
+        
         switch(shooter.chargeShot)
         {
             case GunModes.Explosives:
@@ -352,8 +382,9 @@ public class Shooting : MonoBehaviour
                 obj.GetComponentInChildren<ExplosiveShot>().comboSize = chargeUsed;
                 break;
         }
-        onChargedShotFired?.Invoke(gunCharge);
-        _onChargedShotFired?.Raise(gunCharge);
+
+        onChargedShotFired?.Invoke(chargeUsed);
+        _onChargedShotFired?.Raise(chargeUsed);
 
         if (shooter.useAllChargesOnUse)
         {
