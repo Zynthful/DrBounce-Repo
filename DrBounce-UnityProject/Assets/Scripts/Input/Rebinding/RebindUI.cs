@@ -98,7 +98,7 @@ public class RebindUI : MonoBehaviour
         InputManager.BeginRebind(actionName, bindingIndex, rebindText, controlsToExclude, rebindCancelButtons);
     }
 
-    private void ResetBinding()
+    public void ResetBinding()
     {
         onRebindReset.Invoke();
         InputManager.ResetBinding(actionName, bindingIndex);
