@@ -1099,6 +1099,57 @@
 									</ChildrenList>
 									<ObjectLists/>
 								</BlendContainer>
+								<Folder Name="MaxShot" ID="{4D041F19-8536-4E3F-9DAA-C151AFC8674E}" ShortID="53826152">
+									<ChildrenList>
+										<BlendContainer Name="Gun_MaxShot_Charging" ID="{52325211-81A9-4F27-9A55-7C54940A9CBF}" ShortID="805265071">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-6</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_Gun_MaxShot_Charge_Draft_1" ID="{9A2E39CE-B71A-4FA7-A783-21F76FA8A79F}" ShortID="552277113">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Gun_MaxShot_Charge_Draft_1" ID="{430554C6-2687-46B3-BD05-891BC8CE491C}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Gun_MaxShot_Charge_Draft_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="913572501"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Gun_MaxShot_Charge_Draft_1" ID="{430554C6-2687-46B3-BD05-891BC8CE491C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</BlendContainer>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Movement" ID="{690DC820-0EA0-44D3-9032-DE575996660F}" ShortID="405703962">

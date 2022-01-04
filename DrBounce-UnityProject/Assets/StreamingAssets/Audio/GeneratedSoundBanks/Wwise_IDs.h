@@ -61,6 +61,7 @@ namespace AK
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
         static const AkUniqueID PLAYER_GUN_CHARGE = 1641787780U;
         static const AkUniqueID PLAYER_GUN_LAST_SHOT_CHARGE = 1990407938U;
+        static const AkUniqueID PLAYER_GUN_MAXSHOT_CHARGE_PROGRESS = 1622247325U;
         static const AkUniqueID PLAYER_GUN_NUMOFBOUNCES = 1762700618U;
         static const AkUniqueID PLAYER_HEALTH_PERCENTAGE = 3361892810U;
         static const AkUniqueID RPM = 796049864U;
