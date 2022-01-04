@@ -11,8 +11,7 @@ public class Shooting : MonoBehaviour
         Explosives,
     }
 
-    [SerializeField]
-    private DecalManager decalM = null;
+    private DecalManager decalM;
 
     [SerializeField]
     private Gun shooter = null;
@@ -113,6 +112,7 @@ public class Shooting : MonoBehaviour
         SetCharge(gunCharge);
 
         pool = ObjectPooler.Instance;
+        decalM = DecalManager.Instance;
         CheckForHoverOverEnemy();
     }
 
@@ -322,7 +322,7 @@ public class Shooting : MonoBehaviour
                     }
                     else
                     {
-                        decalM.SpawnDecal(Hitinfo.point, Hitinfo.transform.gameObject.GetComponent<MeshFilter>(), Hitinfo.normal, 0.5f);
+                        decalM.SpawnDecal(Hitinfo.point, Hitinfo.normal, 0.4f);
                     }
                 }
             }
