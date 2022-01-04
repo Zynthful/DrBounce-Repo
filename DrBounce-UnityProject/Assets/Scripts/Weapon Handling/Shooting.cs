@@ -187,19 +187,22 @@ public class Shooting : MonoBehaviour
 
     private void TryStartCharging() 
     {
-        holdingShoot = true;
-
-        // Only begin charging max charge shot if we have charge
-        if (gunCharge > 0)
+        if (!GameManager.s_Instance.paused && transform.parent != null)
         {
-            onChargeMaxShotBegin?.Invoke();
-            maxShotCharging = true;
+            holdingShoot = true;
+
+            // Only begin charging max charge shot if we have charge
+            if (gunCharge > 0)
+            {
+                onChargeMaxShotBegin?.Invoke();
+                maxShotCharging = true;
+            }
         }
     }
 
     private void ReleaseCharge()
     {
-        if (maxShotCharging)
+        if (!GameManager.s_Instance.paused && transform.parent != null && maxShotCharging)
         {
             maxShotCharging = false;
             // Release a max charged shot if we've fully charged
@@ -225,11 +228,9 @@ public class Shooting : MonoBehaviour
         holdingShoot = false;
     }
 
-    // Use this to update chargesLeft so it raises the onChargeUpdate event along with it
-
     /// <summary>
     /// Sets gunCharge equal to the input value
-    /// Use this whenever update gunCharge, so it raises onChargeUpdate with it
+    /// Use this whenever updating gunCharge, so it raises onChargeUpdate with it
     /// </summary>
     /// <param name="value"></param>
     public void SetCharge(int value)
