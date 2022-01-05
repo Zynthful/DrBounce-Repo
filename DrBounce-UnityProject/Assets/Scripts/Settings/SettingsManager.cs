@@ -9,6 +9,11 @@ public class SettingsManager : MonoBehaviour
 
     private void Awake()
     {
+        InitialiseAll();
+    }
+
+    private void InitialiseAll()
+    {
         for (int i = 0; i < settings.Length; i++)
         {
             settings[i].Initialise();

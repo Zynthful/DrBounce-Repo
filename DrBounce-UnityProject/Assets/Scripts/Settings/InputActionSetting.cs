@@ -25,35 +25,13 @@ public class InputActionSetting : SettingData
     {
         base.Initialise();
 
-        actionReference.action.RemoveBindingOverride(bindingIndex);
-
         string path = PlayerPrefs.GetString($"Options/{type}/{subType}/{actionReference.action.actionMap}/{actionReference.action.name}/{bindingIndex}");
         if (!string.IsNullOrEmpty(path))
         {
-            //Debug.Log($"we got one bois: path: {path}, action: {actionReference.action.name}, binding: {bindingIndex}");
-            actionReference.action.ApplyBindingOverride(bindingIndex, path);
+            InputManager.LoadBindingOverride(actionName, path, bindingIndex);
         }
 
-        /*
-        currentValues.Clear();
-
-        List<string> paths = new List<string>();
-        for (int i = 0; i < actionReference.action.bindings.Count; i++)
-        {
-            string path = PlayerPrefs.GetString($"Options/{type}/{subType}/{actionReference.action.actionMap}/{actionReference.action.name}/{i}");
-            if (!string.IsNullOrEmpty(path))
-            {
-                Debug.Log($"we got one bois: path: {path}, action: {actionReference.action.name}, binding: {i}");
-
-                actionReference.action.ApplyBindingOverride(i, path);
-                paths.Add(path);
-            }
-        }
-        for (int i = 0; i < paths.Count; i++)
-        {
-            AddValue(paths[i]);
-        }
-        */
+        UpdateBindingInfo();
     }
 
     private void OnValidate()
@@ -74,42 +52,6 @@ public class InputActionSetting : SettingData
     {
         return currentValue;
     }
-
-    /*
-    public virtual void AddValue(string value)
-    {
-        currentValues.Add(value);
-        Debug.Log($"Adding: {actionReference.action.name}/Binding/{currentValues.Count - 1} - there are now {currentValues.Count} bindings registered.");
-        PlayerPrefs.SetString($"Options/{type}/{subType}/{actionReference.action.actionMap}/{actionReference.action.name}/Binding/{currentValues.Count - 1}", value);
-    }
-
-    public virtual bool Contains(string value)
-    {
-        return currentValues.Contains(value);
-    }
-
-    public int IndexOf(string value)
-    {
-        return currentValues.IndexOf(value);
-    }
-
-    public virtual void SetValue(string value, int index)
-    {
-        currentValues[index] = value;
-
-        PlayerPrefs.SetString($"Options/{type}/{subType}/{actionReference.action.actionMap}/{actionReference.action.name}/{index}", value);
-
-        Save();
-    }
-
-    public string GetValue(int index)
-    {
-        if (index < currentValues.Count)
-            return currentValues[index];
-        else 
-            return null;
-    }
-    */
 
     public int GetBindingIndex()
     {

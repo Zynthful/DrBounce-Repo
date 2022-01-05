@@ -10,7 +10,7 @@ public abstract class Settings : MonoBehaviour
 
     protected virtual void Awake()
     {
-        UpdateUI();
+
     }
 
     protected virtual void OnEnable()

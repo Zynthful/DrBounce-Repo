@@ -144,23 +144,18 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Returns the binding name of the given action.
-    /// </summary>
-    /// <param name="actionName">The name of the action to find and retrieve the binding name of.</param>
-    /// <param name="index">The action binding index, i.e., the control group, e.g., Mouse and Keyboard.</param>
-    /// <returns></returns>
-    public static string GetBindingName(string actionName, int index)
+    public static string GetBindingName(string actionName, int bindingIndex, InputBinding.DisplayStringOptions displayOptions = new InputBinding.DisplayStringOptions())
     {
         CheckForNullInputMaster();
+
         InputAction action = inputMaster.asset.FindAction(actionName);
-        return action.GetBindingDisplayString(index);
+        return action.GetBindingDisplayString(bindingIndex, displayOptions);
     }
 
     /// <summary>
     /// Checks if we don't have an InputMaster, and if so, creates one.
     /// </summary>
-    private static void CheckForNullInputMaster()
+    public static void CheckForNullInputMaster()
     {
         if (inputMaster == null)
             inputMaster = new InputMaster();
@@ -200,6 +195,20 @@ public class InputManager : MonoBehaviour
         */
 
         setting.SetValue(action.bindings[setting.GetBindingIndex()].overridePath);
+    }
+
+    public static void LoadBindingOverride(string actionName, string path, int index)
+    {
+        CheckForNullInputMaster();
+        Debug.Log(inputMaster);
+
+        InputAction action = inputMaster.asset.FindAction(actionName);
+        action.ApplyBindingOverride(index, path);
+    }
+
+    public static void OverrideBinding(InputAction action, int index, string path)
+    {
+        action.ApplyBindingOverride(index, path);
     }
 
     #endregion

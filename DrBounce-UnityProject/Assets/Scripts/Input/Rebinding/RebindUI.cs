@@ -21,9 +21,8 @@ public class RebindUI : Settings
     [Tooltip("Optional. Control paths that cancel the rebinding operation. These *must* match the exact path of the binding.")]
     private string[] rebindCancelButtons = null;
 
-    //TODO
-    //[SerializeField]
-    //private InputBinding.DisplayStringOptions displayStringOptions = new InputBinding.DisplayStringOptions();
+    [SerializeField]
+    private InputBinding.DisplayStringOptions displayStringOptions = new InputBinding.DisplayStringOptions();
 
     [Header("UI")]
     [SerializeField]
@@ -124,14 +123,7 @@ public class RebindUI : Settings
 
             if (rebindText != null)
             {
-                if (Application.isPlaying)
-                {
-                    rebindText.text = InputManager.GetBindingName(setting.GetActionName(), setting.GetBindingIndex());
-                }
-                else
-                {
-                    rebindText.text = setting.GetAction().GetBindingDisplayString(setting.GetBindingIndex());
-                }
+                rebindText.text = InputManager.GetBindingName(setting.GetActionName(), setting.GetBindingIndex(), displayStringOptions);
             }
         }
         else
