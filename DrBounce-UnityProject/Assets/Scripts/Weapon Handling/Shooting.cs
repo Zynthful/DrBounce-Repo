@@ -33,12 +33,14 @@ public class Shooting : MonoBehaviour
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
 
+    [Header("Max Shot Settings")]
     [SerializeField]
     [Tooltip("Duration in seconds that the shoot button must be held in order to fully charge a max charge shot.")]
     private float holdTimeToFullCharge = 1.0f;
     [SerializeField]
-    [Tooltip("Duration in seconds that the shoot button must be held before cancelling does NOT trigger a regular shot.")]
-    private float holdTimeThreshold = 0.3f;
+    [Tooltip("Percentage that the max shot must be charged before cancelling it does NOT trigger a regular shot.")]
+    [Range(0, 1)]
+    private float chargeCancelThreshold = 0.5f;
 
     private float currentHoldTime = 0.0f;
     private bool holdingShoot = false;
@@ -135,29 +137,39 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (GameManager.s_Instance.paused)
+            return;
+
         timeSinceLastShot += Time.deltaTime;
 
         CheckForHoverOverEnemy();
 
-        if (shooter.canRepeatShoot && holdingShoot)
-        {
-            Shoot();
-        }
-
         // Handle max shot charging timer
-        if (maxShotCharging)
+        if (IsInHand() && !maxShotCharged && holdingShoot)
         {
-            currentHoldTime += Time.deltaTime;
-            onChargingMaxShotProgress.Invoke(currentHoldTime / holdTimeToFullCharge);
-        }
+            if (maxShotCharging)
+            {
+                currentHoldTime += Time.deltaTime;
+                onChargingMaxShotProgress.Invoke(currentHoldTime / holdTimeToFullCharge);
 
-        if (currentHoldTime > holdTimeToFullCharge && !maxShotCharged)
-        {
-            print("Max Charge!");
-            maxShotCharged = true;
-            //maxDamage keeps track of a held charge shot for damage calculations
-            maxDamage = true;
-            onMaxShotCharged?.Invoke();
+                // If we've fully charged our max shot
+                if (currentHoldTime > holdTimeToFullCharge)
+                {
+                    maxShotCharged = true;
+                    maxShotCharging = false;
+
+                    //maxDamage keeps track of a held charge shot for damage calculations
+                    maxDamage = true;
+
+                    onMaxShotCharged?.Invoke();
+                }
+            }
+
+            // Try to repeat shoot if we're holding down shoot and we can repeat shoot
+            else if (shooter.canRepeatShoot)
+            {
+                TryShoot();
+            }
         }
     }
 
@@ -168,8 +180,8 @@ public class Shooting : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Player.Shoot.started += _ => TryStartCharging();
-        controls.Player.Shoot.canceled += _ => ReleaseCharge();
+        controls.Player.Shoot.started += _ => ShootStarted();
+        controls.Player.Shoot.canceled += _ => ShootReleased();
 
         controls.Player.RecallGun.performed += _ => Reset();
         controls.Player.Healing.performed += _ => Healing();
@@ -179,56 +191,13 @@ public class Shooting : MonoBehaviour
 
     private void OnDisable()
     {
-        controls.Player.Shoot.started -= _ => TryStartCharging();
-        controls.Player.Shoot.canceled -= _ => ReleaseCharge();
+        controls.Player.Shoot.started -= _ => ShootStarted();
+        controls.Player.Shoot.canceled -= _ => ShootReleased();
 
         controls.Player.RecallGun.performed -= _ => Reset();
         controls.Player.Healing.performed -= _ => Healing();
 
         controls.Disable();
-    }
-
-    private void TryStartCharging() 
-    {
-        holdingShoot = true;
-
-        if (!GameManager.s_Instance.paused && transform.parent != null)
-        {
-            // Only begin charging max charge shot if we have charge
-            if (gunCharge > 0)
-            {
-                onChargeMaxShotBegin?.Invoke();
-                maxShotCharging = true;
-            }
-        }
-    }
-
-    private void ReleaseCharge()
-    {
-        holdingShoot = false;
-
-        if (!GameManager.s_Instance.paused && transform.parent != null && maxShotCharging)
-        {
-            maxShotCharging = false;
-            // Release a max charged shot if we've fully charged
-            if (maxShotCharged)
-            {
-                maxShotCharged = false;
-                HandleChargedShot(gunCharge);
-            }
-            // Cancel into a regular shot if we haven't reached the threshold
-            else if (currentHoldTime < holdTimeThreshold)
-            {
-                onChargeMaxShotCancel?.Invoke();
-                Shoot();
-            }
-            // Cancel without firing a regular shot
-            else
-            {
-                onChargeMaxShotCancel?.Invoke();
-            }
-            currentHoldTime = 0.0f;
-        }
     }
 
     /// <summary>
@@ -314,54 +283,100 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void Shoot() 
+    private void ShootStarted()
     {
-        // Checks:
-        //  - Is not paused
-        //  - Object has a parent
-        //  - Is not already shooting
-        if (!GameManager.s_Instance.paused && transform.parent != null && timeSinceLastShot > shooter.fireRate && !maxShotCharging)  
-        {
-            timeSinceLastShot = 0;
+        holdingShoot = true;
 
-            // Are we trying to fire a single charged shot?
+        if (!GameManager.s_Instance.paused && IsInHand())
+        {
+            // Only begin charging max charge shot if we have charge
             if (gunCharge > 0)
             {
-                HandleChargedShot(1);
+                onChargeMaxShotBegin?.Invoke();
+                maxShotCharging = true;
+            }
+        }
+    }
+
+    private void ShootReleased()
+    {
+        holdingShoot = false;
+
+        if (!GameManager.s_Instance.paused && IsInHand())
+        {
+            maxShotCharging = false;
+
+            // Release a max charged shot if we've fully charged
+            if (maxShotCharged)
+            {
+                maxShotCharged = false;
+                HandleChargedShot(gunCharge);
             }
 
-            // Is it an uncharged/basic shot?
+            // Cancel into a regular shot if we haven't reached the threshold
+            else if (currentHoldTime / holdTimeToFullCharge < chargeCancelThreshold)
+            {
+                onChargeMaxShotCancel?.Invoke();
+                TryShoot();
+            }
+
+            // Cancel without firing a regular shot
             else
             {
-                onUnchargedShotFired?.Invoke();
-                _onUnchargedShotFired?.Raise();
-
-                //ChargedFeedback?.StopFeedbacks();
-                damage = Mathf.RoundToInt(shooter.damageGraph[0].y);
-
-                RaycastHit Hitinfo;
-                if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, shooter.normalRange))
-                {
-                    Hitinfo.transform.GetComponent<Spin>()?.OnStart(Vector3.Magnitude(Hitinfo.normal));
-                    Instantiate(impactEffect, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
-
-                    //print(Hitinfo.transform.name + " hit!");
-                    EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
-                    if (enemy != null)
-                    {
-                        enemy.Damage(damage);
-                    }
-                    else
-                    {
-                        decalM.SpawnDecal(Hitinfo.point, Hitinfo.normal, 0.4f, bulletDecalMaterial);
-                    }
-                }
+                onChargeMaxShotCancel?.Invoke();
             }
 
-            //Instantiate(bullet, transform.position, transform.rotation, null); Change to use raycast
+            currentHoldTime = 0.0f;
+        }
+    }
 
-            //Debug.LogWarning("BANG!!!");
-            //Debug.LogWarning("You shot for " + damage);
+    /// <summary>
+    /// Attempts to shoot, checking if we're unpaused, holding the gun, the gun is not cooling down, and we're not already charging a max shot
+    /// </summary>
+    private void TryShoot()
+    {
+        if (!GameManager.s_Instance.paused && IsInHand() && !IsCoolingDown() && !maxShotCharging)
+        {
+            Shoot();
+        }
+    }
+
+    private void Shoot() 
+    {
+        timeSinceLastShot = 0;
+
+        // Fire a single charged shot if we have sufficient charges
+        if (gunCharge > 0)
+        {
+            HandleChargedShot(1);
+        }
+
+        // Fire an uncharged shot
+        else
+        {
+            onUnchargedShotFired?.Invoke();
+            _onUnchargedShotFired?.Raise();
+
+            //ChargedFeedback?.StopFeedbacks();
+            damage = Mathf.RoundToInt(shooter.damageGraph[0].y);
+
+            RaycastHit Hitinfo;
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out Hitinfo, shooter.normalRange))
+            {
+                Hitinfo.transform.GetComponent<Spin>()?.OnStart(Vector3.Magnitude(Hitinfo.normal));
+                Instantiate(impactEffect, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
+
+                //print(Hitinfo.transform.name + " hit!");
+                EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
+                if (enemy != null)
+                {
+                    enemy.Damage(damage);
+                }
+                else
+                {
+                    decalM.SpawnDecal(Hitinfo.point, Hitinfo.normal, 0.4f, bulletDecalMaterial);
+                }
+            }
         }
     }
 
@@ -438,7 +453,7 @@ public class Shooting : MonoBehaviour
 
     public void Dropped() 
     {
-        if (!transform.parent)  //if the gun is dropped and has no parent
+        if (!IsInHand()) 
         {
             Reset();
         }
@@ -481,5 +496,15 @@ public class Shooting : MonoBehaviour
                 Reset();
             }
         }
+    }
+
+    private bool IsInHand()
+    {
+        return transform.parent != null;    // this is cringe
+    }
+
+    private bool IsCoolingDown()
+    {
+        return timeSinceLastShot <= shooter.fireRate;
     }
 }
