@@ -393,7 +393,20 @@
 												</Action>
 											</ChildrenList>
 										</Event>
-										<Event Name="Gun_Max_Shot_Charged" ID="{654DB1F8-B699-40B2-B778-4B0A1761D208}"/>
+										<Event Name="Gun_Max_Shot_Charged" ID="{654DB1F8-B699-40B2-B778-4B0A1761D208}">
+											<ChildrenList>
+												<Action Name="" ID="{6564D936-61A5-46BD-B774-3B39889477E7}" ShortID="132168175">
+													<PropertyList>
+														<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_MaxShot_Charged_Loop" ID="{67637400-F33A-4F89-8BEA-6F14E40F6A6F}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 										<Event Name="Gun_Max_Shot_Charging_Cancel" ID="{864A55BF-AB65-4620-ABF7-C1EB15772D38}">
 											<ChildrenList>
 												<Action Name="" ID="{ABE52687-8FD4-45AB-9529-04F5E29D4BE5}" ShortID="788491829">
@@ -408,7 +421,30 @@
 												</Action>
 											</ChildrenList>
 										</Event>
-										<Event Name="Gun_Max_Shot_Fired" ID="{47701EB0-2B72-4370-9310-0E01978DB5B4}"/>
+										<Event Name="Gun_Max_Shot_Fired" ID="{47701EB0-2B72-4370-9310-0E01978DB5B4}">
+											<ChildrenList>
+												<Action Name="" ID="{376571AF-F9DD-4653-99BE-59C526238064}" ShortID="624617179">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_MaxShot_Charged_Loop" ID="{67637400-F33A-4F89-8BEA-6F14E40F6A6F}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{48C787D4-203E-4132-92AE-7CA171AE0185}" ShortID="630722522">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Gun_MaxShot_Charging" ID="{52325211-81A9-4F27-9A55-7C54940A9CBF}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>
