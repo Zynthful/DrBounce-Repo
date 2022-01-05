@@ -40,7 +40,7 @@ public class StringSetting : SettingData
         base.ResetToDefault();
     }
 
-    public string GetCurrentValue()
+    public virtual string GetValue()
     {
         return currentValue;
     }

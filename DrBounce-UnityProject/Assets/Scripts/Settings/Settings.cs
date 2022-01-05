@@ -20,7 +20,7 @@ public abstract class Settings : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        UpdateUI();
+
     }
 
     protected virtual void UpdateUI()

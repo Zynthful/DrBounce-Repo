@@ -11,7 +11,7 @@ public class IntSetting : SettingData
     [SerializeField]
     protected GameEventInt onValueChanged = null;
     [SerializeField]
-    protected new GameEventInt onResetToDefault = null;
+    protected GameEventInt onResetToDefault = null;
 
     [Header("Value Settings")]
     [SerializeField]

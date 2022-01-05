@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour
     /// <param name="index">The action binding index, i.e., the control group, e.g., Mouse and Keyboard.</param>
     /// <param name="statusText">The text to be updated when rebinding.</param>
     /// <param name="controlExclusions">Optional. Array of control paths that are excluded from the binding. These controls can't be used for the binding.</param>
-    public static void BeginRebind(string actionName, int index, TextMeshProUGUI statusText, string[] controlExclusions = null, string[] cancelButtons = null)
+    public static void BeginRebind(string actionName, int index, TextMeshProUGUI statusText, InputActionSetting setting, string[] controlExclusions = null, string[] cancelButtons = null)
     {
         InputAction action = inputMaster.asset.FindAction(actionName);
 
@@ -40,12 +40,12 @@ public class InputManager : MonoBehaviour
                 var firstPartIndex = index + 1;
                 if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isComposite)
                 {
-                    Rebind(action, index, true, statusText, controlExclusions, cancelButtons);
+                    Rebind(action, index, true, statusText, setting, controlExclusions, cancelButtons);
                 }
             }
             else
             {
-                Rebind(action, index, false, statusText, controlExclusions, cancelButtons);
+                Rebind(action, index, false, statusText, setting, controlExclusions, cancelButtons);
             }
         }
     }
@@ -58,7 +58,7 @@ public class InputManager : MonoBehaviour
     /// <param name="allCompositeParts">If all our bindings for the given action are composite.</param>
     /// <param name="statusText">The text to be updated when rebinding.</param>
     /// <param name="controlExclusions">Optional. Array of control paths that are excluded from the binding. These controls can't be used for the binding.</param>
-    private static void Rebind(InputAction action, int index, bool allCompositeParts, TextMeshProUGUI statusText, string[] controlExclusions = null, string[] cancelButtons = null)
+    private static void Rebind(InputAction action, int index, bool allCompositeParts, TextMeshProUGUI statusText, InputActionSetting setting, string[] controlExclusions = null, string[] cancelButtons = null)
     {
         if (action == null || index < 0)
             return;
@@ -94,11 +94,11 @@ public class InputManager : MonoBehaviour
                 var nextIndex = index + 1;
                 if (nextIndex < action.bindings.Count && action.bindings[nextIndex].isComposite)
                 {
-                    Rebind(action, nextIndex, allCompositeParts, statusText, controlExclusions);
+                    Rebind(action, nextIndex, allCompositeParts, statusText, setting, controlExclusions);
                 }
             }
 
-            SaveBindingOverride(action);
+            SaveBindingOverride(action, setting);
             onRebindComplete?.Invoke();
         });
 
@@ -120,7 +120,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     /// <param name="actionName">The name of the action to reset.</param>
     /// <param name="index">The action binding index, i.e., the control group, e.g., Mouse and Keyboard.</param>
-    public static void ResetBinding(string actionName, int index)
+    public static void ResetBinding(string actionName, int index, InputActionSetting setting)
     {
         InputAction action = inputMaster.asset.FindAction(actionName);
 
@@ -140,7 +140,7 @@ public class InputManager : MonoBehaviour
                 action.RemoveBindingOverride(index);
             }
 
-            SaveBindingOverride(action);
+            SaveBindingOverride(action, setting);
         }
     }
 
@@ -172,52 +172,56 @@ public class InputManager : MonoBehaviour
     /// Save an action's bindings to PlayerPrefs.
     /// </summary>
     /// <param name="actionName">The action name to save.</param>
-    private static void SaveBindingOverride(string actionName)
+    private static void SaveBindingOverride(string actionName, InputActionSetting setting)
     {
         InputAction action = inputMaster.asset.FindAction(actionName);
-        SaveBindingOverride(action);
+        SaveBindingOverride(action, setting);
     }
 
     /// <summary>
-    /// Save an action's bindings to PlayerPrefs.
+    /// Save a specified action setting's overriden binding
     /// </summary>
     /// <param name="action">The action to save.</param>
-    private static void SaveBindingOverride(InputAction action)
+    private static void SaveBindingOverride(InputAction action, InputActionSetting setting)
     {
+        /*
         for (int i = 0; i < action.bindings.Count; i++)
         {
-            PlayerPrefs.SetString($"{action.actionMap}: {action.name} - {i}", action.bindings[i].overridePath);
+            string path = action.bindings[i].overridePath;
+            if (setting.Contains(path))
+            {
+                setting.SetValue(path, setting.IndexOf(path));
+            }
+            else
+            {
+                setting.AddValue(path);
+            }
         }
+        */
+
+        setting.SetValue(action.bindings[setting.GetBindingIndex()].overridePath);
     }
+
     #endregion
+    /*
     #region Load
     /// <summary>
     /// Using the given action, loads any overriden bindings from PlayerPrefs.
     /// </summary>
-    /// <param name="actionName">The name of the action to load overriding bindings from.</param>
-    public static void LoadBindingOverride(string actionName)
-    {
-        CheckForNullInputMaster();
-        InputAction action = inputMaster.asset.FindAction(actionName);
-        LoadBindingOverride(action);
-    }
-
-    /// <summary>
-    /// Using the given action, loads any overriden bindings from PlayerPrefs.
-    /// </summary>
     /// <param name="action">The action to load overriding bindings from.</param>
-    public static void LoadBindingOverride(InputAction action)
+    public static void LoadBindingOverride(InputActionSetting setting)
     {
         // Loop through action bindings and apply any existing overrides from PlayerPrefs
-        for (int i = 0; i < action.bindings.Count; i++)
+        for (int i = 0; i < setting.GetAction().bindings.Count; i++)
         {
-            string path = PlayerPrefs.GetString($"{action.actionMap}: {action.name} - {i}");
+            string path = setting.GetValue(i);
             if (!string.IsNullOrEmpty(path))
             {
-                action.ApplyBindingOverride(i, path);
+                setting.GetAction().ApplyBindingOverride(i, path);
             }
         }
     }
     #endregion
+    */
     #endregion
 }

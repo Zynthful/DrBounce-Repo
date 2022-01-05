@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(RebindUI)), CanEditMultipleObjects]
-public class RebindUIEditor : Editor
+[CustomEditor(typeof(InputActionSetting)), CanEditMultipleObjects]
+public class InputActionSettingEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        RebindUI rebindUI = (RebindUI)target;
+        InputActionSetting setting = (InputActionSetting)target;
         
         GUILayout.Space(15);
 
@@ -25,12 +25,12 @@ public class RebindUIEditor : Editor
 
         // Display binding input info in inspector
         GUILayout.Label("Selected Binding :)", headerStyle);
-        GUILayout.Label($"Path: {rebindUI.GetInputBinding().path}", bindingStyle);
-        GUILayout.Label($"Group: {rebindUI.GetInputBinding().groups}", bindingStyle);
-        string composite = rebindUI.GetInputBinding().isComposite ? "Yes" : "No";
+        GUILayout.Label($"Path: {setting.GetInputBinding().path}", bindingStyle);
+        GUILayout.Label($"Group: {setting.GetInputBinding().groups}", bindingStyle);
+        string composite = setting.GetInputBinding().isComposite ? "Yes" : "No";
         GUILayout.Label($"Is Composite: {composite}", bindingStyle);
-        GUILayout.Label($"Interactions: {rebindUI.GetInputBinding().interactions}", bindingStyle);
-        GUILayout.Label($"Processors: {rebindUI.GetInputBinding().processors}", bindingStyle);
-        GUILayout.Label($"ID: {rebindUI.GetInputBinding().id}", bindingStyle);
+        GUILayout.Label($"Interactions: {setting.GetInputBinding().interactions}", bindingStyle);
+        GUILayout.Label($"Processors: {setting.GetInputBinding().processors}", bindingStyle);
+        GUILayout.Label($"ID: {setting.GetInputBinding().id}", bindingStyle);
     }
 }

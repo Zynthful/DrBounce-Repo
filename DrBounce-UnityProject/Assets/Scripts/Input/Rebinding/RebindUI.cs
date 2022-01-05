@@ -6,18 +6,12 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 
-public class RebindUI : MonoBehaviour
+public class RebindUI : Settings
 {
     [Header("Rebinding Settings")]
-
     [SerializeField]
-    [Tooltip("The action to be rebinded.")]
-    private InputActionReference inputActionReference = null;
-
-    [SerializeField]
-    [Tooltip("The binding index to rebind. This represents the control scheme, e.g., Mouse & Keyboard.")]
-    [Range(0, 10)]
-    private int selectedBinding = 0;
+    [Tooltip("Setting scriptable object which stores info about the input action.")]
+    protected InputActionSetting setting = null;
 
     [SerializeField]
     [Tooltip("Optional. Control paths that are excluded from the binding. These controls can't be used for the binding. These *must* match the exact path of the binding.")]
@@ -30,10 +24,6 @@ public class RebindUI : MonoBehaviour
     //TODO
     //[SerializeField]
     //private InputBinding.DisplayStringOptions displayStringOptions = new InputBinding.DisplayStringOptions();
-
-    private InputBinding inputBinding;      // Displays information about the selected action binding (path, group, etc.).
-    private int bindingIndex;               // Actual binding index clamped between available bindings.
-    private string actionName;              // Name of the action to be rebinded, taken from inputActionReference.
 
     [Header("UI")]
     [SerializeField]
@@ -62,47 +52,45 @@ public class RebindUI : MonoBehaviour
     private UnityEvent onRebindReset = null;                    // Invoked on pressing the reset button
 
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        if (inputActionReference != null)
-        {
-            // Load binding overrides from PlayerPrefs, if they exist
-            InputManager.LoadBindingOverride(actionName);
-        }
+        base.OnEnable();
 
         // Listen to button onClick events
         rebindButton.onClick.AddListener(() => Rebind());
-        resetButton.onClick.AddListener(() => ResetBinding());
+        resetButton.onClick.AddListener(() => ResetToDefault());
 
-        UpdateBindingInfo();
-        UpdateUI();
+        setting.OnResetDefault += ResetToDefault;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
         rebindButton.onClick.RemoveListener(() => Rebind());
-        resetButton.onClick.RemoveListener(() => ResetBinding());
+        resetButton.onClick.RemoveListener(() => ResetToDefault());
+
+        setting.OnResetDefault -= ResetToDefault;
     }
 
     private void OnValidate()
     {
-        UpdateBindingInfo();
         UpdateUI();
     }
 
     private void Rebind()
     {
-        onRebindBegin?.Invoke(inputActionReference.action, bindingIndex);
+        onRebindBegin?.Invoke(setting.GetAction(), setting.GetBindingIndex());
         InputManager.onRebindComplete += Complete;
         InputManager.onRebindCancel += Cancel;
-        InputManager.BeginRebind(actionName, bindingIndex, rebindText, controlsToExclude, rebindCancelButtons);
+        InputManager.BeginRebind(setting.GetActionName(), setting.GetBindingIndex(), rebindText, setting, controlsToExclude, rebindCancelButtons);
     }
 
-    public void ResetBinding()
+    protected override void ResetToDefault()
     {
         onRebindReset.Invoke();
-        InputManager.ResetBinding(actionName, bindingIndex);
-        UpdateUI();
+        InputManager.ResetBinding(setting.GetActionName(), setting.GetBindingIndex(), setting);
+        base.ResetToDefault();
     }
 
     private void Complete()
@@ -122,48 +110,27 @@ public class RebindUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Update action name, input binding and binding index.
-    /// </summary>
-    private void UpdateBindingInfo()
-    {
-        if (inputActionReference != null)
-        {
-            actionName = inputActionReference.action.name;
-            if (inputActionReference.action.bindings.Count > selectedBinding)
-            {
-                inputBinding = inputActionReference.action.bindings[selectedBinding];
-                bindingIndex = selectedBinding;
-            }
-        }
-        else
-        {
-            actionName = null;
-            inputBinding = new InputBinding();
-            bindingIndex = selectedBinding;
-        }
-    }
-
-    /// <summary>
     /// Update action and rebind text
     /// </summary>
-    private void UpdateUI()
+    protected override void UpdateUI()
     {
-        if (inputActionReference != null)
+        base.UpdateUI();
+        if (setting != null && setting.GetAction() != null)
         {
             if (actionText != null)
             {
-                actionText.text = actionName;
+                actionText.text = setting.GetActionName();
             }
 
             if (rebindText != null)
             {
                 if (Application.isPlaying)
                 {
-                    rebindText.text = InputManager.GetBindingName(actionName, bindingIndex);
+                    rebindText.text = InputManager.GetBindingName(setting.GetActionName(), setting.GetBindingIndex());
                 }
                 else
                 {
-                    rebindText.text = inputActionReference.action.GetBindingDisplayString(bindingIndex);
+                    rebindText.text = setting.GetAction().GetBindingDisplayString(setting.GetBindingIndex());
                 }
             }
         }
@@ -172,14 +139,5 @@ public class RebindUI : MonoBehaviour
             rebindText.text = "No Action Selected";
             actionText.text = "No Action Selected";
         }
-    }
-
-    /// <summary>
-    /// Returns the current InputBinding.
-    /// </summary>
-    /// <returns></returns>
-    public InputBinding GetInputBinding()
-    {
-        return inputBinding;
     }
 }
