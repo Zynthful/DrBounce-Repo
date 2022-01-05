@@ -36,17 +36,22 @@ public class DecalManager : MonoBehaviour
         pool = ObjectPooler.Instance;
     }
 
-    public void SpawnDecal(Vector3 t, Vector3 normal, float decalScale)
+    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale)
     {
-        spawnedDecals.Add(CreateDecal(t, normal, decalScale, defaultDecal));
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, defaultDecal));
     }
 
-    public void SpawnDecal(Vector3 t, Vector3 normal, float decalScale, Material decalMaterial)
+    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Material decalMaterial)
     {
-        spawnedDecals.Add(CreateDecal(t, normal, decalScale, decalMaterial));
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, decalMaterial));
     }
 
-    private GameObject CreateDecal(Vector3 localPos, Vector3 normal, float decalScale, Material decalToSpawn)
+    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, Material decalMaterial)
+    {
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, t, decalMaterial));
+    }
+
+    private GameObject CreateDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, Material decalToSpawn)
     {
         if (decalToSpawn == null)
         {
@@ -57,11 +62,12 @@ public class DecalManager : MonoBehaviour
         decalRotation *= Quaternion.Euler(Vector3.forward * Random.Range(0, 180));
 
         // create game object as child of the spawner
-        GameObject decalObject = pool.SpawnNonBulletFromPool("Decal", localPos + (decalRotation * Vector3.back * 0.01f), decalRotation, decalToSpawn);
+        GameObject decalObject = pool.SpawnNonBulletFromPool("Decal", position + (decalRotation * Vector3.back * 0.01f), decalRotation, decalToSpawn);
         //$"Spawned Decal ({localPos.x.ToString("F3")},{localPos.y.ToString("F3")})"
         decalObject.transform.localScale = Vector3.one * decalScale;
 
-        decalObject.transform.SetParent(this.transform, false);
+        Debug.Log(t);
+        decalObject.transform.SetParent(t, true);
 
         return decalObject;
     }
