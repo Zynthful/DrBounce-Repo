@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExplosionDamageTrigger : MonoBehaviour
 {
-    [HideInInspector] public int damage;
+    public int damage;
     private void OnTriggerEnter(Collider other) 
     {
         EnemyHealth check = other.GetComponent<EnemyHealth>();

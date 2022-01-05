@@ -387,7 +387,7 @@ public class Shooting : MonoBehaviour
                 if (maxDamage) //if charge shot has been held down
                 {
                     //Do standard damage multiplied by the number of charges
-                    shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, gunCharge) * gunCharge;
+                    shooter.chargeBullet.damage = GraphCalculator(shooter.damageGraph, gunCharge);
                     maxDamage = false;
                 }
 
