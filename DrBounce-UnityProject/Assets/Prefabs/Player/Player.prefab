@@ -15378,7 +15378,7 @@ MonoBehaviour:
   fpsCam: {fileID: 5587670236126169273}
   anim: {fileID: 5862399666288358020}
   holdTimeToFullCharge: 0.6
-  holdTimeThreshold: 0.3
+  chargeCancelThreshold: 0.5
   onChargeUpdate:
     m_PersistentCalls:
       m_Calls:
@@ -15448,6 +15448,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onSingleChargeShotFired:
+    m_PersistentCalls:
+      m_Calls: []
   onChargesEmpty:
     m_PersistentCalls:
       m_Calls: []
@@ -16423,7 +16426,7 @@ MonoBehaviour:
   coyoteTime: 0.2
   dashStrength: 4
   dashLength: 0.3
-  dashesBeforeLanding: 2
+  dashesBeforeLanding: 1
   cooldownTime: 0.5
   extendedNoGravTime: 0.1
   noMovementTime: 0.1
