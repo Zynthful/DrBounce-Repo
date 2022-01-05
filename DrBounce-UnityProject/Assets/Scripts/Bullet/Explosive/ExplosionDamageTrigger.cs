@@ -7,7 +7,6 @@ public class ExplosionDamageTrigger : MonoBehaviour
     public int damage;
     private void OnTriggerEnter(Collider other) 
     {
-        damage = GetComponentInParent<ExplosiveShot>().dam;
         EnemyHealth check = other.GetComponent<EnemyHealth>();
         if(check)
         {

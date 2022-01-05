@@ -27,7 +27,7 @@ public class ExplosiveShot : BulletMovement
 
         if (!shotRenderer || !explosionTrigger || !shotModelCollider || !bounceCheck)
         {
-            explosionTrigger = transform.parent.GetComponentInChildren<SphereCollider>().gameObject;
+            explosionTrigger = GetComponentInChildren<SphereCollider>().gameObject;
             shotRenderer = GetComponent<MeshRenderer>();
             shotModelCollider = GetComponent<MeshCollider>();
             bounceCheck = GetComponent<CheckForBouncing>();
