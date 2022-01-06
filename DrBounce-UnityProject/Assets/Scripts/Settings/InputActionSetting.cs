@@ -32,7 +32,7 @@ public class InputActionSetting : SettingData
         string path = PlayerPrefs.GetString($"Options/{type}/{subType}/{actionReference.action.actionMap}/{actionReference.action.name}/{bindingIndex}");
         if (!string.IsNullOrEmpty(path))
         {
-            InputManager.LoadBindingOverride(actionName, path, bindingIndex);
+            InputManager.OverrideBinding(actionName, path, bindingIndex);
         }
 
         UpdateBindingInfo();

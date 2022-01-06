@@ -183,8 +183,8 @@ public class Shooting : MonoBehaviour
         controls.Player.Shoot.started += _ => ShootStarted();
         controls.Player.Shoot.canceled += _ => ShootReleased();
 
-        controls.Player.RecallGun.performed += _ => Reset();
-        controls.Player.Healing.performed += _ => Healing();
+        controls.Player.Recall.performed += _ => Reset();
+        controls.Player.Heal.performed += _ => Healing();
     }
 
     private void OnDisable()
@@ -192,8 +192,8 @@ public class Shooting : MonoBehaviour
         controls.Player.Shoot.started -= _ => ShootStarted();
         controls.Player.Shoot.canceled -= _ => ShootReleased();
 
-        controls.Player.RecallGun.performed -= _ => Reset();
-        controls.Player.Healing.performed -= _ => Healing();
+        controls.Player.Recall.performed -= _ => Reset();
+        controls.Player.Heal.performed -= _ => Healing();
     }
 
     /// <summary>

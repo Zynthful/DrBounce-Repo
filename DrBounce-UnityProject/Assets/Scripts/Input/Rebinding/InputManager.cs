@@ -194,12 +194,33 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public static string GetBindingName(string actionName, int bindingIndex, InputBinding.DisplayStringOptions displayOptions = new InputBinding.DisplayStringOptions())
+    public static string GetBindingDisplayString(string actionName, int bindingIndex, InputBinding.DisplayStringOptions displayOptions = new InputBinding.DisplayStringOptions())
     {
         CheckForNullInputMaster();
+        return inputMaster.asset.FindAction(actionName).GetBindingDisplayString(bindingIndex, displayOptions);
+    }
 
-        InputAction action = inputMaster.asset.FindAction(actionName);
-        return action.GetBindingDisplayString(bindingIndex, displayOptions);
+    /// <summary>
+    /// Save a specified action setting's overriden binding
+    /// </summary>
+    /// <param name="action">The action to save.</param>
+    private static void SaveBindingOverride(InputAction action, InputActionSetting setting)
+    {
+        setting.SetValue(action.bindings[setting.GetBindingIndex()].overridePath);
+    }
+
+    public static void OverrideBinding(string actionName, string path, int index)
+    {
+        CheckForNullInputMaster();
+        inputMaster.asset.FindAction(actionName).ApplyBindingOverride(index, path);
+    }
+
+    public static void SetActionMapActive(InputActionMap map, bool active)
+    {
+        if (active)
+            map.Enable();
+        else
+            map.Disable();
     }
 
     /// <summary>
@@ -209,60 +230,5 @@ public class InputManager : MonoBehaviour
     {
         if (inputMaster == null)
             inputMaster = new InputMaster();
-    }
-
-    /// <summary>
-    /// Save an action's bindings to PlayerPrefs.
-    /// </summary>
-    /// <param name="actionName">The action name to save.</param>
-    private static void SaveBindingOverride(string actionName, InputActionSetting setting)
-    {
-        InputAction action = inputMaster.asset.FindAction(actionName);
-        SaveBindingOverride(action, setting);
-    }
-
-    /// <summary>
-    /// Save a specified action setting's overriden binding
-    /// </summary>
-    /// <param name="action">The action to save.</param>
-    private static void SaveBindingOverride(InputAction action, InputActionSetting setting)
-    {
-        /*
-        for (int i = 0; i < action.bindings.Count; i++)
-        {
-            string path = action.bindings[i].overridePath;
-            if (setting.Contains(path))
-            {
-                setting.SetValue(path, setting.IndexOf(path));
-            }
-            else
-            {
-                setting.AddValue(path);
-            }
-        }
-        */
-
-        setting.SetValue(action.bindings[setting.GetBindingIndex()].overridePath);
-    }
-
-    public static void LoadBindingOverride(string actionName, string path, int index)
-    {
-        CheckForNullInputMaster();
-
-        InputAction action = inputMaster.asset.FindAction(actionName);
-        action.ApplyBindingOverride(index, path);
-    }
-
-    public static void OverrideBinding(InputAction action, int index, string path)
-    {
-        action.ApplyBindingOverride(index, path);
-    }
-
-    public static void SetActionMapActive(InputActionMap map, bool active)
-    {
-        if (active)
-            map.Enable();
-        else
-            map.Disable();
     }
 }

@@ -123,7 +123,7 @@ public class RebindUI : Settings
 
             if (rebindText != null)
             {
-                rebindText.text = InputManager.GetBindingName(setting.GetActionName(), setting.GetBindingIndex(), displayStringOptions);
+                rebindText.text = InputManager.GetBindingDisplayString(setting.GetActionName(), setting.GetBindingIndex(), displayStringOptions);
             }
         }
         else

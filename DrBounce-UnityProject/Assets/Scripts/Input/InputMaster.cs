@@ -51,7 +51,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""RecallGun"",
+                    ""name"": ""Recall"",
                     ""type"": ""Button"",
                     ""id"": ""c59cad59-5098-482b-b35f-e45d94edc138"",
                     ""expectedControlType"": ""Button"",
@@ -59,7 +59,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ThrowGun"",
+                    ""name"": ""Throw"",
                     ""type"": ""Button"",
                     ""id"": ""c7f9b13c-02ba-4148-8fc0-cb0bfadead58"",
                     ""expectedControlType"": ""Button"",
@@ -83,7 +83,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""AimAssist"",
+                    ""name"": ""Aim Assist"",
                     ""type"": ""Button"",
                     ""id"": ""0a72784a-10fc-419b-89f0-c16208e7a319"",
                     ""expectedControlType"": ""Button"",
@@ -91,7 +91,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""SwitchHeld"",
+                    ""name"": ""Switch Held"",
                     ""type"": ""Button"",
                     ""id"": ""8c878912-46d1-4610-a559-c850d0f704bd"",
                     ""expectedControlType"": ""Button"",
@@ -99,7 +99,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Healing"",
+                    ""name"": ""Heal"",
                     ""type"": ""Button"",
                     ""id"": ""899195a3-ba67-4997-9d09-8f535e64f3c2"",
                     ""expectedControlType"": ""Button"",
@@ -466,7 +466,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""ThrowGun"",
+                    ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -477,7 +477,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""ThrowGun"",
+                    ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -488,7 +488,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ThrowGun"",
+                    ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -499,7 +499,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ThrowGun"",
+                    ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -510,7 +510,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""RecallGun"",
+                    ""action"": ""Recall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -521,7 +521,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""RecallGun"",
+                    ""action"": ""Recall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -532,7 +532,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""RecallGun"",
+                    ""action"": ""Recall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -543,7 +543,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""RecallGun"",
+                    ""action"": ""Recall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -642,7 +642,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""AimAssist"",
+                    ""action"": ""Aim Assist"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -653,7 +653,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""AimAssist"",
+                    ""action"": ""Aim Assist"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -664,7 +664,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""AimAssist"",
+                    ""action"": ""Aim Assist"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -675,7 +675,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""AimAssist"",
+                    ""action"": ""Aim Assist"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -686,7 +686,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""SwitchHeld"",
+                    ""action"": ""Switch Held"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -697,7 +697,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""SwitchHeld"",
+                    ""action"": ""Switch Held"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -708,7 +708,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""SwitchHeld"",
+                    ""action"": ""Switch Held"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -719,7 +719,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""SwitchHeld"",
+                    ""action"": ""Switch Held"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -730,7 +730,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Healing"",
+                    ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -741,7 +741,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Healing"",
+                    ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -752,7 +752,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Healing"",
+                    ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -763,7 +763,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Healing"",
+                    ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1135,13 +1135,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        m_Player_RecallGun = m_Player.FindAction("RecallGun", throwIfNotFound: true);
-        m_Player_ThrowGun = m_Player.FindAction("ThrowGun", throwIfNotFound: true);
+        m_Player_Recall = m_Player.FindAction("Recall", throwIfNotFound: true);
+        m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
-        m_Player_AimAssist = m_Player.FindAction("AimAssist", throwIfNotFound: true);
-        m_Player_SwitchHeld = m_Player.FindAction("SwitchHeld", throwIfNotFound: true);
-        m_Player_Healing = m_Player.FindAction("Healing", throwIfNotFound: true);
+        m_Player_AimAssist = m_Player.FindAction("Aim Assist", throwIfNotFound: true);
+        m_Player_SwitchHeld = m_Player.FindAction("Switch Held", throwIfNotFound: true);
+        m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         m_Player_DEBUG_PrevLevel = m_Player.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
         m_Player_DEBUG_NextLevel = m_Player.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
         m_Player_DEBUG_Pause = m_Player.FindAction("DEBUG_Pause", throwIfNotFound: true);
@@ -1205,13 +1205,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Dash;
-    private readonly InputAction m_Player_RecallGun;
-    private readonly InputAction m_Player_ThrowGun;
+    private readonly InputAction m_Player_Recall;
+    private readonly InputAction m_Player_Throw;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_AimAssist;
     private readonly InputAction m_Player_SwitchHeld;
-    private readonly InputAction m_Player_Healing;
+    private readonly InputAction m_Player_Heal;
     private readonly InputAction m_Player_DEBUG_PrevLevel;
     private readonly InputAction m_Player_DEBUG_NextLevel;
     private readonly InputAction m_Player_DEBUG_Pause;
@@ -1224,13 +1224,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
-        public InputAction @RecallGun => m_Wrapper.m_Player_RecallGun;
-        public InputAction @ThrowGun => m_Wrapper.m_Player_ThrowGun;
+        public InputAction @Recall => m_Wrapper.m_Player_Recall;
+        public InputAction @Throw => m_Wrapper.m_Player_Throw;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @AimAssist => m_Wrapper.m_Player_AimAssist;
         public InputAction @SwitchHeld => m_Wrapper.m_Player_SwitchHeld;
-        public InputAction @Healing => m_Wrapper.m_Player_Healing;
+        public InputAction @Heal => m_Wrapper.m_Player_Heal;
         public InputAction @DEBUG_PrevLevel => m_Wrapper.m_Player_DEBUG_PrevLevel;
         public InputAction @DEBUG_NextLevel => m_Wrapper.m_Player_DEBUG_NextLevel;
         public InputAction @DEBUG_Pause => m_Wrapper.m_Player_DEBUG_Pause;
@@ -1256,12 +1256,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @RecallGun.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecallGun;
-                @RecallGun.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecallGun;
-                @RecallGun.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecallGun;
-                @ThrowGun.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowGun;
-                @ThrowGun.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowGun;
-                @ThrowGun.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowGun;
+                @Recall.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecall;
+                @Recall.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecall;
+                @Recall.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecall;
+                @Throw.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
+                @Throw.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
+                @Throw.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
@@ -1274,9 +1274,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @SwitchHeld.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchHeld;
                 @SwitchHeld.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchHeld;
                 @SwitchHeld.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchHeld;
-                @Healing.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
-                @Healing.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
-                @Healing.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHealing;
+                @Heal.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeal;
+                @Heal.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeal;
+                @Heal.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeal;
                 @DEBUG_PrevLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
                 @DEBUG_PrevLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
                 @DEBUG_PrevLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
@@ -1305,12 +1305,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @RecallGun.started += instance.OnRecallGun;
-                @RecallGun.performed += instance.OnRecallGun;
-                @RecallGun.canceled += instance.OnRecallGun;
-                @ThrowGun.started += instance.OnThrowGun;
-                @ThrowGun.performed += instance.OnThrowGun;
-                @ThrowGun.canceled += instance.OnThrowGun;
+                @Recall.started += instance.OnRecall;
+                @Recall.performed += instance.OnRecall;
+                @Recall.canceled += instance.OnRecall;
+                @Throw.started += instance.OnThrow;
+                @Throw.performed += instance.OnThrow;
+                @Throw.canceled += instance.OnThrow;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
@@ -1323,9 +1323,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @SwitchHeld.started += instance.OnSwitchHeld;
                 @SwitchHeld.performed += instance.OnSwitchHeld;
                 @SwitchHeld.canceled += instance.OnSwitchHeld;
-                @Healing.started += instance.OnHealing;
-                @Healing.performed += instance.OnHealing;
-                @Healing.canceled += instance.OnHealing;
+                @Heal.started += instance.OnHeal;
+                @Heal.performed += instance.OnHeal;
+                @Heal.canceled += instance.OnHeal;
                 @DEBUG_PrevLevel.started += instance.OnDEBUG_PrevLevel;
                 @DEBUG_PrevLevel.performed += instance.OnDEBUG_PrevLevel;
                 @DEBUG_PrevLevel.canceled += instance.OnDEBUG_PrevLevel;
@@ -1432,13 +1432,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnRecallGun(InputAction.CallbackContext context);
-        void OnThrowGun(InputAction.CallbackContext context);
+        void OnRecall(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnAimAssist(InputAction.CallbackContext context);
         void OnSwitchHeld(InputAction.CallbackContext context);
-        void OnHealing(InputAction.CallbackContext context);
+        void OnHeal(InputAction.CallbackContext context);
         void OnDEBUG_PrevLevel(InputAction.CallbackContext context);
         void OnDEBUG_NextLevel(InputAction.CallbackContext context);
         void OnDEBUG_Pause(InputAction.CallbackContext context);
