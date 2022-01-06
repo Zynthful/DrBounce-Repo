@@ -105,7 +105,7 @@ public class LevelSelect : MonoBehaviour
                 DestroyImmediate(obj.gameObject);
             }
             #else
-            Destroy(child.gameObject);
+            Destroy(obj);
             #endif
         }
 
