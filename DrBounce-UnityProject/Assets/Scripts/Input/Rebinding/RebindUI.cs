@@ -82,7 +82,7 @@ public class RebindUI : Settings
         onRebindBegin?.Invoke(setting.GetAction(), setting.GetBindingIndex());
         InputManager.onRebindComplete += Complete;
         InputManager.onRebindCancel += Cancel;
-        InputManager.BeginRebind(setting.GetActionName(), setting.GetBindingIndex(), rebindText, setting, controlsToExclude, rebindCancelButtons);
+        InputManager.BeginRebind(setting.GetActionName(), setting.GetBindingIndex(), rebindText, setting, controlsToExclude, rebindCancelButtons, setting.GetBlockingActionNames());
     }
 
     protected override void ResetToDefault()

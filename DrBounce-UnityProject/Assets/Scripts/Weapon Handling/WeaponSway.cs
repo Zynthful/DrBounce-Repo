@@ -54,16 +54,6 @@ public class WeaponSway : MonoBehaviour
         weaponHolderTransform = transform;
     }
 
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-
     private void Start()
     {
         midPoint = transform.localPosition;

@@ -15,10 +15,21 @@ public class InputManager : MonoBehaviour
     public static event Action onRebindComplete = null;
     public static event Action onRebindCancel = null;
     public static event Action onRebindReset = null;
+    public static event Action<InputAction, InputAction> onRebindMatchedBlockingAction = null;
 
     private void Awake()
     {
         CheckForNullInputMaster();
+    }
+
+    private void OnEnable()
+    {
+        inputMaster.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputMaster.Disable();
     }
 
     /// <summary>
@@ -28,9 +39,23 @@ public class InputManager : MonoBehaviour
     /// <param name="index">The action binding index, i.e., the control group, e.g., Mouse and Keyboard.</param>
     /// <param name="statusText">The text to be updated when rebinding.</param>
     /// <param name="controlExclusions">Optional. Array of control paths that are excluded from the binding. These controls can't be used for the binding.</param>
-    public static void BeginRebind(string actionName, int index, TextMeshProUGUI statusText, InputActionSetting setting, string[] controlExclusions = null, string[] cancelButtons = null)
+    public static void BeginRebind(string actionName, int index, TextMeshProUGUI statusText, InputActionSetting setting, string[] controlExclusions = null, string[] cancelButtons = null, string[] blockingActionNames = null)
     {
         InputAction action = inputMaster.asset.FindAction(actionName);
+
+        InputAction[] blockingActions;
+        if (blockingActionNames != null)
+        {
+            blockingActions = new InputAction[blockingActionNames.Length];
+            for (int i = 0; i < blockingActions.Length; i++)
+            {
+                blockingActions[i] = inputMaster.asset.FindAction(blockingActionNames[i]);
+            }
+        }
+        else
+        {
+            blockingActions = null;
+        }
 
         // Check our action and index is valid
         if (action != null && action.bindings.Count > index && index >= 0)
@@ -40,12 +65,12 @@ public class InputManager : MonoBehaviour
                 var firstPartIndex = index + 1;
                 if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isComposite)
                 {
-                    Rebind(action, index, true, statusText, setting, controlExclusions, cancelButtons);
+                    Rebind(action, index, true, statusText, setting, controlExclusions, cancelButtons, blockingActions);
                 }
             }
             else
             {
-                Rebind(action, index, false, statusText, setting, controlExclusions, cancelButtons);
+                Rebind(action, index, false, statusText, setting, controlExclusions, cancelButtons, blockingActions);
             }
         }
     }
@@ -58,7 +83,7 @@ public class InputManager : MonoBehaviour
     /// <param name="allCompositeParts">If all our bindings for the given action are composite.</param>
     /// <param name="statusText">The text to be updated when rebinding.</param>
     /// <param name="controlExclusions">Optional. Array of control paths that are excluded from the binding. These controls can't be used for the binding.</param>
-    private static void Rebind(InputAction action, int index, bool allCompositeParts, TextMeshProUGUI statusText, InputActionSetting setting, string[] controlExclusions = null, string[] cancelButtons = null)
+    private static void Rebind(InputAction action, int index, bool allCompositeParts, TextMeshProUGUI statusText, InputActionSetting setting, string[] controlExclusions = null, string[] cancelButtons = null, InputAction[] blockingActions = null)
     {
         if (action == null || index < 0)
             return;
@@ -94,12 +119,37 @@ public class InputManager : MonoBehaviour
                 var nextIndex = index + 1;
                 if (nextIndex < action.bindings.Count && action.bindings[nextIndex].isComposite)
                 {
-                    Rebind(action, nextIndex, allCompositeParts, statusText, setting, controlExclusions);
+                    Rebind(action, nextIndex, allCompositeParts, statusText, setting, controlExclusions, cancelButtons, blockingActions);
                 }
             }
 
             SaveBindingOverride(action, setting);
             onRebindComplete?.Invoke();
+        });
+
+        // On any control pressed during operation (i think..???)
+        rebind.OnPotentialMatch(operation =>
+        {
+            for (int i = 0; i < operation.candidates.Count; i++)
+            {
+                for (int j = 0; j < blockingActions.Length; j++)
+                {
+                    for (int k = 0; k < blockingActions[j].controls.Count; k++)
+                    {
+                        if (blockingActions[j].controls[k] == operation.candidates[i])
+                        {
+                            //Debug.Log("DING DING DING WE GOT A WINNER: " + operation.candidates[i].path);
+                            //Debug.Log($"This {action.expectedControlType} is already mapped to {blockingActions[j].name}.");
+                            onRebindMatchedBlockingAction?.Invoke(action, blockingActions[j]);
+
+                            rebind.Cancel();
+                            
+                            // todo:
+                            // ui prompt and listen for Override and Cancel buttons.
+                        }
+                    }
+                }
+            }
         });
 
         // Rebind cancelled operation
@@ -161,8 +211,6 @@ public class InputManager : MonoBehaviour
             inputMaster = new InputMaster();
     }
 
-    #region Save / Load
-    #region Save
     /// <summary>
     /// Save an action's bindings to PlayerPrefs.
     /// </summary>
@@ -200,7 +248,6 @@ public class InputManager : MonoBehaviour
     public static void LoadBindingOverride(string actionName, string path, int index)
     {
         CheckForNullInputMaster();
-        Debug.Log(inputMaster);
 
         InputAction action = inputMaster.asset.FindAction(actionName);
         action.ApplyBindingOverride(index, path);
@@ -211,26 +258,11 @@ public class InputManager : MonoBehaviour
         action.ApplyBindingOverride(index, path);
     }
 
-    #endregion
-    /*
-    #region Load
-    /// <summary>
-    /// Using the given action, loads any overriden bindings from PlayerPrefs.
-    /// </summary>
-    /// <param name="action">The action to load overriding bindings from.</param>
-    public static void LoadBindingOverride(InputActionSetting setting)
+    public static void SetActionMapActive(InputActionMap map, bool active)
     {
-        // Loop through action bindings and apply any existing overrides from PlayerPrefs
-        for (int i = 0; i < setting.GetAction().bindings.Count; i++)
-        {
-            string path = setting.GetValue(i);
-            if (!string.IsNullOrEmpty(path))
-            {
-                setting.GetAction().ApplyBindingOverride(i, path);
-            }
-        }
+        if (active)
+            map.Enable();
+        else
+            map.Disable();
     }
-    #endregion
-    */
-    #endregion
 }

@@ -123,17 +123,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #region BrackeysMoment
-    private void OnEnable() //Enables and disables the local version of controls as the gameobject is enabled and disabled.
+    private void OnEnable()
     {
-        controls.Player.Jump.performed += _ => Jump(); //When the jump action is activated in Input Master, activate the Jump function.
+        // Listen for player inputs
+        controls.Player.Jump.performed += _ => Jump();
         controls.Player.Dash.performed += _ => StartCoroutine(Dash());
         controls.Player.Crouch.performed += _ => Crouch();
-        controls.Enable();
     }
 
-    private void OnDisable()//Brackeys Moment
+    private void OnDisable()//Brackeys Moment   // brackeys is gone :(
     {
-        controls.Disable();
         controls.Player.Jump.performed -= _ => Jump();
         controls.Player.Dash.performed -= _ => StartCoroutine(Dash());
         controls.Player.Crouch.performed -= _ => Crouch();

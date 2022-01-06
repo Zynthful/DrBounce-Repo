@@ -147,14 +147,12 @@ public class GunThrowing : MonoBehaviour
     {
         controls.Player.RecallGun.performed += _ => RecallGun();
         controls.Player.ThrowGun.performed += _ => SetThrowGunDelay();
-        controls.Enable();
     }
 
     private void OnDisable()
     {
         controls.Player.ThrowGun.performed -= _ => Thrown();
         controls.Player.RecallGun.performed -= _ => ResetScript();
-        controls.Disable();
     }
 
     // Delay throwing to avoid recalling immediately after throwing

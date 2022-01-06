@@ -13,6 +13,9 @@ public class InputActionSetting : SettingData
     [Tooltip("The input action to rebind and store.")]
     protected InputActionReference actionReference = null;
     [SerializeField]
+    [Tooltip("The input actions that the main input action be rebinded will be prevented from sharing the same binding.")]
+    protected InputActionReference[] blockingActions = null;
+    [SerializeField]
     [Tooltip("The binding index to rebind.")]
     [Range(0, 10)]
     private int selectedBinding = 0;
@@ -20,6 +23,7 @@ public class InputActionSetting : SettingData
     private InputBinding inputBinding;      // Displays information about the selected action binding (path, group, etc.).
     private int bindingIndex;               // Actual binding index clamped between available bindings.
     private string actionName;              // Name of the action to be rebinded, taken from the input action reference.
+    private string[] blockingActionNames = null;
 
     public override void Initialise()
     {
@@ -37,6 +41,7 @@ public class InputActionSetting : SettingData
     private void OnValidate()
     {
         UpdateBindingInfo();
+        UpdateBlockingActionsInfo();
     }
 
     public virtual void SetValue(string value)
@@ -95,6 +100,32 @@ public class InputActionSetting : SettingData
         }
     }
 
+    private void UpdateBlockingActionsInfo()
+    {
+        if (blockingActions == null)
+            return;
+
+        int validActions = 0;
+        for (int i = 0; i < blockingActions.Length; i++)
+        {
+            if (blockingActions[i] == actionReference)
+            {
+                blockingActions[i] = null;
+            }
+
+            if (blockingActions[i] != null)
+            {
+                validActions++;
+            }
+        }
+
+        blockingActionNames = new string[validActions];
+        for (int i = 0; i < validActions; i++)
+        {
+            blockingActionNames[i] = blockingActions[i].action.name;
+        }
+    }
+
     /// <summary>
     /// Returns the current InputBinding.
     /// </summary>
@@ -102,5 +133,15 @@ public class InputActionSetting : SettingData
     public InputBinding GetInputBinding()
     {
         return inputBinding;
+    }
+
+    public InputActionReference[] GetBlockingActions()
+    {
+        return blockingActions;
+    }
+
+    public string[] GetBlockingActionNames()
+    {
+        return blockingActionNames;
     }
 }

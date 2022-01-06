@@ -25,14 +25,12 @@ public class MagnetAA : MonoBehaviour
     {
         controls.Player.ThrowGun.started += _ => AssistStarted();
         controls.Player.ThrowGun.canceled += _ => AssistEnded();
-        controls.Enable();
     }
 
     private void OnDisable()
     {
         controls.Player.ThrowGun.started -= _ => AssistStarted();
         controls.Player.ThrowGun.canceled -= _ => AssistEnded();
-        controls.Disable();
     }
 
     void AssistStarted()

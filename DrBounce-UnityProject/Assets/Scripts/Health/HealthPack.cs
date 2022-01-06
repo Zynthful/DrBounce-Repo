@@ -25,14 +25,12 @@ public class HealthPack : MonoBehaviour
     {
         controls.Player.Shoot.performed += _ => StartCoroutine(Healing());
         controls.Player.Shoot.canceled += _ => StopHealing();
-        controls.Enable();
     }
 
     private void OnDisable()
     {
         controls.Player.Shoot.performed -= _ => StartCoroutine(Healing());
         controls.Player.Shoot.canceled -= _ => StopHealing();
-        controls.Disable();
     }
 
     public void Bounce(int bounceCount)

@@ -48,13 +48,11 @@ public class PauseMenu : MonoBehaviour
     private void OnEnable()
     {
         controls.Menu.Pause.performed += _ => InvertPause();
-        controls.Enable();
     }
 
     private void OnDisable()
     {
         controls.Menu.Pause.performed -= _ => InvertPause();
-        controls.Disable();
     }
 
     private void InvertPause()
@@ -65,6 +63,9 @@ public class PauseMenu : MonoBehaviour
     public void SetPaused(bool value)
     {
         paused = value;
+        
+        // Enable/disable gameplay controls
+        InputManager.SetActionMapActive(controls.Player, !value);
 
         // Update cursor lock state and visibility
         Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;

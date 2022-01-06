@@ -42,14 +42,12 @@ public class SkipCutscene : MonoBehaviour
     {
         controls.Cutscene.SkipCutscene.started += _ => StartSkip();
         controls.Cutscene.SkipCutscene.canceled += _ => ResetProgress();
-        controls.Enable();
     }
 
     private void OnDisable()
     {
         controls.Cutscene.SkipCutscene.started -= _ => StartSkip();
         controls.Cutscene.SkipCutscene.canceled -= _ => ResetProgress();
-        controls.Disable();
     }
 
     private void Start()

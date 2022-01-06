@@ -185,8 +185,6 @@ public class Shooting : MonoBehaviour
 
         controls.Player.RecallGun.performed += _ => Reset();
         controls.Player.Healing.performed += _ => Healing();
-
-        controls.Enable();
     }
 
     private void OnDisable()
@@ -196,8 +194,6 @@ public class Shooting : MonoBehaviour
 
         controls.Player.RecallGun.performed -= _ => Reset();
         controls.Player.Healing.performed -= _ => Healing();
-
-        controls.Disable();
     }
 
     /// <summary>

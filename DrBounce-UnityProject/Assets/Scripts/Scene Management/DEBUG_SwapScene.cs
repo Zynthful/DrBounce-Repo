@@ -18,7 +18,6 @@ public class DEBUG_SwapScene : MonoBehaviour
         controls.Player.DEBUG_PrevLevel.performed += _ => BackLevel();
         controls.Player.DEBUG_NextLevel.performed += _ => NextLevel();
         controls.Player.DEBUG_ReloadScene.performed += _ => ReloadScene();
-        controls.Enable();
     }
 
     private void OnDisable()
@@ -26,7 +25,6 @@ public class DEBUG_SwapScene : MonoBehaviour
         controls.Player.DEBUG_PrevLevel.performed -= _ => BackLevel();
         controls.Player.DEBUG_NextLevel.performed -= _ => NextLevel();
         controls.Player.DEBUG_ReloadScene.performed -= _ => ReloadScene();
-        controls.Disable();
     }
 
     private void ReloadScene() 
