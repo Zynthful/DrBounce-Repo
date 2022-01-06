@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(LineRenderer))]
 public class BezierCurve3PointLineRenderer : MonoBehaviour
@@ -20,12 +21,18 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
 
     [SerializeField] private MagnetAA mAA = null;
 
-    private bool magnetise = false;
+    private bool doMagnetise = false;
     private float oldDistance = 0f;
 
     [Header("Events")]
     [SerializeField]
-    private GameEventBool onIsActiveAndInRange = null;
+    private UnityEvent<bool> onIsActiveAndInRange = null;
+    [SerializeField]
+    private UnityEvent onActivateInRange = null;
+    [SerializeField]
+    private GameEventBool _onIsActiveAndInRange = null;
+    [SerializeField]
+    private GameEvent _onActivateInRange = null;
 
     private void Start()
     {
@@ -49,27 +56,39 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
 
         float distance = Vector3.Distance(point1.position, point3.position);
 
-        lineRenderer.enabled = magnetise;
-
-        if (magnetise)
+        if (doMagnetise)
         {
             // Is it out of range or within 1m (i.e. being held)?
-            if (distance > colourDistance || distance < 1f)
+            if ((distance > colourDistance || distance < 1f))
             {
-                lineRenderer.enabled = false;
-                onIsActiveAndInRange?.Raise(false);
-                return;
+                if (lineRenderer.enabled)
+                {
+                    lineRenderer.enabled = false;
+                    onIsActiveAndInRange?.Invoke(false);
+                    _onIsActiveAndInRange?.Raise(false);
+                    return;
+                }
             }
-            else
+            // Check line render status so we only call this once on activation
+            else if (!lineRenderer.enabled)
             {
-                onIsActiveAndInRange?.Raise(true);
+                lineRenderer.enabled = true;
+                onIsActiveAndInRange?.Invoke(true);
+                _onIsActiveAndInRange?.Raise(true);
+                onActivateInRange?.Invoke();
+                _onActivateInRange?.Raise();
             }
         }
-        else 
+        else if (lineRenderer.enabled)
+        {
+            lineRenderer.enabled = false;
             return;
+        }
 
         if (distance == oldDistance)
             return;
+
+        // Update distance, position, colour, etc.
 
         point2.localPosition = new Vector3(0, 0, distance / 2);
 
@@ -91,9 +110,9 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
         oldDistance = distance;
     }
 
-    public void isMag(bool mag)
+    public void SetDoMagnetise(bool value)
     {
-        magnetise = mag;
+        doMagnetise = value;
     }
 
     public Vector3 QuadraticBezierCurve(float t, Vector3 p0, Vector3 p1, Vector3 p2)

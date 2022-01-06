@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MoreMountains.NiceVibrations;
+using UnityEngine.Events;
 public class MagnetAA : MonoBehaviour
 {
 
@@ -14,7 +14,17 @@ public class MagnetAA : MonoBehaviour
 
     [Header("Events")]
     [SerializeField]
-    private GameEventBool onIsActive = null;
+    private UnityEvent<bool> onIsActive = null;
+    [SerializeField]
+    private UnityEvent onActivate = null;
+    [SerializeField]
+    private UnityEvent onDeactivate = null;
+    [SerializeField]
+    private GameEventBool _onIsActive = null;
+    [SerializeField]
+    private GameEvent _onActivate = null;
+    [SerializeField]
+    private GameEvent _onDeactivate = null;
 
     private void Awake()
     {
@@ -38,7 +48,11 @@ public class MagnetAA : MonoBehaviour
         if (!gun.transform.parent)
         {
             assistActive = true;
-            onIsActive?.Raise(true);
+
+            onIsActive?.Invoke(true);
+            _onIsActive?.Raise(true);
+            onActivate?.Invoke();
+            _onActivate?.Raise();
         }
     }
     void AssistEnded()
@@ -46,7 +60,10 @@ public class MagnetAA : MonoBehaviour
         if (assistActive)
         {
             assistActive = false;
-            onIsActive?.Raise(false);
+            onIsActive?.Invoke(false);
+            _onIsActive?.Raise(false);
+            onDeactivate?.Invoke();
+            _onDeactivate?.Raise();
         }
     }
 
