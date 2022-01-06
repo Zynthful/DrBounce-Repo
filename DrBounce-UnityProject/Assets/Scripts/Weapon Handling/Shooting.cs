@@ -307,6 +307,7 @@ public class Shooting : MonoBehaviour
             {
                 maxShotCharged = false;
                 HandleChargedShot(gunCharge);
+                onMaxShotFired?.Invoke(gunCharge);
             }
 
             // Cancel into a regular shot if we haven't reached the threshold
@@ -345,6 +346,7 @@ public class Shooting : MonoBehaviour
         if (gunCharge > 0)
         {
             HandleChargedShot(1);
+            onSingleChargeShotFired?.Invoke();
         }
 
         // Fire an uncharged shot
@@ -378,15 +380,6 @@ public class Shooting : MonoBehaviour
 
     private void HandleChargedShot(int chargeUsed)
     {
-        if (chargeUsed == gunCharge)
-        {
-            onMaxShotFired?.Invoke(chargeUsed);
-        }
-        else if (chargeUsed == 1)
-        {
-            onSingleChargeShotFired?.Invoke();
-        }
-
         ChargedFeedback?.PlayFeedbacks();
         
         switch(shooter.chargeShot)
