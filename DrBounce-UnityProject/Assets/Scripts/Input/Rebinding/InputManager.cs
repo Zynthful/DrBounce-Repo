@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using System;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -20,9 +20,11 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         CheckForNullInputMaster();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnEnable()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         inputMaster.Enable();
     }
