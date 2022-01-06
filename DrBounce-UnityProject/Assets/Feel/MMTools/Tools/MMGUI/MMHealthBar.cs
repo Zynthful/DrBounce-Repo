@@ -126,7 +126,7 @@ namespace MoreMountains.Tools
 		/// <summary>
 		/// On Start, creates or sets the health bar up
 		/// </summary>
-		protected virtual void Awake()
+		protected virtual void Start()
 		{
             Initialization();
 		}
