@@ -14,16 +14,20 @@ public class BouncyEnemy : Enemy
     public bool canAttack;
     public bool canMove;
     public int currentTargetIndex;
+    public float enemySpeed = 2;
+
+    [Space(10)]
+    public List<Vector3> patrolPoints = new List<Vector3> { };
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(m_root == null)
         {
-            m_root = createTree();
             m_blackboard = new Blackboard();
             m_blackboard.owner = gameObject;
             m_blackboard.aiController = this;
+            m_root = createTree();
         }
     }
 
@@ -42,14 +46,15 @@ public class BouncyEnemy : Enemy
         if (canMove)
         {
             // Movement Node Section
-            BtNode GetPatrolPoint = new Sequence(new IsClose(2f), new TargetNext("PatrolPoint", true));
-            BtNode TowardsPatrolPoint = new Sequence(new IsTargeting("PatrolPoint"), new TowardsTarget());
-            BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose("PatrolPoint", true));
+            BtNode GetPatrolPoint = new Sequence(new IsClose(2f), new TargetNext(patrolPoints.ToArray()));
+            BtNode TowardsPatrolPoint = new Sequence(new IsTargeting(), new TowardsTarget(enemySpeed));
+            BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose(patrolPoints.ToArray()));
             Move = new Sequence(new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
         }
         else
         {
-            Move = new Sequence();
+            // Empty/returns a fail - TEMP
+            Move = new Sequence(new CheckIfStunned());
         }
 
         return Move;
@@ -68,7 +73,8 @@ public class BouncyEnemy : Enemy
         }
         else
         {
-            Attack = new Sequence();
+            // Empty/returns a fail - TEMP
+            Attack = new Sequence(new CheckIfStunned());
         }
 
         return Attack;
@@ -77,10 +83,14 @@ public class BouncyEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        NodeState result = m_root.evaluate(m_blackboard);
-        if(result != NodeState.RUNNING)
+        if (!GameManager.s_Instance.paused && m_root != null)
         {
-            m_root.reset();
+            NodeState result = m_root.evaluate(m_blackboard);
+            Debug.Log(result);
+            if (result != NodeState.RUNNING)
+            {
+                m_root.reset();
+            }
         }
     }
 

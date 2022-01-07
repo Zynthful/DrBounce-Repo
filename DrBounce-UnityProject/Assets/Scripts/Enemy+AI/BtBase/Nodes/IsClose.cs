@@ -14,7 +14,7 @@ public class IsClose : BtNode {
             return NodeState.FAILURE;
         }
 
-        float distance = (blackboard.owner.transform.position - blackboard.target.transform.position).magnitude;
+        float distance = (blackboard.owner.transform.position - blackboard.target).magnitude;
         if (distance < m_distanceLimit) {
             return NodeState.SUCCESS;
         } else {

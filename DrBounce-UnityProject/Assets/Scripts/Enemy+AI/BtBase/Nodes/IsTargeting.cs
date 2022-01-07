@@ -4,24 +4,17 @@ using UnityEngine;
 
 public class IsTargeting : BtNode
 {
-    private string m_targetTag;
-
-    public IsTargeting(string targetTag)
+    public IsTargeting()
     {
-        m_targetTag = targetTag;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (blackboard.target == null)
-        {
-            return NodeState.FAILURE;
-        }
-
-        if (blackboard.target.tag == m_targetTag && blackboard.target.activeInHierarchy)
+        if (blackboard.target != null)
         {
             return NodeState.SUCCESS;
-        } else
+        }
+        else
         {
             return NodeState.FAILURE;
         }

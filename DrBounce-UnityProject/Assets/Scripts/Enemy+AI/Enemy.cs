@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
                 onShoot?.Invoke();
                 shootingDelayCoroutine = StartCoroutine(ShotDelay(rateOfFire));
                 pool.SpawnBulletFromPool("Bullet", transform.position, Quaternion.identity, (PlayerMovement.player.position - transform.position).normalized, bullet, null);
-                Debug.Log((PlayerMovement.player.position - transform.position).normalized);
+                //Debug.Log((PlayerMovement.player.position - transform.position).normalized);
             }
             
         }

@@ -37,7 +37,7 @@ public class IsTagClose : BtNode
         }
 
         double closeDist = double.PositiveInfinity;
-        GameObject closest = null;
+        Vector3 closest = Vector3.zero;
 
         if (m_tag == "Player")
         {
@@ -46,7 +46,7 @@ public class IsTagClose : BtNode
             if (player != null)
             {
                 closeDist = Vector3.Distance(player.transform.position, blackboard.owner.transform.position);
-                closest = player;
+                closest = player.transform.position;
             }
         }
         else
@@ -73,7 +73,7 @@ public class IsTagClose : BtNode
                     if (distance < closeDist)
                     {
                         closeDist = distance;
-                        closest = obj;
+                        closest = obj.transform.position;
                     }
                 }
             }
@@ -98,7 +98,7 @@ public class IsTagClose : BtNode
             {
                 // Move the new target marker directly away from the target in relation to the AI's location
                 newMarker.transform.position = blackboard.owner.transform.position + (blackboard.owner.transform.position - player.transform.position);
-                blackboard.target = newMarker;
+                blackboard.target = newMarker.transform.position;
                 return NodeState.SUCCESS;
             }
             else

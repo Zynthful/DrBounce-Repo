@@ -4,40 +4,22 @@ using UnityEngine;
 
 public class TargetClose : BtNode {
 
-    private string m_targetTag;
-    private bool m_requireChild;
+    private Vector3[] m_positions;
 
-    public TargetClose(string targetTag, bool requireTagAsChild = false) 
+    public TargetClose(Vector3[] points) 
     {
-        this.m_targetTag = targetTag;
-        this.m_requireChild = requireTagAsChild;
+        this.m_positions = points;
     }
 
-    public override NodeState evaluate(Blackboard blackboard) {
-        GameObject[] tagged = GameObject.FindGameObjectsWithTag(m_targetTag);
-
-        if (m_requireChild)
-        {
-            List<GameObject> taggedChildren = new List<GameObject> { };
-
-            foreach (GameObject t in tagged)
-            {
-                if (t.transform.parent = blackboard.owner.transform)
-                {
-                    taggedChildren.Add(t);
-                }
-            }
-
-            tagged = taggedChildren.ToArray();
-        }
-
-        GameObject closest = null;
+    public override NodeState evaluate(Blackboard blackboard) 
+    {
+        Vector3 closest = m_positions[0];
         float closestDistance = float.MaxValue;
 
-        foreach (GameObject gObject in tagged) {
-            float distance = Vector3.Distance(blackboard.owner.transform.position, gObject.transform.position);
+        foreach (Vector3 pos in m_positions) {
+            float distance = Vector3.Distance(blackboard.owner.transform.position, pos);
             if (distance < closestDistance) {
-                closest = gObject;
+                closest = pos;
                 closestDistance = distance;
             }
         }
@@ -45,6 +27,7 @@ public class TargetClose : BtNode {
         if (closest != null)
         {
             blackboard.target = closest;
+            blackboard.startPosition = blackboard.owner.transform.position;
             return NodeState.SUCCESS;
         }
         return NodeState.FAILURE;

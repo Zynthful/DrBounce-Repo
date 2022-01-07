@@ -1,26 +1,41 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.AI;
 
 
-public class TowardsTarget : BtNode {
-    private NavMeshAgent m_agent;
+public class TowardsTarget : BtNode
+{
+    private Transform m_movement;
+    private float moveSpeed;
 
-    public override NodeState evaluate(Blackboard blackboard) {
-        if (m_agent == null) {
-            m_agent = blackboard.owner.GetComponent<NavMeshAgent>();
+    public TowardsTarget(float speed = 2)
+    {
+        moveSpeed = speed;
+    }
+
+    public override NodeState evaluate(Blackboard blackboard)
+    {
+        if (m_movement == null)
+        {
+            m_movement = blackboard.owner.GetComponent<Transform>();
         }
 
         // if target is null, we can't move towards it!
-        if (blackboard.target == null) {
+        if (blackboard.target == null)
+        {
             return NodeState.FAILURE;
         }
 
-        m_agent.SetDestination(blackboard.target.transform.position);
-        //Debug.Log("Agent: " + blackboard.owner.name + ", Target: " + blackboard.target.name);
-        if ( Vector3.Distance(blackboard.owner.transform.position, blackboard.target.transform.position) > 0.5 )
+        if(blackboard.startPosition == Vector3.zero)
+        {
+            blackboard.startPosition = blackboard.owner.transform.position;
+        }
+
+        Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + blackboard.target);
+        m_movement.position = Vector3.Lerp(blackboard.startPosition, blackboard.target, Time.deltaTime / moveSpeed);
+        if (Vector3.Distance(m_movement.position, blackboard.target) > 0.5)
         {
             return NodeState.RUNNING;
         }
@@ -30,7 +45,7 @@ public class TowardsTarget : BtNode {
 
     public override string getName()
     {
-        return "TowardsTarget";
+        return "TowardsTargetNAV";
     }
 
 }

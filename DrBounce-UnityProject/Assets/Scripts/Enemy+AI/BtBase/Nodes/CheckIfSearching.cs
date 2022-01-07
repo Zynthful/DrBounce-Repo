@@ -18,14 +18,7 @@ public class CheckIfSearching : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (true)
-        {
-            return NodeState.SUCCESS;
-        }
-        else if (false)
-        {
-            return NodeState.FAILURE;
-        }
+        return NodeState.FAILURE;
     }
 
     /// <summary>

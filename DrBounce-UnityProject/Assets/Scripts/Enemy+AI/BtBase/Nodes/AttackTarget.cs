@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackTarget : BtNode
 {
 
-    private GameObject m_target;
+    private Vector3 m_target;
 
     /// <summary>
     /// Used to get variables from else where (custimisation)
