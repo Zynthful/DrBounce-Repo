@@ -16,4 +16,9 @@ public class LoadScene : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(name);
     }
+
+    public void ReloadActiveScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
