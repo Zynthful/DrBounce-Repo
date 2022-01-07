@@ -41,6 +41,13 @@ public class Shooting : MonoBehaviour
     [Tooltip("Percentage that the max shot must be charged before cancelling it does NOT trigger a regular shot.")]
     [Range(0, 1)]
     private float chargeCancelThreshold = 0.5f;
+    [SerializeField]
+    [Tooltip("Percentage that the shoot control must be held for before beginning a max shot charge")]
+    [Range(0, 1)]
+    private float chargeBeginThreshold = 0.25f;
+    [SerializeField]
+    [Tooltip("Minimum charges to begin charging a max shot charge")]
+    private int minChargeToMaxShot = 1;
 
     private float currentHoldTime = 0.0f;
     private bool holdingShoot = false;
@@ -144,28 +151,38 @@ public class Shooting : MonoBehaviour
 
         CheckForHoverOverEnemy();
 
-        // Handle max shot charging timer
-        if (IsInHand() && !maxShotCharged && holdingShoot)
+        // Handle max shot charging
+        if (IsInHand() && holdingShoot)
         {
-            if (maxShotCharging)
+            currentHoldTime += Time.deltaTime;
+
+            if (gunCharge >= minChargeToMaxShot)
             {
-                currentHoldTime += Time.deltaTime;
-                onChargingMaxShotProgress.Invoke(currentHoldTime / holdTimeToFullCharge);
-
-                // If we've fully charged our max shot
-                if (currentHoldTime > holdTimeToFullCharge)
+                // Begin charging max shot once we've passed the threshold and have sufficient charge
+                if (!maxShotCharged && !maxShotCharging && (currentHoldTime / holdTimeToFullCharge) >= chargeBeginThreshold)
                 {
-                    maxShotCharged = true;
-                    maxShotCharging = false;
+                    onChargeMaxShotBegin?.Invoke();
+                    maxShotCharging = true;
+                }
 
-                    //maxDamage keeps track of a held charge shot for damage calculations
-                    maxDamage = true;
+                // Charge max shot progress
+                if (!maxShotCharged && maxShotCharging)
+                {
+                    onChargingMaxShotProgress.Invoke(currentHoldTime / holdTimeToFullCharge);
 
-                    onMaxShotCharged?.Invoke();
+                    // If we've fully charged our max shot
+                    if (currentHoldTime > holdTimeToFullCharge)
+                    {
+                        maxShotCharged = true;
+                        maxShotCharging = false;
+
+                        //maxDamage keeps track of a held charge shot for damage calculations
+                        maxDamage = true;
+
+                        onMaxShotCharged?.Invoke();
+                    }
                 }
             }
-
-            // Try to repeat shoot if we're holding down shoot and we can repeat shoot
             else if (shooter.canRepeatShoot)
             {
                 TryShoot();
@@ -283,6 +300,7 @@ public class Shooting : MonoBehaviour
     {
         holdingShoot = true;
 
+        /*
         if (!GameManager.s_Instance.paused && IsInHand())
         {
             // Only begin charging max charge shot if we have charge
@@ -292,6 +310,7 @@ public class Shooting : MonoBehaviour
                 maxShotCharging = true;
             }
         }
+        */
     }
 
     private void ShootReleased()
