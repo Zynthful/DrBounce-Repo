@@ -42,6 +42,7 @@ namespace AK
         static const AkUniqueID GUN_THROW = 3098426972U;
         static const AkUniqueID HEAL = 3448274447U;
         static const AkUniqueID JUMP = 3833651337U;
+        static const AkUniqueID PAUSE = 3092587493U;
         static const AkUniqueID PLAYER_THROW = 65181031U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
         static const AkUniqueID UI_BUTTON_CLICK_FAIL = 4089643514U;
@@ -49,6 +50,7 @@ namespace AK
         static const AkUniqueID UI_BUTTON_POINTERENTER = 1841462538U;
         static const AkUniqueID UI_BUTTON_RETURN = 1182614283U;
         static const AkUniqueID UI_BUTTON_SELECT = 2896333297U;
+        static const AkUniqueID UNPAUSE = 3412868374U;
     } // namespace EVENTS
 
     namespace GAME_PARAMETERS

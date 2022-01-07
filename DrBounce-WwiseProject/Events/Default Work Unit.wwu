@@ -512,6 +512,40 @@
 						<Event Name="UI_Button_Enter" ID="{CDF18C40-212D-4459-A58B-49E8FF646D24}"/>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Game State" ID="{50DD43CB-2E80-45C7-BB45-01DE4D9FF184}" ShortID="637517253">
+					<ChildrenList>
+						<Event Name="Unpause" ID="{FC7ACCB8-CA12-4905-8847-73132E93A31F}">
+							<ChildrenList>
+								<Action Name="" ID="{FD4F8078-3BF4-497C-AED7-AD8E345A3060}" ShortID="360021093">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="9"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Pause" ID="{D6EC6811-499D-453F-955C-8F4D0185B4C3}">
+							<ChildrenList>
+								<Action Name="" ID="{1D47325E-A087-451F-9321-B19FBE5C4B57}" ShortID="88713039">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="7"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
