@@ -42,9 +42,9 @@ public class BouncyEnemy : Enemy
         if (canMove)
         {
             // Movement Node Section
-            BtNode GetPatrolPoint = new Sequence(new IsClose(2f), new TargetNext("PatrolPoint"));
+            BtNode GetPatrolPoint = new Sequence(new IsClose(2f), new TargetNext("PatrolPoint", true));
             BtNode TowardsPatrolPoint = new Sequence(new IsTargeting("PatrolPoint"), new TowardsTarget());
-            BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose("PatrolPoint"));
+            BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose("PatrolPoint", true));
             Move = new Sequence(new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
         }
         else
