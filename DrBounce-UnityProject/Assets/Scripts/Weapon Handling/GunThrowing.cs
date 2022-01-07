@@ -12,6 +12,7 @@ public class GunThrowing : MonoBehaviour
     [SerializeField] bool canThrow;
     [SerializeField] Transform weaponHolderTransform = null;
     [SerializeField] bool startOnPlayer;    // Should the item start on the player or not?
+    [SerializeField] float noHitDetectAfterThrowTime;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Collider[] gunColliders = null;
     [SerializeField] BoxCollider catchCollider;
@@ -22,6 +23,8 @@ public class GunThrowing : MonoBehaviour
     Rigidbody rb;
     private Coroutine pickupDelayCoroutine;
     private bool pickupDelayCoroutineRunning;
+    private bool throwBuffer = false;
+
 
     // Coyote Time variables (gun collision time before drop charges)
     private struct coyote
@@ -206,6 +209,8 @@ public class GunThrowing : MonoBehaviour
             }
             pickupDelayCoroutine = StartCoroutine(EnablePickupAfterTime(0.2f));
 
+            StartCoroutine(delayChargeLossOnThrow());
+
             ResetCoyoteTimes();
             canThrow = false;
             //outlineScript.enabled = true;
@@ -287,7 +292,7 @@ public class GunThrowing : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
-        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
+        if (throwBuffer == false && collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
             onDroppedPreCoyote?.Invoke();
             _onDroppedPreCoyote?.Raise();
@@ -393,6 +398,14 @@ public class GunThrowing : MonoBehaviour
             StopCoroutine(coy.coyoteCoroutine);
         }
         hitObjects.Clear();
+    }
+
+    IEnumerator delayChargeLossOnThrow()
+    {
+        print("Successful throw!");
+        throwBuffer = true;
+        yield return new WaitForSeconds(noHitDetectAfterThrowTime);
+        throwBuffer = false;
     }
 
     IEnumerator CoyoteTimeForPickup(Collision hit)
