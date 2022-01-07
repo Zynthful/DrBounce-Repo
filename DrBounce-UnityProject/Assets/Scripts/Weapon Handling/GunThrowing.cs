@@ -45,7 +45,8 @@ public class GunThrowing : MonoBehaviour
     
 
     SwitchHeldItem inventory;
-    int amountOfBounces;
+    private int amountOfBounces;
+    private int amountOfBouncesUnique;  // bounces where it's not bounced against the same object twice in succession
 
     public InputMaster controls;
     [Space(10)]
@@ -285,6 +286,7 @@ public class GunThrowing : MonoBehaviour
             onRecall?.Invoke();
             _onRecall?.Raise();
             amountOfBounces = 0;
+            amountOfBouncesUnique = 0;
             ResetScript();
         }
     }
@@ -362,8 +364,8 @@ public class GunThrowing : MonoBehaviour
 
         amountOfBounces++;
         
-        onBounce?.Invoke(amountOfBounces);
-        _onBounce?.Raise(amountOfBounces);
+        onBounce?.Invoke(amountOfBouncesUnique);
+        _onBounce?.Raise(amountOfBouncesUnique);
 
         MMFeedbacks feedbacks = collision.transform.GetComponentInChildren<MMFeedbacks>();
         if (feedbacks)
@@ -372,15 +374,25 @@ public class GunThrowing : MonoBehaviour
         currentVel = rb.velocity;
     }
 
+    public void BouncedUnique(Collision collision)
+    {
+        amountOfBouncesUnique++;
+        Bounced(collision);
+    }
+
     public void ChargesEmpty()
     {
         amountOfBounces = 0;
+        amountOfBouncesUnique = 0;
     }
 
     public void ChargedShotFired()
     {
         if(amountOfBounces > 0)
             amountOfBounces--;
+
+        if (amountOfBouncesUnique > 0)
+            amountOfBouncesUnique--;
     }
 
     IEnumerator EnablePickupAfterTime(float time)
@@ -425,6 +437,7 @@ public class GunThrowing : MonoBehaviour
                 }
 
                 amountOfBounces = 0;
+                amountOfBouncesUnique = 0;
                 inFlight = false;
 
                 onDropped?.Invoke();

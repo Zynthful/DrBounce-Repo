@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CheckForBouncing : MonoBehaviour
 {
-    [SerializeField] RequirementsForBounce bounceRequirements;
+    [SerializeField]
+    private RequirementsForBounce bounceRequirements;
 
     Vector3 bounceOriginPoint;
     Vector3 newVelocity;
@@ -17,6 +18,9 @@ public class CheckForBouncing : MonoBehaviour
     Coroutine recentHitRun;
 
     private int numOfPlayerBounces = 0;
+
+    private GameObject lastBounced = null;  // Object that this has bounced off of last
+    private float timeSinceLastBounce = 0.0f;
 
     private void Start()
     {
@@ -47,14 +51,24 @@ public class CheckForBouncing : MonoBehaviour
     {
         if (CanBounce(collision.gameObject) && GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
-
             Vector3[] returnVectors = new Vector3[3];
 
             returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision, bounceOriginPoint);
             if (returnVectors.Length > 0)
             {
-                if(specialInteractions)
-                    specialInteractions.Bounced(collision);
+                if (specialInteractions)
+                {
+                    if (collision.gameObject == lastBounced)
+                    {
+                        specialInteractions.Bounced(collision);
+                    }
+                    else
+                    {
+                        specialInteractions.BouncedUnique(collision);
+                    }
+                }
+
+                lastBounced = collision.gameObject;
 
                 transform.position = returnVectors[0];
                 bounceOriginPoint = returnVectors[1];

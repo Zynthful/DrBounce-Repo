@@ -16,6 +16,12 @@ public class RequirementsForBounce : ScriptableObject
 
     public Requirements[] requirements;
 
+    [SerializeField]
+    [Tooltip("Cooldown before bouncing off of the same object again is counted as a 'unique' bounce (e.g., granting charges)")]
+    private float sameBounceCooldown = 2.0f;
+    public float GetSameBounceCooldown() { return sameBounceCooldown; }
+    public void SetSameBounceCooldown(float value) { sameBounceCooldown = value; }
+
     public RequirementsForBounce(Requirements[] reqs)
     {
         requirements = reqs;
