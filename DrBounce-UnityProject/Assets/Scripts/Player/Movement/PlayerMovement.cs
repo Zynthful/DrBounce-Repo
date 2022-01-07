@@ -146,8 +146,8 @@ public class PlayerMovement : MonoBehaviour
         {
             dashSliderTime += Time.deltaTime;
 
-            float b = (1f - ((float)dashesPerformed / (float)dashesBeforeLanding)) * 100f;
-            float a = (1f - (((float)dashesPerformed + 1f) / (float)dashesBeforeLanding)) * 100f;
+            float b = (1f - ((float)dashesPerformed / (float)dashesBeforeLanding));
+            float a = (1f - (((float)dashesPerformed + 1f) / (float)dashesBeforeLanding));
             float t = 1f - Mathf.Clamp(dashSliderTime / dashLength, 0, 1);
             float dashSliderPos = Mathf.Lerp(a, b, Mathf.SmoothStep(0, 1, t));
 
