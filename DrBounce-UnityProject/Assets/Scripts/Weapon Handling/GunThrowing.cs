@@ -402,7 +402,6 @@ public class GunThrowing : MonoBehaviour
 
     IEnumerator delayChargeLossOnThrow()
     {
-        print("Successful throw!");
         throwBuffer = true;
         yield return new WaitForSeconds(noHitDetectAfterThrowTime);
         throwBuffer = false;
