@@ -281,7 +281,7 @@ public class GunThrowing : MonoBehaviour
 
     private void RecallGun()
     {
-        if (startOnPlayer && transform.parent == null)
+        if (startOnPlayer && transform.parent == null && throwBuffer == false)
         {
             onRecall?.Invoke();
             _onRecall?.Raise();
@@ -323,7 +323,7 @@ public class GunThrowing : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.root == owner && !transform.parent)
+        if (other.transform.root == owner && !transform.parent && throwBuffer == false)
         {
             if (!catchCollider)
             {
