@@ -64,14 +64,14 @@ public class DecalManager : MonoBehaviour
         decalRotation *= Quaternion.Euler(Vector3.forward * Random.Range(0, 180));
 
         //place object from pool
-        GameObject decalObject = pool.SpawnNonBulletFromPool("Decal", position + (decalRotation * Vector3.back * 0.01f), decalRotation, decalToSpawn);
+        GameObject decalObject = pool.SpawnNonBulletFromPool("Decal", position + (decalRotation * Vector3.back * (0.01f + Random.Range(0f, 0.02f))), decalRotation, decalToSpawn);
         //$"Spawned Decal ({localPos.x.ToString("F3")},{localPos.y.ToString("F3")})"
 
-        //scale that bad boy
-        decalObject.transform.localScale = Vector3.one * decalScale;
+        //randomly adjust decal scale for fun :)
+        decalScale *= Random.Range(0.9f, 1.1f);
 
-        //flip randomly
-        decalObject.transform.localScale = Vector3.left * ((Random.Range(0, 1) * 2) - 1);
+        //scale that bad boy and flip randomly
+        decalObject.transform.localScale = new Vector3(((Random.Range(0, 2) * 2) - 1) * decalScale, decalScale, decalScale);
 
         //set parent to manager or supplied transform
         decalObject.transform.SetParent(t, true);
