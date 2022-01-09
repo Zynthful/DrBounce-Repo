@@ -75,6 +75,10 @@ public class InputActionSetting : SettingData
 
     public string GetActionName()
     {
+        if (string.IsNullOrEmpty(actionName))
+        {
+            UpdateBindingInfo();
+        }
         return actionName;
     }
 
