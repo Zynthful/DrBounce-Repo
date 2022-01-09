@@ -132,22 +132,25 @@ public class InputManager : MonoBehaviour
         // On any control pressed during operation (i think..???)
         rebind.OnPotentialMatch(operation =>
         {
-            for (int i = 0; i < operation.candidates.Count; i++)
+            if (blockingActions != null)
             {
-                for (int j = 0; j < blockingActions.Length; j++)
+                for (int i = 0; i < operation.candidates.Count; i++)
                 {
-                    for (int k = 0; k < blockingActions[j].controls.Count; k++)
+                    for (int j = 0; j < blockingActions.Length; j++)
                     {
-                        if (blockingActions[j].controls[k] == operation.candidates[i])
+                        for (int k = 0; k < blockingActions[j].controls.Count; k++)
                         {
-                            //Debug.Log("DING DING DING WE GOT A WINNER: " + operation.candidates[i].path);
-                            //Debug.Log($"This {action.expectedControlType} is already mapped to {blockingActions[j].name}.");
-                            onRebindMatchedBlockingAction?.Invoke(action, blockingActions[j]);
+                            if (blockingActions[j].controls[k] == operation.candidates[i])
+                            {
+                                //Debug.Log("DING DING DING WE GOT A WINNER: " + operation.candidates[i].path);
+                                //Debug.Log($"This {action.expectedControlType} is already mapped to {blockingActions[j].name}.");
+                                onRebindMatchedBlockingAction?.Invoke(action, blockingActions[j]);
 
-                            rebind.Cancel();
-                            
-                            // todo:
-                            // ui prompt and listen for Override and Cancel buttons.
+                                rebind.Cancel();
+
+                                // todo:
+                                // ui prompt and listen for Override and Cancel buttons.
+                            }
                         }
                     }
                 }
