@@ -19,7 +19,8 @@ public class SkipCutscene : MonoBehaviour
     [SerializeField]
     private float timeToTriggerFadeOut = 3.0f;
 
-    private bool active = true;
+    private bool promptActive = true;
+    private bool skipped = false;
 
     [Header("Events")]
     [SerializeField]
@@ -41,18 +42,18 @@ public class SkipCutscene : MonoBehaviour
     private void OnEnable()
     {
         controls.Cutscene.SkipCutscene.started += _ => StartSkip();
-        controls.Cutscene.SkipCutscene.canceled += _ => ResetProgress();
+        controls.Cutscene.SkipCutscene.canceled += _ => ResetProgress(true);
     }
 
     private void OnDisable()
     {
         controls.Cutscene.SkipCutscene.started -= _ => StartSkip();
-        controls.Cutscene.SkipCutscene.canceled -= _ => ResetProgress();
+        controls.Cutscene.SkipCutscene.canceled -= _ => ResetProgress(true);
     }
 
     private void Start()
     {
-        StartCoroutine(TimeToFade());
+        StartCoroutine(FadeDelay());
     }
 
     private void Update()
@@ -65,41 +66,45 @@ public class SkipCutscene : MonoBehaviour
 
             if (currentTime >= holdDuration)
             {
-                ResetProgress();
+                ResetProgress(false);
                 Finish();
             }
         }
     }
 
-    private void ResetProgress()
+    private void ResetProgress(bool doFadeDelay)
     {
         holding = false;
         currentTime = 0;
         onProgressChange.Invoke(0);
         StopAllCoroutines();
-        StartCoroutine(TimeToFade());
+        if (!skipped && doFadeDelay && gameObject.activeInHierarchy)
+        {
+            StartCoroutine(FadeDelay());
+        }
     }
 
     private void Finish()
     {
+        skipped = true;
         onFinish.Invoke();
         _onFinish?.Raise();
     }
 
-    private IEnumerator TimeToFade()
+    private IEnumerator FadeDelay()
     {
         yield return new WaitForSeconds(timeToTriggerFadeOut);
-        active = false;
+        promptActive = false;
         onBeginFadeOut.Invoke();
     }
 
     private void StartSkip()
     {
         holding = true;
-        if (!active)
+        if (!promptActive)
         {
             onStartSkip.Invoke();
-            active = true;
+            promptActive = true;
         }
     }
 }
