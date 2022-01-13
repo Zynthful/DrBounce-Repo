@@ -15,6 +15,7 @@ public class TargetNext : BtNode
     {
         if (m_positions.Length == 0)
         {
+            Debug.Log("Failed to target next");
             return NodeState.FAILURE;
         }
 
@@ -24,9 +25,12 @@ public class TargetNext : BtNode
         {
             blackboard.aiController.currentTargetIndex = 0;
         }
+
         Vector3 nextPos = m_positions[blackboard.aiController.currentTargetIndex];
+
         blackboard.target = nextPos;
-        blackboard.startPosition = blackboard.owner.transform.position;
+        blackboard.startPosition = blackboard.owner.transform.localPosition;
+
         m_nodeState = NodeState.SUCCESS;
         return m_nodeState;
     }

@@ -14,17 +14,11 @@ public class TowardsTargetNAV : BtNode {
         }
 
         // if target is null, we can't move towards it!
-        if (blackboard.target == null) {
+        if (blackboard.target == null || blackboard.target == Vector3.zero) {
             return NodeState.FAILURE;
         }
 
         m_agent.SetDestination(blackboard.target);
-        //Debug.Log("Agent: " + blackboard.owner.name + ", Target: " + blackboard.target.name);
-        if ( Vector3.Distance(blackboard.owner.transform.position, blackboard.target) > 0.5 )
-        {
-            return NodeState.RUNNING;
-        }
-
         return NodeState.SUCCESS;
     }
 

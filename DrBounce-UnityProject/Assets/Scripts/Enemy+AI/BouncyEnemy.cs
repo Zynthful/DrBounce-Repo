@@ -26,7 +26,9 @@ public class BouncyEnemy : Enemy
         {
             m_blackboard = new Blackboard();
             m_blackboard.owner = gameObject;
-            m_blackboard.aiController = this;
+            m_blackboard.aiController = m_blackboard.owner.GetComponent<BouncyEnemy>();
+            m_blackboard.target = Vector3.zero;
+            m_blackboard.startPosition = Vector3.zero;
             m_root = createTree();
         }
     }
@@ -42,22 +44,19 @@ public class BouncyEnemy : Enemy
 
     protected BtNode createMovementTree()
     {
-        BtNode Move;
         if (canMove)
         {
             // Movement Node Section
-            BtNode GetPatrolPoint = new Sequence(new IsClose(2f), new TargetNext(patrolPoints.ToArray()));
+            BtNode GetPatrolPoint = new Sequence(new IsClose(.2f), new TargetNext(patrolPoints.ToArray()));
             BtNode TowardsPatrolPoint = new Sequence(new IsTargeting(), new TowardsTarget(enemySpeed));
             BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose(patrolPoints.ToArray()));
-            Move = new Sequence(new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
+            return new Sequence(new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
         }
         else
         {
             // Empty/returns a fail - TEMP
-            Move = new Sequence(new CheckIfStunned());
+            return new Sequence(new CheckIfStunned());
         }
-
-        return Move;
     }
 
     protected BtNode createAttackingTree()

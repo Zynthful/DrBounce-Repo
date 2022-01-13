@@ -23,23 +23,23 @@ public class TowardsTarget : BtNode
         }
 
         // if target is null, we can't move towards it!
-        if (blackboard.target == null)
+        if (blackboard.target == null || blackboard.target == Vector3.zero)
         {
             return NodeState.FAILURE;
         }
 
-        if(blackboard.startPosition == Vector3.zero)
+        if (blackboard.startPosition == Vector3.zero)
         {
-            blackboard.startPosition = blackboard.owner.transform.position;
+            blackboard.startPosition = blackboard.owner.transform.localPosition;
+            if (blackboard.startPosition == Vector3.zero)
+            {
+                return NodeState.FAILURE;
+            }
         }
 
         Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + blackboard.target);
-        m_movement.position = Vector3.Lerp(blackboard.startPosition, blackboard.target, Time.deltaTime / moveSpeed);
-        if (Vector3.Distance(m_movement.position, blackboard.target) > 0.5)
-        {
-            return NodeState.RUNNING;
-        }
 
+        m_movement.localPosition = Vector3.MoveTowards(m_movement.localPosition, blackboard.target, Time.deltaTime / moveSpeed);
         return NodeState.SUCCESS;
     }
 
