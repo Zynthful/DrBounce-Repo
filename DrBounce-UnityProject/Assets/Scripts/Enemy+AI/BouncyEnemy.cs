@@ -44,19 +44,11 @@ public class BouncyEnemy : Enemy
 
     protected BtNode createMovementTree()
     {
-        if (canMove)
-        {
-            // Movement Node Section
-            BtNode GetPatrolPoint = new Sequence(new IsClose(.2f), new TargetNext(patrolPoints.ToArray()));
-            BtNode TowardsPatrolPoint = new Sequence(new IsTargeting(), new TowardsTarget(enemySpeed));
-            BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose(patrolPoints.ToArray()));
-            return new Sequence(new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
-        }
-        else
-        {
-            // Empty/returns a fail - TEMP
-            return new Sequence(new CheckIfStunned());
-        }
+        // Movement Node Section
+        BtNode GetPatrolPoint = new Sequence(new IsClose(.2f), new TargetNext(patrolPoints.ToArray()));
+        BtNode TowardsPatrolPoint = new Sequence(new IsTargeting(), new TowardsTarget(enemySpeed));
+        BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose(patrolPoints.ToArray()));
+        return new Sequence(new CheckBool(ref canMove), new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
     }
 
     protected BtNode createAttackingTree()

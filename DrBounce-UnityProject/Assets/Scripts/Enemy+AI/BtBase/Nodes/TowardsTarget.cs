@@ -40,6 +40,7 @@ public class TowardsTarget : BtNode
         Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + blackboard.target);
 
         m_movement.localPosition = Vector3.MoveTowards(m_movement.localPosition, blackboard.target, Time.deltaTime / moveSpeed);
+        m_movement.rotation = Quaternion.RotateTowards(m_movement.rotation, Quaternion.LookRotation((blackboard.target - m_movement.localPosition).normalized), Time.deltaTime / .0045f);
         return NodeState.SUCCESS;
     }
 
