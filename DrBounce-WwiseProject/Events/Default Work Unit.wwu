@@ -471,6 +471,55 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Folder Name="Magnet" ID="{51CC3935-85F0-4463-8D93-63BB9A62C673}" ShortID="391336237">
+							<ChildrenList>
+								<Event Name="Magnet_Pulling_Start" ID="{59489EC6-114B-46A9-85BD-4039F7648938}">
+									<ChildrenList>
+										<Action Name="" ID="{88EADE01-0F2F-469A-810A-4444BA7122A3}" ShortID="466269482">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DB_SFX_Magnet_Pulling_Start" ID="{25F377BB-B8B1-4DD5-A173-1AA99BDA5500}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{81FCE616-40BA-4FCB-81DB-222F63B69847}" ShortID="261410366">
+											<PropertyList>
+												<Property Name="FadeTime" Type="Real64" Value="1.5"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DB_SFX_Magnet_Pulling_Loop" ID="{898038CB-A40F-46A3-AB64-5C3CE20991AA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Magnet_Pulling_Cancel" ID="{A6EB2355-97E6-4AAB-85F4-19D036D723BA}">
+									<ChildrenList>
+										<Action Name="" ID="{6AB47B90-37CF-43A3-B084-B7E77E6906F2}" ShortID="123804740">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DB_SFX_Magnet_Pulling_Start" ID="{25F377BB-B8B1-4DD5-A173-1AA99BDA5500}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{F620D19E-0624-47CB-A93D-F7F7E2AB0BC2}" ShortID="912338745">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DB_SFX_Magnet_Pulling_Loop" ID="{898038CB-A40F-46A3-AB64-5C3CE20991AA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Environment" ID="{C80EE8E8-8B3F-4DF8-88EC-93B68BF607BF}" ShortID="893870429">
