@@ -142,7 +142,6 @@ GameObject:
   - component: {fileID: 1969313376993699938}
   - component: {fileID: 2780799904479615596}
   - component: {fileID: 1827998034981765302}
-  - component: {fileID: 589858910253044510}
   - component: {fileID: 6829661780190677376}
   - component: {fileID: 6875376609405512688}
   - component: {fileID: 8562127731376985073}
@@ -218,34 +217,6 @@ MonoBehaviour:
   eventIdInternal: 0
   valueGuidInternal: 
   m_callbackDataInternal: {fileID: 0}
---- !u!114 &589858910253044510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3216315345376716391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 7a6d6113befb658428cc75fcc6fa81e4, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1827998034981765302}
-        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
-        m_MethodName: HandleEvent
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 5866358497386595400}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &6829661780190677376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,20 +413,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 0}
-  aimAssistMaxRange: 14
-  aimAssistForce: 20
-  onIsActive:
+  assistMaxRange: 14
+  assistForce: 20
+  onTryActivateAssist:
     m_PersistentCalls:
       m_Calls: []
-  onActivate:
+  onAssistStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3479626790604822496}
+        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
+        m_MethodName: HandleEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5866358497386595400}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onAssistCancelled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1827998034981765302}
+        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
+        m_MethodName: HandleEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5866358497386595400}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onIsActiveAndInRange:
     m_PersistentCalls:
       m_Calls: []
-  onDeactivate:
-    m_PersistentCalls:
-      m_Calls: []
-  _onIsActive: {fileID: 11400000, guid: 3127428e534217d42942d86bd24c3f87, type: 2}
-  _onActivate: {fileID: 11400000, guid: 2d20b725a126f0a48a4bc24e5d36049c, type: 2}
-  _onDeactivate: {fileID: 11400000, guid: 7a6d6113befb658428cc75fcc6fa81e4, type: 2}
+  _onTryActivateAssist: {fileID: 11400000, guid: 8bc84ef9784be7d41a433c0a614d7e98, type: 2}
+  _onAssistStart: {fileID: 11400000, guid: 2d20b725a126f0a48a4bc24e5d36049c, type: 2}
+  _onAssistCancelled: {fileID: 11400000, guid: 7a6d6113befb658428cc75fcc6fa81e4, type: 2}
+  _onIsActiveAndInRange: {fileID: 11400000, guid: 80579ae5402852b42883e477d213d252, type: 2}
 --- !u!95 &2784282697300590279
 Animator:
   serializedVersion: 3
@@ -486,7 +485,6 @@ GameObject:
   - component: {fileID: 2947857543310485335}
   - component: {fileID: 2211441070618421089}
   - component: {fileID: 3479626790604822496}
-  - component: {fileID: 5668738320213545324}
   m_Layer: 7
   m_Name: Pulling Start
   m_TagString: Untagged
@@ -559,34 +557,6 @@ MonoBehaviour:
   eventIdInternal: 0
   valueGuidInternal: 
   m_callbackDataInternal: {fileID: 0}
---- !u!114 &5668738320213545324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273388705919101803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 19e2be43be42dd8459c67a1c10ba1ae6, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3479626790604822496}
-        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
-        m_MethodName: HandleEvent
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 5866358497386595400}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &6676376771906026456
 GameObject:
   m_ObjectHideFlags: 0

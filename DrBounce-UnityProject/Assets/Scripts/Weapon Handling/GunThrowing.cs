@@ -25,7 +25,6 @@ public class GunThrowing : MonoBehaviour
     private bool pickupDelayCoroutineRunning;
     private bool throwBuffer = false;
 
-
     // Coyote Time variables (gun collision time before drop charges)
     private struct coyote
     {
@@ -60,6 +59,7 @@ public class GunThrowing : MonoBehaviour
     private Shooting shooting = null;
 
     public bool inFlight;
+    private bool throwing = false;
 
     //public Outline outlineScript;
 
@@ -150,6 +150,7 @@ public class GunThrowing : MonoBehaviour
     private void OnEnable()
     {
         controls.Player.Throw.performed += _ => SetThrowGunDelay();
+        controls.Player.Throw.performed += _ => CancelThrow();
         controls.Player.Recall.performed += _ => RecallGun();
     }
 
@@ -166,6 +167,11 @@ public class GunThrowing : MonoBehaviour
         {
             throwGunDelay = true;
         }
+    }
+
+    private void CancelThrow()
+    {
+        throwing = false;
     }
 
     // Update is called once per frame
@@ -204,6 +210,8 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
+            throwing = true;
+
             if (pickupDelayCoroutineRunning) 
             {
                 StopCoroutine(pickupDelayCoroutine); 
@@ -463,5 +471,10 @@ public class GunThrowing : MonoBehaviour
         }
 
         //print(canThrow);
+    }
+
+    public bool GetIsThrowing()
+    {
+        return throwing;
     }
 }

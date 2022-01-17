@@ -14,33 +14,16 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
 
     [SerializeField] private int vertexCount = 12;
 
-    private float colourDistance = 3.5f;
-
     [SerializeField] private Color colourClose = Color.blue;
     [SerializeField] private Color colourFar = Color.red;
 
-    [SerializeField] private MagnetAA mAA = null;
+    [SerializeField] private MagnetAssist mAA = null;
 
     private bool doMagnetise = false;
     private float oldDistance = 0f;
 
-    [Header("Events")]
-    [SerializeField]
-    private UnityEvent<bool> onIsActiveAndInRange = null;
-    [SerializeField]
-    private UnityEvent onActivateInRange = null;
-    [SerializeField]
-    private GameEventBool _onIsActiveAndInRange = null;
-    [SerializeField]
-    private GameEvent _onActivateInRange = null;
-
     private void Start()
     {
-        if (mAA != null)
-        {
-            colourDistance = mAA.aimAssistMaxRange;
-        }
-
         lineRenderer = GetComponent<LineRenderer>();
 
         Gradient gradient = new Gradient();
@@ -59,13 +42,11 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
         if (doMagnetise)
         {
             // Is it out of range or within 1m (i.e. being held)?
-            if ((distance > colourDistance || distance < 1f))
+            if ((distance > mAA.GetMaxRange() || distance < 1f))
             {
                 if (lineRenderer.enabled)
                 {
                     lineRenderer.enabled = false;
-                    onIsActiveAndInRange?.Invoke(false);
-                    _onIsActiveAndInRange?.Raise(false);
                     return;
                 }
             }
@@ -73,10 +54,6 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
             else if (!lineRenderer.enabled)
             {
                 lineRenderer.enabled = true;
-                onIsActiveAndInRange?.Invoke(true);
-                _onIsActiveAndInRange?.Raise(true);
-                onActivateInRange?.Invoke();
-                _onActivateInRange?.Raise();
             }
         }
         else if (lineRenderer.enabled)
@@ -103,8 +80,8 @@ public class BezierCurve3PointLineRenderer : MonoBehaviour
         lineRenderer.SetPositions(pointList.ToArray());
 
         Gradient gradient = new Gradient();
-        Color endColour = Color.Lerp(colourClose, colourFar, Mathf.Clamp(distance / colourDistance, 0, 1));
-        gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(colourClose, 0.0f), new GradientColorKey(endColour, 1.0f / (distance / colourDistance)) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) });
+        Color endColour = Color.Lerp(colourClose, colourFar, Mathf.Clamp(distance / mAA.GetMaxRange(), 0, 1));
+        gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(colourClose, 0.0f), new GradientColorKey(endColour, 1.0f / (distance / mAA.GetMaxRange())) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) });
         lineRenderer.colorGradient = gradient;
 
         oldDistance = distance;
