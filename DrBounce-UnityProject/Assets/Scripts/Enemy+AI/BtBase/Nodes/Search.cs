@@ -18,6 +18,8 @@ public class Search : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
+        // Rotate the enemy to look around for the player, the TargetInSight node should take care of spotting the player once rotated
+
         if (true)
         {
             return NodeState.SUCCESS;

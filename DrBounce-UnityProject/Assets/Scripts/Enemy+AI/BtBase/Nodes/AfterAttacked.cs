@@ -18,6 +18,8 @@ public class AfterAttacked : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
+        // If the enemy has recently taken damage, this script should return NodeState.SUCCESS;
+
         if (true)
         {
             return NodeState.SUCCESS;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackTarget : BtNode
 {
 
-    private Vector3 m_target;
+    private Enemy.Target m_target;
 
     /// <summary>
     /// Used to get variables from else where (custimisation)
@@ -22,6 +22,12 @@ public class AttackTarget : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
+        // Stuff for shooting should be in Enemy.cs
+        if (!blackboard.target.isPlayer)
+        {
+            return NodeState.FAILURE;
+        }
+
         if (true)
         {
             return NodeState.SUCCESS;

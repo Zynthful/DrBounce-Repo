@@ -18,6 +18,8 @@ public class Callout : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
+        // Not 100% sure if we said we'd avoid this for now, so maybe just leave it as is I guess? Have a go if you want tho :)
+
         if (true)
         {
             return NodeState.SUCCESS;

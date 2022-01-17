@@ -7,6 +7,39 @@ using MoreMountains.Tools;
 
 public class Enemy : MonoBehaviour
 {
+    public class Target
+    {
+        public Vector3 spottedPosition;
+        public bool isPlayer;
+        public GameObject playerObject;
+
+        public Target(bool i_isPlayer, GameObject i_playerObject = null, params Vector3[] i_position)
+        {
+            isPlayer = i_isPlayer;
+            if (i_playerObject != null)
+            {
+                playerObject = i_playerObject;
+            }
+            if (i_position.Length > 0)
+            {
+                spottedPosition = i_position[0];
+            }
+        }
+
+        void NewTarget(bool i_isPlayer, GameObject i_playerObject = null, params Vector3[] i_position)
+        {
+            isPlayer = i_isPlayer;
+            if (i_playerObject != null)
+            {
+                playerObject = i_playerObject;
+            }
+            if (i_position.Length > 0)
+            {
+                spottedPosition = i_position[0];
+            }
+        }
+    }
+
     [Header("Declarations")]
     [SerializeField]
     private EnemyAudio enemyAudio = null;

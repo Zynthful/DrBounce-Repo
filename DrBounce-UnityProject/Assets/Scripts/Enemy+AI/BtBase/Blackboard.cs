@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Blackboard {
     public GameObject owner;
-    public Vector3 target;
+    public Enemy.Target target;
     public Vector3 startPosition;
     public BouncyEnemy aiController;
 }

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class TargetInSight : BtNode
 {
+
+    private Blackboard m_blackboard;
+
     /// <summary>
     /// Used to get variables from else where (custimisation)
     /// </summary>
-    public TargetInSight()
+    public TargetInSight(Blackboard board)
     {
+        m_blackboard = board;
     }
 
     /// <summary>
@@ -18,6 +22,8 @@ public class TargetInSight : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
+        // If player is in Line of Sight, set run blackboard.target.NewTarget(true, (player gameobject here)); to assign new target values to enemy AI
+
         if (true)
         {
             return NodeState.SUCCESS;

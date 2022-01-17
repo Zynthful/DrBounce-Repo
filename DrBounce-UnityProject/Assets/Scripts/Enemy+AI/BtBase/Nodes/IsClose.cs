@@ -10,11 +10,20 @@ public class IsClose : BtNode {
     }
 
     public override NodeState evaluate(Blackboard blackboard) {
-        if (blackboard.target == null || blackboard.target == Vector3.zero) {
+        if (blackboard.target == null || (blackboard.target.playerObject == null && blackboard.target.spottedPosition == Vector3.zero)) {
             return NodeState.FAILURE;
         }
 
-        float distance = (blackboard.owner.transform.localPosition - blackboard.target).magnitude;
+        float distance;
+        if (blackboard.target.isPlayer)
+        {
+            distance = (blackboard.owner.transform.localPosition - blackboard.target.playerObject.transform.position).magnitude;
+        }
+        else
+        {
+            distance = (blackboard.owner.transform.localPosition - blackboard.target.spottedPosition).magnitude;
+        }
+
         if (distance < m_distanceLimit) {
             return NodeState.SUCCESS;
         } else {

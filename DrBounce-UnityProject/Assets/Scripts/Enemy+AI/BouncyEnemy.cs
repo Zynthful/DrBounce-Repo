@@ -22,12 +22,15 @@ public class BouncyEnemy : Enemy
     // Start is called before the first frame update
     void Awake()
     {
+        /*
+        GameObject patrolPoint = new GameObject("PatrolPoint");
+        patrolPoint.transform.position = patrolPoints[1];*/
         if(m_root == null)
         {
             m_blackboard = new Blackboard();
             m_blackboard.owner = gameObject;
             m_blackboard.aiController = m_blackboard.owner.GetComponent<BouncyEnemy>();
-            m_blackboard.target = Vector3.zero;
+            m_blackboard.target = new Target(false);
             m_blackboard.startPosition = Vector3.zero;
             m_root = createTree();
         }
@@ -57,7 +60,7 @@ public class BouncyEnemy : Enemy
         if (canAttack)
         {
             // Attack Node Section
-            BtNode CanSee = new Selector(new TargetInSight(), new Search());
+            BtNode CanSee = new Selector(new TargetInSight(m_blackboard), new Search());
             BtNode LookAt = new Selector(CanSee, new AfterAttacked());
             BtNode CheckForTarget = new Sequence(new IsClose(sightRange), LookAt, new Callout());
             Attack = new Sequence(new IsNotReloading(), CheckForTarget, new AttackTarget(m_blackboard));
