@@ -38,8 +38,8 @@ public class TargetRandom : BtNode
 
         // pick a random one
         GameObject randomTag = tagged[Random.Range(0, tagged.Length)];
-        blackboard.target = randomTag.transform.position;
-        blackboard.startPosition = blackboard.owner.transform.localPosition;
+        blackboard.target.NewTarget(false, null, randomTag.transform.position);
+        blackboard.startPosition = blackboard.owner.transform.position;
         m_nodeState = NodeState.SUCCESS;
         return m_nodeState;
     }

@@ -26,8 +26,8 @@ public class TargetClose : BtNode {
 
         if (closest != null)
         {
-            blackboard.target = closest;
-            blackboard.startPosition = blackboard.owner.transform.localPosition;
+            blackboard.target.NewTarget(false, null, closest);
+            blackboard.startPosition = blackboard.owner.transform.position;
             return NodeState.SUCCESS;
         }
 

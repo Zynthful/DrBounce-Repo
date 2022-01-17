@@ -28,8 +28,8 @@ public class TargetNext : BtNode
 
         Vector3 nextPos = m_positions[blackboard.aiController.currentTargetIndex];
 
-        blackboard.target = nextPos;
-        blackboard.startPosition = blackboard.owner.transform.localPosition;
+        blackboard.target.NewTarget(false, null, nextPos);
+        blackboard.startPosition = blackboard.owner.transform.position;
 
         m_nodeState = NodeState.SUCCESS;
         return m_nodeState;

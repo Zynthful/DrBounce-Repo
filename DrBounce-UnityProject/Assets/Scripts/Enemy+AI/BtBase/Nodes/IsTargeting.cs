@@ -10,7 +10,7 @@ public class IsTargeting : BtNode
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (blackboard.target != null && blackboard.target != Vector3.zero)
+        if (blackboard.HasTarget())
         {
             return NodeState.SUCCESS;
         }

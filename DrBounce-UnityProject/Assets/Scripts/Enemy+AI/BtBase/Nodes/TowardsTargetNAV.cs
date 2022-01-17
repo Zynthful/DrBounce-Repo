@@ -14,11 +14,15 @@ public class TowardsTargetNAV : BtNode {
         }
 
         // if target is null, we can't move towards it!
-        if (blackboard.target == null || blackboard.target == Vector3.zero) {
+        if (!blackboard.HasTarget()) {
             return NodeState.FAILURE;
         }
 
-        m_agent.SetDestination(blackboard.target);
+        if(blackboard.target.isPlayer)
+            m_agent.SetDestination(blackboard.target.playerObject.transform.position);
+        else if (!blackboard.target.isPlayer)
+            m_agent.SetDestination(blackboard.target.spottedPosition);
+
         return NodeState.SUCCESS;
     }
 

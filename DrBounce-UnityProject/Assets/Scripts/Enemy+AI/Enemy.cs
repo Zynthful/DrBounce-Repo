@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        void NewTarget(bool i_isPlayer, GameObject i_playerObject = null, params Vector3[] i_position)
+        public void NewTarget(bool i_isPlayer, GameObject i_playerObject = null, params Vector3[] i_position)
         {
             isPlayer = i_isPlayer;
             if (i_playerObject != null)

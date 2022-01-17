@@ -79,34 +79,14 @@ public class IsTagClose : BtNode
             }
         }
 
-        // Determine whether the AI wants to walk towards or away from the target (used for Blinky's stalk behaviour)
-        if (m_moveTowards)
+        if (closeDist <= m_distanceLimit && closeDist >= m_distanceMin && closest != null)
         {
-            if (closeDist <= m_distanceLimit && closeDist >= m_distanceMin && closest != null)
-            {
-                blackboard.target = closest;
-                return NodeState.SUCCESS;
-            }
-            else
-            {
-                return NodeState.FAILURE;
-            }
+            return NodeState.SUCCESS;
         }
         else
         {
-            if (closeDist <= m_distanceLimit && closeDist >= m_distanceMin && closest != null)
-            {
-                // Move the new target marker directly away from the target in relation to the AI's location
-                newMarker.transform.position = blackboard.owner.transform.position + (blackboard.owner.transform.position - player.transform.position);
-                blackboard.target = newMarker.transform.position;
-                return NodeState.SUCCESS;
-            }
-            else
-            {
-                return NodeState.FAILURE;
-            }
+            return NodeState.FAILURE;
         }
-       
     }
 
     public override string getName()

@@ -23,24 +23,30 @@ public class TowardsTarget : BtNode
         }
 
         // if target is null, we can't move towards it!
-        if (blackboard.target == null || blackboard.target == Vector3.zero)
+        if (!blackboard.HasTarget())
         {
             return NodeState.FAILURE;
         }
 
         if (blackboard.startPosition == Vector3.zero)
         {
-            blackboard.startPosition = blackboard.owner.transform.localPosition;
+            blackboard.startPosition = blackboard.owner.transform.position;
             if (blackboard.startPosition == Vector3.zero)
             {
                 return NodeState.FAILURE;
             }
         }
 
-        Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + blackboard.target);
+        Vector3 targetPosition;
+        if (blackboard.target.isPlayer)
+            targetPosition = blackboard.target.playerObject.transform.position;
+        else
+            targetPosition = blackboard.target.spottedPosition;
 
-        m_movement.localPosition = Vector3.MoveTowards(m_movement.localPosition, blackboard.target, Time.deltaTime / moveSpeed);
-        m_movement.rotation = Quaternion.RotateTowards(m_movement.rotation, Quaternion.LookRotation((blackboard.target - m_movement.localPosition).normalized), Time.deltaTime / .0045f);
+        Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + targetPosition);
+
+        m_movement.position = Vector3.MoveTowards(m_movement.position, targetPosition, Time.deltaTime / moveSpeed);
+        m_movement.rotation = Quaternion.RotateTowards(m_movement.rotation, Quaternion.LookRotation((targetPosition - m_movement.position).normalized), Time.deltaTime / .0045f);
         return NodeState.SUCCESS;
     }
 
