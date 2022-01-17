@@ -17,11 +17,11 @@ public class IsClose : BtNode {
         float distance;
         if (blackboard.target.isPlayer)
         {
-            distance = (blackboard.owner.transform.localPosition - blackboard.target.playerObject.transform.position).magnitude;
+            distance = (blackboard.owner.transform.position - blackboard.target.playerObject.transform.position).magnitude;
         }
         else
         {
-            distance = (blackboard.owner.transform.localPosition - blackboard.target.spottedPosition).magnitude;
+            distance = (blackboard.owner.transform.position - blackboard.target.spottedPosition).magnitude;
         }
 
         if (distance < m_distanceLimit) {

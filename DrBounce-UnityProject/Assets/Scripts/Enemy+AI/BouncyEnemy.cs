@@ -22,15 +22,12 @@ public class BouncyEnemy : Enemy
     // Start is called before the first frame update
     void Awake()
     {
-        /*
-        GameObject patrolPoint = new GameObject("PatrolPoint");
-        patrolPoint.transform.position = patrolPoints[1];*/
         if(m_root == null)
         {
             m_blackboard = new Blackboard();
             m_blackboard.owner = gameObject;
             m_blackboard.aiController = m_blackboard.owner.GetComponent<BouncyEnemy>();
-            m_blackboard.target = new Target(false);
+            m_blackboard.target = new Target(false, null, Vector3.zero);
             m_blackboard.startPosition = Vector3.zero;
             m_root = createTree();
         }
