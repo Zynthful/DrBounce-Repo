@@ -152,7 +152,7 @@ public class Shooting : MonoBehaviour
         CheckForHoverOverEnemy();
 
         // Handle max shot charging
-        if (IsInHand() && holdingShoot)
+        if (IsInHand() && holdingShoot && gunCharge > 1)
         {
             currentHoldTime += Time.deltaTime;
 
@@ -508,7 +508,7 @@ public class Shooting : MonoBehaviour
 
     private bool IsInHand()
     {
-        return transform.parent != null;    // this is cringe
+        return transform.parent != null;    // this is cringe       //<----- this comment is cringe
     }
 
     private bool IsCoolingDown()
