@@ -146,13 +146,15 @@ public class Shooting : MonoBehaviour
     {
         if (GameManager.s_Instance.paused)
             return;
+        
+        holdingShoot = controls.Player.Shoot.ReadValue<float>() >= 0.2f;
 
         timeSinceLastShot += Time.deltaTime;
 
         CheckForHoverOverEnemy();
 
         // Handle max shot charging
-        if (IsInHand() && holdingShoot && gunCharge > 1)
+        if (IsInHand() && holdingShoot)
         {
             currentHoldTime += Time.deltaTime;
 
@@ -298,8 +300,6 @@ public class Shooting : MonoBehaviour
 
     private void ShootStarted()
     {
-        holdingShoot = true;
-
         /*
         if (!GameManager.s_Instance.paused && IsInHand())
         {
@@ -315,8 +315,6 @@ public class Shooting : MonoBehaviour
 
     private void ShootReleased()
     {
-        holdingShoot = false;
-
         if (!GameManager.s_Instance.paused && IsInHand())
         {
             maxShotCharging = false;
@@ -508,7 +506,7 @@ public class Shooting : MonoBehaviour
 
     private bool IsInHand()
     {
-        return transform.parent != null;    // this is cringe       //<----- this comment is cringe
+        return transform.parent != null;    // this is cringe       //<----- this comment is cringe     // <----- you breaking gun shooting is cringe >:(
     }
 
     private bool IsCoolingDown()
