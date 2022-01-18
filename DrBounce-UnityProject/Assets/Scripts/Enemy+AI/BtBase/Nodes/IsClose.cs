@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IsClose : BtNode {
-    private float m_distanceLimit = 10;
+public class IsClose : BtNode 
+{
 
-    public IsClose(float distanceLimit){
+    private float m_distanceLimit = 10;
+    private bool m_checkForPlayer;
+
+    public IsClose(bool toPlayer, float distanceLimit)
+    {
+        m_checkForPlayer = toPlayer;
         m_distanceLimit = distanceLimit;
     }
 
@@ -15,7 +20,7 @@ public class IsClose : BtNode {
         }
 
         float distance;
-        if (blackboard.target.isPlayer)
+        if (m_checkForPlayer)
         {
             distance = (blackboard.owner.transform.position - blackboard.target.playerObject.transform.position).magnitude;
         }
@@ -24,9 +29,12 @@ public class IsClose : BtNode {
             distance = (blackboard.owner.transform.position - blackboard.target.spottedPosition).magnitude;
         }
 
-        if (distance < m_distanceLimit) {
+        if (distance < m_distanceLimit) 
+        {
             return NodeState.SUCCESS;
-        } else {
+        } 
+        else 
+        {
             return NodeState.FAILURE;
         }
     }

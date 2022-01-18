@@ -14,7 +14,7 @@ public class TowardsTargetNAV : BtNode {
         }
 
         // if target is null, we can't move towards it!
-        if (!blackboard.HasTarget()) {
+        if (!blackboard.HasTarget(false)) {
             return NodeState.FAILURE;
         }
 

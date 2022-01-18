@@ -5,22 +5,39 @@ using UnityEngine;
 public class CheckBool : BtNode
 {
 
-    private bool m_bool;
+    private int m_integer;
 
-    public CheckBool(ref bool check)
+    public CheckBool(int integer)
     {
-        m_bool = check;
+        m_integer = integer;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (m_bool)
+        switch (m_integer)
         {
-            return NodeState.SUCCESS;
-        }
-        else
-        {
-            return NodeState.FAILURE;
+            case 0:
+                if (blackboard.aiController.canMove)
+                {
+                    return NodeState.SUCCESS;
+                }
+                else
+                {
+                    return NodeState.FAILURE;
+                }
+
+            case 1:
+                if (blackboard.aiController.canAttack)
+                {
+                    return NodeState.SUCCESS;
+                }
+                else
+                {
+                    return NodeState.FAILURE;
+                }
+
+            default:
+                return NodeState.FAILURE;
         }
     }
 

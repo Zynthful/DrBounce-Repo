@@ -22,11 +22,11 @@ public class AfterAttacked : BtNode
 
         if (true)
         {
-            return NodeState.SUCCESS;
+            return NodeState.FAILURE;
         }
         else if (false)
         {
-            return NodeState.FAILURE;
+            return NodeState.SUCCESS;
         }
     }
 

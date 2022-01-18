@@ -21,6 +21,7 @@ public class IsNotReloading : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
+        Debug.Log("Successfuly reached " + getName());
         if(m_blackboard.shotDelay >= 0)
         {
             m_blackboard.shotDelay -= Time.deltaTime;

@@ -7,7 +7,6 @@ public class BouncyEnemy : Enemy
 
     private BtNode m_root;
     private Blackboard m_blackboard;
-    private float sightRange;
 
     public bool searching;
     public bool recentlyAttacked;
@@ -47,30 +46,19 @@ public class BouncyEnemy : Enemy
     protected BtNode createMovementTree()
     {
         // Movement Node Section
-        BtNode GetPatrolPoint = new Sequence(new IsClose(.2f), new TargetNext(patrolPoints.ToArray()));
-        BtNode TowardsPatrolPoint = new Sequence(new IsTargeting(), new TowardsTarget(enemySpeed));
+        BtNode GetPatrolPoint = new Sequence(new IsClose(false, .2f), new TargetNext(patrolPoints.ToArray()));
+        BtNode TowardsPatrolPoint = new Sequence(new IsTargeting(false), new TowardsTarget(enemySpeed));
         BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose(patrolPoints.ToArray()));
-        return new Sequence(new CheckBool(ref canMove), new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
+        return new Sequence(new CheckBool(0), new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
     }
 
     protected BtNode createAttackingTree()
     {
-        BtNode Attack;
-        if (canAttack)
-        {
-            // Attack Node Section
-            BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle), new Search());
-            BtNode LookAt = new Selector(CanSee, new AfterAttacked());
-            BtNode CheckForTarget = new Sequence(new IsClose(sightRange), LookAt, new Callout());
-            Attack = new Sequence(new IsNotReloading(m_blackboard), CheckForTarget, new AttackTarget(m_blackboard, rateOfFire));
-        }
-        else
-        {
-            // Empty/returns a fail - TEMP
-            Attack = new Sequence(new CheckIfStunned());
-        }
-
-        return Attack;
+        // Attack Node Section
+        BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle), new Search());
+        BtNode LookAt = new Selector(CanSee, new AfterAttacked());
+        BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist), new Callout());
+        return new Sequence(new CheckBool(1), CheckForTarget, new IsNotReloading(m_blackboard), new AttackTarget(m_blackboard, rateOfFire, bullet, onShoot));
     }
 
     // Update is called once per frame

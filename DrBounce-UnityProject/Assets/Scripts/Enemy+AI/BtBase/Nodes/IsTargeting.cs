@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class IsTargeting : BtNode
 {
-    public IsTargeting()
+
+    private bool m_playerCheck;
+
+    public IsTargeting(bool player)
     {
+        m_playerCheck = player;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (blackboard.HasTarget())
+        if (blackboard.HasTarget(m_playerCheck))
         {
             return NodeState.SUCCESS;
         }

@@ -23,7 +23,7 @@ public class TowardsTarget : BtNode
         }
 
         // if target is null, we can't move towards it!
-        if (!blackboard.HasTarget())
+        if (!blackboard.HasTarget(false))
         {
             return NodeState.FAILURE;
         }
@@ -37,16 +37,17 @@ public class TowardsTarget : BtNode
             }
         }
 
-        Vector3 targetPosition;
-        if (blackboard.target.isPlayer)
-            targetPosition = blackboard.target.playerObject.transform.position;
-        else
-            targetPosition = blackboard.target.spottedPosition;
+        Vector3 targetPosition = blackboard.target.spottedPosition;
 
-        Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + targetPosition);
+        //Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + targetPosition);
 
         m_movement.position = Vector3.MoveTowards(m_movement.position, targetPosition, Time.deltaTime / moveSpeed);
-        m_movement.rotation = Quaternion.RotateTowards(m_movement.rotation, Quaternion.LookRotation((targetPosition - m_movement.position).normalized), Time.deltaTime / .0045f);
+
+        if (!blackboard.HasTarget(true))
+        {
+            m_movement.rotation = Quaternion.RotateTowards(m_movement.rotation, Quaternion.LookRotation((targetPosition - m_movement.position).normalized), Time.deltaTime / .0045f);
+        }
+
         return NodeState.SUCCESS;
     }
 

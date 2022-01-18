@@ -9,15 +9,18 @@ public class Blackboard {
     public BouncyEnemy aiController;
     public float shotDelay;
 
-    public bool HasTarget()
+    public bool HasTarget(bool player)
     {
         if (target != null)
         {
-            if (target.isPlayer && target.playerObject != null)
+            if (player)
             {
-                return true;
+                if (target.isPlayer && target.playerObject != null)
+                {
+                    return true;
+                }
             }
-            else if (!target.isPlayer && target.spottedPosition != Vector3.zero)
+            else if (target.spottedPosition != Vector3.zero)
             {
                 return true;
             }

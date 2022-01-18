@@ -8,20 +8,11 @@ public class AttackTarget : BtNode
 {
     private Blackboard m_blackboard;
 
-    private Enemy.Target m_target;
-
     private ObjectPooler pool;
 
-    private bool shootDelay;
-    private Coroutine shootingDelayCoroutine;
-
-    private EnemyAudio enemyAudio = null;
-    [SerializeField]
     private EnemyHealth health = null;
-    [SerializeField]
-    private BulletType bullet;
-    [SerializeField]
-    private UnityEvent onShoot = null;
+    private BulletType m_bullet;
+    private UnityEvent m_onShoot = null;
 
     Transform targetPosition;
     Transform enemyPosition;
@@ -38,21 +29,26 @@ public class AttackTarget : BtNode
     /// <returns></returns>
     /// 
 
-    public AttackTarget(Blackboard blackboard, float rateOfFire)
+    public AttackTarget(Blackboard blackboard, float rateOfFire, BulletType bullet, UnityEvent onShoot)
     {
+        m_blackboard = blackboard;
         m_rateOfFire = rateOfFire;
+        m_bullet = bullet;
+        m_onShoot = onShoot;
+        pool = ObjectPooler.Instance;
     }
+
     public override NodeState evaluate(Blackboard blackboard)
     {
         Debug.Log("evaluating");
         // Stuff for shooting should be in Enemy.cs
-        if (!blackboard.target.isPlayer)
+        if (!m_blackboard.target.isPlayer)
         {
             return NodeState.FAILURE;
         }
 
-        enemyPosition = blackboard.owner.transform;
-        targetPosition = m_target.playerObject.transform;
+        enemyPosition = m_blackboard.owner.transform;
+        targetPosition = m_blackboard.target.playerObject.transform;
         GameObject bullet = Shoot();
 
         if (bullet != null)
@@ -69,13 +65,8 @@ public class AttackTarget : BtNode
     {
         Debug.Log("Shooting;");
         m_blackboard.shotDelay = m_rateOfFire;
-        onShoot?.Invoke();
-        return pool.SpawnBulletFromPool("Bullet", enemyPosition.position, Quaternion.identity, (m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized, bullet, null);
-    }
-
-    public EnemyAudio GetAudio()
-    {
-        return enemyAudio;
+        m_onShoot?.Invoke();
+        return pool.SpawnBulletFromPool("Bullet", enemyPosition.position, Quaternion.identity, (m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized, m_bullet, null);
     }
 
     /// <summary>

@@ -35,13 +35,18 @@ public class TargetInSight : BtNode
     {
         // If player is in Line of Sight, set run blackboard.target.NewTarget(true, (player gameobject here)); to assign new target values to enemy AI
         enemyPosition = blackboard.owner.transform;
+
+        Debug.Log("Successfuly reached " + getName());
+
         if (PlayerLosCheck())
         {
             m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
+            enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
             return NodeState.SUCCESS;
         }
         else
         {
+            m_blackboard.target.NewTarget(false, null);
             return NodeState.FAILURE;
         }
     }

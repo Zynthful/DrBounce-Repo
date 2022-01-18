@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private EnemyHealth health = null;
     [SerializeField]
-    private BulletType bullet;
+    public BulletType bullet;
     [SerializeField]
     private GameObject healthPackPrefab;
 
@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Events")]
     [SerializeField]
-    private UnityEvent onShoot = null;
+    public UnityEvent onShoot = null;
 
     /*
     Enemy()
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
     {
         if (!health.GetIsDead())
         {
-            Shoot();
+            //Shoot();
         }
     }
 

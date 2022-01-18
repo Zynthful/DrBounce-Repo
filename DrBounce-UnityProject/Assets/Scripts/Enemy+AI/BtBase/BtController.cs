@@ -15,7 +15,7 @@ public class BtController : MonoBehaviour
     // method to create the tree, sorry - no GUI for this we need to build it by hand
     protected BtNode createTree()
     {
-        return new Sequence(new IsTargeting(), new TowardsTarget());
+        return new Sequence(new IsTargeting(false), new TowardsTarget());
     }
 
     // Start is called before the first frame update
