@@ -1,6 +1,7 @@
 Event	ID	Name			Wwise Object Path	Notes
 	18309885	UI_Button_Enter			\Default Work Unit\UI\UI_Button_Enter	
 	65181031	Player_Throw			\Default Work Unit\Player\Player_Throw	
+	114683718	Slide_End			\Default Work Unit\Player\Movement\Slide\Slide_End	
 	177975784	Enemy_Gun_Bounce_Impact			\Default Work Unit\Enemy\Bouncing\Enemy_Gun_Bounce_Impact	
 	822196729	Gun_PickUpFromGround			\Default Work Unit\Player\Gun\Interactions - Throwing, Catching, Magnet\Gun_PickUpFromGround	
 	936643039	Enemy_Bullet_Impact_Surface			\Default Work Unit\Enemy\Bullet\Enemy_Bullet_Impact_Surface	
@@ -14,6 +15,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1866025847	Footstep			\Default Work Unit\Player\Movement\Footstep	
 	1899329689	Gun_Charge_Lost			\Default Work Unit\Player\Gun\Charge\Gun_Charge_Lost	
 	1942692385	Dash			\Default Work Unit\Player\Movement\Dash	
+	2149348397	Slide_Start			\Default Work Unit\Player\Movement\Slide\Slide_Start	
 	2278189420	Magnet_Pulling_Start			\Default Work Unit\Player\Magnet\Magnet_Pulling_Start	
 	2365089589	Bounce_Object			\Default Work Unit\Environment\Bounce Pads\Bounce_Object	
 	2376949343	Bounce_Player			\Default Work Unit\Environment\Bounce Pads\Bounce_Player	
@@ -49,6 +51,7 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	3274506471	Health_Hit_Damage			\Default Work Unit\Health\Health_Hit_Damage	
 
 Effect plug-ins	ID	Name	Type				Notes
+	542554626	Wwise Compressor (Custom)	Wwise Compressor			
 	744635329	Wwise Delay (Custom)	Wwise Delay			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
@@ -63,6 +66,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	331240589	SFX_Gun_Rebound_Feedback_5	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\SFX_Gun_Rebound_Feedback_5_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Gun\Gun_Bounce_Successful_Feedback\SFX_Gun_Rebound_Feedback_5		310268
 	335593347	DB_SFX_Enemy_Injured_Draft_2	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Enemy_Injured_Draft_2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Health\DB_SFX_Enemy_Injured_Draft_2		39896
 	397801328	SFX_Gun_Charged_Loop_Draft_3	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\SFX_Gun_Charged_Loop_Draft_3_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Gun\SFX_Gun_Charged_Loop_Draft_3		3591064
+	401570358	DB_SFX_Player_Movement_Slide_End	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Movement_Slide_End_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Movement\Slide\DB_SFX_Player_Movement_Slide_End		206728
 	428247045	DB_SFX_Magnet_Pulling_Start	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Magnet_Pulling_Start_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Magnet\DB_SFX_Magnet_Pulling_Start		282292
 	433525132	SFX_Gun_Charged_Draft_4	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\SFX_Gun_Charged_Draft_4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Gun\Gun_Catch_Charge\SFX_Gun_Charged_Draft_4		488464
 	434692751	Footstep_Grass_3	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Footstep_Grass_3_8EE21B35.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Movement\Footstep (Grass)\Footstep_Grass_3		44446
@@ -74,8 +78,10 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	500989044	DB_SFX_Bounce_Pad_Bounce_Player_ConsecutiveBounce	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Bounce_Pad_Bounce_Player_ConsecutiveBounce_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Environment\Bounce Pad\DB_SFX_Bounce_Pad_Bounce_Player\DB_SFX_Bounce_Pad_Bounce_Player_Consecutive\DB_SFX_Bounce_Pad_Bounce_Player_ConsecutiveBounce		167348
 	517715216	Footstep_Grass_1	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Footstep_Grass_1_8EE21B35.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Movement\Footstep (Grass)\Footstep_Grass_1		56898
 	518506752	DB_SFX_Dash_Draft_1	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Dash_Draft_1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Movement\Dash\DB_SFX_Dash_Draft_1		141216
+	567724231	DB_SFX_Player_Movement_Slide_Loop	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Movement_Slide_Loop_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Movement\Slide\DB_SFX_Player_Movement_Slide_Loop		1191908
 	582024848	SFX_Gun_Rebound_Feedback_2	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\SFX_Gun_Rebound_Feedback_2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Gun\Gun_Bounce_Successful_Feedback\SFX_Gun_Rebound_Feedback_2		163876
 	586274457	DB_SFX_Gun_MaxShot_Charged_Loop_Draft_1	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Gun_MaxShot_Charged_Loop_Draft_1_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Gun\MaxShot\Gun_MaxShot_Charged_Loop\DB_SFX_Gun_MaxShot_Charged_Loop_Draft_1		3241276
+	628927546	DB_SFX_Player_Movement_Slide_Start	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Movement_Slide_Start_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Movement\Slide\DB_SFX_Player_Movement_Slide_Start		554564
 	669994136	DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Environment\Bounce Pad\DB_SFX_Bounce_Pad_Bounce_Player\DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer		29804
 	674188590	DB_SFX_Player_Heal_Draft_1	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Heal_Draft_1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\Heal\DB_SFX_Player_Heal_Draft_1		130196
 	674468469	DB_SFX_Enemy_Bullet_Impact_Player	C:\Users\Jamie Carnell\Documents\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Injured_By_Enemy_Bullet_Draft_6_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bullet\DB_SFX_Enemy_Bullet_Impact_Player		96728

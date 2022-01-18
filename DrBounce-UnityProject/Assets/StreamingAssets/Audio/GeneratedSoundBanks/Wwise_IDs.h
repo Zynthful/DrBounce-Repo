@@ -47,6 +47,8 @@ namespace AK
         static const AkUniqueID PAUSE = 3092587493U;
         static const AkUniqueID PLAYER_THROW = 65181031U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
+        static const AkUniqueID SLIDE_END = 114683718U;
+        static const AkUniqueID SLIDE_START = 2149348397U;
         static const AkUniqueID UI_BUTTON_CLICK_FAIL = 4089643514U;
         static const AkUniqueID UI_BUTTON_ENTER = 18309885U;
         static const AkUniqueID UI_BUTTON_POINTERENTER = 1841462538U;
