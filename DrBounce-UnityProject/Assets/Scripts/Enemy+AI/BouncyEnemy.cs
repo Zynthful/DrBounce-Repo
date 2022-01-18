@@ -15,14 +15,10 @@ public class BouncyEnemy : Enemy
     public int currentTargetIndex;
     public float enemySpeed = 2;
 
-    [Header("Attacking")]
-
-    [Space(10)]
-    public List<Vector3> patrolPoints = new List<Vector3> { };
-
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if(m_root == null)
         {
             m_blackboard = new Blackboard();

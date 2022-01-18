@@ -69,6 +69,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public UnityEvent onShoot = null;
 
+    [Space(10)]
+    public List<Vector3> patrolPoints = new List<Vector3> { };
+
     /*
     Enemy()
     {
@@ -155,6 +158,18 @@ public class Enemy : MonoBehaviour
         //         break;
         // }
         // GetComponent<MeshRenderer>().material = mat;
+    }
+
+    protected virtual void Awake()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "PatrolPoint")
+            {
+                patrolPoints.Add(child.position);
+                Destroy(child.gameObject);
+            }
+        }
     }
 
     IEnumerator ShotDelay(float delay)
