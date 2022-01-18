@@ -20,7 +20,13 @@ public class Health : MonoBehaviour
 
     protected bool canSetStartingHealth = true;
 
-    private bool dead = false;
+    [Header("Low Health Settings")]
+    [SerializeField]
+    [Tooltip("When this object's health drops below this percentage value, it will be considered as being on low health.")]
+    [Range(0, 100.0f)]
+    protected float lowHealthThreshold = 25.0f;
+
+    protected bool isOnLowHealth = false;
 
     [Header("Unity Events")]
     // Passes health value
@@ -40,6 +46,10 @@ public class Health : MonoBehaviour
     protected UnityEvent<float> onHeal = null;
     [SerializeField]
     protected UnityEvent onDeath = null;
+    [SerializeField]
+    protected UnityEvent onLowHealth = null;
+    [SerializeField]
+    protected UnityEvent onNotLowHealth = null;
 
     [Header("Game Events")]
     // Passes health percentage
@@ -72,7 +82,6 @@ public class Health : MonoBehaviour
 
     protected virtual void UpdatedStartingHealth()   //doesn't work in start : (
     {
-        // Damage(30);
         canSetStartingHealth = false;
     }
 
@@ -89,6 +98,17 @@ public class Health : MonoBehaviour
         else if (GetIsDead())
         {
             Invoke("DIE", deathDelay);
+        }
+
+        bool wasOnLowHealth = isOnLowHealth;    // Checked against to prevent calling low health events multiple times
+        isOnLowHealth = ((float) health / (float) maxHealth) * 100.0f <= lowHealthThreshold;
+        if (isOnLowHealth && !wasOnLowHealth)
+        {
+            onLowHealth?.Invoke();
+        }
+        else if (!isOnLowHealth && wasOnLowHealth)
+        {
+            onNotLowHealth?.Invoke();
         }
 
         onHealthChange?.Invoke(health);
@@ -132,8 +152,6 @@ public class Health : MonoBehaviour
 
     protected virtual void DIE() 
     {
-        dead = true;
-
         onDeath?.Invoke();
         _onDeath?.Raise();
 
@@ -142,7 +160,6 @@ public class Health : MonoBehaviour
 
     protected virtual void ResetHealth() 
     {
-        dead = false;
         SetHealth(maxHealth);
     }
 
