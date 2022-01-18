@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Search : BtNode
 {
     /// <summary>
@@ -11,23 +10,35 @@ public class Search : BtNode
     {
     }
 
+    private Transform enemyRotation;
+
     /// <summary>
     /// need to return true or false
     /// </summary>
     /// <param name="blackboard"></param>
     /// <returns></returns>
+
+
     public override NodeState evaluate(Blackboard blackboard)
     {
+        enemyRotation = blackboard.owner.transform;
         // Rotate the enemy to look around for the player, the TargetInSight node should take care of spotting the player once rotated
 
-        if (true)
+        if (Rotate())
         {
-            return NodeState.SUCCESS;
+            Debug.Log("Searching");
+            return NodeState.FAILURE;
         }
         else
         {
             return NodeState.FAILURE;
         }
+    }
+
+    private bool Rotate()
+    {
+        enemyRotation.rotation = Quaternion.RotateTowards(enemyRotation.rotation, enemyRotation.rotation * Quaternion.Euler(0,1000,0), Time.deltaTime / .0045f);
+        return true;
     }
 
     /// <summary>
