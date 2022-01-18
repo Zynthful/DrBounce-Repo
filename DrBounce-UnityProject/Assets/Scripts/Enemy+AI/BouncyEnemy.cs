@@ -16,6 +16,8 @@ public class BouncyEnemy : Enemy
     public int currentTargetIndex;
     public float enemySpeed = 2;
 
+    [Header("Attacking")]
+
     [Space(10)]
     public List<Vector3> patrolPoints = new List<Vector3> { };
 
@@ -57,10 +59,10 @@ public class BouncyEnemy : Enemy
         if (canAttack)
         {
             // Attack Node Section
-            BtNode CanSee = new Selector(new TargetInSight(m_blackboard), new Search());
+            BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle), new Search());
             BtNode LookAt = new Selector(CanSee, new AfterAttacked());
             BtNode CheckForTarget = new Sequence(new IsClose(sightRange), LookAt, new Callout());
-            Attack = new Sequence(new IsNotReloading(), CheckForTarget, new AttackTarget(m_blackboard));
+            Attack = new Sequence(new IsNotReloading(m_blackboard), CheckForTarget, new AttackTarget(m_blackboard, rateOfFire));
         }
         else
         {

@@ -7,8 +7,11 @@ public class IsNotReloading : BtNode
     /// <summary>
     /// Used to get variables from else where (custimisation)
     /// </summary>
-    public IsNotReloading()
+    /// 
+    private Blackboard m_blackboard;
+    public IsNotReloading(Blackboard blackboard)
     {
+        m_blackboard = blackboard;
     }
 
     /// <summary>
@@ -18,15 +21,19 @@ public class IsNotReloading : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (true)
+        if(m_blackboard.shotDelay >= 0)
+        {
+            m_blackboard.shotDelay -= Time.deltaTime;
+            return NodeState.FAILURE;
+        }
+
+        else
         {
             return NodeState.SUCCESS;
         }
-        else if (false)
-        {
-            return NodeState.FAILURE;
-        }
     }
+
+
 
     /// <summary>
     /// needs to return name of node

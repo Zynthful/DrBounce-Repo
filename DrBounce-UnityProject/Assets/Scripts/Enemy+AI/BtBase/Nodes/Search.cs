@@ -24,7 +24,7 @@ public class Search : BtNode
         {
             return NodeState.SUCCESS;
         }
-        else if (false)
+        else
         {
             return NodeState.FAILURE;
         }
