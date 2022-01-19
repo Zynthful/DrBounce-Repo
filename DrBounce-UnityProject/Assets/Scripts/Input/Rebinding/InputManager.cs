@@ -21,17 +21,9 @@ public class InputManager : MonoBehaviour
     {
         CheckForNullInputMaster();
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
+        // Enables all controls
+        // Any controls that should start disabled should be done AFTER this
         inputMaster.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputMaster.Disable();
     }
 
     /// <summary>
