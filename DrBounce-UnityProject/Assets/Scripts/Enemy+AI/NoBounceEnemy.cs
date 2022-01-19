@@ -55,7 +55,7 @@ public class NoBounceEnemy : Enemy
         BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle));
         BtNode LookAt = new Selector(CanSee, new AfterAttacked());
         BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist), new Callout());
-        return new Sequence(new CheckBool(4), CheckForTarget, new TowardsTarget(enemySpeed));
+        return new Sequence(new CheckBool(4), CheckForTarget, new EnemyNavMesh(navMeshAgent, m_blackboard, enemySpeed));
     }
 
     // Update is called once per frame

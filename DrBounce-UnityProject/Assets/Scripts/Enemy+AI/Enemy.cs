@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.AI;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 
@@ -68,6 +69,8 @@ public class Enemy : MonoBehaviour
     [Header("Events")]
     [SerializeField]
     public UnityEvent onShoot = null;
+
+    public NavMeshAgent navMeshAgent;
 
     [Space(10)]
     public List<Vector3> patrolPoints = new List<Vector3> { };
@@ -162,6 +165,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Awake()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         foreach (Transform child in transform)
         {
             if (child.tag == "PatrolPoint")
