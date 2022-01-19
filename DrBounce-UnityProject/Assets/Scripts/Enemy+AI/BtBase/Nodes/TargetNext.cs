@@ -19,20 +19,41 @@ public class TargetNext : BtNode
             return NodeState.FAILURE;
         }
 
-        // pick the next one
-        blackboard.aiController.currentTargetIndex++;
-        if(blackboard.aiController.currentTargetIndex > m_positions.Length - 1)
+        if (blackboard.aiController != null)
         {
-            blackboard.aiController.currentTargetIndex = 0;
+            blackboard.aiController.currentTargetIndex++;
+            if (blackboard.aiController.currentTargetIndex > m_positions.Length - 1)
+            {
+                blackboard.aiController.currentTargetIndex = 0;
+            }
+
+            Vector3 nextPos = m_positions[blackboard.aiController.currentTargetIndex];
+
+            blackboard.target.spottedPosition = nextPos;
+            blackboard.startPosition = blackboard.owner.transform.position;
+
+            m_nodeState = NodeState.SUCCESS;
+            return m_nodeState;
         }
 
-        Vector3 nextPos = m_positions[blackboard.aiController.currentTargetIndex];
+        else
+        {
+            blackboard.noBounceAIController.currentTargetIndex++;
+            if (blackboard.noBounceAIController.currentTargetIndex > m_positions.Length - 1)
+            {
+                blackboard.noBounceAIController.currentTargetIndex = 0;
+            }
 
-        blackboard.target.spottedPosition = nextPos;
-        blackboard.startPosition = blackboard.owner.transform.position;
+            Vector3 nextPos = m_positions[blackboard.noBounceAIController.currentTargetIndex];
 
-        m_nodeState = NodeState.SUCCESS;
-        return m_nodeState;
+            blackboard.target.spottedPosition = nextPos;
+            blackboard.startPosition = blackboard.owner.transform.position;
+
+            m_nodeState = NodeState.SUCCESS;
+            return m_nodeState;
+        }
+        // pick the next one
+
     }
 
     public override string getName()

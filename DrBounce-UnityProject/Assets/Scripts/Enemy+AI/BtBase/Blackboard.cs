@@ -7,6 +7,7 @@ public class Blackboard {
     public Enemy.Target target;
     public Vector3 startPosition;
     public BouncyEnemy aiController;
+    public NoBounceEnemy noBounceAIController;
     public float shotDelay;
 
     public bool HasTarget(bool player)

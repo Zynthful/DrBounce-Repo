@@ -36,6 +36,26 @@ public class CheckBool : BtNode
                     return NodeState.FAILURE;
                 }
 
+            case 3:
+                if (blackboard.noBounceAIController.canMove)
+                {
+                    return NodeState.SUCCESS;
+                }
+                else
+                {
+                    return NodeState.FAILURE;
+                }
+
+            case 4:
+                if (blackboard.noBounceAIController.canAttack)
+                {
+                    return NodeState.SUCCESS;
+                }
+                else
+                {
+                    return NodeState.FAILURE;
+                }
+
             default:
                 return NodeState.FAILURE;
         }
