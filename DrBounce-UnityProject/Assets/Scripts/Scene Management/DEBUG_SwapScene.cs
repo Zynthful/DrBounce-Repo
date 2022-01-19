@@ -15,16 +15,16 @@ public class DEBUG_SwapScene : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Player.DEBUG_PrevLevel.performed += _ => BackLevel();
-        controls.Player.DEBUG_NextLevel.performed += _ => NextLevel();
-        controls.Player.DEBUG_ReloadScene.performed += _ => ReloadScene();
+        controls.Debug.DEBUG_PrevLevel.performed += _ => BackLevel();
+        controls.Debug.DEBUG_NextLevel.performed += _ => NextLevel();
+        controls.Debug.DEBUG_ReloadScene.performed += _ => ReloadScene();
     }
 
     private void OnDisable()
     {
-        controls.Player.DEBUG_PrevLevel.performed -= _ => BackLevel();
-        controls.Player.DEBUG_NextLevel.performed -= _ => NextLevel();
-        controls.Player.DEBUG_ReloadScene.performed -= _ => ReloadScene();
+        controls.Debug.DEBUG_PrevLevel.performed -= _ => BackLevel();
+        controls.Debug.DEBUG_NextLevel.performed -= _ => NextLevel();
+        controls.Debug.DEBUG_ReloadScene.performed -= _ => ReloadScene();
     }
 
     private void ReloadScene() 

@@ -57,14 +57,14 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Player.DEBUG_Pause.performed += _ => Stop();
+        controls.Debug.DEBUG_Pause.performed += _ => Stop();
     }
 
     private void OnDisable()
     {
         if (controls != null)
         {
-            controls.Player.DEBUG_Pause.performed -= _ => Stop();
+            controls.Debug.DEBUG_Pause.performed -= _ => Stop();
         }
     }
 

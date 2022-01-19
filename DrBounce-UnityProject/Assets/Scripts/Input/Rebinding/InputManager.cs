@@ -223,9 +223,15 @@ public class InputManager : MonoBehaviour
     public static void SetActionMapActive(InputActionMap map, bool active)
     {
         if (active)
+        {
+            Debug.Log($"{map.name} controls enabled.");
             map.Enable();
+        }
         else
+        {
+            Debug.Log($"{map.name} controls disabled.");
             map.Disable();
+        }
     }
 
     /// <summary>

@@ -107,33 +107,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""DEBUG_PrevLevel"",
+                    ""name"": ""Toggle Debug Controls"",
                     ""type"": ""Button"",
-                    ""id"": ""77a2b363-166c-49c2-ae47-2736e9618cb3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""DEBUG_NextLevel"",
-                    ""type"": ""Button"",
-                    ""id"": ""d1ede88c-1987-4c06-be7c-61f1c5865bee"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""DEBUG_Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""1d553970-0ef5-485e-89c4-46c9a705dbf6"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""DEBUG_ReloadScene"",
-                    ""type"": ""Button"",
-                    ""id"": ""ea74f17e-e2f2-47c7-bf10-8db1facd691e"",
+                    ""id"": ""dba99ac6-5cd2-4a4d-bf73-e626bb152037"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -769,177 +745,45 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1234a299-8d0a-43c8-87cb-96ff6c3b6469"",
-                    ""path"": ""<Keyboard>/l"",
+                    ""id"": ""f7ff3773-5fe7-43f6-86a3-bb06e85f4a30"",
+                    ""path"": ""<Keyboard>/semicolon"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_Pause"",
+                    ""action"": ""Toggle Debug Controls"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c7e729c6-95da-4481-bbda-7b83ce1fde16"",
-                    ""path"": ""<Keyboard>/9"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""07407ae5-daf6-4053-8d0b-949354d8d061"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fb672cea-96e5-43d0-92de-c6ce04f73a0e"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fdd9ffde-f5f0-4530-8705-71b9ed4ce61b"",
-                    ""path"": ""<Keyboard>/rightBracket"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_NextLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""657f3ad6-3c70-4e30-a7d2-f87e4907fa41"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_NextLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fddc900b-c36d-4b53-bcf0-0d872de4c564"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_NextLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""61766d8c-9a22-4b8a-8100-96bdfd228a8a"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_NextLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5d220c5d-4671-4f61-8ca5-dcba108892af"",
-                    ""path"": ""<Keyboard>/leftBracket"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_PrevLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""23c8ec84-9c4c-4df8-8e09-8e269b8d6897"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_PrevLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""821e3694-e73d-4e7a-ba9e-680da463857e"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_PrevLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a383d0e4-c257-44fd-9310-7a618dd74556"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_PrevLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""756c5974-cb80-44de-9522-6ea96e96ba76"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_ReloadScene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""588a8018-3e4d-4bb6-a619-062f7572d3e1"",
+                    ""id"": ""f5b2a329-6083-4153-a9ca-07dda359a258"",
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""DEBUG_ReloadScene"",
+                    ""action"": ""Toggle Debug Controls"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4767eb98-9445-4f3a-b3bb-4207f637e6da"",
+                    ""id"": ""453c55b2-3880-4c80-91b2-ac8bdd99fa63"",
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_ReloadScene"",
+                    ""action"": ""Toggle Debug Controls"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ea7263e4-4f77-4422-a133-91a2020f0cd3"",
+                    ""id"": ""875f5c64-d8d3-4f95-9177-6ee9f913f871"",
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""DEBUG_ReloadScene"",
+                    ""action"": ""Toggle Debug Controls"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1097,6 +941,222 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""0bb7150d-53a8-48e7-8b1e-e5f6a2aeda09"",
+            ""actions"": [
+                {
+                    ""name"": ""DEBUG_PrevLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""c77bc23e-8e8c-4643-b53c-11c3a12acf08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_NextLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""a8b8775c-d223-4b0d-8f8b-4ef0840f92fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2e03031-1bf9-4965-a80f-4a886929cc60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_ReloadScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8737602-6d0b-4cb5-8884-74f917cfaeed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""70244c03-3e90-4441-baaa-ab9ba5158832"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5a620a5-0622-46c9-8987-daa37d8104e3"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""712743e3-cb4e-481d-a925-4cb102f41b87"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_PrevLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47df249d-bb0f-4aae-8772-37b559d061d8"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_PrevLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84ac7418-ef29-4ede-bc2c-ef87cb0e0a91"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06562d2e-9347-4c03-9b0c-c43f160e20f2"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""efded8fc-80ae-464e-a53c-5cedc0f5df90"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f4089e5-b99f-4e09-948f-d9dfdee57728"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83488a52-23e7-44ec-b75a-5b07e8a01a20"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ee86101-7243-4ca5-9fc8-dd0fbc0c2e1e"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d34643c3-6663-4527-abf8-4355e0bc8873"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7be7037a-4269-48b7-9740-efa118b6d917"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a9bf7e7-16e5-4a07-a403-bc50d1dd85b2"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75529e49-9772-4940-a609-e8fbcdccdd5a"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c032ae82-54a4-457d-9f4b-7d0b621a60ae"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6073b478-d30b-4d40-b502-c6d010dfe8e0"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1142,16 +1202,19 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_AimAssist = m_Player.FindAction("Aim Assist", throwIfNotFound: true);
         m_Player_SwitchHeld = m_Player.FindAction("Switch Held", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
-        m_Player_DEBUG_PrevLevel = m_Player.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
-        m_Player_DEBUG_NextLevel = m_Player.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
-        m_Player_DEBUG_Pause = m_Player.FindAction("DEBUG_Pause", throwIfNotFound: true);
-        m_Player_DEBUG_ReloadScene = m_Player.FindAction("DEBUG_ReloadScene", throwIfNotFound: true);
+        m_Player_ToggleDebugControls = m_Player.FindAction("Toggle Debug Controls", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
         // Cutscene
         m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
         m_Cutscene_SkipCutscene = m_Cutscene.FindAction("SkipCutscene", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_DEBUG_PrevLevel = m_Debug.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
+        m_Debug_DEBUG_NextLevel = m_Debug.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
+        m_Debug_DEBUG_Pause = m_Debug.FindAction("DEBUG_Pause", throwIfNotFound: true);
+        m_Debug_DEBUG_ReloadScene = m_Debug.FindAction("DEBUG_ReloadScene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1212,10 +1275,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_AimAssist;
     private readonly InputAction m_Player_SwitchHeld;
     private readonly InputAction m_Player_Heal;
-    private readonly InputAction m_Player_DEBUG_PrevLevel;
-    private readonly InputAction m_Player_DEBUG_NextLevel;
-    private readonly InputAction m_Player_DEBUG_Pause;
-    private readonly InputAction m_Player_DEBUG_ReloadScene;
+    private readonly InputAction m_Player_ToggleDebugControls;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -1231,10 +1291,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @AimAssist => m_Wrapper.m_Player_AimAssist;
         public InputAction @SwitchHeld => m_Wrapper.m_Player_SwitchHeld;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
-        public InputAction @DEBUG_PrevLevel => m_Wrapper.m_Player_DEBUG_PrevLevel;
-        public InputAction @DEBUG_NextLevel => m_Wrapper.m_Player_DEBUG_NextLevel;
-        public InputAction @DEBUG_Pause => m_Wrapper.m_Player_DEBUG_Pause;
-        public InputAction @DEBUG_ReloadScene => m_Wrapper.m_Player_DEBUG_ReloadScene;
+        public InputAction @ToggleDebugControls => m_Wrapper.m_Player_ToggleDebugControls;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1277,18 +1334,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Heal.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeal;
                 @Heal.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeal;
                 @Heal.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeal;
-                @DEBUG_PrevLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
-                @DEBUG_PrevLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
-                @DEBUG_PrevLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_PrevLevel;
-                @DEBUG_NextLevel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
-                @DEBUG_NextLevel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
-                @DEBUG_NextLevel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_NextLevel;
-                @DEBUG_Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_Pause;
-                @DEBUG_Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_Pause;
-                @DEBUG_Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_Pause;
-                @DEBUG_ReloadScene.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_ReloadScene;
-                @DEBUG_ReloadScene.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_ReloadScene;
-                @DEBUG_ReloadScene.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUG_ReloadScene;
+                @ToggleDebugControls.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleDebugControls;
+                @ToggleDebugControls.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleDebugControls;
+                @ToggleDebugControls.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleDebugControls;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1326,18 +1374,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Heal.started += instance.OnHeal;
                 @Heal.performed += instance.OnHeal;
                 @Heal.canceled += instance.OnHeal;
-                @DEBUG_PrevLevel.started += instance.OnDEBUG_PrevLevel;
-                @DEBUG_PrevLevel.performed += instance.OnDEBUG_PrevLevel;
-                @DEBUG_PrevLevel.canceled += instance.OnDEBUG_PrevLevel;
-                @DEBUG_NextLevel.started += instance.OnDEBUG_NextLevel;
-                @DEBUG_NextLevel.performed += instance.OnDEBUG_NextLevel;
-                @DEBUG_NextLevel.canceled += instance.OnDEBUG_NextLevel;
-                @DEBUG_Pause.started += instance.OnDEBUG_Pause;
-                @DEBUG_Pause.performed += instance.OnDEBUG_Pause;
-                @DEBUG_Pause.canceled += instance.OnDEBUG_Pause;
-                @DEBUG_ReloadScene.started += instance.OnDEBUG_ReloadScene;
-                @DEBUG_ReloadScene.performed += instance.OnDEBUG_ReloadScene;
-                @DEBUG_ReloadScene.canceled += instance.OnDEBUG_ReloadScene;
+                @ToggleDebugControls.started += instance.OnToggleDebugControls;
+                @ToggleDebugControls.performed += instance.OnToggleDebugControls;
+                @ToggleDebugControls.canceled += instance.OnToggleDebugControls;
             }
         }
     }
@@ -1408,6 +1447,63 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public CutsceneActions @Cutscene => new CutsceneActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_DEBUG_PrevLevel;
+    private readonly InputAction m_Debug_DEBUG_NextLevel;
+    private readonly InputAction m_Debug_DEBUG_Pause;
+    private readonly InputAction m_Debug_DEBUG_ReloadScene;
+    public struct DebugActions
+    {
+        private @InputMaster m_Wrapper;
+        public DebugActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @DEBUG_PrevLevel => m_Wrapper.m_Debug_DEBUG_PrevLevel;
+        public InputAction @DEBUG_NextLevel => m_Wrapper.m_Debug_DEBUG_NextLevel;
+        public InputAction @DEBUG_Pause => m_Wrapper.m_Debug_DEBUG_Pause;
+        public InputAction @DEBUG_ReloadScene => m_Wrapper.m_Debug_DEBUG_ReloadScene;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @DEBUG_PrevLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_PrevLevel;
+                @DEBUG_NextLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_NextLevel;
+                @DEBUG_Pause.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_Pause;
+                @DEBUG_Pause.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_Pause;
+                @DEBUG_Pause.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_Pause;
+                @DEBUG_ReloadScene.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_ReloadScene;
+                @DEBUG_ReloadScene.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_ReloadScene;
+                @DEBUG_ReloadScene.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_ReloadScene;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @DEBUG_PrevLevel.started += instance.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.performed += instance.OnDEBUG_PrevLevel;
+                @DEBUG_PrevLevel.canceled += instance.OnDEBUG_PrevLevel;
+                @DEBUG_NextLevel.started += instance.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.performed += instance.OnDEBUG_NextLevel;
+                @DEBUG_NextLevel.canceled += instance.OnDEBUG_NextLevel;
+                @DEBUG_Pause.started += instance.OnDEBUG_Pause;
+                @DEBUG_Pause.performed += instance.OnDEBUG_Pause;
+                @DEBUG_Pause.canceled += instance.OnDEBUG_Pause;
+                @DEBUG_ReloadScene.started += instance.OnDEBUG_ReloadScene;
+                @DEBUG_ReloadScene.performed += instance.OnDEBUG_ReloadScene;
+                @DEBUG_ReloadScene.canceled += instance.OnDEBUG_ReloadScene;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1439,10 +1535,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnAimAssist(InputAction.CallbackContext context);
         void OnSwitchHeld(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
-        void OnDEBUG_PrevLevel(InputAction.CallbackContext context);
-        void OnDEBUG_NextLevel(InputAction.CallbackContext context);
-        void OnDEBUG_Pause(InputAction.CallbackContext context);
-        void OnDEBUG_ReloadScene(InputAction.CallbackContext context);
+        void OnToggleDebugControls(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
@@ -1451,5 +1544,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
     public interface ICutsceneActions
     {
         void OnSkipCutscene(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnDEBUG_PrevLevel(InputAction.CallbackContext context);
+        void OnDEBUG_NextLevel(InputAction.CallbackContext context);
+        void OnDEBUG_Pause(InputAction.CallbackContext context);
+        void OnDEBUG_ReloadScene(InputAction.CallbackContext context);
     }
 }
