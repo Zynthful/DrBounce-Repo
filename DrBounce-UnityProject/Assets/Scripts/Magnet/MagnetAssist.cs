@@ -149,21 +149,19 @@ public class MagnetAssist : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks to see if we're in range of using the magnet, and updates variables accordingly.
+    /// Checks to see if we're in range of using the magnet (and that we're not holding the gun), then updates variables and invokes relevant events accordingly.
     /// </summary>
     private void CheckRange()
     {
         bool wasInRange = inRange;
-        inRange = GetDistance() <= assistMaxRange;
+        inRange = GetDistance() <= assistMaxRange && !gun.GetIsHeld();
 
-        if (inRange && !wasInRange)
+        if (inRange && !wasInRange && !gun.GetIsHeld())
         {
-            Debug.Log("in range");
             onInRange?.Invoke();
         }
-        else if (!inRange && wasInRange)
+        else if ((!inRange || gun.GetIsHeld()) && wasInRange)
         {
-            Debug.Log("not in range (cringe)");
             onOutOfRange?.Invoke();
         }
     }

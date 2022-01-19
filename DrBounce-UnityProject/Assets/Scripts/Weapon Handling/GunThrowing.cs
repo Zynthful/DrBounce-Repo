@@ -25,6 +25,8 @@ public class GunThrowing : MonoBehaviour
     private bool pickupDelayCoroutineRunning;
     private bool throwBuffer = false;
 
+    private bool held = true;
+
     // Coyote Time variables (gun collision time before drop charges)
     private struct coyote
     {
@@ -101,7 +103,27 @@ public class GunThrowing : MonoBehaviour
     [SerializeField]
     private GameEvent _onDroppedPreCoyote = null;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        controls = InputManager.inputMaster;
+    }
+
+    private void OnEnable()
+    {
+        // Listen for input
+        controls.Player.Throw.performed += _ => SetThrowGunDelay();
+        controls.Player.Throw.performed += _ => CancelThrow();
+        controls.Player.Recall.performed += _ => RecallGun();
+    }
+
+    private void OnDisable()
+    {
+        // Stop listening for input
+        controls.Player.Throw.performed -= _ => SetThrowGunDelay();
+        controls.Player.Throw.performed -= _ => CancelThrow();
+        controls.Player.Recall.performed -= _ => ResetScript();
+    }
+
     void Start()
     {
         //outlineScript = GetComponentInChildren<Outline>();
@@ -116,6 +138,7 @@ public class GunThrowing : MonoBehaviour
             //outlineScript.enabled = false;
             handPosition = transform.localPosition;
             canThrow = true;
+            held = true;
             transform.parent = weaponHolderTransform;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
@@ -126,38 +149,36 @@ public class GunThrowing : MonoBehaviour
             handPosition = new Vector3(.4f, -.2f, .65f);
             exitedPlayer = true;
             canThrow = false;
+            held = false;
         }
 
         transform.rotation = Quaternion.identity;
 
         gunColliders = GetComponentsInChildren<Collider>();
-        if(gunColliders == new Collider[0])
+        if (gunColliders == new Collider[0])
         {
-            gunColliders = new Collider[1] {GetComponent<Collider>()};
+            gunColliders = new Collider[1] { GetComponent<Collider>() };
         }
 
-        foreach(Collider col in gunColliders)
+        foreach (Collider col in gunColliders)
         {
             physicMaterials.Add(col.material);
         }
     }
 
-    private void Awake()
+    private void Update()
     {
-        controls = InputManager.inputMaster;
-    }
-
-    private void OnEnable()
-    {
-        controls.Player.Throw.performed += _ => SetThrowGunDelay();
-        controls.Player.Throw.performed += _ => CancelThrow();
-        controls.Player.Recall.performed += _ => RecallGun();
-    }
-
-    private void OnDisable()
-    {
-        controls.Player.Throw.performed -= _ => Thrown();
-        controls.Player.Recall.performed -= _ => ResetScript();
+        if (Gamepad.current != null)
+        {
+            if (!Gamepad.current.leftTrigger.IsActuated() && canThrow)  //checks if the player has let go of the left trigger and has the gun in hand
+            {
+                hasLetGoOfTrigger = true;
+            }
+        }
+        else
+        {
+            hasLetGoOfTrigger = true;
+        }
     }
 
     // Delay throwing to avoid recalling immediately after throwing
@@ -211,6 +232,7 @@ public class GunThrowing : MonoBehaviour
         if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
             throwing = true;
+            held = false;
 
             if (pickupDelayCoroutineRunning) 
             {
@@ -267,6 +289,7 @@ public class GunThrowing : MonoBehaviour
             canThrow = true;
             inFlight = false;
             hasLetGoOfTrigger = false;
+            held = true;
 
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -456,25 +479,7 @@ public class GunThrowing : MonoBehaviour
         }
 
     }
-    private void Update()
-    {
-        if (Gamepad.current != null)
-        {
-            if (!Gamepad.current.leftTrigger.IsActuated() && canThrow)  //checks if the player has let go of the left trigger and has the gun in hand
-            {
-                hasLetGoOfTrigger = true;
-            }
-        }
-        else
-        {
-            hasLetGoOfTrigger = true;
-        }
 
-        //print(canThrow);
-    }
-
-    public bool GetIsThrowing()
-    {
-        return throwing;
-    }
+    public bool GetIsThrowing() { return throwing; }
+    public bool GetIsHeld() { return held; }
 }
