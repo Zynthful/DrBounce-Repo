@@ -20,7 +20,10 @@ public class InputListener : MonoBehaviour
 
     private void OnDisable()
     {
-        inputAction.action.performed -= _ => onActionPerformed.Invoke();
-        inputAction.action.Disable();
+        if (inputAction != null)
+        {
+            inputAction.action.performed -= _ => onActionPerformed.Invoke();
+            inputAction.action.Disable();
+        }
     }
 }

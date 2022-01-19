@@ -18,6 +18,7 @@ public abstract class SettingData : ScriptableObject
         Volume,
         ActionBindingKeyboard,
         ActionBindingController,
+        Debug,
     }
 
     [Header("Base Setting Info")]

@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 6147410063700319578}
   - component: {fileID: 7193623553715341017}
   - component: {fileID: 6684612320552575470}
+  - component: {fileID: 5798722194956755768}
   m_Layer: 0
   m_Name: Toggle Debug Controls
   m_TagString: Untagged
@@ -182,9 +183,9 @@ MonoBehaviour:
   onActionPerformed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6684612320552575470}
-        m_TargetAssemblyTypeName: SetActionMapActive, Assembly-CSharp
-        m_MethodName: Toggle
+      - m_Target: {fileID: 11400000, guid: 5b0d0037328c6e24fa059401b6795155, type: 2}
+        m_TargetAssemblyTypeName: BoolSetting, Assembly-CSharp
+        m_MethodName: ToggleValue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -208,6 +209,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapName: Debug
+--- !u!114 &5798722194956755768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910979271253020773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533a3c1250a46794ebb7d90413ad4ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 3f731d163a7b7fb43968bc3f3043214d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6684612320552575470}
+        m_TargetAssemblyTypeName: SetActionMapActive, Assembly-CSharp
+        m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6927807149201617784
 GameObject:
   m_ObjectHideFlags: 0
