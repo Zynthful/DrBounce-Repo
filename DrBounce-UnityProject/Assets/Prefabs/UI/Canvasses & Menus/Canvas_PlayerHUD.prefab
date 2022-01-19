@@ -1882,6 +1882,8 @@ GameObject:
   - component: {fileID: 5071703076902829800}
   - component: {fileID: 4065026356334804754}
   - component: {fileID: 6278425435997515161}
+  - component: {fileID: 1172396249}
+  - component: {fileID: 1172396248}
   m_Layer: 5
   m_Name: Damage
   m_TagString: Untagged
@@ -1946,6 +1948,85 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &1172396249
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5509238325525645866}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1172396248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5509238325525645866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe052b91c95c534b8bf0f64fb0b9151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 1
+  InactiveAlpha: 0
+  ActiveAlpha: 1
+  DefaultDuration: 0.2
+  DefaultTween:
+    MMTweenDefinitionType: 1
+    MMTweenCurve: 0
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.16389401
+        value: 0.46220928
+        inSlope: 5.189822
+        outSlope: 5.189822
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.01679157
+      - serializedVersion: 3
+        time: 0.2999479
+        value: 0.99666166
+        inSlope: -0.13518131
+        outSlope: -0.13518131
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9951172
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  IgnoreTimescale: 1
+  ShouldBlockRaycasts: 0
+  FadeIn1SecondButton: 0
+  FadeOut1SecondButton: 0
+  DefaultFadeButton: 0
+  ResetFaderButton: 0
 --- !u!1 &5950500375008569147
 GameObject:
   m_ObjectHideFlags: 0
@@ -3526,11 +3607,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a71741299c513314199476a3d8558785, type: 3}
---- !u!224 &3488024034334735189 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1731615229135019110, guid: a71741299c513314199476a3d8558785, type: 3}
-  m_PrefabInstance: {fileID: 2909357797604075315}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5314007788006348083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7052417582480175616, guid: a71741299c513314199476a3d8558785, type: 3}
@@ -3542,3 +3618,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a42a23ce4f9ed24abde69beacbef2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3488024034334735189 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1731615229135019110, guid: a71741299c513314199476a3d8558785, type: 3}
+  m_PrefabInstance: {fileID: 2909357797604075315}
+  m_PrefabAsset: {fileID: 0}
