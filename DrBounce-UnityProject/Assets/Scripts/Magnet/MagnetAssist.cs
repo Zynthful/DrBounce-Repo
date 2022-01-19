@@ -17,6 +17,7 @@ public class MagnetAssist : MonoBehaviour
     private float assistForce = 20.0f;
 
     private bool assistActive = false;
+    private bool inRange = false;
     private Rigidbody rb = null;
 
     [Header("Unity Events")]
@@ -30,6 +31,10 @@ public class MagnetAssist : MonoBehaviour
     private UnityEvent onAssistCancelled = null;
     [SerializeField]
     private UnityEvent<bool> onIsActiveAndInRange = null;
+    [SerializeField]
+    private UnityEvent onInRange = null;
+    [SerializeField]
+    private UnityEvent onOutOfRange = null;
 
     [Header("Game Events")]
     [SerializeField]
@@ -68,8 +73,10 @@ public class MagnetAssist : MonoBehaviour
 
     private void FixedUpdate()
     {
+        CheckRange();
+
         // Check if we're holding down the assist button and we can activate the assist
-        if (!assistActive && controls.Player.Throw.ReadValue<float>() >= 0.2f && !gun.transform.parent && IsInRange() && !gun.GetIsThrowing())
+        if (!assistActive && controls.Player.Throw.ReadValue<float>() >= 0.2f && !gun.transform.parent && inRange && !gun.GetIsThrowing())
         {
             assistActive = true;
             onAssistStart?.Invoke();
@@ -96,7 +103,7 @@ public class MagnetAssist : MonoBehaviour
 
         if (!gun.transform.parent)
         {
-            if (IsInRange())
+            if (inRange)
             {
                 assistActive = true;
 
@@ -141,6 +148,26 @@ public class MagnetAssist : MonoBehaviour
         rb.velocity = ((transform.position - gun.transform.position).normalized * assistForce / GetDistance()).normalized * speed;
     }
 
+    /// <summary>
+    /// Checks to see if we're in range of using the magnet, and updates variables accordingly.
+    /// </summary>
+    private void CheckRange()
+    {
+        bool wasInRange = inRange;
+        inRange = GetDistance() <= assistMaxRange;
+
+        if (inRange && !wasInRange)
+        {
+            Debug.Log("in range");
+            onInRange?.Invoke();
+        }
+        else if (!inRange && wasInRange)
+        {
+            Debug.Log("not in range (cringe)");
+            onOutOfRange?.Invoke();
+        }
+    }
+
     public float GetMaxRange()
     {
         return assistMaxRange;
@@ -149,10 +176,5 @@ public class MagnetAssist : MonoBehaviour
     public float GetDistance()
     {
         return Vector3.Distance(transform.position, gun.transform.position);
-    }
-
-    public bool IsInRange()
-    {
-        return GetDistance() < assistMaxRange;
     }
 }
