@@ -558,12 +558,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226782933602530214}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 888380afc233049ce9e618f9f36c8ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 8d9c5f861be80b143987b291b94c5829, type: 2}
+  profile: {fileID: 11400000, guid: d3e18ef68dfe2c3468dc48c629731c53, type: 2}
   profileSync: 1
   previewInEditor: 1
   camerasLayerMask:
@@ -582,7 +582,7 @@ MonoBehaviour:
   GPUInstancing: 1
   normalsOption: 0
   ignore: 0
-  _highlighted: 1
+  _highlighted: 0
   fadeInDuration: 0
   fadeOutDuration: 0
   flipY: 0
@@ -596,7 +596,7 @@ MonoBehaviour:
   overlayTexture: {fileID: 0}
   overlayTextureScale: 1
   outline: 1
-  outlineColor: {r: 0.051886797, g: 0.18127407, b: 1, a: 1}
+  outlineColor: {r: 0, g: 1, b: 0.6701975, a: 1}
   outlineWidth: 0.3
   outlineQuality: 3
   outlineDownsampling: 2
@@ -661,7 +661,7 @@ MonoBehaviour:
   seeThroughMaxDepth: 0
   seeThroughIntensity: 1
   seeThroughTintAlpha: 0.5
-  seeThroughTintColor: {r: 0.9716981, g: 0.033322267, b: 0, a: 1}
+  seeThroughTintColor: {r: 1, g: 0.08445288, b: 0, a: 1}
   seeThroughNoise: 1
   seeThroughBorder: 0
   seeThroughBorderColor: {r: 0, g: 0, b: 0, a: 1}
@@ -5692,8 +5692,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6014676033296018911}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: set_highlighted
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5767,8 +5767,8 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 6014676033296018911}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: set_highlighted
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5842,8 +5842,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6014676033296018911}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: set_highlighted
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5893,8 +5893,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6014676033296018911}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: set_highlighted
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5968,8 +5968,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6014676033296018911}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: set_highlighted
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6007,8 +6007,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6014676033296018911}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: set_highlighted
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6162,10 +6162,58 @@ MonoBehaviour:
         m_CallState: 2
   onChargesEmpty:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6014676033296018911}
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: ProfileReload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6014676033296018911}
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: ProfileReload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHasCharge:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6014676033296018911}
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: ProfileLoad
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: d3e18ef68dfe2c3468dc48c629731c53, type: 2}
+          m_ObjectArgumentAssemblyTypeName: HighlightPlus.HighlightProfile, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6014676033296018911}
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: ProfileReload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHasChargeAndIsHeld:
     m_PersistentCalls:
       m_Calls: []
