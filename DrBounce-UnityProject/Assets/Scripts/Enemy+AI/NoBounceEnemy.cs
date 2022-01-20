@@ -52,10 +52,10 @@ public class NoBounceEnemy : Enemy
     protected BtNode createAttackingTree()
     {
         // Attack Node Section
-        BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle));
+        BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle, navMeshAgent));
         BtNode LookAt = new Selector(CanSee, new AfterAttacked());
         BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist), new Callout());
-        return new Sequence(new CheckBool(4), CheckForTarget, new EnemyNavMesh(navMeshAgent, m_blackboard, enemySpeed));
+        return new Sequence(new CheckBool(4), CheckForTarget);
     }
 
     // Update is called once per frame

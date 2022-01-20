@@ -51,7 +51,7 @@ public class BouncyEnemy : Enemy
     protected BtNode createAttackingTree()
     {
         // Attack Node Section
-        BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle));
+        BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle, navMeshAgent));
         BtNode LookAt = new Selector(CanSee, new AfterAttacked());
         BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist), new Callout());
         return new Sequence(new CheckBool(1), CheckForTarget, new IsNotReloading(m_blackboard), new AttackTarget(m_blackboard, rateOfFire, bullet, onShoot));

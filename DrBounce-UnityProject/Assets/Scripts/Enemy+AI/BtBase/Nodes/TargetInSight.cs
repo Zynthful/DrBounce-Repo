@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TargetInSight : BtNode
 {
@@ -9,6 +10,8 @@ public class TargetInSight : BtNode
 
     private float m_viewDist;
     private float m_sightAngle;
+    public bool m_canSeePlayer;
+    private NavMeshAgent m_navMeshAgent;
 
     /// <summary>
     /// Used to get variables from else where (custimisation)
@@ -23,11 +26,12 @@ public class TargetInSight : BtNode
     /// <returns></returns>
     /// 
 
-    public TargetInSight(Blackboard blackboard, float viewDist, float sightAngle)
+    public TargetInSight(Blackboard blackboard, float viewDist, float sightAngle, NavMeshAgent navMeshAgent)
     {
         m_viewDist = viewDist;
         m_sightAngle = sightAngle;
         m_blackboard = blackboard;
+        m_navMeshAgent = navMeshAgent;
     }
 
 
@@ -42,6 +46,10 @@ public class TargetInSight : BtNode
         {
             m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
             enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
+
+            m_navMeshAgent.enabled = true;
+            m_navMeshAgent.destination = m_blackboard.target.playerObject.transform.position;
+
             return NodeState.SUCCESS;
         }
         else
@@ -71,6 +79,7 @@ public class TargetInSight : BtNode
             }
             else
             {
+                m_navMeshAgent.enabled = false;
                 Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.red);
             }
         }

@@ -24,7 +24,7 @@ public class Callout : BtNode
         {
             return NodeState.SUCCESS;
         }
-        else if (false)
+        else
         {
             return NodeState.FAILURE;
         }
