@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using MoreMountains.Tools;
 
 public class Health : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Health : MonoBehaviour
     protected int maxHealth = 100;
     [SerializeField]
     private float deathDelay = 0.230f;
+
+    [SerializeField]
+    protected MMHealthBar healthBar;
 
     protected bool canSetStartingHealth = true;
 
@@ -85,20 +89,22 @@ public class Health : MonoBehaviour
         canSetStartingHealth = false;
     }
 
-    protected virtual void SetHealth(int value)
+    protected virtual void SetHealth(int value, bool showBar)
     {
         health = value;
 
+        if (GetIsDead())
+        {
+            Invoke("DIE", deathDelay);
+        }
+
         // Cap health
-        if (health > maxHealth)
+        else if (health > maxHealth)
         {
             health = maxHealth;
         }
 
-        else if (GetIsDead())
-        {
-            Invoke("DIE", deathDelay);
-        }
+        UpdateHealthBar(showBar);
 
         bool wasOnLowHealth = isOnLowHealth;    // Checked against to prevent calling low health events multiple times
         isOnLowHealth = ((float) health / (float) maxHealth) * 100.0f <= lowHealthThreshold;
@@ -122,7 +128,7 @@ public class Health : MonoBehaviour
         onHeal?.Invoke(amount);
         _onHeal?.Raise(amount);
 
-        SetHealth(health + amount);
+        SetHealth(health + amount, true);
     }
 
     public virtual void Damage(int amount) 
@@ -130,7 +136,7 @@ public class Health : MonoBehaviour
         onDamage?.Invoke(amount);
         _onDamage?.Raise(amount);
 
-        SetHealth(health - amount);
+        SetHealth(health - amount, true);
 
         // Only call injured events if we're not dead after taking damage
         if (!GetIsDead())
@@ -160,30 +166,26 @@ public class Health : MonoBehaviour
 
     protected virtual void ResetHealth() 
     {
-        SetHealth(maxHealth);
+        SetHealth(maxHealth, false);
     }
 
-    public int GetHealth() 
+    protected virtual void UpdateHealthBar(bool showBar)
     {
-        return health;
+        if (healthBar != null)
+        {
+            healthBar.UpdateBar(health, 0, maxHealth, showBar);
+        }
     }
 
-    public bool GetIsAtFullHealth()
-    {
-        return (health >= maxHealth);
-    }
+    public int GetHealth() { return health; }
+
+    public bool GetIsAtFullHealth() { return (health >= maxHealth); }
 
     /// <summary>
     /// Returns health percentage as a float between 0-100
     /// </summary>
     /// <returns></returns>
-    private float GetHealthPercentageNormalized()
-    {
-        return (float)health / (float)maxHealth;
-    }
+    private float GetHealthPercentageNormalized() { return (float)health / (float)maxHealth; }
 
-    public bool GetIsDead()
-    {
-        return health <= 0;
-    }
+    public bool GetIsDead() { return health <= 0; }
 }
