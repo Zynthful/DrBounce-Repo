@@ -1,58 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FootstepAudio : MonoBehaviour
 {
     [Header("Declarations")]
     [SerializeField]
     private PlayerMovement movement = null;
-    [Tooltip("Wwise Event to handle")]
-    [SerializeField]
-    private AkEvent footstepEvent = null;
 
     [Header("Footstep Settings")]
-    [Tooltip("Delay in seconds between each footstep whilst running")]
+    [Tooltip("Delay in seconds between each footstep whilst running at maximum speed.")]
     [SerializeField]
-    private float runDelay = 0.6f;
-    [Tooltip("Delay in seconds after the player starts movement before which the footstep can play")]
+    private float minimumRunDelay = 0.6f;
+    [Tooltip("The max speed by which the footstep delay has reached its minimum value.")]
     [SerializeField]
-    private float initialDelay = 0.3f;
+    private float maxSpeed = 20.0f;
+    /*
+    [Tooltip("Multiplier applied to the footstep delay for the first footstep when starting to move. Use this to make the first footstep on moving take more or less time to play than the rest.")]
+    [SerializeField]
+    private float initialDelayFactor = 0.5f;
+    */
+
+    [Header("Events")]
+    [SerializeField]
+    private UnityEvent onFootstep = null;
     
     // Controls the run delay
     private bool startedDelay = false;
-    // Controls the initial delay
-    private bool startedMoving = false;
+    private IEnumerator activeDelay = null;
 
     private void FixedUpdate()
     {
-        if (movement.GetIsMoving())
+        if (movement.GetIsMoving() && movement.GetIsGrounded() && !movement.isSliding)
         {
-            if (!startedDelay && movement.GetIsGrounded())
+            if (!startedDelay)
             {
-                // Play initial delay if this is the first time we're delaying since we've started moving
-                if (!startedMoving)
-                {
-                    startedMoving = true;
-                    StartCoroutine(Delay(initialDelay));
-                }
-                else
-                {
-                    StartCoroutine(Delay(runDelay));
-                }
+                activeDelay = Delay(CalculateDelayFromSpeed(movement.velocity.magnitude));
+                StartCoroutine(activeDelay);
             }
         }
-        // Allow initial delay to play again, if we've stopped moving since
-        else
+        // Cancel our active delay if we're no longer valid to play a footstep
+        else if (startedDelay && activeDelay != null)
         {
-            startedMoving = false;
+            StopCoroutine(activeDelay);
+            activeDelay = null;
         }
     }
 
     /// <summary>
-    /// Waits 'delay' seconds before handling the event, if we are still moving by then
+    /// Calculates the length of which to delay playing a footstep, using the given entity's speed.
     /// </summary>
-    /// <param name="delay">Seconds in which to wait before handling the event</param>
+    /// <param name="speed"></param>
+    /// <returns></returns>
+    private float CalculateDelayFromSpeed(float speed)
+    {
+        float speedFactor = minimumRunDelay * Mathf.Sqrt(maxSpeed / speed);   // Square root to create a curve of speed against delay, as opposed to linear
+        return speedFactor;
+    }
+
+    /// <summary>
+    /// Waits 'delay' seconds before handling the event, if we are still moving by then.
+    /// </summary>
+    /// <param name="delay">Seconds in which to wait before handling the event.</param>
     /// <returns></returns>
     private IEnumerator Delay(float delay)
     {
@@ -61,9 +71,9 @@ public class FootstepAudio : MonoBehaviour
         startedDelay = false;
 
         // Check if we're still moving after the delay
-        if (movement.GetIsMoving() && movement.GetIsGrounded())
+        if (movement.GetIsMoving() && movement.GetIsGrounded() && !movement.isSliding)
         {
-            footstepEvent?.HandleEvent(gameObject);
+            onFootstep?.Invoke();
         }
     }
 }
