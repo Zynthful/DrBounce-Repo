@@ -9,7 +9,6 @@ public class BouncyEnemy : Enemy
     private Blackboard m_blackboard;
 
     public bool searching;
-    public bool recentlyAttacked;
     public bool canAttack;
     public bool canMove;
     public int currentTargetIndex;

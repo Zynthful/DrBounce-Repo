@@ -20,14 +20,25 @@ public class AfterAttacked : BtNode
     {
         // If the enemy has recently taken damage, this script should return NodeState.SUCCESS;
 
-        if (true)
+        if (blackboard.aiController != null)
         {
-            return NodeState.FAILURE;
+            if (blackboard.aiController.recentlyAttacked)
+            {
+                blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
+                blackboard.owner.transform.rotation = Quaternion.RotateTowards(blackboard.owner.transform.rotation, Quaternion.LookRotation((blackboard.target.playerObject.transform.position - blackboard.owner.transform.position).normalized), Time.deltaTime / .0005f);
+                return NodeState.SUCCESS;
+            }
         }
-        else if (false)
+        else if(blackboard.noBounceAIController != null)
         {
-            return NodeState.SUCCESS;
+            if (blackboard.noBounceAIController.recentlyAttacked)
+            {
+                blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
+                blackboard.owner.transform.rotation = Quaternion.RotateTowards(blackboard.owner.transform.rotation, Quaternion.LookRotation((blackboard.target.playerObject.transform.position - blackboard.owner.transform.position).normalized), Time.deltaTime / .0005f);
+                return NodeState.SUCCESS;
+            }
         }
+        return NodeState.FAILURE;
     }
 
     /// <summary>

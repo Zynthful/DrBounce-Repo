@@ -56,6 +56,9 @@ public class Enemy : MonoBehaviour
     private bool shootDelay;
     private Coroutine shootingDelayCoroutine;
 
+    public bool recentlyAttacked;
+    private Coroutine recentAttackCoroutine;
+
     public bool canSeePlayer;
 
     [SerializeField]
@@ -86,6 +89,41 @@ public class Enemy : MonoBehaviour
         health.DIE();
     }
     */
+
+    private void Start()
+    {
+        pool = ObjectPooler.Instance;
+        // Material mat = null;
+        // switch (GetComponent<Bouncing>().bType)
+        // {
+        //     case Bouncing.BounceType.Back:
+        //         mat = materials[0];
+        //         break;
+
+        //     case Bouncing.BounceType.Up:
+        //         mat = materials[1];
+        //         break;
+
+        //     case Bouncing.BounceType.Away:
+        //         mat = materials[2];
+        //         break;
+        // }
+        // GetComponent<MeshRenderer>().material = mat;
+    }
+
+    protected virtual void Awake()
+    {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "PatrolPoint")
+            {
+                patrolPoints.Add(child.position);
+                Destroy(child.gameObject);
+            }
+        }
+    }
 
     protected void FixedUpdate()
     {
@@ -133,6 +171,15 @@ public class Enemy : MonoBehaviour
         return null;
     }
 
+    public void RecentlyAttacked()
+    {
+        if (recentAttackCoroutine == null)
+        {
+            recentlyAttacked = true;
+            recentAttackCoroutine = StartCoroutine(ResetRecentlyAttacked(.3f));
+        }
+    }
+
     /*
     public void Die()
     {
@@ -142,46 +189,18 @@ public class Enemy : MonoBehaviour
     }
     */
 
-    private void Start()
-    {
-        pool = ObjectPooler.Instance;
-        // Material mat = null;
-        // switch (GetComponent<Bouncing>().bType)
-        // {
-        //     case Bouncing.BounceType.Back:
-        //         mat = materials[0];
-        //         break;
-
-        //     case Bouncing.BounceType.Up:
-        //         mat = materials[1];
-        //         break;
-
-        //     case Bouncing.BounceType.Away:
-        //         mat = materials[2];
-        //         break;
-        // }
-        // GetComponent<MeshRenderer>().material = mat;
-    }
-
-    protected virtual void Awake()
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-
-        foreach (Transform child in transform)
-        {
-            if (child.tag == "PatrolPoint")
-            {
-                patrolPoints.Add(child.position);
-                Destroy(child.gameObject);
-            }
-        }
-    }
-
     IEnumerator ShotDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         shootDelay = false;
         shootingDelayCoroutine = null;
+    }
+
+    IEnumerator ResetRecentlyAttacked(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        recentlyAttacked = false;
+        recentAttackCoroutine = null;
     }
 
     public EnemyAudio GetAudio()

@@ -47,8 +47,11 @@ public class TargetInSight : BtNode
             m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
             enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
 
-            m_navMeshAgent.enabled = true;
-            m_navMeshAgent.destination = m_blackboard.target.playerObject.transform.position;
+            if (m_blackboard.noBounceAIController != null)
+            {
+                m_navMeshAgent.enabled = true;
+                m_navMeshAgent.destination = m_blackboard.target.playerObject.transform.position;
+            }
 
             return NodeState.SUCCESS;
         }
@@ -79,7 +82,10 @@ public class TargetInSight : BtNode
             }
             else
             {
-                m_navMeshAgent.enabled = false;
+                if (m_blackboard.noBounceAIController != null)
+                {
+                    m_navMeshAgent.enabled = false;
+                }
                 Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.red);
             }
         }
