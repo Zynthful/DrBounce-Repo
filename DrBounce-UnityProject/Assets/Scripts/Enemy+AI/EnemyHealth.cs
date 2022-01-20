@@ -17,8 +17,5 @@ public class EnemyHealth : Health
         base.DIE();
 
         OnDeath?.Invoke();
-
-        GetComponent<Collider>().enabled = false;
-        DeathFeedback?.PlayFeedbacks();
     }
 }
