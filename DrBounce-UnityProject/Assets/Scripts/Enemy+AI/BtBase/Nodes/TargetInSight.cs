@@ -41,6 +41,7 @@ public class TargetInSight : BtNode
         enemyPosition = blackboard.owner.transform;
 
         Debug.Log("Successfuly reached " + getName());
+        Debug.Log(m_blackboard.searchTime);
 
         if (PlayerLosCheck())
         {
@@ -49,6 +50,8 @@ public class TargetInSight : BtNode
 
             if (m_blackboard.noBounceAIController != null)
             {
+                //Enables the navmesh if the player is spotted, disables use of waypoints and sets the player as the navmesh target.
+                m_blackboard.noBounceAIController.canMove = false;
                 m_navMeshAgent.enabled = true;
                 m_navMeshAgent.destination = m_blackboard.target.playerObject.transform.position;
             }
@@ -84,12 +87,27 @@ public class TargetInSight : BtNode
             {
                 if (m_blackboard.noBounceAIController != null)
                 {
-                    m_navMeshAgent.enabled = false;
+                    //Currently only uses time spent searching to de-activate, should probably also de-activate if the player is too far.
+                    countDown();
                 }
                 Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.red);
             }
         }
         return false;
+    }
+
+    void countDown()
+    {
+        //Counts down from 0 to -5
+        m_blackboard.searchTime -= Time.deltaTime;
+        if(m_blackboard.searchTime <= -5)
+        {
+            //resets timer
+            m_blackboard.searchTime = 0;
+            //disables navmesh if the enemy can't find the player and returns to its waypoints.
+            m_navMeshAgent.enabled = false;
+            m_blackboard.noBounceAIController.canMove = true;
+        }
     }
     public override string getName()
     {
