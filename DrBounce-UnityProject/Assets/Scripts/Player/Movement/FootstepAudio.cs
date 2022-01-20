@@ -16,11 +16,9 @@ public class FootstepAudio : MonoBehaviour
     [Tooltip("The max speed by which the footstep delay has reached its minimum value.")]
     [SerializeField]
     private float maxSpeed = 20.0f;
-    /*
     [Tooltip("Multiplier applied to the footstep delay for the first footstep when starting to move. Use this to make the first footstep on moving take more or less time to play than the rest.")]
     [SerializeField]
-    private float initialDelayFactor = 0.5f;
-    */
+    private float initialDelayFactor = 0.35f;
 
     [Header("Events")]
     [SerializeField]
@@ -28,6 +26,9 @@ public class FootstepAudio : MonoBehaviour
     
     // Controls the run delay
     private bool startedDelay = false;
+    // Controls initial delay
+    private bool startedMoving = false;
+    // Stores the active delay couroutine so that it can be stopped if needed
     private IEnumerator activeDelay = null;
 
     private void FixedUpdate()
@@ -36,15 +37,22 @@ public class FootstepAudio : MonoBehaviour
         {
             if (!startedDelay)
             {
+                // Begin delay
                 activeDelay = Delay(CalculateDelayFromSpeed(movement.velocity.magnitude));
                 StartCoroutine(activeDelay);
             }
         }
-        // Cancel our active delay if we're no longer valid to play a footstep
-        else if (startedDelay && activeDelay != null)
+        else
         {
-            StopCoroutine(activeDelay);
-            activeDelay = null;
+            startedMoving = false;
+
+            // Cancel our active delay if we're no longer valid to play a footstep
+            if (startedDelay && activeDelay != null)
+            {
+                startedDelay = false;
+                StopCoroutine(activeDelay);
+                activeDelay = null;
+            }
         }
     }
 
@@ -56,6 +64,14 @@ public class FootstepAudio : MonoBehaviour
     private float CalculateDelayFromSpeed(float speed)
     {
         float speedFactor = minimumRunDelay * Mathf.Sqrt(maxSpeed / speed);   // Square root to create a curve of speed against delay, as opposed to linear
+
+        // If this is our first time playing a footstep since we've started moving, apply the initial delay factor
+        if (!startedMoving)
+        {
+            startedMoving = true;
+            speedFactor *= initialDelayFactor;
+        }
+
         return speedFactor;
     }
 
