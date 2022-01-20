@@ -42,6 +42,7 @@ namespace AK
         static const AkUniqueID GUN_THROW = 3098426972U;
         static const AkUniqueID HEAL = 3448274447U;
         static const AkUniqueID JUMP = 3833651337U;
+        static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
         static const AkUniqueID MAGNET_PULLING_START = 2278189420U;
         static const AkUniqueID PAUSE = 3092587493U;
