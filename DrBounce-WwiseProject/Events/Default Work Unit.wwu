@@ -3,17 +3,6 @@
 	<Events>
 		<WorkUnit Name="Default Work Unit" ID="{8348917E-205A-4290-A4C0-D425B674D15F}" PersistMode="Standalone">
 			<ChildrenList>
-				<Event Name="Redneck_Rolls_Dice" ID="{6AE6BE30-4FF7-4603-A035-924457DF7735}">
-					<ChildrenList>
-						<Action Name="" ID="{7D413CA8-7849-4E9E-A23E-51FC6421C9F0}" ShortID="98264401">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
 				<Folder Name="Enemy" ID="{1B1E654D-564F-47AE-9FF7-FD4251AEA5BD}" ShortID="681773210">
 					<ChildrenList>
 						<Folder Name="Bullet" ID="{BBD4EA8D-27F2-4987-B84E-69B9E38FA72D}" ShortID="181870034">
@@ -23,7 +12,7 @@
 										<Action Name="" ID="{D4EBBE26-ED14-4C3E-9539-21DB47F7D4AB}" ShortID="799629518">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DB_SFX_Enemy_Bullet_Impact_Player" ID="{C1DC0423-7A8A-4B89-90EB-5D156CEA3D13}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Injured_Enemy_Bullet" ID="{C1DC0423-7A8A-4B89-90EB-5D156CEA3D13}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -39,7 +28,7 @@
 										<Action Name="" ID="{EE52427C-C3AE-4F5A-9F54-780DD0F0A7A9}" ShortID="466842576">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="Gun_Bounce_Impact_Enemy" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Bounced_Gun" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" WorkUnitID="{CB1FCA69-FB8B-4593-9F88-56DAD8A1EFD1}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -54,7 +43,7 @@
 										<Action Name="" ID="{A51E7441-1848-402B-83CB-108C207379A1}" ShortID="411264353">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DB_SFX_Enemy_Injured_Draft_2" ID="{F97F6A37-3780-4042-ACB3-C7244C9868AE}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Injured" ID="{F97F6A37-3780-4042-ACB3-C7244C9868AE}" WorkUnitID="{CB1FCA69-FB8B-4593-9F88-56DAD8A1EFD1}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -65,7 +54,7 @@
 										<Action Name="" ID="{4CCA523D-2F4B-4A56-B735-70FBC626F929}" ShortID="155131236">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DB_SFX_Enemy_Death_Draft_3" ID="{A8341F40-E425-44A2-8FDB-1FA0DB35BB33}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Death" ID="{A8341F40-E425-44A2-8FDB-1FA0DB35BB33}" WorkUnitID="{CB1FCA69-FB8B-4593-9F88-56DAD8A1EFD1}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -84,7 +73,7 @@
 										<Action Name="" ID="{1E5E520A-8329-4E92-8262-DE2F107F4C60}" ShortID="1007625815">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="Jump" ID="{FE2F528B-33A1-443F-9895-2C45C1D8F6C6}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Jump" ID="{FE2F528B-33A1-443F-9895-2C45C1D8F6C6}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -99,14 +88,14 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="Jump" ID="{FE2F528B-33A1-443F-9895-2C45C1D8F6C6}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Jump" ID="{FE2F528B-33A1-443F-9895-2C45C1D8F6C6}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
 										<Action Name="" ID="{842B97C8-DF3A-40E9-B873-6D0B56BFF98B}" ShortID="72260092">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="Dash" ID="{99784119-CC91-41E9-973A-987F9B4C192A}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Dash" ID="{99784119-CC91-41E9-973A-987F9B4C192A}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -117,7 +106,7 @@
 										<Action Name="" ID="{1C817ACB-2AE6-4C9A-B649-33901C0C9FD6}" ShortID="743862795">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="Footstep (Grass)" ID="{23857294-2B7B-47DA-96D0-71482D013631}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Footstep_Grass" ID="{23857294-2B7B-47DA-96D0-71482D013631}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -130,21 +119,21 @@
 												<Action Name="" ID="{C04DE2CA-6EB1-4479-958F-25CAD3ECDF57}" ShortID="724927848">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Slide Start Burst" ID="{A34FD79E-3474-4943-9BD6-D5A26BE2D2B2}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Start Burst" ID="{A34FD79E-3474-4943-9BD6-D5A26BE2D2B2}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
 												<Action Name="" ID="{E4B453A7-B9F6-4619-9273-C2F6E609E4A9}" ShortID="876291700">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="DB_SFX_Player_Movement_Slide_Start" ID="{532C1C18-C8E7-4529-8EA8-F87F80CBD14B}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Startup" ID="{532C1C18-C8E7-4529-8EA8-F87F80CBD14B}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
 												<Action Name="" ID="{BCF6CE1A-9E06-4B96-A686-C5D8123439FD}" ShortID="1069680000">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="DB_SFX_Player_Movement_Slide_Loop" ID="{8FC8F52C-B201-42B9-B16B-6A5751F1DA42}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Loop" ID="{8FC8F52C-B201-42B9-B16B-6A5751F1DA42}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -154,7 +143,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Slide Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -164,7 +153,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Slide Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -174,7 +163,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Slide Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -184,7 +173,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Slide Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -195,7 +184,7 @@
 												<Action Name="" ID="{1761D326-EFB2-499A-A5FE-94609E11F495}" ShortID="473526490">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="DB_SFX_Player_Movement_Slide_End" ID="{588FEEF0-1021-42CE-AFBF-FD931B9B95AA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="End" ID="{588FEEF0-1021-42CE-AFBF-FD931B9B95AA}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -205,7 +194,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="DB_SFX_Player_Movement_Slide_Loop" ID="{8FC8F52C-B201-42B9-B16B-6A5751F1DA42}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Loop" ID="{8FC8F52C-B201-42B9-B16B-6A5751F1DA42}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -215,7 +204,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="DB_SFX_Player_Movement_Slide_Start" ID="{532C1C18-C8E7-4529-8EA8-F87F80CBD14B}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Startup" ID="{532C1C18-C8E7-4529-8EA8-F87F80CBD14B}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -225,7 +214,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Slide Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Whoosh" ID="{368957DC-56F9-4DB9-8D72-C0DFADF325B7}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -235,7 +224,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Slide Start Burst" ID="{A34FD79E-3474-4943-9BD6-D5A26BE2D2B2}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Start Burst" ID="{A34FD79E-3474-4943-9BD6-D5A26BE2D2B2}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -254,7 +243,7 @@
 												<Action Name="" ID="{EA736E60-FDDA-4F4E-BF99-7B38B3B2AD88}" ShortID="656185561">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_Shoot_Uncharged" ID="{BBA763BA-27FB-4D61-BF90-EE33F2677E4C}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Uncharged" ID="{BBA763BA-27FB-4D61-BF90-EE33F2677E4C}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -265,7 +254,7 @@
 												<Action Name="" ID="{2915F09B-A14C-4F48-83D5-2C661FDD4E91}" ShortID="999375873">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_Shoot_Charged" ID="{23572DF4-5D69-4B74-8F21-B39BC9D4433A}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charged" ID="{23572DF4-5D69-4B74-8F21-B39BC9D4433A}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -280,7 +269,7 @@
 												<Action Name="" ID="{9836380E-6C7A-4A66-8F93-7ECF9E7178E1}" ShortID="794838078">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="DB_SFX_Gun_Charge_Lost_Draft_2" ID="{5360BBE4-9A1B-4579-BFD9-25F1C3C81B30}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charge_Lost" ID="{5360BBE4-9A1B-4579-BFD9-25F1C3C81B30}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -291,7 +280,7 @@
 												<Action Name="" ID="{D866B551-1A4D-4C17-9879-F4F1071204B4}" ShortID="31595146">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_Catch_Charge" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charged" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -301,7 +290,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charged_Loop" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -315,7 +304,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_Catch_Charge" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charged" ID="{480C3C37-3BF5-4226-8AC8-87B6690AE723}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -325,7 +314,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="SFX_Gun_Charged_Loop_Draft_3" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charged_Loop" ID="{5E45C43C-C5A6-4801-B505-18F340D98412}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -340,7 +329,7 @@
 												<Action Name="" ID="{CA273F5D-D36B-42FC-B032-F93A135C2023}" ShortID="1028708825">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Redneck_Rolls_Dice" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{AFCF4D8B-A6C7-488C-ADD9-AFA2AA9E6B8A}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -351,7 +340,7 @@
 												<Action Name="" ID="{B8E3ED35-F40D-457A-85D9-0788FCF13D22}" ShortID="269891323">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="DB_SFX_Gun_Charged_Explosive_Impact_Explosion_Draft_3" ID="{38877AED-7009-46C3-814B-C3FBB17AAADA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Explosive_Impact" ID="{38877AED-7009-46C3-814B-C3FBB17AAADA}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -362,35 +351,35 @@
 												<Action Name="" ID="{98CC66A1-9EAA-42F8-AD37-A3016F25D701}" ShortID="570568990">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="SFX_Gun_Rebound_Feedback_1" ID="{C716CE9D-C8B4-412C-870A-1E945C81AABF}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Bounce_Feedback_1" ID="{C716CE9D-C8B4-412C-870A-1E945C81AABF}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
 												<Action Name="" ID="{B47461DD-2B90-4705-957B-06D86C3A4F58}" ShortID="453499137">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="SFX_Gun_Rebound_Feedback_2" ID="{3C6FEF2C-6FE7-4639-925D-B31A91354F58}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Bounce_Feedback_2" ID="{3C6FEF2C-6FE7-4639-925D-B31A91354F58}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
 												<Action Name="" ID="{A5B9ABF0-2630-4F43-BA25-B2DE885970BB}" ShortID="211277462">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="SFX_Gun_Rebound_Feedback_3" ID="{667F0495-61DB-4371-84B9-034F6488ABDE}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Bounce_Feedback_3" ID="{667F0495-61DB-4371-84B9-034F6488ABDE}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
 												<Action Name="" ID="{715A454D-D0E0-4238-84E7-7ABFEDE07D49}" ShortID="892518085">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="SFX_Gun_Rebound_Feedback_4" ID="{7A6CED24-590D-46FE-BF1E-8354769E3534}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Bounce_Feedback_4" ID="{7A6CED24-590D-46FE-BF1E-8354769E3534}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
 												<Action Name="" ID="{6F53AE7D-CC79-42FE-9230-BEF1EDC79494}" ShortID="909734684">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="SFX_Gun_Rebound_Feedback_5" ID="{36BEB311-B5F8-425C-8D03-F5719E2D97C3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Bounce_Feedback_5" ID="{36BEB311-B5F8-425C-8D03-F5719E2D97C3}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -408,7 +397,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_Throw" ID="{7783DC4E-C1EC-40F0-8111-44D1BEF13FAF}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Throw" ID="{7783DC4E-C1EC-40F0-8111-44D1BEF13FAF}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -419,7 +408,7 @@
 												<Action Name="" ID="{39F8EDFE-812C-4776-9BA8-39B4200224BF}" ShortID="99691336">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="SFX_Gun_Equip_Draft_1_lowerpitch" ID="{10626C7A-8C24-4F16-8714-D316AC10FAAE}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Equip" ID="{10626C7A-8C24-4F16-8714-D316AC10FAAE}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -478,7 +467,7 @@
 												<Action Name="" ID="{31EF2884-2E75-4EA9-BEEE-6C33093FE4F2}" ShortID="277401726">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="DB_SFX_Gun_Magnet_Impact_Draft_2" ID="{A93C0F40-EBF9-4A18-94AE-A1D1C424C660}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Catch" ID="{A93C0F40-EBF9-4A18-94AE-A1D1C424C660}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -493,7 +482,7 @@
 												<Action Name="" ID="{152164FD-1827-419E-82AB-0007A0B55D0B}" ShortID="386582221">
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_MaxShot_Charging" ID="{52325211-81A9-4F27-9A55-7C54940A9CBF}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charge_Start" ID="{52325211-81A9-4F27-9A55-7C54940A9CBF}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -521,7 +510,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_MaxShot_Charged_Loop" ID="{67637400-F33A-4F89-8BEA-6F14E40F6A6F}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charged_Loop" ID="{67637400-F33A-4F89-8BEA-6F14E40F6A6F}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -535,7 +524,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_MaxShot_Charging" ID="{52325211-81A9-4F27-9A55-7C54940A9CBF}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charge_Start" ID="{52325211-81A9-4F27-9A55-7C54940A9CBF}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -549,7 +538,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_MaxShot_Charged_Loop" ID="{67637400-F33A-4F89-8BEA-6F14E40F6A6F}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charged_Loop" ID="{67637400-F33A-4F89-8BEA-6F14E40F6A6F}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -559,7 +548,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
-															<ObjectRef Name="Gun_MaxShot_Charging" ID="{52325211-81A9-4F27-9A55-7C54940A9CBF}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+															<ObjectRef Name="Charge_Start" ID="{52325211-81A9-4F27-9A55-7C54940A9CBF}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -574,7 +563,7 @@
 								<Action Name="" ID="{AE829DCB-8AB0-4C81-AAE8-EC4D4A58342D}" ShortID="780693348">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Player_Throw" ID="{70E7C959-6EA2-4ED4-8D30-3520B955FD20}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+											<ObjectRef Name="Throw" ID="{70E7C959-6EA2-4ED4-8D30-3520B955FD20}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -585,7 +574,7 @@
 								<Action Name="" ID="{90AEAF40-9116-4CC2-A9C6-79E0D2921C32}" ShortID="890582227">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="DB_SFX_Player_Heal_Draft_1" ID="{AD7B4360-D477-486D-BF9B-9435AF1947DD}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+											<ObjectRef Name="Heal" ID="{AD7B4360-D477-486D-BF9B-9435AF1947DD}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -598,7 +587,7 @@
 										<Action Name="" ID="{88EADE01-0F2F-469A-810A-4444BA7122A3}" ShortID="466269482">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DB_SFX_Magnet_Pulling_Start" ID="{25F377BB-B8B1-4DD5-A173-1AA99BDA5500}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Assist_Start" ID="{25F377BB-B8B1-4DD5-A173-1AA99BDA5500}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -608,7 +597,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DB_SFX_Magnet_Pulling_Loop" ID="{898038CB-A40F-46A3-AB64-5C3CE20991AA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Assist_Loop" ID="{898038CB-A40F-46A3-AB64-5C3CE20991AA}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -618,7 +607,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="Magnet Fail" ID="{92E52623-D519-4D63-9689-465456CC57B5}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Assist_Fail" ID="{92E52623-D519-4D63-9689-465456CC57B5}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -632,7 +621,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DB_SFX_Magnet_Pulling_Start" ID="{25F377BB-B8B1-4DD5-A173-1AA99BDA5500}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Assist_Start" ID="{25F377BB-B8B1-4DD5-A173-1AA99BDA5500}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -642,7 +631,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DB_SFX_Magnet_Pulling_Loop" ID="{898038CB-A40F-46A3-AB64-5C3CE20991AA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Assist_Loop" ID="{898038CB-A40F-46A3-AB64-5C3CE20991AA}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -653,7 +642,7 @@
 										<Action Name="" ID="{02FF912C-3788-4F53-A0A6-0969A832BD10}" ShortID="705815870">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="Magnet Fail" ID="{92E52623-D519-4D63-9689-465456CC57B5}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Assist_Fail" ID="{92E52623-D519-4D63-9689-465456CC57B5}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -672,7 +661,7 @@
 										<Action Name="" ID="{CCEEDA21-2396-4A6C-99F4-D7E9A17BD07D}" ShortID="917037483">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DB_SFX_Bounce_Pad_Bounce_Object" ID="{BBA28ED5-84FC-4D7B-A730-F18055FE889B}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Bounce_Object" ID="{BBA28ED5-84FC-4D7B-A730-F18055FE889B}" WorkUnitID="{002D8378-3CD7-4F3F-9467-731DACAD992E}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -683,7 +672,7 @@
 										<Action Name="" ID="{DD9308E5-1F64-4235-BF1C-33464A4C9DCB}" ShortID="229746157">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DB_SFX_Bounce_Pad_Bounce_Player" ID="{798EFDC7-52FB-45F5-A03E-1EDA186610EB}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+													<ObjectRef Name="Bounce_Player" ID="{798EFDC7-52FB-45F5-A03E-1EDA186610EB}" WorkUnitID="{002D8378-3CD7-4F3F-9467-731DACAD992E}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -729,6 +718,32 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Debug" ID="{B2EE0393-45CD-4118-9BBE-16FE966EF1BE}" ShortID="58376257">
+					<ChildrenList>
+						<Event Name="Redneck_Rolls_Dice" ID="{6AE6BE30-4FF7-4603-A035-924457DF7735}">
+							<ChildrenList>
+								<Action Name="" ID="{7D413CA8-7849-4E9E-A23E-51FC6421C9F0}" ShortID="98264401">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Redneck_Rolls_Dice" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{AFCF4D8B-A6C7-488C-ADD9-AFA2AA9E6B8A}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="uhh_cheesed_to_meet_you" ID="{AB92FD5C-9DFC-409A-8E18-A8213A578DB0}">
+							<ChildrenList>
+								<Action Name="" ID="{5C1CF50B-528C-4C5B-8A16-3B7B80E68E1F}" ShortID="509737586">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Fart" ID="{FB09773A-BF73-4D64-986C-193895342534}" WorkUnitID="{AFCF4D8B-A6C7-488C-ADD9-AFA2AA9E6B8A}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
