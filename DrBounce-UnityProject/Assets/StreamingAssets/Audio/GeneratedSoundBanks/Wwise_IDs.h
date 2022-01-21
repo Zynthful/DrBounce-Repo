@@ -50,6 +50,7 @@ namespace AK
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
         static const AkUniqueID SLIDE_END = 114683718U;
         static const AkUniqueID SLIDE_START = 2149348397U;
+        static const AkUniqueID UHH_CHEESED_TO_MEET_YOU = 3276816688U;
         static const AkUniqueID UI_BUTTON_CLICK_FAIL = 4089643514U;
         static const AkUniqueID UI_BUTTON_ENTER = 18309885U;
         static const AkUniqueID UI_BUTTON_POINTERENTER = 1841462538U;
@@ -98,6 +99,12 @@ namespace AK
         static const AkUniqueID MUSIC = 3991942870U;
         static const AkUniqueID SFX = 393239870U;
     } // namespace BUSSES
+
+    namespace AUX_BUSSES
+    {
+        static const AkUniqueID AUX_ROOM_MEDIUM = 1557528409U;
+        static const AkUniqueID AUX_ROOM_SMALL = 3471733113U;
+    } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
     {
