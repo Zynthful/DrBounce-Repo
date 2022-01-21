@@ -24,13 +24,15 @@ public class DecalManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private Material defaultDecal = null;
+    private Material placeholderDecal = null;
+
+    [SerializeField]
+    private float nearbySurfaceDistanceCheck = 1.0f;
 
     private List<GameObject> spawnedDecals = new List<GameObject>();
 
     private ObjectPooler pool;
 
-    // Start is called before the first frame update
     void Start()
     {
         pool = ObjectPooler.Instance;
@@ -38,7 +40,7 @@ public class DecalManager : MonoBehaviour
 
     public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale)
     {
-        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, defaultDecal));
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, placeholderDecal));
     }
 
     public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Material decalMaterial)
@@ -55,7 +57,7 @@ public class DecalManager : MonoBehaviour
     {
         if (decalToSpawn == null)
         {
-            decalToSpawn = defaultDecal;
+            decalToSpawn = placeholderDecal;
         }
 
         Quaternion decalRotation = Quaternion.FromToRotation(Vector3.back, normal);
