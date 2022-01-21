@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public LayerMask bounceableLayers = 9; // Set this to the layer mask of any bounceable terrain/enemies
     private InputMaster controls;
+    private DecalManager decalM;
 
     [HideInInspector]
     public bool paused = false;
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
         }
 
         controls = InputManager.inputMaster;
+        decalM = DecalManager.Instance;
 
         // Cap fps to 120
         Application.targetFrameRate = 120;
@@ -72,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        decalM.ClearDecals();
     }
 
     public void Stop() 
