@@ -25,7 +25,7 @@ public class ParticleSlime : MonoBehaviour
             Vector3 pos = collisionEvents[i].intersection;
             Vector3 normal = collisionEvents[i].normal;
 
-            decalM.SpawnDecal(pos, normal, 1f, decal);
+            decalM.SpawnDecal(pos, normal, 1f, DecalManager.DecalType.placeholder);
         }
     }
 }

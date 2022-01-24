@@ -23,8 +23,21 @@ public class DecalManager : MonoBehaviour
 
     #endregion
 
+    public enum DecalType
+    {
+        bullet,
+        slime,
+        placeholder
+    }
+
     [SerializeField]
     private Material placeholderDecal = null;
+
+    [SerializeField]
+    private Material bulletHoleDecal = null;
+    
+    [SerializeField]
+    private Material slimeDecal = null;
 
     [SerializeField]
     private float nearbySurfaceDistanceCheck = 1.0f;
@@ -40,24 +53,33 @@ public class DecalManager : MonoBehaviour
 
     public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale)
     {
-        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, placeholderDecal));
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, DecalType.placeholder));
     }
-
-    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Material decalMaterial)
+    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, DecalType decalMaterial)
     {
         spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, decalMaterial));
     }
 
-    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, Material decalMaterial)
+    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalMaterial)
     {
         spawnedDecals.Add(CreateDecal(position, normal, decalScale, t, decalMaterial));
     }
 
-    private GameObject CreateDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, Material decalToSpawn)
+    private GameObject CreateDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalType)
     {
-        if (decalToSpawn == null)
+        Material decalToSpawn;
+
+        switch (decalType)
         {
-            decalToSpawn = placeholderDecal;
+            case DecalType.bullet:
+                decalToSpawn = bulletHoleDecal;
+                break;
+            case DecalType.slime:
+                decalToSpawn = slimeDecal;
+                break;
+            default:
+                decalToSpawn = placeholderDecal;
+                break;
         }
 
         Quaternion decalRotation = Quaternion.FromToRotation(Vector3.back, normal);

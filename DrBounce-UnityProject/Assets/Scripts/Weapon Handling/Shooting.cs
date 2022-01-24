@@ -385,7 +385,7 @@ public class Shooting : MonoBehaviour
                 }
                 else
                 {
-                    decalM.SpawnDecal(Hitinfo.point, Hitinfo.normal, 0.4f, bulletDecalMaterial);
+                    decalM.SpawnDecal(Hitinfo.point, Hitinfo.normal, 0.4f, DecalManager.DecalType.bullet);
                 }
             }
         }
