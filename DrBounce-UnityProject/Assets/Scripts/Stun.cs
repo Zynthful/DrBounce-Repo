@@ -32,6 +32,7 @@ public class Stun : MonoBehaviour
         {
             if (stunTimer >= timeStunnedFor)
             {
+                stunTimer = stunTimer + Time.deltaTime;
                 StunEnded();
             }
         }
@@ -39,6 +40,7 @@ public class Stun : MonoBehaviour
         {
             if (hitTimer >= timeToResetStun && hasBeenHit)      //change to else if?
             {
+                hitTimer = hitTimer + Time.deltaTime;
                 hasBeenHit = false;
                 hitTimer = 0;
                 stunCounter = 0;
@@ -63,6 +65,9 @@ public class Stun : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stuns the enemy after being hit
+    /// </summary>
     private void BigHit() 
     {
         if (!isStunned)
