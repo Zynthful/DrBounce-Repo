@@ -8,14 +8,13 @@ public class Stun : MonoBehaviour
     To do:
     link up to other scripts:
         ai (so the enemy stops moving and attacking)
-        hit detection (when the enemy gets hit by normal shots, throw the gun)
+        hit detection (when the enemy gets hit by normal shots, gets hit by the thrown gun)
         ui (update a slider)
-    meter slowly goes down
     */
 
     private bool hasBeenHit = false;    //checks if the enemy has been hit recently
-    [SerializeField] private int hitsNeededtoStun = 5;      //the amount of hits needed for ther enemy to get stunned
-    private int stunCounter = 0;    //the current stun value of the enemy, if it is equal to hitsNeededtoStun, then the enemy is stunned
+    [SerializeField] private int shotsNeededtoStun = 5;      //the amount of hits needed for ther enemy to get stunned
+    private float stunCounter = 0;    //the current stun value of the enemy, if it is equal to hitsNeededtoStun, then the enemy is stunned
 
     [SerializeField] private float timeToResetStun = 8.5f;      //the amount of time that can pass before the stun counter is reset
 
@@ -23,7 +22,7 @@ public class Stun : MonoBehaviour
     [SerializeField] private float timeStunnedFor = 3.5f;       //the amount of time the enemy is stunned for
 
     private float stunTimer = 0;        //to check if the enemy has reached the timeStunnedFor
-    private float hitTimer = 0;        //to check if the enemy has reached the timeToResetStun
+    [SerializeField] private float stunLoss = 0.1f;     //amount of stun value lost per frame
 
     // Update is called once per frame
     void Update()
@@ -38,27 +37,27 @@ public class Stun : MonoBehaviour
         }
         else
         {
-            if (hitTimer >= timeToResetStun && hasBeenHit)      //change to else if?
+            if (hasBeenHit)      //change to else if?
             {
-                hitTimer = hitTimer + Time.deltaTime;
-                hasBeenHit = false;
-                hitTimer = 0;
-                stunCounter = 0;
+                stunCounter = stunCounter - stunLoss;
+                if (stunCounter <= 0) 
+                {
+                    hasBeenHit = false;
+                }
             }
         }
     }
 
     /// <summary>
-    /// Increase the stun counter unless the enemy is already stunned
+    /// Increase the stun counter unless the enemy is already stunned (normal shot)
     /// </summary>
     private void Hit() 
     {
         if (!isStunned)
         {
             hasBeenHit = true;
-            hitTimer = 0;
             stunCounter++;
-            if (stunCounter >= hitsNeededtoStun)
+            if (stunCounter >= shotsNeededtoStun)
             {
                 Stunned();
             }
@@ -66,19 +65,13 @@ public class Stun : MonoBehaviour
     }
 
     /// <summary>
-    /// Stuns the enemy after being hit
+    /// Stuns the enemy after being hit (gun throw)
     /// </summary>
-    private void BigHit() 
+    private void BigHit()
     {
         if (!isStunned)
         {
-            hasBeenHit = true;
-            hitTimer = 0;
-            stunCounter = hitsNeededtoStun;
-            if (stunCounter >= hitsNeededtoStun)
-            {
-                Stunned();
-            }
+            Stunned();
         }
     }
 
@@ -87,10 +80,10 @@ public class Stun : MonoBehaviour
     /// </summary>
     private void Stunned() 
     {
+        hasBeenHit = false;
+        stunCounter = shotsNeededtoStun;
         isStunned = true;
         stunTimer = 0;
-        hasBeenHit = false;
-        stunCounter = 0;
     }
 
     /// <summary>
@@ -98,6 +91,7 @@ public class Stun : MonoBehaviour
     /// </summary>
     private void StunEnded() 
     {
+        stunCounter = 0;
         isStunned = false;
     }
 
