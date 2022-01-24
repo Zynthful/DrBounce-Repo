@@ -97,7 +97,9 @@ public class AkEvent : AkDragDropTriggerHandler
 
 	public override void HandleEvent(UnityEngine.GameObject in_gameObject)
 	{
-		var gameObj = useOtherObject && in_gameObject != null ? in_gameObject : gameObject;
+		// please don't kill me wwise i beg of you
+		// var gameObj = useOtherObject && in_gameObject != null ? in_gameObject : gameObject;
+		var gameObj = in_gameObject != null ? in_gameObject : gameObject;
 		soundEmitterObject = gameObj;
 
 		if (enableActionOnEvent)

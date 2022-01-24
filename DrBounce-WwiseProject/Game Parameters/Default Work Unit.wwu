@@ -25,6 +25,12 @@
 										<Property Name="Max" Type="Real64" Value="10"/>
 									</PropertyList>
 								</GameParameter>
+								<GameParameter Name="Player_Gun_MaxShot_Charge_Progress" ID="{58E4EA3E-DE47-4FFF-A6A4-2CB2EC21B2A5}">
+									<PropertyList>
+										<Property Name="InitialValue" Type="Real64" Value="0"/>
+										<Property Name="Max" Type="Real64" Value="1"/>
+									</PropertyList>
+								</GameParameter>
 							</ChildrenList>
 						</Folder>
 						<GameParameter Name="Player_Health_Percentage" ID="{BDE197B6-8BCD-45F3-81C5-2D1074DAA0F1}"/>
@@ -48,6 +54,40 @@
 							<PropertyList>
 								<Property Name="InitialValue" Type="Real64" Value="7"/>
 								<Property Name="Max" Type="Real64" Value="10"/>
+							</PropertyList>
+						</GameParameter>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Environment" ID="{D4753EE3-5B9E-4181-9EA5-607FA8C049F2}" ShortID="790473540">
+					<ChildrenList>
+						<Folder Name="Bouncing" ID="{C8F7AE8C-B28B-49A4-8A8E-514A0C7D2500}" ShortID="554637216">
+							<ChildrenList>
+								<GameParameter Name="ObjectSize" ID="{6D2A1B4D-36B4-4EB5-BEF9-ECA8B3FC77B9}">
+									<PropertyList>
+										<Property Name="InitialValue" Type="Real64" Value="75"/>
+										<Property Name="Min" Type="Real64" Value="1"/>
+									</PropertyList>
+								</GameParameter>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Bounce Pad" ID="{B2CB4BD9-EA63-43DF-85D0-6EC3A301A950}" ShortID="676125811">
+							<ChildrenList>
+								<GameParameter Name="BouncePad_NumOfBounces" ID="{1E5091A7-1B06-4968-A32E-0C0739C0B13C}">
+									<PropertyList>
+										<Property Name="InitialValue" Type="Real64" Value="0"/>
+										<Property Name="Max" Type="Real64" Value="5"/>
+									</PropertyList>
+								</GameParameter>
+							</ChildrenList>
+						</Folder>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Health" ID="{B382CDD4-7D52-4FD8-B676-4781DBBD9F49}" ShortID="588102470">
+					<ChildrenList>
+						<GameParameter Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="0"/>
+								<Property Name="Max" Type="Real64" Value="1000"/>
 							</PropertyList>
 						</GameParameter>
 					</ChildrenList>

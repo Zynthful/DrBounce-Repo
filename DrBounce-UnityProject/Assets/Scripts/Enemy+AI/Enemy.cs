@@ -9,8 +9,6 @@ public class Enemy : MonoBehaviour
 {
     [Header("Declarations")]
     [SerializeField]
-    private EnemyAudio enemyAudio = null;
-    [SerializeField]
     private EnemyHealth health = null;
     [SerializeField]
     private BulletType bullet;
@@ -129,11 +127,6 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(delay);
         shootDelay = false;
         shootingDelayCoroutine = null;
-    }
-
-    public EnemyAudio GetAudio()
-    {
-        return enemyAudio;
     }
 
     /*

@@ -11,20 +11,26 @@ public class SliderSetting : Settings
     [SerializeField]
     protected Slider slider = null;
 
-    protected virtual void Start()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        slider.onValueChanged.AddListener(setting.SetValue);
+        setting.OnResetDefault += ResetToDefault;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        slider.onValueChanged.RemoveListener(setting.SetValue);
+        setting.OnResetDefault -= ResetToDefault;
+    }
+
+    protected override void UpdateUI()
+    {
+        base.UpdateUI();
+        valueText.text = setting.GetCurrentValue().ToString();
         slider.minValue = setting.GetMinValue();
         slider.maxValue = setting.GetMaxValue();
         slider.value = setting.GetCurrentValue();
-    }
-
-    protected virtual void OnEnable()
-    {
-        slider.onValueChanged.AddListener(setting.SetValue);
-    }
-
-    protected virtual void OnDisable()
-    {
-        slider.onValueChanged.RemoveListener(setting.SetValue);
     }
 }

@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Float Setting", menuName = "ScriptableObjects/Settings/Float")]
-public class FloatSetting : GenericSettingObj
+public class FloatSetting : SettingData
 {
+    protected float currentValue = 0;
+
+    [Header("Events")]
     [SerializeField]
     protected GameEventFloat onValueChanged = null;
+    [SerializeField]
+    protected GameEventFloat onResetToDefault = null;
 
+    [Header("Value Settings")]
     [SerializeField]
     protected float minValue = 0;
     [SerializeField]
@@ -15,12 +21,10 @@ public class FloatSetting : GenericSettingObj
     [SerializeField]
     protected float defaultValue = 0;
 
-    protected float currentValue = 0;
-
     public override void Initialise()
     {
         base.Initialise();
-        currentValue = PlayerPrefs.GetFloat($"Options/{type}/{settingName}", defaultValue);
+        currentValue = PlayerPrefs.GetFloat($"Options/{type}/{subType}/{settingName}", defaultValue);
         onValueChanged?.Raise(currentValue);
     }
 
@@ -28,9 +32,16 @@ public class FloatSetting : GenericSettingObj
     {
         currentValue = value;
         onValueChanged?.Raise(value);
-        PlayerPrefs.SetFloat($"Options/{type}/{settingName}", value);
+        PlayerPrefs.SetFloat($"Options/{type}/{subType}/{settingName}", value);
 
         Save();
+    }
+
+    public override void ResetToDefault()
+    {
+        SetValue(defaultValue);
+        onResetToDefault?.Raise(defaultValue);
+        base.ResetToDefault();
     }
 
     public float GetCurrentValue()

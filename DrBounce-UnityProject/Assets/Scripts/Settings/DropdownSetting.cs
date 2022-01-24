@@ -11,18 +11,23 @@ public class DropdownSetting : Settings
     [SerializeField]
     private TMP_Dropdown dropdown = null;
 
-    protected virtual void Start()
+    protected override void OnEnable()
     {
-        dropdown.value = setting.GetCurrentValue();
-    }
-
-    protected virtual void OnEnable()
-    {
+        base.OnEnable();
         dropdown.onValueChanged.AddListener(setting.SetValue);
+        setting.OnResetDefault += ResetToDefault;
     }
 
-    protected virtual void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         dropdown.onValueChanged.RemoveListener(setting.SetValue);
+        setting.OnResetDefault -= ResetToDefault;
+    }
+
+    protected override void UpdateUI()
+    {
+        base.UpdateUI();
+        dropdown.value = setting.GetCurrentValue();
     }
 }

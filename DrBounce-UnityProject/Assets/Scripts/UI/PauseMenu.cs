@@ -36,13 +36,23 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        controls = new InputMaster();
+        controls = InputManager.inputMaster;
     }
 
     private void Start()
     {
         if (unpauseOnStart)
             SetPaused(false);
+    }
+
+    private void OnEnable()
+    {
+        controls.Menu.Pause.performed += _ => InvertPause();
+    }
+
+    private void OnDisable()
+    {
+        controls.Menu.Pause.performed -= _ => InvertPause();
     }
 
     private void InvertPause()
@@ -53,6 +63,9 @@ public class PauseMenu : MonoBehaviour
     public void SetPaused(bool value)
     {
         paused = value;
+        
+        // Enable/disable gameplay controls
+        InputManager.SetActionMapActive(controls.Player, !value);
 
         // Update cursor lock state and visibility
         Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
@@ -78,17 +91,5 @@ public class PauseMenu : MonoBehaviour
                 _onUnpauseAfterPause.Invoke();
             }
         }
-    }
-
-    private void OnEnable()
-    {
-        controls.Menu.Pause.performed += _ => InvertPause();
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Menu.Pause.performed -= _ => InvertPause();
-        controls.Disable();
     }
 }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public LayerMask bounceableLayers = 9; // Set this to the layer mask of any bounceable terrain/enemies
     private InputMaster controls;
+    private DecalManager decalM;
 
     [HideInInspector]
     public bool paused = false;
@@ -45,8 +46,9 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        controls = new InputMaster();
-        controls.Player.DEBUG_Pause.performed += _ => Stop();
+        controls = InputManager.inputMaster;
+        decalM = DecalManager.Instance;
+
         // Cap fps to 120
         Application.targetFrameRate = 120;
 
@@ -55,21 +57,24 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
-
     private void OnEnable()
     {
-        controls.Enable();
+        controls.Debug.DEBUG_Pause.performed += _ => Stop();
     }
 
     private void OnDisable()
     {
-        if(controls != null)
-            controls.Disable();
+        if (controls != null)
+        {
+            controls.Debug.DEBUG_Pause.performed -= _ => Stop();
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        decalM.ClearDecals();
     }
 
     public void Stop() 
@@ -80,7 +85,10 @@ public class GameManager : MonoBehaviour
 #if !UNITY_EDITOR
     private void OnApplicationQuit()
     {
-        Application.OpenURL(urlToOpen);
+        if (openUrlOnQuit)
+        {
+            Application.OpenURL(urlToOpen);
+        }
     }
 #endif
 }

@@ -109,5 +109,7 @@ namespace MoreMountains.Feedbacks
                     break;
             }
         }
+
+        public void SetDestinationSceneName(string value) { DestinationSceneName = value; }
     }
 }

@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Int Setting", menuName = "ScriptableObjects/Settings/Int")]
-public class IntSetting : GenericSettingObj
+public class IntSetting : SettingData
 {
-    [SerializeField]
-    private GameEventInt onValueChanged = null;
+    protected int currentValue = 0;
 
+    [Header("Events")]
+    [SerializeField]
+    protected GameEventInt onValueChanged = null;
+    [SerializeField]
+    protected GameEventInt onResetToDefault = null;
+
+    [Header("Value Settings")]
     [SerializeField]
     protected int minValue = 0;
     [SerializeField]
@@ -15,12 +21,10 @@ public class IntSetting : GenericSettingObj
     [SerializeField]
     protected int defaultValue = 0;
 
-    protected int currentValue = 0;
-
     public override void Initialise()
     {
         base.Initialise();
-        currentValue = PlayerPrefs.GetInt($"Options/{type}/{settingName}", defaultValue);
+        currentValue = PlayerPrefs.GetInt($"Options/{type}/{subType}/{settingName}", defaultValue);
         onValueChanged?.Raise(currentValue);
     }
 
@@ -28,9 +32,16 @@ public class IntSetting : GenericSettingObj
     {
         currentValue = value;
         onValueChanged?.Raise(value);
-        PlayerPrefs.SetInt($"Options/{type}/{settingName}", value);
+        PlayerPrefs.SetInt($"Options/{type}/{subType}/{settingName}", value);
 
         Save();
+    }
+
+    public override void ResetToDefault()
+    {
+        SetValue(defaultValue);
+        onResetToDefault?.Raise(defaultValue);
+        base.ResetToDefault();
     }
 
     public int GetCurrentValue()

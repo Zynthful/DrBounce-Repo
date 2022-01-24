@@ -126,7 +126,7 @@ namespace MoreMountains.Tools
 		/// <summary>
 		/// On Start, creates or sets the health bar up
 		/// </summary>
-		protected virtual void Awake()
+		protected virtual void Start()
 		{
             Initialization();
 		}
@@ -148,8 +148,8 @@ namespace MoreMountains.Tools
                     Debug.LogWarning(this.name + " : the HealthBar has no prefab associated to it, nothing will be displayed.");
                     return;
                 }
-                _progressBar = Instantiate(HealthBarPrefab, transform.position + HealthBarOffset, transform.rotation) as MMProgressBar;
-                _progressBar.transform.SetParent(this.transform);
+                _progressBar = Instantiate(HealthBarPrefab, transform.position + HealthBarOffset, transform.rotation, this.transform) as MMProgressBar;
+                //_progressBar.transform.SetParent(this.transform);
                 _progressBar.gameObject.name = "HealthBar";
             }
 
