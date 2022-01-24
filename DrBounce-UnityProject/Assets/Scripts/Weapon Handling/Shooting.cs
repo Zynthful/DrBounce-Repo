@@ -34,20 +34,11 @@ public class Shooting : MonoBehaviour
     private float timeSinceLastShot = 0;
 
     [Header("Max Shot Settings")]
-    [SerializeField]
-    [Tooltip("Duration in seconds that the shoot button must be held in order to fully charge a max charge shot.")]
-    private float holdTimeToFullCharge = 1.0f;
-    [SerializeField]
-    [Tooltip("Percentage that the max shot must be charged before cancelling it does NOT trigger a regular shot.")]
-    [Range(0, 1)]
-    private float chargeCancelThreshold = 0.5f;
-    [SerializeField]
-    [Tooltip("Percentage that the shoot control must be held for before beginning a max shot charge")]
-    [Range(0, 1)]
-    private float chargeBeginThreshold = 0.25f;
-    [SerializeField]
-    [Tooltip("Minimum charges to begin charging a max shot charge")]
-    private int minChargeToMaxShot = 1;
+
+    private float holdTimeToFullCharge = 0;
+    private float chargeCancelThreshold = 0;
+    private float chargeBeginThreshold = 0;
+    private int minChargeToMaxShot = 0;
 
     private float currentHoldTime = 0.0f;
     private bool holdingShoot = false;
@@ -139,6 +130,11 @@ public class Shooting : MonoBehaviour
         pool = ObjectPooler.Instance;
         decalM = DecalManager.Instance;
         CheckForHoverOverEnemy();
+
+        holdTimeToFullCharge = shooter.holdTimeToFullCharge;
+        chargeCancelThreshold = shooter.chargeCancelThreshold; 
+        chargeBeginThreshold = shooter.chargeBeginThreshold; 
+        minChargeToMaxShot = shooter.minChargeToMaxShot; 
     }
 
     // Update is called once per frame
