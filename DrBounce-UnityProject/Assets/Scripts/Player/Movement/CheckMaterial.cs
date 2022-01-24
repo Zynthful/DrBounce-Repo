@@ -15,12 +15,14 @@ public class CheckMaterial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        MaterialSwitch material = other.gameObject.GetComponent<MaterialSwitch>();
-        if (material != null)
+        MaterialSwitch materialSwitch = other.gameObject.GetComponent<MaterialSwitch>();
+        if (materialSwitch != null)
         {
-            Debug.Log("switching: " + material.GetMaterial().ToString());
-            currentMaterial = material.GetMaterial();
-            currentMaterial.SetValue(switchObj);
+            if (currentMaterial != materialSwitch.GetMaterial() && materialSwitch.GetMaterial() != null)
+            {
+                currentMaterial = materialSwitch.GetMaterial();
+                currentMaterial.SetValue(switchObj);
+            }
         }
     }
 
