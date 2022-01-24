@@ -13,6 +13,7 @@ public class TargetInSight : BtNode
     public bool m_canSeePlayer;
     private bool spottedPlayer;
     private NavMeshAgent m_navMeshAgent;
+    private bool sightReset = false;
 
     /// <summary>
     /// Used to get variables from else where (custimisation)
@@ -103,12 +104,18 @@ public class TargetInSight : BtNode
             if (Physics.Raycast(ray, out hit, m_viewDist) && hit.transform.root.CompareTag("Player"))
             {
                 Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.green);
+                if(sightReset == false)
+                {
+                    m_blackboard.searchTime = 0;
+                    sightReset = true;
+                }
                 spottedPlayer = true;
                 return true;
             }
             else if (spottedPlayer == true && m_blackboard.noBounceAIController != null)
             {
                 countDown();
+                sightReset = false;
             }
             else
             {
