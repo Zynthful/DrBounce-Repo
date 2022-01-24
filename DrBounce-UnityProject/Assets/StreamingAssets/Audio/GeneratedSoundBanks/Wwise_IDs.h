@@ -59,6 +59,22 @@ namespace AK
         static const AkUniqueID UNPAUSE = 3412868374U;
     } // namespace EVENTS
 
+    namespace SWITCHES
+    {
+        namespace COLLISION_MATERIAL
+        {
+            static const AkUniqueID GROUP = 2158317749U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID GRASS = 4248645337U;
+                static const AkUniqueID LAB = 578926554U;
+                static const AkUniqueID SLIME = 3803999823U;
+            } // namespace SWITCH
+        } // namespace COLLISION_MATERIAL
+
+    } // namespace SWITCHES
+
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID BOUNCEPAD_NUMOFBOUNCES = 856530565U;
