@@ -41,17 +41,17 @@ public class Gun : ScriptableObject
 
     [Range(0, 10)]
     [Tooltip("Duration in seconds that the shoot button must be held in order to fully charge a max charge shot.")]
-    public float holdTimeToFullCharge; //1.0f;
+    public float holdTimeToFullCharge = 1.0f;
 
     [Range(0, 1)]
     [Tooltip("Percentage that the max shot must be charged before cancelling it does NOT trigger a regular shot.")]
-    public float chargeCancelThreshold; //0.5f
+    public float chargeCancelThreshold = 0.5f;
 
     [Range(0, 1)]
     [Tooltip("Percentage that the shoot control must be held for before beginning a max shot charge")]
-    public float chargeBeginThreshold; //0.25f
+    public float chargeBeginThreshold = 0.25f;
 
     [Range(0, 100)]
     [Tooltip("Minimum charges to begin charging a max shot charge")]
-    public int minChargeToMaxShot; //1
+    public int minChargeToMaxShot = 1;
 }
