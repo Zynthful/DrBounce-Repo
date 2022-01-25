@@ -59,11 +59,13 @@ public class TargetInSight : BtNode
 
                 m_navMeshAgent.destination = m_blackboard.noBounceAIController.patrolPoints[0];
 
-                //If enemy's x value is close to the waypoint location
                 if (m_blackboard.noBounceAIController.patrolPoints[0].x >= m_blackboard.noBounceAIController.transform.position.x - 5 && m_blackboard.noBounceAIController.patrolPoints[0].x <= m_blackboard.noBounceAIController.transform.position.x + 5)
                 {
                     m_navMeshAgent.enabled = false;
                 }
+
+                //If enemy's x value is close to the waypoint location
+
                 m_blackboard.noBounceAIController.canMove = true;
             }
         }
