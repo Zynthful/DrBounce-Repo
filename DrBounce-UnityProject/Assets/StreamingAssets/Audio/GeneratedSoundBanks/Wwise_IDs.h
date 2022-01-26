@@ -20,6 +20,7 @@ namespace AK
         static const AkUniqueID ENEMY_BULLET_IMPACT_SURFACE = 936643039U;
         static const AkUniqueID ENEMY_GUN_BOUNCE_IMPACT = 177975784U;
         static const AkUniqueID ENEMY_HEALTH_DEATH = 2932285363U;
+        static const AkUniqueID ENEMY_HEALTH_DEATH_PARTICLE_COLLIDE = 4019809755U;
         static const AkUniqueID ENEMY_HEALTH_INJURED = 3919011194U;
         static const AkUniqueID FOOTSTEP = 1866025847U;
         static const AkUniqueID GUN_BOUNCE_FEEDBACK = 2862887114U;

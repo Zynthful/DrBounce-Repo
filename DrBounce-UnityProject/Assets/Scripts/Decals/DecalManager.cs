@@ -46,6 +46,14 @@ public class DecalManager : MonoBehaviour
 
     private ObjectPooler pool;
 
+    [Header("AkEvents")]
+    [SerializeField]
+    private AK.Wwise.Event slimeEvent = null;
+    [SerializeField]
+    private AK.Wwise.Event bulletHoleEvent = null;
+    [SerializeField]
+    private AK.Wwise.Event placeHolderEvent = null;
+
     void Start()
     {
         pool = ObjectPooler.Instance;
@@ -69,16 +77,21 @@ public class DecalManager : MonoBehaviour
     {
         Material decalToSpawn;
 
+        AK.Wwise.Event sound;
+
         switch (decalType)
         {
             case DecalType.bullet:
                 decalToSpawn = bulletHoleDecal;
+                sound = bulletHoleEvent;
                 break;
             case DecalType.slime:
                 decalToSpawn = slimeDecal;
+                sound = slimeEvent;
                 break;
             default:
                 decalToSpawn = placeholderDecal;
+                sound = placeHolderEvent;
                 break;
         }
 
@@ -99,6 +112,8 @@ public class DecalManager : MonoBehaviour
 
         //set parent to manager or supplied transform
         decalObject.transform.SetParent(t, true);
+
+        sound.Post(decalObject);
 
         return decalObject;
     }
