@@ -10,6 +10,7 @@ public class Blackboard {
     public NoBounceEnemy noBounceAIController;
     public float shotDelay;
     public float searchTime;
+    public bool spottedPlayer;
 
     public bool HasTarget(bool player)
     {

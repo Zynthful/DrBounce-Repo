@@ -11,8 +11,6 @@ public class TargetInSight : BtNode
     private float m_viewDist;
     private float m_sightAngle;
     public bool m_canSeePlayer;
-    private bool spottedPlayer;
-    private NavMeshAgent m_navMeshAgent;
     private bool sightReset = false;
 
     /// <summary>
@@ -28,12 +26,11 @@ public class TargetInSight : BtNode
     /// <returns></returns>
     /// 
 
-    public TargetInSight(Blackboard blackboard, float viewDist, float sightAngle, NavMeshAgent navMeshAgent)
+    public TargetInSight(Blackboard blackboard, float viewDist, float sightAngle)
     {
         m_viewDist = viewDist;
         m_sightAngle = sightAngle;
         m_blackboard = blackboard;
-        m_navMeshAgent = navMeshAgent;
     }
 
 
@@ -43,32 +40,7 @@ public class TargetInSight : BtNode
         enemyPosition = blackboard.owner.transform;
 
         //Debug.Log("Successfuly reached " + getName());
-        Debug.Log(m_blackboard.searchTime);
 
-        if (spottedPlayer == true && m_blackboard.noBounceAIController != null)
-        {
-            m_navMeshAgent.enabled = true;
-            m_navMeshAgent.destination = PlayerMovement.player.transform.position;
-
-            if (m_blackboard.searchTime <= -10)
-            {
-                spottedPlayer = false;
-                //resets timer
-                m_blackboard.searchTime = 0;
-                //disables navmesh if the enemy can't find the player and returns to its waypoints.
-
-                m_navMeshAgent.destination = m_blackboard.noBounceAIController.patrolPoints[0];
-
-                if (m_blackboard.noBounceAIController.patrolPoints[0].x >= m_blackboard.noBounceAIController.transform.position.x - 5 && m_blackboard.noBounceAIController.patrolPoints[0].x <= m_blackboard.noBounceAIController.transform.position.x + 5)
-                {
-                    m_navMeshAgent.enabled = false;
-                }
-
-                //If enemy's x value is close to the waypoint location
-
-                m_blackboard.noBounceAIController.canMove = true;
-            }
-        }
 
         if (PlayerLosCheck())
         {
@@ -111,10 +83,10 @@ public class TargetInSight : BtNode
                     m_blackboard.searchTime = 0;
                     sightReset = true;
                 }
-                spottedPlayer = true;
+                m_blackboard.spottedPlayer = true;
                 return true;
             }
-            else if (spottedPlayer == true && m_blackboard.noBounceAIController != null)
+            else if (m_blackboard.spottedPlayer == true && m_blackboard.noBounceAIController != null)
             {
                 countDown();
                 sightReset = false;
