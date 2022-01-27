@@ -20,8 +20,10 @@ public class EnemyChase : BtNode
 
         Debug.Log(m_blackboard.searchTime);
 
+        // If the player has been spotted, and the stopchasing hasn't been activated by the timer running out or the player being out of reach
         if (m_blackboard.spottedPlayer == true && stopChasing == false)
         {
+            //re-enable Navmesh and target the player
             m_navMeshAgent.enabled = true;
             m_navMeshAgent.destination = PlayerMovement.player.transform.position;
         }
@@ -34,10 +36,13 @@ public class EnemyChase : BtNode
             stopChasing = true;
             m_blackboard.spottedPlayer = false;
 
+            //Set the navmesh destination to the first patrol point in the list
             m_blackboard.noBounceAIController.navMeshAgent.destination = m_blackboard.noBounceAIController.patrolPoints[0];
 
+            //Once the patrol point has been reached
             if (m_blackboard.noBounceAIController.patrolPoints[0].x >= m_blackboard.noBounceAIController.transform.position.x - 5 && m_blackboard.noBounceAIController.patrolPoints[0].x <= m_blackboard.noBounceAIController.transform.position.x + 5)
             {
+                //Disable the timer, navmesh, set stopchasing to false, allowing the enemy to target the player again if spotted
                 stopChasing = false;
                 m_blackboard.noBounceAIController.navMeshAgent.enabled = false;
                 m_blackboard.searchTime = 0;
@@ -48,24 +53,34 @@ public class EnemyChase : BtNode
             m_blackboard.noBounceAIController.canMove = true;
         }
 
+        //This section allows the enemy to re-target the player if they're seen while travelling back to a waypoint
+
+        //If the chase timer has run out or the player has gone out of reach, but if the player can still be seen
         if (stopChasing == true && m_blackboard.spottedPlayer == true)
         {
+            //Test if the player can be reached by the enemy
             path = new NavMeshPath();
             NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.player.transform.position, NavMesh.AllAreas, path);
 
+            //If they can:
             if (path.status == NavMeshPathStatus.PathComplete)
             {
+                //Set stop chasing to false, allowing the player to be chased again if spotted
                 stopChasing = false;
+                //reset the timer so stopchasing isn't activated again immediately
                 m_blackboard.searchTime = 0;
             }
         }
 
-        if (m_blackboard.notSeenPlayer == true && m_blackboard.spottedPlayer == true && m_blackboard.noBounceAIController != null)
+        //If the player isn't in sight range and spotted player hasn't been set to false from the timer running out
+        if (m_blackboard.notSeenPlayer == true && m_blackboard.spottedPlayer == true)
         {
+            //Start counting down on the timer
             countDown();
             m_blackboard.sightReset = false;
         }
 
+        //Always return failure so the script always runs
         if (stopChasing == false)
         {
             return NodeState.FAILURE;
