@@ -37,7 +37,7 @@ public class EnemyChase : BtNode
             m_blackboard.noBounceAIController.navMeshAgent.destination = m_blackboard.noBounceAIController.patrolPoints[0];
 
             //Once the patrol point has been reached
-            if (m_blackboard.noBounceAIController.patrolPoints[0].x >= m_blackboard.noBounceAIController.transform.position.x - 5 && m_blackboard.noBounceAIController.patrolPoints[0].x <= m_blackboard.noBounceAIController.transform.position.x + 5)
+            if (m_blackboard.noBounceAIController.patrolPoints[0].x +5 >= m_blackboard.noBounceAIController.transform.position.x && m_blackboard.noBounceAIController.patrolPoints[0].x -5 <= m_blackboard.noBounceAIController.transform.position.x)
             {
                 //Disable the timer, navmesh, set stopchasing to false, allowing the enemy to target the player again if spotted
                 stopChasing = false;
@@ -53,7 +53,7 @@ public class EnemyChase : BtNode
         //This section allows the enemy to re-target the player if they're seen while travelling back to a waypoint
 
         //If the chase timer has run out or the player has gone out of reach, but if the player can still be seen
-        if (stopChasing == true && m_blackboard.spottedPlayer == true)
+        if (stopChasing == true && m_blackboard.notSeenPlayer == false)
         {
             //Test if the player can be reached by the enemy
             path = new NavMeshPath();
