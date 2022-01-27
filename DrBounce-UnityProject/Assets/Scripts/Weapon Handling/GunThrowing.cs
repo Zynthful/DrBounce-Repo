@@ -395,8 +395,8 @@ public class GunThrowing : MonoBehaviour
 
         amountOfBounces++;
         
-        onBounce?.Invoke(amountOfBouncesUnique);
-        _onBounce?.Raise(amountOfBouncesUnique);
+        onBounce?.Invoke(amountOfBounces);
+        _onBounce?.Raise(amountOfBounces);
 
         MMFeedbacks feedbacks = collision.transform.GetComponentInChildren<MMFeedbacks>();
         if (feedbacks)
