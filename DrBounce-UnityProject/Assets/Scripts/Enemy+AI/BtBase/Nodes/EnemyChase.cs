@@ -17,6 +17,9 @@ public class EnemyChase : BtNode
 
     public override NodeState evaluate(Blackboard blackboard)
     {
+
+        Debug.Log(m_blackboard.searchTime);
+
         if (m_blackboard.spottedPlayer == true && stopChasing == false)
         {
             m_navMeshAgent.enabled = true;
@@ -45,10 +48,11 @@ public class EnemyChase : BtNode
             m_blackboard.noBounceAIController.canMove = true;
         }
 
-        if(stopChasing == true)
+        if (stopChasing == true && m_blackboard.spottedPlayer == true)
         {
             path = new NavMeshPath();
             NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.player.transform.position, NavMesh.AllAreas, path);
+
             if (path.status == NavMeshPathStatus.PathComplete)
             {
                 stopChasing = false;
@@ -56,7 +60,13 @@ public class EnemyChase : BtNode
             }
         }
 
-        if (getRange())
+        if (m_blackboard.notSeenPlayer == true && m_blackboard.spottedPlayer == true && m_blackboard.noBounceAIController != null)
+        {
+            countDown();
+            m_blackboard.sightReset = false;
+        }
+
+        if (stopChasing == false)
         {
             return NodeState.FAILURE;
         }
@@ -67,18 +77,9 @@ public class EnemyChase : BtNode
         }
     }
 
-    public bool getRange()
+    void countDown()
     {
-        if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_blackboard.noBounceAIController.navMeshAgent.destination) > 1 && m_blackboard.noBounceAIController.navMeshAgent.enabled == true)
-        {
-            Debug.Log("Outside of 1 unit");
-            m_blackboard.searchTime -= Time.deltaTime;
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        m_blackboard.searchTime -= Time.deltaTime;
     }
 
     public override string getName()

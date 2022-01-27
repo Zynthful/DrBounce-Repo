@@ -11,7 +11,6 @@ public class TargetInSight : BtNode
     private float m_viewDist;
     private float m_sightAngle;
     public bool m_canSeePlayer;
-    private bool sightReset = false;
 
     /// <summary>
     /// Used to get variables from else where (custimisation)
@@ -78,32 +77,25 @@ public class TargetInSight : BtNode
             if (Physics.Raycast(ray, out hit, m_viewDist) && hit.transform.root.CompareTag("Player"))
             {
                 Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.green);
-                if(sightReset == false)
+                if (m_blackboard.sightReset == false)
                 {
                     m_blackboard.searchTime = 0;
-                    sightReset = true;
+                    m_blackboard.sightReset = true;
                 }
+                m_blackboard.notSeenPlayer = false;
                 m_blackboard.spottedPlayer = true;
                 return true;
             }
-            else if (m_blackboard.spottedPlayer == true && m_blackboard.noBounceAIController != null)
-            {
-                countDown();
-                sightReset = false;
-            }
+
             else
             {
+                m_blackboard.notSeenPlayer = true;
                 Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.red);
             }
         }
         return false;
     }
 
-    void countDown()
-    {
-        //Counts down from 0 to -5
-        m_blackboard.searchTime -= Time.deltaTime;
-    }
     public override string getName()
     {
         return "TargetInSight";
