@@ -9,6 +9,7 @@ public class EnemyChase : BtNode
     private NavMeshAgent m_navMeshAgent;
     private bool stopChasing = false;
     private NavMeshPath path;
+    private bool headingBack = false;
     public EnemyChase(Blackboard blackboard, NavMeshAgent navMeshAgent)
     {
         m_blackboard = blackboard;
@@ -17,6 +18,7 @@ public class EnemyChase : BtNode
 
     public override NodeState evaluate(Blackboard blackboard)
     {
+        Debug.Log(m_blackboard.searchTime);
         // If the player has been spotted, and the stopchasing hasn't been activated by the timer running out or the player being out of reach
         if (m_blackboard.spottedPlayer == true && stopChasing == false)
         {
@@ -25,8 +27,9 @@ public class EnemyChase : BtNode
             m_navMeshAgent.destination = PlayerMovement.player.transform.position;
         }
 
-        if ((m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status != NavMeshPathStatus.PathComplete) && m_navMeshAgent.enabled == true)
+        if ((m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status != NavMeshPathStatus.PathComplete) && m_navMeshAgent.enabled == true && headingBack == false)
         {
+            headingBack = true;
             stopChasing = true;
             m_blackboard.spottedPlayer = false;
 
@@ -35,17 +38,18 @@ public class EnemyChase : BtNode
             m_blackboard.noBounceAIController.canMove = false;
 
             //Once the patrol point has been reached, or the enemy is close enough to it
-            if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_blackboard.noBounceAIController.patrolPoints[0]) <= 7.5f)
-            {
-                //Disable the timer, navmesh, set stopchasing to false, allowing the enemy to target the player again if spotted
-                stopChasing = false;
-                //resets timer
-                m_blackboard.searchTime = 0;
-                m_blackboard.noBounceAIController.canMove = true;
-                m_blackboard.noBounceAIController.navMeshAgent.enabled = false;
-            }
-
             //If enemy's x value is close to the waypoint location
+        }
+
+        if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_blackboard.noBounceAIController.patrolPoints[0]) <= 7.5f && headingBack == true)
+        {
+            //Disable the timer, navmesh, set stopchasing to false, allowing the enemy to target the player again if spotted
+            stopChasing = false;
+            //resets timer
+            m_blackboard.searchTime = 0;
+            m_blackboard.noBounceAIController.canMove = true;
+            m_blackboard.noBounceAIController.navMeshAgent.enabled = false;
+            headingBack = false;
         }
 
         //This section allows the enemy to re-target the player if they're seen while travelling back to a waypoint
@@ -67,7 +71,7 @@ public class EnemyChase : BtNode
             }
         }
 
-        //If the player isn't in sight range and spotted player hasn't been set to false from the timer running out
+        //If the player isn't in sight range and spottedPlayer hasn't been set to false from the timer running out
         if (m_blackboard.notSeenPlayer == true && m_blackboard.spottedPlayer == true)
         {
             //Start counting down on the timer
