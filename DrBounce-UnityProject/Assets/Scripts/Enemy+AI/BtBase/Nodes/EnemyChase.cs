@@ -17,9 +17,6 @@ public class EnemyChase : BtNode
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-
-        Debug.Log(m_blackboard.searchTime);
-
         // If the player has been spotted, and the stopchasing hasn't been activated by the timer running out or the player being out of reach
         if (m_blackboard.spottedPlayer == true && stopChasing == false)
         {
