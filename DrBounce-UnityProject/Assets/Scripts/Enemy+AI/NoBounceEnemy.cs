@@ -13,6 +13,7 @@ public class NoBounceEnemy : Enemy
     public bool canMove;
     public int currentTargetIndex;
     public float enemySpeed = 2;
+    public int contactDamage;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -68,6 +69,14 @@ public class NoBounceEnemy : Enemy
             {
                 m_root.reset();
             }
+        }
+    }
+
+    public virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerMovement.player.GetComponent<Health>().Damage(contactDamage);
         }
     }
 

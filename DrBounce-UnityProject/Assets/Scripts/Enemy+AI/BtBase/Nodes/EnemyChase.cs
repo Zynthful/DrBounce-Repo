@@ -25,29 +25,27 @@ public class EnemyChase : BtNode
             m_navMeshAgent.destination = PlayerMovement.player.transform.position;
         }
 
-        if (m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status != NavMeshPathStatus.PathComplete)
+        if ((m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status != NavMeshPathStatus.PathComplete) && m_navMeshAgent.enabled == true)
         {
-            //resets timer
-            //disables navmesh if the enemy can't find the player and returns to its waypoints.
-
             stopChasing = true;
             m_blackboard.spottedPlayer = false;
 
             //Set the navmesh destination to the first patrol point in the list
             m_blackboard.noBounceAIController.navMeshAgent.destination = m_blackboard.noBounceAIController.patrolPoints[0];
+            m_blackboard.noBounceAIController.canMove = false;
 
-            //Once the patrol point has been reached
-            if (m_blackboard.noBounceAIController.patrolPoints[0].x +5 >= m_blackboard.noBounceAIController.transform.position.x && m_blackboard.noBounceAIController.patrolPoints[0].x -5 <= m_blackboard.noBounceAIController.transform.position.x)
+            //Once the patrol point has been reached, or the enemy is close enough to it
+            if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_blackboard.noBounceAIController.patrolPoints[0]) <= 7.5f)
             {
                 //Disable the timer, navmesh, set stopchasing to false, allowing the enemy to target the player again if spotted
                 stopChasing = false;
-                m_blackboard.noBounceAIController.navMeshAgent.enabled = false;
+                //resets timer
                 m_blackboard.searchTime = 0;
+                m_blackboard.noBounceAIController.canMove = true;
+                m_blackboard.noBounceAIController.navMeshAgent.enabled = false;
             }
 
             //If enemy's x value is close to the waypoint location
-
-            m_blackboard.noBounceAIController.canMove = true;
         }
 
         //This section allows the enemy to re-target the player if they're seen while travelling back to a waypoint
