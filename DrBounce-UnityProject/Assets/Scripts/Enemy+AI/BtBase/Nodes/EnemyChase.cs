@@ -8,6 +8,7 @@ public class EnemyChase : BtNode
     private Blackboard m_blackboard;
     private NavMeshAgent m_navMeshAgent;
     private bool stopChasing = false;
+    private NavMeshPath path;
     public EnemyChase(Blackboard blackboard, NavMeshAgent navMeshAgent)
     {
         m_blackboard = blackboard;
@@ -22,7 +23,7 @@ public class EnemyChase : BtNode
             m_navMeshAgent.destination = PlayerMovement.player.transform.position;
         }
 
-        if (m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status == NavMeshPathStatus.PathPartial)
+        if (m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status != NavMeshPathStatus.PathComplete)
         {
             //resets timer
             //disables navmesh if the enemy can't find the player and returns to its waypoints.
@@ -42,6 +43,17 @@ public class EnemyChase : BtNode
             //If enemy's x value is close to the waypoint location
 
             m_blackboard.noBounceAIController.canMove = true;
+        }
+
+        if(stopChasing == true)
+        {
+            path = new NavMeshPath();
+            NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.player.transform.position, NavMesh.AllAreas, path);
+            if (path.status == NavMeshPathStatus.PathComplete)
+            {
+                stopChasing = false;
+                m_blackboard.searchTime = 0;
+            }
         }
 
         if (getRange())
