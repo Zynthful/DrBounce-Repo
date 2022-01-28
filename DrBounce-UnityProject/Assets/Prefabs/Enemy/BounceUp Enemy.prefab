@@ -1,5 +1,64 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3728975310896608980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149279235832735512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30c497cf15efc24b8b79449b2e02310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bType: 1
+  bounceForceMod: 14
+  onBounceAny:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9149279235565455175}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onBouncePlayer:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6727669429539304520}
+        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
+        m_MethodName: HandleEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 9149279235832735512}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  onBounceObject:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2981240229656574355}
+        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
+        m_MethodName: HandleEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 9149279235832735512}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &6608680844299921400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,53 +90,6 @@ MonoBehaviour:
   canMove: 1
   currentTargetIndex: 0
   enemySpeed: 0.25
---- !u!114 &3728975310896608980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9149279235832735512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f30c497cf15efc24b8b79449b2e02310, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bType: 1
-  bounceForceMod: 14
-  onBounceAny:
-    m_PersistentCalls:
-      m_Calls: []
-  onBouncePlayer:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6727669429539304520}
-        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
-        m_MethodName: HandleEvent
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 9149279235832735512}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-  onBounceObject:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2981240229656574355}
-        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
-        m_MethodName: HandleEvent
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 9149279235832735512}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
 --- !u!1001 &523964885611059974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -135,6 +147,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e63e17a38e8e5f46a2d53a3be980aff, type: 3}
+--- !u!4 &926486815299639806 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 837376580008575736, guid: 5e63e17a38e8e5f46a2d53a3be980aff, type: 3}
+  m_PrefabInstance: {fileID: 523964885611059974}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4429711502281651228 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4196229424566611738, guid: 5e63e17a38e8e5f46a2d53a3be980aff, type: 3}
+  m_PrefabInstance: {fileID: 523964885611059974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8332586119460299743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,7 +171,7 @@ PrefabInstance:
     - target: {fileID: 1003770591, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: AnimateScaleTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 926486815299639806}
     - target: {fileID: 627753933870988838, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -212,12 +234,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 962519144952153287, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: m_Name
-      value: Enemy (Yellow) Variant
+      value: BounceUp Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 962519145221760155, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: BoundRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4429711502281651228}
     - target: {fileID: 1387973275529385780, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: eType
       value: 1
@@ -225,11 +247,11 @@ PrefabInstance:
     - target: {fileID: 1448171371370849376, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: BoundRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4429711502281651228}
     - target: {fileID: 1607026623799637674, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: BoundParticleSystem
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4113413413488518118}
     - target: {fileID: 1773256025093444491, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -269,7 +291,7 @@ PrefabInstance:
     - target: {fileID: 4595923951367861967, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: AnimateScaleTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 926486815299639806}
     - target: {fileID: 4917186013634426166, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -300,6 +322,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a070ac3fbfc409439f88beb3c02265e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9149279235565455175 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 962519145221760152, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+  m_PrefabInstance: {fileID: 8332586119460299743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2981240229656574355 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6556173281068620364, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
@@ -325,5 +358,10 @@ MonoBehaviour:
 --- !u!4 &7726087995065643092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1773256025093444491, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+  m_PrefabInstance: {fileID: 8332586119460299743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4113413413488518118 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5383645821508468793, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
   m_PrefabInstance: {fileID: 8332586119460299743}
   m_PrefabAsset: {fileID: 0}

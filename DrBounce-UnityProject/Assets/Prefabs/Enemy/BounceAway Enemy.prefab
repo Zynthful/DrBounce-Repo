@@ -47,7 +47,19 @@ MonoBehaviour:
   bounceForceMod: 14
   onBounceAny:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5164754091306144885}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onBouncePlayer:
     m_PersistentCalls:
       m_Calls:
@@ -147,7 +159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 962519144952153287, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: m_Name
-      value: Enemy (Red) Variant
+      value: BounceAway Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 962519145221760155, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: BoundRenderer
@@ -164,7 +176,7 @@ PrefabInstance:
     - target: {fileID: 1607026623799637674, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: BoundParticleSystem
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 18550078297845972}
     - target: {fileID: 2196810234897038356, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -181,6 +193,18 @@ PrefabInstance:
       propertyPath: AnimateScaleTarget
       value: 
       objectReference: {fileID: 368106433651156669}
+    - target: {fileID: 5759167906582156880, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759167906582156880, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759167906582156880, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6897226980601495417, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -207,6 +231,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a070ac3fbfc409439f88beb3c02265e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5164754091306144885 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 962519145221760152, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+  m_PrefabInstance: {fileID: 5401903287877824749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1156121871720671905 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6556173281068620364, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
@@ -229,6 +264,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b4aa157d2e65f4eac85bcae4d2bacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &18550078297845972 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5383645821508468793, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+  m_PrefabInstance: {fileID: 5401903287877824749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &368106433651156669 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5759167906582156880, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
