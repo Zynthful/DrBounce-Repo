@@ -2,16 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.AI;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 
 public class Enemy : MonoBehaviour
 {
+    public class Target
+    {
+        public Vector3 spottedPosition;
+        public bool isPlayer;
+        public GameObject playerObject;
+
+        public Target(bool i_isPlayer, GameObject i_playerObject = null, params Vector3[] i_position)
+        {
+            isPlayer = i_isPlayer;
+            if (i_playerObject != null)
+            {
+                playerObject = i_playerObject;
+            }
+            if (i_position.Length > 0)
+            {
+                spottedPosition = i_position[0];
+            }
+        }
+
+        public void NewTarget(bool i_isPlayer, GameObject i_playerObject = null, params Vector3[] i_position)
+        {
+            isPlayer = i_isPlayer;
+            if (i_playerObject != null)
+            {
+                playerObject = i_playerObject;
+            }
+            if (i_position.Length > 0)
+            {
+                spottedPosition = i_position[0];
+            }
+        }
+    }
+
     [Header("Declarations")]
     [SerializeField]
     private EnemyHealth health = null;
     [SerializeField]
-    private BulletType bullet;
+    public BulletType bullet;
     [SerializeField]
     private GameObject healthPackPrefab;
 
@@ -19,6 +53,9 @@ public class Enemy : MonoBehaviour
 
     private bool shootDelay;
     private Coroutine shootingDelayCoroutine;
+
+    public bool recentlyAttacked;
+    private Coroutine recentAttackCoroutine;
 
     public bool canSeePlayer;
 
@@ -32,7 +69,12 @@ public class Enemy : MonoBehaviour
 
     [Header("Events")]
     [SerializeField]
-    private UnityEvent onShoot = null;
+    public UnityEvent onShoot = null;
+
+    public NavMeshAgent navMeshAgent;
+
+    [Space(10)]
+    public List<Vector3> patrolPoints = new List<Vector3> { };
 
     /*
     Enemy()
@@ -46,11 +88,46 @@ public class Enemy : MonoBehaviour
     }
     */
 
+    private void Start()
+    {
+        pool = ObjectPooler.Instance;
+        // Material mat = null;
+        // switch (GetComponent<Bouncing>().bType)
+        // {
+        //     case Bouncing.BounceType.Back:
+        //         mat = materials[0];
+        //         break;
+
+        //     case Bouncing.BounceType.Up:
+        //         mat = materials[1];
+        //         break;
+
+        //     case Bouncing.BounceType.Away:
+        //         mat = materials[2];
+        //         break;
+        // }
+        // GetComponent<MeshRenderer>().material = mat;
+    }
+
+    protected virtual void Awake()
+    {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "PatrolPoint")
+            {
+                patrolPoints.Add(child.position);
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
     protected void FixedUpdate()
     {
         if (!health.GetIsDead())
         {
-            Shoot();
+            //Shoot();
         }
     }
 
@@ -85,11 +162,20 @@ public class Enemy : MonoBehaviour
                 onShoot?.Invoke();
                 shootingDelayCoroutine = StartCoroutine(ShotDelay(rateOfFire));
                 pool.SpawnBulletFromPool("Bullet", transform.position, Quaternion.identity, (PlayerMovement.player.position - transform.position).normalized, bullet, null);
-                Debug.Log((PlayerMovement.player.position - transform.position).normalized);
+                //Debug.Log((PlayerMovement.player.position - transform.position).normalized);
             }
             
         }
         return null;
+    }
+
+    public void RecentlyAttacked()
+    {
+        if (recentAttackCoroutine == null)
+        {
+            recentlyAttacked = true;
+            recentAttackCoroutine = StartCoroutine(ResetRecentlyAttacked(.3f));
+        }
     }
 
     /*
@@ -101,33 +187,20 @@ public class Enemy : MonoBehaviour
     }
     */
 
-    private void Start()
-    {
-        pool = ObjectPooler.Instance;
-        // Material mat = null;
-        // switch (GetComponent<Bouncing>().bType)
-        // {
-        //     case Bouncing.BounceType.Back:
-        //         mat = materials[0];
-        //         break;
-
-        //     case Bouncing.BounceType.Up:
-        //         mat = materials[1];
-        //         break;
-
-        //     case Bouncing.BounceType.Away:
-        //         mat = materials[2];
-        //         break;
-        // }
-        // GetComponent<MeshRenderer>().material = mat;
-    }
-
     IEnumerator ShotDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         shootDelay = false;
         shootingDelayCoroutine = null;
     }
+
+    IEnumerator ResetRecentlyAttacked(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        recentlyAttacked = false;
+        recentAttackCoroutine = null;
+    }
+
 
     /*
     /// <summary>

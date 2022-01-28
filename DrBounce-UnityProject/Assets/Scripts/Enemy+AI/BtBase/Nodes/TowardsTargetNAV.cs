@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class TowardsTarget : BtNode {
+public class TowardsTargetNAV : BtNode {
     private NavMeshAgent m_agent;
 
     public override NodeState evaluate(Blackboard blackboard) {
@@ -14,23 +14,21 @@ public class TowardsTarget : BtNode {
         }
 
         // if target is null, we can't move towards it!
-        if (blackboard.target == null) {
+        if (!blackboard.HasTarget(false)) {
             return NodeState.FAILURE;
         }
 
-        m_agent.SetDestination(blackboard.target.transform.position);
-        //Debug.Log("Agent: " + blackboard.owner.name + ", Target: " + blackboard.target.name);
-        if ( Vector3.Distance(blackboard.owner.transform.position, blackboard.target.transform.position) > 0.5 )
-        {
-            return NodeState.RUNNING;
-        }
+        if(blackboard.target.isPlayer)
+            m_agent.SetDestination(blackboard.target.playerObject.transform.position);
+        else if (!blackboard.target.isPlayer)
+            m_agent.SetDestination(blackboard.target.spottedPosition);
 
         return NodeState.SUCCESS;
     }
 
     public override string getName()
     {
-        return "TowardsTarget";
+        return "TowardsTargetNAV";
     }
 
 }

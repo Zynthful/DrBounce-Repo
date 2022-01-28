@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class IsTargeting : BtNode
 {
-    private string m_targetTag;
 
-    public IsTargeting(string targetTag)
+    private bool m_playerCheck;
+
+    public IsTargeting(bool player)
     {
-        m_targetTag = targetTag;
+        m_playerCheck = player;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (blackboard.target == null)
-        {
-            return NodeState.FAILURE;
-        }
-
-        if (blackboard.target.tag == m_targetTag && blackboard.target.activeInHierarchy)
+        if (blackboard.HasTarget(m_playerCheck))
         {
             return NodeState.SUCCESS;
-        } else
+        }
+        else
         {
             return NodeState.FAILURE;
         }
