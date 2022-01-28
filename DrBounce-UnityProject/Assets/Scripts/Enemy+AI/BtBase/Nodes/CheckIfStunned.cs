@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CheckIfStunned : BtNode
 {
+    Stun m_stun;
     /// <summary>
     /// Used to get variables from else where (custimisation)
     /// </summary>
-    public CheckIfStunned()
+    public CheckIfStunned(Stun stun)
     {
+        m_stun = stun;
     }
 
     /// <summary>
@@ -18,7 +20,14 @@ public class CheckIfStunned : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
-        return NodeState.FAILURE;
+        if (m_stun.IsStunned())
+        {
+            return NodeState.SUCCESS;   //is stunned, can't move or shot
+        }
+        else
+        {
+            return NodeState.FAILURE;   //not stunned, can move or shot
+        }
     }
 
     /// <summary>
@@ -29,4 +38,5 @@ public class CheckIfStunned : BtNode
     {
         return "CheckIfStunned";
     }
+
 }

@@ -7,7 +7,7 @@ public class Stun : MonoBehaviour
     /*
     To do:
     link up to other scripts:
-        ai (so the enemy stops moving and attacking)
+        ai (so the enemy stops moving and attacking) DONE BABY
         hit detection (when the enemy gets hit by normal shots, gets hit by the thrown gun)
         ui (update a slider)
     */

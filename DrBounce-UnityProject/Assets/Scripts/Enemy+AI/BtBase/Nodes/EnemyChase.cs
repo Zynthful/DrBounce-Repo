@@ -18,7 +18,7 @@ public class EnemyChase : BtNode
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        Debug.Log(m_blackboard.searchTime);
+        //Debug.Log(m_blackboard.searchTime);
         // If the player has been spotted, and the stopchasing hasn't been activated by the timer running out or the player being out of reach
         //IF THE ENEMY CAN SEE YOU BUT CAN'T REACH YOU, IT'LL KEEP SETTING OFF AND IMMEDIATELY GOING BACK TO ITS WAYPOINTS. FIX THIS BY COPYING AND PASTING THE 'PATH' STUFF FROM LINE 62 & 63, TO UP HERE, AND ADD ' && path.status == NavMeshPathStatus.PathComplete' TO THE BELOW IF STATEMENT
         //This currently isn't implimented as it would cause the script to require a lot more resources, and the bug might not even be possible in the final game.
