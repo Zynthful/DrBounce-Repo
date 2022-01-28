@@ -37,10 +37,7 @@ public class DecalManager : MonoBehaviour
     private Material bulletHoleDecal = null;
     
     [SerializeField]
-    private Material slimeDecal = null;
-
-    [SerializeField]
-    private float nearbySurfaceDistanceCheck = 1.0f;
+    private Material[] slimeDecals = new Material[4];
 
     private List<GameObject> spawnedDecals = new List<GameObject>();
 
@@ -63,17 +60,22 @@ public class DecalManager : MonoBehaviour
     {
         spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, DecalType.placeholder));
     }
-    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, DecalType decalMaterial)
+    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, DecalType decalType)
     {
-        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, decalMaterial));
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, decalType));
     }
 
-    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalMaterial)
+    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalType)
     {
-        spawnedDecals.Add(CreateDecal(position, normal, decalScale, t, decalMaterial));
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, t, decalType));
+    }
+    
+    public void SpawnDecalWithColour(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalType, int colour)
+    {
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, t, decalType, colour));
     }
 
-    private GameObject CreateDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalType)
+    private GameObject CreateDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalType, int? colour = 0)
     {
         Material decalToSpawn;
 
@@ -86,7 +88,7 @@ public class DecalManager : MonoBehaviour
                 sound = bulletHoleEvent;
                 break;
             case DecalType.slime:
-                decalToSpawn = slimeDecal;
+                decalToSpawn = slimeDecals[(int)colour];
                 sound = slimeEvent;
                 break;
             default:
@@ -102,7 +104,6 @@ public class DecalManager : MonoBehaviour
 
         //place object from pool
         GameObject decalObject = pool.SpawnNonBulletFromPool("Decal", position + (decalRotation * Vector3.back * (0.01f + Random.Range(0f, 0.02f))), decalRotation, decalToSpawn);
-        //$"Spawned Decal ({localPos.x.ToString("F3")},{localPos.y.ToString("F3")})"
 
         //randomly adjust decal scale for fun :)
         decalScale *= Random.Range(0.9f, 1.1f);

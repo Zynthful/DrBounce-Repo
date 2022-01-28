@@ -5,10 +5,31 @@ using UnityEngine;
 public class ParticleSlime : MonoBehaviour
 {
     private DecalManager decalM;
+    private int colour;
 
     private void Start()
     {
         decalM = DecalManager.Instance;
+
+
+        //this is actually cringe please never talk to me or my family again
+        Color particleSysColour = GetComponent<ParticleSystemRenderer>().material.GetColor("_Color");
+        string colourHEX = ColorUtility.ToHtmlStringRGB(particleSysColour);
+
+        switch (colourHEX) {
+            case "9A3FEF":
+                colour = 0;
+                break;
+            case "0099FF":
+                colour = 1;
+                break;
+            case "FF0000":
+                colour = 2;
+                break;
+            case "EFF300":
+                colour = 3;
+                break;
+        }
     }
 
     void OnParticleCollision(GameObject other)
@@ -24,7 +45,7 @@ public class ParticleSlime : MonoBehaviour
             Vector3 pos = collisionEvents[i].intersection;
             Vector3 normal = collisionEvents[i].normal;
 
-            decalM.SpawnDecal(pos, normal, 1f, collisionEvents[i].colliderComponent.transform, DecalManager.DecalType.slime);
+            decalM.SpawnDecalWithColour(pos, normal, 1f, collisionEvents[i].colliderComponent.transform, DecalManager.DecalType.slime, colour);
         }
     }
 }
