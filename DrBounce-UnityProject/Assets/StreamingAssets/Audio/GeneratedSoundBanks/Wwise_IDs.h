@@ -42,6 +42,7 @@ namespace AK
         static const AkUniqueID GUN_SHOOT_UNCHARGED = 1084131995U;
         static const AkUniqueID GUN_THROW = 3098426972U;
         static const AkUniqueID HEAL = 3448274447U;
+        static const AkUniqueID INJURED = 2860195132U;
         static const AkUniqueID JUMP = 3833651337U;
         static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
@@ -80,6 +81,7 @@ namespace AK
     {
         static const AkUniqueID BOUNCEPAD_NUMOFBOUNCES = 856530565U;
         static const AkUniqueID HEALTH_HIT_DAMAGE = 3274506471U;
+        static const AkUniqueID LOW_PASS = 1177178531U;
         static const AkUniqueID MASTERVOLUME = 2918011349U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
         static const AkUniqueID OBJECTSIZE = 1059072663U;

@@ -5,6 +5,34 @@
 			<ChildrenList>
 				<Bus Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}">
 					<PropertyList>
+						<Property Name="Lowpass" Type="int16">
+							<RTPCList>
+								<RTPC Name="" ID="{1ED2B0CB-F1DF-4309-8A4B-C4BFF8A19F95}" ShortID="224098595">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="Low_Pass" ID="{6740E924-43D2-41B9-B4DE-85B907E83CCA}" WorkUnitID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{CCBAB635-D7F4-4189-A0C6-F486EDC833AD}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="65537"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-100</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>1</XPos>
+												<YPos>100</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+							</RTPCList>
+						</Property>
 						<Property Name="Volume" Type="Real64">
 							<RTPCList>
 								<RTPC Name="" ID="{E6CF1069-7805-46C5-9B5A-77BB2488212F}" ShortID="769370614">
