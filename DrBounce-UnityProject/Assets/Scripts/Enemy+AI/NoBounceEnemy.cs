@@ -37,7 +37,7 @@ public class NoBounceEnemy : Enemy
 
         BtNode Attack = createAttackingTree();
 
-        return new Selector(new CheckIfStunned(), Attack, Move);
+        return new Selector(new CheckIfStunned(stun), Attack, Move);
     }
 
     protected BtNode createMovementTree()

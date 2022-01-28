@@ -76,6 +76,8 @@ public class Enemy : MonoBehaviour
     [Space(10)]
     public List<Vector3> patrolPoints = new List<Vector3> { };
 
+    protected Stun stun;
+
     /*
     Enemy()
     {
@@ -111,6 +113,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Awake()
     {
+        stun = GetComponent<Stun>();
+
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         foreach (Transform child in transform)
