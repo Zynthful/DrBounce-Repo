@@ -90,6 +90,75 @@ MonoBehaviour:
   canMove: 1
   currentTargetIndex: 0
   enemySpeed: 0.25
+--- !u!114 &41316547836541243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6076479445082809582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfccef02abb17a438a2bcccd7133075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Bounce Face Switch
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  TargetRenderer: {fileID: 3509006065203499975}
+  Method: 0
+  Loop: 1
+  AlwaysNewMaterial: 1
+  InitialIndex: 0
+  Materials:
+  - {fileID: 2100000, guid: aeae24471cab25545877da2143d385d8, type: 2}
+  - {fileID: 2100000, guid: 8667dd67216c859439955f96fb74377c, type: 2}
+  InterpolateTransition: 0
+  TransitionDuration: 2
+  TransitionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &2908499473888319970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97,6 +166,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4725310898308060152}
     m_Modifications:
+    - target: {fileID: 927542356120010290, guid: 958fa2a2d1beda842a024014f24de0a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 927542356120010290, guid: 958fa2a2d1beda842a024014f24de0a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.013
+      objectReference: {fileID: 0}
     - target: {fileID: 3516546647492208721, guid: 958fa2a2d1beda842a024014f24de0a2, type: 3}
       propertyPath: m_Name
       value: BlueEnemy
@@ -155,6 +232,11 @@ Transform:
 --- !u!23 &2898896999030361507 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 29242244991063105, guid: 958fa2a2d1beda842a024014f24de0a2, type: 3}
+  m_PrefabInstance: {fileID: 2908499473888319970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3509006065203499975 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1796776479303092773, guid: 958fa2a2d1beda842a024014f24de0a2, type: 3}
   m_PrefabInstance: {fileID: 2908499473888319970}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6415504990364434547
@@ -216,6 +298,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BounceBack Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 962519145221760152, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+      propertyPath: Feedbacks.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 962519145221760152, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+      propertyPath: Feedbacks.Array.data[2]
+      value: 
+      objectReference: {fileID: 41316547836541243}
     - target: {fileID: 962519145221760155, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
       propertyPath: BoundRenderer
       value: 
@@ -246,12 +336,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a070ac3fbfc409439f88beb3c02265e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6076479445082809582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 962519145221760157, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+  m_PrefabInstance: {fileID: 6415504990364434547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6076479445082809579 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 962519145221760152, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
   m_PrefabInstance: {fileID: 6415504990364434547}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6076479445082809582}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
