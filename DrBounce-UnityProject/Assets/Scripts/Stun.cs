@@ -73,7 +73,7 @@ public class Stun : MonoBehaviour
     /// <summary>
     /// Stuns the enemy after being hit (gun throw)
     /// </summary>
-    private void BigHit()
+    public void BigHit()
     {
         if (!isStunned)
         {
@@ -115,16 +115,5 @@ public class Stun : MonoBehaviour
     public bool IsStunned()
     {
         return isStunned;
-    }
-
-    void OnEnable()
-    {
-        //Bouncing.OnBounce += BigHit;
-    }
-
-
-    void OnDisable()
-    {
-        //Bouncing.OnBounce -= BigHit;
     }
 }
