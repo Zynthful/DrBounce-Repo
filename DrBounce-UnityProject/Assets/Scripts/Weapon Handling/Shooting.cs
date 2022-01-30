@@ -113,6 +113,9 @@ public class Shooting : MonoBehaviour
     public delegate void Activated(int value);
     public static event Activated OnActivated;
 
+    public delegate void BeenHit();
+    public static event BeenHit OnShot;
+
     public MMFeedbacks ChargedFeedback;
     public GameObject impactEffect;
 
@@ -382,6 +385,7 @@ public class Shooting : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.Damage(damage);
+                    OnShot?.Invoke();
                 }
                 else
                 {
