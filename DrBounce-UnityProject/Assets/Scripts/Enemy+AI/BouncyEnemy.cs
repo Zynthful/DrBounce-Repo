@@ -62,7 +62,7 @@ public class BouncyEnemy : Enemy
         if (!GameManager.s_Instance.paused && m_root != null)
         {
             NodeState result = m_root.evaluate(m_blackboard);
-            Debug.Log(result);
+            //Debug.Log(result);
             if (result != NodeState.RUNNING)
             {
                 m_root.reset();
