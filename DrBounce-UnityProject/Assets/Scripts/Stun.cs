@@ -7,8 +7,8 @@ public class Stun : MonoBehaviour
     /*
     To do:
     link up to other scripts:
-        ai (so the enemy stops moving and attacking) DONE BABY
-        hit detection (when the enemy gets hit by normal shots DONE, gets hit by the thrown gun)
+        ai (so the enemy stops moving and attacking) DONE
+        hit detection (when the enemy gets hit by normal shots, gets hit by the thrown gun) DONE
         ui (update a slider)
     */
 
@@ -20,13 +20,16 @@ public class Stun : MonoBehaviour
     [SerializeField] private float timeStunnedFor = 6f;       //the amount of time the enemy is stunned for
 
     private float stunTimer = 0;        //to check if the enemy has reached the timeStunnedFor
-    [SerializeField] private float stunLoss = 0.005f;     //amount of stun value lost per frame
+    //[SerializeField]
+    private float stunLoss = 0.005f;     //amount of stun value lost per frame
 
     // Update is called once per frame
     void Update()
     {
         if (isStunned)
         {
+            //print("stun timer");
+
             stunTimer = stunTimer + Time.deltaTime;
 
             if (stunTimer >= timeStunnedFor)
@@ -38,6 +41,8 @@ public class Stun : MonoBehaviour
         {
             if (hasBeenHit)      //change to else if?
             {
+                //print("stun counter lowering");
+
                 stunCounter = stunCounter - stunLoss;
                 if (stunCounter < 0) 
                 {
@@ -50,10 +55,12 @@ public class Stun : MonoBehaviour
     /// <summary>
     /// Increase the stun counter unless the enemy is already stunned (normal shot)
     /// </summary>
-    private void Hit() 
+    public void Hit() 
     {
         if (!isStunned)
         {
+            //print("hit");
+
             hasBeenHit = true;
             stunCounter++;
             if (stunCounter >= shotsNeededtoStun)
@@ -70,6 +77,8 @@ public class Stun : MonoBehaviour
     {
         if (!isStunned)
         {
+            //print("big hit");
+
             Stunned();
         }
     }
@@ -79,6 +88,8 @@ public class Stun : MonoBehaviour
     /// </summary>
     private void Stunned() 
     {
+        //print("Stunned");
+
         hasBeenHit = false;
         stunCounter = shotsNeededtoStun;
         isStunned = true;
@@ -90,6 +101,8 @@ public class Stun : MonoBehaviour
     /// </summary>
     private void StunEnded() 
     {
+        //print("not Stunned");
+
         stunCounter = 0;
         stunTimer = 0;
         isStunned = false;
@@ -106,12 +119,12 @@ public class Stun : MonoBehaviour
 
     void OnEnable()
     {
-        Shooting.OnShot += Hit;
+        //Bouncing.OnBounce += BigHit;
     }
 
 
     void OnDisable()
     {
-        Shooting.OnShot -= Hit;
+        //Bouncing.OnBounce -= BigHit;
     }
 }

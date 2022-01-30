@@ -113,9 +113,6 @@ public class Shooting : MonoBehaviour
     public delegate void Activated(int value);
     public static event Activated OnActivated;
 
-    public delegate void BeenHit();
-    public static event BeenHit OnShot;
-
     public MMFeedbacks ChargedFeedback;
     public GameObject impactEffect;
 
@@ -382,10 +379,11 @@ public class Shooting : MonoBehaviour
 
                 //print(Hitinfo.transform.name + " hit!");
                 EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
+                Stun enemyStun = Hitinfo.transform.GetComponent<Stun>();
                 if (enemy != null)
                 {
                     enemy.Damage(damage);
-                    OnShot?.Invoke();
+                    enemyStun.Hit();
                 }
                 else
                 {
