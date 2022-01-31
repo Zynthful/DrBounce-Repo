@@ -1,5 +1,6 @@
 using UnityEngine;
 using MoreMountains.Tools;
+using UnityEngine.Events;
 
 public class Stun : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class Stun : MonoBehaviour
 
     private int maxStun = 0;
     private int minStun = 0;
+
+    [Space]
+    [Header("Events")]
+    [SerializeField]
+    public UnityEvent onStun = null;
 
     private void Start()
     {
@@ -118,6 +124,7 @@ public class Stun : MonoBehaviour
     private void Stunned() 
     {
         //print("Stunned");
+        onStun?.Invoke();
 
         hasBeenHit = false;
         stunCounter = shotsNeededtoStun;
@@ -132,6 +139,7 @@ public class Stun : MonoBehaviour
     private void StunEnded() 
     {
         //print("not Stunned");
+
 
         stunCounter = 0;
         UpdateStunBar(false);
