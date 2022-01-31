@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Tools;
 
 public class Stun : MonoBehaviour
 {
@@ -10,7 +9,12 @@ public class Stun : MonoBehaviour
         ai (so the enemy stops moving and attacking) DONE
         hit detection (when the enemy gets hit by normal shots, gets hit by the thrown gun) DONE
         ui (update a slider)
+
+    stun timer go down every half second
     */
+
+    [SerializeField]
+    private MMHealthBar stunBar;
 
     private bool hasBeenHit = false;    //checks if the enemy has been hit recently
     [SerializeField] private int shotsNeededtoStun = 4;      //the amount of hits needed for ther enemy to get stunned
@@ -20,12 +24,21 @@ public class Stun : MonoBehaviour
     [SerializeField] private float timeStunnedFor = 6f;       //the amount of time the enemy is stunned for
 
     private float stunTimer = 0;        //to check if the enemy has reached the timeStunnedFor
-    //[SerializeField]
-    private float stunLoss = 0.005f;     //amount of stun value lost per frame
+    [SerializeField] private float stunLoss = 0.005f;     //amount of stun value lost per frame
+
+    private int maxStun = 0;
+    private int minStun = 0;
+
+    private void Start()
+    {
+        maxStun = shotsNeededtoStun;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        //UpdateStunBar(true);
+
         if (isStunned)
         {
             //print("stun timer");
@@ -44,6 +57,7 @@ public class Stun : MonoBehaviour
                 //print("stun counter lowering");
 
                 stunCounter = stunCounter - stunLoss;
+                UpdateStunBar(true);
                 if (stunCounter < 0) 
                 {
                     hasBeenHit = false;
@@ -63,6 +77,7 @@ public class Stun : MonoBehaviour
 
             hasBeenHit = true;
             stunCounter++;
+            UpdateStunBar(true);
             if (stunCounter >= shotsNeededtoStun)
             {
                 Stunned();
@@ -92,6 +107,7 @@ public class Stun : MonoBehaviour
 
         hasBeenHit = false;
         stunCounter = shotsNeededtoStun;
+        UpdateStunBar(true);
         isStunned = true;
         stunTimer = 0;
     }
@@ -104,6 +120,7 @@ public class Stun : MonoBehaviour
         //print("not Stunned");
 
         stunCounter = 0;
+        UpdateStunBar(true);
         stunTimer = 0;
         isStunned = false;
     }
@@ -115,5 +132,13 @@ public class Stun : MonoBehaviour
     public bool IsStunned()
     {
         return isStunned;
+    }
+
+    protected virtual void UpdateStunBar(bool showBar)
+    {
+        if (stunBar != null)
+        {
+            stunBar.UpdateBar(stunCounter, minStun, maxStun, showBar);
+        }
     }
 }
