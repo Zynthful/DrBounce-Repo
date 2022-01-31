@@ -68,10 +68,16 @@ public class Stun : MonoBehaviour
                 stunCounter = stunCounter - stunLoss;
                 if (stunCounter < 0) 
                 {
-                    hasBeenHit = false;
+                    StoppingBeingHit();
                 }
             }
         }
+    }
+
+    private void StoppingBeingHit() 
+    {
+        hasBeenHit = false;
+        UpdateStunBar(false);
     }
 
     /// <summary>
@@ -128,7 +134,7 @@ public class Stun : MonoBehaviour
         //print("not Stunned");
 
         stunCounter = 0;
-        UpdateStunBar(true);
+        UpdateStunBar(false);
         stunTimer = 0;
         isStunned = false;
     }
