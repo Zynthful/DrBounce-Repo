@@ -8,8 +8,9 @@ public class Stun : MonoBehaviour
     link up to other scripts:
         ai (so the enemy stops moving and attacking) DONE
         hit detection (when the enemy gets hit by normal shots, gets hit by the thrown gun) DONE
-        ui (update a slider)
+        ui (update a slider) Mostly done needs a bit of tweaking
 
+    make ui bar only apear when only should go if it is empty
     stun timer go down every half second
     */
 
@@ -32,6 +33,14 @@ public class Stun : MonoBehaviour
     private void Start()
     {
         maxStun = shotsNeededtoStun;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isStunned && hasBeenHit)
+        {
+            UpdateStunBar(true);
+        }
     }
 
     // Update is called once per frame
@@ -57,7 +66,6 @@ public class Stun : MonoBehaviour
                 //print("stun counter lowering");
 
                 stunCounter = stunCounter - stunLoss;
-                UpdateStunBar(true);
                 if (stunCounter < 0) 
                 {
                     hasBeenHit = false;
