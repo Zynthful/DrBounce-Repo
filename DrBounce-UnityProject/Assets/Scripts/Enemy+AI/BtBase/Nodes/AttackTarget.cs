@@ -9,7 +9,6 @@ public class AttackTarget : BtNode
 
     private ObjectPooler pool;
 
-    private EnemyHealth health = null;
     private BulletType m_bullet;
 
     Transform targetPosition;
@@ -37,7 +36,6 @@ public class AttackTarget : BtNode
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        // Stuff for shooting should be in Enemy.cs
         if (!m_blackboard.target.isPlayer)
         {
             return NodeState.FAILURE;
