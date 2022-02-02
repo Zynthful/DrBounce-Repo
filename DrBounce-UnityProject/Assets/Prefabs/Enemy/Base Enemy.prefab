@@ -404,6 +404,7 @@ Transform:
   - {fileID: 7307871655423914017}
   - {fileID: 8521636709362193907}
   - {fileID: 4216198890021323320}
+  - {fileID: 1245645463396242079}
   - {fileID: 7895218252655289197}
   - {fileID: 1850240910594433421}
   - {fileID: 4917186013634426166}
@@ -1623,7 +1624,7 @@ Transform:
   m_Children:
   - {fileID: 5759167906582156880}
   m_Father: {fileID: 962519144952153284}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6252557339512048768
 GameObject:
@@ -2499,6 +2500,8 @@ GameObject:
   - component: {fileID: 2809022970378010366}
   - component: {fileID: 3572602445744173895}
   - component: {fileID: 8220857874034987330}
+  - component: {fileID: 4514077671292704144}
+  - component: {fileID: 1786114386209108286}
   m_Layer: 8
   m_Name: Stun Feedback
   m_TagString: Untagged
@@ -2533,6 +2536,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks:
+  - {fileID: 4514077671292704144}
+  - {fileID: 1786114386209108286}
   - {fileID: 5036435363099479484}
   - {fileID: 2809022970378010366}
   - {fileID: 3572602445744173895}
@@ -2581,7 +2586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Particles Play
+  Label: Spinning Stars PFX
   Chance: 100
   Timing:
     TimescaleMode: 0
@@ -3264,6 +3269,88 @@ MonoBehaviour:
   AllowAdditivePlays: 0
   DetermineScaleOnPlay: 0
   DestinationScale: {x: 1, y: 1, z: 1}
+--- !u!114 &4514077671292704144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354014140521808177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c27131831afa28b499cb120fc9059997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Stun Flash PFX
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Mode: 0
+  BoundParticleSystem: {fileID: 2254212061096785724}
+  MoveToPosition: 0
+  RandomParticleSystems: []
+--- !u!114 &1786114386209108286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354014140521808177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1480e377932bb4cab1ab6851bbdbf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Holding Pause
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  PauseDuration: 0.1
+  RandomizePauseDuration: 0
+  MinPauseDuration: 1
+  MaxPauseDuration: 3
+  RandomizeOnEachPlay: 1
+  ScriptDriven: 0
+  AutoResume: 0
+  AutoResumeAfter: 0.25
 --- !u!1 &7803451578296572975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3461,6 +3548,73 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &1126625749129356748
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 962519144952153284}
+    m_Modifications:
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.887
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8876531883421807259, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+      propertyPath: m_Name
+      value: StunFlash_PFX
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+--- !u!4 &1245645463396242079 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+  m_PrefabInstance: {fileID: 1126625749129356748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2254212061096785724 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1218793019897729776, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+  m_PrefabInstance: {fileID: 1126625749129356748}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1688557898801661475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3474,7 +3628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3092859399994948776, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3092859399994948776, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3522,14 +3676,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
---- !u!4 &4432383480645417611 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3092859399994948776, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
-  m_PrefabInstance: {fileID: 1688557898801661475}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &5383645821508468793 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 6762290285499614746, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
+  m_PrefabInstance: {fileID: 1688557898801661475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4432383480645417611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3092859399994948776, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
   m_PrefabInstance: {fileID: 1688557898801661475}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3870587342562764230
@@ -3545,7 +3699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6351875949648234155, guid: 1c388e06b2c5a1b418c827d1ac1ea4e8, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6351875949648234155, guid: 1c388e06b2c5a1b418c827d1ac1ea4e8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3616,7 +3770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1691719025792539009, guid: d31400d96a46dfb47b0913954ff9ed69, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1691719025792539009, guid: d31400d96a46dfb47b0913954ff9ed69, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3707,7 +3861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5008460616589788173, guid: 50147181b8a36134cbdd8e0dc2799d8a, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5008460616589788173, guid: 50147181b8a36134cbdd8e0dc2799d8a, type: 3}
       propertyPath: m_LocalScale.x
