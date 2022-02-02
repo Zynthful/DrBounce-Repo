@@ -15,19 +15,30 @@ public class CheckMaterial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        MaterialSwitch materialSwitch = other.gameObject.GetComponent<MaterialSwitch>();
-        if (materialSwitch != null)
+        MaterialSwitch matSwitch = other.gameObject.GetComponent<MaterialSwitch>();
+        if (matSwitch != null)
         {
-            if (currentMaterial != materialSwitch.GetMaterial() && materialSwitch.GetMaterial() != null)
-            {
-                currentMaterial = materialSwitch.GetMaterial();
-                currentMaterial.SetValue(switchObj);
-            }
+            SetMaterial(matSwitch.GetMaterial());
         }
     }
 
-    public AK.Wwise.Switch GetCurrentMaterial()
+    private void OnTriggerExit(Collider other)
     {
-        return currentMaterial;
+        MaterialSwitch matSwitch = other.gameObject.GetComponent<MaterialSwitch>();
+        if (matSwitch != null)
+        {
+            SetMaterial(null);
+        }
     }
+
+    public void SetMaterial(AK.Wwise.Switch material)
+    {
+        if (currentMaterial != material)
+        {
+            currentMaterial = material;
+            currentMaterial.SetValue(switchObj);
+        }
+    }
+
+    public AK.Wwise.Switch GetCurrentMaterial() { return currentMaterial; }
 }

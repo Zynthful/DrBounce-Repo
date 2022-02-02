@@ -435,7 +435,6 @@ public class PlayerMovement : MonoBehaviour
         // Is the ground we landed on NOT bounceable?
         if (!Physics.CheckSphere(groundCheck.position, groundDistance, bounceableMask))
         {
-            Debug.Log("land non :)");
             onLandOnNonBounceableGround?.Invoke();
             _onLandOnNonBounceableGround?.Raise();
         }
