@@ -9,7 +9,7 @@ public class NoBounceEnemy : Enemy
     public bool canMove;
     public int currentTargetIndex;
     public float enemySpeed = 2;
-    public float attackRange = 2;
+    public float attackRange = 2.5f;
     public float attackDelay = .75f;
     public float knockbackForce = 12f;
     public int contactDamage;

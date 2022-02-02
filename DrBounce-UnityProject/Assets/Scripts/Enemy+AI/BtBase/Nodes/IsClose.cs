@@ -22,7 +22,7 @@ public class IsClose : BtNode
         float distance;
         if (m_checkForPlayer)
         {
-            distance = (blackboard.owner.transform.position - blackboard.target.playerObject.transform.position).magnitude;
+            distance = (new Vector3(blackboard.owner.transform.position.x, blackboard.owner.transform.position.y / 2, blackboard.owner.transform.position.z) - new Vector3(blackboard.target.playerObject.transform.position.x, blackboard.target.playerObject.transform.position.y / 2, blackboard.target.playerObject.transform.position.z)).magnitude;
         }
         else
         {
