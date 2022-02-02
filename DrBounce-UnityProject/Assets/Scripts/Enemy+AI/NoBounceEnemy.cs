@@ -32,14 +32,16 @@ public class NoBounceEnemy : Enemy
 
     protected BtNode createTree()
     {
-        BtNode Move = createMovementTree();
+        BtNode Patrol = createPatrolTree();
+
+        BtNode Chase = createChaseTree();
 
         BtNode Attack = createAttackingTree();
 
-        return new Selector(new CheckIfStunned(stun), Attack, Move);
+        return new Selector(new CheckIfStunned(stun), Attack, Chase, Patrol);
     }
 
-    protected BtNode createMovementTree()
+    protected BtNode createPatrolTree()
     {
         // Movement Node Section
         BtNode GetPatrolPoint = new Sequence(new IsClose(false, .2f), new TargetNext(patrolPoints.ToArray()));
@@ -48,13 +50,18 @@ public class NoBounceEnemy : Enemy
         return new Sequence(new CheckBool(3), new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
     }
 
+    protected BtNode createChaseTree()
+    {
+        BtNode CanSee = new Selector(new EnemyChase(m_blackboard, navMeshAgent, attackRange), new TargetInSight(m_blackboard, viewDist, sightAngle));
+        BtNode LookAt = new Selector(CanSee, new AfterAttacked());
+        BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist));
+        return new Sequence(new CheckBool(4), CheckForTarget);
+    }
+
     protected BtNode createAttackingTree()
     {
         // Attack Node Section
-        BtNode CanSee = new Selector(new EnemyChase(m_blackboard, navMeshAgent, attackRange), new TargetInSight(m_blackboard, viewDist, sightAngle));
-        BtNode LookAt = new Selector(CanSee, new AfterAttacked());
-        BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist), new Callout());
         BtNode AttackTarget = new Sequence(new IsNotReloading(m_blackboard), new IsClose(true, attackRange), new MeleeAttackTarget(attackDelay, contactDamage, knockbackForce));
-        return new Sequence(new CheckBool(4), CheckForTarget, AttackTarget);
+        return new Sequence(new CheckBool(4), AttackTarget);
     }
 }
