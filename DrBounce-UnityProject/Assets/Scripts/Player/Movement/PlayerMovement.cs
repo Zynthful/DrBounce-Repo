@@ -184,14 +184,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            // Is the ground we landed on NOT bounceable?
-            // todo: make this not call every frame whilst on non-bounceable ground :(
-            if (!Physics.CheckSphere(groundCheck.position, groundDistance, bounceableMask))
-            {
-                onLandOnNonBounceableGround?.Invoke();
-                _onLandOnNonBounceableGround?.Raise();
-            }
-
             coyoteTime = oldCoyoteTime;
             hasJumped = false;
             dashesPerformed = 0;
@@ -420,6 +412,14 @@ public class PlayerMovement : MonoBehaviour
     void Land()
     {
         onLand?.Invoke();
+
+        // Is the ground we landed on NOT bounceable?
+        if (!Physics.CheckSphere(groundCheck.position, groundDistance, bounceableMask))
+        {
+            Debug.Log("land non :)");
+            onLandOnNonBounceableGround?.Invoke();
+            _onLandOnNonBounceableGround?.Raise();
+        }
     }
 
     void Crouch()
