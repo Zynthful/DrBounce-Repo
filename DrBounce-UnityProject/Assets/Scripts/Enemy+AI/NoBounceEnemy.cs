@@ -11,6 +11,7 @@ public class NoBounceEnemy : Enemy
     public float enemySpeed = 2;
     public float attackRange = 2;
     public float attackDelay = .75f;
+    public float knockbackForce = 12f;
     public int contactDamage;
 
     // Start is called before the first frame update
@@ -53,7 +54,7 @@ public class NoBounceEnemy : Enemy
         BtNode CanSee = new Selector(new EnemyChase(m_blackboard, navMeshAgent, attackRange), new TargetInSight(m_blackboard, viewDist, sightAngle));
         BtNode LookAt = new Selector(CanSee, new AfterAttacked());
         BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist), new Callout());
-        BtNode AttackTarget = new Sequence(new IsNotReloading(m_blackboard), new IsClose(true, attackRange), new MeleeAttackTarget(attackDelay, contactDamage));
+        BtNode AttackTarget = new Sequence(new IsNotReloading(m_blackboard), new IsClose(true, attackRange), new MeleeAttackTarget(attackDelay, contactDamage, knockbackForce));
         return new Sequence(new CheckBool(4), CheckForTarget, AttackTarget);
     }
 }

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public static PlayerMovement instance;
 
     private bool isCrouching;
     private CharacterController charController;
@@ -69,6 +70,11 @@ public class PlayerMovement : MonoBehaviour
     private bool headCheckPerformed = false;
     private bool hasLetGo = false;
 
+    // Knockback values
+    private float knockbackPower;
+    private Vector3 knockbackDir;
+    private int knockbackDecayMultiplier = 8;
+
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
     public Transform headCheck;
@@ -121,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
 
         controls = InputManager.inputMaster;
 
+        instance = this;
         player = transform;
     }
 
@@ -271,6 +278,7 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing == true)
         {
             velocity = Vector3.zero;
+            knockbackPower = 0;
 
             if (hasDashed == false)
             {
@@ -340,6 +348,7 @@ public class PlayerMovement : MonoBehaviour
             //{
             //    isSliding = false;
             //}
+            knockbackPower = 0;
             acceleration = 1;
             coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
@@ -373,6 +382,16 @@ public class PlayerMovement : MonoBehaviour
                 oldSpeed = speed;
                 speed /= 2;
             }
+        }
+
+        #endregion
+
+        #region Knockback
+
+        if (knockbackPower > 0)
+        {
+            controller.Move(knockbackDir * knockbackPower * Time.deltaTime); //Move them in a direction at a speed based on the knockback strength
+            knockbackPower -= Time.deltaTime * knockbackDecayMultiplier;
         }
 
         #endregion
@@ -450,6 +469,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+    }
+
+    public void ApplyKnockback(Vector3 dir, float power)
+    {
+        knockbackDir = (knockbackDir + dir).normalized;
+        knockbackPower = power;
     }
 
     IEnumerator Dash()
