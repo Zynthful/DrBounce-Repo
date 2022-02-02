@@ -175,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region GroundChecking
+        bool wasGrounded = isGrounded;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
@@ -223,6 +224,12 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
             cooldown = false;
+        }
+
+        // Check if we've just become grounded
+        if (!wasGrounded && isGrounded)
+        {
+            Land();
         }
         #endregion
 
@@ -299,7 +306,7 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-        #region jump
+        #region Jumping
 
         if (jump == true)
         {
@@ -408,6 +415,11 @@ public class PlayerMovement : MonoBehaviour
             onJump?.Invoke();
             _onJump?.Raise();
         }
+    }
+
+    void Land()
+    {
+        onLand?.Invoke();
     }
 
     void Crouch()
