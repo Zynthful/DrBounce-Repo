@@ -92,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private UnityEvent onSlideEnd = null;
     [SerializeField]
+    private UnityEvent onLand = null;
+    [SerializeField]
     private UnityEvent onLandOnNonBounceableGround = null;
 
     [Header("Game Events")]
@@ -438,21 +440,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public bool GetIsCrouching()
-    {
-        return isCrouching;
-    }
-
-    public bool GetIsMoving()
-    {
-        return isMoving;
-    }
-
-    public bool GetIsGrounded()
-    {
-        return isGrounded;
-    }
-
     IEnumerator Dash()
     {
         // Checks:
@@ -519,4 +506,10 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         dashesPerformed = 0;
     }
+
+    public bool GetIsCrouching() { return isCrouching; }
+
+    public bool GetIsMoving() { return isMoving; }
+
+    public bool GetIsGrounded() { return isGrounded; }
 }
