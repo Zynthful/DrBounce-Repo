@@ -10,6 +10,17 @@ public class Blackboard {
     public NoBounceEnemy noBounceAIController;
     public float shotDelay;
 
+    public enum Actions
+    {
+        NONE,
+        ATTACKING,
+        PATROLING,
+        CHASING,
+        LOST,
+    }
+
+    public Actions currentAction;
+
     //The amount of time the enemy chases the player for after losing their location
     public float searchTime;
     //Activates if the player has been spotted, deactivates if searchtime hits -10

@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class BouncyEnemy : Enemy
 {
-
-    private BtNode m_root;
-    private Blackboard m_blackboard;
-
     public bool searching;
     public bool canAttack;
     public bool canMove;
@@ -53,25 +49,6 @@ public class BouncyEnemy : Enemy
         BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle));
         BtNode LookAt = new Selector(CanSee, new AfterAttacked());
         BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist), new Callout());
-        return new Sequence(new CheckBool(1), CheckForTarget, new IsNotReloading(m_blackboard), new AttackTarget(m_blackboard, rateOfFire, bullet, onShoot));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!GameManager.s_Instance.paused && m_root != null)
-        {
-            NodeState result = m_root.evaluate(m_blackboard);
-            //Debug.Log(result);
-            if (result != NodeState.RUNNING)
-            {
-                m_root.reset();
-            }
-        }
-    }
-
-    public void ResetRoot()
-    {
-        m_root.reset();
+        return new Sequence(new CheckBool(1), CheckForTarget, new IsNotReloading(m_blackboard), new AttackTarget(m_blackboard, rateOfFire, bullet));
     }
 }

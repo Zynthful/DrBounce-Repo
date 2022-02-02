@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class NoBounceEnemy : Enemy
 {
-
-    private BtNode m_root;
-    private Blackboard m_blackboard;
-
     public bool searching;
     public bool canAttack;
     public bool canMove;
@@ -58,30 +54,12 @@ public class NoBounceEnemy : Enemy
         return new Sequence(new CheckBool(4), CheckForTarget);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!GameManager.s_Instance.paused && m_root != null)
-        {
-            NodeState result = m_root.evaluate(m_blackboard);
-            Debug.Log(result);
-            if (result != NodeState.RUNNING)
-            {
-                m_root.reset();
-            }
-        }
-    }
-
     public virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             PlayerMovement.player.GetComponent<Health>().Damage(contactDamage);
+            m_blackboard.currentAction = Blackboard.Actions.ATTACKING;
         }
-    }
-
-    public void ResetRoot()
-    {
-        m_root.reset();
     }
 }

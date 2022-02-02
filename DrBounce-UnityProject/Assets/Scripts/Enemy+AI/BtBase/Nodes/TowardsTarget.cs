@@ -48,6 +48,8 @@ public class TowardsTarget : BtNode
             m_movement.rotation = Quaternion.RotateTowards(m_movement.rotation, Quaternion.LookRotation((targetPosition - m_movement.position).normalized), Time.deltaTime / .0045f);
         }
 
+        blackboard.currentAction = Blackboard.Actions.PATROLING;
+
         return NodeState.SUCCESS;
     }
 
