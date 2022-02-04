@@ -216,12 +216,12 @@ public class InputManager : MonoBehaviour
     {
         if (active)
         {
-            Debug.Log($"{map.name} controls enabled.");
+            //Debug.Log($"{map.name} controls enabled.");
             map.Enable();
         }
         else
         {
-            Debug.Log($"{map.name} controls disabled.");
+            //Debug.Log($"{map.name} controls disabled.");
             map.Disable();
         }
     }

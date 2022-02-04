@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public static PlayerMovement instance;
 
     private bool isCrouching;
     private CharacterController charController;
@@ -69,6 +70,11 @@ public class PlayerMovement : MonoBehaviour
     private bool headCheckPerformed = false;
     private bool hasLetGo = false;
 
+    // Knockback values
+    private float knockbackPower;
+    private Vector3 knockbackDir;
+    private int knockbackDecayMultiplier = 8;
+
     [Header("Ground+Head Checking")]
     public Transform groundCheck;
     public Transform headCheck;
@@ -91,6 +97,8 @@ public class PlayerMovement : MonoBehaviour
     private UnityEvent onSlide = null;
     [SerializeField]
     private UnityEvent onSlideEnd = null;
+    [SerializeField]
+    private UnityEvent onLand = null;
     [SerializeField]
     private UnityEvent onLandOnNonBounceableGround = null;
 
@@ -119,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
 
         controls = InputManager.inputMaster;
 
+        instance = this;
         player = transform;
     }
 
@@ -173,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region GroundChecking
+        bool wasGrounded = isGrounded;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
@@ -181,14 +191,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            // Is the ground we landed on NOT bounceable?
-            // todo: make this not call every frame whilst on non-bounceable ground :(
-            if (!Physics.CheckSphere(groundCheck.position, groundDistance, bounceableMask))
-            {
-                onLandOnNonBounceableGround?.Invoke();
-                _onLandOnNonBounceableGround?.Raise();
-            }
-
             coyoteTime = oldCoyoteTime;
             hasJumped = false;
             dashesPerformed = 0;
@@ -221,6 +223,12 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
             cooldown = false;
+        }
+
+        // Check if we've just become grounded
+        if (!wasGrounded && isGrounded)
+        {
+            Land();
         }
         #endregion
 
@@ -270,6 +278,7 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing == true)
         {
             velocity = Vector3.zero;
+            knockbackPower = 0;
 
             if (hasDashed == false)
             {
@@ -297,7 +306,7 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-        #region jump
+        #region Jumping
 
         if (jump == true)
         {
@@ -339,6 +348,7 @@ public class PlayerMovement : MonoBehaviour
             //{
             //    isSliding = false;
             //}
+            knockbackPower = 0;
             acceleration = 1;
             coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
@@ -375,6 +385,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         #endregion
+
+        #region Knockback
+
+        if (knockbackPower > 0)
+        {
+            controller.Move(knockbackDir * knockbackPower * Time.deltaTime); //Move them in a direction at a speed based on the knockback strength
+            knockbackPower -= Time.deltaTime * knockbackDecayMultiplier;
+        }
+
+        #endregion
     }
     void Jump()
     {
@@ -408,6 +428,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void Land()
+    {
+        onLand?.Invoke();
+
+        // Is the ground we landed on NOT bounceable?
+        if (!Physics.CheckSphere(groundCheck.position, groundDistance, bounceableMask))
+        {
+            onLandOnNonBounceableGround?.Invoke();
+            _onLandOnNonBounceableGround?.Raise();
+        }
+    }
+
     void Crouch()
     {
         if(!GameManager.s_Instance.paused && isGrounded == true)
@@ -438,19 +470,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public bool GetIsCrouching()
+    public void ApplyKnockback(Vector3 dir, float power)
     {
-        return isCrouching;
-    }
-
-    public bool GetIsMoving()
-    {
-        return isMoving;
-    }
-
-    public bool GetIsGrounded()
-    {
-        return isGrounded;
+        knockbackDir = (knockbackDir + dir).normalized;
+        knockbackPower = power;
     }
 
     IEnumerator Dash()
@@ -519,4 +542,10 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         dashesPerformed = 0;
     }
+
+    public bool GetIsCrouching() { return isCrouching; }
+
+    public bool GetIsMoving() { return isMoving; }
+
+    public bool GetIsGrounded() { return isGrounded; }
 }

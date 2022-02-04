@@ -4536,6 +4536,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &3914182229937654054
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4782109033980594174}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.85
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &968394828474596640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4555,9 +4568,30 @@ MonoBehaviour:
   canSeePlayer: 0
   materials: []
   viewDist: 12
-  sightAngle: 45
+  sightAngle: 70
   rateOfFire: 1.5
-  onShoot:
+  onPatrol:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7884428195672875028}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Attack
+          m_BoolArgument: 0
+        m_CallState: 2
+  onChase:
+    m_PersistentCalls:
+      m_Calls: []
+  onGiveUp:
     m_PersistentCalls:
       m_Calls: []
   navMeshAgent: {fileID: 0}
@@ -4567,6 +4601,9 @@ MonoBehaviour:
   canMove: 1
   currentTargetIndex: 0
   enemySpeed: 0.25
+  attackRange: 2.5
+  attackDelay: 0.75
+  knockbackForce: 12
   contactDamage: 5
 --- !u!195 &3401031651880236854
 NavMeshAgent:
@@ -4587,22 +4624,28 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!135 &3914182229937654054
-SphereCollider:
+--- !u!95 &7884428195672875028
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4782109033980594174}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_GameObject: {fileID: 2088386001273375903}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.85
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d75bc81369fb9f4f9a6ec9f8d8c41f9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6032863998663182990
 GameObject:
   m_ObjectHideFlags: 0
@@ -8705,19 +8748,19 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fe46549bebe1d744b9dfe3bbd25c2248, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
---- !u!23 &1202786148901370944 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6897226980601495417, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+--- !u!4 &65958014398731625 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5759167906582156880, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+  m_PrefabInstance: {fileID: 5694512301365478201}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2088386001273375903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6052143852674289574, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
   m_PrefabInstance: {fileID: 5694512301365478201}
   m_PrefabAsset: {fileID: 0}
 --- !u!198 &409956886356165376 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 5383645821508468793, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
-  m_PrefabInstance: {fileID: 5694512301365478201}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &65958014398731625 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5759167906582156880, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
   m_PrefabInstance: {fileID: 5694512301365478201}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4782109033980594174 stripped
@@ -8736,3 +8779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a070ac3fbfc409439f88beb3c02265e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!23 &1202786148901370944 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6897226980601495417, guid: ec54498436265a2408d27a95b8f6f9d9, type: 3}
+  m_PrefabInstance: {fileID: 5694512301365478201}
+  m_PrefabAsset: {fileID: 0}

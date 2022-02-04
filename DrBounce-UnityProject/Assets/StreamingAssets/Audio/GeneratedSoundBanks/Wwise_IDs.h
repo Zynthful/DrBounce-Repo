@@ -44,6 +44,7 @@ namespace AK
         static const AkUniqueID HEAL = 3448274447U;
         static const AkUniqueID INJURED = 2860195132U;
         static const AkUniqueID JUMP = 3833651337U;
+        static const AkUniqueID LAND = 674522502U;
         static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
         static const AkUniqueID MAGNET_PULLING_START = 2278189420U;

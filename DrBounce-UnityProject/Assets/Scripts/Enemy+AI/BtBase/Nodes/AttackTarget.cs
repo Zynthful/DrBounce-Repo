@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Events;
 using UnityEngine;
 using System;
 
@@ -10,9 +9,7 @@ public class AttackTarget : BtNode
 
     private ObjectPooler pool;
 
-    private EnemyHealth health = null;
     private BulletType m_bullet;
-    private UnityEvent m_onShoot = null;
 
     Transform targetPosition;
     Transform enemyPosition;
@@ -29,19 +26,16 @@ public class AttackTarget : BtNode
     /// <returns></returns>
     /// 
 
-    public AttackTarget(Blackboard blackboard, float rateOfFire, BulletType bullet, UnityEvent onShoot)
+    public AttackTarget(Blackboard blackboard, float rateOfFire, BulletType bullet)
     {
         m_blackboard = blackboard;
         m_rateOfFire = rateOfFire;
         m_bullet = bullet;
-        m_onShoot = onShoot;
         pool = ObjectPooler.Instance;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        Debug.Log("evaluating");
-        // Stuff for shooting should be in Enemy.cs
         if (!m_blackboard.target.isPlayer)
         {
             return NodeState.FAILURE;
@@ -53,6 +47,7 @@ public class AttackTarget : BtNode
 
         if (bullet != null)
         {
+            m_blackboard.currentAction = Blackboard.Actions.ATTACKING;
             return NodeState.SUCCESS;
         }
         else
@@ -63,9 +58,7 @@ public class AttackTarget : BtNode
 
     protected GameObject Shoot()
     {
-        Debug.Log("Shooting;");
         m_blackboard.shotDelay = m_rateOfFire;
-        m_onShoot?.Invoke();
         return pool.SpawnBulletFromPool("Bullet", enemyPosition.position, Quaternion.identity, (m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized, m_bullet, null);
     }
 

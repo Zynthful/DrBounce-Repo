@@ -379,9 +379,11 @@ public class Shooting : MonoBehaviour
 
                 //print(Hitinfo.transform.name + " hit!");
                 EnemyHealth enemy = Hitinfo.transform.GetComponent<EnemyHealth>();
+                Stun enemyStun = Hitinfo.transform.GetComponent<Stun>();
                 if (enemy != null)
                 {
                     enemy.Damage(damage);
+                    enemyStun.Hit();
                 }
                 else
                 {

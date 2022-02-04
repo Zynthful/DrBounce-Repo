@@ -18,10 +18,16 @@ public class TowardsTargetNAV : BtNode {
             return NodeState.FAILURE;
         }
 
-        if(blackboard.target.isPlayer)
+        if (blackboard.target.isPlayer)
+        {
             m_agent.SetDestination(blackboard.target.playerObject.transform.position);
+            blackboard.currentAction = Blackboard.Actions.CHASING;
+        }
         else if (!blackboard.target.isPlayer)
+        {
             m_agent.SetDestination(blackboard.target.spottedPosition);
+            blackboard.currentAction = Blackboard.Actions.PATROLING;
+        }
 
         return NodeState.SUCCESS;
     }

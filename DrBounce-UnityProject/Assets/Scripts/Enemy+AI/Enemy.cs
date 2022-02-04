@@ -8,6 +8,7 @@ using MoreMountains.Tools;
 
 public class Enemy : MonoBehaviour
 {
+    #region Declarations
     public class Target
     {
         public Vector3 spottedPosition;
@@ -41,6 +42,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    protected BtNode m_root;
+    protected Blackboard m_blackboard;
+
+    protected Blackboard.Actions recentAction;
+
     [Header("Declarations")]
     [SerializeField]
     private EnemyHealth health = null;
@@ -69,7 +75,13 @@ public class Enemy : MonoBehaviour
 
     [Header("Events")]
     [SerializeField]
-    public UnityEvent onShoot = null;
+    public UnityEvent onPatrol = null;
+    [SerializeField]
+    public UnityEvent onAttack = null;
+    [SerializeField]
+    public UnityEvent onChase = null;
+    [SerializeField]
+    public UnityEvent onGiveUp = null;
 
     public NavMeshAgent navMeshAgent;
 
@@ -77,38 +89,11 @@ public class Enemy : MonoBehaviour
     public List<Vector3> patrolPoints = new List<Vector3> { };
 
     protected Stun stun;
-
-    /*
-    Enemy()
-    {
-        pool = ObjectPooler.Instance;
-    }
-
-    ~Enemy()
-    {
-        health.DIE();
-    }
-    */
+    #endregion
 
     private void Start()
     {
         pool = ObjectPooler.Instance;
-        // Material mat = null;
-        // switch (GetComponent<Bouncing>().bType)
-        // {
-        //     case Bouncing.BounceType.Back:
-        //         mat = materials[0];
-        //         break;
-
-        //     case Bouncing.BounceType.Up:
-        //         mat = materials[1];
-        //         break;
-
-        //     case Bouncing.BounceType.Away:
-        //         mat = materials[2];
-        //         break;
-        // }
-        // GetComponent<MeshRenderer>().material = mat;
     }
 
     protected virtual void Awake()
@@ -127,93 +112,46 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
-        if (!health.GetIsDead())
+        if(m_blackboard.currentAction != recentAction)
         {
-            //Shoot();
-        }
-    }
-
-    protected bool PlayerLosCheck()
-    {
-        if(Vector3.Dot(transform.TransformDirection(Vector3.forward), (PlayerMovement.player.position - transform.position).normalized) > (90 - sightAngle) / 90)
-        {
-            RaycastHit hit;
-
-            Ray ray = new Ray(transform.position, (PlayerMovement.player.position - transform.position).normalized);
-
-            if (Physics.Raycast(ray, out hit, viewDist) && hit.transform.root.CompareTag("Player"))
+            switch (m_blackboard.currentAction)
             {
-                Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - transform.position).normalized * viewDist, Color.green);
-                return true;
-            }
-            else
-            {
-                Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - transform.position).normalized * viewDist, Color.red);
-            }
-        }
-        return false;
-    }
+                case Blackboard.Actions.ATTACKING:
+                    onAttack?.Invoke();
+                    break;
 
-    protected GameObject Shoot()
-    {
-        if(PlayerLosCheck())
+                case Blackboard.Actions.PATROLING:
+                    onPatrol?.Invoke();
+                    break;
+
+                case Blackboard.Actions.CHASING:
+                    onChase?.Invoke();
+                    break;
+
+                case Blackboard.Actions.LOST:
+                    onGiveUp?.Invoke();
+                    break;
+            }
+
+            recentAction = m_blackboard.currentAction;
+        }
+
+        if (!GameManager.s_Instance.paused && m_root != null)
         {
-            if (!shootDelay && shootingDelayCoroutine == null)
+            Debug.Log(m_blackboard.currentAction);
+            NodeState result = m_root.evaluate(m_blackboard);
+            if (result != NodeState.RUNNING)
             {
-                shootDelay = true;
-                onShoot?.Invoke();
-                shootingDelayCoroutine = StartCoroutine(ShotDelay(rateOfFire));
-                pool.SpawnBulletFromPool("Bullet", transform.position, Quaternion.identity, (PlayerMovement.player.position - transform.position).normalized, bullet, null);
-                //Debug.Log((PlayerMovement.player.position - transform.position).normalized);
+                m_root.reset();
             }
-            
-        }
-        return null;
-    }
-
-    public void RecentlyAttacked()
-    {
-        if (recentAttackCoroutine == null)
-        {
-            recentlyAttacked = true;
-            recentAttackCoroutine = StartCoroutine(ResetRecentlyAttacked(.3f));
         }
     }
 
-    /*
-    public void Die()
+    public void ResetRoot()
     {
-        //SwitchHeldItem.instance.AddToList(Instantiate(healthPack, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity, null));
-        print("That's right baby! Our dog, " + this.name + ", is dead!");
-        //Destroy(gameObject);
+        m_root.reset();
     }
-    */
-
-    IEnumerator ShotDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        shootDelay = false;
-        shootingDelayCoroutine = null;
-    }
-
-    IEnumerator ResetRecentlyAttacked(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        recentlyAttacked = false;
-        recentAttackCoroutine = null;
-    }
-
-
-    /*
-    /// <summary>
-    /// This and the variable are used for the doors don't delete
-    /// </summary>
-    /// <returns></returns>
-    public bool GetisDead() 
-    {
-        return amDead;
-    }
-    */
 }

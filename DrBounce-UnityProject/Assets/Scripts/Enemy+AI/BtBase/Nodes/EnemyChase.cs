@@ -10,10 +10,13 @@ public class EnemyChase : BtNode
     private bool stopChasing = false;
     private NavMeshPath path;
     private bool headingBack = false;
-    public EnemyChase(Blackboard blackboard, NavMeshAgent navMeshAgent)
+    private float m_attackRange;
+
+    public EnemyChase(Blackboard blackboard, NavMeshAgent navMeshAgent, float attackRange)
     {
         m_blackboard = blackboard;
         m_navMeshAgent = navMeshAgent;
+        m_attackRange = attackRange;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
@@ -27,6 +30,13 @@ public class EnemyChase : BtNode
             //re-enable Navmesh and target the player
             m_navMeshAgent.enabled = true;
             m_navMeshAgent.destination = PlayerMovement.player.transform.position;
+
+            m_blackboard.currentAction = Blackboard.Actions.CHASING;
+        }
+
+        if(Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_navMeshAgent.destination) <= m_attackRange)
+        {
+            m_blackboard.noBounceAIController.navMeshAgent.destination = m_blackboard.noBounceAIController.transform.position;
         }
 
         if ((m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status != NavMeshPathStatus.PathComplete) && m_navMeshAgent.enabled == true && headingBack == false)
@@ -38,6 +48,8 @@ public class EnemyChase : BtNode
             //Set the navmesh destination to the first patrol point in the list
             m_blackboard.noBounceAIController.navMeshAgent.destination = m_blackboard.noBounceAIController.patrolPoints[0];
             m_blackboard.noBounceAIController.canMove = false;
+
+            m_blackboard.currentAction = Blackboard.Actions.LOST;
 
             //Once the patrol point has been reached, or the enemy is close enough to it
             //If enemy's x value is close to the waypoint location
@@ -86,7 +98,6 @@ public class EnemyChase : BtNode
         {
             return NodeState.FAILURE;
         }
-
         else
         {
             return NodeState.FAILURE;
