@@ -3,10 +3,19 @@
 	<AudioObjects>
 		<WorkUnit Name="Default Work Unit" ID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}" PersistMode="Standalone">
 			<ChildrenList>
-				<WorkUnit Name="Debug" ID="{AFCF4D8B-A6C7-488C-ADD9-AFA2AA9E6B8A}" PersistMode="Reference"/>
-				<WorkUnit Name="Enemies" ID="{CB1FCA69-FB8B-4593-9F88-56DAD8A1EFD1}" PersistMode="Reference"/>
-				<WorkUnit Name="Objects" ID="{002D8378-3CD7-4F3F-9467-731DACAD992E}" PersistMode="Reference"/>
-				<WorkUnit Name="Player" ID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}" PersistMode="Reference"/>
+				<WorkUnit Name="Dialogue" ID="{F7EB1399-798D-492E-B05F-CA6B00B9F0B1}" PersistMode="Reference"/>
+				<WorkUnit Name="Sound FX" ID="{A4D0CE53-A64D-4A9D-907F-CDD807D23199}" PersistMode="Reference"/>
+				<ActorMixer Name="New Actor-Mixer" ID="{8E43C80C-584D-4D6E-94E0-6A3141F4321E}" ShortID="724805">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+						</Reference>
+					</ReferenceList>
+					<ObjectLists/>
+				</ActorMixer>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

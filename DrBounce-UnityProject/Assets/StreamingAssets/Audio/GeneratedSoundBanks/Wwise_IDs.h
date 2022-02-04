@@ -15,6 +15,9 @@ namespace AK
     {
         static const AkUniqueID BOUNCE_OBJECT = 2365089589U;
         static const AkUniqueID BOUNCE_PLAYER = 2376949343U;
+        static const AkUniqueID COLLIDE_ANY = 2766579562U;
+        static const AkUniqueID COLLIDE_BOUNCEABLE = 3104417468U;
+        static const AkUniqueID COLLIDE_NONBOUNCEABLE = 402864233U;
         static const AkUniqueID DASH = 1942692385U;
         static const AkUniqueID ENEMY_BULLET_IMPACT_PLAYER = 1082212733U;
         static const AkUniqueID ENEMY_BULLET_IMPACT_SURFACE = 936643039U;
