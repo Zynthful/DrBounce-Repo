@@ -22,6 +22,7 @@ public class CheckIfStunned : BtNode
     {
         if (m_stun.IsStunned())
         {
+            blackboard.currentAction = Blackboard.Actions.NONE;
             return NodeState.SUCCESS;   //is stunned, can't move or shot
         }
         else
