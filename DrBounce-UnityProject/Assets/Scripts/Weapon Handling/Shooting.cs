@@ -154,7 +154,7 @@ public class Shooting : MonoBehaviour
         {
             currentHoldTime += Time.deltaTime;
 
-            if (gunCharge >= minChargeToMaxShot)
+            if (gunCharge > minChargeToMaxShot)
             {
                 // Begin charging max shot once we've passed the threshold and have sufficient charge
                 if (!maxShotCharged && !maxShotCharging && (currentHoldTime / holdTimeToFullCharge) >= chargeBeginThreshold)
