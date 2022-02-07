@@ -558,7 +558,6 @@ MonoBehaviour:
   _onInjured: {fileID: 0}
   _onHeal: {fileID: 0}
   _onDeath: {fileID: 0}
-  DeathFeedback: {fileID: 3924644698427810977}
 --- !u!114 &3191203114709652961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,6 +1236,7 @@ GameObject:
   - component: {fileID: 3951363810211267227}
   - component: {fileID: 3714402439856080278}
   - component: {fileID: 2716966838687600853}
+  - component: {fileID: 3831677900056145994}
   m_Layer: 0
   m_Name: Death Feedback
   m_TagString: Untagged
@@ -1278,6 +1278,7 @@ MonoBehaviour:
   - {fileID: 3951363810211267227}
   - {fileID: 3714402439856080278}
   - {fileID: 2716966838687600853}
+  - {fileID: 3831677900056145994}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -1652,6 +1653,43 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   TargetGameObject: {fileID: 8979443653804786771}
+  Mode: 0
+--- !u!114 &3831677900056145994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5617105669266042679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a735df4ed5161bc4a89ba41ab2149469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Destroy Stun Sparks PFX
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  TargetGameObject: {fileID: 2477126865757436135}
   Mode: 0
 --- !u!1 &5769735188086508123
 GameObject:
@@ -3943,14 +3981,14 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2633220930310155072, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
   m_PrefabInstance: {fileID: 3691763570337841133}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2901231033860579686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1979605991996497547, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
-  m_PrefabInstance: {fileID: 3691763570337841133}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8979443653804786771 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5739454020710136766, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
+  m_PrefabInstance: {fileID: 3691763570337841133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2901231033860579686 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1979605991996497547, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
   m_PrefabInstance: {fileID: 3691763570337841133}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3870587342562764230
@@ -4010,6 +4048,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c388e06b2c5a1b418c827d1ac1ea4e8, type: 3}
+--- !u!198 &7738402152029468860 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6832881405400587642, guid: 1c388e06b2c5a1b418c827d1ac1ea4e8, type: 3}
+  m_PrefabInstance: {fileID: 3870587342562764230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4563197983353686799 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 784940036205375177, guid: 1c388e06b2c5a1b418c827d1ac1ea4e8, type: 3}
@@ -4018,11 +4061,6 @@ GameObject:
 --- !u!4 &7895218252655289197 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6351875949648234155, guid: 1c388e06b2c5a1b418c827d1ac1ea4e8, type: 3}
-  m_PrefabInstance: {fileID: 3870587342562764230}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7738402152029468860 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6832881405400587642, guid: 1c388e06b2c5a1b418c827d1ac1ea4e8, type: 3}
   m_PrefabInstance: {fileID: 3870587342562764230}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5286676463486753841
@@ -4094,6 +4132,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
+--- !u!1 &2477126865757436135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7727765714656273622, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
+  m_PrefabInstance: {fileID: 5286676463486753841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &2647583789505025117 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7917353803556079724, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
