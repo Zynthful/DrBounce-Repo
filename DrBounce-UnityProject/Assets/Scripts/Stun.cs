@@ -47,6 +47,10 @@ public class Stun : MonoBehaviour
         {
             UpdateStunBar(true);
         }
+        else if (isStunned) 
+        {
+            UpdateStunBar(true);
+        }
     }
 
     // Update is called once per frame
@@ -113,6 +117,9 @@ public class Stun : MonoBehaviour
         if (!isStunned)
         {
             //print("big hit");
+            stunCounter = shotsNeededtoStun;
+            hasBeenHit = true;
+            UpdateStunBar(true);
 
             Stunned();
         }
