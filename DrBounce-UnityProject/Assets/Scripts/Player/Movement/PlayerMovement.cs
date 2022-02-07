@@ -323,7 +323,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 jump = false;
-                print("Midhop");
+                //print("Midhop");
                 jumpHeight = 0;
                 velocity.y -= floatiness;
 
@@ -352,7 +352,7 @@ public class PlayerMovement : MonoBehaviour
             acceleration = 1;
             coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
-            print(isGrounded);
+            //print(isGrounded);
             isGrounded = true;
             if (slideDirectionDecided == false)
             {

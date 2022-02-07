@@ -141,7 +141,7 @@ public class Enemy : MonoBehaviour
 
         if (!GameManager.s_Instance.paused && m_root != null)
         {
-            Debug.Log(m_blackboard.currentAction);
+            //Debug.Log(m_blackboard.currentAction);
             NodeState result = m_root.evaluate(m_blackboard);
             if (result != NodeState.RUNNING)
             {
