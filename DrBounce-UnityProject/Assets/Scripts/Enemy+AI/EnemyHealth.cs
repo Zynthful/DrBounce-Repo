@@ -6,8 +6,7 @@ using MoreMountains.Tools;
 
 public class EnemyHealth : Health
 {
-    [Header("Feedbacks")]
-    public MMFeedbacks DeathFeedback;
+    
 
     public delegate void Death();
     public static event Death OnDeath;
