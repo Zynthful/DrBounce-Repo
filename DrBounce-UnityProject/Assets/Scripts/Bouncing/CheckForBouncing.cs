@@ -55,15 +55,11 @@ public class CheckForBouncing : MonoBehaviour
 
             returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision, bounceOriginPoint);
 
-            if (collision.gameObject.GetComponent<Stun>() != null)
-            {
-                collision.gameObject.GetComponent<Stun>().BigHit();
-            }
-
             if (returnVectors.Length > 0)
             {
                 if (specialInteractions)
                 {
+
                     if (collision.gameObject == lastBounced)
                     {
                         specialInteractions.Bounced(collision);

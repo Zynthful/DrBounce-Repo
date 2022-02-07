@@ -394,7 +394,12 @@ public class GunThrowing : MonoBehaviour
         inFlight = true;
 
         amountOfBounces++;
-        
+
+        if (collision.gameObject.GetComponent<Stun>() != null)
+        {
+            collision.gameObject.GetComponent<Stun>().BigHit();
+        }
+
         onBounce?.Invoke(amountOfBounces);
         _onBounce?.Raise(amountOfBounces);
 
