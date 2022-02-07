@@ -6,10 +6,7 @@ public class Stun : MonoBehaviour
 {
     /*
     To do:
-    link up to other scripts:
-        ai (so the enemy stops moving and attacking) DONE
-        hit detection (when the enemy gets hit by normal shots, gets hit by the thrown gun) DONE
-        ui (update a slider) Mostly done needs a bit of tweaking
+    make stun only work with gun
 
     make ui bar only apear when only should go if it is empty
     stun timer go down every half second
@@ -47,7 +44,7 @@ public class Stun : MonoBehaviour
         {
             UpdateStunBar(true);
         }
-        else if (isStunned) 
+        if (isStunned) 
         {
             UpdateStunBar(true);
         }
@@ -56,7 +53,10 @@ public class Stun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //UpdateStunBar(true);
+        if (GameManager.s_Instance.paused)
+        {
+            return;
+        }
 
         if (isStunned)
         {
@@ -95,9 +95,11 @@ public class Stun : MonoBehaviour
     /// </summary>
     public void Hit() 
     {
+        //print("hit");
+
         if (!isStunned)
         {
-            //print("hit");
+            //print("hit success");
 
             hasBeenHit = true;
             stunCounter++;
@@ -114,9 +116,11 @@ public class Stun : MonoBehaviour
     /// </summary>
     public void BigHit()
     {
+        //print("big hit");
+
         if (!isStunned)
         {
-            //print("big hit");
+            //print("big hit success");
             stunCounter = shotsNeededtoStun;
             hasBeenHit = true;
             UpdateStunBar(true);
@@ -146,7 +150,6 @@ public class Stun : MonoBehaviour
     private void StunEnded() 
     {
         //print("not Stunned");
-
 
         stunCounter = 0;
         UpdateStunBar(false);
