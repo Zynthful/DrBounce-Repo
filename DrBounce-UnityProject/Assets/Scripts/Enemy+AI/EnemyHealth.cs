@@ -17,5 +17,7 @@ public class EnemyHealth : Health
         base.DIE();
 
         OnDeath?.Invoke();
+
+        Destroy(this);
     }
 }
