@@ -449,10 +449,13 @@ public class Shooting : MonoBehaviour
 
     public void Reset()
     {
-        ChargedFeedback?.StopFeedbacks();
-        chargedShotPS.Clear();
-        if (anim != null) anim.SetInteger("ChargesLeft", gunCharge);
-        SetCharge(0);
+        if (transform.parent == null)
+        {
+            ChargedFeedback?.StopFeedbacks();
+            chargedShotPS.Clear();
+            if (anim != null) anim.SetInteger("ChargesLeft", gunCharge);
+            SetCharge(0);
+        }
     }
 
     public void Dropped() 
