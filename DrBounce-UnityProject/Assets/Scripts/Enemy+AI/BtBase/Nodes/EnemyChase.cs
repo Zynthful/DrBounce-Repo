@@ -11,6 +11,7 @@ public class EnemyChase : BtNode
     private NavMeshPath path;
     private bool headingBack = false;
     private float m_attackRange;
+    private Vector3 targetWaypoint;
 
     public EnemyChase(Blackboard blackboard, NavMeshAgent navMeshAgent, float attackRange)
     {
@@ -30,7 +31,7 @@ public class EnemyChase : BtNode
             //re-enable Navmesh and target the player
             m_navMeshAgent.enabled = true;
             m_navMeshAgent.destination = PlayerMovement.player.transform.position;
-
+            targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
             m_blackboard.currentAction = Blackboard.Actions.CHASING;
         }
 
@@ -45,8 +46,20 @@ public class EnemyChase : BtNode
             stopChasing = true;
             m_blackboard.spottedPlayer = false;
 
-            //Set the navmesh destination to the first patrol point in the list
-            m_blackboard.noBounceAIController.navMeshAgent.destination = m_blackboard.noBounceAIController.patrolPoints[0];
+            //Set the navmesh destination to the closest patrol point
+
+            for (int i = 0; i < m_blackboard.noBounceAIController.patrolPoints.Count; i++)
+            {
+                Vector3 tempWaypoint = m_blackboard.noBounceAIController.patrolPoints[i];
+                if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, tempWaypoint) < Vector3.Distance(m_blackboard.noBounceAIController.transform.position, targetWaypoint))
+                {
+                    targetWaypoint = tempWaypoint;
+                }
+
+                Debug.Log("Reps of loop");
+            }
+            Debug.Log(targetWaypoint);
+            m_blackboard.noBounceAIController.navMeshAgent.destination = targetWaypoint;
             m_blackboard.noBounceAIController.canMove = false;
 
             m_blackboard.currentAction = Blackboard.Actions.LOST;
@@ -55,7 +68,7 @@ public class EnemyChase : BtNode
             //If enemy's x value is close to the waypoint location
         }
 
-        if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_blackboard.noBounceAIController.patrolPoints[0]) <= 7.5f && headingBack == true)
+        if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, targetWaypoint) <= 7.5f && headingBack == true)
         {
             //Disable the timer, navmesh, set stopchasing to false, allowing the enemy to target the player again if spotted
             stopChasing = false;
