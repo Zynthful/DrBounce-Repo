@@ -8,7 +8,7 @@ public class EnemyChase : BtNode
     private Blackboard m_blackboard;
     private NavMeshAgent m_navMeshAgent;
     private bool stopChasing = false;
-    private NavMeshPath path;
+    private NavMeshPath path = new NavMeshPath();
     private bool headingBack = false;
     private float m_attackRange;
     private Vector3 targetWaypoint;
@@ -22,26 +22,30 @@ public class EnemyChase : BtNode
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        //Debug.Log(m_blackboard.searchTime);
         // If the player has been spotted, and the stopchasing hasn't been activated by the timer running out or the player being out of reach
-        //IF THE ENEMY CAN SEE YOU BUT CAN'T REACH YOU, IT'LL KEEP SETTING OFF AND IMMEDIATELY GOING BACK TO ITS WAYPOINTS. FIX THIS BY COPYING AND PASTING THE 'PATH' STUFF FROM LINE 62 & 63, TO UP HERE, AND ADD ' && path.status == NavMeshPathStatus.PathComplete' TO THE BELOW IF STATEMENT
-        //This currently isn't implimented as it would cause the script to require a lot more resources, and the bug might not even be possible in the final game.
+
         if (m_blackboard.spottedPlayer == true && stopChasing == false)
         {
             //re-enable Navmesh and target the player
+            m_blackboard.noBounceAIController.canMove = false;
             m_navMeshAgent.enabled = true;
-            m_navMeshAgent.destination = PlayerMovement.player.transform.position;
-            targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
-            m_blackboard.currentAction = Blackboard.Actions.CHASING;
+            NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.instance.groundCheck.transform.position, NavMesh.AllAreas, path);
+            if (path.status != NavMeshPathStatus.PathInvalid)
+            {
+                m_navMeshAgent.destination = PlayerMovement.player.position;
+                targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
+                m_blackboard.currentAction = Blackboard.Actions.CHASING;
+            }
         }
 
-        if(Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_navMeshAgent.destination) <= m_attackRange)
+        if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_navMeshAgent.destination) <= m_attackRange)
         {
             m_blackboard.noBounceAIController.navMeshAgent.destination = m_blackboard.noBounceAIController.transform.position;
         }
 
         if ((m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status != NavMeshPathStatus.PathComplete) && m_navMeshAgent.enabled == true && headingBack == false)
         {
+
             headingBack = true;
             stopChasing = true;
             m_blackboard.spottedPlayer = false;
@@ -58,7 +62,7 @@ public class EnemyChase : BtNode
 
                 Debug.Log("Reps of loop");
             }
-            Debug.Log(targetWaypoint);
+
             m_blackboard.noBounceAIController.navMeshAgent.destination = targetWaypoint;
             m_blackboard.noBounceAIController.canMove = false;
 
@@ -74,7 +78,7 @@ public class EnemyChase : BtNode
             stopChasing = false;
             //resets timer
             m_blackboard.searchTime = 0;
-            m_blackboard.noBounceAIController.canMove = true;
+            //m_blackboard.noBounceAIController.canMove = true;
             m_blackboard.noBounceAIController.navMeshAgent.enabled = false;
             headingBack = false;
         }
@@ -85,8 +89,6 @@ public class EnemyChase : BtNode
         if (stopChasing == true && m_blackboard.notSeenPlayer == false)
         {
             //Test if the player can be reached by the enemy
-            path = new NavMeshPath();
-            NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.player.transform.position, NavMesh.AllAreas, path);
 
             //If they can:
             if (path.status == NavMeshPathStatus.PathComplete)
