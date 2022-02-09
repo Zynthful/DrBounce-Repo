@@ -46,6 +46,12 @@ public class TargetInSight : BtNode
             m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
             enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
 
+            if (m_blackboard.noBounceAIController != null)
+            {
+                //Enables the navmesh if the player is spotted, disables use of waypoints and sets the player as the navmesh target.
+                m_blackboard.noBounceAIController.canMove = false;
+            }
+
             return NodeState.SUCCESS;
         }
         else
@@ -71,7 +77,6 @@ public class TargetInSight : BtNode
             if (Physics.Raycast(ray, out hit, m_viewDist) && hit.transform.root.CompareTag("Player"))
             {
                 Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.green);
-
                 if (m_blackboard.sightReset == false)
                 {
                     m_blackboard.searchTime = 0;
