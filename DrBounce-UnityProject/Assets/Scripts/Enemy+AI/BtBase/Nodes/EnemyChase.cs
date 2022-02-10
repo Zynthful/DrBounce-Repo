@@ -32,6 +32,7 @@ public class EnemyChase : BtNode
             targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
             m_blackboard.currentAction = Blackboard.Actions.CHASING;
             m_blackboard.noBounceAIController.canMove = false;
+            Debug.Log("Test");
         }
 
         if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_navMeshAgent.destination) <= m_attackRange)
@@ -39,7 +40,7 @@ public class EnemyChase : BtNode
             m_blackboard.noBounceAIController.navMeshAgent.destination = m_blackboard.noBounceAIController.transform.position;
         }
 
-        if ((m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status == NavMeshPathStatus.PathPartial) && m_navMeshAgent.enabled == true && headingBack == false)
+        if ((m_blackboard.searchTime <= -10 || m_blackboard.noBounceAIController.navMeshAgent.path.status != NavMeshPathStatus.PathComplete) && headingBack == false)
         {
             headingBack = true;
             stopChasing = true;
@@ -71,6 +72,7 @@ public class EnemyChase : BtNode
             stopChasing = false;
             //resets timer
             m_blackboard.searchTime = 0;
+            m_blackboard.target.spottedPosition = targetWaypoint;
             m_navMeshAgent.destination = m_blackboard.target.spottedPosition;
             m_blackboard.noBounceAIController.canMove = true;
             headingBack = false;
