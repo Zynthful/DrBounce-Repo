@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [ExecuteInEditMode]
 public class PlatformHeight : MonoBehaviour
@@ -8,8 +9,10 @@ public class PlatformHeight : MonoBehaviour
     [SerializeField]
     private Transform[] objects = new Transform[0];
 
+    private float height;
+
     [SerializeField]
-    private float height = 1f;
+    private Transform heightPoint;
 
     [SerializeField]
     private float baseSizeY = 0.1f;
@@ -24,22 +27,24 @@ public class PlatformHeight : MonoBehaviour
     {
         if (Application.IsPlaying(gameObject))
         {
+            Destroy(heightPoint.gameObject);
             Destroy(this);
         }
     }
 
     private void Update()
     {
+        height = 4f;
+
         float baseAndTopHeight = topSizeY + baseSizeY;
         float baseToTopHeight = height - baseAndTopHeight;
         float pieceHeight = baseToTopHeight / 6f;
 
         for (int i = 0; i < 6; i++)
         {
-            objects[i].localPosition = pieceHeight * i * Vector3.up + (baseSizeY * Vector3.up);
+            objects[i].localPosition = Mathf.Clamp((pieceHeight * i) + baseSizeY, baseSizeY, Mathf.Infinity) * Vector3.up;
         }
 
-        objects[6].localPosition = objects[5].localPosition + ((pieceSizeY + baseSizeY - topSizeY) * Vector3.up);
-        //objects[6].localPosition = objects[5].localPosition + ((pieceSizeY * Vector3.up) + (baseSizeY * Vector3.up) - (topSizeY * Vector3.up));
+        objects[6].localPosition = Vector3.zero; //objects[5].localPosition + ((pieceSizeY + topSizeY) * Vector3.up);
     }
 }
