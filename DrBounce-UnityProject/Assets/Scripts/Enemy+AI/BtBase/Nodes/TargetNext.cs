@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TargetNext : BtNode
 {
@@ -43,7 +44,6 @@ public class TargetNext : BtNode
             {
                 blackboard.noBounceAIController.currentTargetIndex = 0;
             }
-
             Vector3 nextPos = m_positions[blackboard.noBounceAIController.currentTargetIndex];
 
             blackboard.target.spottedPosition = nextPos;

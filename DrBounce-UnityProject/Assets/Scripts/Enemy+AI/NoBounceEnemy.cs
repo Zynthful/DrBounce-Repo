@@ -45,7 +45,7 @@ public class NoBounceEnemy : Enemy
     {
         // Movement Node Section
         BtNode GetPatrolPoint = new Sequence(new IsClose(false, .2f), new TargetNext(patrolPoints.ToArray()));
-        BtNode TowardsPatrolPoint = new Sequence(new IsTargeting(false), new TowardsTarget(enemySpeed));
+        BtNode TowardsPatrolPoint = new Sequence(new IsTargeting(false), new TowardsTarget(navMeshAgent, enemySpeed));
         BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose(patrolPoints.ToArray()));
         return new Sequence(new CheckBool(3), new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
     }

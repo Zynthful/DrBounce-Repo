@@ -9,10 +9,12 @@ public class TowardsTarget : BtNode
 {
     private Transform m_movement;
     private float moveSpeed;
+    private NavMeshAgent m_navMeshAgent;
 
-    public TowardsTarget(float speed = 2)
+    public TowardsTarget(NavMeshAgent navMeshAgent, float speed = 2)
     {
         moveSpeed = speed;
+        m_navMeshAgent = navMeshAgent;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
@@ -38,6 +40,12 @@ public class TowardsTarget : BtNode
         }
 
         Vector3 targetPosition = blackboard.target.spottedPosition;
+
+        if (blackboard.noBounceAIController == true)
+        {
+            m_navMeshAgent.destination = targetPosition;
+            return NodeState.SUCCESS;
+        }
 
         //Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + targetPosition);
 
