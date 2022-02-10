@@ -22,17 +22,20 @@ public class EnemyChase : BtNode
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-        NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.instance.groundCheck.position, NavMesh.AllAreas, path);
+        if (PlayerMovement.instance.isGrounded == true)
+        {
+            NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.instance.groundCheck.position, NavMesh.AllAreas, path);
+        }
         Debug.Log(path.status);
 
-        if (m_blackboard.spottedPlayer == true && stopChasing == false && path.status != NavMeshPathStatus.PathPartial)
+        if (m_blackboard.spottedPlayer == true && stopChasing == false && path.status == NavMeshPathStatus.PathComplete)
         {
             //target the player
             m_navMeshAgent.destination = PlayerMovement.player.transform.position;
             targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
             m_blackboard.currentAction = Blackboard.Actions.CHASING;
             m_blackboard.noBounceAIController.canMove = false;
-            Debug.Log("Test");
+
         }
 
         if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_navMeshAgent.destination) <= m_attackRange)
