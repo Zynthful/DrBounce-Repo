@@ -25,7 +25,7 @@ public class EnemyChase : BtNode
         NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.instance.groundCheck.position, NavMesh.AllAreas, path);
         Debug.Log(path.status);
 
-        if (m_blackboard.spottedPlayer == true && stopChasing == false)
+        if (m_blackboard.spottedPlayer == true && stopChasing == false && path.status != NavMeshPathStatus.PathPartial)
         {
             //target the player
             m_navMeshAgent.destination = PlayerMovement.player.transform.position;
