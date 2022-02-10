@@ -25,15 +25,16 @@ public class EnemyChase : BtNode
         NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.instance.groundCheck.position, NavMesh.AllAreas, path);
         Debug.Log(path.status);
 
-        if (m_blackboard.spottedPlayer == true && stopChasing == false && path.status != NavMeshPathStatus.PathPartial)
+        if (m_blackboard.spottedPlayer == true && stopChasing == false)
         {
             //target the player
             m_navMeshAgent.destination = PlayerMovement.player.transform.position;
             targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
             m_blackboard.currentAction = Blackboard.Actions.CHASING;
+            m_blackboard.noBounceAIController.canMove = false;
         }
 
-        if(Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_navMeshAgent.destination) <= m_attackRange)
+        if (Vector3.Distance(m_blackboard.noBounceAIController.transform.position, m_navMeshAgent.destination) <= m_attackRange)
         {
             m_blackboard.noBounceAIController.navMeshAgent.destination = m_blackboard.noBounceAIController.transform.position;
         }
@@ -71,6 +72,7 @@ public class EnemyChase : BtNode
             //resets timer
             m_blackboard.searchTime = 0;
             m_navMeshAgent.destination = m_blackboard.target.spottedPosition;
+            m_blackboard.noBounceAIController.canMove = true;
             headingBack = false;
         }
 
