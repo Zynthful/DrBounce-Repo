@@ -1230,7 +1230,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2235704470533588477}
   - component: {fileID: 3924644698427810977}
-  - component: {fileID: 1607026623799637674}
   - component: {fileID: 4595923951367861967}
   - component: {fileID: 4260634603950938794}
   - component: {fileID: 9196251956195355598}
@@ -1238,6 +1237,8 @@ GameObject:
   - component: {fileID: 3714402439856080278}
   - component: {fileID: 2716966838687600853}
   - component: {fileID: 3831677900056145994}
+  - component: {fileID: 7544371095693143855}
+  - component: {fileID: 2488091982261965928}
   m_Layer: 0
   m_Name: Death Feedback
   m_TagString: Untagged
@@ -1272,7 +1273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks:
-  - {fileID: 1607026623799637674}
+  - {fileID: 7544371095693143855}
   - {fileID: 4595923951367861967}
   - {fileID: 4260634603950938794}
   - {fileID: 9196251956195355598}
@@ -1280,6 +1281,7 @@ MonoBehaviour:
   - {fileID: 3714402439856080278}
   - {fileID: 2716966838687600853}
   - {fileID: 3831677900056145994}
+  - {fileID: 2488091982261965928}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -1311,45 +1313,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   DebugActive: 0
---- !u!114 &1607026623799637674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5617105669266042679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c27131831afa28b499cb120fc9059997, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: Particles Play
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    InitialDelay: 0
-    CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  Mode: 0
-  BoundParticleSystem: {fileID: 5383645821508468793}
-  MoveToPosition: 0
-  RandomParticleSystems: []
 --- !u!114 &4595923951367861967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1363,7 +1326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Scale
+  Label: Death Pop Scale
   Chance: 100
   Timing:
     TimescaleMode: 0
@@ -1388,9 +1351,9 @@ MonoBehaviour:
   Mode: 0
   TimeScale: 0
   AnimateScaleTarget: {fileID: 0}
-  AnimateScaleDuration: 0.2
-  RemapCurveZero: 1
-  RemapCurveOne: 2
+  AnimateScaleDuration: 0.1
+  RemapCurveZero: 1.3
+  RemapCurveOne: 1.7
   Offset: 0
   AnimateX: 1
   AnimateScaleX:
@@ -1399,20 +1362,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.9996266
-      value: -1
-      inSlope: -6.948413
-      outSlope: -6.948413
+      time: 0.2
+      value: 1
+      inSlope: 1.9881436
+      outSlope: 1.9881436
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.03436747
+      inWeight: 0.042717855
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1424,20 +1387,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.9996266
-      value: -1
-      inSlope: -6.948413
-      outSlope: -6.948413
+      time: 0.2
+      value: 1
+      inSlope: 1.9881436
+      outSlope: 1.9881436
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.03436747
+      inWeight: 0.042717855
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1449,20 +1412,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.9996266
-      value: -1
-      inSlope: -6.948413
-      outSlope: -6.948413
+      time: 0.2
+      value: 1
+      inSlope: 1.9881436
+      outSlope: 1.9881436
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.03436747
+      inWeight: 0.042717855
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1487,7 +1450,7 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    InitialDelay: 2
+    InitialDelay: 0.07
     CooldownDuration: 0
     ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
@@ -1505,8 +1468,8 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  TargetGameObject: {fileID: 962519144952153287}
-  Mode: 0
+  TargetGameObject: {fileID: 0}
+  Mode: 2
 --- !u!114 &9196251956195355598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1692,6 +1655,98 @@ MonoBehaviour:
   DebugActive: 0
   TargetGameObject: {fileID: 2477126865757436135}
   Mode: 0
+--- !u!114 &7544371095693143855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5617105669266042679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdfe4b9b079619143a9748eeee75e698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Death Splat PFX Instantiation
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Mode: 1
+  CachedRecycle: 1
+  ParticlesPrefab: {fileID: 5383645821508468793}
+  RandomParticlePrefabs: []
+  PositionMode: 0
+  InstantiateParticlesPosition: {fileID: 0}
+  TargetWorldPosition: {x: 0, y: 0, z: 0}
+  Offset: {x: 0, y: 0, z: 0}
+  NestParticles: 0
+  ApplyRotation: 0
+  ApplyScale: 0
+--- !u!114 &2488091982261965928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5617105669266042679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdfe4b9b079619143a9748eeee75e698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Death Pop PFX Instantiation
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Mode: 1
+  CachedRecycle: 1
+  ParticlesPrefab: {fileID: 6334149813117053390}
+  RandomParticlePrefabs: []
+  PositionMode: 1
+  InstantiateParticlesPosition: {fileID: 1773256025093444491}
+  TargetWorldPosition: {x: 0, y: 0, z: 0}
+  Offset: {x: 0, y: 1, z: 0}
+  NestParticles: 0
+  ApplyRotation: 0
+  ApplyScale: 0
 --- !u!1 &5769735188086508123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3910,14 +3965,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
---- !u!198 &5383645821508468793 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6762290285499614746, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
-  m_PrefabInstance: {fileID: 1688557898801661475}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4432383480645417611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3092859399994948776, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
+  m_PrefabInstance: {fileID: 1688557898801661475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5383645821508468793 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6762290285499614746, guid: 34496db581c75ee47a2656ebeaa4dbe7, type: 3}
   m_PrefabInstance: {fileID: 1688557898801661475}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3691763570337841133
@@ -3977,6 +4032,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
+--- !u!4 &2901231033860579686 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1979605991996497547, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
+  m_PrefabInstance: {fileID: 3691763570337841133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8979443653804786771 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5739454020710136766, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
@@ -3985,11 +4045,6 @@ GameObject:
 --- !u!198 &1707096343152186541 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2633220930310155072, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
-  m_PrefabInstance: {fileID: 3691763570337841133}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2901231033860579686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1979605991996497547, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
   m_PrefabInstance: {fileID: 3691763570337841133}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3870587342562764230
@@ -4077,7 +4132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1218793019897729776, guid: 2659b2168c06b0e489afc77b9e8805e6, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 7.5
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 2228155732340422483, guid: 2659b2168c06b0e489afc77b9e8805e6, type: 3}
       propertyPath: m_RootOrder
@@ -4132,6 +4187,11 @@ PrefabInstance:
 --- !u!4 &6478025298635820141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2228155732340422483, guid: 2659b2168c06b0e489afc77b9e8805e6, type: 3}
+  m_PrefabInstance: {fileID: 5119869824629488446}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6334149813117053390 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1218793019897729776, guid: 2659b2168c06b0e489afc77b9e8805e6, type: 3}
   m_PrefabInstance: {fileID: 5119869824629488446}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5286676463486753841
@@ -4203,14 +4263,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
---- !u!4 &7405821791535812720 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3429719356355710017, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
-  m_PrefabInstance: {fileID: 5286676463486753841}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &2647583789505025117 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7917353803556079724, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
+  m_PrefabInstance: {fileID: 5286676463486753841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7405821791535812720 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3429719356355710017, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
   m_PrefabInstance: {fileID: 5286676463486753841}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2477126865757436135 stripped
