@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ExplosiveShot : BulletMovement
 {
@@ -16,8 +17,8 @@ public class ExplosiveShot : BulletMovement
     private MeshCollider shotModelCollider;
     private CheckForBouncing bounceCheck;
 
-    [SerializeField]
-    private ExplosiveShotAudio shotAudio = null;
+    [Header("Explosive Shot Events")]
+    public UnityEvent onExplode = null;
 
     public override void OnObjectSpawn()
     {
@@ -52,8 +53,6 @@ public class ExplosiveShot : BulletMovement
                 }
             }
 
-            shotAudio?.PlayExplode();
-
             explosionTrigger.SetActive(true);
             //if (comboSize > 1 && explosionDamageMultiplier > 0)
             //dam = (int)(dam * comboSize * explosionDamageMultiplier);
@@ -63,6 +62,8 @@ public class ExplosiveShot : BulletMovement
             shotRenderer.enabled = false; rb.velocity = Vector3.zero;
 
             StartCoroutine(ExplosionExpansion());
+
+            onExplode?.Invoke();
         }
     }
 
