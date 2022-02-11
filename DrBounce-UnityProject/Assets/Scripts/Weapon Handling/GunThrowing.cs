@@ -315,7 +315,7 @@ public class GunThrowing : MonoBehaviour
 
     private void RecallGun()
     {
-        if (startOnPlayer && transform.parent == null && throwBuffer == false)
+        if (startOnPlayer && transform.parent == null && !throwBuffer)
         {
             onRecall?.Invoke();
             _onRecall?.Raise();
@@ -325,15 +325,33 @@ public class GunThrowing : MonoBehaviour
         }
     }
 
+    private bool EndSpecificCoyoteTime(Collision check)
+    {
+        for (int i = 0; i < hitObjects.Count; i++)
+        {
+            if (hitObjects[i].hitObject == check)
+            {
+                StopCoroutine(hitObjects[i].coyoteCoroutine);
+                hitObjects.RemoveAt(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
-        if (throwBuffer == false && collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
+        if (!GetIsHeld() && collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
             onDroppedPreCoyote?.Invoke();
             _onDroppedPreCoyote?.Raise();
+
+            // Check for/end current coyote time on this object and start a new one
+            EndSpecificCoyoteTime(collision);
             hitObjects.Add(new coyote(collision, StartCoroutine(CoyoteTimeForPickup(collision))));
 
+            // Stop gun from sliding along the floor
             AffectPhysics(0.85f, 0f);
         }
     }
@@ -341,23 +359,16 @@ public class GunThrowing : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
-        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
+        if (!GetIsHeld() && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
-            for(int i = 0; i < hitObjects.Count; i++)
-            {
-                if(hitObjects[i].hitObject == collision)
-                {
-                    StopCoroutine(hitObjects[i].coyoteCoroutine);
-                    hitObjects.RemoveAt(i);
-                    break;
-                }
-            }
+            // Stop coyote time when leaving collision with an object
+            EndSpecificCoyoteTime(collision);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.root == owner && !transform.parent && throwBuffer == false)
+        if (other.transform.root == owner && !transform.parent && !throwBuffer)
         {
             if (!catchCollider)
             {
@@ -460,7 +471,6 @@ public class GunThrowing : MonoBehaviour
 
     IEnumerator CoyoteTimeForPickup(Collision hit)
     {
-
         yield return new WaitForSeconds(coyoteTimeDuration);
         for (int i = 0; i < hitObjects.Count; i++)
         {
