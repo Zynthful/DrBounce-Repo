@@ -17,6 +17,7 @@ public class Blackboard {
         PATROLING,
         CHASING,
         LOST,
+        FIRSTSPOTTED,
     }
 
     public Actions currentAction;
