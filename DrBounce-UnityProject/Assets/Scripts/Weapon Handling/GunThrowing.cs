@@ -71,7 +71,7 @@ public class GunThrowing : MonoBehaviour
     [SerializeField]
     private UnityEvent onPickup = null;
     [SerializeField]
-    private UnityEvent onThrown = null;
+    public UnityEvent onThrown = null;
     [SerializeField]
     private UnityEvent onCatch = null;
     [SerializeField]
@@ -184,7 +184,10 @@ public class GunThrowing : MonoBehaviour
     // Delay throwing to avoid recalling immediately after throwing
     public void SetThrowGunDelay()
     {
-        if (!GameManager.s_Instance.paused)
+        //float test = controls.Player.Throw.ReadValue<float>();
+        //print(test);
+
+        if (!GameManager.s_Instance.paused && controls.Player.Throw.ReadValue<float>() == 1)
         {
             throwGunDelay = true;
         }

@@ -17,6 +17,8 @@ public class Shooting : MonoBehaviour
     private Gun shooter = null;
     [SerializeField]
     private Health health = null;
+    [SerializeField]
+    private GunThrowing gunThrowing = null;
 
     private ObjectPooler pool;
     public InputMaster controls;
@@ -134,7 +136,7 @@ public class Shooting : MonoBehaviour
         holdTimeToFullCharge = shooter.holdTimeToFullCharge;
         chargeCancelThreshold = shooter.chargeCancelThreshold; 
         chargeBeginThreshold = shooter.chargeBeginThreshold; 
-        minChargeToMaxShot = shooter.minChargeToMaxShot; 
+        minChargeToMaxShot = shooter.minChargeToMaxShot;
     }
 
     // Update is called once per frame
@@ -150,7 +152,7 @@ public class Shooting : MonoBehaviour
         CheckForHoverOverEnemy();
 
         // Handle max shot charging
-        if (IsInHand() && holdingShoot)
+        if (gunThrowing.GetIsHeld() && holdingShoot)
         {
             currentHoldTime += Time.deltaTime;
 
@@ -191,6 +193,12 @@ public class Shooting : MonoBehaviour
     private void Awake()
     {
         controls = InputManager.inputMaster;
+
+        GunThrowing throwing = GetComponent<GunThrowing>();
+        if (gunThrowing == null && throwing != null)
+        {
+            gunThrowing = throwing;
+        }
     }
 
     private void OnEnable()
@@ -200,6 +208,8 @@ public class Shooting : MonoBehaviour
 
         controls.Player.Recall.performed += _ => Reset();
         controls.Player.Heal.performed += _ => Healing();
+
+        gunThrowing.onThrown.AddListener(ShootReleased);
     }
 
     private void OnDisable()
@@ -209,6 +219,8 @@ public class Shooting : MonoBehaviour
 
         controls.Player.Recall.performed -= _ => Reset();
         controls.Player.Heal.performed -= _ => Healing();
+
+        gunThrowing.onThrown.RemoveListener(ShootReleased);
     }
 
     /// <summary>
@@ -311,26 +323,30 @@ public class Shooting : MonoBehaviour
 
     private void ShootReleased()
     {
-        if (!GameManager.s_Instance.paused && IsInHand())
+        if (!GameManager.s_Instance.paused)
         {
             maxShotCharging = false;
 
-            // Release a max charged shot if we've fully charged
-            if (maxShotCharged)
+            // Release a max charged shot if we've fully charged and we're holding the gun
+            if (maxShotCharged && gunThrowing.GetIsHeld())
             {
                 maxShotCharged = false;
                 HandleChargedShot(gunCharge);
                 onMaxShotFired?.Invoke(gunCharge);
             }
 
-            // Cancel into a regular shot if we haven't reached the threshold
+            // Cancel if we haven't reached the threshold, shooting if we're still holding the gun
             else if (currentHoldTime / holdTimeToFullCharge < chargeCancelThreshold)
             {
                 onChargeMaxShotCancel?.Invoke();
-                TryShoot();
+
+                if (gunThrowing.GetIsHeld())
+                {
+                    TryShoot();
+                }
             }
 
-            // Cancel without firing a regular shot
+            // Cancel without trying to fire a regular shot
             else
             {
                 onChargeMaxShotCancel?.Invoke();
@@ -345,7 +361,7 @@ public class Shooting : MonoBehaviour
     /// </summary>
     private void TryShoot()
     {
-        if (!GameManager.s_Instance.paused && IsInHand() && !IsCoolingDown() && !maxShotCharging)
+        if (!GameManager.s_Instance.paused && gunThrowing.GetIsHeld() && !IsCoolingDown() && !maxShotCharging)
         {
             Shoot();
         }
@@ -460,7 +476,7 @@ public class Shooting : MonoBehaviour
 
     public void Dropped() 
     {
-        if (!IsInHand()) 
+        if (!gunThrowing.GetIsHeld()) 
         {
             Reset();
         }
@@ -503,11 +519,6 @@ public class Shooting : MonoBehaviour
                 Reset();
             }
         }
-    }
-
-    private bool IsInHand()
-    {
-        return transform.parent != null;    // this is cringe       //<----- this comment is cringe     // <----- you breaking gun shooting is cringe >:(
     }
 
     private bool IsCoolingDown()
