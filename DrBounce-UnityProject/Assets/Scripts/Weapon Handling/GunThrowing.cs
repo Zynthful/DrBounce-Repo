@@ -7,6 +7,8 @@ using MoreMountains.Feedbacks;
 
 public class GunThrowing : MonoBehaviour
 {
+    [SerializeField] private float waitTime = 0.2;
+
     [SerializeField] bool returning;
     [SerializeField] float throwForceMod;
     [SerializeField] bool canThrow;
@@ -124,6 +126,15 @@ public class GunThrowing : MonoBehaviour
         controls.Player.Recall.performed -= _ => ResetScript();
     }
 
+    private IEnumerator WaitAndPrint(float waitTime)
+    {
+        controls.Player.Throw.Disable();
+
+        yield return new WaitForSeconds(waitTime);
+
+        controls.Player.Throw.Enable();
+    }
+
     void Start()
     {
         //outlineScript = GetComponentInChildren<Outline>();
@@ -187,7 +198,7 @@ public class GunThrowing : MonoBehaviour
         //float test = controls.Player.Throw.ReadValue<float>();
         //print(test);
 
-        if (!GameManager.s_Instance.paused && controls.Player.Throw.ReadValue<float>() == 1)
+        if (!GameManager.s_Instance.paused && controls.Player.Throw.ReadValue<float>() >= 0.5f)
         {
             throwGunDelay = true;
         }
@@ -234,6 +245,8 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
+            StartCoroutine(WaitAndPrint(waitTime));
+
             throwing = true;
             held = false;
 

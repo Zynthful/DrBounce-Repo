@@ -78,7 +78,7 @@ public class MagnetAssist : MonoBehaviour
         CheckRange();
 
         // Check if we're holding down the assist button and we can activate the assist
-        if (!assistActive && !gun.transform.parent && inRange && !gun.GetIsThrowing() && controls.Player.Throw.ReadValue<float>() >= 1f)
+        if (!assistActive && !gun.transform.parent && inRange && !gun.GetIsThrowing() && controls.Player.Throw.ReadValue<float>() >= 0.5f)
         {
             assistActive = true;
             onAssistStart?.Invoke();
@@ -105,7 +105,7 @@ public class MagnetAssist : MonoBehaviour
         onTryActivateAssist?.Invoke();
         _onTryActivateAssist?.Raise();
 
-        if (!gun.transform.parent && controls.Player.Throw.ReadValue<float>() == 1)
+        if (!gun.transform.parent && controls.Player.Throw.ReadValue<float>() >= 0.5f)
         {
             if (inRange)
             {
