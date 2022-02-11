@@ -32,6 +32,8 @@ public class Stun : MonoBehaviour
     [Header("Events")]
     [SerializeField]
     public UnityEvent onStun = null;
+    [SerializeField]
+    public UnityEvent onUnStun = null;
 
     private void Start()
     {
@@ -150,9 +152,9 @@ public class Stun : MonoBehaviour
     private void StunEnded() 
     {
         //print("not Stunned");
-
         stunCounter = 0;
         UpdateStunBar(false);
+        onUnStun?.Invoke();
         stunTimer = 0;
         isStunned = false;
     }

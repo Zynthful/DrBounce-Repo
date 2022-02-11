@@ -590,6 +590,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onUnStun:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3722863078154279149}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &962519145221760157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,6 +1052,7 @@ Transform:
   - {fileID: 2579757423658624861}
   - {fileID: 2235704470533588477}
   - {fileID: 6147291124461919100}
+  - {fileID: 5195907485294750274}
   m_Father: {fileID: 962519144952153284}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1172,6 +1188,151 @@ Transform:
   m_Father: {fileID: 962519144952153284}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3635937570956551680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5195907485294750274}
+  - component: {fileID: 3722863078154279149}
+  - component: {fileID: 3229138735789166640}
+  m_Layer: 8
+  m_Name: Un-stun Feedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5195907485294750274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635937570956551680}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8521636709362193907}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3722863078154279149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635937570956551680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Feedbacks:
+  - {fileID: 3229138735789166640}
+  InitializationMode: 2
+  SafeMode: 3
+  Direction: 0
+  AutoChangeDirectionOnEnd: 0
+  AutoPlayOnStart: 0
+  AutoPlayOnEnable: 0
+  DurationMultiplier: 1
+  DisplayFullDurationDetails: 0
+  CooldownDuration: 0
+  InitialDelay: 0
+  CanPlayWhileAlreadyPlaying: 1
+  FeedbacksIntensity: 1
+  Events:
+    TriggerMMFeedbacksEvents: 0
+    TriggerUnityEvents: 1
+    OnPlay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPause:
+      m_PersistentCalls:
+        m_Calls: []
+    OnResume:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRevert:
+      m_PersistentCalls:
+        m_Calls: []
+    OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  DebugActive: 0
+--- !u!114 &3229138735789166640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635937570956551680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfccef02abb17a438a2bcccd7133075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Material
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  TargetRenderer: {fileID: 0}
+  Method: 0
+  Loop: 1
+  AlwaysNewMaterial: 1
+  InitialIndex: 0
+  Materials:
+  - {fileID: 2100000, guid: 8667dd67216c859439955f96fb74377c, type: 2}
+  InterpolateTransition: 0
+  TransitionDuration: 1
+  TransitionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5475605315994055368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,6 +1400,7 @@ GameObject:
   - component: {fileID: 3831677900056145994}
   - component: {fileID: 7544371095693143855}
   - component: {fileID: 2488091982261965928}
+  - component: {fileID: 905932109575184616}
   m_Layer: 0
   m_Name: Death Feedback
   m_TagString: Untagged
@@ -1273,6 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks:
+  - {fileID: 905932109575184616}
   - {fileID: 7544371095693143855}
   - {fileID: 4595923951367861967}
   - {fileID: 4260634603950938794}
@@ -1747,6 +1910,74 @@ MonoBehaviour:
   NestParticles: 0
   ApplyRotation: 0
   ApplyScale: 0
+--- !u!114 &905932109575184616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5617105669266042679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfccef02abb17a438a2bcccd7133075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Face Material Change
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  TargetRenderer: {fileID: 0}
+  Method: 0
+  Loop: 1
+  AlwaysNewMaterial: 1
+  InitialIndex: 0
+  Materials:
+  - {fileID: 2100000, guid: 819dbfd61e96ee44f8a5bad71e5d1e37, type: 2}
+  InterpolateTransition: 0
+  TransitionDuration: 0.1
+  TransitionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5769735188086508123
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,6 +2986,7 @@ GameObject:
   - component: {fileID: 4514077671292704144}
   - component: {fileID: 765354246701760062}
   - component: {fileID: 3692567083441822828}
+  - component: {fileID: 6512558728148526518}
   m_Layer: 8
   m_Name: Stun Feedback
   m_TagString: Untagged
@@ -2789,6 +3021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks:
+  - {fileID: 6512558728148526518}
   - {fileID: 2809022970378010366}
   - {fileID: 3572602445744173895}
   - {fileID: 8220857874034987330}
@@ -3640,6 +3873,74 @@ MonoBehaviour:
   BoundParticleSystem: {fileID: 1707096343152186541}
   MoveToPosition: 0
   RandomParticleSystems: []
+--- !u!114 &6512558728148526518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354014140521808177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfccef02abb17a438a2bcccd7133075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Stun Face MAT
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  TargetRenderer: {fileID: 0}
+  Method: 0
+  Loop: 1
+  AlwaysNewMaterial: 1
+  InitialIndex: 0
+  Materials:
+  - {fileID: 2100000, guid: 937dbfc08feb53244a9ad4dfc9f639c8, type: 2}
+  InterpolateTransition: 0
+  TransitionDuration: 1
+  TransitionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7803451578296572975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3894,14 +4195,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
---- !u!198 &2254212061096785724 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1218793019897729776, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
-  m_PrefabInstance: {fileID: 1126625749129356748}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1245645463396242079 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+  m_PrefabInstance: {fileID: 1126625749129356748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2254212061096785724 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1218793019897729776, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
   m_PrefabInstance: {fileID: 1126625749129356748}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1688557898801661475
@@ -4263,11 +4564,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
---- !u!198 &2647583789505025117 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7917353803556079724, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
-  m_PrefabInstance: {fileID: 5286676463486753841}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7405821791535812720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3429719356355710017, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
@@ -4276,6 +4572,11 @@ Transform:
 --- !u!1 &2477126865757436135 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7727765714656273622, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
+  m_PrefabInstance: {fileID: 5286676463486753841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2647583789505025117 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7917353803556079724, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
   m_PrefabInstance: {fileID: 5286676463486753841}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6000883626182487223
