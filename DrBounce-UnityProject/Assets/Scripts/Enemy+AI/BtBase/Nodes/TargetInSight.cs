@@ -76,11 +76,7 @@ public class TargetInSight : BtNode
                     return true;
                 }
 
-                if (m_blackboard.sightReset == false)
-                {
-                    m_blackboard.searchTime = 0;
-                    m_blackboard.sightReset = true;
-                }
+                m_blackboard.searchTime = 0;
                 m_blackboard.notSeenPlayer = false;
                 m_blackboard.spottedPlayer = true;
                 return true;

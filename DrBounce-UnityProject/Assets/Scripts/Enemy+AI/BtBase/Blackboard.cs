@@ -25,8 +25,6 @@ public class Blackboard {
     public float searchTime;
     //Activates if the player has been spotted, deactivates if searchtime hits -10
     public bool spottedPlayer;
-    //a bool in TargetInSight that allows the timer to be reset once after the enemy has spotted the player, and only reset once the enemy is chasing the player and isn't in sight range.
-    public bool sightReset;
     //Only active if the player is seen by the enemy in TargetInSight, sent to EnemyChase for an accurate searchTime Countdown
     public bool notSeenPlayer;
 

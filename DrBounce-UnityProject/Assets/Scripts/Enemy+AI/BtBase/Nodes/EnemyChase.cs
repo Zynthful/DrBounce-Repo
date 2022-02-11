@@ -33,7 +33,7 @@ public class EnemyChase : BtNode
                 NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.instance.groundCheck.position, NavMesh.AllAreas, path);
             }
 
-            if(path.status == NavMeshPathStatus.PathComplete)
+            if (path.status == NavMeshPathStatus.PathComplete)
             {
                 //target the player
                 m_navMeshAgent.destination = PlayerMovement.player.transform.position;
@@ -81,6 +81,7 @@ public class EnemyChase : BtNode
             //Disable the timer, navmesh, set stopchasing to false, allowing the enemy to target the player again if spotted
             //resets timer
             m_blackboard.searchTime = 0;
+            //Sets the closest waypoint as its target position, as well as making it the next destination in the list - to allow it to move to the next one in the sequence once it gets there
             m_blackboard.target.spottedPosition = targetWaypoint;
             m_navMeshAgent.destination = m_blackboard.target.spottedPosition;
             m_blackboard.noBounceAIController.canMove = true;
@@ -88,24 +89,11 @@ public class EnemyChase : BtNode
             Debug.Log("TESTC");
         }
 
-        //This section allows the enemy to re-target the player if they're seen while travelling back to a waypoint
-
-        //If the chase timer has run out or the player has gone out of reach, but if the player can still be seen and the enemy is on its way back to a waypoint
-        if (m_blackboard.notSeenPlayer == false && headingBack == true && path.status == NavMeshPathStatus.PathComplete)
-        {
-            //If they can:
-            //Set stop chasing to false, allowing the player to be chased again if spotted
-            //reset the timer so stopchasing isn't activated again immediately
-            m_blackboard.searchTime = 0;
-            Debug.Log("TESTA");
-        }
-
         //If the player isn't in sight range and spottedPlayer hasn't been set to false from the timer running out
         if (m_blackboard.notSeenPlayer == true && m_blackboard.spottedPlayer == true)
         {
             //Start counting down on the timer
             countDown();
-            m_blackboard.sightReset = false;
             Debug.Log("TESTB");
         }
 
