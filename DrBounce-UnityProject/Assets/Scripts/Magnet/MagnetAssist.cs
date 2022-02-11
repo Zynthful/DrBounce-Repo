@@ -101,7 +101,7 @@ public class MagnetAssist : MonoBehaviour
         onTryActivateAssist?.Invoke();
         _onTryActivateAssist?.Raise();
 
-        if (!gun.transform.parent)
+        if (!gun.transform.parent && controls.Player.Throw.ReadValue<float>() == 1)
         {
             if (inRange)
             {
