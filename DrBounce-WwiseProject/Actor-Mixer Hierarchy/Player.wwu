@@ -3442,7 +3442,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-11</Value>
+										<Value>-6</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -3559,14 +3559,7 @@
 											</ReferenceList>
 											<ObjectLists/>
 										</RandomSequenceContainer>
-										<RandomSequenceContainer Name="Generic" ID="{58DEBBC3-81E2-4310-9AC9-1A4AF17DB9E9}" ShortID="86354190">
-											<PropertyList>
-												<Property Name="Volume" Type="Real64">
-													<ValueList>
-														<Value>-16</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
+										<BlendContainer Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}" ShortID="32062996">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3576,7 +3569,203 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_1" ID="{60C828E8-A4C1-4B6D-B1D1-6A28D72E3BBA}" ShortID="225599560">
+												<RandomSequenceContainer Name="Clothing" ID="{58DEBBC3-81E2-4310-9AC9-1A4AF17DB9E9}" ShortID="86354190">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-6</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+														<Reference Name="ReflectionsAuxSend">
+															<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_1" ID="{60C828E8-A4C1-4B6D-B1D1-6A28D72E3BBA}" ShortID="225599560">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_1" ID="{967B79B9-4D33-4E08-8278-B1BA7C202747}">
+																	<Language>SFX</Language>
+																	<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_1.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="894217778"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_1" ID="{967B79B9-4D33-4E08-8278-B1BA7C202747}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_2" ID="{8E173A11-3BA7-4525-8B61-C80F085833A8}" ShortID="640363423">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_2" ID="{EEEA3FF2-662A-4A83-9C81-C76298491712}">
+																	<Language>SFX</Language>
+																	<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_2.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="632294282"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_2" ID="{EEEA3FF2-662A-4A83-9C81-C76298491712}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_3" ID="{8162B7D9-A6CD-4AA3-A371-8CFF87B2C3F5}" ShortID="636335987">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_3" ID="{4561DD32-A89A-4995-89DC-851D49863FD5}">
+																	<Language>SFX</Language>
+																	<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_3.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="811566170"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_3" ID="{4561DD32-A89A-4995-89DC-851D49863FD5}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_4" ID="{F86C609D-176A-4376-BB64-E2F835A12EE4}" ShortID="312324903">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_4" ID="{50042128-9CEC-4B70-AA70-4BF403279547}">
+																	<Language>SFX</Language>
+																	<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_4.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="718060303"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_4" ID="{50042128-9CEC-4B70-AA70-4BF403279547}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_5" ID="{6CF0F049-AF93-44DD-9227-C12433843DDC}" ShortID="400417612">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_5" ID="{14E1CAD0-F3B6-4040-AFD6-80E2DA556A5A}">
+																	<Language>SFX</Language>
+																	<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_5.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="176682715"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_5" ID="{14E1CAD0-F3B6-4040-AFD6-80E2DA556A5A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_6" ID="{19339B9F-0808-4277-8B88-A9EE7DDBF7A6}" ShortID="354678217">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_6" ID="{70F827E3-32EF-4FAA-A6E6-53CC81CD5AA4}">
+																	<Language>SFX</Language>
+																	<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_6.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="192933928"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_6" ID="{70F827E3-32EF-4FAA-A6E6-53CC81CD5AA4}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_7" ID="{1F96B7D9-1923-4240-9F49-63CC2BB56625}" ShortID="370629975">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_7" ID="{24815104-1831-440C-8512-B47803EA92D2}">
+																	<Language>SFX</Language>
+																	<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_7.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="79871530"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_7" ID="{24815104-1831-440C-8512-B47803EA92D2}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="Whoosh" ID="{8AEB0517-F12A-4EBE-98C7-A6DDE85D5A44}" ShortID="672001783">
+													<PropertyList>
+														<Property Name="InitialDelay" Type="Real64">
+															<ValueList>
+																<Value>0.1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3586,160 +3775,127 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_1" ID="{967B79B9-4D33-4E08-8278-B1BA7C202747}">
-															<Language>SFX</Language>
-															<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="894217778"/>
-															</MediaIDList>
-														</AudioFileSource>
+														<Sound Name="Whoosh_Ascending_1" ID="{F0411685-88B4-4251-A107-16F0437B4F1E}" ShortID="940701474">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="Whoosh_Ascending_1" ID="{8CFE298D-2B6D-4867-A24E-61C431D18C28}">
+																	<Language>SFX</Language>
+																	<AudioFile>Whoosh_Ascending_1.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="477234073"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="Whoosh_Ascending_1" ID="{8CFE298D-2B6D-4867-A24E-61C431D18C28}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="Whoosh_Ascending_2" ID="{4008F083-25A4-4618-86FF-A33E7FB6EB61}" ShortID="871795030">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="Whoosh_Ascending_2" ID="{E5425CA6-1AF4-4978-B680-C249E77BBDA9}">
+																	<Language>SFX</Language>
+																	<AudioFile>Whoosh_Ascending_2.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="59504452"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="Whoosh_Ascending_2" ID="{E5425CA6-1AF4-4978-B680-C249E77BBDA9}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="Whoosh_Ascending_3" ID="{92AEB057-4091-467E-931C-480D8DBD4EA7}" ShortID="239542070">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="Whoosh_Ascending_3" ID="{6827AC52-6F5C-401A-A52C-040A44D84E17}">
+																	<Language>SFX</Language>
+																	<AudioFile>Whoosh_Ascending_3.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="797826254"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="Whoosh_Ascending_3" ID="{6827AC52-6F5C-401A-A52C-040A44D84E17}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="Whoosh_Ascending_4" ID="{6427B49E-F0BF-430C-983B-744C7A3AC442}" ShortID="758090314">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="Whoosh_Ascending_4" ID="{7EE67DB3-BCC9-446D-B93F-A3C0347086D9}">
+																	<Language>SFX</Language>
+																	<AudioFile>Whoosh_Ascending_4.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="668733362"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="Whoosh_Ascending_4" ID="{7EE67DB3-BCC9-446D-B93F-A3C0347086D9}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="Whoosh_Ascending_5" ID="{3419ED4D-5293-4DD4-9777-44CA4812039B}" ShortID="538861613">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="Whoosh_Ascending_5" ID="{0E74DC96-7368-4A93-8D9B-56379A308B9B}">
+																	<Language>SFX</Language>
+																	<AudioFile>Whoosh_Ascending_5.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="551154081"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="Whoosh_Ascending_5" ID="{0E74DC96-7368-4A93-8D9B-56379A308B9B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
 													</ChildrenList>
 													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_1" ID="{967B79B9-4D33-4E08-8278-B1BA7C202747}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_2" ID="{8E173A11-3BA7-4525-8B61-C80F085833A8}" ShortID="640363423">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_2" ID="{EEEA3FF2-662A-4A83-9C81-C76298491712}">
-															<Language>SFX</Language>
-															<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="632294282"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_2" ID="{EEEA3FF2-662A-4A83-9C81-C76298491712}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_3" ID="{8162B7D9-A6CD-4AA3-A371-8CFF87B2C3F5}" ShortID="636335987">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_3" ID="{4561DD32-A89A-4995-89DC-851D49863FD5}">
-															<Language>SFX</Language>
-															<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_3.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="811566170"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_3" ID="{4561DD32-A89A-4995-89DC-851D49863FD5}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_4" ID="{F86C609D-176A-4376-BB64-E2F835A12EE4}" ShortID="312324903">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_4" ID="{50042128-9CEC-4B70-AA70-4BF403279547}">
-															<Language>SFX</Language>
-															<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_4.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="718060303"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_4" ID="{50042128-9CEC-4B70-AA70-4BF403279547}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_5" ID="{6CF0F049-AF93-44DD-9227-C12433843DDC}" ShortID="400417612">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_5" ID="{14E1CAD0-F3B6-4040-AFD6-80E2DA556A5A}">
-															<Language>SFX</Language>
-															<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_5.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="176682715"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_5" ID="{14E1CAD0-F3B6-4040-AFD6-80E2DA556A5A}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_6" ID="{19339B9F-0808-4277-8B88-A9EE7DDBF7A6}" ShortID="354678217">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_6" ID="{70F827E3-32EF-4FAA-A6E6-53CC81CD5AA4}">
-															<Language>SFX</Language>
-															<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_6.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="192933928"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_6" ID="{70F827E3-32EF-4FAA-A6E6-53CC81CD5AA4}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FEETHmn_BootsJumpingDCFloor_JC_DB_7" ID="{1F96B7D9-1923-4240-9F49-63CC2BB56625}" ShortID="370629975">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_7" ID="{24815104-1831-440C-8512-B47803EA92D2}">
-															<Language>SFX</Language>
-															<AudioFile>FEETHmn_BootsJumpingDCFloor_JC_DB_7.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="79871530"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="FEETHmn_BootsJumpingDCFloor_JC_DB_7" ID="{24815104-1831-440C-8512-B47803EA92D2}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
+												</RandomSequenceContainer>
 											</ChildrenList>
 											<ObjectLists/>
-										</RandomSequenceContainer>
+										</BlendContainer>
 									</ChildrenList>
 									<ObjectLists/>
 									<GroupingInfo>
@@ -3754,26 +3910,26 @@
 												<ItemRef Name="Slime" ID="{30005DB1-73AD-43DD-8760-DAD2E3CC2587}"/>
 											</GroupingBehavior>
 											<GroupingBehavior>
-												<ItemRef Name="Generic" ID="{58DEBBC3-81E2-4310-9AC9-1A4AF17DB9E9}"/>
+												<ItemRef Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}"/>
 											</GroupingBehavior>
 										</GroupingBehaviorList>
 										<GroupingList>
 											<Grouping>
 												<SwitchRef Name="Grass" ID="{87F5B304-D58D-4ACA-B0B5-361B10AA4782}"/>
 												<ItemList>
-													<ItemRef Name="Generic" ID="{58DEBBC3-81E2-4310-9AC9-1A4AF17DB9E9}"/>
+													<ItemRef Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}"/>
 												</ItemList>
 											</Grouping>
 											<Grouping>
 												<SwitchRef Name="Slime" ID="{84ACF342-909D-4F74-975A-461945CC0039}"/>
 												<ItemList>
-													<ItemRef Name="Generic" ID="{58DEBBC3-81E2-4310-9AC9-1A4AF17DB9E9}"/>
+													<ItemRef Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}"/>
 												</ItemList>
 											</Grouping>
 											<Grouping>
 												<SwitchRef Name="Lab" ID="{FAF1B0A1-4F2C-435E-AB7A-6533E59B9F1F}"/>
 												<ItemList>
-													<ItemRef Name="Generic" ID="{58DEBBC3-81E2-4310-9AC9-1A4AF17DB9E9}"/>
+													<ItemRef Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}"/>
 												</ItemList>
 											</Grouping>
 										</GroupingList>
