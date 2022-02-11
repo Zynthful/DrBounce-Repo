@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class TargetInSight : BtNode
 {
@@ -11,7 +10,6 @@ public class TargetInSight : BtNode
     private float m_viewDist;
     private float m_sightAngle;
     public bool m_canSeePlayer;
-    private NavMeshPath path = new NavMeshPath();
 
     /// <summary>
     /// Used to get variables from else where (custimisation)
