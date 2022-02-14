@@ -8,30 +8,41 @@ public class Checkpoint : MonoBehaviour
 {
     //need to be where the player spawns
 
-    private GameObject player;     //needs to be manually set
+    public Transform player;     //needs to be manually set
+
     [SerializeField] private Transform[] checkpoints;
 
     private int currentCheckpoint = 0;
 
     public static Checkpoint checkpointManagerInstance = null;
 
+    public static bool firstSetup;
+
+    private void Start()
+    {
+        firstSetup = true;
+    }
+
 
     private void ReturnToCheckpoint() 
     {
-        //print("return");
+        print("return");
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        player.transform.position = checkpoints[currentCheckpoint].position;
+        //player = PlayerMovement.player;
+
+        //player.transform.position = checkpoints[currentCheckpoint].position;
     }
 
     private void ReachedNextCheckpoint() 
     {
-        //print("hit me");
+        print("hit me");
 
-        if (currentCheckpoint < checkpoints.Length)
+        if (currentCheckpoint < checkpoints.Length - 1)
         {
             currentCheckpoint++;
+            print(currentCheckpoint);
         }
     }
 
@@ -57,8 +68,6 @@ public class Checkpoint : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player");
-
         if (checkpointManagerInstance == null)
         {
             checkpointManagerInstance = FindObjectOfType(typeof(Checkpoint)) as Checkpoint;
@@ -78,6 +87,7 @@ public class Checkpoint : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
+        player = PlayerMovement.player;
         player.transform.position = checkpoints[currentCheckpoint].position;
     }
 }

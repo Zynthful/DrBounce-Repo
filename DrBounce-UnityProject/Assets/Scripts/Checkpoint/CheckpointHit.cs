@@ -22,20 +22,29 @@ public class CheckpointHit : MonoBehaviour
 
     private void Awake()
     {
-        if (checkpointInstance == null)
-        {
-            checkpointInstance = FindObjectOfType(typeof(CheckpointHit)) as CheckpointHit;
-        }
-
-        if (checkpointInstance == null)
-        {
-            checkpointInstance = this;
-        }
-        else if (checkpointInstance != this)
+        if (Checkpoint.firstSetup)
         {
             Destroy(gameObject);
         }
+        else 
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
 
-        DontDestroyOnLoad(this.gameObject);
+        //if (checkpointInstance == null)
+        //{
+        //    checkpointInstance = FindObjectOfType(typeof(CheckpointHit)) as CheckpointHit;
+        //}
+
+        //if (checkpointInstance == null)
+        //{
+        //    checkpointInstance = this;
+        //}
+        //else if (checkpointInstance != this)
+        //{
+        //    Destroy(gameObject);
+        //}
+
+        //DontDestroyOnLoad(this.gameObject);
     }
 }
