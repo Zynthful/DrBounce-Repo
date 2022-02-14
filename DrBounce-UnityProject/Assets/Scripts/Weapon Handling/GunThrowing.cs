@@ -18,6 +18,7 @@ public class GunThrowing : MonoBehaviour
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Collider[] gunColliders = null;
     [SerializeField] BoxCollider catchCollider;
+    [SerializeField] LayerMask throwCheckLayers;
     bool throwGunDelay;
     Transform owner; // The player
     Vector3 handPosition;
@@ -218,17 +219,6 @@ public class GunThrowing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        int f = 1;
-        foreach (coyote coy in hitObjects)
-        {
-            if(f == 1)
-            {
-                Debug.Log("I am currently colliding with: ");
-            }
-            Debug.Log(f + " " + coy.hitObject.gameObject.name);
-            f++;
-        }
-
         if (transform.parent)
         {
             transform.rotation = weaponHolderTransform.rotation;
@@ -270,6 +260,14 @@ public class GunThrowing : MonoBehaviour
             if (pickupDelayCoroutineRunning) 
             {
                 StopCoroutine(pickupDelayCoroutine); 
+            }
+
+            // Stops the gun from moving through walls when thrown up against them
+            Vector3 raycastOrigin = new Vector3(transform.position.x, transform.position.y, transform.position.z) - (transform.forward * transform.localScale.magnitude * 1.5f);
+            RaycastHit hit;
+            if(Physics.Raycast(raycastOrigin, transform.forward, out hit, 1, throwCheckLayers))
+            {
+                transform.position = (owner.position + hit.point) / 2;
             }
 
             ResetCoyoteTimes();
