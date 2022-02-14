@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using MoreMountains.Feedbacks;
 using MoreMountains.NiceVibrations;
 using SamDriver.Decal;
+using System.Collections.Generic;
 
 public class Shooting : MonoBehaviour
 {
@@ -482,7 +483,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private int GraphCalculator(Vector2[] graph, int charges) //🐌
+    private int GraphCalculator(List<Vector2> graph, int charges) //🐌
     {
         foreach (Vector2 amount in graph)  //loops through the vector 2 (graph)
         {
@@ -491,9 +492,9 @@ public class Shooting : MonoBehaviour
                 return Mathf.RoundToInt(amount.y);
             }
         }
-        if (charges >= graph.Length) //in case you over the max
+        if (charges >= graph.Count) //in case you over the max
         {
-            return Mathf.RoundToInt(graph[graph.Length - 1].y);
+            return Mathf.RoundToInt(graph[graph.Count - 1].y);
         }
         return 0; // you lose you get nothing
     }

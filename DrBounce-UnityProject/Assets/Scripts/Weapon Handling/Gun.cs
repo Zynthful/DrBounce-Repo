@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Gun", menuName = "ScriptableObjects/Gun", order = 0)]
 public class Gun : ScriptableObject
@@ -7,35 +8,35 @@ public class Gun : ScriptableObject
 
     [Range(0.0f, 10f)]
     [Tooltip("fireRate float value between 0 and 10")]
-    public float fireRate;    //time between shots, in seconds
+    public float fireRate = 0.21f;    //time between shots, in seconds
 
     [Range(0, 1000)]
     [Tooltip("normalRange int value between 0 and 1000")]
-    public float normalRange;     //the range of uncharged shots
+    public float normalRange = 100f;     //the range of uncharged shots
 
     [Tooltip("can you hold to shoot")]
-    public bool canRepeatShoot;
+    public bool canRepeatShoot = true;
 
     [Header("Charge Gun Shots")]
 
     [Tooltip("do you use all charges upon using one")]
-    public bool useAllChargesOnUse;
+    public bool useAllChargesOnUse = false;
 
     [Tooltip("Charge mode of the gun")]
-    public Shooting.GunModes chargeShot;    //the effect the gun has when it is charged
+    public Shooting.GunModes chargeShot = Shooting.GunModes.Explosives;    //the effect the gun has when it is charged
 
     [Tooltip("Bullet that is fired when the gun is charged")]
-    public BulletType chargeBullet;   //the bullet the gun will fire when charged
+    public BulletType chargeBullet = null;   //the bullet the gun will fire when charged
 
     [Header("Damage")]
 
     [Tooltip("X = amount of charges, Y = damage delt")]
-    public Vector2[] damageGraph;   //allows for each charge state to be set in the insector as well as base damage
+    public List<Vector2> damageGraph = new List<Vector2> {new Vector2(0, 5), new Vector2(1, 100)};   //allows for each charge state to be set in the insector as well as base damage
 
     [Header("Healing")]
 
     [Tooltip("X = amount of charges, Y = health healed")]
-    public Vector2[] healGraph;   //allows for each charge state to be set in the insector as well as base healing
+    public List<Vector2> healGraph = new List<Vector2> {new Vector2(0, 10), new Vector2(0, 30)};   //allows for each charge state to be set in the insector as well as base healing
 
     [Header("Max Shot Settings")]
 
