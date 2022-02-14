@@ -5514,7 +5514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Destination
+  Label: Enemy Leave Destination
   Chance: 100
   Timing:
     TimescaleMode: 0
@@ -5541,7 +5541,7 @@ MonoBehaviour:
   Origin: {fileID: 0}
   Destination: {fileID: 2144138720}
   TimeScale: 0
-  ForceDestinationOnEnd: 0
+  ForceDestinationOnEnd: 1
   GlobalAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -5568,7 +5568,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 1.75
   AnimatePositionX: 1
-  AnimatePositionY: 1
+  AnimatePositionY: 0
   AnimatePositionZ: 1
   AnimateRotationX: 1
   AnimateRotationY: 1
@@ -5692,7 +5692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Rotation
+  Label: Enemy Roll Away
   Chance: 100
   Timing:
     TimescaleMode: 0
@@ -6267,7 +6267,7 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  PauseDuration: 0.25
+  PauseDuration: 0.175
   RandomizePauseDuration: 0
   MinPauseDuration: 1
   MaxPauseDuration: 3
@@ -14966,6 +14966,7 @@ GameObject:
   - component: {fileID: 1845624124}
   - component: {fileID: 1845624128}
   - component: {fileID: 1845624127}
+  - component: {fileID: 1845624129}
   m_Layer: 0
   m_Name: ElevatorDescendFeedback
   m_TagString: Untagged
@@ -15167,6 +15168,7 @@ MonoBehaviour:
   - {fileID: 1845624124}
   - {fileID: 1845624128}
   - {fileID: 1845624127}
+  - {fileID: 1845624129}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -15226,7 +15228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Events
+  Label: Delayed Door Open Event
   Chance: 100
   Timing:
     TimescaleMode: 0
@@ -15307,7 +15309,7 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  PauseDuration: 5.75
+  PauseDuration: 4.75
   RandomizePauseDuration: 0
   MinPauseDuration: 1
   MaxPauseDuration: 3
@@ -15315,6 +15317,65 @@ MonoBehaviour:
   ScriptDriven: 0
   AutoResume: 0
   AutoResumeAfter: 0.25
+--- !u!114 &1845624129
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845624123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a102c1a91e34644aa37f1e4f00c31a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Enemy Alerted Event
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  PlayEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 966534216}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  StopEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  InitializationEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  ResetEvents:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1912941266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6076479444812940471, guid: 45480c21173ee84409dc9402a48e85b8, type: 3}
@@ -17132,7 +17193,7 @@ MonoBehaviour:
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
-  InitialDelay: 2.75
+  InitialDelay: 3.25
   CanPlayWhileAlreadyPlaying: 1
   FeedbacksIntensity: 1
   Events:
@@ -17581,7 +17642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144138719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.909, y: 0, z: 0.37879944}
+  m_LocalPosition: {x: -21.659, y: 0, z: 0.37879944}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 966534212}
