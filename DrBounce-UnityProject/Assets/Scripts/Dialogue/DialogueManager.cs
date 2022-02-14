@@ -36,10 +36,15 @@ public class DialogueManager : MonoBehaviour
 
     public void PlayDialogueLine(DialogueData line, GameObject @object)
     {
-        line.GetEvent().Post(@object);
+        line.GetEvent().Post(@object, (uint)AkCallbackType.AK_EndOfEvent, OnEndOfEvent);
 
         // Show subtitles
         dialogueCanvas.SetActive(true);
         subtitleUI.ShowSubtitle(line);
+    }
+
+    private void OnEndOfEvent(object in_cookie, AkCallbackType in_type, object in_info)
+    {
+        subtitleUI.Disable();
     }
 }
