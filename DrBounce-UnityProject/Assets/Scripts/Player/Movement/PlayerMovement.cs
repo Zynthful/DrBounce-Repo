@@ -163,7 +163,8 @@ public class PlayerMovement : MonoBehaviour
             onDashSliderValue?.Raise(dashSliderPos);
         }
 
-
+        print(move + "move");
+        print(velocity + "velocity");
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
@@ -211,8 +212,8 @@ public class PlayerMovement : MonoBehaviour
             if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
             {
                 velocity.y = (-40f * Time.fixedDeltaTime);
-                velocity.x = 0;
-                velocity.z = 0;
+                //velocity.x = 0;
+                //velocity.z = 0;
             }
         }
 
@@ -272,13 +273,9 @@ public class PlayerMovement : MonoBehaviour
         {
             acceleration = 0;
         }
-        //EARLY MOMENTUM SYSTEM - DOESN'T RESET! 
-        //velocity.x += move.x;
-        //velocity.z += move.z;
 
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
         controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
-
         #endregion
 
         #region Dashing
@@ -306,7 +303,7 @@ public class PlayerMovement : MonoBehaviour
             if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
             {
                 move = transform.forward;
-                controller.Move(move * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+                controller.Move(move * dashStrength * 8 * Time.deltaTime); //Move them forward at a speed based on the dash strength
                 hasDashed = true;
                 controls.Player.Movement.Disable();
             }
@@ -351,10 +348,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (isSliding == true)
         {
-            //if (controls.Player.Crouch.ReadValue<float>() == 1 && hasLetGo == true)
-            //{
-            //    isSliding = false;
-            //}
             knockbackPower = 0;
             acceleration = 1;
             coyoteTime = oldCoyoteTime;
@@ -375,7 +368,7 @@ public class PlayerMovement : MonoBehaviour
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
 
-            controller.Move(slideDirection * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+            velocity = (slideDirection * slideStrength * 8); //Move them forward at a speed based on the dash strength
         }
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
