@@ -175,6 +175,13 @@ public class PlayerMovement : MonoBehaviour
         {
             float lastHeight = charController.height;
             charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
+
+            //If crouching height is close enough to its target number (with a threshold of 0.05), then set it to that number
+            if (((charController.height - h) < 0 ? ((charController.height - h) * -1) : (charController.height - h)) <= 0.05)
+            {
+                charController.height = h;
+            }
+
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
         }
