@@ -14,6 +14,8 @@ public class Checkpoint : MonoBehaviour
 
     private int currentCheckpoint = 0;
 
+    private int currentSceneIndex = -1;
+
     public static Checkpoint checkpointManagerInstance = null;
 
     public static bool firstSetup;
@@ -26,7 +28,7 @@ public class Checkpoint : MonoBehaviour
 
     private void ReturnToCheckpoint() 
     {
-        print("return");
+        //print("return");
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
@@ -37,12 +39,11 @@ public class Checkpoint : MonoBehaviour
 
     private void ReachedNextCheckpoint() 
     {
-        print("hit me");
+        //print("hit me");
 
         if (currentCheckpoint < checkpoints.Length - 1)
         {
             currentCheckpoint++;
-            print(currentCheckpoint);
         }
     }
 
@@ -83,11 +84,35 @@ public class Checkpoint : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
+
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
-        player = PlayerMovement.player;
-        player.transform.position = checkpoints[currentCheckpoint].position;
+        if (currentSceneIndex == -1)
+        {
+            currentSceneIndex = scene.buildIndex;
+        }
+
+        //makes it so you only respawn in the current scene
+        if (scene.buildIndex == currentSceneIndex)
+        {
+            player = PlayerMovement.player;
+            player.transform.position = checkpoints[currentCheckpoint].position;
+        }
+        else 
+        {
+            checkpointManagerInstance = null;
+            firstSetup = false;
+            //currentSceneIndex = -1;
+
+            foreach (Transform trans in checkpoints) 
+            {
+                Destroy(trans.gameObject);
+            }
+
+            Destroy(gameObject);
+        }
     }
 }
