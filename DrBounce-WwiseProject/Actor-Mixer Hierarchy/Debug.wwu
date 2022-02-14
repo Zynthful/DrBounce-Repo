@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{AFCF4D8B-A6C7-488C-ADD9-AFA2AA9E6B8A}" SchemaVersion="103" RootDocumentID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}" ParentDocumentID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}">
+<WwiseDocument Type="WorkUnit" ID="{AFCF4D8B-A6C7-488C-ADD9-AFA2AA9E6B8A}" SchemaVersion="103" RootDocumentID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}" ParentDocumentID="{A4D0CE53-A64D-4A9D-907F-CDD807D23199}">
 	<AudioObjects>
-		<WorkUnit Name="Debug" ID="{AFCF4D8B-A6C7-488C-ADD9-AFA2AA9E6B8A}" OwnerID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}" PersistMode="Nested">
+		<WorkUnit Name="Debug" ID="{AFCF4D8B-A6C7-488C-ADD9-AFA2AA9E6B8A}" OwnerID="{A4D0CE53-A64D-4A9D-907F-CDD807D23199}" PersistMode="Nested">
 			<PropertyList>
 				<Property Name="Color" Type="int16" Value="26"/>
 				<Property Name="OverrideColor" Type="bool" Value="True"/>
@@ -98,8 +98,29 @@
 					<PropertyList>
 						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 						<Property Name="EnableDiffraction" Type="bool" Value="True"/>
-						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+						<Property Name="MaxSoundPerInstance" Type="int16">
+							<ValueList>
+								<Value>5</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{2FF35DB6-8820-4BB9-8B64-CB99DB086126}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="1800"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
 						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+						<Property Name="UseMaxSoundPerInstance" Type="bool">
+							<ValueList>
+								<Value>True</Value>
+							</ValueList>
+						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
 								<Value>-2</Value>

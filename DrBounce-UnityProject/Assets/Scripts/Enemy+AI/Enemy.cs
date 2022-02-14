@@ -2,16 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.AI;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 
 public class Enemy : MonoBehaviour
 {
+    #region Declarations
+    public class Target
+    {
+        public Vector3 spottedPosition;
+        public bool isPlayer;
+        public GameObject playerObject;
+
+        public Target(bool i_isPlayer, GameObject i_playerObject = null, params Vector3[] i_position)
+        {
+            isPlayer = i_isPlayer;
+            if (i_playerObject != null)
+            {
+                playerObject = i_playerObject;
+            }
+            if (i_position.Length > 0)
+            {
+                spottedPosition = i_position[0];
+            }
+        }
+
+        public void NewTarget(bool i_isPlayer, GameObject i_playerObject = null, params Vector3[] i_position)
+        {
+            isPlayer = i_isPlayer;
+            if (i_playerObject != null)
+            {
+                playerObject = i_playerObject;
+            }
+            if (i_position.Length > 0)
+            {
+                spottedPosition = i_position[0];
+            }
+        }
+    }
+
+    protected BtNode m_root;
+    protected Blackboard m_blackboard;
+
+    protected Blackboard.Actions recentAction;
+
     [Header("Declarations")]
     [SerializeField]
     private EnemyHealth health = null;
     [SerializeField]
-    private BulletType bullet;
+    public BulletType bullet;
     [SerializeField]
     private GameObject healthPackPrefab;
 
@@ -19,6 +59,9 @@ public class Enemy : MonoBehaviour
 
     private bool shootDelay;
     private Coroutine shootingDelayCoroutine;
+
+    public bool recentlyAttacked;
+    private Coroutine recentAttackCoroutine;
 
     public bool canSeePlayer;
 
@@ -32,111 +75,83 @@ public class Enemy : MonoBehaviour
 
     [Header("Events")]
     [SerializeField]
-    private UnityEvent onShoot = null;
+    public UnityEvent onPatrol = null;
+    [SerializeField]
+    public UnityEvent onAttack = null;
+    [SerializeField]
+    public UnityEvent onChase = null;
+    [SerializeField]
+    public UnityEvent onGiveUp = null;
 
-    /*
-    Enemy()
-    {
-        pool = ObjectPooler.Instance;
-    }
+    public NavMeshAgent navMeshAgent;
 
-    ~Enemy()
-    {
-        health.DIE();
-    }
-    */
+    [Space(10)]
+    public List<Vector3> patrolPoints = new List<Vector3> { };
 
-    protected void FixedUpdate()
-    {
-        if (!health.GetIsDead())
-        {
-            Shoot();
-        }
-    }
-
-    protected bool PlayerLosCheck()
-    {
-        if(Vector3.Dot(transform.TransformDirection(Vector3.forward), (PlayerMovement.player.position - transform.position).normalized) > (90 - sightAngle) / 90)
-        {
-            RaycastHit hit;
-
-            Ray ray = new Ray(transform.position, (PlayerMovement.player.position - transform.position).normalized);
-
-            if (Physics.Raycast(ray, out hit, viewDist) && hit.transform.root.CompareTag("Player"))
-            {
-                Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - transform.position).normalized * viewDist, Color.green);
-                return true;
-            }
-            else
-            {
-                Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - transform.position).normalized * viewDist, Color.red);
-            }
-        }
-        return false;
-    }
-
-    protected GameObject Shoot()
-    {
-        if(PlayerLosCheck())
-        {
-            if (!shootDelay && shootingDelayCoroutine == null)
-            {
-                shootDelay = true;
-                onShoot?.Invoke();
-                shootingDelayCoroutine = StartCoroutine(ShotDelay(rateOfFire));
-                pool.SpawnBulletFromPool("Bullet", transform.position, Quaternion.identity, (PlayerMovement.player.position - transform.position).normalized, bullet, null);
-                Debug.Log((PlayerMovement.player.position - transform.position).normalized);
-            }
-            
-        }
-        return null;
-    }
-
-    /*
-    public void Die()
-    {
-        //SwitchHeldItem.instance.AddToList(Instantiate(healthPack, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity, null));
-        print("That's right baby! Our dog, " + this.name + ", is dead!");
-        //Destroy(gameObject);
-    }
-    */
+    protected Stun stun;
+    #endregion
 
     private void Start()
     {
         pool = ObjectPooler.Instance;
-        // Material mat = null;
-        // switch (GetComponent<Bouncing>().bType)
-        // {
-        //     case Bouncing.BounceType.Back:
-        //         mat = materials[0];
-        //         break;
-
-        //     case Bouncing.BounceType.Up:
-        //         mat = materials[1];
-        //         break;
-
-        //     case Bouncing.BounceType.Away:
-        //         mat = materials[2];
-        //         break;
-        // }
-        // GetComponent<MeshRenderer>().material = mat;
     }
 
-    IEnumerator ShotDelay(float delay)
+    protected virtual void Awake()
     {
-        yield return new WaitForSeconds(delay);
-        shootDelay = false;
-        shootingDelayCoroutine = null;
+        stun = GetComponent<Stun>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "PatrolPoint")
+            {
+                patrolPoints.Add(child.position);
+                Destroy(child.gameObject);
+            }
+        }
     }
 
-    /*
-    /// <summary>
-    /// This and the variable are used for the doors don't delete
-    /// </summary>
-    /// <returns></returns>
-    public bool GetisDead() 
+    // Update is called once per frame
+    void Update()
     {
-        return amDead;
+        if(m_blackboard.currentAction != recentAction)
+        {
+            switch (m_blackboard.currentAction)
+            {
+                case Blackboard.Actions.ATTACKING:
+                    onAttack?.Invoke();
+                    break;
+
+                case Blackboard.Actions.PATROLING:
+                    onPatrol?.Invoke();
+                    break;
+
+                case Blackboard.Actions.CHASING:
+                    onChase?.Invoke();
+                    break;
+
+                case Blackboard.Actions.LOST:
+                    onGiveUp?.Invoke();
+                    break;
+            }
+
+            recentAction = m_blackboard.currentAction;
+        }
+
+        if (!GameManager.s_Instance.paused && m_root != null)
+        {
+            //Debug.Log(m_blackboard.currentAction);
+            NodeState result = m_root.evaluate(m_blackboard);
+            if (result != NodeState.RUNNING)
+            {
+                m_root.reset();
+            }
+        }
     }
-    */
+
+    public void ResetRoot()
+    {
+        m_root.reset();
+    }
 }

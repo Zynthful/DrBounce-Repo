@@ -65,8 +65,8 @@ public class MouseLook : MonoBehaviour
             conY *= currentControllerSensitivityMultiplier;
         }
 
-        float mouseX = Mouse.current.delta.x.ReadValue() * mouseSensitivityX * 3.5f * Time.deltaTime;
-        float mouseY = Mouse.current.delta.y.ReadValue() * mouseSensitivityY * 3.5f * Time.deltaTime;
+        float mouseX = (Mouse.current.delta.x.ReadValue() * mouseSensitivityX * 3.5f) * Time.deltaTime;
+        float mouseY = (Mouse.current.delta.y.ReadValue() * mouseSensitivityY * 3.5f) * Time.deltaTime;
 
         float camX = conX + mouseX;
         float camY = conY + mouseY;

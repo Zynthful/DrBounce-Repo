@@ -18,12 +18,12 @@ public class SwitchHeldItem : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Player.SwitchHeld.performed += _ => SwitchActiveItem();
+        //controls.Player.SwitchHeld.performed += _ => SwitchActiveItem();
     }
 
     private void OnDisable()
     {
-        controls.Player.SwitchHeld.performed -= _ => SwitchActiveItem();
+        //controls.Player.SwitchHeld.performed -= _ => SwitchActiveItem();
     }
 
     // Start is called before the first frame update

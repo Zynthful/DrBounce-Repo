@@ -7,6 +7,8 @@ using MoreMountains.Feedbacks;
 
 public class GunThrowing : MonoBehaviour
 {
+    [SerializeField] private float waitTime = 0.2f;
+
     [SerializeField] bool returning;
     [SerializeField] float throwForceMod;
     [SerializeField] bool canThrow;
@@ -28,10 +30,12 @@ public class GunThrowing : MonoBehaviour
     private bool held = true;
 
     // Coyote Time variables (gun collision time before drop charges)
-    private struct coyote
+
+    [System.Serializable]
+    readonly struct coyote
     {
-        public Collision hitObject;
-        public Coroutine coyoteCoroutine;
+        public Collision hitObject { get; }
+        public Coroutine coyoteCoroutine { get; }
 
         public coyote(Collision col, Coroutine cor)
         {
@@ -39,7 +43,10 @@ public class GunThrowing : MonoBehaviour
             coyoteCoroutine = cor;
         }
     }
+
     private List<coyote> hitObjects = new List<coyote> { };
+
+
     [Header("Coyote Time")]
     [Space(10)]
     [SerializeField] private float coyoteTimeDuration;
@@ -71,7 +78,7 @@ public class GunThrowing : MonoBehaviour
     [SerializeField]
     private UnityEvent onPickup = null;
     [SerializeField]
-    private UnityEvent onThrown = null;
+    public UnityEvent onThrown = null;
     [SerializeField]
     private UnityEvent onCatch = null;
     [SerializeField]
@@ -124,6 +131,15 @@ public class GunThrowing : MonoBehaviour
         controls.Player.Recall.performed -= _ => ResetScript();
     }
 
+    private IEnumerator WaitAndPrint(float waitTime)
+    {
+        controls.Player.Throw.Disable();
+
+        yield return new WaitForSeconds(waitTime);
+
+        controls.Player.Throw.Enable();
+    }
+
     void Start()
     {
         //outlineScript = GetComponentInChildren<Outline>();
@@ -163,6 +179,7 @@ public class GunThrowing : MonoBehaviour
         foreach (Collider col in gunColliders)
         {
             physicMaterials.Add(col.material);
+            col.enabled = false;
         }
     }
 
@@ -184,7 +201,10 @@ public class GunThrowing : MonoBehaviour
     // Delay throwing to avoid recalling immediately after throwing
     public void SetThrowGunDelay()
     {
-        if (!GameManager.s_Instance.paused)
+        //float test = controls.Player.Throw.ReadValue<float>();
+        //print(test);
+
+        if (!GameManager.s_Instance.paused && controls.Player.Throw.ReadValue<float>() >= 0.5f)
         {
             throwGunDelay = true;
         }
@@ -198,6 +218,17 @@ public class GunThrowing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        int f = 1;
+        foreach (coyote coy in hitObjects)
+        {
+            if(f == 1)
+            {
+                Debug.Log("I am currently colliding with: ");
+            }
+            Debug.Log(f + " " + coy.hitObject.gameObject.name);
+            f++;
+        }
+
         if (transform.parent)
         {
             transform.rotation = weaponHolderTransform.rotation;
@@ -231,6 +262,8 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
+            StartCoroutine(WaitAndPrint(waitTime));
+
             throwing = true;
             held = false;
 
@@ -238,11 +271,18 @@ public class GunThrowing : MonoBehaviour
             {
                 StopCoroutine(pickupDelayCoroutine); 
             }
+
+            ResetCoyoteTimes();
+
+            foreach (Collider col in gunColliders)
+            {
+                col.enabled = true;
+            }
+
             pickupDelayCoroutine = StartCoroutine(EnablePickupAfterTime(0.2f));
 
             StartCoroutine(delayChargeLossOnThrow());
 
-            ResetCoyoteTimes();
             canThrow = false;
             //outlineScript.enabled = true;
             //when we get out of prototype we need to made the world model seperate from the fp model
@@ -283,6 +323,11 @@ public class GunThrowing : MonoBehaviour
             foreach (Transform child in transform)
                 child.gameObject.layer = 7;
 
+            foreach (Collider col in gunColliders)
+            {
+                col.enabled = false;
+            }
+
             ResetCoyoteTimes();
             exitedPlayer = false;
             returning = false;
@@ -312,7 +357,7 @@ public class GunThrowing : MonoBehaviour
 
     private void RecallGun()
     {
-        if (startOnPlayer && transform.parent == null && throwBuffer == false)
+        if (startOnPlayer && transform.parent == null && !throwBuffer)
         {
             onRecall?.Invoke();
             _onRecall?.Raise();
@@ -322,15 +367,38 @@ public class GunThrowing : MonoBehaviour
         }
     }
 
+    private bool EndSpecificCoyoteTime(Collision check)
+    {
+        for (int i = 0; i < hitObjects.Count; i++)
+        {
+            Debug.Log("Number of total objects: " + hitObjects.Count + "... HitObject checking is: " + hitObjects[i].hitObject.gameObject.name);
+            if (hitObjects[i].hitObject.gameObject.name == check.gameObject.name)
+            {
+                Debug.Log("This object: " + hitObjects[i].hitObject.gameObject.name + " ... == " + check.gameObject.name);
+                StopCoroutine(hitObjects[i].coyoteCoroutine);
+                hitObjects.RemoveAt(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
-        if (throwBuffer == false && collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
+        if (collision.transform.root != owner && collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
             onDroppedPreCoyote?.Invoke();
             _onDroppedPreCoyote?.Raise();
-            hitObjects.Add(new coyote(collision, StartCoroutine(CoyoteTimeForPickup(collision))));
 
+            Debug.Log("Gotta add this now: " + collision.gameObject);
+
+            // Check for/end current coyote time on this object and start a new one
+            EndSpecificCoyoteTime(collision);
+            var coy = new coyote(collision, StartCoroutine(CoyoteTimeForPickup(collision)));
+            hitObjects.Add(coy);
+
+            // Stop gun from sliding along the floor
             AffectPhysics(0.85f, 0f);
         }
     }
@@ -338,23 +406,16 @@ public class GunThrowing : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         //occures when the gun hits the floor or a relatively flat surface, removing charge from the gun
-        if (collision.contacts[0].normal.normalized.y > .80f && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
+        if (collision.transform.root != owner && GameManager.s_Instance.bounceableLayers != (GameManager.s_Instance.bounceableLayers | 1 << collision.gameObject.layer))
         {
-            for(int i = 0; i < hitObjects.Count; i++)
-            {
-                if(hitObjects[i].hitObject == collision)
-                {
-                    StopCoroutine(hitObjects[i].coyoteCoroutine);
-                    hitObjects.RemoveAt(i);
-                    break;
-                }
-            }
+            // Stop coyote time when leaving collision with an object
+            EndSpecificCoyoteTime(collision);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.root == owner && !transform.parent && throwBuffer == false)
+        if (other.transform.root == owner && !transform.parent && !throwBuffer)
         {
             if (!catchCollider)
             {
@@ -394,9 +455,14 @@ public class GunThrowing : MonoBehaviour
         inFlight = true;
 
         amountOfBounces++;
-        
-        onBounce?.Invoke(amountOfBouncesUnique);
-        _onBounce?.Raise(amountOfBouncesUnique);
+
+        if (collision.gameObject.GetComponent<Stun>() != null)
+        {
+            collision.gameObject.GetComponent<Stun>().BigHit();
+        }
+
+        onBounce?.Invoke(amountOfBounces);
+        _onBounce?.Raise(amountOfBounces);
 
         MMFeedbacks feedbacks = collision.transform.GetComponentInChildren<MMFeedbacks>();
         if (feedbacks)
@@ -452,12 +518,16 @@ public class GunThrowing : MonoBehaviour
 
     IEnumerator CoyoteTimeForPickup(Collision hit)
     {
-
         yield return new WaitForSeconds(coyoteTimeDuration);
+
+        Debug.Log("FUrther Beyond: " + hit.gameObject.name);
+
         for (int i = 0; i < hitObjects.Count; i++)
         {
-            if (hitObjects[i].hitObject == hit)
+            if (hitObjects[i].hitObject.gameObject == hit.gameObject)
             {
+                Debug.Log("cob: " + hit.gameObject.name);
+
                 returning = false;
 
                 // If the item loses all charges on drop

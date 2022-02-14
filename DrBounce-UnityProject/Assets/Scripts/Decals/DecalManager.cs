@@ -23,15 +23,33 @@ public class DecalManager : MonoBehaviour
 
     #endregion
 
+    public enum DecalType
+    {
+        bullet,
+        slime,
+        placeholder
+    }
+
     [SerializeField]
     private Material placeholderDecal = null;
 
     [SerializeField]
-    private float nearbySurfaceDistanceCheck = 1.0f;
+    private Material bulletHoleDecal = null;
+    
+    [SerializeField]
+    private Material[] slimeDecals = new Material[4];
 
     private List<GameObject> spawnedDecals = new List<GameObject>();
 
     private ObjectPooler pool;
+
+    [Header("AkEvents")]
+    [SerializeField]
+    private AK.Wwise.Event slimeEvent = null;
+    [SerializeField]
+    private AK.Wwise.Event bulletHoleEvent = null;
+    [SerializeField]
+    private AK.Wwise.Event placeHolderEvent = null;
 
     void Start()
     {
@@ -40,24 +58,43 @@ public class DecalManager : MonoBehaviour
 
     public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale)
     {
-        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, placeholderDecal));
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, DecalType.placeholder));
+    }
+    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, DecalType decalType)
+    {
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, decalType));
     }
 
-    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Material decalMaterial)
+    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalType)
     {
-        spawnedDecals.Add(CreateDecal(position, normal, decalScale, this.transform, decalMaterial));
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, t, decalType));
+    }
+    
+    public void SpawnDecalWithColour(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalType, int colour)
+    {
+        spawnedDecals.Add(CreateDecal(position, normal, decalScale, t, decalType, colour));
     }
 
-    public void SpawnDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, Material decalMaterial)
+    private GameObject CreateDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, DecalType decalType, int? colour = 0)
     {
-        spawnedDecals.Add(CreateDecal(position, normal, decalScale, t, decalMaterial));
-    }
+        Material decalToSpawn;
 
-    private GameObject CreateDecal(Vector3 position, Vector3 normal, float decalScale, Transform t, Material decalToSpawn)
-    {
-        if (decalToSpawn == null)
+        AK.Wwise.Event sound;
+
+        switch (decalType)
         {
-            decalToSpawn = placeholderDecal;
+            case DecalType.bullet:
+                decalToSpawn = bulletHoleDecal;
+                sound = bulletHoleEvent;
+                break;
+            case DecalType.slime:
+                decalToSpawn = slimeDecals[(int)colour];
+                sound = slimeEvent;
+                break;
+            default:
+                decalToSpawn = placeholderDecal;
+                sound = placeHolderEvent;
+                break;
         }
 
         Quaternion decalRotation = Quaternion.FromToRotation(Vector3.back, normal);
@@ -67,7 +104,6 @@ public class DecalManager : MonoBehaviour
 
         //place object from pool
         GameObject decalObject = pool.SpawnNonBulletFromPool("Decal", position + (decalRotation * Vector3.back * (0.01f + Random.Range(0f, 0.02f))), decalRotation, decalToSpawn);
-        //$"Spawned Decal ({localPos.x.ToString("F3")},{localPos.y.ToString("F3")})"
 
         //randomly adjust decal scale for fun :)
         decalScale *= Random.Range(0.9f, 1.1f);
@@ -77,6 +113,8 @@ public class DecalManager : MonoBehaviour
 
         //set parent to manager or supplied transform
         decalObject.transform.SetParent(t, true);
+
+        sound.Post(decalObject);
 
         return decalObject;
     }

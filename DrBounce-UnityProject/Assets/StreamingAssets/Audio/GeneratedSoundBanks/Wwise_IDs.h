@@ -15,11 +15,15 @@ namespace AK
     {
         static const AkUniqueID BOUNCE_OBJECT = 2365089589U;
         static const AkUniqueID BOUNCE_PLAYER = 2376949343U;
+        static const AkUniqueID COLLIDE_ANY = 2766579562U;
+        static const AkUniqueID COLLIDE_BOUNCEABLE = 3104417468U;
+        static const AkUniqueID COLLIDE_NONBOUNCEABLE = 402864233U;
         static const AkUniqueID DASH = 1942692385U;
         static const AkUniqueID ENEMY_BULLET_IMPACT_PLAYER = 1082212733U;
         static const AkUniqueID ENEMY_BULLET_IMPACT_SURFACE = 936643039U;
         static const AkUniqueID ENEMY_GUN_BOUNCE_IMPACT = 177975784U;
         static const AkUniqueID ENEMY_HEALTH_DEATH = 2932285363U;
+        static const AkUniqueID ENEMY_HEALTH_DEATH_PARTICLE_COLLIDE = 4019809755U;
         static const AkUniqueID ENEMY_HEALTH_INJURED = 3919011194U;
         static const AkUniqueID FOOTSTEP = 1866025847U;
         static const AkUniqueID GUN_BOUNCE_FEEDBACK = 2862887114U;
@@ -41,7 +45,9 @@ namespace AK
         static const AkUniqueID GUN_SHOOT_UNCHARGED = 1084131995U;
         static const AkUniqueID GUN_THROW = 3098426972U;
         static const AkUniqueID HEAL = 3448274447U;
+        static const AkUniqueID INJURED = 2860195132U;
         static const AkUniqueID JUMP = 3833651337U;
+        static const AkUniqueID LAND = 674522502U;
         static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
         static const AkUniqueID MAGNET_PULLING_START = 2278189420U;
@@ -59,10 +65,27 @@ namespace AK
         static const AkUniqueID UNPAUSE = 3412868374U;
     } // namespace EVENTS
 
+    namespace SWITCHES
+    {
+        namespace COLLISION_MATERIAL
+        {
+            static const AkUniqueID GROUP = 2158317749U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID GRASS = 4248645337U;
+                static const AkUniqueID LAB = 578926554U;
+                static const AkUniqueID SLIME = 3803999823U;
+            } // namespace SWITCH
+        } // namespace COLLISION_MATERIAL
+
+    } // namespace SWITCHES
+
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID BOUNCEPAD_NUMOFBOUNCES = 856530565U;
         static const AkUniqueID HEALTH_HIT_DAMAGE = 3274506471U;
+        static const AkUniqueID LOW_PASS = 1177178531U;
         static const AkUniqueID MASTERVOLUME = 2918011349U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
         static const AkUniqueID OBJECTSIZE = 1059072663U;
