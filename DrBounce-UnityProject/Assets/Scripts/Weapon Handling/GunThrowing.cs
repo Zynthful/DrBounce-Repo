@@ -7,7 +7,7 @@ using MoreMountains.Feedbacks;
 
 public class GunThrowing : MonoBehaviour
 {
-    [SerializeField] private float waitTime = 0.2;
+    [SerializeField] private float waitTime = 0.2f;
 
     [SerializeField] bool returning;
     [SerializeField] float throwForceMod;
