@@ -11,9 +11,15 @@ public class ButtonAudio : SelectableAudio, IPointerClickHandler
 
     [Header("Button AkEvents")]
     [SerializeField]
-    protected AK.Wwise.Event onClickSuccess = null;
+    protected AK.Wwise.Event onClick = null;
+
+    [Header("Button AkSwitches")]
     [SerializeField]
-    protected AK.Wwise.Event onClickFail = null;
+    protected AK.Wwise.Switch buttonType = null;
+    [SerializeField]
+    protected AK.Wwise.Switch clickSuccess = null;
+    [SerializeField]
+    protected AK.Wwise.Switch clickFail = null;
 
     protected override void Awake()
     {
@@ -22,32 +28,37 @@ public class ButtonAudio : SelectableAudio, IPointerClickHandler
         {
             button = GetComponent<Button>();
         }
+
+        buttonType.SetValue(button.gameObject);
     }
 
     protected virtual void OnEnable()
     {
-        button.onClick.AddListener(Click);
+        button.onClick.AddListener(ClickSuccess);
     }
 
     protected virtual void OnDisable()
     {
-        button.onClick.RemoveListener(Click);
+        button.onClick.RemoveListener(ClickSuccess);
     }
 
-    protected virtual void Click()
+    protected virtual void ClickSuccess()
     {
-        onClickSuccess?.Post(gameObject);
+        clickSuccess?.SetValue(button.gameObject);
+        onClick?.Post(button.gameObject);
+    }
+
+    protected virtual void ClickFail()
+    {
+        clickFail?.SetValue(button.gameObject);
+        onClick?.Post(button.gameObject);
     }
 
     public virtual void OnPointerClick(PointerEventData eventData)
     {
-        if (button.interactable)
+        if (!button.interactable)
         {
-            Click();
-        }
-        else
-        {
-            onClickFail?.Post(gameObject);
+            ClickFail();
         }
     }
 }

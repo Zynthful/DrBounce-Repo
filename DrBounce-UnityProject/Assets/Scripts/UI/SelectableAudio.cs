@@ -15,12 +15,18 @@ public class SelectableAudio : MonoBehaviour, IPointerEnterHandler, ISelectHandl
     [SerializeField]
     protected AK.Wwise.Event onPointerEnter = null;
 
+    [Header("Selectable AkSwitches")]
+    [SerializeField]
+    protected AK.Wwise.Switch selectableType = null;
+
     protected virtual void Awake()
     {
         if (selectable == null)
         {
             selectable = GetComponent<Selectable>();
         }
+
+        selectableType.SetValue(selectable.gameObject);
     }
 
     // Called when the cursor enters the rect area of this selectable UI object.
