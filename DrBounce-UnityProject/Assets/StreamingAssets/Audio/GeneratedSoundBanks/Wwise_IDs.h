@@ -57,7 +57,8 @@ namespace AK
         static const AkUniqueID SLIDE_END = 114683718U;
         static const AkUniqueID SLIDE_START = 2149348397U;
         static const AkUniqueID UHH_CHEESED_TO_MEET_YOU = 3276816688U;
-        static const AkUniqueID UI_BUTTON_CLICK = 1664509575U;
+        static const AkUniqueID UI_BUTTON_CLICK_FAIL = 4089643514U;
+        static const AkUniqueID UI_BUTTON_CLICK_SUCCESS = 233541203U;
         static const AkUniqueID UI_SELECTABLE_POINTERENTER = 4021794910U;
         static const AkUniqueID UI_SELECTABLE_SELECT = 4159793957U;
         static const AkUniqueID UNPAUSE = 3412868374U;
@@ -65,17 +66,6 @@ namespace AK
 
     namespace SWITCHES
     {
-        namespace BUTTON_CLICK_RESULT
-        {
-            static const AkUniqueID GROUP = 2000868764U;
-
-            namespace SWITCH
-            {
-                static const AkUniqueID FAIL = 2596272617U;
-                static const AkUniqueID SUCCESS = 3625060726U;
-            } // namespace SWITCH
-        } // namespace BUTTON_CLICK_RESULT
-
         namespace BUTTON_TYPE
         {
             static const AkUniqueID GROUP = 753474920U;

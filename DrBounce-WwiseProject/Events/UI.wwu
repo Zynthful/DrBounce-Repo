@@ -2,40 +2,13 @@
 <WwiseDocument Type="WorkUnit" ID="{D8D10A81-71D6-4564-9A29-047F5EB2A8DB}" SchemaVersion="103" RootDocumentID="{8348917E-205A-4290-A4C0-D425B674D15F}" ParentDocumentID="{8348917E-205A-4290-A4C0-D425B674D15F}">
 	<Events>
 		<WorkUnit Name="UI" ID="{D8D10A81-71D6-4564-9A29-047F5EB2A8DB}" OwnerID="{8348917E-205A-4290-A4C0-D425B674D15F}" PersistMode="Nested">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="1"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
 			<ChildrenList>
-				<Event Name="UI_Selectable_Select" ID="{9D1E85D1-F3C4-4854-A2A0-F34BF43DF068}">
-					<ChildrenList>
-						<Action Name="" ID="{F8BA4CAD-986B-44A3-9B14-08AE2E8AB08D}" ShortID="616215306">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Selectable_Select" ID="{B3EE8002-C50E-44B8-AE89-8D280F68DC80}" WorkUnitID="{BF9838DF-008B-4995-AD10-9A66A6C21B11}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
-				<Event Name="UI_Button_Click" ID="{0CCB217C-A7F8-43E8-A73D-514E03D1F678}">
-					<ChildrenList>
-						<Action Name="" ID="{F0AA3ED1-B8DA-48C7-85C5-6FEC55010966}" ShortID="1027952214">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Button_Click" ID="{E84CB6A1-4A9A-4E51-BFA5-8666FAC093F6}" WorkUnitID="{BF9838DF-008B-4995-AD10-9A66A6C21B11}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
-				<Event Name="UI_Selectable_PointerEnter" ID="{0CC804F1-8376-4537-8425-9B7DE82D4B4D}">
-					<ChildrenList>
-						<Action Name="" ID="{2DD6A913-44DB-48B4-B310-5F33B1523AFB}" ShortID="433808116">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Selectable_PointerEnter" ID="{DB0860C3-53EC-4E3E-9E94-603501B32B06}" WorkUnitID="{BF9838DF-008B-4995-AD10-9A66A6C21B11}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
+				<WorkUnit Name="Selectable" ID="{B31E2E65-DC6A-41AB-A516-8C9DC9CEBB2F}" PersistMode="Reference"/>
+				<WorkUnit Name="Button" ID="{EB3A03B1-FDA7-47DE-819D-5BA91A35A2B8}" PersistMode="Reference"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
