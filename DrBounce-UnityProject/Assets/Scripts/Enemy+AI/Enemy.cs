@@ -82,6 +82,8 @@ public class Enemy : MonoBehaviour
     public UnityEvent onChase = null;
     [SerializeField]
     public UnityEvent onGiveUp = null;
+    [SerializeField]
+    public UnityEvent onSpotted = null;
 
     public NavMeshAgent navMeshAgent;
 
@@ -133,6 +135,10 @@ public class Enemy : MonoBehaviour
 
                 case Blackboard.Actions.LOST:
                     onGiveUp?.Invoke();
+                    break;
+
+                case Blackboard.Actions.FIRSTSPOTTED:
+                    onSpotted?.Invoke();
                     break;
             }
 
