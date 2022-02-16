@@ -19,7 +19,43 @@
 						<SwitchContainer Name="Selectable_PointerEnter" ID="{DB0860C3-53EC-4E3E-9E94-603501B32B06}" ShortID="734925757">
 							<PropertyList>
 								<Property Name="Color" Type="int16" Value="14"/>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{ACD0AA60-CAD5-4630-BD32-F8B69C8D02A3}">
+												<PropertyList>
+													<Property Name="Min" Type="Real64" Value="-354"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-8</Value>
+									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{62D47A10-4D42-48B4-AD93-A9A69513CE56}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Min" Type="Real64" Value="-2"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -56,6 +92,31 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 										</Reference>
 									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="DB_SFX_UI_TV_Selectable_Select" ID="{741616F6-0BA1-416D-9B3E-7635F65EFD4D}" ShortID="854764038">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DB_SFX_UI_TV_Selectable_Select" ID="{6E0E9AF1-ADAF-48E6-A524-DF8DC32B3200}">
+													<Language>SFX</Language>
+													<AudioFile>DB_SFX_UI_TV_Selectable_Select.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="529543171"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DB_SFX_UI_TV_Selectable_Select" ID="{6E0E9AF1-ADAF-48E6-A524-DF8DC32B3200}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
 									<ObjectLists/>
 								</BlendContainer>
 							</ChildrenList>
@@ -88,7 +149,22 @@
 						<SwitchContainer Name="Selectable_Select" ID="{B3EE8002-C50E-44B8-AE89-8D280F68DC80}" ShortID="122161261">
 							<PropertyList>
 								<Property Name="Color" Type="int16" Value="15"/>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-8</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -125,6 +201,34 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 										</Reference>
 									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="DB_SFX_UI_TV_Selectable_Select" ID="{B9FC810F-0A5F-4225-A205-0944C0467095}" ShortID="260434308">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DB_SFX_UI_TV_Selectable_Select" ID="{C881D040-1077-44B8-B7E0-785A01F40430}">
+													<Language>SFX</Language>
+													<AudioFile>DB_SFX_UI_TV_Selectable_Select.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="529543171"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DB_SFX_UI_TV_Selectable_Select" ID="{C881D040-1077-44B8-B7E0-785A01F40430}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
 									<ObjectLists/>
 								</BlendContainer>
 							</ChildrenList>
@@ -227,6 +331,20 @@
 												<ItemRef Name="Enter" ID="{DE5AD2F5-B545-432D-BAB9-A6671295D091}"/>
 											</GroupingBehavior>
 										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Return" ID="{BD9EDDC5-DBD1-4F35-B3CC-471FB067A116}"/>
+												<ItemList>
+													<ItemRef Name="Return" ID="{71593751-5E19-42D2-9E2C-85643A4767D8}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Enter" ID="{4C52D0FC-620A-4607-A8B9-E8B8F0E7C3A0}"/>
+												<ItemList>
+													<ItemRef Name="Enter" ID="{DE5AD2F5-B545-432D-BAB9-A6671295D091}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
 									</GroupingInfo>
 								</SwitchContainer>
 								<SwitchContainer Name="TV" ID="{B7CF3120-663D-46C9-8BAC-CFFC8727A68B}" ShortID="803857452">
@@ -260,6 +378,34 @@
 													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 												</Reference>
 											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_UI_TV_Button_Enter" ID="{C9F825F6-7D27-42D1-A7E9-67E7BFE08E0B}" ShortID="232356">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_UI_TV_Button_Enter" ID="{DE15DD9E-852A-4D20-97AE-0A63064478F9}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_UI_TV_Button_Enter.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="942098278"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_UI_TV_Button_Enter" ID="{DE15DD9E-852A-4D20-97AE-0A63064478F9}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
 											<ObjectLists/>
 										</BlendContainer>
 										<BlendContainer Name="Return" ID="{3949C9C9-2F11-49A0-8222-2688BC69204E}" ShortID="751293613">
@@ -274,6 +420,34 @@
 													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 												</Reference>
 											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_UI_TV_Button_Return" ID="{AC3935D3-D262-44AD-8777-05143C53E512}" ShortID="980189977">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_UI_TV_Button_Return" ID="{C2EAF3BA-5022-4C99-B426-F5552773BB31}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_UI_TV_Button_Return.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="382437502"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_UI_TV_Button_Return" ID="{C2EAF3BA-5022-4C99-B426-F5552773BB31}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
 											<ObjectLists/>
 										</BlendContainer>
 									</ChildrenList>
@@ -287,6 +461,20 @@
 												<ItemRef Name="Return" ID="{3949C9C9-2F11-49A0-8222-2688BC69204E}"/>
 											</GroupingBehavior>
 										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Return" ID="{BD9EDDC5-DBD1-4F35-B3CC-471FB067A116}"/>
+												<ItemList>
+													<ItemRef Name="Return" ID="{3949C9C9-2F11-49A0-8222-2688BC69204E}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Enter" ID="{4C52D0FC-620A-4607-A8B9-E8B8F0E7C3A0}"/>
+												<ItemList>
+													<ItemRef Name="Enter" ID="{733FF370-A4C1-4454-8989-5B4E5F455DB6}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
 									</GroupingInfo>
 								</SwitchContainer>
 							</ChildrenList>
@@ -389,6 +577,20 @@
 												<ItemRef Name="Return" ID="{3A5E9588-974E-478B-9510-D2FFBEF2EE4C}"/>
 											</GroupingBehavior>
 										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Return" ID="{BD9EDDC5-DBD1-4F35-B3CC-471FB067A116}"/>
+												<ItemList>
+													<ItemRef Name="Return" ID="{3A5E9588-974E-478B-9510-D2FFBEF2EE4C}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Enter" ID="{4C52D0FC-620A-4607-A8B9-E8B8F0E7C3A0}"/>
+												<ItemList>
+													<ItemRef Name="Enter" ID="{43C64825-1A3A-4FF3-8A4C-94C5A1D1DA7E}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
 									</GroupingInfo>
 								</SwitchContainer>
 								<SwitchContainer Name="TV" ID="{BBDB23FE-E7B9-4ECF-97A4-705E08354796}" ShortID="997589657">
@@ -449,6 +651,20 @@
 												<ItemRef Name="Return" ID="{C0F0B5FC-74D9-4E0E-BFE4-9B71C2969B9B}"/>
 											</GroupingBehavior>
 										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Return" ID="{BD9EDDC5-DBD1-4F35-B3CC-471FB067A116}"/>
+												<ItemList>
+													<ItemRef Name="Return" ID="{C0F0B5FC-74D9-4E0E-BFE4-9B71C2969B9B}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Enter" ID="{4C52D0FC-620A-4607-A8B9-E8B8F0E7C3A0}"/>
+												<ItemList>
+													<ItemRef Name="Enter" ID="{BBB8D65D-E470-47D0-9678-9720B2ACE9C8}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
 									</GroupingInfo>
 								</SwitchContainer>
 							</ChildrenList>
