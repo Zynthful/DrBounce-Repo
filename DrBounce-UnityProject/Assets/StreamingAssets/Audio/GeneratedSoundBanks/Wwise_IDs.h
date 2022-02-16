@@ -57,10 +57,18 @@ namespace AK
         static const AkUniqueID SLIDE_END = 114683718U;
         static const AkUniqueID SLIDE_START = 2149348397U;
         static const AkUniqueID UHH_CHEESED_TO_MEET_YOU = 3276816688U;
-        static const AkUniqueID UI_BUTTON_CLICK_FAIL = 4089643514U;
-        static const AkUniqueID UI_BUTTON_CLICK_SUCCESS = 233541203U;
-        static const AkUniqueID UI_SELECTABLE_POINTERENTER = 4021794910U;
-        static const AkUniqueID UI_SELECTABLE_SELECT = 4159793957U;
+        static const AkUniqueID UI_BP_BUTTON_CLICK_FAIL = 1780783421U;
+        static const AkUniqueID UI_BP_BUTTON_CLICK_SUCCESS = 935477938U;
+        static const AkUniqueID UI_BP_SELECTABLE_POINTERENTER = 2987181893U;
+        static const AkUniqueID UI_BP_SELECTABLE_SELECT = 3466594822U;
+        static const AkUniqueID UI_TOOLBOX_BUTTON_CLICK_FAIL = 2598475366U;
+        static const AkUniqueID UI_TOOLBOX_BUTTON_CLICK_SUCCESS = 3358586071U;
+        static const AkUniqueID UI_TOOLBOX_SELECTABLE_POINTERENTER = 926850530U;
+        static const AkUniqueID UI_TOOLBOX_SELECTABLE_SELECT = 3613588569U;
+        static const AkUniqueID UI_TV_BUTTON_CLICK_FAIL = 1570416185U;
+        static const AkUniqueID UI_TV_BUTTON_CLICK_SUCCESS = 2770946982U;
+        static const AkUniqueID UI_TV_SELECTABLE_POINTERENTER = 3934313U;
+        static const AkUniqueID UI_TV_SELECTABLE_SELECT = 1544786970U;
         static const AkUniqueID UNPAUSE = 3412868374U;
     } // namespace EVENTS
 
@@ -88,17 +96,6 @@ namespace AK
                 static const AkUniqueID SLIME = 3803999823U;
             } // namespace SWITCH
         } // namespace COLLISION_MATERIAL
-
-        namespace SELECTABLE_TYPE
-        {
-            static const AkUniqueID GROUP = 3759305260U;
-
-            namespace SWITCH
-            {
-                static const AkUniqueID BLUEPRINT = 1751426142U;
-                static const AkUniqueID TV = 1568083719U;
-            } // namespace SWITCH
-        } // namespace SELECTABLE_TYPE
 
     } // namespace SWITCHES
 
