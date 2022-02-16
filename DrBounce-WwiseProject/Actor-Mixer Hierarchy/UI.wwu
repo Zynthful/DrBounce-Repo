@@ -84,7 +84,15 @@
 									<ObjectLists/>
 								</BlendContainer>
 								<BlendContainer Name="TV" ID="{104FB4AA-CB8E-43CF-B433-BCB99407942B}" ShortID="15370991">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 										</Reference>
@@ -193,7 +201,15 @@
 									<ObjectLists/>
 								</BlendContainer>
 								<BlendContainer Name="TV" ID="{06973451-A87E-4090-9AA0-E90F7AD75EE5}" ShortID="650261975">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 										</Reference>
@@ -349,9 +365,14 @@
 								</SwitchContainer>
 								<SwitchContainer Name="TV" ID="{B7CF3120-663D-46C9-8BAC-CFFC8727A68B}" ShortID="803857452">
 									<PropertyList>
-										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 										</Reference>
@@ -369,6 +390,11 @@
 										<BlendContainer Name="Enter" ID="{733FF370-A4C1-4454-8989-5B4E5F455DB6}" ShortID="34573639">
 											<PropertyList>
 												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -411,6 +437,11 @@
 										<BlendContainer Name="Return" ID="{3949C9C9-2F11-49A0-8222-2688BC69204E}" ShortID="751293613">
 											<PropertyList>
 												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -595,9 +626,14 @@
 								</SwitchContainer>
 								<SwitchContainer Name="TV" ID="{BBDB23FE-E7B9-4ECF-97A4-705E08354796}" ShortID="997589657">
 									<PropertyList>
-										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 										</Reference>
@@ -624,6 +660,31 @@
 													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 												</Reference>
 											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_UI_TV_Button_Click_Fail" ID="{614BE763-53EF-4078-B4BD-B5A221F1C0E0}" ShortID="342716902">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_UI_TV_Button_Click_Fail" ID="{6C875EB1-11B4-4F57-9C21-FADFBC83F052}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_UI_TV_Button_Click_Fail.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="151771855"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_UI_TV_Button_Click_Fail" ID="{6C875EB1-11B4-4F57-9C21-FADFBC83F052}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
 											<ObjectLists/>
 										</BlendContainer>
 										<BlendContainer Name="Return" ID="{C0F0B5FC-74D9-4E0E-BFE4-9B71C2969B9B}" ShortID="409801591">
@@ -638,6 +699,34 @@
 													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 												</Reference>
 											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_UI_TV_Button_Click_Fail" ID="{44F29E46-994C-4720-8069-0494A9E69830}" ShortID="632268436">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_UI_TV_Button_Click_Fail" ID="{3D76330E-701C-4A35-AEF1-BFAB5465046E}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_UI_TV_Button_Click_Fail.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="151771855"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_UI_TV_Button_Click_Fail" ID="{3D76330E-701C-4A35-AEF1-BFAB5465046E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
 											<ObjectLists/>
 										</BlendContainer>
 									</ChildrenList>
