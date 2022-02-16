@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{BF9838DF-008B-4995-AD10-9A66A6C21B11}" SchemaVersion="103" RootDocumentID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}" ParentDocumentID="{A4D0CE53-A64D-4A9D-907F-CDD807D23199}">
+	<AudioObjects>
+		<WorkUnit Name="UI" ID="{BF9838DF-008B-4995-AD10-9A66A6C21B11}" OwnerID="{A4D0CE53-A64D-4A9D-907F-CDD807D23199}" PersistMode="Nested">
+			<ChildrenList>
+				<ActorMixer Name="UI" ID="{5736CBC6-35D8-4782-953A-DBBBDE70D079}" ShortID="752336355">
+					<PropertyList>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<SwitchContainer Name="Selectable_PointerEnter" ID="{DB0860C3-53EC-4E3E-9E94-603501B32B06}" ShortID="734925757">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="14"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+								</Reference>
+								<Reference Name="DefaultSwitchOrState">
+									<ObjectRef Name="TV" ID="{C05C5773-E8B7-4A3C-AC2D-20E71B06337D}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="Selectable_Type" ID="{B729B74A-2B1E-4B24-B5D6-54BDF1E4F3F8}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<BlendContainer Name="Blueprint" ID="{F4D252DE-806D-428E-85BF-5329336D9F51}" ShortID="1002406731">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ObjectLists/>
+								</BlendContainer>
+								<BlendContainer Name="TV" ID="{104FB4AA-CB8E-43CF-B433-BCB99407942B}" ShortID="15370991">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ObjectLists/>
+								</BlendContainer>
+							</ChildrenList>
+							<ObjectLists/>
+							<GroupingInfo>
+								<GroupingBehaviorList>
+									<GroupingBehavior>
+										<ItemRef Name="TV" ID="{104FB4AA-CB8E-43CF-B433-BCB99407942B}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Blueprint" ID="{F4D252DE-806D-428E-85BF-5329336D9F51}"/>
+									</GroupingBehavior>
+								</GroupingBehaviorList>
+								<GroupingList>
+									<Grouping>
+										<SwitchRef Name="TV" ID="{C05C5773-E8B7-4A3C-AC2D-20E71B06337D}"/>
+										<ItemList>
+											<ItemRef Name="TV" ID="{104FB4AA-CB8E-43CF-B433-BCB99407942B}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Blueprint" ID="{9AF232F3-43C8-41E3-B027-20A090F42061}"/>
+										<ItemList>
+											<ItemRef Name="Blueprint" ID="{F4D252DE-806D-428E-85BF-5329336D9F51}"/>
+										</ItemList>
+									</Grouping>
+								</GroupingList>
+							</GroupingInfo>
+						</SwitchContainer>
+						<SwitchContainer Name="Selectable_Select" ID="{B3EE8002-C50E-44B8-AE89-8D280F68DC80}" ShortID="122161261">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="15"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+								</Reference>
+								<Reference Name="DefaultSwitchOrState">
+									<ObjectRef Name="TV" ID="{C05C5773-E8B7-4A3C-AC2D-20E71B06337D}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="Selectable_Type" ID="{B729B74A-2B1E-4B24-B5D6-54BDF1E4F3F8}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<BlendContainer Name="Blueprint" ID="{CAF62F3F-BCEE-40A8-8FD5-CEFEFBB326A5}" ShortID="243794234">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ObjectLists/>
+								</BlendContainer>
+								<BlendContainer Name="TV" ID="{06973451-A87E-4090-9AA0-E90F7AD75EE5}" ShortID="650261975">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ObjectLists/>
+								</BlendContainer>
+							</ChildrenList>
+							<ObjectLists/>
+							<GroupingInfo>
+								<GroupingBehaviorList>
+									<GroupingBehavior>
+										<ItemRef Name="Blueprint" ID="{CAF62F3F-BCEE-40A8-8FD5-CEFEFBB326A5}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="TV" ID="{06973451-A87E-4090-9AA0-E90F7AD75EE5}"/>
+									</GroupingBehavior>
+								</GroupingBehaviorList>
+								<GroupingList>
+									<Grouping>
+										<SwitchRef Name="TV" ID="{C05C5773-E8B7-4A3C-AC2D-20E71B06337D}"/>
+										<ItemList>
+											<ItemRef Name="TV" ID="{06973451-A87E-4090-9AA0-E90F7AD75EE5}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Blueprint" ID="{9AF232F3-43C8-41E3-B027-20A090F42061}"/>
+										<ItemList>
+											<ItemRef Name="Blueprint" ID="{CAF62F3F-BCEE-40A8-8FD5-CEFEFBB326A5}"/>
+										</ItemList>
+									</Grouping>
+								</GroupingList>
+							</GroupingInfo>
+						</SwitchContainer>
+						<SwitchContainer Name="Button_Click_Success" ID="{E84CB6A1-4A9A-4E51-BFA5-8666FAC093F6}" ShortID="519007105">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="2"/>
+								<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+								</Reference>
+								<Reference Name="DefaultSwitchOrState">
+									<ObjectRef Name="TV" ID="{C05C5773-E8B7-4A3C-AC2D-20E71B06337D}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="Selectable_Type" ID="{B729B74A-2B1E-4B24-B5D6-54BDF1E4F3F8}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<SwitchContainer Name="Blueprint" ID="{8E265282-B1E5-4A79-8727-165843B4F467}" ShortID="1038875514">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="DefaultSwitchOrState">
+											<ObjectRef Name="Enter" ID="{4C52D0FC-620A-4607-A8B9-E8B8F0E7C3A0}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="Button_Type" ID="{D8159AD0-17C8-434D-A11C-C4E1741D9281}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<BlendContainer Name="Enter" ID="{DE5AD2F5-B545-432D-BAB9-A6671295D091}" ShortID="1071182256">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</BlendContainer>
+										<BlendContainer Name="Return" ID="{71593751-5E19-42D2-9E2C-85643A4767D8}" ShortID="535724490">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</BlendContainer>
+									</ChildrenList>
+									<ObjectLists/>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="Return" ID="{71593751-5E19-42D2-9E2C-85643A4767D8}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Enter" ID="{DE5AD2F5-B545-432D-BAB9-A6671295D091}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+									</GroupingInfo>
+								</SwitchContainer>
+								<SwitchContainer Name="TV" ID="{B7CF3120-663D-46C9-8BAC-CFFC8727A68B}" ShortID="803857452">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="DefaultSwitchOrState">
+											<ObjectRef Name="Enter" ID="{4C52D0FC-620A-4607-A8B9-E8B8F0E7C3A0}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="Button_Type" ID="{D8159AD0-17C8-434D-A11C-C4E1741D9281}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<BlendContainer Name="Enter" ID="{733FF370-A4C1-4454-8989-5B4E5F455DB6}" ShortID="34573639">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</BlendContainer>
+										<BlendContainer Name="Return" ID="{3949C9C9-2F11-49A0-8222-2688BC69204E}" ShortID="751293613">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</BlendContainer>
+									</ChildrenList>
+									<ObjectLists/>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="Enter" ID="{733FF370-A4C1-4454-8989-5B4E5F455DB6}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Return" ID="{3949C9C9-2F11-49A0-8222-2688BC69204E}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+									</GroupingInfo>
+								</SwitchContainer>
+							</ChildrenList>
+							<ObjectLists/>
+							<GroupingInfo>
+								<GroupingBehaviorList>
+									<GroupingBehavior>
+										<ItemRef Name="TV" ID="{B7CF3120-663D-46C9-8BAC-CFFC8727A68B}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Blueprint" ID="{8E265282-B1E5-4A79-8727-165843B4F467}"/>
+									</GroupingBehavior>
+								</GroupingBehaviorList>
+								<GroupingList>
+									<Grouping>
+										<SwitchRef Name="TV" ID="{C05C5773-E8B7-4A3C-AC2D-20E71B06337D}"/>
+										<ItemList>
+											<ItemRef Name="TV" ID="{B7CF3120-663D-46C9-8BAC-CFFC8727A68B}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Blueprint" ID="{9AF232F3-43C8-41E3-B027-20A090F42061}"/>
+										<ItemList>
+											<ItemRef Name="Blueprint" ID="{8E265282-B1E5-4A79-8727-165843B4F467}"/>
+										</ItemList>
+									</Grouping>
+								</GroupingList>
+							</GroupingInfo>
+						</SwitchContainer>
+						<SwitchContainer Name="Button_Click_Fail" ID="{A77AA0C2-1E65-46DB-B3EB-AC0F1C9FEF31}" ShortID="717639207">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="2"/>
+								<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+								</Reference>
+								<Reference Name="DefaultSwitchOrState">
+									<ObjectRef Name="TV" ID="{C05C5773-E8B7-4A3C-AC2D-20E71B06337D}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="Selectable_Type" ID="{B729B74A-2B1E-4B24-B5D6-54BDF1E4F3F8}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<SwitchContainer Name="Blueprint" ID="{97791F59-EC85-4023-899C-2872DE53E703}" ShortID="204334528">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="DefaultSwitchOrState">
+											<ObjectRef Name="Enter" ID="{4C52D0FC-620A-4607-A8B9-E8B8F0E7C3A0}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="Button_Type" ID="{D8159AD0-17C8-434D-A11C-C4E1741D9281}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<BlendContainer Name="Enter" ID="{43C64825-1A3A-4FF3-8A4C-94C5A1D1DA7E}" ShortID="896386047">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</BlendContainer>
+										<BlendContainer Name="Return" ID="{3A5E9588-974E-478B-9510-D2FFBEF2EE4C}" ShortID="420354043">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</BlendContainer>
+									</ChildrenList>
+									<ObjectLists/>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="Enter" ID="{43C64825-1A3A-4FF3-8A4C-94C5A1D1DA7E}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Return" ID="{3A5E9588-974E-478B-9510-D2FFBEF2EE4C}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+									</GroupingInfo>
+								</SwitchContainer>
+								<SwitchContainer Name="TV" ID="{BBDB23FE-E7B9-4ECF-97A4-705E08354796}" ShortID="997589657">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="DefaultSwitchOrState">
+											<ObjectRef Name="Enter" ID="{4C52D0FC-620A-4607-A8B9-E8B8F0E7C3A0}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="Button_Type" ID="{D8159AD0-17C8-434D-A11C-C4E1741D9281}" WorkUnitID="{16DA066E-F147-46AD-A442-810EBA1B0F20}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<BlendContainer Name="Enter" ID="{BBB8D65D-E470-47D0-9678-9720B2ACE9C8}" ShortID="396768088">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</BlendContainer>
+										<BlendContainer Name="Return" ID="{C0F0B5FC-74D9-4E0E-BFE4-9B71C2969B9B}" ShortID="409801591">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</BlendContainer>
+									</ChildrenList>
+									<ObjectLists/>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="Enter" ID="{BBB8D65D-E470-47D0-9678-9720B2ACE9C8}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Return" ID="{C0F0B5FC-74D9-4E0E-BFE4-9B71C2969B9B}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+									</GroupingInfo>
+								</SwitchContainer>
+							</ChildrenList>
+							<ObjectLists/>
+							<GroupingInfo>
+								<GroupingBehaviorList>
+									<GroupingBehavior>
+										<ItemRef Name="Blueprint" ID="{97791F59-EC85-4023-899C-2872DE53E703}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="TV" ID="{BBDB23FE-E7B9-4ECF-97A4-705E08354796}"/>
+									</GroupingBehavior>
+								</GroupingBehaviorList>
+								<GroupingList>
+									<Grouping>
+										<SwitchRef Name="TV" ID="{C05C5773-E8B7-4A3C-AC2D-20E71B06337D}"/>
+										<ItemList>
+											<ItemRef Name="TV" ID="{BBDB23FE-E7B9-4ECF-97A4-705E08354796}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Blueprint" ID="{9AF232F3-43C8-41E3-B027-20A090F42061}"/>
+										<ItemList>
+											<ItemRef Name="Blueprint" ID="{97791F59-EC85-4023-899C-2872DE53E703}"/>
+										</ItemList>
+									</Grouping>
+								</GroupingList>
+							</GroupingInfo>
+						</SwitchContainer>
+					</ChildrenList>
+					<ObjectLists/>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

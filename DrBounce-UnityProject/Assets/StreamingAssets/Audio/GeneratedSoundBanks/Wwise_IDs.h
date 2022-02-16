@@ -58,15 +58,25 @@ namespace AK
         static const AkUniqueID SLIDE_START = 2149348397U;
         static const AkUniqueID UHH_CHEESED_TO_MEET_YOU = 3276816688U;
         static const AkUniqueID UI_BUTTON_CLICK_FAIL = 4089643514U;
-        static const AkUniqueID UI_BUTTON_ENTER = 18309885U;
-        static const AkUniqueID UI_BUTTON_POINTERENTER = 1841462538U;
-        static const AkUniqueID UI_BUTTON_RETURN = 1182614283U;
-        static const AkUniqueID UI_BUTTON_SELECT = 2896333297U;
+        static const AkUniqueID UI_BUTTON_CLICK_SUCCESS = 233541203U;
+        static const AkUniqueID UI_SELECTABLE_POINTERENTER = 4021794910U;
+        static const AkUniqueID UI_SELECTABLE_SELECT = 4159793957U;
         static const AkUniqueID UNPAUSE = 3412868374U;
     } // namespace EVENTS
 
     namespace SWITCHES
     {
+        namespace BUTTON_TYPE
+        {
+            static const AkUniqueID GROUP = 753474920U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID ENTER = 2368844905U;
+                static const AkUniqueID RETURN = 3859834159U;
+            } // namespace SWITCH
+        } // namespace BUTTON_TYPE
+
         namespace COLLISION_MATERIAL
         {
             static const AkUniqueID GROUP = 2158317749U;
@@ -78,6 +88,17 @@ namespace AK
                 static const AkUniqueID SLIME = 3803999823U;
             } // namespace SWITCH
         } // namespace COLLISION_MATERIAL
+
+        namespace SELECTABLE_TYPE
+        {
+            static const AkUniqueID GROUP = 3759305260U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID BLUEPRINT = 1751426142U;
+                static const AkUniqueID TV = 1568083719U;
+            } // namespace SWITCH
+        } // namespace SELECTABLE_TYPE
 
     } // namespace SWITCHES
 
@@ -121,6 +142,7 @@ namespace AK
         static const AkUniqueID MOTION_FACTORY_BUS = 985987111U;
         static const AkUniqueID MUSIC = 3991942870U;
         static const AkUniqueID SFX = 393239870U;
+        static const AkUniqueID UI = 1551306167U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES
