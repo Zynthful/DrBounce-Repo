@@ -47,15 +47,20 @@ public class UnlockTracker : MonoBehaviour
         }
     }
 
+    public void NewUnlocks(UnlockTypes[] newUnlocks)
+    {
+        foreach(UnlockTypes unlock in newUnlocks)
+        {
+            EnableUnlock(unlock);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         if(levelStartSettings != null)
         {
-            foreach(UnlockTypes unlock in levelStartSettings.unlocks)
-            {
-                EnableUnlock(unlock);
-            }
+            NewUnlocks(levelStartSettings.unlocks);
         }
         else
             Debug.Log("Running without any unlocks, have you forgotten to setup the scriptableObject?");
