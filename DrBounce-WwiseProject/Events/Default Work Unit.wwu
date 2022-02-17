@@ -3,78 +3,6 @@
 	<Events>
 		<WorkUnit Name="Default Work Unit" ID="{8348917E-205A-4290-A4C0-D425B674D15F}" PersistMode="Standalone">
 			<ChildrenList>
-				<Folder Name="Enemy" ID="{1B1E654D-564F-47AE-9FF7-FD4251AEA5BD}" ShortID="681773210">
-					<ChildrenList>
-						<Folder Name="Bullet" ID="{BBD4EA8D-27F2-4987-B84E-69B9E38FA72D}" ShortID="181870034">
-							<ChildrenList>
-								<Event Name="Enemy_Bullet_Impact_Player" ID="{CD4F0CCF-5783-4CEB-A997-756E7567BEAC}">
-									<ChildrenList>
-										<Action Name="" ID="{D4EBBE26-ED14-4C3E-9539-21DB47F7D4AB}" ShortID="799629518">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="Injured_Enemy_Bullet" ID="{C1DC0423-7A8A-4B89-90EB-5D156CEA3D13}" WorkUnitID="{CE0CAAE6-48AB-4535-8383-EA0CE233C2E2}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="Enemy_Bullet_Impact_Surface" ID="{01260D73-2E30-44BD-8B0C-D5DE22974262}"/>
-							</ChildrenList>
-						</Folder>
-						<Folder Name="Bouncing" ID="{46694129-CD7B-4619-9963-6E3848DC6843}" ShortID="904866695">
-							<ChildrenList>
-								<Event Name="Enemy_Gun_Bounce_Impact" ID="{145EE972-B19C-4CE3-881B-2A4F630E0483}">
-									<ChildrenList>
-										<Action Name="" ID="{EE52427C-C3AE-4F5A-9F54-780DD0F0A7A9}" ShortID="466842576">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="Bounced_Gun" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" WorkUnitID="{CB1FCA69-FB8B-4593-9F88-56DAD8A1EFD1}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-							</ChildrenList>
-						</Folder>
-						<Folder Name="Health" ID="{6D799F90-053F-4505-A8FD-F03727B4D5C2}" ShortID="747942249">
-							<ChildrenList>
-								<Event Name="Enemy_Health_Injured" ID="{FCCA1507-ECE7-43C3-9D31-9AEC95DC9B8B}">
-									<ChildrenList>
-										<Action Name="" ID="{A51E7441-1848-402B-83CB-108C207379A1}" ShortID="411264353">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="Injured" ID="{F97F6A37-3780-4042-ACB3-C7244C9868AE}" WorkUnitID="{CB1FCA69-FB8B-4593-9F88-56DAD8A1EFD1}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="Enemy_Health_Death" ID="{9E33BC64-B73D-4A5D-A8DE-54DD3EADAA78}">
-									<ChildrenList>
-										<Action Name="" ID="{4CCA523D-2F4B-4A56-B735-70FBC626F929}" ShortID="155131236">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="Death" ID="{B0AE8333-9853-4A8E-AD99-AE2B7EC28480}" WorkUnitID="{CB1FCA69-FB8B-4593-9F88-56DAD8A1EFD1}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="Enemy_Health_Death_Particle_Collide" ID="{815F912B-04F7-4207-A49C-CE9D172F32A3}">
-									<ChildrenList>
-										<Action Name="" ID="{87C2A3E7-11F1-4615-B36A-CCFD0F8BB80A}" ShortID="577585265">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="Death_Particle_Collide" ID="{6522DE2B-7BC5-48E2-945F-DABC89DA12FA}" WorkUnitID="{CB1FCA69-FB8B-4593-9F88-56DAD8A1EFD1}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-							</ChildrenList>
-						</Folder>
-					</ChildrenList>
-				</Folder>
 				<Folder Name="Player" ID="{C23E21F6-91A7-4E10-B475-BDC3CA2E4A2F}" ShortID="546277428">
 					<ChildrenList>
 						<Folder Name="Movement" ID="{CF2FAB4F-956E-4ECD-920A-D58D443911A9}" ShortID="860483524">
@@ -794,6 +722,7 @@
 				<WorkUnit Name="UI" ID="{D8D10A81-71D6-4564-9A29-047F5EB2A8DB}" PersistMode="Reference"/>
 				<WorkUnit Name="Debug" ID="{1E217EA1-CFC7-4CBB-B49A-CF9F61613943}" PersistMode="Reference"/>
 				<WorkUnit Name="Camera" ID="{3BA721DE-44F8-4C57-B25A-F0993E82DBFE}" PersistMode="Reference"/>
+				<WorkUnit Name="Enemy" ID="{510D12E1-003D-4145-8536-5858DF0C5DBA}" PersistMode="Reference"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

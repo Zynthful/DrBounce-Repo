@@ -821,6 +821,825 @@
 							</ChildrenList>
 							<ObjectLists/>
 						</ActorMixer>
+						<ActorMixer Name="Stun" ID="{B40D6183-AA7A-4AB1-BFF7-DBBC04C6D628}" ShortID="28233160">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<SwitchContainer Name="Stunned" ID="{329C98AB-2407-47FE-95E2-9A1C7BEE9EE6}" ShortID="725767056">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{30EA535F-5408-4E0F-9A5D-589A81A6C057}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-100"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-7</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="DefaultSwitchOrState">
+											<ObjectRef Name="Medium" ID="{263CFE83-B1B1-4991-B3CF-2E8570A19D27}" WorkUnitID="{6A990274-792E-4F07-9CA8-3BFDEF31EED6}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="Enemy_Size" ID="{55750A57-9F56-45F2-9C0A-1719830D080D}" WorkUnitID="{6A990274-792E-4F07-9CA8-3BFDEF31EED6}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<BlendContainer Name="Large" ID="{EF74701B-9FA2-4E98-860B-0B56D754E73B}" ShortID="85392054">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_Enemy_Stunned_Notif_Large" ID="{18D75ACA-FD36-4814-8888-8098310C6FFB}" ShortID="608307163">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Notif_Large" ID="{E726E793-5BAE-4DA4-8E34-438E58AC50DA}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Notif_Large.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="456076823"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Notif_Large" ID="{E726E793-5BAE-4DA4-8E34-438E58AC50DA}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Birds" ID="{8418A756-23F0-47A6-807C-8261316C5C18}" ShortID="693921070">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>-400</Value>
+															</ValueList>
+														</Property>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+														<Reference Name="ReflectionsAuxSend">
+															<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Birds" ID="{A15F4A38-2A69-4FA2-B269-972FA8086361}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Birds.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="630263409"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Birds" ID="{A15F4A38-2A69-4FA2-B269-972FA8086361}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</BlendContainer>
+										<BlendContainer Name="Medium" ID="{BAB7C0F6-7CA0-42D6-A38A-F4D71F0B5B40}" ShortID="92493534">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+												<Reference Name="ReflectionsAuxSend">
+													<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_Enemy_Stunned_Notif_Medium" ID="{6095C8DD-CD59-4B1F-AB69-3A7B491F7A42}" ShortID="71342524">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Notif_Medium" ID="{789522E8-3D56-4B9F-AA0E-4C6C95B89D41}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Notif_Medium.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="139336153"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Notif_Medium" ID="{789522E8-3D56-4B9F-AA0E-4C6C95B89D41}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Birds" ID="{71AFB3F2-B188-4B18-8D8C-8992B5BC6B0A}" ShortID="163914892">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+														<Reference Name="ReflectionsAuxSend">
+															<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Birds" ID="{CA1FD436-88C9-4E39-ABDD-31EF4F8B3215}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Birds.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="630263409"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Birds" ID="{CA1FD436-88C9-4E39-ABDD-31EF4F8B3215}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</BlendContainer>
+										<BlendContainer Name="Small" ID="{5022144C-3930-48DD-B0C9-1348D3F81E0D}" ShortID="543446473">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+												<Reference Name="ReflectionsAuxSend">
+													<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_Enemy_Stunned_Notif_Medium" ID="{7C6A2076-C731-4F48-A1FC-E191528C2930}" ShortID="281240708">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>800</Value>
+															</ValueList>
+														</Property>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+														<Reference Name="ReflectionsAuxSend">
+															<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Notif_Medium" ID="{915E1FAF-D918-4B42-8017-5ED87E386F75}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Notif_Medium.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="139336153"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Notif_Medium" ID="{915E1FAF-D918-4B42-8017-5ED87E386F75}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Birds" ID="{4B4B6AEC-B8B6-46FB-AF97-0B953720F6AB}" ShortID="666096951">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>400</Value>
+															</ValueList>
+														</Property>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+														<Reference Name="ReflectionsAuxSend">
+															<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Birds" ID="{B2494B13-5F06-4D56-8256-03FB6B1AECAB}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Birds.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="630263409"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Birds" ID="{B2494B13-5F06-4D56-8256-03FB6B1AECAB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</BlendContainer>
+									</ChildrenList>
+									<ObjectLists/>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="Large" ID="{EF74701B-9FA2-4E98-860B-0B56D754E73B}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Small" ID="{5022144C-3930-48DD-B0C9-1348D3F81E0D}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Medium" ID="{BAB7C0F6-7CA0-42D6-A38A-F4D71F0B5B40}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Small" ID="{7541FF06-DE28-4A34-AA45-E90291790C05}"/>
+												<ItemList>
+													<ItemRef Name="Small" ID="{5022144C-3930-48DD-B0C9-1348D3F81E0D}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Medium" ID="{263CFE83-B1B1-4991-B3CF-2E8570A19D27}"/>
+												<ItemList>
+													<ItemRef Name="Medium" ID="{BAB7C0F6-7CA0-42D6-A38A-F4D71F0B5B40}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Large" ID="{86247AEE-EC1F-4315-A90F-D8A821FBCDB0}"/>
+												<ItemList>
+													<ItemRef Name="Large" ID="{EF74701B-9FA2-4E98-860B-0B56D754E73B}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
+									</GroupingInfo>
+								</SwitchContainer>
+								<BlendContainer Name="Stun_Particle_Pop" ID="{A6BC243C-D7E5-4F43-AAF8-913EB2984B72}" ShortID="225702622">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{09255E49-304B-41D4-849E-109E32CF7263}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="200"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{1A9FDDEF-CC8F-45DD-A098-9B8C82484AB9}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Min" Type="Real64" Value="-7"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="Firework" ID="{B4185CAF-EC07-4064-99AC-E4D5EAA84754}" ShortID="1024287149">
+											<PropertyList>
+												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-6</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Firework_1" ID="{C801B6E5-A7BF-40F8-8599-3B1A31F322F6}" ShortID="866246977">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Firework_1" ID="{7C70796F-7807-49B0-BF28-5346DE473C6C}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Firework_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="260901875"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Firework_1" ID="{7C70796F-7807-49B0-BF28-5346DE473C6C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Firework_2" ID="{2C9F9161-6F23-4522-9792-278DDA7224C3}" ShortID="907714743">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Firework_2" ID="{55E98B02-DD2A-4A9B-8A76-57F54C90FF55}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Firework_2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="30890876"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Firework_2" ID="{55E98B02-DD2A-4A9B-8A76-57F54C90FF55}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Firework_3" ID="{47449123-C07E-4251-B56F-615359029D56}" ShortID="116402962">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Firework_3" ID="{3ACBAC41-54E7-4E47-BDD9-1AF46D8B38C2}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Firework_3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="44867086"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Firework_3" ID="{3ACBAC41-54E7-4E47-BDD9-1AF46D8B38C2}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Firework_4" ID="{24FBE44E-4AFA-414A-8211-C2C2D13988FA}" ShortID="612967558">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Firework_4" ID="{650B6AB0-258F-46A2-BF4B-D2BB6B936A9A}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Firework_4.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="855508952"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Firework_4" ID="{650B6AB0-258F-46A2-BF4B-D2BB6B936A9A}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="Krisp" ID="{CF8796FE-D76D-4216-97D9-18FD42B0DC92}" ShortID="837818109">
+											<PropertyList>
+												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Krisp_1" ID="{8C571997-985F-4F48-90FC-9E7F86782FC6}" ShortID="943685197">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_1" ID="{64C2D0A1-2028-4EDD-9B4D-1B5BA48F07D3}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Krisp_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="743061033"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_1" ID="{64C2D0A1-2028-4EDD-9B4D-1B5BA48F07D3}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Krisp_2" ID="{4898873A-60AE-4751-8929-D5A9B1551681}" ShortID="867938243">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_2" ID="{77C54136-B0EB-40CD-B2E8-66ADFC3E63D6}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Krisp_2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="510800511"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_2" ID="{77C54136-B0EB-40CD-B2E8-66ADFC3E63D6}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Krisp_3" ID="{7572507B-14A8-42F2-8C7D-159E428159A4}" ShortID="15218330">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_3" ID="{F5D04440-C58A-4304-9C14-2E5B1E8C1676}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Krisp_3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="372295811"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_3" ID="{F5D04440-C58A-4304-9C14-2E5B1E8C1676}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Krisp_4" ID="{1C04305D-7D3C-4F1B-9B23-68CF15C16715}" ShortID="921571675">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_4" ID="{EF8ADFB1-D58F-4CF0-965A-83CEDC3D5812}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Krisp_4.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="716881035"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_4" ID="{EF8ADFB1-D58F-4CF0-965A-83CEDC3D5812}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Krisp_5" ID="{BCA0BE05-442F-4775-A9D2-C61267756B2A}" ShortID="463179015">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_5" ID="{875FF922-2CF5-46EA-A055-6DE57D809997}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Krisp_5.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="592507709"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_5" ID="{875FF922-2CF5-46EA-A055-6DE57D809997}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Krisp_6" ID="{B39D6BA4-0E70-4AF0-8C15-3BF285FFF912}" ShortID="169682752">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_6" ID="{FE131C98-D713-4BD0-8B27-A71C55528A87}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Krisp_6.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="9348502"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_6" ID="{FE131C98-D713-4BD0-8B27-A71C55528A87}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Krisp_7" ID="{FAF37746-B877-457C-BC72-760408A0A2F3}" ShortID="736356696">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_7" ID="{1067EA63-00F5-43EF-ABE8-7020B846270F}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Krisp_7.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="169310918"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_7" ID="{1067EA63-00F5-43EF-ABE8-7020B846270F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Krisp_8" ID="{868552AA-B553-4643-80E3-4EA825EC7410}" ShortID="640640043">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_8" ID="{055FCE6F-CE7B-4298-8991-BFB8EED6A16E}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Krisp_8.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="98906036"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_8" ID="{055FCE6F-CE7B-4298-8991-BFB8EED6A16E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="DB_SFX_Enemy_Stunned_Pop_Krisp_9" ID="{5DC982BC-3D46-414E-837F-9B8A4ABB64FF}" ShortID="462996352">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_9" ID="{F6F6DB62-54AE-49AF-92A9-F1094E75DC6E}">
+															<Language>SFX</Language>
+															<AudioFile>DB_SFX_Enemy_Stunned_Pop_Krisp_9.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="338188237"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="DB_SFX_Enemy_Stunned_Pop_Krisp_9" ID="{F6F6DB62-54AE-49AF-92A9-F1094E75DC6E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
+									</ChildrenList>
+									<ObjectLists/>
+								</BlendContainer>
+								<BlendContainer Name="Stun_Progress" ID="{E683CF77-CECB-4CF3-B7EA-B7919EBA3428}" ShortID="658833133">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{ABC0E711-1CE4-40BC-A6A8-30AF7D5FBBA6}"/>
+												</ModifierInfo>
+											</ModifierList>
+											<RTPCList>
+												<RTPC Name="" ID="{237C1154-79BA-47B5-A25A-FEDCB39FD29A}" ShortID="846362067">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="Stun_Progress" ID="{CEAD2F06-16FD-4E6D-B730-8CEFD38E3FD6}" WorkUnitID="{53509FFC-1E2F-4F4E-8366-0ECAAE502B6D}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{B16E6ED8-D763-4C92-A90E-1EFEDDE29FD6}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="65537"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>0</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>1</XPos>
+																<YPos>1387</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-15</Value>
+											</ValueList>
+											<RTPCList>
+												<RTPC Name="" ID="{FB91EE2C-3279-4F8F-B2B1-249F06548C99}" ShortID="670122607">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="Stun_Progress" ID="{CEAD2F06-16FD-4E6D-B730-8CEFD38E3FD6}" WorkUnitID="{53509FFC-1E2F-4F4E-8366-0ECAAE502B6D}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{859E748C-D385-4A62-B930-13D47D799DF4}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="3"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>-12.64046</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>1</XPos>
+																<YPos>0</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="DB_SFX_Enemy_Stun_Progress" ID="{16DF2090-58A6-4701-A6A6-0D418292D80A}" ShortID="110469463">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DB_SFX_Enemy_Stun_Progress" ID="{7BBC93F6-2416-44D5-8798-3B8EAAE12E28}">
+													<Language>SFX</Language>
+													<AudioFile>DB_SFX_Enemy_Stun_Progress.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1059073891"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DB_SFX_Enemy_Stun_Progress" ID="{7BBC93F6-2416-44D5-8798-3B8EAAE12E28}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<ObjectLists/>
+								</BlendContainer>
+							</ChildrenList>
+							<ObjectLists/>
+						</ActorMixer>
 					</ChildrenList>
 					<ObjectLists/>
 				</ActorMixer>

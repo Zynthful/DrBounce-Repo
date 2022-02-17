@@ -26,6 +26,9 @@ namespace AK
         static const AkUniqueID ENEMY_HEALTH_DEATH = 2932285363U;
         static const AkUniqueID ENEMY_HEALTH_DEATH_PARTICLE_COLLIDE = 4019809755U;
         static const AkUniqueID ENEMY_HEALTH_INJURED = 3919011194U;
+        static const AkUniqueID ENEMY_STUN_END = 2724073864U;
+        static const AkUniqueID ENEMY_STUN_INCREASE = 3231467681U;
+        static const AkUniqueID ENEMY_STUNNED = 268174739U;
         static const AkUniqueID FOOTSTEP = 1866025847U;
         static const AkUniqueID GUN_BOUNCE_FEEDBACK = 2862887114U;
         static const AkUniqueID GUN_CATCH = 4103136129U;
@@ -98,6 +101,31 @@ namespace AK
             } // namespace SWITCH
         } // namespace COLLISION_MATERIAL
 
+        namespace ENEMY_BOUNCE_TYPE
+        {
+            static const AkUniqueID GROUP = 1048211601U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID BOUNCE_AWAY = 1903985670U;
+                static const AkUniqueID BOUNCE_BACK = 267090673U;
+                static const AkUniqueID BOUNCE_UP = 3485075655U;
+                static const AkUniqueID NO_BOUNCE = 3131894243U;
+            } // namespace SWITCH
+        } // namespace ENEMY_BOUNCE_TYPE
+
+        namespace ENEMY_SIZE
+        {
+            static const AkUniqueID GROUP = 3783208413U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID LARGE = 4284352190U;
+                static const AkUniqueID MEDIUM = 2849147824U;
+                static const AkUniqueID SMALL = 1846755610U;
+            } // namespace SWITCH
+        } // namespace ENEMY_SIZE
+
     } // namespace SWITCHES
 
     namespace GAME_PARAMETERS
@@ -126,6 +154,7 @@ namespace AK
         static const AkUniqueID SS_AIR_STORM = 3715662592U;
         static const AkUniqueID SS_AIR_TIMEOFDAY = 3203397129U;
         static const AkUniqueID SS_AIR_TURBULENCE = 4160247818U;
+        static const AkUniqueID STUN_PROGRESS = 1603095301U;
         static const AkUniqueID VOLUME_OVERRIDE = 1657400430U;
     } // namespace GAME_PARAMETERS
 
