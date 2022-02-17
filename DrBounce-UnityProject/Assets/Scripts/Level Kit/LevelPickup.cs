@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class LevelPickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private Unlocks unlocksOnPickup;
+
+    [SerializeField]
+    private bool destroyOnPickup = true;
+    [SerializeField]
+    private float timeBeforeDestroy = .2f;
+
+    private void OnTriggerEnter(Collider other) 
     {
-        
+        if(other.CompareTag("Player"))
+        {
+            GetComponent<UnlockTracker>().NewUnlocks(unlocksOnPickup.unlocks);
+            if(destroyOnPickup)
+                Destroy(gameObject, timeBeforeDestroy);
+                Destroy(this);
+        }
     }
 }
