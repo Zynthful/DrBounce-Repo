@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     public static Transform player;
     public InputMaster controls;
     public Vector3 move;
+    [Tooltip("The higher the number, the quicker your momentum dies. 0 depletes it super slowly")]
+    public float momentumLossRate;
     [SerializeField]
     private float acceleration;
     public float accelerationSpeed;
@@ -163,7 +165,6 @@ public class PlayerMovement : MonoBehaviour
             onDashSliderValue?.Raise(dashSliderPos);
         }
 
-        print(move + "move");
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
@@ -211,8 +212,20 @@ public class PlayerMovement : MonoBehaviour
             if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
             {
                 velocity.y = (-40f * Time.fixedDeltaTime);
-                //velocity.x = 0;
-                //velocity.z = 0;
+            }
+
+            //If the player has movement velocity and is on the ground
+            if (velocity.x != 0)
+            {
+                Debug.Log(velocity.x);
+                // reduce the velocity over time by the momentum loss rate.
+                //If the player is moving with the momentum, it won't be depleted. Move is always between 0 & 1 - if the player's movement is at its max, then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
+                velocity.x -= (velocity.x * (momentumLossRate + 1 + (Mathf.Abs(move.x) * momentumLossRate)) * Time.deltaTime);
+            }
+            if (velocity.z != 0)
+            {
+                velocity.z -= (velocity.z * (momentumLossRate + 1 + (Mathf.Abs(move.z) * -momentumLossRate)) * Time.deltaTime);
+                Debug.Log("Killing Z momentum");
             }
         }
 
@@ -326,7 +339,6 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 jump = false;
-                //print("Midhop");
                 jumpHeight = 0;
                 velocity.y -= floatiness;
 
@@ -351,7 +363,6 @@ public class PlayerMovement : MonoBehaviour
             acceleration = 1;
             coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
-            //print(isGrounded);
             isGrounded = true;
             if (slideDirectionDecided == false)
             {
