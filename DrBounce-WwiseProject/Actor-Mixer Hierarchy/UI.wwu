@@ -6,11 +6,6 @@
 				<ActorMixer Name="UI" ID="{5736CBC6-35D8-4782-953A-DBBBDE70D079}" ShortID="752336355">
 					<PropertyList>
 						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
-						<Property Name="Volume" Type="Real64">
-							<ValueList>
-								<Value>-8</Value>
-							</ValueList>
-						</Property>
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -30,6 +25,11 @@
 								<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-6</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
@@ -634,6 +634,11 @@
 								<SwitchContainer Name="Button_Click_Fail" ID="{97791F59-EC85-4023-899C-2872DE53E703}" ShortID="204334528">
 									<PropertyList>
 										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-8</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -705,6 +710,11 @@
 								<SwitchContainer Name="Button_Click_Success" ID="{8E265282-B1E5-4A79-8727-165843B4F467}" ShortID="1038875514">
 									<PropertyList>
 										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -826,6 +836,51 @@
 													<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 												</Reference>
 											</ReferenceList>
+											<ChildrenList>
+												<RandomSequenceContainer Name="Paper" ID="{8AF416A6-E34E-4981-976E-788AE1098CA3}" ShortID="240981954">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="DB_SFX_UI_BP_Button_Return_1" ID="{7ADBF8A1-63C1-4172-B146-C2C3102F0BE8}" ShortID="216416429">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Blueprint" ID="{2FCDC646-3026-48F4-931B-C67EDC953BCB}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="UI" ID="{679513FF-4ECD-4A8E-BAC8-6C11EC2FE68C}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_UI_BP_Button_Return_1" ID="{C83839C7-61FD-4A9E-AF18-81E7F3211A36}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_UI_BP_Button_Return_1.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="798609601"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_UI_BP_Button_Return_1" ID="{C83839C7-61FD-4A9E-AF18-81E7F3211A36}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</RandomSequenceContainer>
+											</ChildrenList>
 											<ObjectLists/>
 										</BlendContainer>
 									</ChildrenList>
@@ -858,10 +913,33 @@
 								<BlendContainer Name="Selectable_PointerEnter" ID="{F4D252DE-806D-428E-85BF-5329336D9F51}" ShortID="1002406731">
 									<PropertyList>
 										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{E43BA9A3-0EB5-4052-A2EC-860AE6CE913D}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-100"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-5</Value>
+												<Value>-12</Value>
 											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{8686A190-4399-4C29-87C5-1F8B53937F3B}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Min" Type="Real64" Value="-2"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
 										</Property>
 									</PropertyList>
 									<ReferenceList>
@@ -959,10 +1037,33 @@
 								<BlendContainer Name="Selectable_Select" ID="{CAF62F3F-BCEE-40A8-8FD5-CEFEFBB326A5}" ShortID="243794234">
 									<PropertyList>
 										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{0008FCD2-DA19-427E-B7E9-FFA2E9E4F3FF}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-100"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-5</Value>
+												<Value>-12</Value>
 											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{E95DEDC2-971A-4E19-9B49-0DF7C148FBE1}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Min" Type="Real64" Value="-2"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
 										</Property>
 									</PropertyList>
 									<ReferenceList>
