@@ -16,6 +16,8 @@ public class UnlockTracker : MonoBehaviour
     [SerializeField]
     private Unlocks levelStartSettings;
 
+    public static UnlockTracker instance;
+
 
     // Events to enable/disable unlocks
     [SerializeField]
@@ -71,6 +73,8 @@ public class UnlockTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+        
         DisableAllUnlocks();
         if(levelStartSettings != null)
         {

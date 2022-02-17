@@ -11,13 +11,13 @@ public class LevelPickup : MonoBehaviour
     [SerializeField]
     private bool destroyOnPickup = true;
     [SerializeField]
-    private float timeBeforeDestroy = .2f;
+    private float timeBeforeDestroy = .05f;
 
     private void OnTriggerEnter(Collider other) 
     {
         if(other.CompareTag("Player"))
         {
-            GetComponent<UnlockTracker>().NewUnlocks(unlocksOnPickup.unlocks);
+            UnlockTracker.instance.NewUnlocks(unlocksOnPickup.unlocks);
             if(destroyOnPickup)
                 Destroy(gameObject, timeBeforeDestroy);
                 Destroy(this);

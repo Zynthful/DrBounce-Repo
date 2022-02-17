@@ -53,7 +53,6 @@ public class GunThrowing : MonoBehaviour
     [SerializeField] private float coyoteTimeDuration;
     
 
-    SwitchHeldItem inventory;
     private int amountOfBounces;
     private int amountOfBouncesUnique;  // bounces where it's not bounced against the same object twice in succession
 
@@ -146,7 +145,6 @@ public class GunThrowing : MonoBehaviour
         //outlineScript = GetComponentInChildren<Outline>();
 
         owner = PlayerMovement.player;
-        inventory = SwitchHeldItem.instance;
 
         rb = GetComponent<Rigidbody>();
 
@@ -302,11 +300,6 @@ public class GunThrowing : MonoBehaviour
             shooting.CheckIfCharged();
 
             AffectPhysics(0.2f, 0.2f);
-
-            if(inventory.currentHeldTransform == transform)
-            {
-                inventory.currentHeldTransform = null; inventory.SwitchActiveItem();
-            }
         }
     }
 
@@ -342,8 +335,6 @@ public class GunThrowing : MonoBehaviour
             currentVel = Vector3.zero;
 
             onReset?.Invoke();
-
-            inventory.OnPickupItem(transform);
 
             // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
             shooting.CheckIfCharged();
