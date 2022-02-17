@@ -215,17 +215,18 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //If the player has movement velocity and is on the ground
-            if (velocity.x != 0)
+            if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
             {
-                Debug.Log(velocity.x);
                 // reduce the velocity over time by the momentum loss rate.
                 //If the player is moving with the momentum, it won't be depleted. Move is always between 0 & 1 - if the player's movement is at its max, then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
-                velocity.x -= (velocity.x * (momentumLossRate + 1 + (Mathf.Abs(move.x) * momentumLossRate)) * Time.deltaTime);
-            }
-            if (velocity.z != 0)
-            {
-                velocity.z -= (velocity.z * (momentumLossRate + 1 + (Mathf.Abs(move.z) * -momentumLossRate)) * Time.deltaTime);
-                Debug.Log("Killing Z momentum");
+                Vector3 mario = new Vector3(velocity.x, 0, velocity.z);
+                Vector3 luigi = new Vector3(move.x, 0, move.z);
+
+                Debug.Log(luigi.normalized);
+
+                //mario -= (-luigi.normalized * momentumLossRate * Time.deltaTime);
+                velocity.x -= ((velocity.normalized.x * momentumLossRate) - (luigi.normalized.x * momentumLossRate)) * Time.deltaTime;
+                velocity.z -= ((velocity.normalized.z * momentumLossRate) - (luigi.normalized.z * momentumLossRate)) * Time.deltaTime;
             }
         }
 
