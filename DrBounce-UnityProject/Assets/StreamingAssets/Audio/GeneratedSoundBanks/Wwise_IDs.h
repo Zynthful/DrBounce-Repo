@@ -28,6 +28,7 @@ namespace AK
         static const AkUniqueID ENEMY_HEALTH_INJURED = 3919011194U;
         static const AkUniqueID ENEMY_STUN_END = 2724073864U;
         static const AkUniqueID ENEMY_STUN_INCREASE = 3231467681U;
+        static const AkUniqueID ENEMY_STUN_PARTICLE_SPAWN = 865452671U;
         static const AkUniqueID ENEMY_STUNNED = 268174739U;
         static const AkUniqueID FOOTSTEP = 1866025847U;
         static const AkUniqueID GUN_BOUNCE_FEEDBACK = 2862887114U;
