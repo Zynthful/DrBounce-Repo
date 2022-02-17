@@ -15,6 +15,7 @@ public class Checkpoint : MonoBehaviour
     private int currentCheckpoint = 0;
 
     private int currentSceneIndex = -1;
+    private string sceneName = "";
 
     public static Checkpoint checkpointManagerInstance = null;
 
@@ -53,7 +54,6 @@ public class Checkpoint : MonoBehaviour
         DeathZone.OnPlayerDeath += ReturnToCheckpoint;
         PlayerHealth.OnPlayerDeath += ReturnToCheckpoint;
 
-
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -69,27 +69,48 @@ public class Checkpoint : MonoBehaviour
 
     private void Awake()
     {
+        //print("awake");
+
         if (checkpointManagerInstance == null)
         {
+            //print("finding");
             checkpointManagerInstance = FindObjectOfType(typeof(Checkpoint)) as Checkpoint;
+
+            //print(checkpointManagerInstance);
         }
 
         if (checkpointManagerInstance == null)
         {
+            //print("making");
             checkpointManagerInstance = this;
         }
         else if (checkpointManagerInstance != this)
         {
+            //print("deathing");
             Destroy(gameObject);
         }
 
         DontDestroyOnLoad(this.gameObject);
 
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        //print("before " + currentSceneIndex);
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;   //think this line is causing the bug but don't know how to fix it
+        //print("after " + currentSceneIndex);
+
+        sceneName = SceneManager.GetActiveScene().name;
+        //print(sceneName);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
+        //print("on scene loaded");
+
+        //print(scene.buildIndex);
+
+        //print("work? " + currentSceneIndex);
+        //print(sceneName);
+
+        //print(scene.buildIndex == currentSceneIndex);
+
         if (currentSceneIndex == -1)
         {
             currentSceneIndex = scene.buildIndex;
@@ -105,13 +126,14 @@ public class Checkpoint : MonoBehaviour
         {
             checkpointManagerInstance = null;
             firstSetup = false;
-            //currentSceneIndex = -1;
+            currentSceneIndex = -1;
 
             foreach (Transform trans in checkpoints) 
             {
                 Destroy(trans.gameObject);
             }
 
+            //print("death");
             Destroy(gameObject);
         }
     }
