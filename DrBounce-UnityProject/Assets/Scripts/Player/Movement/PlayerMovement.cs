@@ -483,6 +483,11 @@ public class PlayerMovement : MonoBehaviour
         knockbackPower = power;
     }
 
+    public void UpdateDashCount(int newAmount)
+    {
+        dashesBeforeLanding = newAmount;
+    }
+
     IEnumerator Dash()
     {
         // Checks:

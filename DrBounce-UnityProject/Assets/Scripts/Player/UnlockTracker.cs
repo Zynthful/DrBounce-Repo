@@ -24,27 +24,40 @@ public class UnlockTracker : MonoBehaviour
     public UnityEvent unlockSecondDash = null;
     [SerializeField]
     public UnityEvent unlockMagnet = null;
+    [SerializeField]
+    public UnityEvent disableFirstDash = null;
+    [SerializeField]
+    public UnityEvent disableSecondDash = null;
+    [SerializeField]
+    public UnityEvent disableMagnet = null;
 
     void EnableUnlock(UnlockTypes type)
     {
         switch(type)
         {
             case UnlockTypes.FirstDash:
-                unlockFirstDash.Invoke();
+                unlockFirstDash?.Invoke();
                 break;
 
             case UnlockTypes.SecondDash:
-                unlockSecondDash.Invoke();
+                unlockSecondDash?.Invoke();
                 break;
 
             case UnlockTypes.Magnet:
-                unlockMagnet.Invoke();
+                unlockMagnet?.Invoke();
                 break;
 
             default:
                 Debug.LogError("Type not setup with an event, @Cole for being dumb");
                 break;
         }
+    }
+
+    void DisableAllUnlocks()
+    {
+        disableSecondDash?.Invoke();
+        disableFirstDash?.Invoke();
+        disableMagnet?.Invoke();
     }
 
     public void NewUnlocks(UnlockTypes[] newUnlocks)
@@ -58,6 +71,7 @@ public class UnlockTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DisableAllUnlocks();
         if(levelStartSettings != null)
         {
             NewUnlocks(levelStartSettings.unlocks);
