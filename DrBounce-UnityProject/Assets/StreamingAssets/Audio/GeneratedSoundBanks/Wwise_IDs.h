@@ -132,6 +132,7 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID BOUNCEPAD_NUMOFBOUNCES = 856530565U;
+        static const AkUniqueID COLLISION_IMPULSE_MAGNITUDE = 2292195936U;
         static const AkUniqueID HEALTH_HIT_DAMAGE = 3274506471U;
         static const AkUniqueID LOW_PASS = 1177178531U;
         static const AkUniqueID MASTERVOLUME = 2918011349U;
