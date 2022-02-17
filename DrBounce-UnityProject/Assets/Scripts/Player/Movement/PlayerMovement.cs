@@ -164,7 +164,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         print(move + "move");
-        print(velocity + "velocity");
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
