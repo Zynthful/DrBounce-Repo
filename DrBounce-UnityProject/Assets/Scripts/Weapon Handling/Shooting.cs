@@ -334,6 +334,7 @@ public class Shooting : MonoBehaviour
         if (!GameManager.s_Instance.paused)
         {
             maxShotCharging = false;
+            onChargingMaxShotProgress?.Invoke(0.0f);
 
             // Release a max charged shot if we've fully charged and we're holding the gun
             if (maxShotCharged && gunThrowing.GetIsHeld())
