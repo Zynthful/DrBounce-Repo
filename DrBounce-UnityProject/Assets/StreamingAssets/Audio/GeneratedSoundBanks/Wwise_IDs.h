@@ -13,6 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID BGM_LEVEL_2 = 3736445777U;
         static const AkUniqueID BOUNCE_OBJECT = 2365089589U;
         static const AkUniqueID BOUNCE_PLAYER = 2376949343U;
         static const AkUniqueID CAMERA_FLY_QUICK = 3362723590U;
@@ -76,6 +77,22 @@ namespace AK
         static const AkUniqueID UI_TV_SELECTABLE_SELECT = 1544786970U;
         static const AkUniqueID UNPAUSE = 3412868374U;
     } // namespace EVENTS
+
+    namespace STATES
+    {
+        namespace COMBAT_STATE
+        {
+            static const AkUniqueID GROUP = 1238077023U;
+
+            namespace STATE
+            {
+                static const AkUniqueID IN_COMBAT = 2116791127U;
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID NOT_IN_COMBAT = 2120752185U;
+            } // namespace STATE
+        } // namespace COMBAT_STATE
+
+    } // namespace STATES
 
     namespace SWITCHES
     {
