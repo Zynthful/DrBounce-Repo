@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 slideLeftRight;
     private bool headCheckPerformed = false;
     private bool hasLetGo = false;
+    public bool canSlide = true;
 
     // Knockback values
     private float knockbackPower;
@@ -453,13 +454,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isCrouching == false)
             {
-                if(controls.Player.Movement.ReadValue<Vector2>().y <= 0)
+                if(controls.Player.Movement.ReadValue<Vector2>().y <= 0 || !canSlide)
                 {
                     isCrouching = true;
                     oldSpeed = speed;
                     speed /= 2;
                 }
-                else
+                else if(canSlide)
                 {
                     isSliding = true;
 
@@ -486,6 +487,11 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateDashCount(int newAmount)
     {
         dashesBeforeLanding = newAmount;
+    }
+
+    public void UpdateCanSlide(bool i_canSlide)
+    {
+        canSlide = i_canSlide;
     }
 
     IEnumerator Dash()
