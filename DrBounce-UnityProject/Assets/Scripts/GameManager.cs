@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Time.timeScale = 1.0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         decalM.ClearDecals();
