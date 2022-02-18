@@ -29,19 +29,11 @@ public class Checkpoint : MonoBehaviour
 
     private void ReturnToCheckpoint() 
     {
-        //print("return");
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-        //player = PlayerMovement.player;
-
-        //player.transform.position = checkpoints[currentCheckpoint].position;
     }
 
     private void ReachedNextCheckpoint() 
     {
-        //print("hit me");
-
         if (currentCheckpoint < checkpoints.Length - 1)
         {
             currentCheckpoint++;
@@ -53,7 +45,6 @@ public class Checkpoint : MonoBehaviour
         CheckpointHit.OnCollision += ReachedNextCheckpoint;
         DeathZone.OnPlayerDeath += ReturnToCheckpoint;
         PlayerHealth.OnPlayerDeath += ReturnToCheckpoint;
-
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -63,78 +54,53 @@ public class Checkpoint : MonoBehaviour
         CheckpointHit.OnCollision -= ReachedNextCheckpoint;
         DeathZone.OnPlayerDeath -= ReturnToCheckpoint;
         PlayerHealth.OnPlayerDeath -= ReturnToCheckpoint;
-
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Awake()
     {
-        //print("awake");
-
         if (checkpointManagerInstance == null)
         {
-            //print("finding");
             checkpointManagerInstance = FindObjectOfType(typeof(Checkpoint)) as Checkpoint;
-
-            //print(checkpointManagerInstance);
         }
 
         if (checkpointManagerInstance == null)
         {
-            //print("making");
             checkpointManagerInstance = this;
         }
         else if (checkpointManagerInstance != this)
         {
-            //print("deathing");
             Destroy(gameObject);
         }
 
         DontDestroyOnLoad(this.gameObject);
-
-        //print("before " + currentSceneIndex);
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;   //think this line is causing the bug but don't know how to fix it
-        //print("after " + currentSceneIndex);
-
-        sceneName = SceneManager.GetActiveScene().name;
-        //print(sceneName);
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //print("on scene loaded");
-
-        //print(scene.buildIndex);
-
-        //print("work? " + currentSceneIndex);
-        //print(sceneName);
-
-        //print(scene.buildIndex == currentSceneIndex);
-
-        if (currentSceneIndex == -1)
+        if (scene.buildIndex != 3)  //needs to be the build index for the loading screen
         {
-            currentSceneIndex = scene.buildIndex;
-        }
-
-        //makes it so you only respawn in the current scene
-        if (scene.buildIndex == currentSceneIndex)
-        {
-            player = PlayerMovement.player;
-            player.transform.position = checkpoints[currentCheckpoint].position;
-        }
-        else 
-        {
-            checkpointManagerInstance = null;
-            firstSetup = false;
-            currentSceneIndex = -1;
-
-            foreach (Transform trans in checkpoints) 
+            if (currentSceneIndex == -1)
             {
-                Destroy(trans.gameObject);
+                currentSceneIndex = scene.buildIndex;
             }
+            if (scene.buildIndex == currentSceneIndex)
+            {
+                player = PlayerMovement.player;
+                player.transform.position = checkpoints[currentCheckpoint].position;
+            }
+            else
+            {
+                checkpointManagerInstance = null;
+                firstSetup = false;
+                currentSceneIndex = -1;
 
-            //print("death");
-            Destroy(gameObject);
+                foreach (Transform trans in checkpoints)
+                {
+                    Destroy(trans.gameObject);
+                }
+                Destroy(gameObject);
+            }
         }
     }
 }
