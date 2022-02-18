@@ -24,7 +24,7 @@ public class EnemyChase : BtNode
     public override NodeState evaluate(Blackboard blackboard)
     {
 
-        Debug.Log(path.status);
+        //Debug.Log(path.status);
 
         if (m_blackboard.spottedPlayer == true)
         {
