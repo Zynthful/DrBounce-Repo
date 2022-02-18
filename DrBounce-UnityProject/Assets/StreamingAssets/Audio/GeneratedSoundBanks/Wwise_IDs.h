@@ -168,8 +168,9 @@ namespace AK
         static const AkUniqueID BOUNCEPAD_NUMOFBOUNCES = 856530565U;
         static const AkUniqueID COLLISION_IMPULSE_MAGNITUDE = 2292195936U;
         static const AkUniqueID HEALTH_HIT_DAMAGE = 3274506471U;
-        static const AkUniqueID LOW_PASS = 1177178531U;
+        static const AkUniqueID MASTER_LOW_PASS = 93313484U;
         static const AkUniqueID MASTERVOLUME = 2918011349U;
+        static const AkUniqueID MUSIC_LOW_PASS = 549164459U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
         static const AkUniqueID NUM_ENEMIES_IN_COMBAT_WITH = 457807310U;
         static const AkUniqueID OBJECTSIZE = 1059072663U;
