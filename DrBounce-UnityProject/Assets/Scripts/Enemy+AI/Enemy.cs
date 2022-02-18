@@ -74,15 +74,10 @@ public class Enemy : MonoBehaviour
     public float rateOfFire;
 
     [Header("Events")]
-    [SerializeField]
     public UnityEvent onPatrol = null;
-    [SerializeField]
     public UnityEvent onAttack = null;
-    [SerializeField]
     public UnityEvent onChase = null;
-    [SerializeField]
     public UnityEvent onGiveUp = null;
-    [SerializeField]
     public UnityEvent onSpotted = null;
 
     public NavMeshAgent navMeshAgent;
@@ -90,12 +85,16 @@ public class Enemy : MonoBehaviour
     [Space(10)]
     public List<Vector3> patrolPoints = new List<Vector3> { };
 
+    private int id = 0;
+
     protected Stun stun;
     #endregion
 
     private void Start()
     {
         pool = ObjectPooler.Instance;
+
+        id = gameObject.GetInstanceID();
     }
 
     protected virtual void Awake()
@@ -123,6 +122,7 @@ public class Enemy : MonoBehaviour
             {
                 case Blackboard.Actions.ATTACKING:
                     onAttack?.Invoke();
+                    CombatAudioManager.s_Instance.AddEnemy(id);
                     break;
 
                 case Blackboard.Actions.PATROLING:
@@ -135,10 +135,12 @@ public class Enemy : MonoBehaviour
 
                 case Blackboard.Actions.LOST:
                     onGiveUp?.Invoke();
+                    CombatAudioManager.s_Instance.RemoveEnemy(id);
                     break;
 
                 case Blackboard.Actions.FIRSTSPOTTED:
                     onSpotted?.Invoke();
+                    CombatAudioManager.s_Instance.AddEnemy(id);
                     break;
             }
 

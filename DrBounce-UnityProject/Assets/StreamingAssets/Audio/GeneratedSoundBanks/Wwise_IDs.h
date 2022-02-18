@@ -13,7 +13,11 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID BGM_LEVEL_1 = 3736445778U;
         static const AkUniqueID BGM_LEVEL_2 = 3736445777U;
+        static const AkUniqueID BGM_LEVEL_3 = 3736445776U;
+        static const AkUniqueID BGM_LEVEL_4 = 3736445783U;
+        static const AkUniqueID BGM_MAIN_MENU = 4038578923U;
         static const AkUniqueID BOUNCE_OBJECT = 2365089589U;
         static const AkUniqueID BOUNCE_PLAYER = 2376949343U;
         static const AkUniqueID CAMERA_FLY_QUICK = 3362723590U;
@@ -92,6 +96,18 @@ namespace AK
             } // namespace STATE
         } // namespace COMBAT_STATE
 
+        namespace PAUSED_STATE
+        {
+            static const AkUniqueID GROUP = 3336199605U;
+
+            namespace STATE
+            {
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID NOT_PAUSED = 2014024977U;
+                static const AkUniqueID PAUSED = 319258907U;
+            } // namespace STATE
+        } // namespace PAUSED_STATE
+
     } // namespace STATES
 
     namespace SWITCHES
@@ -154,6 +170,7 @@ namespace AK
         static const AkUniqueID LOW_PASS = 1177178531U;
         static const AkUniqueID MASTERVOLUME = 2918011349U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
+        static const AkUniqueID NUM_ENEMIES_IN_COMBAT_WITH = 457807310U;
         static const AkUniqueID OBJECTSIZE = 1059072663U;
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
         static const AkUniqueID PLAYER_GUN_CHARGE = 1641787780U;
@@ -180,7 +197,14 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
-        static const AkUniqueID MASTER = 4056684167U;
+        static const AkUniqueID ALL_IN_ONE = 2451497209U;
+        static const AkUniqueID GENERAL = 133642231U;
+        static const AkUniqueID LEVEL_1 = 1290008369U;
+        static const AkUniqueID LEVEL_2 = 1290008370U;
+        static const AkUniqueID LEVEL_3 = 1290008371U;
+        static const AkUniqueID LEVEL_4 = 1290008372U;
+        static const AkUniqueID MAIN_MENU = 2005704188U;
+        static const AkUniqueID UI = 1551306167U;
     } // namespace BANKS
 
     namespace BUSSES

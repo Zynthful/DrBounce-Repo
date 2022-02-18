@@ -104,6 +104,37 @@
 									</RTPCList>
 								</Property>
 							</PropertyList>
+							<StateInfo>
+								<StatePropertyList>
+									<Property Name="BusVolume"/>
+									<Property Name="Highpass"/>
+									<Property Name="Lowpass"/>
+									<Property Name="OutputBusHighpass"/>
+									<Property Name="OutputBusLowpass"/>
+									<Property Name="Pitch"/>
+									<Property Name="Volume"/>
+								</StatePropertyList>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="Paused_State" ID="{DC652B3E-6993-405F-B254-614CE51246D4}"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="Paused" ID="{D2176E39-6326-4067-94AA-642281814A64}"/>
+										<CustomState Name="" ID="{FF9EE127-ED66-47B2-BA8C-9EDA46C32520}" ShortID="379239298">
+											<PropertyList>
+												<Property Name="OutputBusHighpass" Type="int16" Value="60"/>
+												<Property Name="OutputBusLowpass" Type="int16" Value="30"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="Not_Paused" ID="{69741386-A138-46A4-A069-9B69879F3034}"/>
+										<CustomState Name="" ID="{B0B344F6-C781-4E08-9707-DDF78D9CFC6C}" ShortID="323340590"/>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
 							<ObjectLists/>
 						</Bus>
 						<Bus Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}">
