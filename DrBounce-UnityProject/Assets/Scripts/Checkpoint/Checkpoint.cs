@@ -87,7 +87,7 @@ public class Checkpoint : MonoBehaviour
             if (scene.buildIndex == currentSceneIndex)
             {
                 player = PlayerMovement.player;
-                player.transform.position = checkpoints[currentCheckpoint].position;
+                player.transform.position = new Vector3(checkpoints[currentCheckpoint].position.x, checkpoints[currentCheckpoint].position.y + 1, checkpoints[currentCheckpoint].position.z);
             }
             else
             {
