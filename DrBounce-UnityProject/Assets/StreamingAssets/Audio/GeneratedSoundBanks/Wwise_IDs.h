@@ -66,6 +66,7 @@ namespace AK
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
         static const AkUniqueID SLIDE_END = 114683718U;
         static const AkUniqueID SLIDE_START = 2149348397U;
+        static const AkUniqueID STOP_MUSIC = 2837384057U;
         static const AkUniqueID UHH_CHEESED_TO_MEET_YOU = 3276816688U;
         static const AkUniqueID UI_BP_BUTTON_CLICK_FAIL = 1780783421U;
         static const AkUniqueID UI_BP_BUTTON_CLICK_SUCCESS = 935477938U;
