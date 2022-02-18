@@ -118,6 +118,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameEvent _onLandOnNonBounceableGround = null;
 
+
+    private bool momentumFalling;
     private void Awake()
     {
         oldCoyoteTime = coyoteTime;
@@ -219,9 +221,20 @@ public class PlayerMovement : MonoBehaviour
             {
                 // reduce the velocity over time by the momentum loss rate.
                 //If the player is moving with the momentum, it won't be depleted. Move is always between 0 & 1 - if the player's movement is at its max, then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
+               
+                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate) + momentumLossRate)) * Time.deltaTime;
+                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate) + momentumLossRate)) * Time.deltaTime;
 
-                velocity.x -= ((velocity.normalized.x * momentumLossRate) - (move.normalized.x * momentumLossRate)) * Time.deltaTime;
-                velocity.z -= ((velocity.normalized.z * momentumLossRate) - (move.normalized.z * momentumLossRate)) * Time.deltaTime;
+                //Allows the player to push against their momentum to slow it down without springing back after letting go
+                if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
+                {
+                    velocity.x += move.x;
+                }
+                if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
+                {
+                    velocity.z += move.z;
+                }
+
             }
         }
 
@@ -283,7 +296,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-        controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
+        controller.Move(velocity * Time.deltaTime);
         #endregion
 
         #region Dashing
