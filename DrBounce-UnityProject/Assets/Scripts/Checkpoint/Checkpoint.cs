@@ -12,7 +12,7 @@ public class Checkpoint : MonoBehaviour
 
     [SerializeField] private Transform[] checkpoints;
 
-    private int currentCheckpoint = 0;
+    [SerializeField] private int currentCheckpoint = 0;
 
     private int currentSceneIndex = -1;
     private string sceneName = "";
