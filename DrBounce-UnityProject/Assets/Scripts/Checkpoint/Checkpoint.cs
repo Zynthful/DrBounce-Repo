@@ -78,7 +78,7 @@ public class Checkpoint : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex != 3)  //needs to be the build index for the loading screen
+        if (scene.buildIndex != 1)  //needs to be the build index for the loading screen
         {
             if (currentSceneIndex == -1)
             {
