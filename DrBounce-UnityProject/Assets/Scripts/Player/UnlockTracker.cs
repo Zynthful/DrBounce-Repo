@@ -12,6 +12,7 @@ public class UnlockTracker : MonoBehaviour
         SecondDash,
         Magnet,
         Slide,
+        NormalShooting,
     }
 
     [SerializeField]
@@ -30,6 +31,8 @@ public class UnlockTracker : MonoBehaviour
     [SerializeField]
     public UnityEvent unlockSlide = null;
     [SerializeField]
+    public UnityEvent unlockNormalShooting = null;
+    [SerializeField]
     public UnityEvent disableFirstDash = null;
     [SerializeField]
     public UnityEvent disableSecondDash = null;
@@ -37,6 +40,8 @@ public class UnlockTracker : MonoBehaviour
     public UnityEvent disableMagnet = null;
     [SerializeField]
     public UnityEvent disableSlide = null;
+    [SerializeField]
+    public UnityEvent disableNormalShooting = null;
 
     void EnableUnlock(UnlockTypes type)
     {
@@ -58,6 +63,10 @@ public class UnlockTracker : MonoBehaviour
                 unlockSlide?.Invoke();
                 break;
 
+            case UnlockTypes.NormalShooting:
+                unlockNormalShooting?.Invoke();
+                break;
+
             default:
                 Debug.LogError("Type not setup with an event, @Cole for being dumb");
                 break;
@@ -70,6 +79,7 @@ public class UnlockTracker : MonoBehaviour
         disableFirstDash?.Invoke();
         disableMagnet?.Invoke();
         disableSlide?.Invoke();
+        disableNormalShooting?.Invoke();
     }
 
     public void NewUnlocks(UnlockTypes[] newUnlocks)

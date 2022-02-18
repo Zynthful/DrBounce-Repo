@@ -124,6 +124,8 @@ public class Shooting : MonoBehaviour
 
     private bool maxDamage;
 
+    private bool canShoot;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -222,6 +224,11 @@ public class Shooting : MonoBehaviour
         controls.Player.Heal.performed -= _ => Healing();
 
         gunThrowing.onThrown.RemoveListener(ShootReleased);
+    }
+
+    public void UpdateCanShoot(bool value)
+    {
+        canShoot = value;
     }
 
     /// <summary>
@@ -380,7 +387,7 @@ public class Shooting : MonoBehaviour
         }
 
         // Fire an uncharged shot
-        else
+        else if(canShoot)
         {
             onUnchargedShotFired?.Invoke();
             _onUnchargedShotFired?.Raise();
