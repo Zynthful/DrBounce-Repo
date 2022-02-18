@@ -9,7 +9,7 @@ public static class SaveSystem
     public static void SaveInLevel(LevelSaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "levelData.dat";
+        string path = Application.persistentDataPath + "/levelData.dat";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, data);
@@ -18,7 +18,7 @@ public static class SaveSystem
 
     public static LevelSaveData LoadInLevel()
     {
-        string path = Application.persistentDataPath + "levelData.dat";
+        string path = Application.persistentDataPath + "/levelData.dat";
         if(File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -39,7 +39,7 @@ public static class SaveSystem
     public static void SaveGameData(GameSaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "save.dat";
+        string path = Application.persistentDataPath + "/save.dat";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, data);
@@ -48,7 +48,7 @@ public static class SaveSystem
 
     public static GameSaveData LoadGameData()
     {
-        string path = Application.persistentDataPath + "save.dat";
+        string path = Application.persistentDataPath + "/save.dat";
         if(File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

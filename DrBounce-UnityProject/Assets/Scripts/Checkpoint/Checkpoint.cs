@@ -45,6 +45,23 @@ public class Checkpoint : MonoBehaviour
         {
             currentCheckpoint++;
         }
+
+        SaveLevelProgress();
+    }
+
+    void SaveLevelProgress()
+    {
+        // Save Level Progress
+        Transform player = PlayerMovement.player;
+
+        int[] checkpoint = Checkpoint.checkpointManagerInstance.GetCheckpointAndLevel();
+        LevelSaveData data = new LevelSaveData(checkpoint[1], 
+                                                checkpoint[0], 
+                                                player.GetComponent<PlayerHealth>().GetHealth(), 
+                                                new float[3]{player.position.x, player.position.y, player.position.z},
+                                                player.GetComponentInChildren<Shooting>().GetCharges());
+
+        SaveSystem.SaveInLevel(data);
     }
 
     void OnEnable()
@@ -114,5 +131,10 @@ public class Checkpoint : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    public int[] GetCheckpointAndLevel()
+    {
+        return new int[2]{currentCheckpoint,currentSceneIndex};
     }
 }
