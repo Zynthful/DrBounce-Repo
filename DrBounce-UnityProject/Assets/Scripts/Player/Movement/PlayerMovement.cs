@@ -118,8 +118,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameEvent _onLandOnNonBounceableGround = null;
 
-
-    private bool momentumFalling;
     private void Awake()
     {
         oldCoyoteTime = coyoteTime;
