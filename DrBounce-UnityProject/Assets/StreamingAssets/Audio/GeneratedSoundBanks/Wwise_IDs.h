@@ -167,11 +167,13 @@ namespace AK
     {
         static const AkUniqueID BOUNCEPAD_NUMOFBOUNCES = 856530565U;
         static const AkUniqueID COLLISION_IMPULSE_MAGNITUDE = 2292195936U;
+        static const AkUniqueID CRITICAL_DIALOGUE_VOLUME = 3513493796U;
         static const AkUniqueID HEALTH_HIT_DAMAGE = 3274506471U;
         static const AkUniqueID MASTER_LOW_PASS = 93313484U;
         static const AkUniqueID MASTERVOLUME = 2918011349U;
         static const AkUniqueID MUSIC_LOW_PASS = 549164459U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
+        static const AkUniqueID NONCRITICAL_DIALOGUE_VOLUME = 3346270995U;
         static const AkUniqueID NUM_ENEMIES_IN_COMBAT_WITH = 457807310U;
         static const AkUniqueID OBJECTSIZE = 1059072663U;
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
@@ -181,6 +183,7 @@ namespace AK
         static const AkUniqueID PLAYER_GUN_NUMOFBOUNCES = 1762700618U;
         static const AkUniqueID PLAYER_HEALTH_PERCENTAGE = 3361892810U;
         static const AkUniqueID RPM = 796049864U;
+        static const AkUniqueID SFX_VOLUME = 1564184899U;
         static const AkUniqueID SFXVOLUME = 988953028U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
         static const AkUniqueID SS_AIR_FREEFALL = 3002758120U;
@@ -211,9 +214,16 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID CRITICAL = 2534871658U;
+        static const AkUniqueID DIALOGUE = 3930136735U;
+        static const AkUniqueID ENEMIES = 2242381963U;
+        static const AkUniqueID ENVIRONMENT = 1229948536U;
+        static const AkUniqueID ENVIRONMENTAL = 1973600711U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
         static const AkUniqueID MOTION_FACTORY_BUS = 985987111U;
         static const AkUniqueID MUSIC = 3991942870U;
+        static const AkUniqueID NON_CRITICAL = 1182015412U;
+        static const AkUniqueID PLAYER = 1069431850U;
         static const AkUniqueID SFX = 393239870U;
         static const AkUniqueID UI = 1551306167U;
     } // namespace BUSSES

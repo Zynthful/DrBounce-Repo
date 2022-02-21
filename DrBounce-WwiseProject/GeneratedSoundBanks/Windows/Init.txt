@@ -20,6 +20,7 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	549164459	Music_Low_Pass			\Default Work Unit\Music_Low_Pass	
 	841620460	Concrete			\Factory Acoustic Textures\Textures\Concrete	
 	988953028	SFXVolume			\Default Work Unit\Volume Settings\SFXVolume	
+	1564184899	SFX_Volume			\Default Work Unit\Sidechaining\SFX_Volume	
 	1622247325	Player_Gun_MaxShot_Charge_Progress			\Default Work Unit\Player\Gun\Player_Gun_MaxShot_Charge_Progress	
 	1755085759	Wood_Deep			\Factory Acoustic Textures\Textures\Wood_Deep	
 	1873957695	Anechoic			\Factory Acoustic Textures\Textures\Anechoic	
@@ -31,24 +32,35 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	2918011349	MasterVolume			\Default Work Unit\Volume Settings\MasterVolume	
 	2928161104	Curtains			\Factory Acoustic Textures\Textures\Curtains	
 	3195498748	Cork_Tiles			\Factory Acoustic Textures\Textures\Cork_Tiles	
+	3513493796	Critical_Dialogue_Volume			\Default Work Unit\Sidechaining\Critical_Dialogue_Volume	
 	3670307564	Drywall			\Factory Acoustic Textures\Textures\Drywall	
 	4168643977	Acoustic_Banner			\Factory Acoustic Textures\Textures\Acoustic_Banner	
 	4262522749	Wood_Bright			\Factory Acoustic Textures\Textures\Wood_Bright	
 
 Audio Bus	ID	Name			Wwise Object Path	Notes
-	393239870	SFX			\Default Work Unit\Master Audio Bus\SFX	
+	393239870	SFX			\Default Work Unit\Master Audio Bus\Environmental\SFX	
 	985987111	Motion Factory Bus			\Default Work Unit\Motion Factory Bus	
-	1551306167	UI			\Default Work Unit\Master Audio Bus\SFX\UI	
+	1069431850	Player			\Default Work Unit\Master Audio Bus\Environmental\SFX\Player	
+	1182015412	Non-Critical			\Default Work Unit\Master Audio Bus\Environmental\Dialogue\Non-Critical	
+	1229948536	Environment			\Default Work Unit\Master Audio Bus\Environmental\SFX\Environment	
+	1551306167	UI			\Default Work Unit\Master Audio Bus\Environmental\SFX\UI	
+	1973600711	Environmental			\Default Work Unit\Master Audio Bus\Environmental	
+	2242381963	Enemies			\Default Work Unit\Master Audio Bus\Environmental\SFX\Enemies	
+	2534871658	Critical			\Default Work Unit\Master Audio Bus\Environmental\Dialogue\Critical	
 	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+	3930136735	Dialogue			\Default Work Unit\Master Audio Bus\Environmental\Dialogue	
 	3991942870	Music			\Default Work Unit\Master Audio Bus\Music	
 
 Auxiliary Bus	ID	Name			Wwise Object Path	Notes
-	1557528409	Aux_Room_Medium			\Default Work Unit\Master Audio Bus\SFX\Aux_Room_Medium	
-	3471733113	Aux_Room_Small			\Default Work Unit\Master Audio Bus\SFX\Aux_Room_Small	
+	1557528409	Aux_Room_Medium			\Default Work Unit\Master Audio Bus\Environmental\SFX\Environment\Aux_Room_Medium	
+	3471733113	Aux_Room_Small			\Default Work Unit\Master Audio Bus\Environmental\SFX\Environment\Aux_Room_Small	
 
 Effect plug-ins	ID	Name	Type				Notes
 	536301384	Room_Small (Custom)	Wwise RoomVerb			
 	815282617	Room_Medium (Custom)	Wwise RoomVerb			
+	1564184899	SFX_Volume	Wwise Meter			
+	3346270995	NonCritical_Dialogue_Volume	Wwise Meter			
+	3513493796	Critical_Dialogue_Volume	Wwise Meter			
 
 Audio Devices	ID	Name	Type				Notes
 	2317455096	No_Output	No Output			
