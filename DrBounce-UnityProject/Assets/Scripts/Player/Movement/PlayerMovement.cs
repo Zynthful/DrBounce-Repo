@@ -16,25 +16,33 @@ public class PlayerMovement : MonoBehaviour
     private float oldSpeed;
 
     [Header("Base Movement")]
-    public float speed = 8f;
-    public float gravity = -19.81f;
+    [SerializeField]
+    private float speed = 8f;
+    [SerializeField]
+    private float gravity = -19.81f;
     public static Transform player;
     public InputMaster controls;
-    public Vector3 move;
+    [SerializeField]
+    private Vector3 move;
     [Tooltip("The higher the number, the quicker your momentum dies. 0 depletes it super slowly")]
     public float momentumLossRate;
     [SerializeField]
     private float acceleration;
-    public float accelerationSpeed;
+    [SerializeField]
+    private float accelerationSpeed;
     private bool isMoving = false;
 
     [Header("Jump")]
-    public float jumpPeak = 3f;
-    public float jumpMin = 1f;
+    [SerializeField]
+    private float jumpPeak = 3f;
+    [SerializeField]
+    private float jumpMin = 1f;
     [Tooltip("The higher the value, the heavier the player is.")]
-    public float floatiness;
+    [SerializeField]
+    private float floatiness;
     [Tooltip("Set between 1 and 0, with 1 being lots of time and 0 being none")]
-    public float coyoteTime;
+    [SerializeField]
+    private float coyoteTime;
     private float oldCoyoteTime;
     private bool jump = false;
     private float jumpHeight = 0f;
@@ -43,14 +51,19 @@ public class PlayerMovement : MonoBehaviour
     private bool hasJumped = false;
 
     [Header("Dashing")]
-    public float dashStrength = 4f;
-    public float dashLength = 0.2f;
-    public int dashesBeforeLanding;
-    public float cooldownTime = 0.5f;
-    public float extendedNoGravTime = 0.1f;
-    public float noMovementTime;
+    [SerializeField]
+    private float dashStrength = 4f;
+    [SerializeField]
+    private float dashLength = 0.2f;
+    [SerializeField]
+    private int dashesBeforeLanding;
+    [SerializeField]
+    private float cooldownTime = 0.5f;
+    [SerializeField]
+    private float extendedNoGravTime = 0.1f;
+    [SerializeField]
     private bool cooldown = false;
-    private bool isDashing = false;
+    public bool isDashing = false;
     private int dashesPerformed = 0;
     private bool dashLocker = false;
     private bool movementBlocker = false;
@@ -61,16 +74,19 @@ public class PlayerMovement : MonoBehaviour
     private float dashSliderTime = 0f;
 
     [Header("Sliding")]
-    public float slideTime;
-    public float slideStrength;
+    [SerializeField]
+    private float slideTime;
+    [SerializeField]
+    private float slideStrength;
     public bool isSliding = false;
-    public float strafeStrength;
-    public float slideGravity;
+    [SerializeField]
+    private float strafeStrength;
+    [SerializeField]
+    private float slideGravity;
     private bool slideDirectionDecided = false;
-    private Vector3 slideDirection;
+    [HideInInspector] public Vector3 slideDirection;
     private Vector3 slideLeftRight;
     private bool headCheckPerformed = false;
-    private bool hasLetGo = false;
 
     // Knockback values
     private float knockbackPower;
@@ -543,7 +559,6 @@ public class PlayerMovement : MonoBehaviour
 
         isSliding = false;
 
-        hasLetGo = false;
         slideDirectionDecided = false;
         cooldown = false;
     }
