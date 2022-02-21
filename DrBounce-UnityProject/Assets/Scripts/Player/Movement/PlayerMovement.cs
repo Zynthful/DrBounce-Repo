@@ -386,12 +386,12 @@ public class PlayerMovement : MonoBehaviour
             acceleration = 1;
             coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
-            isGrounded = true;
             if (slideDirectionDecided == false)
             {
                 slideDirectionDecided = true;
                 slideDirection = transform.forward;
                 slideLeftRight = transform.right;
+                velocity += (slideDirection * slideStrength * 8); //Move them forward at a speed based on the dash strength
             }
 
             cooldown = true;
@@ -400,8 +400,6 @@ public class PlayerMovement : MonoBehaviour
             charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
-
-            velocity = (slideDirection * slideStrength * 8); //Move them forward at a speed based on the dash strength
         }
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
