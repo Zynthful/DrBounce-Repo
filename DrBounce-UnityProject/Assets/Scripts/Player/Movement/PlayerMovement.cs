@@ -220,8 +220,8 @@ public class PlayerMovement : MonoBehaviour
                 // reduce the velocity over time by the momentum loss rate.
                 //If the player is moving with the momentum, it won't be depleted. Move is always between 0 & 1 - if the player's movement is at its max, then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
                
-                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate))) * Time.deltaTime;
-                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate))) * Time.deltaTime;
+                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) * Time.deltaTime;
+                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
 
                 //Allows the player to push against their momentum to slow it down without springing back after letting go
                 if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
