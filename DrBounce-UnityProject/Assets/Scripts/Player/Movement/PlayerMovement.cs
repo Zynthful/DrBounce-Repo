@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float accelerationSpeed;
     private bool isMoving = false;
+    [SerializeField]
+    private float maxMomentum;
 
     [Header("Jump")]
     [SerializeField]
@@ -52,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Dashing")]
     [SerializeField]
-    private float dashStrength = 4f;
+    private float dashStrength = 8;
     [SerializeField]
     private float dashLength = 0.2f;
     [SerializeField]
@@ -384,22 +386,20 @@ public class PlayerMovement : MonoBehaviour
         {
             knockbackPower = 0;
             acceleration = 1;
-            coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
             if (slideDirectionDecided == false)
             {
                 slideDirectionDecided = true;
                 slideDirection = transform.forward;
                 slideLeftRight = transform.right;
-                velocity += (slideDirection * slideStrength * 8); //Move them forward at a speed based on the dash strength
+                velocity += (slideDirection * slideStrength); //Move them forward at a speed based on the dash strength
             }
-
-            cooldown = true;
             h = playerHeight * 0.35f;
             float lastHeight = charController.height;
+            //Moves the player downward
             charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
-            groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
+            groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely to the player's downard movement
         }
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
