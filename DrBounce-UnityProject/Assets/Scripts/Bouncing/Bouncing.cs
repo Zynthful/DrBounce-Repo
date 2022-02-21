@@ -35,6 +35,9 @@ public class Bouncing : MonoBehaviour
     [SerializeField]
     private UnityEvent onBounceObject = null; // Invoked when an object other than the player bounces off of it
 
+    [SerializeField]
+    private float basePlayerKnockback = 5;
+
     public Vector3[] BounceBack(Vector3 position, Vector3 origin)
     {
         Vector3[] vectors = new Vector3[3];
@@ -99,7 +102,7 @@ public class Bouncing : MonoBehaviour
         return vectors;
     }
 
-    public Vector3[] BounceStraight(Transform collision, Vector3 normal, Vector3 position)
+    public Vector3[] BounceStraight(Transform collision, Vector3 normal, Vector3 position, bool isPlayer)
     {
         Vector3[] vectors = new Vector3[3];
 
@@ -108,7 +111,14 @@ public class Bouncing : MonoBehaviour
         vectors[1] = position;
 
         vectors[2] = normal.normalized; vectors[2].y += .2f;
-        vectors[2] *= bounceForceMod;
+        if (isPlayer)
+        {
+            vectors[2] *= Mathf.Clamp(PlayerMovement.instance.velocity.magnitude / 1.75f, 1, PlayerMovement.instance.velocity.magnitude + basePlayerKnockback) + basePlayerKnockback;
+        }
+        else
+        {
+            vectors[2] *= bounceForceMod;
+        }
 
         return vectors;
     }
@@ -130,7 +140,7 @@ public class Bouncing : MonoBehaviour
                 return BounceForward(collision.transform, position, origin);
 
             case BounceType.W_Straight:
-                return BounceStraight(collision.transform, collision.contacts[0].normal, position);
+                return BounceStraight(collision.transform, collision.contacts[0].normal, position, false);
         }
 
         return null;
@@ -153,7 +163,7 @@ public class Bouncing : MonoBehaviour
                 return PlayerBounceForward(collision.transform, position, direction);
 
             case BounceType.W_Straight:
-                return BounceStraight(collision.transform, collision.normal, position);
+                return BounceStraight(collision.transform, collision.normal, position, true);
         }
 
         return null;

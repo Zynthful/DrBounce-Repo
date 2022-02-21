@@ -223,17 +223,17 @@ public class PlayerMovement : MonoBehaviour
                 velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) * Time.deltaTime;
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
 
-                //Allows the player to push against their momentum to slow it down without springing back after letting go
-                if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
-                {
-                    velocity.x += move.x;
-                }
-                if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
-                {
-                    velocity.z += move.z;
-                }
-
             }
+        }
+
+        //Allows the player to push against their momentum to slow it down without springing back after letting go
+        if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
+        {
+            velocity.x += move.x;
+        }
+        if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
+        {
+            velocity.z += move.z;
         }
 
         if (headIsTouchingSomething)
