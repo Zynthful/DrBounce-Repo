@@ -16,35 +16,26 @@ public class PlayerMovement : MonoBehaviour
     private float oldSpeed;
 
     [Header("Base Movement")]
-    [SerializeField]
-    private float speed = 8f;
-    [SerializeField]
-    private float gravity = -19.81f;
+    [SerializeField] private float speed = 8f;
+    [SerializeField] private float gravity = -19.81f;
     public static Transform player;
     public InputMaster controls;
-    [SerializeField]
-    private Vector3 move;
+    [SerializeField] private Vector3 move;
     [Tooltip("The higher the number, the quicker your momentum dies. 0 depletes it super slowly")]
     public float momentumLossRate;
-    [SerializeField]
-    private float acceleration;
-    [SerializeField]
-    private float accelerationSpeed;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float accelerationSpeed;
     private bool isMoving = false;
-    [SerializeField]
-    private float maxMomentum;
 
+    [SerializeField] private float maxMomentum;
     [Header("Jump")]
-    [SerializeField]
-    private float jumpPeak = 3f;
-    [SerializeField]
-    private float jumpMin = 1f;
+    [SerializeField] private float jumpPeak = 3f;
+    [SerializeField] private float jumpMin = 1f;
     [Tooltip("The higher the value, the heavier the player is.")]
-    [SerializeField]
-    private float floatiness;
+    [SerializeField] private float floatiness;
     [Tooltip("Set between 1 and 0, with 1 being lots of time and 0 being none")]
-    [SerializeField]
-    private float coyoteTime;
+
+    [SerializeField] private float coyoteTime;
     private float oldCoyoteTime;
     private bool jump = false;
     private float jumpHeight = 0f;
@@ -53,18 +44,12 @@ public class PlayerMovement : MonoBehaviour
     private bool hasJumped = false;
 
     [Header("Dashing")]
-    [SerializeField]
-    private float dashStrength = 8;
-    [SerializeField]
-    private float dashLength = 0.2f;
-    [SerializeField]
-    private int dashesBeforeLanding;
-    [SerializeField]
-    private float cooldownTime = 0.5f;
-    [SerializeField]
-    private float extendedNoGravTime = 0.1f;
-    [SerializeField]
-    private bool cooldown = false;
+    [SerializeField] private float dashStrength = 8;
+    [SerializeField] private float dashLength = 0.2f;
+    [SerializeField] private int dashesBeforeLanding;
+    [SerializeField] private float cooldownTime = 0.5f;
+    [SerializeField] private float extendedNoGravTime = 0.1f;
+    [SerializeField] private bool cooldown = false;
     public bool isDashing = false;
     private int dashesPerformed = 0;
     private bool dashLocker = false;
@@ -76,15 +61,11 @@ public class PlayerMovement : MonoBehaviour
     private float dashSliderTime = 0f;
 
     [Header("Sliding")]
-    [SerializeField]
-    private float slideTime;
-    [SerializeField]
-    private float slideStrength;
+    [SerializeField] private float slideTime;
+    [SerializeField] private float slideStrength;
     public bool isSliding = false;
-    [SerializeField]
-    private float strafeStrength;
-    [SerializeField]
-    private float slideGravity;
+    [SerializeField] private float strafeStrength;
+    [SerializeField] private float slideGravity;
     private bool slideDirectionDecided = false;
     [HideInInspector] public Vector3 slideDirection;
     private Vector3 slideLeftRight;
@@ -109,32 +90,20 @@ public class PlayerMovement : MonoBehaviour
     private float oldGroundDistance;
 
     [Header("UnityEvents")]
-    [SerializeField]
-    private UnityEvent onJump = null;
-    [SerializeField]
-    private UnityEvent onDash = null;
-    [SerializeField]
-    private UnityEvent onSlide = null;
-    [SerializeField]
-    private UnityEvent onSlideEnd = null;
-    [SerializeField]
-    private UnityEvent onLand = null;
-    [SerializeField]
-    private UnityEvent onLandOnNonBounceableGround = null;
+    [SerializeField] private UnityEvent onJump = null;
+    [SerializeField] private UnityEvent onDash = null;
+    [SerializeField] private UnityEvent onSlide = null;
+    [SerializeField] private UnityEvent onSlideEnd = null;
+    [SerializeField] private UnityEvent onLand = null;
+    [SerializeField] private UnityEvent onLandOnNonBounceableGround = null;
 
     [Header("Game Events")]
-    [SerializeField]
-    private GameEvent _onJump = null;
-    [SerializeField]
-    private GameEvent _onDash = null;
-    [SerializeField]
-    private GameEvent _onSlide = null;
-    [SerializeField]
-    private GameEvent _onSlideEnd = null;
-    [SerializeField]
-    private GameEventFloat onDashSliderValue = null;
-    [SerializeField]
-    private GameEvent _onLandOnNonBounceableGround = null;
+    [SerializeField] private GameEvent _onJump = null;
+    [SerializeField] private GameEvent _onDash = null;
+    [SerializeField] private GameEvent _onSlide = null;
+    [SerializeField] private GameEvent _onSlideEnd = null;
+    [SerializeField] private GameEventFloat onDashSliderValue = null;
+    [SerializeField] private GameEvent _onLandOnNonBounceableGround = null;
 
     private void Awake()
     {
@@ -240,7 +209,6 @@ public class PlayerMovement : MonoBehaviour
                
                 velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) * Time.deltaTime;
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
-
             }
         }
 
@@ -252,6 +220,13 @@ public class PlayerMovement : MonoBehaviour
         if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
         {
             velocity.z += move.z;
+        }
+
+        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
+        controller.Move(new Vector3(0, velocity.y, 0) * Time.deltaTime);
+        if(velocity.x != 0 || velocity.z != 0)
+        {
+            controller.Move(new Vector3(velocity.x - move.x, 0, velocity.z - move.z) * Time.deltaTime);
         }
 
         if (headIsTouchingSomething)
@@ -311,8 +286,7 @@ public class PlayerMovement : MonoBehaviour
             acceleration = 0;
         }
 
-        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-        controller.Move(velocity * Time.deltaTime);
+
         #endregion
 
         #region Dashing
@@ -366,7 +340,6 @@ public class PlayerMovement : MonoBehaviour
                 jump = false;
                 jumpHeight = 0;
                 velocity.y -= floatiness;
-
             }
 
             if (jumpHeight >= jumpPeak)
@@ -392,7 +365,7 @@ public class PlayerMovement : MonoBehaviour
                 slideDirectionDecided = true;
                 slideDirection = transform.forward;
                 slideLeftRight = transform.right;
-                velocity += (slideDirection * slideStrength); //Move them forward at a speed based on the dash strength
+                velocity = (slideDirection * slideStrength); //Move them forward at a speed based on the dash strength
             }
             h = playerHeight * 0.35f;
             float lastHeight = charController.height;
