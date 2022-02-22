@@ -68,6 +68,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 slideLeftRight;
     private bool headCheckPerformed = false;
 
+    private bool hasLetGo = false;
+    public bool canSlide = true;
+
     // Knockback values
     private float knockbackPower;
     private Vector3 knockbackDir;
