@@ -16,23 +16,26 @@ public class PlayerMovement : MonoBehaviour
     private float oldSpeed;
 
     [Header("Base Movement")]
-    public float speed = 8f;
-    public float gravity = -19.81f;
+    [SerializeField] private float speed = 8f;
+    [SerializeField] private float gravity = -19.81f;
     public static Transform player;
     public InputMaster controls;
-    public Vector3 move;
-    [SerializeField]
-    private float acceleration;
-    public float accelerationSpeed;
+    [SerializeField] private Vector3 move;
+    [Tooltip("The higher the number, the quicker your momentum dies. 0 depletes it super slowly")]
+    public float momentumLossRate;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float accelerationSpeed;
     private bool isMoving = false;
 
+    [SerializeField] private float maxMomentum;
     [Header("Jump")]
-    public float jumpPeak = 3f;
-    public float jumpMin = 1f;
+    [SerializeField] private float jumpPeak = 3f;
+    [SerializeField] private float jumpMin = 1f;
     [Tooltip("The higher the value, the heavier the player is.")]
-    public float floatiness;
+    [SerializeField] private float floatiness;
     [Tooltip("Set between 1 and 0, with 1 being lots of time and 0 being none")]
-    public float coyoteTime;
+
+    [SerializeField] private float coyoteTime;
     private float oldCoyoteTime;
     private bool jump = false;
     private float jumpHeight = 0f;
@@ -41,33 +44,30 @@ public class PlayerMovement : MonoBehaviour
     private bool hasJumped = false;
 
     [Header("Dashing")]
-    public float dashStrength = 4f;
-    public float dashLength = 0.2f;
-    public int dashesBeforeLanding;
-    public float cooldownTime = 0.5f;
-    public float extendedNoGravTime = 0.1f;
-    public float noMovementTime;
-    private bool cooldown = false;
-    private bool isDashing = false;
+    [SerializeField] private float dashStrength = 8;
+    [SerializeField] private float dashLength = 0.2f;
+    [SerializeField] private int dashesBeforeLanding;
+    [SerializeField] private float cooldownTime = 0.5f;
+    [SerializeField] private float extendedNoGravTime = 0.1f;
+    [SerializeField] private bool cooldown = false;
+    private Vector3 dashDirection;
+    public bool isDashing = false;
     private int dashesPerformed = 0;
     private bool dashLocker = false;
-    private bool movementBlocker = false;
-    private bool hasDashed = false;
-    private float x2;
-    private float z2;
 
     private float dashSliderTime = 0f;
 
     [Header("Sliding")]
-    public float slideTime;
-    public float slideStrength;
+    [SerializeField] private float slideTime;
+    [SerializeField] private float slideStrength;
     public bool isSliding = false;
-    public float strafeStrength;
-    public float slideGravity;
+    [SerializeField] private float strafeStrength;
+    [SerializeField] private float slideGravity;
     private bool slideDirectionDecided = false;
-    private Vector3 slideDirection;
+    [HideInInspector] public Vector3 slideDirection;
     private Vector3 slideLeftRight;
     private bool headCheckPerformed = false;
+
     private bool hasLetGo = false;
     public bool canSlide = true;
 
@@ -90,32 +90,20 @@ public class PlayerMovement : MonoBehaviour
     private float oldGroundDistance;
 
     [Header("UnityEvents")]
-    [SerializeField]
-    private UnityEvent onJump = null;
-    [SerializeField]
-    private UnityEvent onDash = null;
-    [SerializeField]
-    private UnityEvent onSlide = null;
-    [SerializeField]
-    private UnityEvent onSlideEnd = null;
-    [SerializeField]
-    private UnityEvent onLand = null;
-    [SerializeField]
-    private UnityEvent onLandOnNonBounceableGround = null;
+    [SerializeField] private UnityEvent onJump = null;
+    [SerializeField] private UnityEvent onDash = null;
+    [SerializeField] private UnityEvent onSlide = null;
+    [SerializeField] private UnityEvent onSlideEnd = null;
+    [SerializeField] private UnityEvent onLand = null;
+    [SerializeField] private UnityEvent onLandOnNonBounceableGround = null;
 
     [Header("Game Events")]
-    [SerializeField]
-    private GameEvent _onJump = null;
-    [SerializeField]
-    private GameEvent _onDash = null;
-    [SerializeField]
-    private GameEvent _onSlide = null;
-    [SerializeField]
-    private GameEvent _onSlideEnd = null;
-    [SerializeField]
-    private GameEventFloat onDashSliderValue = null;
-    [SerializeField]
-    private GameEvent _onLandOnNonBounceableGround = null;
+    [SerializeField] private GameEvent _onJump = null;
+    [SerializeField] private GameEvent _onDash = null;
+    [SerializeField] private GameEvent _onSlide = null;
+    [SerializeField] private GameEvent _onSlideEnd = null;
+    [SerializeField] private GameEventFloat onDashSliderValue = null;
+    [SerializeField] private GameEvent _onLandOnNonBounceableGround = null;
 
     private void Awake()
     {
@@ -164,7 +152,6 @@ public class PlayerMovement : MonoBehaviour
             onDashSliderValue?.Raise(dashSliderPos);
         }
 
-
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
@@ -212,9 +199,34 @@ public class PlayerMovement : MonoBehaviour
             if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
             {
                 velocity.y = (-40f * Time.fixedDeltaTime);
-                velocity.x = 0;
-                velocity.z = 0;
             }
+
+            //If the player has movement velocity and is on the ground
+            if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
+            {
+                // reduce the velocity over time by the momentum loss rate.
+                //If the player is moving with the momentum, it won't be depleted. Move is always between 0 & 1 - if the player's movement is at its max, then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
+               
+                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) * Time.deltaTime;
+                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
+            }
+        }
+
+        //Allows the player to push against their momentum to slow it down without springing back after letting go
+        if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
+        {
+            velocity.x += move.x;
+        }
+        if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
+        {
+            velocity.z += move.z;
+        }
+
+        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
+        controller.Move(new Vector3(0, velocity.y, 0) * Time.deltaTime);
+        if(velocity.x != 0 || velocity.z != 0)
+        {
+            controller.Move(new Vector3(velocity.x - move.x, 0, velocity.z - move.z) * Time.deltaTime);
         }
 
         if (headIsTouchingSomething)
@@ -241,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Movement
-        if (!GameManager.s_Instance.paused && movementBlocker == false)
+        if (!GameManager.s_Instance.paused && isDashing == false)
         {
 
             acceleration += Time.deltaTime * accelerationSpeed;
@@ -273,12 +285,7 @@ public class PlayerMovement : MonoBehaviour
         {
             acceleration = 0;
         }
-        //EARLY MOMENTUM SYSTEM - DOESN'T RESET! 
-        //velocity.x += move.x;
-        //velocity.z += move.z;
 
-        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-        controller.Move(velocity * Time.deltaTime); //Moves the player based on this velocity.
 
         #endregion
 
@@ -287,30 +294,24 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity = Vector3.zero;
             knockbackPower = 0;
-
-            if (hasDashed == false)
+            cooldown = true;
+            if (dashLocker == false)
             {
-                //acceleration = 1;
-                cooldown = true;
-
-                if (dashLocker == false)
+                dashLocker = true;
+                float x2 = controls.Player.Movement.ReadValue<Vector2>().x;
+                float z2 = controls.Player.Movement.ReadValue<Vector2>().y;
+                if (x2 == 0 && z2 == 0)
                 {
-                    dashLocker = true;
-                    x2 = controls.Player.Movement.ReadValue<Vector2>().x;
-                    z2 = controls.Player.Movement.ReadValue<Vector2>().y;
+                    dashDirection = transform.forward;
                 }
-                move = (transform.right * x2 + transform.forward * z2).normalized;
-
-                controller.Move(move * dashStrength * speed * Time.deltaTime);
+                else
+                {
+                   
+                    dashDirection = (transform.right * x2 + transform.forward * z2).normalized;
+                }
             }
-
-            if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
-            {
-                move = transform.forward;
-                controller.Move(move * dashStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
-                hasDashed = true;
-                controls.Player.Movement.Disable();
-            }
+            controller.Move(dashDirection * dashStrength * Time.deltaTime);
+            //controls.Player.Movement.Disable();
         }
         #endregion
 
@@ -331,10 +332,8 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 jump = false;
-                //print("Midhop");
                 jumpHeight = 0;
                 velocity.y -= floatiness;
-
             }
 
             if (jumpHeight >= jumpPeak)
@@ -352,31 +351,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (isSliding == true)
         {
-            //if (controls.Player.Crouch.ReadValue<float>() == 1 && hasLetGo == true)
-            //{
-            //    isSliding = false;
-            //}
             knockbackPower = 0;
             acceleration = 1;
-            coyoteTime = oldCoyoteTime;
             gravity = slideGravity;
-            //print(isGrounded);
-            isGrounded = true;
             if (slideDirectionDecided == false)
             {
                 slideDirectionDecided = true;
                 slideDirection = transform.forward;
                 slideLeftRight = transform.right;
+                velocity = (slideDirection * slideStrength); //Move them forward at a speed based on the dash strength
             }
-
-            cooldown = true;
             h = playerHeight * 0.35f;
             float lastHeight = charController.height;
+            //Moves the player downward
             charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
-            groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
-
-            controller.Move(slideDirection * slideStrength * speed * Time.deltaTime); //Move them forward at a speed based on the dash strength
+            groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely to the player's downard movement
         }
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
@@ -507,7 +497,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
             dashSliderTime = 0f;
-            movementBlocker = true;
 
             onDash?.Invoke();
             _onDash?.Raise();
@@ -528,9 +517,6 @@ public class PlayerMovement : MonoBehaviour
 
             isDashing = false;
             dashLocker = false;
-            movementBlocker = false;
-            hasDashed = false;
-            controls.Player.Movement.Enable();
 
             yield return new WaitForSeconds(extendedNoGravTime);
             gravity = oldGravity;
@@ -544,7 +530,6 @@ public class PlayerMovement : MonoBehaviour
 
         isSliding = false;
 
-        hasLetGo = false;
         slideDirectionDecided = false;
         cooldown = false;
     }
