@@ -50,13 +50,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float cooldownTime = 0.5f;
     [SerializeField] private float extendedNoGravTime = 0.1f;
     [SerializeField] private bool cooldown = false;
+    private Vector3 dashDirection;
     public bool isDashing = false;
     private int dashesPerformed = 0;
     private bool dashLocker = false;
-    private bool movementBlocker = false;
-    private bool hasDashed = false;
-    private float x2;
-    private float z2;
 
     private float dashSliderTime = 0f;
 
@@ -253,7 +250,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Movement
-        if (!GameManager.s_Instance.paused && movementBlocker == false)
+        if (!GameManager.s_Instance.paused && isDashing == false)
         {
 
             acceleration += Time.deltaTime * accelerationSpeed;
@@ -294,30 +291,24 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity = Vector3.zero;
             knockbackPower = 0;
-
-            if (hasDashed == false)
+            cooldown = true;
+            if (dashLocker == false)
             {
-                //acceleration = 1;
-                cooldown = true;
-
-                if (dashLocker == false)
+                dashLocker = true;
+                float x2 = controls.Player.Movement.ReadValue<Vector2>().x;
+                float z2 = controls.Player.Movement.ReadValue<Vector2>().y;
+                if (x2 == 0 && z2 == 0)
                 {
-                    dashLocker = true;
-                    x2 = controls.Player.Movement.ReadValue<Vector2>().x;
-                    z2 = controls.Player.Movement.ReadValue<Vector2>().y;
+                    dashDirection = transform.forward;
                 }
-                move = (transform.right * x2 + transform.forward * z2).normalized;
-
-                controller.Move(move * dashStrength * speed * Time.deltaTime);
+                else
+                {
+                   
+                    dashDirection = (transform.right * x2 + transform.forward * z2).normalized;
+                }
             }
-
-            if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
-            {
-                move = transform.forward;
-                controller.Move(move * dashStrength * 8 * Time.deltaTime); //Move them forward at a speed based on the dash strength
-                hasDashed = true;
-                controls.Player.Movement.Disable();
-            }
+            controller.Move(dashDirection * dashStrength * Time.deltaTime);
+            //controls.Player.Movement.Disable();
         }
         #endregion
 
@@ -493,7 +484,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
             dashSliderTime = 0f;
-            movementBlocker = true;
 
             onDash?.Invoke();
             _onDash?.Raise();
@@ -514,9 +504,6 @@ public class PlayerMovement : MonoBehaviour
 
             isDashing = false;
             dashLocker = false;
-            movementBlocker = false;
-            hasDashed = false;
-            controls.Player.Movement.Enable();
 
             yield return new WaitForSeconds(extendedNoGravTime);
             gravity = oldGravity;
