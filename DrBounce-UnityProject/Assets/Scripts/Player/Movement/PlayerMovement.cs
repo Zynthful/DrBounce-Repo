@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float accelerationSpeed;
     private bool isMoving = false;
 
-    [SerializeField] private float maxMomentum;
     [Header("Jump")]
     [SerializeField] private float jumpPeak = 3f;
     [SerializeField] private float jumpMin = 1f;
@@ -51,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float extendedNoGravTime = 0.1f;
     [SerializeField] private bool cooldown = false;
     private Vector3 dashDirection;
-    public bool isDashing = false;
+    [HideInInspector] public bool isDashing = false;
     private int dashesPerformed = 0;
     private bool dashLocker = false;
 
