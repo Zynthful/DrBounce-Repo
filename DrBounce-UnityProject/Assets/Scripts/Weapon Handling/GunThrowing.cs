@@ -202,11 +202,11 @@ public class GunThrowing : MonoBehaviour
 
         if (!held && !alone && !pulledByMagnet) 
         {
-            print("timer" + timeOnGround);
+            //print("timer" + timeOnGround);
             timeOnGround = timeOnGround + Time.deltaTime;
             if (timeOnGround >= timeLeftAlone) 
             {
-                print("alone");
+                //print("alone");
                 alone = true;
             }
         }
