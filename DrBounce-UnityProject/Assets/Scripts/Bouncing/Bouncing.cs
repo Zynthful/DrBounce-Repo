@@ -111,15 +111,8 @@ public class Bouncing : MonoBehaviour
         vectors[1] = position;
 
         vectors[2] = normal.normalized; vectors[2].y += .2f;
-        if (isPlayer)
-        {
-            vectors[2] *= Mathf.Clamp(PlayerMovement.instance.velocity.magnitude / 1.75f, 1, PlayerMovement.instance.velocity.magnitude + basePlayerKnockback) + basePlayerKnockback;
-            PlayerMovement.instance.slideDirection = normal.normalized;
-        }
-        else
-        {
-            vectors[2] *= bounceForceMod;
-        }
+
+        vectors[2] *= bounceForceMod;
 
         return vectors;
     }
