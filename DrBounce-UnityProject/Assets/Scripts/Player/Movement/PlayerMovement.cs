@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 move;
     [Tooltip("The higher the number, the quicker your momentum dies. 0 depletes it super slowly")]
     public float momentumLossRate;
+    [SerializeField] private float momentumStrength = 5;
     [SerializeField] private float acceleration;
     [SerializeField] private float accelerationSpeed;
     private bool isMoving = false;
@@ -151,6 +152,43 @@ public class PlayerMovement : MonoBehaviour
             onDashSliderValue?.Raise(dashSliderPos);
         }
 
+        #region Movement
+        if (!GameManager.s_Instance.paused && isDashing == false)
+        {
+
+            acceleration += Time.deltaTime * accelerationSpeed;
+
+            if (acceleration >= 1)
+            {
+                acceleration = 1;
+            }
+
+            float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
+            float z = controls.Player.Movement.ReadValue<Vector2>().y;
+
+            if (isSliding == false)
+            {
+                move = (transform.right * x + transform.forward * z).normalized * acceleration; //Creates a value to move the player in local space based on this value.
+                controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
+            }
+            else
+            {
+                move = (slideLeftRight * x); //Creates a value to move the player in local space based on this value.
+                controller.Move(move * strafeStrength * Time.deltaTime); //uses move value to move the player.
+            }
+
+            // Check if moving
+            isMoving = move != Vector3.zero ? true : false;
+        }
+
+        if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
+        {
+            acceleration = 0;
+        }
+
+
+        #endregion
+
         #region Crouching
         //print(isCrouching);
         float h = playerHeight;
@@ -211,23 +249,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        //Allows the player to push against their momentum to slow it down without springing back after letting go
-        if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
-        {
-            velocity.x += move.x;
-        }
-        if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
-        {
-            velocity.z += move.z;
-        }
-
-        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-        print(gameObject.GetComponent<CharacterController>().velocity.x);
-        if (velocity.x != 0 || velocity.z != 0)
-        {
-            controller.Move(new Vector3((velocity.x * Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x) - move.x) / momentumLossRate, 0, (velocity.z * Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z) - move.z) / momentumLossRate) * Time.deltaTime);
-        }
-        controller.Move(new Vector3(0, velocity.y, 0) * Time.deltaTime);
         if (headIsTouchingSomething)
         {
             velocity.y = (-40f * Time.fixedDeltaTime);
@@ -249,42 +270,71 @@ public class PlayerMovement : MonoBehaviour
         {
             Land();
         }
+
+        #endregion
+        #region Slide
+
+        if (isSliding == true)
+        {
+            knockbackPower = 0;
+            acceleration = 1;
+            gravity = slideGravity;
+            if (slideDirectionDecided == false)
+            {
+                slideDirectionDecided = true;
+                slideDirection = transform.forward;
+                slideLeftRight = transform.right;
+                velocity = (slideDirection * slideStrength); //Move them forward at a speed based on the dash strength
+            }
+            controller.Move(slideDirection * slideStrength * Time.deltaTime);
+            h = playerHeight * 0.35f;
+            float lastHeight = charController.height;
+            //Moves the player downward
+            charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
+            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+            groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely to the player's downard movement
+        }
+
+        if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
+        {
+            DisableSlide();
+
+            if (headIsTouchingSomething && headCheckPerformed == false) //Keeps the player crouched if they finish their slide underneath a small gap.
+            {
+                headCheckPerformed = true;
+                isCrouching = true;
+                oldSpeed = speed;
+                speed /= 2;
+            }
+        }
+
         #endregion
 
-        #region Movement
-        if (!GameManager.s_Instance.paused && isDashing == false)
+        #region Momentum
+
+        //Allows the player to push against their momentum to slow it down without springing back after letting go
+        if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
         {
-
-            acceleration += Time.deltaTime * accelerationSpeed;
-
-            if (acceleration >= 1)
-            {
-                acceleration = 1;
-            }
-
-            float x = controls.Player.Movement.ReadValue<Vector2>().x; //Reads the value set from the Input Master based on which keys are being pressed, or where the player is holding on a joystick.
-            float z = controls.Player.Movement.ReadValue<Vector2>().y;
-
-            if (isSliding == false)
-            {
-                move = (transform.right * x + transform.forward * z).normalized * acceleration; //Creates a value to move the player in local space based on this value.
-                controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
-            }
-            else
-            {
-                move = (slideLeftRight * x); //Creates a value to move the player in local space based on this value.
-                controller.Move(move * strafeStrength * Time.deltaTime); //uses move value to move the player.
-            }
-
-            // Check if moving
-            isMoving = move != Vector3.zero ? true : false;
+            velocity.x += move.x;
+        }
+        if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
+        {
+            velocity.z += move.z;
         }
 
-        if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
-        {
-            acceleration = 0;
-        }
+        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
 
+
+        controller.Move(new Vector3(Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x) * (velocity.x + move.x * speed) / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z) * (velocity.z + move.z * speed) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+
+        if (gameObject.GetComponent<CharacterController>().velocity.x == 0)
+        {
+            velocity.x = 0;
+        }
+        if (gameObject.GetComponent<CharacterController>().velocity.z == 0)
+        {
+            velocity.z = 0;
+        }
 
         #endregion
 
@@ -341,44 +391,6 @@ public class PlayerMovement : MonoBehaviour
                 jumpHeight = 0;
                 velocity.y -= floatiness;
 
-            }
-        }
-
-        #endregion
-
-        #region Slide
-
-        if (isSliding == true)
-        {
-            knockbackPower = 0;
-            acceleration = 1;
-            gravity = slideGravity;
-            controller.Move(slideDirection * slideStrength * 2 * Time.deltaTime);
-            if (slideDirectionDecided == false)
-            {
-                slideDirectionDecided = true;
-                slideDirection = transform.forward;
-                slideLeftRight = transform.right;
-                velocity = (slideDirection * slideStrength); //Move them forward at a speed based on the dash strength
-            }
-            h = playerHeight * 0.35f;
-            float lastHeight = charController.height;
-            //Moves the player downward
-            charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
-            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
-            groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely to the player's downard movement
-        }
-
-        if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
-        {
-            DisableSlide();
-
-            if (headIsTouchingSomething && headCheckPerformed == false) //Keeps the player crouched if they finish their slide underneath a small gap.
-            {
-                headCheckPerformed = true;
-                isCrouching = true;
-                oldSpeed = speed;
-                speed /= 2;
             }
         }
 
