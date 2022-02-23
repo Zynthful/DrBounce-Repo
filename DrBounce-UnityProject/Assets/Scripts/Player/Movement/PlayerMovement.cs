@@ -225,7 +225,7 @@ public class PlayerMovement : MonoBehaviour
         print(gameObject.GetComponent<CharacterController>().velocity.x);
         if (velocity.x != 0 || velocity.z != 0)
         {
-            controller.Move(new Vector3(velocity.x * Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x / 5) - move.x, 0, velocity.z * Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z / 5) - move.z) * Time.deltaTime);
+            controller.Move(new Vector3((velocity.x * Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x) - move.x) / momentumLossRate, 0, (velocity.z * Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z) - move.z) / momentumLossRate) * Time.deltaTime);
         }
         controller.Move(new Vector3(0, velocity.y, 0) * Time.deltaTime);
         if (headIsTouchingSomething)
@@ -353,7 +353,7 @@ public class PlayerMovement : MonoBehaviour
             knockbackPower = 0;
             acceleration = 1;
             gravity = slideGravity;
-            controller.Move(slideDirection * slideStrength * Time.deltaTime);
+            controller.Move(slideDirection * slideStrength * 2 * Time.deltaTime);
             if (slideDirectionDecided == false)
             {
                 slideDirectionDecided = true;
