@@ -70,6 +70,10 @@ public class GunThrowing : MonoBehaviour
     public bool inFlight;
     private bool throwing = false;
 
+    private float timeOnGround = 0;
+    [SerializeField] private float timeLeftAlone = 5;
+    private bool alone = false;
+
     //public Outline outlineScript;
 
     [Header("Unity Events")]
@@ -165,6 +169,7 @@ public class GunThrowing : MonoBehaviour
             exitedPlayer = true;
             canThrow = false;
             held = false;
+            alone = true;
         }
 
         transform.rotation = Quaternion.identity;
@@ -194,6 +199,17 @@ public class GunThrowing : MonoBehaviour
         else
         {
             hasLetGoOfTrigger = true;
+        }
+
+        if (!held && !alone) 
+        {
+            //print("timer");
+            timeOnGround = timeOnGround + Time.deltaTime;
+            if (timeOnGround >= timeLeftAlone) 
+            {
+                print("alone");
+                alone = true;
+            }
         }
     }
 
@@ -326,6 +342,8 @@ public class GunThrowing : MonoBehaviour
             inFlight = false;
             hasLetGoOfTrigger = false;
             held = true;
+            timeOnGround = 0;
+            alone = false;
 
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
