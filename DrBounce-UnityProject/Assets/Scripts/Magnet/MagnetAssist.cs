@@ -9,6 +9,9 @@ public class MagnetAssist : MonoBehaviour
     [SerializeField]
     private GunThrowing gun = null;
 
+    public delegate void MagnetUse(bool assistActive);
+    public static event MagnetUse OnMagnetUse;
+
     [Header("Assist Settings")]
     [SerializeField]
     [Range(0.0f, 50f)]
@@ -81,6 +84,7 @@ public class MagnetAssist : MonoBehaviour
         if (!assistActive && !gun.transform.parent && inRange && !gun.GetIsThrowing() && controls.Player.Throw.ReadValue<float>() >= 0.5f)
         {
             assistActive = true;
+            OnMagnetUse?.Invoke(assistActive);
             onAssistStart?.Invoke();
             _onAssistStart?.Raise();
         }
@@ -110,6 +114,7 @@ public class MagnetAssist : MonoBehaviour
             if (inRange)
             {
                 assistActive = true;
+                OnMagnetUse?.Invoke(assistActive);
 
                 onAssistStart?.Invoke();
                 _onAssistStart?.Raise();
@@ -135,6 +140,7 @@ public class MagnetAssist : MonoBehaviour
     private void Deactivate()
     {
         assistActive = false;
+        OnMagnetUse?.Invoke(assistActive);
 
         onAssistCancelled?.Invoke();
         _onAssistCancelled?.Raise();

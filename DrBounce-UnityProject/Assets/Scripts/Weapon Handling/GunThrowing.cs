@@ -73,6 +73,7 @@ public class GunThrowing : MonoBehaviour
     private float timeOnGround = 0;
     [SerializeField] private float timeLeftAlone = 5;
     private bool alone = false;
+    private bool pulledByMagnet = false;
 
     //public Outline outlineScript;
 
@@ -125,6 +126,9 @@ public class GunThrowing : MonoBehaviour
         controls.Player.Throw.performed += _ => SetThrowGunDelay();
         controls.Player.Throw.performed += _ => CancelThrow();
         controls.Player.Recall.performed += _ => RecallGun();
+
+        // Listen for event
+        MagnetAssist.OnMagnetUse += Magnet;
     }
 
     private void OnDisable()
@@ -133,16 +137,11 @@ public class GunThrowing : MonoBehaviour
         controls.Player.Throw.performed -= _ => SetThrowGunDelay();
         controls.Player.Throw.performed -= _ => CancelThrow();
         controls.Player.Recall.performed -= _ => ResetScript();
+
+        // Stop listening for event
+        MagnetAssist.OnMagnetUse -= Magnet;
     }
 
-    private IEnumerator WaitAndPrint(float waitTime)
-    {
-        controls.Player.Throw.Disable();
-
-        yield return new WaitForSeconds(waitTime);
-
-        controls.Player.Throw.Enable();
-    }
 
     void Start()
     {
@@ -201,15 +200,36 @@ public class GunThrowing : MonoBehaviour
             hasLetGoOfTrigger = true;
         }
 
-        if (!held && !alone) 
+        if (!held && !alone && !pulledByMagnet) 
         {
-            //print("timer");
+            print("timer" + timeOnGround);
             timeOnGround = timeOnGround + Time.deltaTime;
             if (timeOnGround >= timeLeftAlone) 
             {
                 print("alone");
                 alone = true;
             }
+        }
+    }
+
+    private IEnumerator WaitAndUse(float waitTime)
+    {
+        controls.Player.Throw.Disable();
+
+        yield return new WaitForSeconds(waitTime);
+
+        controls.Player.Throw.Enable();
+    }
+
+    private void Magnet(bool active) 
+    {
+        if (active)
+        {
+            pulledByMagnet = true;
+        }
+        else 
+        {
+            pulledByMagnet = false;
         }
     }
 
@@ -266,7 +286,7 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
-            StartCoroutine(WaitAndPrint(waitTime));
+            StartCoroutine(WaitAndUse(waitTime));
 
             throwing = true;
             held = false;
