@@ -206,8 +206,8 @@ public class PlayerMovement : MonoBehaviour
                 // reduce the velocity over time by the momentum loss rate.
                 //If the player is moving with the momentum, it won't be depleted. Move is always between 0 & 1 - if the player's movement is at its max, then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
                
-                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) * Time.deltaTime;
-                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
+                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) / 4 * Time.deltaTime;
+                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) / 4* Time.deltaTime;
             }
         }
 
@@ -222,12 +222,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-        controller.Move(new Vector3(0, velocity.y, 0) * Time.deltaTime);
-        if(velocity.x != 0 || velocity.z != 0)
+        print(gameObject.GetComponent<CharacterController>().velocity.x);
+        if (velocity.x != 0 || velocity.z != 0)
         {
-            controller.Move(new Vector3(velocity.x - move.x, 0, velocity.z - move.z) * Time.deltaTime);
+            controller.Move(new Vector3(velocity.x * Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x / 5) - move.x, 0, velocity.z * Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z / 5) - move.z) * Time.deltaTime);
         }
-
+        controller.Move(new Vector3(0, velocity.y, 0) * Time.deltaTime);
         if (headIsTouchingSomething)
         {
             velocity.y = (-40f * Time.fixedDeltaTime);
@@ -353,6 +353,7 @@ public class PlayerMovement : MonoBehaviour
             knockbackPower = 0;
             acceleration = 1;
             gravity = slideGravity;
+            controller.Move(slideDirection * slideStrength * Time.deltaTime);
             if (slideDirectionDecided == false)
             {
                 slideDirectionDecided = true;
