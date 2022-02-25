@@ -36,7 +36,7 @@ public class Bouncing : MonoBehaviour
     private UnityEvent onBounceObject = null; // Invoked when an object other than the player bounces off of it
 
     [SerializeField]
-    private float basePlayerKnockback = 5;
+    private float basePlayerKnockback = 15;
 
     public Vector3[] BounceBack(Vector3 position, Vector3 origin)
     {
@@ -112,7 +112,17 @@ public class Bouncing : MonoBehaviour
 
         vectors[2] = normal.normalized; vectors[2].y += .2f;
 
-        vectors[2] *= bounceForceMod;
+        if (isPlayer)
+        {
+            vectors[2] *= bounceForceMod;
+            //PlayerMovement.instance.velocity += (vectors[2] * basePlayerKnockback);
+            PlayerMovement.instance.bounceForce = basePlayerKnockback;
+        }
+        else
+        {
+
+            vectors[2] *= bounceForceMod;
+        }
 
         return vectors;
     }

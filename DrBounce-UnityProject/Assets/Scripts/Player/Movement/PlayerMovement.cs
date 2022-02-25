@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float accelerationSpeed;
     private bool isMoving = false;
+    public float bounceForce;
 
     [Header("Jump")]
     [SerializeField] private float jumpPeak = 3f;
@@ -213,65 +214,6 @@ public class PlayerMovement : MonoBehaviour
 
         #endregion
 
-        #region GroundChecking
-        bool wasGrounded = isGrounded;
-
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
-        headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
-
-        coyoteTime -= Time.deltaTime;
-
-        if (isGrounded)
-        {
-            coyoteTime = oldCoyoteTime;
-            hasJumped = false;
-            dashesPerformed = 0;
-
-            onDashSliderValue?.Raise(100);
-
-            if (dashesPerformed > 0)
-            {
-                StartCoroutine(StopDash()); //Starts coroutine stopdash, which waits a split second after hitting the ground to reset the dash counter.
-            } //This delay is to prevent the player being able to dash just before they hit the ground.
-            if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
-            {
-                velocity.y = (-40f * Time.fixedDeltaTime);
-            }
-
-            //If the player has movement velocity and is on the ground
-            if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
-            {
-                // reduce the velocity over time by the momentum loss rate.
-                //If the player is moving with the momentum, it won't be depleted. Move is always between 0 & 1 - if the player's movement is at its max, then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
-               
-                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) / 4 * Time.deltaTime;
-                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) / 4* Time.deltaTime;
-            }
-        }
-
-        if (headIsTouchingSomething)
-        {
-            velocity.y = (-40f * Time.fixedDeltaTime);
-            if (isCrouching == true)
-            {
-                isGrounded = false;
-                cooldown = true;
-            }
-        }
-
-        if (!headIsTouchingSomething && isCrouching == true)
-        {
-            isGrounded = true;
-            cooldown = false;
-        }
-
-        // Check if we've just become grounded
-        if (!wasGrounded && isGrounded)
-        {
-            Land();
-        }
-
-        #endregion
         #region Slide
 
         if (isSliding == true)
@@ -323,17 +265,68 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
+        print(bounceForce);
+        controller.Move(new Vector3(Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x + bounceForce) * (velocity.x + move.x * speed) / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z) * (velocity.z + move.z * speed) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
+        #endregion
 
-        controller.Move(new Vector3(Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x) * (velocity.x + move.x * speed) / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z) * (velocity.z + move.z * speed) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+        #region GroundChecking
+        bool wasGrounded = isGrounded;
 
-        if (gameObject.GetComponent<CharacterController>().velocity.x == 0)
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
+        headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
+
+        coyoteTime -= Time.deltaTime;
+
+        if (isGrounded)
         {
-            velocity.x = 0;
+            coyoteTime = oldCoyoteTime;
+            hasJumped = false;
+            dashesPerformed = 0;
+
+            onDashSliderValue?.Raise(100);
+
+            if (dashesPerformed > 0)
+            {
+                StartCoroutine(StopDash()); //Starts coroutine stopdash, which waits a split second after hitting the ground to reset the dash counter.
+            } //This delay is to prevent the player being able to dash just before they hit the ground.
+            if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
+            {
+                velocity.y = (-40f * Time.fixedDeltaTime);
+            }
+
+            //If the player has movement velocity and is on the ground
+            if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
+            {
+                // reduce the velocity over time by the momentum loss rate.
+                //If the player is moving with the momentum, it won't be depleted. Move is always between 0 & 1 - if the player's movement is at its max, then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
+
+                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) / 4 * Time.deltaTime;
+                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) / 4 * Time.deltaTime;
+            }
+            bounceForce = 0;
         }
-        if (gameObject.GetComponent<CharacterController>().velocity.z == 0)
+
+        if (headIsTouchingSomething)
         {
-            velocity.z = 0;
+            velocity.y = (-40f * Time.fixedDeltaTime);
+            if (isCrouching == true)
+            {
+                isGrounded = false;
+                cooldown = true;
+            }
+        }
+
+        if (!headIsTouchingSomething && isCrouching == true)
+        {
+            isGrounded = true;
+            cooldown = false;
+        }
+
+        // Check if we've just become grounded
+        if (!wasGrounded && isGrounded)
+        {
+            Land();
         }
 
         #endregion
