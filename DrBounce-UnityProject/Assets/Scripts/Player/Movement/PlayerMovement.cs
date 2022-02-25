@@ -265,8 +265,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-        print(bounceForce);
+
+        print(gameObject.GetComponent<CharacterController>().velocity.x + bounceForce);
+
         controller.Move(new Vector3(Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x + bounceForce) * (velocity.x + move.x * speed) / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z) * (velocity.z + move.z * speed) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+
+        if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce == 0)
+        {
+            velocity.x = 0;
+        }
+
+        if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce == 0)
+        {
+            velocity.z = 0;
+        }
 
         #endregion
 
@@ -304,6 +316,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) / 4 * Time.deltaTime;
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) / 4 * Time.deltaTime;
             }
+
             bounceForce = 0;
         }
 
