@@ -268,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
 
         print(gameObject.GetComponent<CharacterController>().velocity.x + bounceForce);
 
-        controller.Move(new Vector3(Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x + bounceForce) * (velocity.x + move.x * speed) / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z) * (velocity.z + move.z * speed) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+        controller.Move(new Vector3(Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.x + bounceForce) * (velocity.x + move.x * speed) / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(gameObject.GetComponent<CharacterController>().velocity.z + bounceForce) * (velocity.z + move.z * speed) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
         if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce == 0)
         {
