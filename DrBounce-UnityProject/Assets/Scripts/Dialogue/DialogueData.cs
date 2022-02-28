@@ -7,19 +7,23 @@ public class DialogueData : ScriptableObject
 {
     [Header("Dialogue Data")]
     [SerializeField]
+    [Tooltip("The Wwise event to be posted when this dialogue line is played.")]
     private AK.Wwise.Event @event = null;
     [SerializeField]
+    [Tooltip("The Dialogue Speaker Data who speaks this dialogue line.")]
     private DialogueSpeakerData speaker = null;
     [SerializeField]
-    private string subtitle = null;
+    private string subtitle = null; // todo: rework subtitle to use marker callbacks from Wwise
 
     [Header("Randomisation Settings")]
     [SerializeField]
+    [Tooltip("The overall chance to play this dialogue line. 1 = always plays, 0 = never plays.")]
     [Range(0.0f, 1.0f)]
     private float chanceToPlay = 1.0f;
 
     [Header("Cooldown Settings")]
     [SerializeField]
+    [Tooltip("The duration in seconds that this dialogue line must wait after playing before being able to play again.")]
     private float cooldown = 0.0f;
 
     private bool coolingDown = false;
@@ -50,6 +54,9 @@ public class DialogueData : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Resets cooldown.
+    /// </summary>
     private void Reset()
     {
         coolingDown = false;
