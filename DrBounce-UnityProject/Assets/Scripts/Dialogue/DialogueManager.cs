@@ -47,4 +47,11 @@ public class DialogueManager : MonoBehaviour
     {
         subtitleUI.Disable();
     }
+
+    public IEnumerator Cooldown(DialogueData data, float duration)
+    {
+        data.SetCoolingDown(true);
+        yield return new WaitForSeconds(duration);
+        data.SetCoolingDown(false);
+    }
 }
