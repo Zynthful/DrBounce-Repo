@@ -21,6 +21,8 @@ namespace AK
         static const AkUniqueID BOUNCE_OBJECT = 2365089589U;
         static const AkUniqueID BOUNCE_PLAYER = 2376949343U;
         static const AkUniqueID CAMERA_FLY_QUICK = 3362723590U;
+        static const AkUniqueID CHARGED = 3146088667U;
+        static const AkUniqueID COLLIDE = 3176465873U;
         static const AkUniqueID COLLIDE_ANY = 2766579562U;
         static const AkUniqueID COLLIDE_BOUNCEABLE = 3104417468U;
         static const AkUniqueID COLLIDE_NONBOUNCEABLE = 402864233U;
@@ -35,6 +37,8 @@ namespace AK
         static const AkUniqueID ENEMY_STUN_INCREASE = 3231467681U;
         static const AkUniqueID ENEMY_STUN_PARTICLE_SPAWN = 865452671U;
         static const AkUniqueID ENEMY_STUNNED = 268174739U;
+        static const AkUniqueID FAR_AWAY = 3715371445U;
+        static const AkUniqueID FIRE = 2678880713U;
         static const AkUniqueID FOOTSTEP = 1866025847U;
         static const AkUniqueID GUN_BOUNCE_FEEDBACK = 2862887114U;
         static const AkUniqueID GUN_CATCH = 4103136129U;
@@ -61,12 +65,16 @@ namespace AK
         static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
         static const AkUniqueID MAGNET_PULLING_START = 2278189420U;
+        static const AkUniqueID MAGNETISED = 326990256U;
+        static const AkUniqueID MILO_LOW_HEALTH = 2089651132U;
         static const AkUniqueID PAUSE = 3092587493U;
         static const AkUniqueID PLAYER_THROW = 65181031U;
+        static const AkUniqueID RECALLED = 1243887785U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
         static const AkUniqueID SLIDE_END = 114683718U;
         static const AkUniqueID SLIDE_START = 2149348397U;
         static const AkUniqueID STOP_MUSIC = 2837384057U;
+        static const AkUniqueID THROWN = 2260218479U;
         static const AkUniqueID UHH_CHEESED_TO_MEET_YOU = 3276816688U;
         static const AkUniqueID UI_BP_BUTTON_CLICK_FAIL = 1780783421U;
         static const AkUniqueID UI_BP_BUTTON_CLICK_SUCCESS = 935477938U;
