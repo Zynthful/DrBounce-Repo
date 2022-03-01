@@ -16,7 +16,6 @@ public class CombatAudioManager : MonoBehaviour
 
     private bool inCombat = false;
 
-    [SerializeField]
     private List<int> enemiesInCombatWith = new List<int>();
 
     private void Awake()
@@ -35,7 +34,7 @@ public class CombatAudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //DontDestroyOnLoad(s_Instance);
+        RemoveAllEnemies();
     }
 
     public void AddEnemy(int enemy)
@@ -59,7 +58,14 @@ public class CombatAudioManager : MonoBehaviour
         }
     }
 
-    public void SetInCombat(bool value)
+    public void RemoveAllEnemies()
+    {
+        enemiesInCombatWith.Clear();
+        numEnemiesEngaged.SetGlobalValue(0);
+        SetInCombat(false);
+    }
+
+    private void SetInCombat(bool value)
     {
         inCombat = value;
         if (inCombat)
