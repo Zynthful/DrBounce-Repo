@@ -33,7 +33,10 @@ public class Door : MonoBehaviour
         // Stop listening to enemy death events
         for (int i = 0; i < enemies.Length; i++)
         {
-            enemies[i].OnDeath -= CheckIfCanOpen;
+            if (enemies[i] != null)
+            {
+                enemies[i].OnDeath -= CheckIfCanOpen;
+            }
         }
     }
 
