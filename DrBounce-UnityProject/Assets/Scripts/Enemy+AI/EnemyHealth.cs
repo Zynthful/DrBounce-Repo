@@ -7,7 +7,7 @@ using MoreMountains.Tools;
 public class EnemyHealth : Health
 {
     public delegate void Death();
-    public static event Death OnDeath;
+    public event Death OnDeath;
 
     protected override void DIE()
     {

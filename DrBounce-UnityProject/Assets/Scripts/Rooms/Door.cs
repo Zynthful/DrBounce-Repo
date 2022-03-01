@@ -5,76 +5,73 @@ using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
-    private bool open = false;
-    private bool isAnEnemyAlive = false;
-
     [Header("Declarations")]
-    /*
-    [Tooltip("The door then opens and closes")]
     [SerializeField]
-    private GameObject door = null;
-    */
-    [Tooltip("All enemies below have to be dead for this door to open")]
-    [SerializeField]
-    private GameObject[] enemies;
+    [Tooltip("All enemies below have to be dead for this door to open.")]
+    private EnemyHealth[] enemies = null;
 
     [Header("Unity Events")]
-    [SerializeField]
-    private UnityEvent onOpen = null;
-    [SerializeField]
-    private UnityEvent onClose = null;
+    public UnityEvent onOpen = null;
+    public UnityEvent onClose = null;
 
-    // Start is called before the first frame update
-    private void Start()
+    private void OnEnable()
     {
-        //door = GetComponentInChildren<GameObject>(); need to get first child not all children
+        // Listen to enemy death event for each enemy within our list
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].OnDeath += CheckIfCanOpen;
+            }
+        }
 
         CheckIfCanOpen();
     }
 
+    private void OnDisable()
+    {
+        // Stop listening to enemy death events
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].OnDeath -= CheckIfCanOpen;
+        }
+    }
+
     private void Open() 
     {
-        // door.SetActive(false);
-
         onOpen?.Invoke();
     }
 
     private void Close() 
     {
-        // door.SetActive(true);
-
         onClose?.Invoke();
     }
 
+    /// <summary>
+    /// Checks if any enemies are alive. If not, the door opens, otherwise, it closes.
+    /// </summary>
     private void CheckIfCanOpen() 
     {
-        isAnEnemyAlive = false;
-        foreach (GameObject enemy in enemies) 
-        {        
-            if (enemy != null)
+        bool isAnEnemyAlive = false;
+
+        foreach (EnemyHealth health in enemies) 
+        {
+            if (health != null)
             {
-                if (!enemy.GetComponent<EnemyHealth>().GetIsDead())
+                if (!health.GetIsDead())
                 {
                     isAnEnemyAlive = true;
-                    Close();
                 }
             }
         }
+
         if (!isAnEnemyAlive) 
         {
             Open();
-            isAnEnemyAlive = false;
         }
-    }
-
-    void OnEnable()
-    {
-        EnemyHealth.OnDeath += CheckIfCanOpen;
-    }
-
-
-    void OnDisable()
-    {
-        EnemyHealth.OnDeath -= CheckIfCanOpen;
+        else
+        {
+            Close();
+        }
     }
 }
