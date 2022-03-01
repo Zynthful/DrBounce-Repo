@@ -23,9 +23,11 @@ public class DialogueSubtitleUI : MonoBehaviour
         // Update speaker text
         speakerText.text = $"{line.GetSpeaker().GetName()}:";
         speakerText.color = line.GetSpeaker().GetColor();
+    }
 
-        // Update dialogue text
-        dialogueText.text = $"{line.GetSubtitle()}";
+    public void SetSubtitleText(string text)
+    {
+        dialogueText.text = text;
     }
 
     public void Disable()

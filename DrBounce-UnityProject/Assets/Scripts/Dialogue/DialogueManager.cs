@@ -36,16 +36,37 @@ public class DialogueManager : MonoBehaviour
 
     public void PlayDialogueLine(DialogueData line, GameObject @object)
     {
-        line.GetEvent().Post(@object, (uint)AkCallbackType.AK_EndOfEvent, OnEndOfEvent);
+        line.GetEvent().Post(@object, (uint)(AkCallbackType.AK_Marker | AkCallbackType.AK_EndOfEvent), Callback);
 
-        // Show subtitles
-        dialogueCanvas.SetActive(true);
         subtitleUI.ShowSubtitle(line);
     }
 
-    private void OnEndOfEvent(object in_cookie, AkCallbackType in_type, object in_info)
+    
+    private void Callback(object in_cookie, AkCallbackType in_type, AkCallbackInfo in_info)
+    {
+        switch (in_type)
+        {
+            case AkCallbackType.AK_EndOfEvent:
+                OnEndOfEvent();
+                break;
+            case AkCallbackType.AK_Marker:
+                OnMarker((AkMarkerCallbackInfo)in_info);
+                break;
+        }
+    }
+
+    public void OnEndOfEvent()
     {
         subtitleUI.Disable();
+    }
+
+    public void OnMarker(AkMarkerCallbackInfo info)
+    {
+        // Show subtitles
+        dialogueCanvas.SetActive(true);
+
+        // Update text with subtitle read from marker on audio file
+        subtitleUI.SetSubtitleText(info.strLabel);
     }
 
     public IEnumerator Cooldown(DialogueData data, float duration)

@@ -12,8 +12,6 @@ public class DialogueData : ScriptableObject
     [SerializeField]
     [Tooltip("The Dialogue Speaker Data who speaks this dialogue line.")]
     private DialogueSpeakerData speaker = null;
-    [SerializeField]
-    private string subtitle = null; // todo: rework subtitle to use marker callbacks from Wwise
 
     [Header("Randomisation Settings")]
     [SerializeField]
@@ -30,7 +28,6 @@ public class DialogueData : ScriptableObject
 
     public AK.Wwise.Event GetEvent() { return @event; }
     public DialogueSpeakerData GetSpeaker() { return speaker; }
-    public string GetSubtitle() { return subtitle; }
     public void SetCoolingDown(bool value) { coolingDown = value; }
     public bool GetCoolingDown() { return coolingDown; }
 
