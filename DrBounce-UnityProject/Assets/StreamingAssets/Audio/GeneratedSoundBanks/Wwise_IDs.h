@@ -22,9 +22,10 @@ namespace AK
         static const AkUniqueID BOUNCE_PLAYER = 2376949343U;
         static const AkUniqueID CAMERA_FLY_QUICK = 3362723590U;
         static const AkUniqueID CHARGED = 3146088667U;
-        static const AkUniqueID COLLIDE = 3176465873U;
         static const AkUniqueID COLLIDE_ANY = 2766579562U;
+        static const AkUniqueID COLLIDE_BOUNCE = 602641764U;
         static const AkUniqueID COLLIDE_BOUNCEABLE = 3104417468U;
+        static const AkUniqueID COLLIDE_NON_BOUNCE = 1752364416U;
         static const AkUniqueID COLLIDE_NONBOUNCEABLE = 402864233U;
         static const AkUniqueID DASH = 1942692385U;
         static const AkUniqueID ENEMY_BULLET_IMPACT_PLAYER = 1082212733U;

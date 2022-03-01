@@ -40,12 +40,12 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Collide" ID="{F6E981E2-6688-47D4-8138-DB35E10F828C}">
+				<Event Name="Collide_Non_Bounce" ID="{F6E981E2-6688-47D4-8138-DB35E10F828C}">
 					<ChildrenList>
 						<Action Name="" ID="{8ECF1932-35B3-461B-BAA8-DAC69882DB40}" ShortID="887721137">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Collide" ID="{49DF669D-26E7-4EC3-8BF6-338CD503096F}" WorkUnitID="{5BE9AB73-10A4-4104-905C-5B06BEC2323B}"/>
+									<ObjectRef Name="Non Bounceable" ID="{C1CE5E01-E346-44DE-BDBA-E9E826B9DBFB}" WorkUnitID="{5BE9AB73-10A4-4104-905C-5B06BEC2323B}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -90,6 +90,17 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="Magnetised" ID="{BA10E558-304A-4FF0-AA59-5C1330E0AADE}" WorkUnitID="{5BE9AB73-10A4-4104-905C-5B06BEC2323B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Collide_Bounce" ID="{183B2EC6-316B-4A61-96CC-1F52E16D30F9}">
+					<ChildrenList>
+						<Action Name="" ID="{311AE239-2EF1-4102-9DB9-D207B995C57D}" ShortID="688789729">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Bounceable" ID="{5423A075-704B-4382-95FC-44D1F3EC3820}" WorkUnitID="{5BE9AB73-10A4-4104-905C-5B06BEC2323B}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
