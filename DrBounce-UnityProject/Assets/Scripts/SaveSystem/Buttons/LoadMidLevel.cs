@@ -13,8 +13,10 @@ public class LoadMidLevel : MonoBehaviour
 
         if(SceneManager.GetActiveScene().buildIndex != checkpoint[1])
         {
-            
+            Debug.LogError("Load level failed, not on the correct level, this button should be disabled");
+            return;
         }
+        else if(SceneManager.GetActiveScene().buildIndex == )
 
         Transform player = PlayerMovement.player;
 
@@ -22,9 +24,10 @@ public class LoadMidLevel : MonoBehaviour
         player.position = newPosition;
 
         LevelSaveData ll = new LevelSaveData(checkpoint[1], 
-                                                checkpoint[0], 
-                                                player.GetComponent<PlayerHealth>().GetHealth(), 
-                                                new float[3]{player.position.x, player.position.y, player.position.z},
-                                                player.GetComponentInChildren<Shooting>().GetCharges());
+                                             checkpoint[0], 
+                                             player.GetComponent<PlayerHealth>().GetHealth(), 
+                                             new float[3]{player.position.x, player.position.y, player.position.z},
+                                             player.GetComponentInChildren<Shooting>().GetCharges()
+                                             );
     }
 }
