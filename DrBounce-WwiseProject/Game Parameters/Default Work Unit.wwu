@@ -3,114 +3,14 @@
 	<GameParameters>
 		<WorkUnit Name="Default Work Unit" ID="{551EA9F5-CBC2-429B-81BC-CD19BD9ACB2A}" PersistMode="Standalone">
 			<ChildrenList>
-				<Folder Name="Player" ID="{FE740B2A-DE78-465E-A676-BDF93CFDEF0A}" ShortID="76839822">
-					<ChildrenList>
-						<Folder Name="Gun" ID="{3174DDB3-5702-4368-8E81-558A2B9BA082}" ShortID="335200605">
-							<ChildrenList>
-								<GameParameter Name="Player_Gun_Charge" ID="{336257D0-FD65-43ED-8A93-0EC61AD829F0}">
-									<PropertyList>
-										<Property Name="InitialValue" Type="Real64" Value="0"/>
-										<Property Name="Max" Type="Real64" Value="10"/>
-									</PropertyList>
-								</GameParameter>
-								<GameParameter Name="Player_Gun_NumOfBounces" ID="{03248952-0020-41F8-BA23-F47A90EB80A3}">
-									<PropertyList>
-										<Property Name="InitialValue" Type="Real64" Value="0"/>
-										<Property Name="Max" Type="Real64" Value="5"/>
-									</PropertyList>
-								</GameParameter>
-								<GameParameter Name="Player_Gun_Last_Shot_Charge" ID="{D8542F28-8C0B-45CD-B85A-6E71E94606FE}">
-									<PropertyList>
-										<Property Name="InitialValue" Type="Real64" Value="0"/>
-										<Property Name="Max" Type="Real64" Value="10"/>
-									</PropertyList>
-								</GameParameter>
-								<GameParameter Name="Player_Gun_MaxShot_Charge_Progress" ID="{58E4EA3E-DE47-4FFF-A6A4-2CB2EC21B2A5}">
-									<PropertyList>
-										<Property Name="InitialValue" Type="Real64" Value="0"/>
-										<Property Name="Max" Type="Real64" Value="1"/>
-										<Property Name="RTPCRamping" Type="int16" Value="1"/>
-									</PropertyList>
-								</GameParameter>
-							</ChildrenList>
-						</Folder>
-						<GameParameter Name="Player_Health_Percentage" ID="{BDE197B6-8BCD-45F3-81C5-2D1074DAA0F1}"/>
-					</ChildrenList>
-				</Folder>
-				<Folder Name="Volume Settings" ID="{56B5405A-196F-489C-8FA4-B4C2709383FA}" ShortID="887160516">
-					<ChildrenList>
-						<GameParameter Name="MasterVolume" ID="{42D608D2-6D52-472C-88C5-E8CD93A012B1}">
-							<PropertyList>
-								<Property Name="InitialValue" Type="Real64" Value="7"/>
-								<Property Name="Max" Type="Real64" Value="10"/>
-							</PropertyList>
-						</GameParameter>
-						<GameParameter Name="SFXVolume" ID="{BF83DE8C-9604-43CC-AAC2-6568F3CCA4ED}">
-							<PropertyList>
-								<Property Name="InitialValue" Type="Real64" Value="7"/>
-								<Property Name="Max" Type="Real64" Value="10"/>
-							</PropertyList>
-						</GameParameter>
-						<GameParameter Name="MusicVolume" ID="{5288E8AB-88AD-4A0F-9EA7-86E0F05F3489}">
-							<PropertyList>
-								<Property Name="InitialValue" Type="Real64" Value="7"/>
-								<Property Name="Max" Type="Real64" Value="10"/>
-							</PropertyList>
-						</GameParameter>
-					</ChildrenList>
-				</Folder>
-				<Folder Name="Environment" ID="{D4753EE3-5B9E-4181-9EA5-607FA8C049F2}" ShortID="790473540">
-					<ChildrenList>
-						<Folder Name="Bouncing" ID="{C8F7AE8C-B28B-49A4-8A8E-514A0C7D2500}" ShortID="554637216">
-							<ChildrenList>
-								<GameParameter Name="ObjectSize" ID="{6D2A1B4D-36B4-4EB5-BEF9-ECA8B3FC77B9}">
-									<PropertyList>
-										<Property Name="InitialValue" Type="Real64" Value="75"/>
-										<Property Name="Min" Type="Real64" Value="1"/>
-									</PropertyList>
-								</GameParameter>
-							</ChildrenList>
-						</Folder>
-						<Folder Name="Bounce Pad" ID="{B2CB4BD9-EA63-43DF-85D0-6EC3A301A950}" ShortID="676125811">
-							<ChildrenList>
-								<GameParameter Name="BouncePad_NumOfBounces" ID="{1E5091A7-1B06-4968-A32E-0C0739C0B13C}">
-									<PropertyList>
-										<Property Name="InitialValue" Type="Real64" Value="0"/>
-										<Property Name="Max" Type="Real64" Value="5"/>
-									</PropertyList>
-								</GameParameter>
-							</ChildrenList>
-						</Folder>
-					</ChildrenList>
-				</Folder>
-				<Folder Name="Health" ID="{B382CDD4-7D52-4FD8-B676-4781DBBD9F49}" ShortID="588102470">
-					<ChildrenList>
-						<GameParameter Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}">
-							<PropertyList>
-								<Property Name="InitialValue" Type="Real64" Value="0"/>
-								<Property Name="Max" Type="Real64" Value="1000"/>
-							</PropertyList>
-						</GameParameter>
-					</ChildrenList>
-				</Folder>
-				<GameParameter Name="Master_Low_Pass" ID="{6740E924-43D2-41B9-B4DE-85B907E83CCA}">
-					<PropertyList>
-						<Property Name="InitialValue" Type="Real64" Value="0"/>
-						<Property Name="Max" Type="Real64" Value="1"/>
-						<Property Name="SlewRateUp" Type="Real64" Value="48"/>
-					</PropertyList>
-				</GameParameter>
-				<WorkUnit Name="Generic" ID="{783C6E46-CBCD-4A5D-8B3F-72A89138546F}" PersistMode="Reference"/>
 				<WorkUnit Name="Enemy" ID="{53509FFC-1E2F-4F4E-8366-0ECAAE502B6D}" PersistMode="Reference"/>
 				<WorkUnit Name="Global" ID="{9D2E2264-0334-4D69-A05C-D2220A5521E4}" PersistMode="Reference"/>
-				<GameParameter Name="Music_Low_Pass" ID="{F45BCBEB-1A9A-4744-96A2-024054D8AEF5}">
-					<PropertyList>
-						<Property Name="InitialValue" Type="Real64" Value="0"/>
-						<Property Name="Max" Type="Real64" Value="1"/>
-						<Property Name="SlewRateUp" Type="Real64" Value="48"/>
-					</PropertyList>
-				</GameParameter>
 				<WorkUnit Name="Dialogue" ID="{92E98EC8-01E2-4A5D-B4FD-45F0DE7282C1}" PersistMode="Reference"/>
+				<WorkUnit Name="Player" ID="{E1605B34-B066-4C5B-9C33-F28E2B10A0A1}" PersistMode="Reference"/>
+				<WorkUnit Name="Health" ID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}" PersistMode="Reference"/>
+				<WorkUnit Name="Volume" ID="{63BE9798-58DD-428E-9C40-E909C31625C5}" PersistMode="Reference"/>
+				<WorkUnit Name="Collision" ID="{1740F7F4-0018-49DF-87B3-1101BE78DF0B}" PersistMode="Reference"/>
+				<WorkUnit Name="Objects" ID="{29F7BC38-2E9E-43F1-A408-5DD06AD3C8D2}" PersistMode="Reference"/>
 			</ChildrenList>
 		</WorkUnit>
 	</GameParameters>

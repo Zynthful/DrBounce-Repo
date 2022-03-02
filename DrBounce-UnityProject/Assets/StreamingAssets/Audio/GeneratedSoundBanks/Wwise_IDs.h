@@ -13,13 +13,10 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID BGM_LEVEL_1 = 3736445778U;
-        static const AkUniqueID BGM_LEVEL_2 = 3736445777U;
-        static const AkUniqueID BGM_LEVEL_3 = 3736445776U;
-        static const AkUniqueID BGM_LEVEL_4 = 3736445783U;
+        static const AkUniqueID BGM_LEVEL = 3727984986U;
         static const AkUniqueID BGM_MAIN_MENU = 4038578923U;
-        static const AkUniqueID BOUNCE_OBJECT = 2365089589U;
-        static const AkUniqueID BOUNCE_PLAYER = 2376949343U;
+        static const AkUniqueID BOUNCEPAD_BOUNCE_OBJECT = 3449590119U;
+        static const AkUniqueID BOUNCEPAD_BOUNCE_PLAYER = 179148629U;
         static const AkUniqueID CAMERA_FLY_QUICK = 3362723590U;
         static const AkUniqueID CHARGED = 3146088667U;
         static const AkUniqueID COLLIDE_ANY = 2766579562U;
@@ -63,6 +60,7 @@ namespace AK
         static const AkUniqueID INJURED = 2860195132U;
         static const AkUniqueID JUMP = 3833651337U;
         static const AkUniqueID LAND = 674522502U;
+        static const AkUniqueID LEVEL_FINISHED = 1660357050U;
         static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
         static const AkUniqueID MAGNET_PULLING_START = 2278189420U;
@@ -70,8 +68,10 @@ namespace AK
         static const AkUniqueID MILO_LOW_HEALTH = 2089651132U;
         static const AkUniqueID PAUSE = 3092587493U;
         static const AkUniqueID PLAYER_THROW = 65181031U;
+        static const AkUniqueID QUIT_LEVEL = 4088290975U;
         static const AkUniqueID RECALLED = 1243887785U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
+        static const AkUniqueID RESTART_LEVEL = 1904346601U;
         static const AkUniqueID SLIDE_END = 114683718U;
         static const AkUniqueID SLIDE_START = 2149348397U;
         static const AkUniqueID STOP_MUSIC = 2837384057U;
@@ -105,6 +105,19 @@ namespace AK
                 static const AkUniqueID NOT_IN_COMBAT = 2120752185U;
             } // namespace STATE
         } // namespace COMBAT_STATE
+
+        namespace CURRENT_LEVEL
+        {
+            static const AkUniqueID GROUP = 1929983783U;
+
+            namespace STATE
+            {
+                static const AkUniqueID LEVEL_01 = 987635873U;
+                static const AkUniqueID LEVEL_02 = 987635874U;
+                static const AkUniqueID LEVEL_03 = 987635875U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace CURRENT_LEVEL
 
         namespace PAUSED_STATE
         {
@@ -178,23 +191,24 @@ namespace AK
         static const AkUniqueID COLLISION_IMPULSE_MAGNITUDE = 2292195936U;
         static const AkUniqueID CRITICAL_DIALOGUE_VOLUME = 3513493796U;
         static const AkUniqueID D0C_DIALOGUE_VOLUME = 3657827626U;
+        static const AkUniqueID GUN_ACTIVE_CHARGE = 1163307585U;
+        static const AkUniqueID GUN_DISTANCE_FROM_PLAYER = 1810057344U;
+        static const AkUniqueID GUN_LAST_SHOT_CHARGE = 1164637510U;
+        static const AkUniqueID GUN_MAXSHOT_CHARGE_PROGRESS = 3728130025U;
+        static const AkUniqueID GUN_NUMOFBOUNCES = 495264102U;
         static const AkUniqueID HEALTH_HIT_DAMAGE = 3274506471U;
         static const AkUniqueID MASTER_LOW_PASS = 93313484U;
-        static const AkUniqueID MASTERVOLUME = 2918011349U;
+        static const AkUniqueID MASTER_VOLUME = 4179668880U;
         static const AkUniqueID MUSIC_LOW_PASS = 549164459U;
-        static const AkUniqueID MUSICVOLUME = 2346531308U;
+        static const AkUniqueID MUSIC_VOLUME = 1006694123U;
         static const AkUniqueID NONCRITICAL_DIALOGUE_VOLUME = 3346270995U;
         static const AkUniqueID NUM_ENEMIES_IN_COMBAT_WITH = 457807310U;
-        static const AkUniqueID OBJECTSIZE = 1059072663U;
+        static const AkUniqueID OBJECT_SIZE = 3625945784U;
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
-        static const AkUniqueID PLAYER_GUN_CHARGE = 1641787780U;
-        static const AkUniqueID PLAYER_GUN_LAST_SHOT_CHARGE = 1990407938U;
-        static const AkUniqueID PLAYER_GUN_MAXSHOT_CHARGE_PROGRESS = 1622247325U;
-        static const AkUniqueID PLAYER_GUN_NUMOFBOUNCES = 1762700618U;
         static const AkUniqueID PLAYER_HEALTH_PERCENTAGE = 3361892810U;
         static const AkUniqueID RPM = 796049864U;
         static const AkUniqueID SFX_VOLUME = 1564184899U;
-        static const AkUniqueID SFXVOLUME = 988953028U;
+        static const AkUniqueID SFX_VOLUME_OUTPUT = 3836597185U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
         static const AkUniqueID SS_AIR_FREEFALL = 3002758120U;
         static const AkUniqueID SS_AIR_FURY = 1029930033U;
