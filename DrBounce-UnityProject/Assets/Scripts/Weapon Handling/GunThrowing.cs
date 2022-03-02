@@ -7,8 +7,6 @@ using MoreMountains.Feedbacks;
 
 public class GunThrowing : MonoBehaviour
 {
-    [SerializeField] private float waitTime = 0.2f;
-
     [SerializeField] bool returning;
     [SerializeField] float throwForceMod;
     [SerializeField] bool canThrow;
@@ -48,15 +46,27 @@ public class GunThrowing : MonoBehaviour
     private List<coyote> hitObjects = new List<coyote> { };
 
 
-    [Header("Coyote Time")]
+    [Header("Coyote Time Settings")]
     [Space(10)]
     [SerializeField] private float coyoteTimeDuration;
-    
+
+    [Header("Throwing Settings")]
+    [SerializeField]
+    [Tooltip("When throwing the gun, the Throw control is disabled for this duration in seconds.")]
+    private float throwDisableTime = 0.2f;
+
+    [Header("Loneliness Settings")]
+    [SerializeField]
+    [Tooltip("Duration in seconds the gun needs to be left alone on the ground in order to trigger loneliness event.")]
+    private float timeToTriggerLonely = 5;
+
+    private float timeOnGround = 0;
+    private bool alone = false;
+
 
     private int amountOfBounces;
     private int amountOfBouncesUnique;  // bounces where it's not bounced against the same object twice in succession
 
-    public InputMaster controls;
     [Space(10)]
     public Vector3 currentVel; // Used to influence aim assist to be less snappy.
     private bool exitedPlayer; // Controls when the gun can be caught by waiting until it's left the player's hitbox
@@ -70,32 +80,26 @@ public class GunThrowing : MonoBehaviour
     public bool inFlight;
     private bool throwing = false;
 
-    private float timeOnGround = 0;
-    [SerializeField] private float timeLeftAlone = 5;
-    private bool alone = false;
     private bool pulledByMagnet = false;
 
     //public Outline outlineScript;
 
-    [Header("Unity Events")]
-    [SerializeField]
-    private UnityEvent<int> onBounce = null;
-    [SerializeField]
-    private UnityEvent onPickup = null;
-    [SerializeField]
+    #region Events
+    [Header("Bouncing Events")]
+    public UnityEvent<int> onBounce = null;
+
+    [Header("Dropped Events")]
+    public UnityEvent onDroppedPreCoyote = null;
+    public UnityEvent onDropped = null;
+    public UnityEvent onDroppedAndLostAllCharges = null;    // Invoked only if the item loses charges on drop
+    public UnityEvent onLonely = null;                      // Invoked when left on the ground for a set duration
+
+    [Header("Throwing Events")]
     public UnityEvent onThrown = null;
-    [SerializeField]
-    private UnityEvent onCatch = null;
-    [SerializeField]
-    private UnityEvent onDropped = null;
-    [SerializeField]
-    private UnityEvent onDroppedAndLostAllCharges = null; // Invoked only if the item loses charges on drop
-    [SerializeField]
-    private UnityEvent onRecall = null;
-    [SerializeField]
-    private UnityEvent onReset = null;
-    [SerializeField]
-    private UnityEvent onDroppedPreCoyote = null;
+    public UnityEvent onCatch = null;
+    public UnityEvent onRecall = null;
+    public UnityEvent onPickup = null;
+    public UnityEvent onReset = null;
 
     [Header("Game Events")]
     [SerializeField]
@@ -114,18 +118,14 @@ public class GunThrowing : MonoBehaviour
     private GameEvent _onRecall = null;
     [SerializeField]
     private GameEvent _onDroppedPreCoyote = null;
-
-    private void Awake()
-    {
-        controls = InputManager.inputMaster;
-    }
+    #endregion
 
     private void OnEnable()
     {
         // Listen for input
-        controls.Player.Throw.performed += _ => SetThrowGunDelay();
-        controls.Player.Throw.performed += _ => CancelThrow();
-        controls.Player.Recall.performed += _ => RecallGun();
+        InputManager.inputMaster.Player.Throw.performed += _ => SetThrowGunDelay();
+        InputManager.inputMaster.Player.Throw.performed += _ => CancelThrow();
+        InputManager.inputMaster.Player.Recall.performed += _ => RecallGun();
 
         // Listen for event
         MagnetAssist.OnMagnetUse += Magnet;
@@ -134,9 +134,9 @@ public class GunThrowing : MonoBehaviour
     private void OnDisable()
     {
         // Stop listening for input
-        controls.Player.Throw.performed -= _ => SetThrowGunDelay();
-        controls.Player.Throw.performed -= _ => CancelThrow();
-        controls.Player.Recall.performed -= _ => ResetScript();
+        InputManager.inputMaster.Player.Throw.performed -= _ => SetThrowGunDelay();
+        InputManager.inputMaster.Player.Throw.performed -= _ => CancelThrow();
+        InputManager.inputMaster.Player.Recall.performed -= _ => ResetScript();
 
         // Stop listening for event
         MagnetAssist.OnMagnetUse -= Magnet;
@@ -200,25 +200,28 @@ public class GunThrowing : MonoBehaviour
             hasLetGoOfTrigger = true;
         }
 
+        // Handle loneliness time
         if (!held && !alone && !pulledByMagnet) 
         {
-            //print("timer" + timeOnGround);
             timeOnGround = timeOnGround + Time.deltaTime;
-            if (timeOnGround >= timeLeftAlone) 
+            if (timeOnGround >= timeToTriggerLonely) 
             {
-                //print("alone");
                 alone = true;
+                onLonely?.Invoke();
             }
         }
     }
 
-    private IEnumerator WaitAndUse(float waitTime)
+    /// <summary>
+    /// Disable throwing for a given duration in seconds.
+    /// </summary>
+    /// <param name="waitTime">The duration in seconds to disable throwing.</param>
+    /// <returns></returns>
+    private IEnumerator DisableThrowForDuration(float disabledTime)
     {
-        controls.Player.Throw.Disable();
-
-        yield return new WaitForSeconds(waitTime);
-
-        controls.Player.Throw.Enable();
+        InputManager.inputMaster.Player.Throw.Disable();
+        yield return new WaitForSeconds(disabledTime);
+        InputManager.inputMaster.Player.Throw.Enable();
     }
 
     private void Magnet(bool active) 
@@ -239,7 +242,7 @@ public class GunThrowing : MonoBehaviour
         //float test = controls.Player.Throw.ReadValue<float>();
         //print(test);
 
-        if (!GameManager.s_Instance.paused && controls.Player.Throw.ReadValue<float>() >= 0.5f)
+        if (!GameManager.s_Instance.paused && InputManager.inputMaster.Player.Throw.ReadValue<float>() >= 0.5f)
         {
             throwGunDelay = true;
         }
@@ -286,10 +289,11 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
-            StartCoroutine(WaitAndUse(waitTime));
-
             throwing = true;
             held = false;
+            
+            // Disable throwing for set duration
+            StartCoroutine(DisableThrowForDuration(throwDisableTime));
 
             if (pickupDelayCoroutineRunning) 
             {

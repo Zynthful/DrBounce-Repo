@@ -35,7 +35,6 @@ namespace AK
         static const AkUniqueID ENEMY_STUN_INCREASE = 3231467681U;
         static const AkUniqueID ENEMY_STUN_PARTICLE_SPAWN = 865452671U;
         static const AkUniqueID ENEMY_STUNNED = 268174739U;
-        static const AkUniqueID FAR_AWAY = 3715371445U;
         static const AkUniqueID FIRE = 2678880713U;
         static const AkUniqueID FOOTSTEP = 1866025847U;
         static const AkUniqueID GUN_BOUNCE_FEEDBACK = 2862887114U;
@@ -61,6 +60,7 @@ namespace AK
         static const AkUniqueID JUMP = 3833651337U;
         static const AkUniqueID LAND = 674522502U;
         static const AkUniqueID LEVEL_FINISHED = 1660357050U;
+        static const AkUniqueID LONELY = 2487009732U;
         static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
         static const AkUniqueID MAGNET_PULLING_START = 2278189420U;
