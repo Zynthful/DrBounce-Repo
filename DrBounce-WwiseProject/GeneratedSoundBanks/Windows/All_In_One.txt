@@ -9,6 +9,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	402864233	Collide_NonBounceable			\Default Work Unit\Player\Gun\Collide_NonBounceable	
 	602641764	Collide_Bounce			\Dialogue\D0C\Collide_Bounce	
 	674522502	Land			\Default Work Unit\Player\Movement\Land	
+	816373421	Caught			\Dialogue\D0C\Caught	
 	822196729	Gun_PickUpFromGround			\Default Work Unit\Player\Gun\Interactions - Throwing, Catching, Magnet\Gun_PickUpFromGround	
 	865452671	Enemy_Stun_Particle_Spawn			\Default Work Unit\Enemy\Stun\Enemy_Stun_Particle_Spawn	
 	926850530	UI_Toolbox_Selectable_PointerEnter			\Default Work Unit\UI\Toolbox\UI_Toolbox_Selectable_PointerEnter	
@@ -51,7 +52,6 @@ Event	ID	Name			Wwise Object Path	Notes
 	3092587493	Pause			\Default Work Unit\State\Pausing\Pause	
 	3098426972	Gun_Throw			\Default Work Unit\Player\Gun\Interactions - Throwing, Catching, Magnet\Gun_Throw	
 	3104417468	Collide_Bounceable			\Default Work Unit\Player\Gun\Collide_Bounceable	
-	3146088667	Charged			\Dialogue\D0C\Charged	
 	3231467681	Enemy_Stun_Increase			\Default Work Unit\Enemy\Stun\Enemy_Stun_Increase	
 	3276816688	uhh_cheesed_to_meet_you			\Default Work Unit\Debug\uhh_cheesed_to_meet_you	
 	3358586071	UI_Toolbox_Button_Click_Success			\Default Work Unit\UI\Toolbox\UI_Toolbox_Button_Click_Success	
@@ -210,7 +210,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	517715216	Footstep_Grass_1	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Footstep_Grass_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Grass\Footstep_Grass_1		12484
 	518506752	Dash_1	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Dash_Draft_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Dash\Dash\Dash_1		13106
 	520776906	DB_SFX_Player_Movement_Slide_Start_Burst	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Movement_Slide_Start_Burst_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Slide\Start Burst\DB_SFX_Player_Movement_Slide_Start_Burst		14190
-	521365193	doc_charged_b	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_charged_b_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Charged\doc_charged_b		30960
+	521365193	doc_charged_b	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_charged_b_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Caught\Charged\doc_charged_b		30960
 	528163299	DB_SFX_Enemy_Death_Splatter_Particle_3	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Enemy_Death_Splatter_Particle_3_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Enemies\Enemy\Health\Death_Particle_Collide\DB_SFX_Enemy_Death_Splatter_Particle_3		6024
 	529543171	DB_SFX_UI_TV_Selectable_Select	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_TV_Selectable_Select_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\UI\UI\TV\Selectable_Select\DB_SFX_UI_TV_Selectable_Select		1882
 	533805478	doc_collide_c	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_collide_c_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Collide\Non Bounceable\doc_collide_c		26284
@@ -220,7 +220,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	567724231	Loop	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Movement_Slide_Loop_E511C0EB.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Slide\Loop		95855
 	575713228	FEETHmn_BootsRunningDCFloor_JC_DB_3R	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_3R_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Right\FEETHmn_BootsRunningDCFloor_JC_DB_3R		3302
 	582024848	Bounce_Feedback_2	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\SFX_Gun_Rebound_Feedback_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Gun\Bounce\Bounce_Feedback_2		17833
-	582171735	doc_charged_a	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_charged_a_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Charged\doc_charged_a		41857
+	582171735	doc_charged_a	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_charged_a_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Caught\Charged\doc_charged_a		41857
 	584061711	doc_grunt_short_c	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_grunt_short_c_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Collide\Bounceable\doc_grunt_short_c		5739
 	585685359	DB_SFX_UI_BP_Select_1	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_BP_Select_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\UI\UI\Blueprint\Selectable_PointerEnter\Pencil\DB_SFX_UI_BP_Select_1		2841
 	586274457	DB_SFX_Gun_MaxShot_Charged_Loop_Draft_1	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Gun_MaxShot_Charged_Loop_Draft_1_E511C0EB.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Gun\Max Shot\Charged_Loop\DB_SFX_Gun_MaxShot_Charged_Loop_Draft_1		431829

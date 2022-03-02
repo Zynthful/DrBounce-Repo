@@ -18,7 +18,7 @@ namespace AK
         static const AkUniqueID BOUNCEPAD_BOUNCE_OBJECT = 3449590119U;
         static const AkUniqueID BOUNCEPAD_BOUNCE_PLAYER = 179148629U;
         static const AkUniqueID CAMERA_FLY_QUICK = 3362723590U;
-        static const AkUniqueID CHARGED = 3146088667U;
+        static const AkUniqueID CAUGHT = 816373421U;
         static const AkUniqueID COLLIDE_ANY = 2766579562U;
         static const AkUniqueID COLLIDE_BOUNCE = 602641764U;
         static const AkUniqueID COLLIDE_BOUNCEABLE = 3104417468U;
