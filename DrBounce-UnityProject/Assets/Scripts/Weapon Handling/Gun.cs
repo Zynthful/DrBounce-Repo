@@ -19,6 +19,9 @@ public class Gun : ScriptableObject
 
     [Header("Charge Gun Shots")]
 
+    [Tooltip("How many charges can you get max in this level")]
+    public int maxCharges = 3;
+
     [Tooltip("do you use all charges upon using one")]
     public bool useAllChargesOnUse = false;
 

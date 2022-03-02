@@ -32,6 +32,7 @@ public class Shooting : MonoBehaviour
     [Header("Charges")]
     private int gunCharge = 0;    //amount of times the gun has been bounced successfully
     private bool hasCharge = false;
+    private int maxCharges = 99;
 
     [Header("Fire Rate")]
     private float timeSinceLastShot = 0;
@@ -129,6 +130,9 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // Updates max charges to a given value (more than 0)
+        UpdateMaxCharges(shooter.maxCharges);
+
         // Initialise charge
         SetCharge(gunCharge);
 
@@ -231,6 +235,12 @@ public class Shooting : MonoBehaviour
         canShoot = value;
     }
 
+    public void UpdateMaxCharges(int value)
+    {
+        if(value > 0)
+            maxCharges = value;
+    }
+
     /// <summary>
     /// Sets gunCharge equal to the input value
     /// Use this whenever updating gunCharge, so it raises onChargeUpdate with it
@@ -245,7 +255,10 @@ public class Shooting : MonoBehaviour
             _onFirstGainChargeSinceEmpty?.Raise();
         }
 
-        gunCharge = value;
+        if (value > maxCharges)
+            gunCharge = maxCharges;
+        else
+            gunCharge = value;
 
         onChargeUpdate?.Invoke(gunCharge);
         _onChargeUpdate?.Raise(gunCharge);
