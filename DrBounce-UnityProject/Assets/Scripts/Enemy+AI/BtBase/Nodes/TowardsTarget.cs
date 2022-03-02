@@ -46,10 +46,12 @@ public class TowardsTarget : BtNode
             m_navMeshAgent.destination = targetPosition;
             return NodeState.SUCCESS;
         }
+        else
+        {
+            m_movement.position = Vector3.MoveTowards(m_movement.position, targetPosition, Time.deltaTime / moveSpeed);
+        }
 
         //Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + targetPosition);
-
-        m_movement.position = Vector3.MoveTowards(m_movement.position, targetPosition, Time.deltaTime / moveSpeed);
 
         if (!blackboard.HasTarget(true))
         {
