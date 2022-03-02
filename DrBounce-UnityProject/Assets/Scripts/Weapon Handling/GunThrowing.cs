@@ -297,7 +297,7 @@ public class GunThrowing : MonoBehaviour
             }
 
             // Stops the gun from moving through walls when thrown up against them
-            Vector3 raycastOrigin = new Vector3(transform.position.x, transform.position.y, transform.position.z) - (transform.forward * transform.localScale.magnitude * 1.5f);
+            Vector3 raycastOrigin = new Vector3(transform.position.x, transform.position.y, transform.position.z) - (transform.forward * transform.localScale.magnitude / 3);
             RaycastHit hit;
             if(Physics.Raycast(raycastOrigin, transform.forward, out hit, 1, throwCheckLayers))
             {

@@ -44,7 +44,7 @@ public class NoBounceEnemy : Enemy
     protected BtNode createPatrolTree()
     {
         // Movement Node Section
-        BtNode GetPatrolPoint = new Sequence(new IsClose(false, .2f), new TargetNext(patrolPoints.ToArray()));
+        BtNode GetPatrolPoint = new Sequence(new IsClose(false, 1f), new TargetNext(patrolPoints.ToArray()));
         BtNode TowardsPatrolPoint = new Sequence(new IsTargeting(false), new TowardsTarget(navMeshAgent, enemySpeed));
         BtNode UpdatePatrolPoint = new Selector(GetPatrolPoint, TowardsPatrolPoint, new TargetClose(patrolPoints.ToArray()));
         return new Sequence(new CheckBool(3), new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
@@ -52,7 +52,7 @@ public class NoBounceEnemy : Enemy
 
     protected BtNode createChaseTree()
     {
-        BtNode CanSee = new Selector(new EnemyChase(m_blackboard, navMeshAgent, attackRange), new TargetInSight(m_blackboard, viewDist, sightAngle));
+        BtNode CanSee = new Selector(new EnemyChase(m_blackboard, navMeshAgent, attackRange, onSpotted), new TargetInSight(m_blackboard, viewDist, sightAngle));
         BtNode LookAt = new Selector(CanSee, new AfterAttacked());
         BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist));
         return new Sequence(new CheckBool(4), CheckForTarget);
