@@ -3,25 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class DeathZone : MonoBehaviour
 {
-    public delegate void PlayerDeath();
-    public static event PlayerDeath OnPlayerDeath;
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+        if (playerHealth != null)
         {
-            Die();
+            playerHealth.Damage(playerHealth.GetMaxHealth());
         }
-    }
-
-    /// <summary>
-    /// Kills the player
-    /// </summary>
-    private void Die()
-    {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //reloads the current scene
-
-        OnPlayerDeath?.Invoke();
     }
 }

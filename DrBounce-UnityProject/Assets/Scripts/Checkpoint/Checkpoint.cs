@@ -8,28 +8,43 @@ public class Checkpoint : MonoBehaviour
 {
     //need to be where the player spawns
 
-    public Transform player;     //needs to be manually set
+    [SerializeField]
+    private Transform[] checkpoints;
 
-    [SerializeField] private Transform[] checkpoints;
-
-    [SerializeField] private int currentCheckpoint = 0;
+    private static int currentCheckpoint = 0;
 
     private int currentSceneIndex = -1;
-    private string sceneName = "";
-
-    public static Checkpoint checkpointManagerInstance = null;
-
+    public static Checkpoint s_Instance = null;
     public static bool firstSetup;
+
+    private void Awake()
+    {
+        if (s_Instance == null)
+        {
+            s_Instance = FindObjectOfType(typeof(Checkpoint)) as Checkpoint;
+        }
+        if (s_Instance == null)
+        {
+            s_Instance = this;
+        }
+        else if (s_Instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+        GoToCurrentCheckpoint();
+    }
 
     private void Start()
     {
         firstSetup = true;
     }
 
-
-    private void ReturnToCheckpoint() 
+    private void OnEnable()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        CheckpointHit.OnCollision += ReachedNextCheckpoint;
+        PlayerHealth.OnPlayerDeath += ReloadCheckpoint;
     }
 
     private void ReachedNextCheckpoint() 
@@ -40,58 +55,26 @@ public class Checkpoint : MonoBehaviour
         }
     }
 
-    void OnEnable()
+    private void ReloadCheckpoint()
     {
-        CheckpointHit.OnCollision += ReachedNextCheckpoint;
-        DeathZone.OnPlayerDeath += ReturnToCheckpoint;
-        PlayerHealth.OnPlayerDeath += ReturnToCheckpoint;
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
-    void OnDisable()
+    private void GoToCurrentCheckpoint()
     {
-        CheckpointHit.OnCollision -= ReachedNextCheckpoint;
-        DeathZone.OnPlayerDeath -= ReturnToCheckpoint;
-        PlayerHealth.OnPlayerDeath -= ReturnToCheckpoint;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void Awake()
-    {
-        if (checkpointManagerInstance == null)
-        {
-            checkpointManagerInstance = FindObjectOfType(typeof(Checkpoint)) as Checkpoint;
-        }
-
-        if (checkpointManagerInstance == null)
-        {
-            checkpointManagerInstance = this;
-        }
-        else if (checkpointManagerInstance != this)
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.buildIndex != 1)  //needs to be the build index for the loading screen
+        if (SceneManager.GetActiveScene().buildIndex != 1)  //needs to be the build index for the loading screen
         {
             if (currentSceneIndex == -1)
             {
-                currentSceneIndex = scene.buildIndex;
+                currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             }
-            if (scene.buildIndex == currentSceneIndex)
+            if (SceneManager.GetActiveScene().buildIndex == currentSceneIndex)
             {
-                player = PlayerMovement.player;
-                player.transform.position = new Vector3(checkpoints[currentCheckpoint].position.x, checkpoints[currentCheckpoint].position.y + 1, checkpoints[currentCheckpoint].position.z);
+                GoToCheckpoint(currentCheckpoint);
             }
             else
             {
-                checkpointManagerInstance = null;
+                s_Instance = null;
                 firstSetup = false;
                 currentSceneIndex = -1;
 
@@ -102,5 +85,10 @@ public class Checkpoint : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void GoToCheckpoint(int checkpointIndex)
+    {
+        PlayerMovement.player.transform.position = new Vector3(checkpoints[currentCheckpoint].position.x, checkpoints[currentCheckpoint].position.y + 1, checkpoints[currentCheckpoint].position.z);
     }
 }

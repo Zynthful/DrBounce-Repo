@@ -178,6 +178,7 @@ public class Health : MonoBehaviour
     }
 
     public int GetHealth() { return health; }
+    public int GetMaxHealth() { return maxHealth; }
 
     public bool GetIsAtFullHealth() { return (health >= maxHealth); }
 
