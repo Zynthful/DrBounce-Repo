@@ -15,10 +15,11 @@ public class LevelComplete : MonoBehaviour
     private TriggerInvoke trigger = null;
 
     [Header("Events")]
-    [SerializeField]
-    private UnityEvent onLevelComplete = null;
-    [SerializeField]
-    private GameEvent _onLevelComplete = null;
+    public UnityEvent onLevelComplete = null;
+    public GameEvent _onLevelComplete = null;
+
+    public delegate void LevelCompleted();
+    public static event LevelCompleted onComplete;
 
     private void Start()
     {
@@ -46,7 +47,8 @@ public class LevelComplete : MonoBehaviour
     /// </summary>
     private void Complete() 
     {
-        onLevelComplete.Invoke();
+        onComplete?.Invoke();
+        onLevelComplete?.Invoke();
         _onLevelComplete?.Raise();
     }
 }
