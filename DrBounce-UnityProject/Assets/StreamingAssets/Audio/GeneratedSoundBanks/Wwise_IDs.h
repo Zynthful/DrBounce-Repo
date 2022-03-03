@@ -191,6 +191,7 @@ namespace AK
         static const AkUniqueID COLLISION_IMPULSE_MAGNITUDE = 2292195936U;
         static const AkUniqueID CRITICAL_DIALOGUE_VOLUME = 3513493796U;
         static const AkUniqueID D0C_DIALOGUE_VOLUME = 3657827626U;
+        static const AkUniqueID DIALOGUE_VOLUME = 725232568U;
         static const AkUniqueID GUN_ACTIVE_CHARGE = 1163307585U;
         static const AkUniqueID GUN_DISTANCE_FROM_PLAYER = 1810057344U;
         static const AkUniqueID GUN_LAST_SHOT_CHARGE = 1164637510U;
