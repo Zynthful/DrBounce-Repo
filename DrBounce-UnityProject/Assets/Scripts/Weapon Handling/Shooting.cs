@@ -22,7 +22,6 @@ public class Shooting : MonoBehaviour
     private GunThrowing gunThrowing = null;
 
     private ObjectPooler pool;
-    public InputMaster controls;
     public Camera fpsCam;
     public Animator anim;
 
@@ -149,10 +148,10 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        holdingShoot = InputManager.inputMaster.Player.Shoot.ReadValue<float>() >= 0.2f;
+
         if (GameManager.s_Instance.paused)
             return;
-        
-        holdingShoot = controls.Player.Shoot.ReadValue<float>() >= 0.2f;
 
         timeSinceLastShot += Time.deltaTime;
 
@@ -199,8 +198,6 @@ public class Shooting : MonoBehaviour
 
     private void Awake()
     {
-        controls = InputManager.inputMaster;
-
         GunThrowing throwing = GetComponent<GunThrowing>();
         if (gunThrowing == null && throwing != null)
         {
@@ -210,22 +207,22 @@ public class Shooting : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Player.Shoot.started += _ => ShootStarted();
-        controls.Player.Shoot.canceled += _ => ShootReleased();
+        InputManager.inputMaster.Player.Shoot.started += _ => ShootStarted();
+        InputManager.inputMaster.Player.Shoot.canceled += _ => ShootReleased();
 
-        controls.Player.Recall.performed += _ => Reset();
-        controls.Player.Heal.performed += _ => Healing();
+        InputManager.inputMaster.Player.Recall.performed += _ => Reset();
+        InputManager.inputMaster.Player.Heal.performed += _ => Healing();
 
         gunThrowing.onThrown.AddListener(ShootReleased);
     }
 
     private void OnDisable()
     {
-        controls.Player.Shoot.started -= _ => ShootStarted();
-        controls.Player.Shoot.canceled -= _ => ShootReleased();
+        InputManager.inputMaster.Player.Shoot.started -= _ => ShootStarted();
+        InputManager.inputMaster.Player.Shoot.canceled -= _ => ShootReleased();
 
-        controls.Player.Recall.performed -= _ => Reset();
-        controls.Player.Heal.performed -= _ => Healing();
+        InputManager.inputMaster.Player.Recall.performed -= _ => Reset();
+        InputManager.inputMaster.Player.Heal.performed -= _ => Healing();
 
         gunThrowing.onThrown.RemoveListener(ShootReleased);
     }
@@ -329,17 +326,7 @@ public class Shooting : MonoBehaviour
 
     private void ShootStarted()
     {
-        /*
-        if (!GameManager.s_Instance.paused && IsInHand())
-        {
-            // Only begin charging max charge shot if we have charge
-            if (gunCharge > 0)
-            {
-                onChargeMaxShotBegin?.Invoke();
-                maxShotCharging = true;
-            }
-        }
-        */
+
     }
 
     private void ShootReleased()

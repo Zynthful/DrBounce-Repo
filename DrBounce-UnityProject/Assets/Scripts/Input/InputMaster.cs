@@ -68,7 +68,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Shoot"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""0de4bb50-dd38-4346-8e6d-db9b81f0c5e6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

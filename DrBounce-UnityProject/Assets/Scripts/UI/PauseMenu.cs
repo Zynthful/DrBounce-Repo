@@ -8,8 +8,6 @@ public class PauseMenu : MonoBehaviour
     private bool paused = false;
     private bool hasPausedOnce = false; // Has the player paused at least once since initialisation?
 
-    public InputMaster controls;
-
     [Header("Pause Settings")]
     [SerializeField]
     private bool unpauseOnStart = true;
@@ -25,19 +23,10 @@ public class PauseMenu : MonoBehaviour
     private GameEvent onUnpauseAfterPause = null;
 
     [Header("Unity Events")]
-    [SerializeField]
-    private UnityEvent _onPause = null;
-    [SerializeField]
-    private UnityEvent _onUnpause = null;
-    [SerializeField]
-    private UnityEvent _onUnpauseAfterPause = null;
-    [SerializeField]
-    private BoolEvent _onPauseStateChange = null;
-
-    private void Awake()
-    {
-        controls = InputManager.inputMaster;
-    }
+    public UnityEvent _onPause = null;
+    public UnityEvent _onUnpause = null;
+    public UnityEvent _onUnpauseAfterPause = null;
+    public BoolEvent _onPauseStateChange = null;
 
     private void Start()
     {
@@ -47,12 +36,12 @@ public class PauseMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Menu.Pause.performed += _ => InvertPause();
+        InputManager.inputMaster.Menu.Pause.performed += _ => InvertPause();
     }
 
     private void OnDisable()
     {
-        controls.Menu.Pause.performed -= _ => InvertPause();
+        InputManager.inputMaster.Menu.Pause.performed -= _ => InvertPause();
     }
 
     private void InvertPause()
@@ -65,7 +54,7 @@ public class PauseMenu : MonoBehaviour
         paused = value;
         
         // Enable/disable gameplay controls
-        InputManager.SetActionMapActive(controls.Player, !value);
+        InputManager.SetActionMapActive(InputManager.inputMaster.Player, !value);
 
         // Update cursor lock state and visibility
         Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
