@@ -9,14 +9,16 @@ public class LevelSaveData
     public int health;
     public int level;
     public float[] position;
+    public float[] rotation;
     public int charges;
 
-    public LevelSaveData(int curLevel, int curCheckpoint, int curHealth, float[] curPosition, int curCharges)
+    public LevelSaveData(int curLevel, int curCheckpoint, int curHealth, float[] curPosition, float[] curRotation, int curCharges)
     {
         level = curLevel;
         checkpoint = curCheckpoint;
         health = curHealth;
         position = curPosition;
+        rotation = curRotation;
         charges = curCharges;
     }
 }

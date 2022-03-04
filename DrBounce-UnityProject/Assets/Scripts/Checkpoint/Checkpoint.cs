@@ -65,14 +65,20 @@ public class Checkpoint : MonoBehaviour
 
     void SaveLevelProgress()
     {
+        if(currentSceneIndex == -1) { currentSceneIndex = SceneManager.GetActiveScene().buildIndex; }
+
         // Save Level Progress
         Transform player = PlayerMovement.player;
 
         int[] checkpoint = GetCheckpointAndLevel();
+
+        Debug.Log("Data saved at level " + checkpoint[1]);
+
         LevelSaveData data = new LevelSaveData(checkpoint[1], 
                                                 checkpoint[0], 
                                                 player.GetComponent<PlayerHealth>().GetHealth(), 
                                                 new float[3]{player.position.x, player.position.y, player.position.z},
+                                                new float[4]{player.rotation.x, player.rotation.y, player.rotation.z, player.rotation.w},
                                                 player.GetComponentInChildren<Shooting>().GetCharges());
 
         SaveSystem.SaveInLevel(data);
