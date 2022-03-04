@@ -20,7 +20,7 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<MusicSwitchContainer Name="Level_03" ID="{42DF6E0D-91AD-4EBE-8845-17E18FAEDCA1}" ShortID="31440573">
+						<MusicSwitchContainer Name="Track_03" ID="{42DF6E0D-91AD-4EBE-8845-17E18FAEDCA1}" ShortID="31440573">
 							<PropertyList>
 								<Property Name="EnableAttenuation" Type="bool" Value="False"/>
 								<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
@@ -1836,7 +1836,7 @@
 								</Entry>
 							</EntryList>
 						</MusicSwitchContainer>
-						<MusicSwitchContainer Name="Level_02" ID="{EE8327A2-0769-4D9D-B577-C4B030BDD7F9}" ShortID="266768696">
+						<MusicSwitchContainer Name="Track_02" ID="{EE8327A2-0769-4D9D-B577-C4B030BDD7F9}" ShortID="266768696">
 							<PropertyList>
 								<Property Name="ContinuePlay" Type="bool" Value="False"/>
 								<Property Name="EnableAttenuation" Type="bool" Value="False"/>
@@ -3238,7 +3238,7 @@
 								</Entry>
 							</EntryList>
 						</MusicSwitchContainer>
-						<MusicSwitchContainer Name="Level_01" ID="{FC25A197-BFE7-43BC-859C-18F9D8DA0D87}" ShortID="700079375">
+						<MusicSwitchContainer Name="Track_01" ID="{FC25A197-BFE7-43BC-859C-18F9D8DA0D87}" ShortID="700079375">
 							<PropertyList>
 								<Property Name="ContinuePlay" Type="bool" Value="False"/>
 								<Property Name="Tempo" Type="Real64" Value="141"/>
@@ -3771,31 +3771,31 @@
 					</TransitionList>
 					<ObjectLists/>
 					<ArgumentList>
-						<ArgumentRef Name="Current_Level" ID="{83FE44AB-F4BA-486F-9BB8-8A0E8C4EE98A}"/>
+						<ArgumentRef Name="Selected_Track" ID="{64ADEC31-FDDE-4B81-8F2E-EBF726B1DE33}"/>
 					</ArgumentList>
 					<EntryList>
 						<Entry>
 							<Path>
-								<PathElementRef Name="Level_01" ID="{7509FF80-5560-4720-A0CE-31FA31599C09}"/>
+								<PathElementRef Name="Track_01" ID="{D2A6BF6D-6ECB-4F23-A072-FD55C7294067}"/>
 							</Path>
 							<AudioNodeInfo>
-								<NoObject Platform="Linked"/>
+								<AudioNodeRef Name="Track_01" ID="{FC25A197-BFE7-43BC-859C-18F9D8DA0D87}" WorkUnitID="{BDF29459-0CBE-4DBA-8AC7-BFABDCC212CF}" Platform="Linked"/>
 							</AudioNodeInfo>
 						</Entry>
 						<Entry>
 							<Path>
-								<PathElementRef Name="Level_02" ID="{D6CC0680-0376-4DB8-A076-569DA798DD49}"/>
+								<PathElementRef Name="Track_03" ID="{6C636290-D6C3-4853-8B7A-697EE191B6DD}"/>
 							</Path>
 							<AudioNodeInfo>
-								<AudioNodeRef Name="Level_02" ID="{EE8327A2-0769-4D9D-B577-C4B030BDD7F9}" WorkUnitID="{BDF29459-0CBE-4DBA-8AC7-BFABDCC212CF}" Platform="Linked"/>
+								<AudioNodeRef Name="Track_03" ID="{42DF6E0D-91AD-4EBE-8845-17E18FAEDCA1}" WorkUnitID="{BDF29459-0CBE-4DBA-8AC7-BFABDCC212CF}" Platform="Linked"/>
 							</AudioNodeInfo>
 						</Entry>
 						<Entry>
 							<Path>
-								<PathElementRef Name="Level_03" ID="{4F246CD1-8869-4C77-83F3-4557F29E16BD}"/>
+								<PathElementRef Name="Track_02" ID="{C8AEAD3F-E5F0-4F25-91C1-DD8442C1F670}"/>
 							</Path>
 							<AudioNodeInfo>
-								<AudioNodeRef Name="Level_03" ID="{42DF6E0D-91AD-4EBE-8845-17E18FAEDCA1}" WorkUnitID="{BDF29459-0CBE-4DBA-8AC7-BFABDCC212CF}" Platform="Linked"/>
+								<AudioNodeRef Name="Track_02" ID="{EE8327A2-0769-4D9D-B577-C4B030BDD7F9}" WorkUnitID="{BDF29459-0CBE-4DBA-8AC7-BFABDCC212CF}" Platform="Linked"/>
 							</AudioNodeInfo>
 						</Entry>
 					</EntryList>
