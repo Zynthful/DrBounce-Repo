@@ -54,7 +54,6 @@ public class DialogueData : ScriptableObject
         // Check against cooldown and chance to play
         else if (Random.Range(0.0f, 1.0f) <= chanceToPlay)
         {
-            Debug.Log("playing!");
             triggered = true;
             DialogueManager.s_Instance.PlayDialogueLine(this, @object);
             DialogueManager.s_Instance.StartCoroutine(DialogueManager.s_Instance.Cooldown(this, cooldown));
