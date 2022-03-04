@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 
 public class Checkpoint : MonoBehaviour
@@ -36,6 +37,9 @@ public class Checkpoint : MonoBehaviour
         GoToCurrentCheckpoint();
     }
 
+    [SerializeField]
+    public UnityEvent OnCheckpointReached = null;
+
     private void Start()
     {
         firstSetup = true;
@@ -53,6 +57,30 @@ public class Checkpoint : MonoBehaviour
         {
             currentCheckpoint++;
         }
+
+        SaveLevelProgress();
+
+        OnCheckpointReached?.Invoke();
+    }
+
+    void SaveLevelProgress()
+    {
+        // Save Level Progress
+        Transform player = PlayerMovement.player;
+
+        int[] checkpoint = Checkpoint.checkpointManagerInstance.GetCheckpointAndLevel();
+        LevelSaveData data = new LevelSaveData(checkpoint[1], 
+                                                checkpoint[0], 
+                                                player.GetComponent<PlayerHealth>().GetHealth(), 
+                                                new float[3]{player.position.x, player.position.y, player.position.z},
+                                                player.GetComponentInChildren<Shooting>().GetCharges());
+
+        SaveSystem.SaveInLevel(data);
+    }
+
+    public void LoadLevelProgress(int setCheckpoint)
+    {
+        currentCheckpoint = setCheckpoint;
     }
 
     private void ReloadCheckpoint()
@@ -90,5 +118,10 @@ public class Checkpoint : MonoBehaviour
     private void GoToCheckpoint(int checkpointIndex)
     {
         PlayerMovement.player.transform.position = new Vector3(checkpoints[currentCheckpoint].position.x, checkpoints[currentCheckpoint].position.y + 1, checkpoints[currentCheckpoint].position.z);
+    }
+
+    public int[] GetCheckpointAndLevel()
+    {
+        return new int[2]{currentCheckpoint,currentSceneIndex};
     }
 }

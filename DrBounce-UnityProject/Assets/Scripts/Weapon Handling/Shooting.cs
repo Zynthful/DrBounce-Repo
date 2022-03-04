@@ -491,6 +491,11 @@ public class Shooting : MonoBehaviour
         }
     }
 
+    public int GetCharges()
+    {
+        return gunCharge;
+    }
+
     private int GraphCalculator(List<Vector2> graph, int charges) //🐌
     {
         foreach (Vector2 amount in graph)  //loops through the vector 2 (graph)
