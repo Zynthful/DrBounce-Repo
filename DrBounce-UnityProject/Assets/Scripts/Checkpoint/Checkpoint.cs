@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-
 public class Checkpoint : MonoBehaviour
 {
     //need to be where the player spawns
@@ -17,6 +16,8 @@ public class Checkpoint : MonoBehaviour
     private int currentSceneIndex = -1;
     public static Checkpoint s_Instance = null;
     public static bool firstSetup;
+
+    private bool levelReloadFromSave;
 
     private void Awake()
     {
@@ -49,6 +50,7 @@ public class Checkpoint : MonoBehaviour
     {
         CheckpointHit.OnCollision += ReachedNextCheckpoint;
         PlayerHealth.OnPlayerDeath += ReloadCheckpoint;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void ReachedNextCheckpoint() 
@@ -63,6 +65,16 @@ public class Checkpoint : MonoBehaviour
         OnCheckpointReached?.Invoke();
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (levelReloadFromSave && scene.buildIndex == currentSceneIndex)
+        {
+            levelReloadFromSave = false;
+            Debug.Log("LevelLoadFromSave");
+            LoadLevelProgress(SaveSystem.LoadInLevel());
+        }
+    }
+
     void SaveLevelProgress()
     {
         if(currentSceneIndex == -1) { currentSceneIndex = SceneManager.GetActiveScene().buildIndex; }
@@ -74,11 +86,12 @@ public class Checkpoint : MonoBehaviour
 
         Debug.Log("Data saved at level " + checkpoint[1]);
 
-        int[] unlockFilter = new int[UnlockTracker.instance.currentSettings.unlocks.Length];
-        for(int i = 0; i < UnlockTracker.instance.currentSettings.unlocks.Length; i++)
+        int[] unlockFilter = new int[GameManager.s_Instance.currentSettings.Length];
+        for(int i = 0; i < GameManager.s_Instance.currentSettings.Length; i++)
         {
-            unlockFilter[i] = (int)UnlockTracker.instance.currentSettings.unlocks[i];
+            unlockFilter[i] = (int)GameManager.s_Instance.currentSettings[i];
         }
+        Debug.Log(unlockFilter);
 
         LevelSaveData data = new LevelSaveData(checkpoint[1], 
                                                 checkpoint[0], 
@@ -91,15 +104,46 @@ public class Checkpoint : MonoBehaviour
         SaveSystem.SaveInLevel(data);
     }
 
-    public void LoadLevelProgress(int setCheckpoint)
+    public void ReloadFromSaveProgress()
     {
-        currentCheckpoint = setCheckpoint;
+        levelReloadFromSave = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadLevelProgress(LevelSaveData data)
+    {
+        Debug.Log("Run Load level progress");
+
+        currentCheckpoint = data.checkpoint;
+
+        UnlockTracker.UnlockTypes[] unlocks = new UnlockTracker.UnlockTypes[data.unlocks.Length];
+        for (int i = 0; i < data.unlocks.Length; i++)
+        {
+            unlocks[i] = (UnlockTracker.UnlockTypes)data.unlocks[i];
+            Debug.Log("Stuffherer: " + unlocks[i]);
+        }
+        
+        Transform player = PlayerMovement.player;
+        UnlockTracker tracker = player.GetComponent<UnlockTracker>();
+
+        tracker.saveValues = true; tracker.saveUnlocks = unlocks;
+
+        Vector3 newPosition = new Vector3(data.position[0], data.position[1], data.position[2]);
+        Quaternion rotation = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
+        player.position = newPosition;
+        player.rotation = rotation;
+
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+        health.saveDamageValue = player.GetComponent<PlayerHealth>().GetMaxHealth() - data.health;
+        health.saveDamage = true;
+
+        player.GetComponentInChildren<Shooting>().SetCharge(data.charges);
     }
 
     private void ReloadCheckpoint()
     {
+        levelReloadFromSave = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        UnlockTracker.instance.ReloadUnlocks();
     }
 
     private void GoToCurrentCheckpoint()
@@ -116,6 +160,7 @@ public class Checkpoint : MonoBehaviour
             }
             else
             {
+                GameManager.s_Instance.currentSettings = null;
                 s_Instance = null;
                 firstSetup = false;
                 currentSceneIndex = -1;

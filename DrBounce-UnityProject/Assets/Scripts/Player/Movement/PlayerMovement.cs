@@ -126,14 +126,21 @@ public class PlayerMovement : MonoBehaviour
     {
         // Listen for player inputs
         controls.Player.Jump.performed += _ => Jump();
-        controls.Player.Dash.performed += _ => StartCoroutine(Dash());
+        controls.Player.Dash.performed += _ => InitiateDash();
         controls.Player.Crouch.performed += _ => Crouch();
+    }
+
+    private void OnDestroy()
+    {
+        controls.Player.Jump.performed -= _ => Jump();
+        controls.Player.Dash.performed -= _ => InitiateDash();
+        controls.Player.Crouch.performed -= _ => Crouch();
     }
 
     private void OnDisable()//Brackeys Moment   // brackeys is gone :(
     {
         controls.Player.Jump.performed -= _ => Jump();
-        controls.Player.Dash.performed -= _ => StartCoroutine(Dash());
+        controls.Player.Dash.performed -= _ => InitiateDash();
         controls.Player.Crouch.performed -= _ => Crouch();
     }
     #endregion
@@ -440,6 +447,11 @@ public class PlayerMovement : MonoBehaviour
             onJump?.Invoke();
             _onJump?.Raise();
         }
+    }
+
+    void InitiateDash()
+    {
+        StartCoroutine(Dash());
     }
 
     void Land()

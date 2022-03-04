@@ -48,6 +48,7 @@ public class LevelComplete : MonoBehaviour
     private void Complete() 
     {
         SaveSystem.DeleteLevelData();
+        GameManager.s_Instance.currentSettings = null;
         onComplete?.Invoke();
         onLevelComplete?.Invoke();
         _onLevelComplete?.Raise();

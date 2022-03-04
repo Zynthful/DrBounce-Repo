@@ -18,10 +18,10 @@ public class UnlockTracker : MonoBehaviour
     [SerializeField]
     private Unlocks levelStartSettings;
 
-    public Unlocks currentSettings;
-
     public static UnlockTracker instance;
 
+    public bool saveValues;
+    public UnlockTypes[] saveUnlocks;
 
     // Events to enable/disable unlocks
     [SerializeField]
@@ -88,14 +88,15 @@ public class UnlockTracker : MonoBehaviour
     {
         foreach(UnlockTypes unlock in newUnlocks)
         {
+            Debug.Log("Unlocking: " + unlock);
             EnableUnlock(unlock);
         }
-        currentSettings = new Unlocks(newUnlocks);
+        GameManager.s_Instance.currentSettings = newUnlocks;
     }
 
     public void ReloadUnlocks()
     {
-        foreach (UnlockTypes unlock in currentSettings.unlocks)
+        foreach (UnlockTypes unlock in GameManager.s_Instance.currentSettings)
         {
             EnableUnlock(unlock);
         }
@@ -107,10 +108,16 @@ public class UnlockTracker : MonoBehaviour
         instance = this;
         
         DisableAllUnlocks();
-        if(levelStartSettings != null)
+        if(levelStartSettings != null && !saveValues)
         {
             NewUnlocks(levelStartSettings.unlocks);
-            currentSettings = levelStartSettings;
+            GameManager.s_Instance.currentSettings = levelStartSettings.unlocks;
+        }
+        else if (saveValues)
+        {
+            NewUnlocks(saveUnlocks);
+            GameManager.s_Instance.currentSettings = saveUnlocks;
+            saveValues = false;
         }
         else
             Debug.Log("Running without any unlocks, have you forgotten to setup the scriptableObject?");

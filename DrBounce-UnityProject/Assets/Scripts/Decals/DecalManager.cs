@@ -124,7 +124,8 @@ public class DecalManager : MonoBehaviour
         //whatever
         foreach (var decal in spawnedDecals)
         {
-            decal.SetActive(false);
+            if(decal != null)
+                decal.SetActive(false);
         }
         spawnedDecals.Clear();
     }

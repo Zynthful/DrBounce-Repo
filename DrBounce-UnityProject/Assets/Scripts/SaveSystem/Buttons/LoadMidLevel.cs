@@ -37,31 +37,7 @@ public class LoadMidLevel : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(this);
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-            Checkpoint.s_Instance.LoadLevelProgress(data.checkpoint);
-
-            UnlockTracker.UnlockTypes[] unlocks = new UnlockTracker.UnlockTypes[data.unlocks.Length];
-            for(int i = 0; i < data.unlocks.Length; i++)
-            {
-                unlocks[i] = (UnlockTracker.UnlockTypes)data.unlocks[i];
-            }
-            UnlockTracker.instance.NewUnlocks(unlocks);
-
-            Transform player = PlayerMovement.player;
-
-            Vector3 newPosition = new Vector3(data.position[0], data.position[1], data.position[2]);
-            Quaternion rotation = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
-            player.position = newPosition;
-            player.rotation = rotation;
-
-            player.GetComponent<PlayerHealth>().Damage(player.GetComponent<PlayerHealth>().GetMaxHealth() - data.health);
-
-            player.GetComponentInChildren<Shooting>().SetCharge(data.charges);
-
-            Destroy(this);
+            Checkpoint.s_Instance.ReloadFromSaveProgress();
         }
     }
 }

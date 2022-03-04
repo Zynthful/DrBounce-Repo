@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private InputMaster controls;
     private DecalManager decalM;
 
+    public UnlockTracker.UnlockTypes[] currentSettings;
+
     [HideInInspector]
     public bool paused = false;
 

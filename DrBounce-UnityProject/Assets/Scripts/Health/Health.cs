@@ -74,9 +74,18 @@ public class Health : MonoBehaviour
     [SerializeField]
     private GameEvent _onDeath = null;
 
+    public bool saveDamage;
+    public int saveDamageValue;
+
     protected virtual void Start()
     {
         ResetHealth();
+
+        if (saveDamage)
+        {
+            saveDamage = false;
+            Damage(saveDamageValue);
+        }
     }
 
     protected virtual void Update()

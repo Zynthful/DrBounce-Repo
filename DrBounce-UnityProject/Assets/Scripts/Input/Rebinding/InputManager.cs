@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour
 {
     public static InputMaster inputMaster = null;
 
+    public static InputManager s_Instance = null;
+
     // Events
     public static event Action<InputAction, int> onRebindBegin = null;
     public static event Action onRebindComplete = null;
@@ -19,8 +21,23 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        if (s_Instance == null)
+        {
+            s_Instance = FindObjectOfType(typeof(InputManager)) as InputManager;
+        }
+
+        if (s_Instance == null)
+        {
+            s_Instance = this;
+        }
+        else if (s_Instance != this)
+        {
+            Destroy(gameObject);
+        }
+
         CheckForNullInputMaster();
 
+        inputMaster.Disable();
         // Enables all controls
         // Any controls that should start disabled should be done AFTER this
         inputMaster.Enable();
