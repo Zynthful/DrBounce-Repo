@@ -34,6 +34,6 @@ public class DialogueSubtitleUI : MonoBehaviour
     {
         onDisableSubtitle?.Invoke();
 
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
