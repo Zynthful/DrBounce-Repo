@@ -67,5 +67,13 @@ public static class SaveSystem
         }
     }
 
+    public static void DeleteLevelData()
+    {
+        if (File.Exists(Application.persistentDataPath + "/levelData.dat"))
+        {
+            File.Delete(Application.persistentDataPath + "/levelData.dat");
+        }
+    }
+
     public static bool LevelSaveExists(int levelIndex) { LevelSaveData data = LoadInLevel(); if (data.level == levelIndex) { return true; } else { return false; } }
 }

@@ -47,6 +47,7 @@ public class LevelComplete : MonoBehaviour
     /// </summary>
     private void Complete() 
     {
+        SaveSystem.DeleteLevelData();
         onComplete?.Invoke();
         onLevelComplete?.Invoke();
         _onLevelComplete?.Raise();
