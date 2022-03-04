@@ -25,6 +25,11 @@ namespace AK
         static const AkUniqueID COLLIDE_NON_BOUNCE = 1752364416U;
         static const AkUniqueID COLLIDE_NONBOUNCEABLE = 402864233U;
         static const AkUniqueID DASH = 1942692385U;
+        static const AkUniqueID ELEVATOR_TRIGGER_01 = 779930936U;
+        static const AkUniqueID ELEVATOR_TRIGGER_02 = 779930939U;
+        static const AkUniqueID ELEVATOR_TRIGGER_03 = 779930938U;
+        static const AkUniqueID ELEVATOR_TRIGGER_03_EXPLOSION = 2831787342U;
+        static const AkUniqueID ELEVATOR_TRIGGER_04 = 779930941U;
         static const AkUniqueID ENEMY_BULLET_IMPACT_PLAYER = 1082212733U;
         static const AkUniqueID ENEMY_BULLET_IMPACT_SURFACE = 936643039U;
         static const AkUniqueID ENEMY_GUN_BOUNCE_IMPACT = 177975784U;
@@ -130,6 +135,19 @@ namespace AK
                 static const AkUniqueID PAUSED = 319258907U;
             } // namespace STATE
         } // namespace PAUSED_STATE
+
+        namespace SELECTED_TRACK
+        {
+            static const AkUniqueID GROUP = 952270134U;
+
+            namespace STATE
+            {
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID TRACK_01 = 3366477912U;
+                static const AkUniqueID TRACK_02 = 3366477915U;
+                static const AkUniqueID TRACK_03 = 3366477914U;
+            } // namespace STATE
+        } // namespace SELECTED_TRACK
 
     } // namespace STATES
 
