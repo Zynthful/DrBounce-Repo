@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager s_Instance = null;
+    private GameObject uiInstance = null;
 
     [SerializeField]
     private GameObject dialogueCanvas = null;
@@ -28,14 +29,27 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
-        dialogueCanvas = Instantiate(dialogueCanvas);
-        dialogueCanvas.SetActive(false);
-        subtitleUI = dialogueCanvas.GetComponent<DialogueSubtitleUI>();
+    private void CheckNullUI()
+    {
+        if (uiInstance == null || subtitleUI == null)
+        {
+            InitialiseUI();
+        }
+    }
+
+    private void InitialiseUI()
+    {
+        uiInstance = Instantiate(dialogueCanvas);
+        uiInstance.SetActive(false);
+        subtitleUI = uiInstance.GetComponent<DialogueSubtitleUI>();
     }
 
     public void PlayDialogueLine(DialogueData line, GameObject @object)
     {
+        CheckNullUI();
+
         line.GetEvent().Post(@object, (uint)(AkCallbackType.AK_Marker | AkCallbackType.AK_EndOfEvent), Callback);
 
         subtitleUI.ShowSubtitle(line);
@@ -62,8 +76,10 @@ public class DialogueManager : MonoBehaviour
 
     public void OnMarker(AkMarkerCallbackInfo info)
     {
+        CheckNullUI();
+
         // Show subtitles
-        dialogueCanvas.SetActive(true);
+        uiInstance.SetActive(true);
 
         // Update text with subtitle read from marker on audio file
         subtitleUI.SetSubtitleText(info.strLabel);
