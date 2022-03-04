@@ -64,7 +64,7 @@ namespace AK
         static const AkUniqueID INJURED = 2860195132U;
         static const AkUniqueID JUMP = 3833651337U;
         static const AkUniqueID LAND = 674522502U;
-        static const AkUniqueID LEVEL_FINISHED = 1660357050U;
+        static const AkUniqueID LEVEL_COMPLETE = 3736098925U;
         static const AkUniqueID LONELY = 2487009732U;
         static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
@@ -241,6 +241,11 @@ namespace AK
         static const AkUniqueID STUN_PROGRESS = 1603095301U;
         static const AkUniqueID VOLUME_OVERRIDE = 1657400430U;
     } // namespace GAME_PARAMETERS
+
+    namespace TRIGGERS
+    {
+        static const AkUniqueID RESTART_LEVEL = 1904346601U;
+    } // namespace TRIGGERS
 
     namespace BANKS
     {
