@@ -68,7 +68,7 @@ public class Checkpoint : MonoBehaviour
         // Save Level Progress
         Transform player = PlayerMovement.player;
 
-        int[] checkpoint = Checkpoint.checkpointManagerInstance.GetCheckpointAndLevel();
+        int[] checkpoint = GetCheckpointAndLevel();
         LevelSaveData data = new LevelSaveData(checkpoint[1], 
                                                 checkpoint[0], 
                                                 player.GetComponent<PlayerHealth>().GetHealth(), 

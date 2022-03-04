@@ -13,7 +13,7 @@ public class LoadMidLevel : MonoBehaviour
             GetComponent<Button>().interactable = true;
         else
             GetComponent<Button>().interactable = false;
-        Checkpoint.checkpointManagerInstance.OnCheckpointReached.AddListener(ActivateLoadButton);
+        Checkpoint.s_Instance.OnCheckpointReached.AddListener(ActivateLoadButton);
     }
 
     void ActivateLoadButton()
@@ -37,7 +37,7 @@ public class LoadMidLevel : MonoBehaviour
             Vector3 newPosition = new Vector3(data.position[0], data.position[1], data.position[2]);
             player.position = newPosition;
 
-            Checkpoint.checkpointManagerInstance.LoadLevelProgress(data.checkpoint);
+            Checkpoint.s_Instance.LoadLevelProgress(data.checkpoint);
 
             player.GetComponent<PlayerHealth>().Damage(player.GetComponent<PlayerHealth>().GetMaxHealth() - data.health);
 
