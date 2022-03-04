@@ -3,8 +3,32 @@
 	<Events>
 		<WorkUnit Name="Levels" ID="{59CFBAF3-7D61-44BA-BD14-28ABB6060068}" OwnerID="{E60A796A-48FE-43E5-AB40-2E68E11C33F2}" PersistMode="Nested">
 			<ChildrenList>
-				<Event Name="Restart_Level" ID="{DD5B0966-D1EA-497D-9EDD-6EE713CE6CC9}"/>
-				<Event Name="Level_Finished" ID="{7ED7CCD8-1B1A-46F8-AA5E-F552F1D2FCEB}">
+				<Event Name="Restart_Level" ID="{DD5B0966-D1EA-497D-9EDD-6EE713CE6CC9}">
+					<ChildrenList>
+						<Action Name="" ID="{25F9261A-E2FE-4B82-A5DC-42EACEAFF3F7}" ShortID="395493420">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="41"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Stop_Music" ID="{B87AF80C-767D-4106-8679-19F412638650}" WorkUnitID="{E77FE1BE-C949-47D0-BE4A-BEF66442F80A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{F8E73F75-7AB6-45B8-B38E-6FB5BA74F959}" ShortID="70119856">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="35"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Restart_Level" ID="{4A96EF6E-2FE3-4C9E-8270-1E922D6CADC2}" WorkUnitID="{C2709772-7077-4A9F-97E0-F0DF8BA39E2D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Level_Complete" ID="{7ED7CCD8-1B1A-46F8-AA5E-F552F1D2FCEB}">
 					<ChildrenList>
 						<Action Name="" ID="{83CA9F3F-889F-44FC-854C-7AE12BCBBA80}" ShortID="224918958">
 							<PropertyList>
