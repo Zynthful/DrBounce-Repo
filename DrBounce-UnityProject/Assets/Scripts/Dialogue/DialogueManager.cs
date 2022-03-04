@@ -13,6 +13,10 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueSubtitleUI subtitleUI = null;
 
+    private DialogueData lastPlayedDialogue = null;
+
+    private bool playing = false;
+
     private void Awake()
     {
         if (s_Instance == null)
@@ -48,9 +52,12 @@ public class DialogueManager : MonoBehaviour
 
     public void PlayDialogueLine(DialogueData line, GameObject @object)
     {
+        playing = true;
+
         CheckNullUI();
 
         line.GetEvent().Post(@object, (uint)(AkCallbackType.AK_Marker | AkCallbackType.AK_EndOfEvent), Callback);
+        lastPlayedDialogue = line;
 
         subtitleUI.ShowSubtitle(line);
     }
@@ -72,6 +79,7 @@ public class DialogueManager : MonoBehaviour
     public void OnEndOfEvent()
     {
         subtitleUI.Disable();
+        playing = false;
     }
 
     public void OnMarker(AkMarkerCallbackInfo info)
@@ -91,4 +99,7 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         data.SetCoolingDown(false);
     }
+
+    public DialogueData GetLastPlayed() { return lastPlayedDialogue; }
+    public bool GetIsPlaying() { return playing; }
 }

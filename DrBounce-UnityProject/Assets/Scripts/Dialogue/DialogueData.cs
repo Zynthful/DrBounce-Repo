@@ -28,6 +28,14 @@ public class DialogueData : ScriptableObject
     [Tooltip("If true, this dialogue will only ever trigger once.")]
     private bool triggerOnce = false;
 
+    [SerializeField]
+    [Tooltip("If true, other dialogue lines can interrupt this dialogue line. This overrides whether other dialogue lines can interrupt or not.")]
+    private bool canBeInterrupted = true;
+
+    [SerializeField]
+    [Tooltip("If true, this dialogue line can interrput other dialogue lines.")]
+    private bool canInterrupt = true;
+
     private bool coolingDown = false;
     private bool triggered = false;
 
@@ -35,6 +43,8 @@ public class DialogueData : ScriptableObject
     public DialogueSpeakerData GetSpeaker() { return speaker; }
     public void SetCoolingDown(bool value) { coolingDown = value; }
     public bool GetCoolingDown() { return coolingDown; }
+    public bool GetCanBeInterrupted() { return canBeInterrupted; }
+    public bool GetCanInterrupt() { return canInterrupt; }
 
     private void OnEnable()
     {
@@ -48,7 +58,16 @@ public class DialogueData : ScriptableObject
 
     public void Play(GameObject @object)
     {
+        // Prevent re-triggering if we can only trigger once or we're cooling down
         if ((triggerOnce && triggered) || coolingDown)
+            return;
+
+        // Prevent interrupting if we can't interrupt and dialogue is currently being played
+        else if (!canInterrupt && DialogueManager.s_Instance.GetIsPlaying())
+            return;
+
+        // Prevent interrupting if any currently playing dialogue is uninterruptable
+        else if (DialogueManager.s_Instance.GetLastPlayed() != null && !DialogueManager.s_Instance.GetLastPlayed().GetCanBeInterrupted() && DialogueManager.s_Instance.GetIsPlaying())
             return;
 
         // Check against cooldown and chance to play
