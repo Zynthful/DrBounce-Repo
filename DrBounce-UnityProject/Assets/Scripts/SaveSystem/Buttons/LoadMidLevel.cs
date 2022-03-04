@@ -2,9 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadMidLevel : MonoBehaviour
 {
+
+    private void Start()
+    {
+        if (SaveSystem.LevelSaveExists(SceneManager.GetActiveScene().buildIndex))
+            GetComponent<Button>().interactable = true;
+        else
+            GetComponent<Button>().interactable = false;
+        Checkpoint.checkpointManagerInstance.OnCheckpointReached.AddListener(ActivateLoadButton);
+    }
+
+    void ActivateLoadButton()
+    {
+        GetComponent<Button>().interactable = true;
+    }
+
     public void OnClickedLoad()
     {
         LevelSaveData data = SaveSystem.LoadInLevel();

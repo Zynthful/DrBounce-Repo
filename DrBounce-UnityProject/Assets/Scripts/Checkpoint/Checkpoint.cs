@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 
 public class Checkpoint : MonoBehaviour
@@ -19,6 +20,9 @@ public class Checkpoint : MonoBehaviour
     public static Checkpoint checkpointManagerInstance = null;
 
     public static bool firstSetup;
+
+    [SerializeField]
+    public UnityEvent OnCheckpointReached = null;
 
     private void Start()
     {
@@ -47,6 +51,8 @@ public class Checkpoint : MonoBehaviour
         }
 
         SaveLevelProgress();
+
+        OnCheckpointReached?.Invoke();
     }
 
     void SaveLevelProgress()

@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
+
     public static void SaveInLevel(LevelSaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -65,4 +66,6 @@ public static class SaveSystem
             return null;
         }
     }
+
+    public static bool LevelSaveExists(int levelIndex) { LevelSaveData data = LoadInLevel(); if (data.level == levelIndex) { return true; } else { return false; } }
 }
