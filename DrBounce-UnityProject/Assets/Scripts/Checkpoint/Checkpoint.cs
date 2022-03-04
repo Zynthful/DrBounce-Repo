@@ -64,6 +64,11 @@ public class Checkpoint : MonoBehaviour
         SaveSystem.SaveInLevel(data);
     }
 
+    public void LoadLevelProgress(int setCheckpoint)
+    {
+        currentCheckpoint = setCheckpoint;
+    }
+
     void OnEnable()
     {
         CheckpointHit.OnCollision += ReachedNextCheckpoint;

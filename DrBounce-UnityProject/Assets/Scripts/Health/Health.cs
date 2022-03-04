@@ -181,6 +181,8 @@ public class Health : MonoBehaviour
 
     public bool GetIsAtFullHealth() { return (health >= maxHealth); }
 
+    public int GetMaxHealth() { return maxHealth; }
+
     /// <summary>
     /// Returns health percentage as a float between 0-100
     /// </summary>
