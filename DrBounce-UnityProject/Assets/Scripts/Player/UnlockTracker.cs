@@ -18,6 +18,8 @@ public class UnlockTracker : MonoBehaviour
     [SerializeField]
     private Unlocks levelStartSettings;
 
+    public Unlocks currentSettings;
+
     public static UnlockTracker instance;
 
 
@@ -88,6 +90,15 @@ public class UnlockTracker : MonoBehaviour
         {
             EnableUnlock(unlock);
         }
+        currentSettings = new Unlocks(newUnlocks);
+    }
+
+    public void ReloadUnlocks()
+    {
+        foreach (UnlockTypes unlock in currentSettings.unlocks)
+        {
+            EnableUnlock(unlock);
+        }
     }
 
     // Start is called before the first frame update
@@ -99,6 +110,7 @@ public class UnlockTracker : MonoBehaviour
         if(levelStartSettings != null)
         {
             NewUnlocks(levelStartSettings.unlocks);
+            currentSettings = levelStartSettings;
         }
         else
             Debug.Log("Running without any unlocks, have you forgotten to setup the scriptableObject?");

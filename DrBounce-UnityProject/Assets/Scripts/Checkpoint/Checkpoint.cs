@@ -74,12 +74,19 @@ public class Checkpoint : MonoBehaviour
 
         Debug.Log("Data saved at level " + checkpoint[1]);
 
+        int[] unlockFilter = new int[UnlockTracker.instance.currentSettings.unlocks.Length];
+        for(int i = 0; i < UnlockTracker.instance.currentSettings.unlocks.Length; i++)
+        {
+            unlockFilter[i] = (int)UnlockTracker.instance.currentSettings.unlocks[i];
+        }
+
         LevelSaveData data = new LevelSaveData(checkpoint[1], 
                                                 checkpoint[0], 
                                                 player.GetComponent<PlayerHealth>().GetHealth(), 
                                                 new float[3]{player.position.x, player.position.y, player.position.z},
                                                 new float[4]{player.rotation.x, player.rotation.y, player.rotation.z, player.rotation.w},
-                                                player.GetComponentInChildren<Shooting>().GetCharges());
+                                                player.GetComponentInChildren<Shooting>().GetCharges(),
+                                                unlockFilter);
 
         SaveSystem.SaveInLevel(data);
     }
@@ -92,6 +99,7 @@ public class Checkpoint : MonoBehaviour
     private void ReloadCheckpoint()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        UnlockTracker.instance.ReloadUnlocks();
     }
 
     private void GoToCurrentCheckpoint()

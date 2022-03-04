@@ -43,6 +43,13 @@ public class LoadMidLevel : MonoBehaviour
 
             Checkpoint.s_Instance.LoadLevelProgress(data.checkpoint);
 
+            UnlockTracker.UnlockTypes[] unlocks = new UnlockTracker.UnlockTypes[data.unlocks.Length];
+            for(int i = 0; i < data.unlocks.Length; i++)
+            {
+                unlocks[i] = (UnlockTracker.UnlockTypes)data.unlocks[i];
+            }
+            UnlockTracker.instance.NewUnlocks(unlocks);
+
             Transform player = PlayerMovement.player;
 
             Vector3 newPosition = new Vector3(data.position[0], data.position[1], data.position[2]);

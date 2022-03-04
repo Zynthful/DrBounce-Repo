@@ -10,9 +10,10 @@ public class LevelSaveData
     public int level;
     public float[] position;
     public float[] rotation;
+    public int[] unlocks;
     public int charges;
 
-    public LevelSaveData(int curLevel, int curCheckpoint, int curHealth, float[] curPosition, float[] curRotation, int curCharges)
+    public LevelSaveData(int curLevel, int curCheckpoint, int curHealth, float[] curPosition, float[] curRotation, int curCharges, int[] curSettings)
     {
         level = curLevel;
         checkpoint = curCheckpoint;
@@ -20,5 +21,6 @@ public class LevelSaveData
         position = curPosition;
         rotation = curRotation;
         charges = curCharges;
+        unlocks = curSettings;
     }
 }
