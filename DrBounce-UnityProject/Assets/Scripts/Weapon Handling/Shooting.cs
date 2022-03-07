@@ -514,7 +514,7 @@ public class Shooting : MonoBehaviour
 
     private void Healing() 
     {
-        if (gunCharge > 0 && !health.GetIsAtFullHealth()) 
+        if (gunCharge > 0 && !health.GetIsAtFullHealth() && gunThrowing.GetIsHeld()) 
         {
             int healAmount = GraphCalculator(shooter.healGraph, gunCharge);
             OnActivated?.Invoke(healAmount);    //calls the player heal function
