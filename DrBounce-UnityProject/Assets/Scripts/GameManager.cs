@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(s_Instance);
 
+        Time.fixedDeltaTime = 0.02f;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
