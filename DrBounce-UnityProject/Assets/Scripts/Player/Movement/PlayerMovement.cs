@@ -181,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
                 oldMove = move * speed;
                 move = (transform.right * x + transform.forward * z).normalized * acceleration; //Creates a value to move the player in local space based on this value.
                 controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
-                velocity -= ((move * speed) - oldMove);
+                velocity -= (((move * speed) - (oldMove)) * 0.5f);
             }
             else
             {
