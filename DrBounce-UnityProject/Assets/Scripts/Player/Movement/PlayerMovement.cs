@@ -92,6 +92,9 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 velocity;
     private float oldGroundDistance;
 
+    [Header("Freeze")]
+    [SerializeField] private bool Freeze = false;
+
     [Header("UnityEvents")]
     [SerializeField] private UnityEvent onJump = null;
     [SerializeField] private UnityEvent onDash = null;
@@ -121,6 +124,23 @@ public class PlayerMovement : MonoBehaviour
 
         instance = this;
         player = transform;
+    }
+
+    private void Start()
+    {
+        if (Freeze)
+        {
+            controls.Player.Movement.Disable();
+            controls.Player.Jump.Disable();
+            controls.Player.Crouch.Disable();
+        }
+    }
+
+    public void UnFreezeMovement()
+    {
+        controls.Player.Movement.Enable();
+        controls.Player.Jump.Enable();
+        controls.Player.Crouch.Enable();
     }
 
     #region BrackeysMoment
