@@ -36,6 +36,7 @@ namespace AK
         static const AkUniqueID ENEMY_HEALTH_DEATH = 2932285363U;
         static const AkUniqueID ENEMY_HEALTH_DEATH_PARTICLE_COLLIDE = 4019809755U;
         static const AkUniqueID ENEMY_HEALTH_INJURED = 3919011194U;
+        static const AkUniqueID ENEMY_JUMP = 45936026U;
         static const AkUniqueID ENEMY_STUN_END = 2724073864U;
         static const AkUniqueID ENEMY_STUN_INCREASE = 3231467681U;
         static const AkUniqueID ENEMY_STUN_PARTICLE_SPAWN = 865452671U;
@@ -95,6 +96,12 @@ namespace AK
         static const AkUniqueID UI_TV_SELECTABLE_POINTERENTER = 3934313U;
         static const AkUniqueID UI_TV_SELECTABLE_SELECT = 1544786970U;
         static const AkUniqueID UNPAUSE = 3412868374U;
+        static const AkUniqueID VENT_BREAKING = 3276954688U;
+        static const AkUniqueID VENT_FALL_LAND = 3059471644U;
+        static const AkUniqueID VENT_GRATE_CREAK = 2020572437U;
+        static const AkUniqueID VENT_GRATE_FALL_LAND = 3812533968U;
+        static const AkUniqueID VENT_GRATE_FALL_START = 1723523377U;
+        static const AkUniqueID WINDOW_FALL = 3538399667U;
     } // namespace EVENTS
 
     namespace STATES
@@ -255,7 +262,6 @@ namespace AK
         static const AkUniqueID LEVEL_1 = 1290008369U;
         static const AkUniqueID LEVEL_2 = 1290008370U;
         static const AkUniqueID LEVEL_3 = 1290008371U;
-        static const AkUniqueID LEVEL_4 = 1290008372U;
         static const AkUniqueID MAIN_MENU = 2005704188U;
         static const AkUniqueID UI = 1551306167U;
     } // namespace BANKS
