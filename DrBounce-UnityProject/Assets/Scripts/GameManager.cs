@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        decalM.ClearDecals();
     }
 
     public void Stop() 
