@@ -73,16 +73,16 @@ public class Shooting : MonoBehaviour
     private UnityEvent onExplosiveShot = null;
 
     [Header("Max Charge Shot Unity Events")]
-    [SerializeField]
-    private UnityEvent<float> onChargingMaxShotProgress = null;     // Every frame that the max shot is charging. Passes progress as a percentage between 0-1.
-    [SerializeField]
-    private UnityEvent onChargeMaxShotBegin = null;                 // When starting to charge the max shot by holding the button
-    [SerializeField]
-    private UnityEvent onChargeMaxShotCancel = null;                // When cancelling the max shot charge by letting go of the button too early
-    [SerializeField]
-    private UnityEvent onMaxShotCharged = null;                     // When the max shot has been fully charged (but not fired)
-    [SerializeField]
-    private UnityEvent<int> onMaxShotFired = null;                  // When the max shot has been fired. Passes number of charges consumed.
+    public UnityEvent<float> onChargingMaxShotProgress = null;     // Every frame that the max shot is charging. Passes progress as a percentage between 0-1.
+    public UnityEvent onChargeMaxShotBegin = null;                 // When starting to charge the max shot by holding the button
+    public UnityEvent onChargeMaxShotCancel = null;                // When cancelling the max shot charge by letting go of the button too early
+    public UnityEvent onMaxShotCharged = null;                     // When the max shot has been fully charged (but not fired)
+    public UnityEvent<int> onMaxShotFired = null;                  // When the max shot has been fired. Passes number of charges consumed.
+
+    [Header("Heal Fail Events")]
+    public UnityEvent onFailHealFullHP = null;
+    public UnityEvent onFailHealNoCharge = null;
+    public UnityEvent onFailHealNotHeld = null;
     #endregion
 
     #region GameEvents
@@ -211,7 +211,7 @@ public class Shooting : MonoBehaviour
         InputManager.inputMaster.Player.Shoot.canceled += _ => ShootReleased();
 
         InputManager.inputMaster.Player.Recall.performed += _ => Reset();
-        InputManager.inputMaster.Player.Heal.performed += _ => Healing();
+        InputManager.inputMaster.Player.Heal.performed += _ => TryHeal();
 
         gunThrowing.onThrown.AddListener(ShootReleased);
     }
@@ -222,7 +222,7 @@ public class Shooting : MonoBehaviour
         InputManager.inputMaster.Player.Shoot.canceled -= _ => ShootReleased();
 
         InputManager.inputMaster.Player.Recall.performed -= _ => Reset();
-        InputManager.inputMaster.Player.Heal.performed -= _ => Healing();
+        InputManager.inputMaster.Player.Heal.performed -= _ => TryHeal();
 
         gunThrowing.onThrown.RemoveListener(ShootReleased);
     }
@@ -512,26 +512,49 @@ public class Shooting : MonoBehaviour
         return 0; // you lose you get nothing
     }
 
-    private void Healing() 
+    private void TryHeal() 
     {
-        if (gunCharge > 0 && !health.GetIsAtFullHealth() && gunThrowing.GetIsHeld()) 
+        if (gunThrowing.GetIsHeld()) 
         {
-            int healAmount = GraphCalculator(shooter.healGraph, gunCharge);
-            OnActivated?.Invoke(healAmount);    //calls the player heal function
-
-            if (shooter.useAllChargesOnUse)
+            if (gunCharge > 0)
             {
-                SetCharge(0);
+                // Successful heal
+                if (!health.GetIsAtFullHealth())
+                {
+                    int healAmount = GraphCalculator(shooter.healGraph, gunCharge);
+                    OnActivated?.Invoke(healAmount);    //calls the player heal function
+
+                    if (shooter.useAllChargesOnUse)
+                    {
+                        SetCharge(0);
+                        Reset();
+                    }
+                    else
+                    {
+                        SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
+
+                        if (gunCharge <= 0)
+                        {
+                            Reset();
+                        }
+                    }
+                }
+                // Fail heal: Full HP
+                else
+                {
+                    onFailHealFullHP?.Invoke();
+                }
             }
+            // Fail heal: No Charge
             else
             {
-                SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
+                onFailHealNoCharge?.Invoke();
             }
-
-            if (gunCharge == 0)
-            {
-                Reset();
-            }
+        }
+        // Fail heal: Not held
+        else
+        {
+            onFailHealNotHeld?.Invoke();
         }
     }
 
