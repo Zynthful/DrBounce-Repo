@@ -17,6 +17,14 @@ public class DialogueManager : MonoBehaviour
 
     private bool playing = false;
 
+    [Header("Global Cooldown Settings")]
+    [SerializeField]
+    [Tooltip("The global cooldown in seconds, triggered everytime a new dialogue line is played. No dialogue (except that which overrides) may play during this cooldown period.")]
+    private float globalCooldown = 0.0f;
+
+    private bool coolingDown = false;
+    private Coroutine globalCooldownCoroutine = null;
+
     private void Awake()
     {
         if (s_Instance == null)
@@ -56,10 +64,19 @@ public class DialogueManager : MonoBehaviour
 
         CheckNullUI();
 
+        // Play dialogue
         line.GetEvent().Post(@object, (uint)(AkCallbackType.AK_Marker | AkCallbackType.AK_EndOfEvent), Callback);
         lastPlayedDialogue = line;
 
+        // Show subtitles
         subtitleUI.ShowSubtitle(line);
+
+        // Stop any running global cooldowns
+        if (globalCooldownCoroutine != null && coolingDown)
+            StopCoroutine(globalCooldownCoroutine);
+
+        // Start new global cooldown
+        globalCooldownCoroutine = StartCoroutine(GlobalCooldown(globalCooldown));
     }
 
     
@@ -100,6 +117,14 @@ public class DialogueManager : MonoBehaviour
         data.SetCoolingDown(false);
     }
 
+    public IEnumerator GlobalCooldown(float duration)
+    {
+        coolingDown = true;
+        yield return new WaitForSeconds(duration);
+        coolingDown = false;
+    }
+
     public DialogueData GetLastPlayed() { return lastPlayedDialogue; }
     public bool GetIsPlaying() { return playing; }
+    public bool GetIsCoolingDown() { return coolingDown; }
 }

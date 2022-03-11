@@ -33,8 +33,12 @@ public class DialogueData : ScriptableObject
     private bool canBeInterrupted = true;
 
     [SerializeField]
-    [Tooltip("If true, this dialogue line can interrput other dialogue lines.")]
+    [Tooltip("If true, this dialogue line can interrupt other dialogue lines.")]
     private bool canInterrupt = true;
+
+    [SerializeField]
+    [Tooltip("If true, this dialogue line will override the dialogue global cooldown.")]
+    private bool overrideGlobalCooldown = false;
 
     private bool coolingDown = false;
     private bool triggered = false;
@@ -70,7 +74,11 @@ public class DialogueData : ScriptableObject
         else if (DialogueManager.s_Instance.GetLastPlayed() != null && !DialogueManager.s_Instance.GetLastPlayed().GetCanBeInterrupted() && DialogueManager.s_Instance.GetIsPlaying())
             return;
 
-        // Check against cooldown and chance to play
+        // Prevent playback if the global dialogue cooldown is in effect and we can't override it
+        else if (DialogueManager.s_Instance.GetIsCoolingDown() && !overrideGlobalCooldown)
+            return;
+
+        // Check against chance to play
         else if (Random.Range(0.0f, 1.0f) <= chanceToPlay)
         {
             triggered = true;
