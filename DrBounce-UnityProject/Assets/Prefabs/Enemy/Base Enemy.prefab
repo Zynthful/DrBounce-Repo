@@ -219,7 +219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8490400361117919042}
-  - component: {fileID: 7316956005158476678}
+  - component: {fileID: 9039848830153856291}
   m_Layer: 2
   m_Name: Stunned
   m_TagString: Untagged
@@ -241,7 +241,7 @@ Transform:
   m_Father: {fileID: 3510130522959320200}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7316956005158476678
+--- !u!114 &9039848830153856291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,26 +250,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 388912277791583092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b4aa157d2e65f4eac85bcae4d2bacc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aba46dcb64ec7545b9c56afe2562456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: 
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
+  event:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 5a4c46382c3d819479f91d3a9bd67f9a, type: 2}
-  useCallbacks: 0
-  Callbacks: []
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
+  objToPost: {fileID: 962519144952153287}
 --- !u!1 &790663236736604907
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2161952980748115717}
-  - component: {fileID: 6556173281068620364}
+  - component: {fileID: 2423961062984726495}
   m_Layer: 2
   m_Name: Object
   m_TagString: Untagged
@@ -301,7 +289,7 @@ Transform:
   m_Father: {fileID: 2840191712901950446}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6556173281068620364
+--- !u!114 &2423961062984726495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -310,26 +298,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 790663236736604907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b4aa157d2e65f4eac85bcae4d2bacc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aba46dcb64ec7545b9c56afe2562456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: 
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
+  event:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 06929e671ff6c304e8121e93a1bf0f6f, type: 2}
-  useCallbacks: 0
-  Callbacks: []
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
+  objToPost: {fileID: 962519144952153287}
 --- !u!1 &961146047496861030
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,13 +464,13 @@ MonoBehaviour:
   onInjured:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6993296262394879778}
-        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
-        m_MethodName: HandleEvent
-        m_Mode: 2
+      - m_Target: {fileID: 2466429204824234814}
+        m_TargetAssemblyTypeName: WwiseEvent, Assembly-CSharp
+        m_MethodName: Post
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 962519144952153287}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -518,13 +494,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8381011555328235111}
-        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
-        m_MethodName: HandleEvent
-        m_Mode: 2
+      - m_Target: {fileID: 6015190740635581904}
+        m_TargetAssemblyTypeName: WwiseEvent, Assembly-CSharp
+        m_MethodName: Post
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 962519144952153287}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -587,13 +563,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7316956005158476678}
-        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
-        m_MethodName: HandleEvent
-        m_Mode: 2
+      - m_Target: {fileID: 9039848830153856291}
+        m_TargetAssemblyTypeName: WwiseEvent, Assembly-CSharp
+        m_MethodName: Post
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 962519144952153287}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -602,13 +578,13 @@ MonoBehaviour:
   onStunEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4494123856925080853}
-        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
-        m_MethodName: HandleEvent
-        m_Mode: 2
+      - m_Target: {fileID: 2575656938907653764}
+        m_TargetAssemblyTypeName: WwiseEvent, Assembly-CSharp
+        m_MethodName: Post
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 962519144952153287}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -644,13 +620,13 @@ MonoBehaviour:
   onStunIncrease:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7271016828647481231}
-        m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
-        m_MethodName: HandleEvent
-        m_Mode: 2
+      - m_Target: {fileID: 628773680668602989}
+        m_TargetAssemblyTypeName: WwiseEvent, Assembly-CSharp
+        m_MethodName: Post
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 962519144952153287}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1617,7 +1593,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3334013351063694936}
-  - component: {fileID: 8110644216892511958}
+  - component: {fileID: 2244733332300949508}
   m_Layer: 2
   m_Name: Jump
   m_TagString: Untagged
@@ -1639,7 +1615,7 @@ Transform:
   m_Father: {fileID: 1461451354007458169}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8110644216892511958
+--- !u!114 &2244733332300949508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1648,26 +1624,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4663918203019512771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b4aa157d2e65f4eac85bcae4d2bacc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aba46dcb64ec7545b9c56afe2562456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: 
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
+  event:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 6b63c134583bf774cb7dce6b2b23c4fd, type: 2}
-  useCallbacks: 0
-  Callbacks: []
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
+  objToPost: {fileID: 962519144952153287}
 --- !u!1 &5252726176695939569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2487,7 +2451,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7736083451794625886}
-  - component: {fileID: 8381011555328235111}
+  - component: {fileID: 6015190740635581904}
   m_Layer: 2
   m_Name: Death
   m_TagString: Untagged
@@ -2509,7 +2473,7 @@ Transform:
   m_Father: {fileID: 1461451354007458169}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8381011555328235111
+--- !u!114 &6015190740635581904
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2518,26 +2482,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6252557339512048768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b4aa157d2e65f4eac85bcae4d2bacc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aba46dcb64ec7545b9c56afe2562456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: 
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
+  event:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: b891d2915391d8c46a6f90357cbbe036, type: 2}
-  useCallbacks: 0
-  Callbacks: []
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
+  objToPost: {fileID: 962519144952153287}
 --- !u!1 &6262718025914831845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,7 +2550,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3482023728900272477}
-  - component: {fileID: 4494123856925080853}
+  - component: {fileID: 2575656938907653764}
   m_Layer: 2
   m_Name: Stun End
   m_TagString: Untagged
@@ -2620,7 +2572,7 @@ Transform:
   m_Father: {fileID: 3510130522959320200}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4494123856925080853
+--- !u!114 &2575656938907653764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2629,26 +2581,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6703705652136119707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b4aa157d2e65f4eac85bcae4d2bacc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aba46dcb64ec7545b9c56afe2562456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: 
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
+  event:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: c4e8f9e716f2d2d439fc32d3b12a44e3, type: 2}
-  useCallbacks: 0
-  Callbacks: []
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
+  objToPost: {fileID: 962519144952153287}
 --- !u!1 &6933671826139254212
 GameObject:
   m_ObjectHideFlags: 0
@@ -2868,7 +2808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7720760333439041021}
-  - component: {fileID: 6993296262394879778}
+  - component: {fileID: 2466429204824234814}
   m_Layer: 2
   m_Name: Injured
   m_TagString: Untagged
@@ -2890,7 +2830,7 @@ Transform:
   m_Father: {fileID: 1461451354007458169}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6993296262394879778
+--- !u!114 &2466429204824234814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2899,26 +2839,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6934631128390378777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b4aa157d2e65f4eac85bcae4d2bacc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aba46dcb64ec7545b9c56afe2562456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: 
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
+  event:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 59944a0e14041ff4f9327d98e196fc03, type: 2}
-  useCallbacks: 0
-  Callbacks: []
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
+  objToPost: {fileID: 962519144952153287}
 --- !u!1 &7064423848880595699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2928,7 +2856,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 730602101360092752}
-  - component: {fileID: 3386198253639423895}
+  - component: {fileID: 9074430880741657438}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -2950,7 +2878,7 @@ Transform:
   m_Father: {fileID: 2840191712901950446}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3386198253639423895
+--- !u!114 &9074430880741657438
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2959,26 +2887,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7064423848880595699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b4aa157d2e65f4eac85bcae4d2bacc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aba46dcb64ec7545b9c56afe2562456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: 
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
+  event:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: bf5e684ed6f12f04891e2d5e1776af60, type: 2}
-  useCallbacks: 0
-  Callbacks: []
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
+    WwiseObjectReference: {fileID: 0}
+  objToPost: {fileID: 962519144952153287}
 --- !u!1 &7213832519559974935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4342,7 +4258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3994696868904695756}
-  - component: {fileID: 7271016828647481231}
+  - component: {fileID: 628773680668602989}
   m_Layer: 2
   m_Name: Stun Increase
   m_TagString: Untagged
@@ -4364,7 +4280,7 @@ Transform:
   m_Father: {fileID: 3510130522959320200}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7271016828647481231
+--- !u!114 &628773680668602989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4373,26 +4289,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7863493316485494591}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b4aa157d2e65f4eac85bcae4d2bacc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aba46dcb64ec7545b9c56afe2562456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: 
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
+  event:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 313daa43761ecb748958a6ac9c24cd50, type: 2}
-  useCallbacks: 0
-  Callbacks: []
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
+  objToPost: {fileID: 962519144952153287}
 --- !u!1 &8975916818936271589
 GameObject:
   m_ObjectHideFlags: 0
