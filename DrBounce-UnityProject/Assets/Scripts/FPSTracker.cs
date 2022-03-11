@@ -5,12 +5,18 @@ using TMPro;
 
 public class FPSTracker : MonoBehaviour
 {
-    int fps = 0;
+    private int fps = 0;
+
+    private int[] fpsList = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int currentItemInList = 0;
+    private int fpsAverage = 0;
+
 
     public static FPSTracker s_Instance = null;
 
-    [SerializeField] private TMP_Text colour;
+    [SerializeField] private TMP_Text textcolour;
     [SerializeField] private TMP_Text fpsCounter;
+    [SerializeField] private TMP_Text fpsAverageCounter;
 
     [SerializeField] private Color badFPSColor = new Color();
     [SerializeField] private Color okFPSColor = new Color();
@@ -50,35 +56,56 @@ public class FPSTracker : MonoBehaviour
 
     void OutputTime()
     {
+        print(fpsList.Length);
+
         fps = (int)(1f / Time.unscaledDeltaTime);
+
+        fpsList[currentItemInList] = fps;
+
+        currentItemInList++;
+        if (currentItemInList >= fpsList.Length)
+        {
+            currentItemInList = 0;
+        }
+
+        AverageCalc();
 
         if (fps >= 120)
         {
-            colour.color = bestFPSColor;
-            colour.text = "Golden";
-
-            fpsCounter.text = "FPS: " + fps;
+            ChangeColour(bestFPSColor, "Golden");
         }
         if (fps >= 60)
         {
-            colour.color = goodFPSColor;
-            colour.text = "Green";
-
-            fpsCounter.text = "FPS: " + fps;
+            ChangeColour(goodFPSColor, "Green");
         }
         else if (fps >= 30)
         {
-            colour.color = okFPSColor;
-            colour.text = "Amber";
-
-            fpsCounter.text = "FPS: " + fps;
+            ChangeColour(okFPSColor, "Amber");
         }
         else 
         {
-            colour.color = badFPSColor;
-            colour.text = "Red";
-
-            fpsCounter.text = "FPS: " + fps;
+            ChangeColour(badFPSColor, "Red");
         }
+        fpsCounter.text = "FPS: " + fps;
+        fpsAverageCounter.text = "Average FPS: " + fpsAverage;
     }
+
+    private void ChangeColour(Color colour, string text) 
+    {
+        textcolour.color = colour;
+        textcolour.text = text;
+    } 
+
+    private void AverageCalc() 
+    {
+        fpsAverage = 0;
+
+        foreach (int fps in fpsList) 
+        {
+            fpsAverage = fpsAverage + fps;
+        }
+
+        fpsAverage = fpsAverage / fpsList.Length;
+    }
+
 }
