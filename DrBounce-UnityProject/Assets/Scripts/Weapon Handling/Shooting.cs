@@ -80,6 +80,7 @@ public class Shooting : MonoBehaviour
     public UnityEvent<int> onMaxShotFired = null;                  // When the max shot has been fired. Passes number of charges consumed.
 
     [Header("Heal Fail Events")]
+    public UnityEvent onFailHeal = null;
     public UnityEvent onFailHealFullHP = null;
     public UnityEvent onFailHealNoCharge = null;
     public UnityEvent onFailHealNotHeld = null;
@@ -542,18 +543,21 @@ public class Shooting : MonoBehaviour
                 // Fail heal: Full HP
                 else
                 {
+                    onFailHeal?.Invoke();
                     onFailHealFullHP?.Invoke();
                 }
             }
             // Fail heal: No Charge
             else
             {
+                onFailHeal?.Invoke();
                 onFailHealNoCharge?.Invoke();
             }
         }
         // Fail heal: Not held
         else
         {
+            onFailHeal?.Invoke();
             onFailHealNotHeld?.Invoke();
         }
     }
