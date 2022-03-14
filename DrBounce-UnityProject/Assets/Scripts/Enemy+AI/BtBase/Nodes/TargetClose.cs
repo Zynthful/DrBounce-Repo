@@ -33,7 +33,7 @@ public class TargetClose : BtNode {
             return NodeState.SUCCESS;
         }
 
-        Debug.Log("Failed to target");
+        //Debug.Log("Failed to target");
         return NodeState.FAILURE;
     }
 

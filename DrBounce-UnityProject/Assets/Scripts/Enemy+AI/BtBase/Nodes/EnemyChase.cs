@@ -25,9 +25,6 @@ public class EnemyChase : BtNode
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-
-        //Debug.Log(path.status);
-
         if (m_blackboard.spottedPlayer == true)
         {
 
@@ -46,7 +43,6 @@ public class EnemyChase : BtNode
                 if(FirstSpotted == false)
                 {
                     FirstSpotted = true;
-                    targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
                     m_blackboard.noBounceAIController.canMove = false;
                     headingBack = true;
                     CombatAudioManager.s_Instance.AddEnemy(blackboard.owner.GetInstanceID());
@@ -55,13 +51,14 @@ public class EnemyChase : BtNode
             }
         }
 
-        if (m_blackboard.searchTime <= -10 || path.status != NavMeshPathStatus.PathComplete && headingBack == true)
+        if ((m_blackboard.searchTime <= -10 || path.status != NavMeshPathStatus.PathComplete) && headingBack == true)
         {
             m_blackboard.spottedPlayer = false;
             m_blackboard.noBounceAIController.canMove = true;
             headingBack = false;
             FirstSpotted = false;
-
+            //targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
+            Debug.Log("I'm not broken!");
             m_navMeshAgent.destination = m_blackboard.target.spottedPosition;
             //Move back to nearest waypoint is commented out below, is a bit buggy with new optimised script
 
@@ -76,7 +73,6 @@ public class EnemyChase : BtNode
             //    Debug.Log("Reps of loop");
             //}
             //m_blackboard.target.spottedPosition = targetWaypoint;
-
         }
 
 

@@ -15,7 +15,7 @@ public class TargetNext : BtNode
     {
         if (m_positions.Length == 0)
         {
-            Debug.Log("Failed to target next");
+            //Debug.Log("Failed to target next");
             return NodeState.FAILURE;
         }
 
