@@ -56,7 +56,7 @@ public class FPSTracker : MonoBehaviour
 
     void OutputTime()
     {
-        print(fpsList.Length);
+        //print(fpsList.Length);
 
         fps = (int)(1f / Time.unscaledDeltaTime);
 
