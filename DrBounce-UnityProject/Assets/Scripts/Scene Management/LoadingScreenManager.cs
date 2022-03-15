@@ -8,8 +8,20 @@ public class LoadingScreenManager : MonoBehaviour
     public static LoadingScreenManager s_Instance = null;
 
     AsyncOperation destinationOperation = null;
+
     private string destination = null;
+    private ContinueOptions continueOptions = ContinueOptions.Automatic;
+    private float smoothMultiplier = 1.0f;
+
     private bool finished = false;
+    private bool loadingDest = false;
+    private float loadProgress = 0.0f;
+
+    public enum ContinueOptions
+    {
+        Automatic,
+        RequireInput,
+    }
 
     [Header("Declarations")]
     [SerializeField]
@@ -24,6 +36,8 @@ public class LoadingScreenManager : MonoBehaviour
     private GameEvent onLoadLevelComplete = null;
     [SerializeField]
     private GameEventFloat onLoadProgress = null;
+    [SerializeField]
+    private GameEventFloat onLoadProgressSmoothed = null;   // A smoothed version of the load progress, useful for progress bars
     [SerializeField]
     private GameEvent onContinue = null;
     [SerializeField]
@@ -49,10 +63,28 @@ public class LoadingScreenManager : MonoBehaviour
         }
     }
 
-    public void LoadScene(string _destination, bool requireContinueInput)
+    private void Update()
+    {
+        if (loadingDest)
+        {
+            float target = destinationOperation.progress / 0.9f;
+            loadProgress = Mathf.MoveTowards(loadProgress, target, smoothMultiplier * Time.deltaTime);  // cry about it tom
+            onLoadProgressSmoothed?.Raise(loadProgress);
+
+            if (loadProgress >= 1)
+            {
+                OnLoadCompleted();
+            }
+        }
+    }
+
+    public void LoadScene(string _destination, ContinueOptions _continueOptions = ContinueOptions.Automatic, float _smoothMultiplier = 1.0f, float delay = 0.0f)
     {
         finished = false;
+
         destination = _destination;
+        continueOptions = _continueOptions;
+        smoothMultiplier = _smoothMultiplier;
 
         onLoadLoadingScreenStart?.Raise();
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -62,33 +94,46 @@ public class LoadingScreenManager : MonoBehaviour
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadingScreenSceneName));                       // Set loading screen as our active scene
             SceneManager.UnloadSceneAsync(currentSceneIndex, UnloadSceneOptions.None);                              // Unload active scene when we've finished loading the loading screen
 
-            onLoadLevelStart?.Raise();
-            destinationOperation = SceneManager.LoadSceneAsync(destination, LoadSceneMode.Additive);                // Load destination scene
-            destinationOperation.allowSceneActivation = false;                                                      // Don't activate our destination scene immediately
+            StartCoroutine(DelayLoad(delay));
+        };
+    }
 
-            // Update progress
-            // As allowSceneActivation is false, operation progress caps at 0.9, so we wait until it's reached it before allowing continuing
-            while (destinationOperation.progress < 0.89f)
-            {
-                onLoadProgress?.Raise(destinationOperation.progress);
-            }
+    private IEnumerator DelayLoad(float duration)
+    {
+        yield return new WaitForSeconds(duration);
 
-            // Load level completed
-            onLoadProgress?.Raise(1.0f);
-            onLoadLevelComplete?.Raise();
+        loadingDest = true;
+        onLoadLevelStart?.Raise();
+        destinationOperation = SceneManager.LoadSceneAsync(destination, LoadSceneMode.Additive);                // Load destination scene
+        destinationOperation.allowSceneActivation = false;                                                      // Don't activate our destination scene immediately
 
-            // Automatically continue if we don't require input
-            if (!requireContinueInput)
-            {
+        // Update progress
+        // As allowSceneActivation is false, operation progress caps at 0.9, so we wait until it's reached it before allowing continuing
+        while (destinationOperation.progress < 0.89f)
+        {
+            onLoadProgress?.Raise(destinationOperation.progress);
+        }
+    }
+
+    private void OnLoadCompleted()
+    {
+        loadingDest = false;
+        onLoadProgress?.Raise(1.0f);
+        onLoadLevelComplete?.Raise();
+
+        switch (continueOptions)
+        {
+            case ContinueOptions.Automatic:
                 Continue();
-            }
-            else
-            {
-                // Listen for continue input
+                break;
+            case ContinueOptions.RequireInput:
                 InputManager.inputMaster.Menu.Continue.performed += _ => Continue();
                 InputManager.inputMaster.Menu.Continue.Enable();
-            }
-        };
+                break;
+            default:
+                Continue();
+                break;
+        }
     }
 
     private void Continue()
