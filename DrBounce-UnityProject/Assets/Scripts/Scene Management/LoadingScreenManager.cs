@@ -8,6 +8,8 @@ public class LoadingScreenManager : MonoBehaviour
     public static LoadingScreenManager s_Instance = null;
 
     AsyncOperation destinationOperation = null;
+    private string destination = null;
+    private bool finished = false;
 
     [Header("Declarations")]
     [SerializeField]
@@ -22,6 +24,10 @@ public class LoadingScreenManager : MonoBehaviour
     private GameEvent onLoadLevelComplete = null;
     [SerializeField]
     private GameEventFloat onLoadProgress = null;
+    [SerializeField]
+    private GameEvent onContinue = null;
+    [SerializeField]
+    private GameEvent onUnloadLoadingScreenComplete = null;
 
 
     private void Awake()
@@ -43,23 +49,26 @@ public class LoadingScreenManager : MonoBehaviour
         }
     }
 
-    public void LoadScene(string destination, bool requireContinueInput)
+    public void LoadScene(string _destination, bool requireContinueInput)
     {
-        // Load loading screen and unload active scene
+        finished = false;
+        destination = _destination;
+
         onLoadLoadingScreenStart?.Raise();
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         AsyncOperation operation = SceneManager.LoadSceneAsync(loadingScreenSceneName, LoadSceneMode.Additive);     // Load loading screen
         operation.completed += _ =>
         {
-            SceneManager.UnloadSceneAsync(currentSceneIndex, UnloadSceneOptions.None);      // Unload active scene when we've finished loading the loading screen
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadingScreenSceneName));                       // Set loading screen as our active scene
+            SceneManager.UnloadSceneAsync(currentSceneIndex, UnloadSceneOptions.None);                              // Unload active scene when we've finished loading the loading screen
 
-            // Load destination scene
             onLoadLevelStart?.Raise();
-            destinationOperation = SceneManager.LoadSceneAsync(destination, LoadSceneMode.Additive);
-            destinationOperation.allowSceneActivation = false;
+            destinationOperation = SceneManager.LoadSceneAsync(destination, LoadSceneMode.Additive);                // Load destination scene
+            destinationOperation.allowSceneActivation = false;                                                      // Don't activate our destination scene immediately
 
             // Update progress
-            while (destinationOperation.progress < 0.89f)   // As allowSceneActivation is false, operation progress caps at 0.9, so we wait until it's reached it before allowing continuing
+            // As allowSceneActivation is false, operation progress caps at 0.9, so we wait until it's reached it before allowing continuing
+            while (destinationOperation.progress < 0.89f)
             {
                 onLoadProgress?.Raise(destinationOperation.progress);
             }
@@ -75,18 +84,40 @@ public class LoadingScreenManager : MonoBehaviour
             }
             else
             {
+                // Listen for continue input
                 InputManager.inputMaster.Menu.Continue.performed += _ => Continue();
                 InputManager.inputMaster.Menu.Continue.Enable();
             }
         };
     }
 
-    public void Continue()
+    private void Continue()
     {
-        InputManager.inputMaster.Menu.Continue.performed -= _ => Continue();
-        InputManager.inputMaster.Menu.Continue.Disable();
-        SceneManager.UnloadSceneAsync(loadingScreenSceneName, UnloadSceneOptions.None);
-        destinationOperation.allowSceneActivation = true;
-        destinationOperation = null;
+        if (!finished)  // had to add this in because Continue kept getting called despite stopping listening for input??
+        {
+            onContinue?.Raise();
+
+            // Stop listening for continue input
+            InputManager.inputMaster.Menu.Continue.performed -= _ => Continue();
+            InputManager.inputMaster.Menu.Continue.Disable();
+
+            // Activate loaded scene
+            destinationOperation.allowSceneActivation = true;
+
+            // Wait for loaded scene to be active before unloading loading screen
+            destinationOperation.completed += _ =>
+            {
+                destinationOperation = null;
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName(destination));
+
+                // Unload loading screen
+                AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(loadingScreenSceneName, UnloadSceneOptions.None);
+                unloadOp.completed += _ =>
+                {
+                    onUnloadLoadingScreenComplete?.Raise();
+                };
+                finished = true;
+            };
+        }
     }
 }
