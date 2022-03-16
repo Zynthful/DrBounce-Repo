@@ -11,16 +11,27 @@ public class LoadingScreenManager : MonoBehaviour
 
     private string destination = null;
     private ContinueOptions continueOptions = ContinueOptions.Automatic;
+    private UnloadOptions unloadPrevOptions = UnloadOptions.Automatic;
     private float smoothMultiplier = 1.0f;
+    private float delay = 0.0f;
 
     private bool finished = false;
     private bool loadingDest = false;
     private float loadProgress = 0.0f;
 
+    private int prevSceneIndex = 0;
+
     public enum ContinueOptions
     {
         Automatic,
+        Manual,
         RequireInput,
+    }
+
+    public enum UnloadOptions
+    {
+        Automatic,
+        Manual,
     }
 
     [Header("Declarations")]
@@ -78,30 +89,53 @@ public class LoadingScreenManager : MonoBehaviour
         }
     }
 
-    public void LoadScene(string _destination, ContinueOptions _continueOptions = ContinueOptions.Automatic, float _smoothMultiplier = 1.0f, float delay = 0.0f)
+    public void LoadScene(string _destination, ContinueOptions _continueOptions = ContinueOptions.Automatic, UnloadOptions _unloadPrevOptions = UnloadOptions.Automatic, float _smoothMultiplier = 1.0f, float _delay = 0.0f)
     {
         finished = false;
 
         destination = _destination;
         continueOptions = _continueOptions;
         smoothMultiplier = _smoothMultiplier;
+        unloadPrevOptions = _unloadPrevOptions;
+        delay = _delay;
 
         onLoadLoadingScreenStart?.Raise();
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        prevSceneIndex = SceneManager.GetActiveScene().buildIndex;
         AsyncOperation operation = SceneManager.LoadSceneAsync(loadingScreenSceneName, LoadSceneMode.Additive);     // Load loading screen
         operation.completed += _ =>
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadingScreenSceneName));                       // Set loading screen as our active scene
-            SceneManager.UnloadSceneAsync(currentSceneIndex, UnloadSceneOptions.None);                              // Unload active scene when we've finished loading the loading screen
 
-            StartCoroutine(DelayLoad(delay));
+            switch (unloadPrevOptions)
+            {
+                case UnloadOptions.Automatic:
+                    UnloadPrevScene();
+                    break;
+                case UnloadOptions.Manual:
+                    break;
+                default:
+                    UnloadPrevScene();
+                    break;
+            }
+
         };
     }
 
-    private IEnumerator DelayLoad(float duration)
+    public void UnloadPrevScene()
+    {
+        Debug.Log("unloading prev..");
+        SceneManager.UnloadSceneAsync(prevSceneIndex, UnloadSceneOptions.None);
+        StartCoroutine(DelayLoadDestination(delay));
+    }
+
+    private IEnumerator DelayLoadDestination(float duration)
     {
         yield return new WaitForSeconds(duration);
+        LoadDestination();
+    }
 
+    private void LoadDestination()
+    {
         loadingDest = true;
         onLoadLevelStart?.Raise();
         destinationOperation = SceneManager.LoadSceneAsync(destination, LoadSceneMode.Additive);                // Load destination scene

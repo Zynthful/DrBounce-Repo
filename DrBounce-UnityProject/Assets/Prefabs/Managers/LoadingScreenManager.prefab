@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1493427088264553836}
   - component: {fileID: 6053611818947106863}
+  - component: {fileID: 970205398687982575}
   m_Layer: 0
   m_Name: LoadingScreenManager
   m_TagString: Untagged
@@ -51,3 +52,31 @@ MonoBehaviour:
   onLoadProgressSmoothed: {fileID: 11400000, guid: c7cf686fdd6883046a77634400d0e5ed, type: 2}
   onContinue: {fileID: 11400000, guid: 38a07355258e8b64e9ebe5eb28745b7d, type: 2}
   onUnloadLoadingScreenComplete: {fileID: 11400000, guid: aad14f05522766e41b5cac1fb60554ec, type: 2}
+--- !u!114 &970205398687982575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111069171800188034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: b309369cb1dc64947b40c60129a81f51, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6053611818947106863}
+        m_TargetAssemblyTypeName: LoadingScreenManager, Assembly-CSharp
+        m_MethodName: UnloadPrevScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
