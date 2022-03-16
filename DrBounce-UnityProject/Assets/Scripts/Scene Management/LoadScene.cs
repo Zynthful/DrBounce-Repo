@@ -5,18 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    public void LoadSceneByIndex(int index)
+    public void LoadSceneViaScreen(string name)
     {
-        SceneManager.LoadScene(index);
+        LoadingScreenManager.s_Instance.LoadScene(name, LoadingScreenManager.ContinueOptions.RequireInput, LoadingScreenManager.UnloadOptions.Manual, LoadingScreenManager.UnloadOptions.Manual, 1.0f);
     }
 
-    public void LoadSceneByName(string name)
+    public void LoadLevelViaScreen(LevelData level)
     {
-        SceneManager.LoadScene(name);
+        LoadSceneViaScreen(level.GetSceneName());
     }
 
-    public void ReloadActiveScene()
+    public void ReloadActiveSceneViaScreen()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LoadSceneViaScreen(SceneManager.GetActiveScene().name);
     }
 }

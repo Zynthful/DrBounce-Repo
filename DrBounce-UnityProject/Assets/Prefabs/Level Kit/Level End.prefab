@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &648401509
 Transform:
   m_ObjectHideFlags: 0
@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 591008932604269980}
   - component: {fileID: 8624660549875345726}
   - component: {fileID: 6761953480337197374}
+  - component: {fileID: 6988735229372821448}
   m_Layer: 3
   m_Name: Level End
   m_TagString: Untagged
@@ -232,18 +233,6 @@ MonoBehaviour:
   onLevelComplete:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 648401508}
-        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
-        m_MethodName: PlayFeedbacks
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 6111311053380494329}
         m_TargetAssemblyTypeName: AkEvent, AK.Wwise.Unity.MonoBehaviour
         m_MethodName: HandleEvent
@@ -251,6 +240,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 591008932604269955}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6988735229372821448}
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: LoadLevelViaScreen
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: LevelData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -279,6 +280,18 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &6988735229372821448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591008932604269955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a07755ef3c08c540b3a50145c645edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &676036245914896509
 GameObject:
   m_ObjectHideFlags: 0

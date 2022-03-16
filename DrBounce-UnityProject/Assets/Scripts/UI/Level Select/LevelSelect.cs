@@ -149,4 +149,9 @@ public class LevelSelect : MonoBehaviour
             SelectLevel(selectedLevel - 1);
         }
     }
+
+    public void StartLevel()
+    {
+        LoadingScreenManager.s_Instance.LoadScene(levels[selectedLevel].GetSceneName(), LoadingScreenManager.ContinueOptions.RequireInput, LoadingScreenManager.UnloadOptions.Manual, LoadingScreenManager.UnloadOptions.Manual, 1.2f);
+    }
 }
