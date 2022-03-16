@@ -12,10 +12,10 @@ public class LoadingScreenManager : MonoBehaviour
     private string destination = null;
     private ContinueOptions continueOptions = ContinueOptions.Automatic;
     private UnloadOptions unloadPrevOptions = UnloadOptions.Automatic;
+    private UnloadOptions unloadLoadScreenOptions = UnloadOptions.Automatic;
     private float smoothMultiplier = 1.0f;
-    private float delay = 0.0f;
 
-    private bool finished = false;
+    private bool continued = false;
     private bool loadingDest = false;
     private float loadProgress = 0.0f;
 
@@ -39,20 +39,14 @@ public class LoadingScreenManager : MonoBehaviour
     private string loadingScreenSceneName = null;
 
     [Header("Loading Events")]
-    [SerializeField]
-    private GameEvent onLoadLoadingScreenStart = null;
-    [SerializeField]
-    private GameEvent onLoadLevelStart = null;
-    [SerializeField]
-    private GameEvent onLoadLevelComplete = null;
-    [SerializeField]
-    private GameEventFloat onLoadProgress = null;
-    [SerializeField]
-    private GameEventFloat onLoadProgressSmoothed = null;   // A smoothed version of the load progress, useful for progress bars
-    [SerializeField]
-    private GameEvent onContinue = null;
-    [SerializeField]
-    private GameEvent onUnloadLoadingScreenComplete = null;
+    public GameEvent onLoadLoadingScreenStart = null;
+    public GameEvent onLoadLevelStart = null;
+    public GameEvent onLoadLevelComplete = null;
+    public GameEventFloat onLoadProgress = null;
+    public GameEventFloat onLoadProgressSmoothed = null;   // A smoothed version of the load progress, useful for progress bars
+    public GameEvent onContinue = null;
+    public GameEvent onUnloadLoadingScreenComplete = null;
+    public GameEvent onDestinationSceneActivated = null;
 
 
     private void Awake()
@@ -89,19 +83,28 @@ public class LoadingScreenManager : MonoBehaviour
         }
     }
 
-    public void LoadScene(string _destination, ContinueOptions _continueOptions = ContinueOptions.Automatic, UnloadOptions _unloadPrevOptions = UnloadOptions.Automatic, float _smoothMultiplier = 1.0f, float _delay = 0.0f)
+    /// <summary>
+    /// Loads a scene via a loading screen.
+    /// </summary>
+    /// <param name="_destination">The destination scene name to load.</param>
+    /// <param name="_continueOptions">Additional parameter to determine when to continue.</param>
+    /// <param name="_unloadPrevOptions">Additional parameter to determine when to unload the previous (starting) scene.</param>
+    /// <param name="_unloadLoadScreenOptions">Additional parameter to determine when to unload the loading screen scene.</param>
+    /// <param name="_smoothMultiplier">Additional parameter that affects smoothing of load progress (useful for progress bars).</param>
+    public void LoadScene(string _destination, ContinueOptions _continueOptions = ContinueOptions.Automatic, UnloadOptions _unloadPrevOptions = UnloadOptions.Automatic, UnloadOptions _unloadLoadScreenOptions = UnloadOptions.Automatic, float _smoothMultiplier = 1.0f)
     {
-        finished = false;
+        continued = false;
 
         destination = _destination;
         continueOptions = _continueOptions;
-        smoothMultiplier = _smoothMultiplier;
         unloadPrevOptions = _unloadPrevOptions;
-        delay = _delay;
+        unloadLoadScreenOptions = _unloadLoadScreenOptions;
+        smoothMultiplier = _smoothMultiplier;
+        prevSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         onLoadLoadingScreenStart?.Raise();
-        prevSceneIndex = SceneManager.GetActiveScene().buildIndex;
         AsyncOperation operation = SceneManager.LoadSceneAsync(loadingScreenSceneName, LoadSceneMode.Additive);     // Load loading screen
+
         operation.completed += _ =>
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadingScreenSceneName));                       // Set loading screen as our active scene
@@ -117,24 +120,16 @@ public class LoadingScreenManager : MonoBehaviour
                     UnloadPrevScene();
                     break;
             }
-
         };
     }
 
     public void UnloadPrevScene()
     {
-        Debug.Log("unloading prev..");
         SceneManager.UnloadSceneAsync(prevSceneIndex, UnloadSceneOptions.None);
-        StartCoroutine(DelayLoadDestination(delay));
-    }
-
-    private IEnumerator DelayLoadDestination(float duration)
-    {
-        yield return new WaitForSeconds(duration);
         LoadDestination();
     }
 
-    private void LoadDestination()
+    public void LoadDestination()
     {
         loadingDest = true;
         onLoadLevelStart?.Raise();
@@ -172,8 +167,10 @@ public class LoadingScreenManager : MonoBehaviour
 
     private void Continue()
     {
-        if (!finished)  // had to add this in because Continue kept getting called despite stopping listening for input??
+        if (!continued)  // had to add this in because Continue kept getting called despite stopping listening for input??
         {
+            continued = true;
+
             onContinue?.Raise();
 
             // Stop listening for continue input
@@ -186,17 +183,34 @@ public class LoadingScreenManager : MonoBehaviour
             // Wait for loaded scene to be active before unloading loading screen
             destinationOperation.completed += _ =>
             {
-                destinationOperation = null;
+                onDestinationSceneActivated?.Raise();
                 SceneManager.SetActiveScene(SceneManager.GetSceneByName(destination));
 
-                // Unload loading screen
-                AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(loadingScreenSceneName, UnloadSceneOptions.None);
-                unloadOp.completed += _ =>
+                switch (unloadLoadScreenOptions)
                 {
-                    onUnloadLoadingScreenComplete?.Raise();
-                };
-                finished = true;
+                    case UnloadOptions.Automatic:
+                        UnloadLoadScreen();
+                        break;
+                    case UnloadOptions.Manual:
+                        break;
+                    default:
+                        UnloadLoadScreen();
+                        break;
+                }
             };
         }
+    }
+
+    public void UnloadLoadScreen()
+    {
+        // Unload loading screen
+        AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(loadingScreenSceneName, UnloadSceneOptions.None);
+
+        unloadOp.completed += _ =>
+        {
+            onUnloadLoadingScreenComplete?.Raise();
+        };
+
+        destinationOperation = null;
     }
 }
