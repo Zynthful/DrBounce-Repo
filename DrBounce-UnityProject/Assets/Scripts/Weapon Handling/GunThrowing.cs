@@ -402,10 +402,10 @@ public class GunThrowing : MonoBehaviour
     {
         for (int i = 0; i < hitObjects.Count; i++)
         {
-            Debug.Log("Number of total objects: " + hitObjects.Count + "... HitObject checking is: " + hitObjects[i].hitObject.gameObject.name);
+            //Debug.Log("Number of total objects: " + hitObjects.Count + "... HitObject checking is: " + hitObjects[i].hitObject.gameObject.name);
             if (hitObjects[i].hitObject.gameObject.name == check.gameObject.name)
             {
-                Debug.Log("This object: " + hitObjects[i].hitObject.gameObject.name + " ... == " + check.gameObject.name);
+                //Debug.Log("This object: " + hitObjects[i].hitObject.gameObject.name + " ... == " + check.gameObject.name);
                 StopCoroutine(hitObjects[i].coyoteCoroutine);
                 hitObjects.RemoveAt(i);
                 return true;
@@ -422,8 +422,8 @@ public class GunThrowing : MonoBehaviour
             onDroppedPreCoyote?.Invoke();
             _onDroppedPreCoyote?.Raise();
 
-            Debug.Log("Gotta add this now: " + collision.gameObject);
-
+            //Debug.Log("Gotta add this now: " + collision.gameObject);
+            
             // Check for/end current coyote time on this object and start a new one
             EndSpecificCoyoteTime(collision);
             var coy = new coyote(collision, StartCoroutine(CoyoteTimeForPickup(collision)));
@@ -551,13 +551,13 @@ public class GunThrowing : MonoBehaviour
     {
         yield return new WaitForSeconds(coyoteTimeDuration);
 
-        Debug.Log("FUrther Beyond: " + hit.gameObject.name);
+        //Debug.Log("FUrther Beyond: " + hit.gameObject.name);
 
         for (int i = 0; i < hitObjects.Count; i++)
         {
             if (hitObjects[i].hitObject.gameObject == hit.gameObject)
             {
-                Debug.Log("cob: " + hit.gameObject.name);
+                //Debug.Log("cob: " + hit.gameObject.name);
 
                 returning = false;
 

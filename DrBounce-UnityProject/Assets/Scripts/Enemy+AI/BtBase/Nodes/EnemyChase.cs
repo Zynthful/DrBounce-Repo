@@ -58,7 +58,7 @@ public class EnemyChase : BtNode
             headingBack = false;
             FirstSpotted = false;
             //targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
-            Debug.Log("I'm not broken!");
+            //Debug.Log("I'm not broken!");
             m_navMeshAgent.destination = m_blackboard.target.spottedPosition;
             //Move back to nearest waypoint is commented out below, is a bit buggy with new optimised script
 

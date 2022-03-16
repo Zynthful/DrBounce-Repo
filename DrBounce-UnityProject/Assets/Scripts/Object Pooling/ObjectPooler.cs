@@ -75,7 +75,7 @@ public class ObjectPooler : MonoBehaviour
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
+            //Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
             return null;
         }
 
@@ -123,7 +123,7 @@ public class ObjectPooler : MonoBehaviour
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
+            //Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
             return null;
         }
 

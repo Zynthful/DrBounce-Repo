@@ -70,7 +70,7 @@ public class UnlockTracker : MonoBehaviour
                 break;
 
             default:
-                Debug.LogError("Type not setup with an event, @Cole for being dumb");
+                //Debug.LogError("Type not setup with an event, @Cole for being dumb");
                 break;
         }
     }
@@ -88,7 +88,7 @@ public class UnlockTracker : MonoBehaviour
     {
         foreach(UnlockTypes unlock in newUnlocks)
         {
-            Debug.Log("Unlocking: " + unlock);
+            //Debug.Log("Unlocking: " + unlock);
             EnableUnlock(unlock);
         }
         GameManager.s_Instance.currentSettings = newUnlocks;
@@ -108,7 +108,7 @@ public class UnlockTracker : MonoBehaviour
         instance = this;
         
         DisableAllUnlocks();
-        if(levelStartSettings != null && !saveValues)
+        if (levelStartSettings != null && !saveValues)
         {
             NewUnlocks(levelStartSettings.unlocks);
             GameManager.s_Instance.currentSettings = levelStartSettings.unlocks;
@@ -119,7 +119,7 @@ public class UnlockTracker : MonoBehaviour
             GameManager.s_Instance.currentSettings = saveUnlocks;
             saveValues = false;
         }
-        else
-            Debug.Log("Running without any unlocks, have you forgotten to setup the scriptableObject?");
+        else { }
+            //Debug.Log("Running without any unlocks, have you forgotten to setup the scriptableObject?");
     }
 }

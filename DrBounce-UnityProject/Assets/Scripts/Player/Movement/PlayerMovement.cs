@@ -215,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (move == new Vector3(0,0,0))
         {
-            print(move);
+            //print(move);
             hasMoved = false;
         }
 

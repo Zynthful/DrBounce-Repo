@@ -32,7 +32,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.LogError("No existing save file found in path " + path);
+            //Debug.LogError("No existing save file found in path " + path);
             return null;
         }
     }
@@ -62,7 +62,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.LogError("No existing save file found in path " + path);
+            //Debug.LogError("No existing save file found in path " + path);
             return null;
         }
     }
