@@ -32,7 +32,7 @@ public static class SaveSystem
         }
         else
         {
-            //Debug.LogError("No existing save file found in path " + path);
+            Debug.LogError("No existing save file found in path " + path);
             return null;
         }
     }
@@ -75,5 +75,16 @@ public static class SaveSystem
         }
     }
 
-    public static bool LevelSaveExists(int levelIndex) { LevelSaveData data = LoadInLevel(); if (data.level == levelIndex) { return true; } else { return false; } }
+    public static bool LevelSaveExists(int levelIndex) 
+    { 
+        LevelSaveData data = LoadInLevel(); 
+        if (data.level == levelIndex) 
+        { 
+            return true; 
+        } 
+        else 
+        { 
+            return false; 
+        } 
+    }
 }

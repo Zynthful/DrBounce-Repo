@@ -55,6 +55,7 @@ public class Checkpoint : MonoBehaviour
 
     private void ReachedNextCheckpoint() 
     {
+        Debug.Log("Arrived at next checkpoint... ");
         if (currentCheckpoint < checkpoints.Length - 1)
         {
             currentCheckpoint++;
@@ -70,7 +71,7 @@ public class Checkpoint : MonoBehaviour
         if (levelReloadFromSave && scene.buildIndex == currentSceneIndex)
         {
             levelReloadFromSave = false;
-            //Debug.Log("LevelLoadFromSave");
+            Debug.Log("LevelLoadFromSave");
             LoadLevelProgress(SaveSystem.LoadInLevel());
         }
     }
@@ -90,8 +91,8 @@ public class Checkpoint : MonoBehaviour
         for(int i = 0; i < GameManager.s_Instance.currentSettings.Length; i++)
         {
             unlockFilter[i] = (int)GameManager.s_Instance.currentSettings[i];
+            Debug.Log(unlockFilter[i]);
         }
-        //Debug.Log(unlockFilter);
 
         LevelSaveData data = new LevelSaveData(checkpoint[1], 
                                                 checkpoint[0], 
@@ -112,7 +113,7 @@ public class Checkpoint : MonoBehaviour
 
     public void LoadLevelProgress(LevelSaveData data)
     {
-        //Debug.Log("Run Load level progress");
+        Debug.Log("Run Load level progress");
 
         currentCheckpoint = data.checkpoint;
 
@@ -120,7 +121,7 @@ public class Checkpoint : MonoBehaviour
         for (int i = 0; i < data.unlocks.Length; i++)
         {
             unlocks[i] = (UnlockTracker.UnlockTypes)data.unlocks[i];
-            //Debug.Log("Stuffherer: " + unlocks[i]);
+            Debug.Log("Stuffherer: " + unlocks[i]);
         }
         
         Transform player = PlayerMovement.player;

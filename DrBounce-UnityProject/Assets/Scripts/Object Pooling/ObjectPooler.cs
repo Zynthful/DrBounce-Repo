@@ -65,8 +65,11 @@ public class ObjectPooler : MonoBehaviour
         {
             foreach(GameObject obj in pool)
             {
-                obj.transform.parent = transform;
-                obj.SetActive(false);
+                if(obj != null)
+                {
+                    obj.transform.parent = transform;
+                    obj.SetActive(false);
+                }
             }
         }
     }

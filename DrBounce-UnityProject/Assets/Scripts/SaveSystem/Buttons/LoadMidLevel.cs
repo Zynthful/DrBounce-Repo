@@ -31,8 +31,8 @@ public class LoadMidLevel : MonoBehaviour
 
         if(SceneManager.GetActiveScene().buildIndex != data.level)
         {
-            //Debug.LogError("Load level failed, not on the correct level, this button should be disabled");
-            //Debug.LogError("Current Level " + SceneManager.GetActiveScene().buildIndex + ", desired level: " + data.level);
+            Debug.LogError("Load level failed, not on the correct level, this button should be disabled");
+            Debug.LogError("Current Level " + SceneManager.GetActiveScene().buildIndex + ", desired level: " + data.level);
             return;
         }
         else
