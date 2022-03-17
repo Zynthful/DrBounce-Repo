@@ -114,9 +114,8 @@ public class Bouncing : MonoBehaviour
 
         if (isPlayer)
         {
-            vectors[2] *= basePlayerKnockback;
+            PlayerMovement.instance.bounceForce = vectors[2] *= bounceForceMod;
             //PlayerMovement.instance.velocity += (vectors[2] * basePlayerKnockback);
-            PlayerMovement.instance.bounceForce = basePlayerKnockback;
         }
         else
         {

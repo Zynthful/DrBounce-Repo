@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float accelerationSpeed;
     private bool isMoving = false;
-    [HideInInspector] public float bounceForce;
+    [HideInInspector] public Vector3 bounceForce;
     private bool hasMoved = false;
     private Vector3 oldMove;
 
@@ -263,7 +263,7 @@ public class PlayerMovement : MonoBehaviour
                 slideDirectionDecided = true;
                 slideDirection = transform.forward;
                 slideLeftRight = transform.right;
-                velocity = (slideDirection * slideStrength); //Move them forward at a speed based on the dash strength
+                velocity = (slideDirection * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
             }
             controller.Move(slideDirection * slideStrength * Time.deltaTime);
             h = playerHeight * 0.35f;
@@ -285,34 +285,6 @@ public class PlayerMovement : MonoBehaviour
                 oldSpeed = speed;
                 speed /= 2;
             }
-        }
-
-        #endregion
-
-        #region Momentum
-
-        //Allows the player to push against their momentum to slow it down without springing back after letting go
-        if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
-        {
-            velocity.x += move.x;
-        }
-        if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
-        {
-            velocity.z += move.z;
-        }
-
-        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-
-        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce) * velocity.x / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(charController.velocity.z + velocity.z + bounceForce) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
-
-        if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce == 0)
-        {
-
-        }
-
-        if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce == 0)
-        {
-            
         }
 
         #endregion
@@ -351,7 +323,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
             }
 
-            bounceForce = 0;
+            bounceForce = Vector3.zero;
         }
 
         if (headIsTouchingSomething)
@@ -442,6 +414,34 @@ public class PlayerMovement : MonoBehaviour
         {
             controller.Move(knockbackDir * knockbackPower * Time.deltaTime); //Move them in a direction at a speed based on the knockback strength
             knockbackPower -= Time.deltaTime * knockbackDecayMultiplier;
+        }
+
+        #endregion
+
+        #region Momentum
+
+        //Allows the player to push against their momentum to slow it down without springing back after letting go
+        if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
+        {
+            velocity.x += move.x;
+        }
+        if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
+        {
+            velocity.z += move.z;
+        }
+
+        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
+
+        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(charController.velocity.z + velocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+
+        if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
+        {
+            velocity.x = 0;
+        }
+
+        if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce.z == 0)
+        {
+            velocity.z = 0;
         }
 
         #endregion
