@@ -434,15 +434,15 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(charController.velocity.z + velocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
-        if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
-        {
-            velocity.x = 0;
-        }
+        //if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
+        //{
+        //    velocity.x = 0;
+        //}
 
-        if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce.z == 0)
-        {
-            velocity.z = 0;
-        }
+        //if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce.z == 0)
+        //{
+        //    velocity.z = 0;
+        //}
 
         #endregion
     }
