@@ -77,7 +77,7 @@ public class SkipCutscene : MonoBehaviour
         holding = false;
         currentTime = 0;
         onProgressChange.Invoke(0);
-        StopAllCoroutines();
+        if (this != null) StopAllCoroutines();
         if (!skipped && doFadeDelay && gameObject.activeInHierarchy)
         {
             StartCoroutine(FadeDelay());
