@@ -84,6 +84,7 @@ namespace AK
         static const AkUniqueID RESTART_LEVEL = 1904346601U;
         static const AkUniqueID SLIDE_END = 114683718U;
         static const AkUniqueID SLIDE_START = 2149348397U;
+        static const AkUniqueID SLIME_PIT_AMBIENT = 3143556144U;
         static const AkUniqueID STOP_MUSIC = 2837384057U;
         static const AkUniqueID THROWN = 2260218479U;
         static const AkUniqueID UHH_CHEESED_TO_MEET_YOU = 3276816688U;
