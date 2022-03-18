@@ -142,6 +142,7 @@ public class LoadingScreenManager : MonoBehaviour
         {
             onLoadProgress?.Raise(destinationOperation.progress);
         }
+        OnLoadCompleted();
     }
 
     private void OnLoadCompleted()
