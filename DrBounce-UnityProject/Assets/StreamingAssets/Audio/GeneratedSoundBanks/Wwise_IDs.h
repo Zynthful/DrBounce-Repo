@@ -77,8 +77,10 @@ namespace AK
         static const AkUniqueID PLAYER_RESPAWN = 2161713971U;
         static const AkUniqueID PLAYER_THROW = 65181031U;
         static const AkUniqueID QUIT_LEVEL = 4088290975U;
+        static const AkUniqueID REACHED_CHECKPOINT = 1122212922U;
         static const AkUniqueID RECALLED = 1243887785U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
+        static const AkUniqueID RELOAD_FROM_CHECKPOINT = 1432378914U;
         static const AkUniqueID RESTART_LEVEL = 1904346601U;
         static const AkUniqueID SLIDE_END = 114683718U;
         static const AkUniqueID SLIDE_START = 2149348397U;

@@ -19,6 +19,10 @@ public class Checkpoint : MonoBehaviour
 
     private bool levelReloadFromSave;
 
+    [Header("Events")]
+    public UnityEvent onCheckpointReached = null;
+    public UnityEvent onReloadFromCheckpoint = null;
+
     private void Awake()
     {
         if (s_Instance == null)
@@ -38,32 +42,11 @@ public class Checkpoint : MonoBehaviour
         GoToCurrentCheckpoint();
     }
 
-    [SerializeField]
-    public UnityEvent OnCheckpointReached = null;
-
-    private void Start()
-    {
-        firstSetup = true;
-    }
-
     private void OnEnable()
     {
         CheckpointHit.OnCollision += ReachedNextCheckpoint;
-        PlayerHealth.OnPlayerDeath += ReloadCheckpoint;
+        PlayerHealth.OnPlayerDeath += ReloadFromCheckpoint;
         SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void ReachedNextCheckpoint() 
-    {
-        Debug.Log("Arrived at next checkpoint... ");
-        if (currentCheckpoint < checkpoints.Length - 1)
-        {
-            currentCheckpoint++;
-        }
-
-        SaveLevelProgress();
-
-        OnCheckpointReached?.Invoke();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -71,12 +54,29 @@ public class Checkpoint : MonoBehaviour
         if (levelReloadFromSave && scene.buildIndex == currentSceneIndex)
         {
             levelReloadFromSave = false;
-            Debug.Log("LevelLoadFromSave");
+            //Debug.Log("LevelLoadFromSave");
             LoadLevelProgress(SaveSystem.LoadInLevel());
         }
     }
 
-    void SaveLevelProgress()
+    private void Start()
+    {
+        firstSetup = true;
+    }
+
+    private void ReachedNextCheckpoint() 
+    {
+        if (currentCheckpoint < checkpoints.Length - 1)
+        {
+            currentCheckpoint++;
+        }
+
+        SaveLevelProgress();
+
+        onCheckpointReached?.Invoke();
+    }
+
+    private void SaveLevelProgress()
     {
         if(currentSceneIndex == -1) { currentSceneIndex = SceneManager.GetActiveScene().buildIndex; }
 
@@ -105,15 +105,16 @@ public class Checkpoint : MonoBehaviour
         SaveSystem.SaveInLevel(data);
     }
 
-    public void ReloadFromSaveProgress()
+    public void ReloadFromCheckpoint()
     {
+        onReloadFromCheckpoint?.Invoke();
         levelReloadFromSave = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadLevelProgress(LevelSaveData data)
     {
-        Debug.Log("Run Load level progress");
+        //Debug.Log("Run Load level progress");
 
         currentCheckpoint = data.checkpoint;
 
@@ -121,7 +122,7 @@ public class Checkpoint : MonoBehaviour
         for (int i = 0; i < data.unlocks.Length; i++)
         {
             unlocks[i] = (UnlockTracker.UnlockTypes)data.unlocks[i];
-            Debug.Log("Stuffherer: " + unlocks[i]);
+            //Debug.Log("Stuffherer: " + unlocks[i]);
         }
         
         Transform player = PlayerMovement.player;
@@ -139,12 +140,6 @@ public class Checkpoint : MonoBehaviour
         health.saveDamage = true;
 
         player.GetComponentInChildren<Shooting>().SetCharge(data.charges);
-    }
-
-    private void ReloadCheckpoint()
-    {
-        levelReloadFromSave = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void GoToCurrentCheckpoint()

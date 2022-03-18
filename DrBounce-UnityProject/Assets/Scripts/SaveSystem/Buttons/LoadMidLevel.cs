@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class LoadMidLevel : MonoBehaviour
 {
-
     private void Awake()
     {
         //Debug.Log("Before " + GetComponent<Button>().interactable);
@@ -15,7 +14,7 @@ public class LoadMidLevel : MonoBehaviour
         else
             GetComponent<Button>().interactable = false;
         //Debug.Log("After " + GetComponent<Button>().interactable);
-        Checkpoint.s_Instance.OnCheckpointReached.AddListener(ActivateLoadButton);
+        Checkpoint.s_Instance.onCheckpointReached.AddListener(ActivateLoadButton);
     }
 
     void ActivateLoadButton()
@@ -37,7 +36,7 @@ public class LoadMidLevel : MonoBehaviour
         }
         else
         {
-            Checkpoint.s_Instance.ReloadFromSaveProgress();
+            Checkpoint.s_Instance.ReloadFromCheckpoint();
         }
     }
 }

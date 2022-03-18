@@ -73,7 +73,7 @@ public class LoadingScreenManager : MonoBehaviour
         if (loadingDest)
         {
             float target = destinationOperation.progress / 0.9f;
-            loadProgress = Mathf.MoveTowards(loadProgress, target, smoothMultiplier * Time.deltaTime);  // cry about it tom
+            loadProgress = Mathf.MoveTowards(loadProgress, target, smoothMultiplier * Time.unscaledDeltaTime);  // cry about it tom
             onLoadProgressSmoothed?.Raise(loadProgress);
 
             if (loadProgress >= 1)
