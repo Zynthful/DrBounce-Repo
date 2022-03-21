@@ -27,6 +27,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1122212922	Reached_Checkpoint			\Default Work Unit\State\Levels\Reached_Checkpoint	
 	1160443240	Gun_Max_Shot_Charged			\Default Work Unit\Player\Gun\Max Shot\Gun_Max_Shot_Charged	
 	1243887785	Recalled			\Dialogue\D0C\Gameplay\Recalled	
+	1252905418	Slime_Pit_Object_Enter			\Slime Pit\Slime_Pit_Object_Enter	
 	1432378914	Reload_From_Checkpoint			\Default Work Unit\State\Levels\Reload_From_Checkpoint	
 	1454043598	Gun_Collide			\Default Work Unit\Player\Gun\Environment Interactions\Gun_Collide	
 	1544786970	UI_TV_Selectable_Select			\Default Work Unit\UI\TV\UI_TV_Selectable_Select	
@@ -64,7 +65,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3092587493	Pause			\Default Work Unit\State\Pausing\Pause	
 	3098426972	Gun_Throw			\Default Work Unit\Player\Gun\Interactions - Throwing, Catching, Magnet\Gun_Throw	
 	3104417468	Collide_Bounceable			\Default Work Unit\Player\Gun\Collide_Bounceable	
-	3143556144	Slime_Pit_Ambient			\Default Work Unit\Objects\Slime_Pit_Ambient	
+	3143556144	Slime_Pit_Ambient			\Slime Pit\Slime_Pit_Ambient	
 	3231467681	Enemy_Stun_Increase			\Default Work Unit\Enemy\Stun\Enemy_Stun_Increase	
 	3276816688	uhh_cheesed_to_meet_you			\Default Work Unit\Debug\uhh_cheesed_to_meet_you	
 	3276954688	Vent_Breaking			\Default Work Unit\Objects\Vent\Vent_Breaking	
@@ -97,7 +98,7 @@ Event	ID	Name			Wwise Object Path	Notes
 Switch Group	ID	Name			Wwise Object Path	Notes
 	753474920	Button_Type			\Default Work Unit\UI\Button_Type	
 	2158317749	Collision_Material			\Default Work Unit\Movement\Collision_Material	
-	3783208413	Enemy_Size			\Default Work Unit\Enemy\Enemy_Size	
+	3625945784	Object_Size			\Generic\Object_Size	
 
 Switch	ID	Name	Switch Group			Notes
 	2368844905	Enter	Button_Type			
@@ -105,9 +106,9 @@ Switch	ID	Name	Switch Group			Notes
 	578926554	Lab	Collision_Material			
 	3803999823	Slime	Collision_Material			
 	4248645337	Grass	Collision_Material			
-	1846755610	Small	Enemy_Size			
-	2849147824	Medium	Enemy_Size			
-	4284352190	Large	Enemy_Size			
+	1846755610	Small	Object_Size			
+	2849147824	Medium	Object_Size			
+	4284352190	Large	Object_Size			
 
 State Group	ID	Name			Wwise Object Path	Notes
 	952270134	Selected_Track			\Default Work Unit\Music\Selected_Track	
@@ -134,6 +135,7 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	1164637510	Gun_Last_Shot_Charge			\Default Work Unit\Player\Gun\Gun_Last_Shot_Charge	
 	1603095301	Stun_Progress			\Default Work Unit\Enemy\Stun_Progress	
 	1657400430	Volume_Override			\Default Work Unit\Volume\Volume_Override	
+	2436325575	Object_Enter_Speed			\Slime Pit\Object_Enter_Speed	
 	3274506471	Health_Hit_Damage			\Default Work Unit\Health\Health_Hit_Damage	
 	3625945784	Object_Size			\Default Work Unit\Objects\Objects Generic\Object_Size	
 	3728130025	Gun_MaxShot_Charge_Progress			\Default Work Unit\Player\Gun\Gun_MaxShot_Charge_Progress	
@@ -217,10 +219,12 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	370220968	DB_MSC_Lv2_Chorus_Battle_141bpm_Bass_Synth	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Lv2_Chorus_Battle_141bpm_Bass_Synth_E511C0EB.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Level BGM\Track_03\Combat\Chorus\DB_MSC_Lv2_Chorus_Battle_141bpm_Bass_Synth		459257
 	372295811	DB_SFX_Enemy_Stunned_Pop_Krisp_3	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Enemy_Stunned_Pop_Krisp_3_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Enemies\Enemy\Stun\Stun_Particle_Pop\Krisp\DB_SFX_Enemy_Stunned_Pop_Krisp_3		1380
 	382437502	DB_SFX_UI_TV_Button_Return	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_TV_Button_Return_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\UI\UI\TV\Button_Click_Success\Return\DB_SFX_UI_TV_Button_Return		3500
+	391103241	DB_SFX_Slime Pit_Object_Fall_Medium_1	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Slime Pit_Object_Fall_Large_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Objects\Slime Pit\Object Enter\Medium\Object Enter\DB_SFX_Slime Pit_Object_Fall_Medium_1		18382
 	396856221	DB_SFX_Vent_Grate_Fall_Land	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Vent_Grate_Fall_Land_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Objects\Vent\Grate\Fall_Land\DB_SFX_Vent_Grate_Fall_Land		3809
 	397801328	Charged_Loop	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\SFX_Gun_Charged_Loop_Draft_3_E511C0EB.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Gun\Charge\Charged_Loop		333359
 	398900633	FEETHmn_BootsRunningDCFloor_JC_DB_1R	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_1R_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Right\FEETHmn_BootsRunningDCFloor_JC_DB_1R		4723
 	401570358	End	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Movement_Slide_End_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Slide\End		18483
+	403637389	DB_SFX_Slime Pit_Object_Fall_Small_2	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Slime Pit_Object_Fall_Small_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Objects\Slime Pit\Object Enter\Small\Object Enter\DB_SFX_Slime Pit_Object_Fall_Small_2		8019
 	405458385	FEETHmn_BootsRunningDCFloor_JC_DB_4R	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_4R_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Right\FEETHmn_BootsRunningDCFloor_JC_DB_4R		3486
 	412082314	DB_MSC_Lv2_Chorus_1B_Medium_141bpm	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Lv2_Chorus_1B_Medium_141bpm_E511C0EB.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Level BGM\Track_02\Medium\Chorus_1B\DB_MSC_Lv2_Chorus_1B_Medium_141bpm		251975
 	412437146	FEETHmn_BootsRunningDCFloor_JC_DB_16L	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_16L_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Left\FEETHmn_BootsRunningDCFloor_JC_DB_16L		3971
@@ -235,6 +239,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	456076823	DB_SFX_Enemy_Stunned_Notif_Large	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Enemy_Stunned_Notif_Large_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Enemies\Enemy\Stun\Stunned\Large\DB_SFX_Enemy_Stunned_Notif_Large		13539
 	458719144	Fire_Uncharged	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DrBounce_SFX_Gun_Shoot_Uncharged_Draft_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Gun\Fire\Uncharged\Fire_Uncharged		6644
 	462393207	lv01_a01_doc04E	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\Voices\English(US)\lv01_a01_doc04E_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Critical\Level Specific\Level 1\Intro\Pt4\Level_01\lv01_a01_doc04E		57563
+	462805565	DB_SFX_Slime Pit_Object_Fall_Medium_2	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Slime Pit_Object_Fall_Large_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Objects\Slime Pit\Object Enter\Medium\Object Enter\DB_SFX_Slime Pit_Object_Fall_Medium_2		12484
 	471736304	DB_SFX_Gun_MaxShot_Charging_Draft_2	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Gun_MaxShot_Charging_Draft_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Gun\Max Shot\Charge_Start\DB_SFX_Gun_MaxShot_Charging_Draft_2		23919
 	477234073	Whoosh_Ascending_1	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Whoosh_Ascending_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Jump\Jump\Generic\Whoosh\Whoosh_Ascending_1		4405
 	480408025	Footstep_Grass_2	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Footstep_Grass_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Grass\Footstep_Grass_2		13102
@@ -248,19 +253,20 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	520776906	DB_SFX_Player_Movement_Slide_Start_Burst	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Movement_Slide_Start_Burst_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Slide\Start Burst\DB_SFX_Player_Movement_Slide_Start_Burst		14190
 	521365193	doc_charged_b	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_charged_b_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Caught\Charged\doc_charged_b		31040
 	528163299	DB_SFX_Enemy_Death_Splatter_Particle_3	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Enemy_Death_Splatter_Particle_3_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Enemies\Enemy\Health\Death_Particle_Collide\DB_SFX_Enemy_Death_Splatter_Particle_3		6024
-	529543171	DB_SFX_UI_TV_Selectable_Select	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_TV_Selectable_Select_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\UI\UI\TV\Selectable_PointerEnter\DB_SFX_UI_TV_Selectable_Select		1882
+	529543171	DB_SFX_UI_TV_Selectable_Select	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_TV_Selectable_Select_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\UI\UI\TV\Selectable_Select\DB_SFX_UI_TV_Selectable_Select		1882
 	533805478	doc_collide_c	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_collide_c_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Collide\Non Bounceable\doc_collide_c		26284
 	551154081	Whoosh_Ascending_5	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Whoosh_Ascending_5_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Jump\Jump\Generic\Whoosh\Whoosh_Ascending_5		3557
 	551485717	FEETHmn_BootsRunningDCFloor_JC_DB_3L	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_3L_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Left\FEETHmn_BootsRunningDCFloor_JC_DB_3L		3614
 	557779749	lv01_a01_doc01A	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\Voices\English(US)\lv01_a01_doc01A_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Critical\Level Specific\Level 1\Intro\Pt1\Level_01\lv01_a01_doc01A		56024
 	561083166	FEETHmn_BootsRunningDCFloor_JC_DB_19R	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_19R_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Right\FEETHmn_BootsRunningDCFloor_JC_DB_19R		3594
+	566004674	DB_SFX_Slime Pit_Object_Fall_Small_1	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Slime Pit_Object_Fall_Small_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Objects\Slime Pit\Object Enter\Small\Object Enter\DB_SFX_Slime Pit_Object_Fall_Small_1		13939
 	567724231	Loop	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Movement_Slide_Loop_E511C0EB.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Slide\Loop		95855
 	574273272	DB_SFX_Slime Pit Ambient_Loop	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Slime Pit Ambient_Loop_E511C0EB.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Objects\Slime Pit\Slime Pit Ambient\DB_SFX_Slime Pit Ambient_Loop		287679
 	575713228	FEETHmn_BootsRunningDCFloor_JC_DB_3R	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_3R_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Right\FEETHmn_BootsRunningDCFloor_JC_DB_3R		3302
 	582024848	Bounce_Feedback_2	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\SFX_Gun_Rebound_Feedback_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Gun\Bounce\Bounce_Feedback_2		17833
 	582171735	doc_charged_a	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_charged_a_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Caught\Charged\doc_charged_a		41951
 	584061711	doc_grunt_short_c	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_grunt_short_c_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Collide\Bounceable\doc_grunt_short_c		5805
-	585685359	DB_SFX_UI_BP_Select_1	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_BP_Select_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\UI\UI\Blueprint\Selectable_PointerEnter\Pencil\DB_SFX_UI_BP_Select_1		2841
+	585685359	DB_SFX_UI_BP_Select_1	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_BP_Select_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\UI\UI\Blueprint\Selectable_Select\Pencil\DB_SFX_UI_BP_Select_1		2841
 	586274457	DB_SFX_Gun_MaxShot_Charged_Loop_Draft_1	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Gun_MaxShot_Charged_Loop_Draft_1_E511C0EB.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Gun\Max Shot\Charged_Loop\DB_SFX_Gun_MaxShot_Charged_Loop_Draft_1		431829
 	587892254	doc_recalled_a	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\doc_recalled_a_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Non-Critical\Gameplay\Recalled\doc_recalled_a		28879
 	588009869	FEETHmn_BootsRunningDCFloor_JC_DB_10L	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_10L_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Left\FEETHmn_BootsRunningDCFloor_JC_DB_10L		3942
@@ -271,7 +277,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	628927546	Startup	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Player_Movement_Slide_Start_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Slide\Startup		35612
 	632294282	FEETHmn_BootsJumpingDCFloor_JC_DB_2	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsJumpingDCFloor_JC_DB_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Jump\Jump\Generic\Clothing\FEETHmn_BootsJumpingDCFloor_JC_DB_2		5147
 	634247204	DB_MSC_Lv2_Riff_Medium_141bpm_Bass_Synth	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Lv2_Riff_Medium_141bpm_Bass_Synth_E511C0EB.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Level BGM\Track_03\Medium\Riff\DB_MSC_Lv2_Riff_Medium_141bpm_Bass_Synth		530087
-	647415147	DB_SFX_UI_BP_Select_2	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_BP_Select_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\UI\UI\Blueprint\Selectable_PointerEnter\Pencil\DB_SFX_UI_BP_Select_2		2760
+	647415147	DB_SFX_UI_BP_Select_2	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_BP_Select_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\UI\UI\Blueprint\Selectable_Select\Pencil\DB_SFX_UI_BP_Select_2		2760
 	668733362	Whoosh_Ascending_4	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Whoosh_Ascending_4_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Jump\Jump\Generic\Whoosh\Whoosh_Ascending_4		3169
 	669994136	DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Objects\Bounce Pad\Bounce_Player\DB_SFX_Bounce_Pad_Bounce_Any_SlimeLayer		2458
 	670182655	DB_MSC_Lv2_Intro_Medium_141bpm_Drums	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Lv2_Intro_Medium_141bpm_Drums_E511C0EB.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Level BGM\Track_03\Medium\Intro\DB_MSC_Lv2_Intro_Medium_141bpm_Drums		214454
@@ -282,6 +288,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	687447830	FEETHmn_BootsRunningDCFloor_JC_DB_10R	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_10R_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Right\FEETHmn_BootsRunningDCFloor_JC_DB_10R		3737
 	691599594	lv01_a01_doc02E	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\Voices\English(US)\lv01_a01_doc02E_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Critical\Level Specific\Level 1\Intro\Pt2\Level_01\lv01_a01_doc02E		28903
 	698774650	DB_MSC_Lv2_Chorus_Medium_141bpm_Riff_Synth	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Lv2_Chorus_Medium_141bpm_Riff_Synth_E511C0EB.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Level BGM\Track_03\Medium\Chorus\DB_MSC_Lv2_Chorus_Medium_141bpm_Riff_Synth		488035
+	701217798	DB_SFX_Slime Pit_Object_Fall_Small_3	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Slime Pit_Object_Fall_Small_3_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Objects\Slime Pit\Object Enter\Small\Object Enter\DB_SFX_Slime Pit_Object_Fall_Small_3		8009
 	715612054	FEETHmn_BootsRunningDCFloor_JC_DB_4L	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_4L_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Lab\Left\FEETHmn_BootsRunningDCFloor_JC_DB_4L		3800
 	716881035	DB_SFX_Enemy_Stunned_Pop_Krisp_4	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Enemy_Stunned_Pop_Krisp_4_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Enemies\Enemy\Stun\Stun_Particle_Pop\Krisp\DB_SFX_Enemy_Stunned_Pop_Krisp_4		893
 	718060303	FEETHmn_BootsJumpingDCFloor_JC_DB_4	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsJumpingDCFloor_JC_DB_4_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Jump\Jump\Generic\Clothing\FEETHmn_BootsJumpingDCFloor_JC_DB_4		4012

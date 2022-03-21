@@ -85,6 +85,7 @@ namespace AK
         static const AkUniqueID SLIDE_END = 114683718U;
         static const AkUniqueID SLIDE_START = 2149348397U;
         static const AkUniqueID SLIME_PIT_AMBIENT = 3143556144U;
+        static const AkUniqueID SLIME_PIT_OBJECT_ENTER = 1252905418U;
         static const AkUniqueID STOP_MUSIC = 2837384057U;
         static const AkUniqueID THROWN = 2260218479U;
         static const AkUniqueID UHH_CHEESED_TO_MEET_YOU = 3276816688U;
@@ -201,9 +202,9 @@ namespace AK
             } // namespace SWITCH
         } // namespace ENEMY_BOUNCE_TYPE
 
-        namespace ENEMY_SIZE
+        namespace OBJECT_SIZE
         {
-            static const AkUniqueID GROUP = 3783208413U;
+            static const AkUniqueID GROUP = 3625945784U;
 
             namespace SWITCH
             {
@@ -211,7 +212,7 @@ namespace AK
                 static const AkUniqueID MEDIUM = 2849147824U;
                 static const AkUniqueID SMALL = 1846755610U;
             } // namespace SWITCH
-        } // namespace ENEMY_SIZE
+        } // namespace OBJECT_SIZE
 
     } // namespace SWITCHES
 
@@ -234,6 +235,7 @@ namespace AK
         static const AkUniqueID MUSIC_VOLUME = 1006694123U;
         static const AkUniqueID NONCRITICAL_DIALOGUE_VOLUME = 3346270995U;
         static const AkUniqueID NUM_ENEMIES_IN_COMBAT_WITH = 457807310U;
+        static const AkUniqueID OBJECT_ENTER_SPEED = 2436325575U;
         static const AkUniqueID OBJECT_SIZE = 3625945784U;
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
         static const AkUniqueID PLAYER_HEALTH_PERCENTAGE = 3361892810U;

@@ -41,26 +41,19 @@ public class WwiseRTPC : MonoBehaviour
 
     public void SetValue(int value)
     {
-        SetValue((float) value);
+        SetValue((float)value);
     }
-
-    public void SetGlobalValue(float value)
+    public void SetValue(GameObject @object, float value)
     {
-        rtpc.SetGlobalValue(value);
+        rtpc.SetValue(@object, value);
     }
+    public float GetValue(GameObject gameObject) { return rtpc.GetValue(gameObject); }
+    public float GetValue() { return rtpc.GetValue(assignedObject); }
 
-    public float GetValue(GameObject gameObject)
-    {
-        return rtpc.GetValue(gameObject);
-    }
 
-    public float GetValue()
-    {
-        return rtpc.GetValue(assignedObject);
-    }
+    public void SetGlobalValue(float value) { rtpc.SetGlobalValue(value); }
+    public float GetGlobalValue() { return rtpc.GetGlobalValue(); }
 
-    public float GetGlobalValue()
-    {
-        return rtpc.GetGlobalValue();
-    }
+    public void SetAssignedObject(GameObject value) { assignedObject = value; }
+    public GameObject GetAssignedObject() { return assignedObject; }
 }
