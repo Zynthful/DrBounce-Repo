@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class AISwitch : MonoBehaviour
 {
+    private int collisions;
     // Start is called before the first frame update
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
+            collisions += 1;
             foreach (EnemyHealth test in GetComponentsInChildren<EnemyHealth>())
             {
                 if (test.gameObject.GetComponent<BouncyEnemy>())
@@ -28,15 +30,19 @@ public class AISwitch : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            foreach (EnemyHealth test in GetComponentsInChildren<EnemyHealth>())
+            collisions -= 1;
+            if(collisions <= 0)
             {
-                if (test.gameObject.GetComponent<BouncyEnemy>())
+                foreach (EnemyHealth test in GetComponentsInChildren<EnemyHealth>())
                 {
-                    test.gameObject.GetComponent<BouncyEnemy>().enabled = false;
-                }
-                if (test.gameObject.GetComponent<NoBounceEnemy>())
-                {
-                    test.gameObject.GetComponent<NoBounceEnemy>().enabled = false;
+                    if (test.gameObject.GetComponent<BouncyEnemy>())
+                    {
+                        test.gameObject.GetComponent<BouncyEnemy>().enabled = false;
+                    }
+                    if (test.gameObject.GetComponent<NoBounceEnemy>())
+                    {
+                        test.gameObject.GetComponent<NoBounceEnemy>().enabled = false;
+                    }
                 }
             }
         }
