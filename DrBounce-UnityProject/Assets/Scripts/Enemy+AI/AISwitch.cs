@@ -8,30 +8,36 @@ public class AISwitch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        foreach (EnemyHealth test in GetComponentsInChildren<EnemyHealth>())
+        if(other.tag == "Player")
         {
-            if (test.gameObject.GetComponent<BouncyEnemy>())
+            foreach (EnemyHealth test in GetComponentsInChildren<EnemyHealth>())
             {
-                test.gameObject.GetComponent<BouncyEnemy>().enabled = true;
-            }
-            else if (test.gameObject.GetComponent<NoBounceEnemy>())
-            {
-                test.gameObject.GetComponent<NoBounceEnemy>().enabled = true;
+                if (test.gameObject.GetComponent<BouncyEnemy>())
+                {
+                    test.gameObject.GetComponent<BouncyEnemy>().enabled = true;
+                }
+                if (test.gameObject.GetComponent<NoBounceEnemy>())
+                {
+                    test.gameObject.GetComponent<NoBounceEnemy>().enabled = true;
+                }
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        foreach (EnemyHealth test in GetComponentsInChildren<EnemyHealth>())
+        if (other.tag == "Player")
         {
-            if (test.gameObject.GetComponent<BouncyEnemy>())
+            foreach (EnemyHealth test in GetComponentsInChildren<EnemyHealth>())
             {
-                test.gameObject.GetComponent<BouncyEnemy>().enabled = false;
-            }
-            else if (test.gameObject.GetComponent<NoBounceEnemy>())
-            {
-                test.gameObject.GetComponent<NoBounceEnemy>().enabled = false;
+                if (test.gameObject.GetComponent<BouncyEnemy>())
+                {
+                    test.gameObject.GetComponent<BouncyEnemy>().enabled = false;
+                }
+                if (test.gameObject.GetComponent<NoBounceEnemy>())
+                {
+                    test.gameObject.GetComponent<NoBounceEnemy>().enabled = false;
+                }
             }
         }
     }
