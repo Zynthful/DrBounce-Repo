@@ -7,19 +7,20 @@ public class LoadingScreenManager : MonoBehaviour
 {
     public static LoadingScreenManager s_Instance = null;
 
-    AsyncOperation destinationOperation = null;
+    private static AsyncOperation destinationOperation = null;
 
-    private string destination = null;
-    private ContinueOptions continueOptions = ContinueOptions.Automatic;
-    private UnloadOptions unloadPrevOptions = UnloadOptions.Automatic;
-    private UnloadOptions unloadLoadScreenOptions = UnloadOptions.Automatic;
-    private float smoothMultiplier = 1.0f;
+    private static string destination = null;
+    private static ContinueOptions continueOptions = ContinueOptions.Automatic;
+    private static UnloadOptions unloadPrevOptions = UnloadOptions.Automatic;
+    private static UnloadOptions unloadLoadScreenOptions = UnloadOptions.Automatic;
+    private static float smoothMultiplier = 1.0f;
 
-    private bool continued = false;
-    private bool loadingDest = false;
-    private float loadProgress = 0.0f;
+    private static bool loadingInProgress = false;  // Prevents multiple instances of loading
+    private static bool continued = false;          // Prevents multiple instances of continuing
+    private static bool loadingDest = false;        // Allows progress bar to update
+    private static float loadProgress = 0.0f;
 
-    private int prevSceneIndex = 0;
+    private static int prevSceneIndex = 0;
 
     public enum ContinueOptions
     {
@@ -91,9 +92,18 @@ public class LoadingScreenManager : MonoBehaviour
     /// <param name="_unloadPrevOptions">Additional parameter to determine when to unload the previous (starting) scene.</param>
     /// <param name="_unloadLoadScreenOptions">Additional parameter to determine when to unload the loading screen scene.</param>
     /// <param name="_smoothMultiplier">Additional parameter that affects smoothing of load progress (useful for progress bars).</param>
-    public void LoadScene(string _destination, ContinueOptions _continueOptions = ContinueOptions.Automatic, UnloadOptions _unloadPrevOptions = UnloadOptions.Automatic, UnloadOptions _unloadLoadScreenOptions = UnloadOptions.Automatic, float _smoothMultiplier = 1.0f)
+    public void LoadScene(
+            string _destination,
+            ContinueOptions _continueOptions = ContinueOptions.Automatic,
+            UnloadOptions _unloadPrevOptions = UnloadOptions.Automatic,
+            UnloadOptions _unloadLoadScreenOptions = UnloadOptions.Automatic,
+            float _smoothMultiplier = 1.0f)
     {
-        continued = false;
+        // Prevent loading whilst we're already performing a loading operation
+        if (loadingInProgress)
+            return;
+
+        loadingInProgress = true;
 
         destination = _destination;
         continueOptions = _continueOptions;
@@ -148,7 +158,9 @@ public class LoadingScreenManager : MonoBehaviour
     private void OnLoadCompleted()
     {
         loadingDest = false;
+        continued = false;
         onLoadProgress?.Raise(1.0f);
+        onLoadProgressSmoothed?.Raise(1.0f);
         onLoadLevelComplete?.Raise();
 
         switch (continueOptions)
@@ -213,5 +225,6 @@ public class LoadingScreenManager : MonoBehaviour
         };
 
         destinationOperation = null;
+        loadingInProgress = false;
     }
 }
