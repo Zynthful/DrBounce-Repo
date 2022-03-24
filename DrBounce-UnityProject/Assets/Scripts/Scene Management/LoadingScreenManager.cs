@@ -117,8 +117,6 @@ public class LoadingScreenManager : MonoBehaviour
 
         operation.completed += _ =>
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadingScreenSceneName));                       // Set loading screen as our active scene
-
             switch (unloadPrevOptions)
             {
                 case UnloadOptions.Automatic:
