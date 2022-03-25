@@ -25,6 +25,9 @@ namespace AK
         static const AkUniqueID COLLIDE_NON_BOUNCE = 1752364416U;
         static const AkUniqueID COLLIDE_NONBOUNCEABLE = 402864233U;
         static const AkUniqueID DASH = 1942692385U;
+        static const AkUniqueID ELEVATOR_DESCEND = 3651634652U;
+        static const AkUniqueID ELEVATOR_DOORS_OPEN = 3896169556U;
+        static const AkUniqueID ELEVATOR_STOP = 2818913498U;
         static const AkUniqueID ELEVATOR_TRIGGER_01 = 779930936U;
         static const AkUniqueID ELEVATOR_TRIGGER_02 = 779930939U;
         static const AkUniqueID ELEVATOR_TRIGGER_03 = 779930938U;
