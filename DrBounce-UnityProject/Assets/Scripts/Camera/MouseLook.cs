@@ -35,6 +35,8 @@ public class MouseLook : MonoBehaviour
 
     private float currentControllerSensitivityMultiplier = 1f;
 
+    public Vector2 aimAssistInfluence { private get; set; } = Vector2.zero;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -68,8 +70,8 @@ public class MouseLook : MonoBehaviour
         float mouseX = (Mouse.current.delta.x.ReadValue() * mouseSensitivityX * 3.5f) * Time.deltaTime;
         float mouseY = (Mouse.current.delta.y.ReadValue() * mouseSensitivityY * 3.5f) * Time.deltaTime;
 
-        float camX = conX + mouseX;
-        float camY = conY + mouseY;
+        float camX = conX + mouseX + aimAssistInfluence.x;
+        float camY = conY + mouseY + aimAssistInfluence.y;
 
         xRotation -= camY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
