@@ -8,6 +8,7 @@ public class AAManager : MonoBehaviour
 {
     Camera main;
     MouseLook aimScript;
+    Transform playerTransform;
 
     public static List<Transform> enemiesOnScreen = new List<Transform> { };
     [field: SerializeField]
@@ -18,11 +19,18 @@ public class AAManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetupAA();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        SetupAA();
+    }
+
+    void SetupAA()
+    {
+        playerTransform = PlayerMovement.player;
         enemiesOnScreen.Clear();
         main = Camera.main;
         aimScript = main.GetComponent<MouseLook>();
@@ -31,23 +39,34 @@ public class AAManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Gamepad.current != null)
+        if(Gamepad.current == null)
         {
-            bool assisting = false;
-            for(int i = 0; i < enemiesOnScreen.Count; i++)
+            float closest = float.PositiveInfinity;
+            Transform closestT = null;
+            Vector2 midScreen = new Vector2(main.pixelHeight, main.pixelWidth) / 2;
+            for (int i = 0; i < enemiesOnScreen.Count; i++)
             {
-                Vector2 posOnScreen = main.WorldToScreenPoint(enemiesOnScreen[i].position);
-                Vector2 midScreen = new Vector2(main.pixelHeight, main.pixelWidth) / 2;
+                Vector3 posOnScreen = main.WorldToScreenPoint(enemiesOnScreen[i].position);
+                Debug.Log("Distance to enemy " + i + ") " + Vector2.Distance(midScreen, posOnScreen));
+                Debug.Log((midScreen - (Vector2)posOnScreen) * Time.deltaTime * aimAssistPower);
                 if (Vector2.Distance(midScreen, posOnScreen) <= assistDistance)
                 {
-                    aimScript.aimAssistInfluence = posOnScreen * Time.deltaTime * aimAssistPower;
-                    assisting = true;
-                    break;
+                    if (posOnScreen.z < closest)
+                    {
+                        closest = posOnScreen.z;
+                        closestT = enemiesOnScreen[i];
+                    }
                 }
             }
-            if (!assisting)
+            if (closestT != null)
+            {
+                aimScript.aimAssistInfluence = ((Vector2)main.WorldToScreenPoint(closestT.position) - midScreen).normalized * Time.deltaTime * aimAssistPower;
+            }
+            else
                 aimScript.aimAssistInfluence = Vector2.zero;
         }
+        else
+            aimScript.aimAssistInfluence = Vector2.zero;
     }
 
     public static void RemoveTransform(Transform t)
