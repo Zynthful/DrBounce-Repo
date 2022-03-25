@@ -44,11 +44,10 @@ public class AAManager : MonoBehaviour
             float closest = float.PositiveInfinity;
             Transform closestT = null;
             Vector2 midScreen = new Vector2(main.pixelHeight, main.pixelWidth) / 2;
+            Debug.Log("Midscreen: " + midScreen);
             for (int i = 0; i < enemiesOnScreen.Count; i++)
             {
                 Vector3 posOnScreen = main.WorldToScreenPoint(enemiesOnScreen[i].position);
-                Debug.Log("Distance to enemy " + i + ") " + Vector2.Distance(midScreen, posOnScreen));
-                Debug.Log((midScreen - (Vector2)posOnScreen) * Time.deltaTime * aimAssistPower);
                 if (Vector2.Distance(midScreen, posOnScreen) <= assistDistance)
                 {
                     if (posOnScreen.z < closest)
@@ -60,7 +59,11 @@ public class AAManager : MonoBehaviour
             }
             if (closestT != null)
             {
-                aimScript.aimAssistInfluence = ((Vector2)main.WorldToScreenPoint(closestT.position) - midScreen).normalized * Time.deltaTime * aimAssistPower;
+                Vector2 posOnScreen = main.WorldToScreenPoint(closestT.position);
+                aimScript.aimAssistInfluence = (posOnScreen - midScreen).normalized * Time.deltaTime * aimAssistPower;
+                Debug.Log("Enemy position: " + posOnScreen);
+                Debug.Log("Distance to enemy " + closestT.name + ") "  + Vector2.Distance(midScreen, posOnScreen));
+                Debug.Log("Force to use: " + (posOnScreen - midScreen).normalized * Time.deltaTime * aimAssistPower);
             }
             else
                 aimScript.aimAssistInfluence = Vector2.zero;
