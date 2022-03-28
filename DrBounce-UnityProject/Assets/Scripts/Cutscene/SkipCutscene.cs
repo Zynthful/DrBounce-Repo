@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class SkipCutscene : MonoBehaviour
 {
+    public delegate void CameraAnim();
+    public static event CameraAnim OnEnd;
+
     private InputMaster controls = null;
 
     [Header("Input Settings")]
@@ -89,6 +92,7 @@ public class SkipCutscene : MonoBehaviour
         skipped = true;
         onFinish.Invoke();
         _onFinish?.Raise();
+        OnEnd?.Invoke();
     }
 
     private IEnumerator FadeDelay()
