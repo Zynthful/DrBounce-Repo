@@ -248,7 +248,6 @@ public class PlayerMovement : MonoBehaviour
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
         }
-
         #endregion
 
         #region Slide
@@ -292,7 +291,9 @@ public class PlayerMovement : MonoBehaviour
         #region GroundChecking
         bool wasGrounded = isGrounded;
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask); //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
+        //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask);
+
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
 
         coyoteTime -= Time.deltaTime;
@@ -318,7 +319,9 @@ public class PlayerMovement : MonoBehaviour
             if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
             {
                 // reduce the velocity over time by the momentum loss rate.
-                //If the player is moving with the momentum, it won't be depleted. Move is always between 0 & 1 - if the player's movement is at its max, then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
+                //If the player is moving with the momentum, it won't be depleted.
+                //Move is always between 0 & 1 - if the player's movement is at its max,
+                //then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
                 velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) * Time.deltaTime;
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
             }
@@ -353,26 +356,30 @@ public class PlayerMovement : MonoBehaviour
         #region Dashing
         if (isDashing == true)
         {
+            //Resets velocity and sets Y velocity to 0 while dashing so the player stays at the same elevation for the duration of the move
             velocity = Vector3.zero;
             knockbackPower = 0;
             cooldown = true;
+            //Locks in the direction of the dash once the player's directional input has been read so it can't be changed mid-dash
             if (dashLocker == false)
             {
                 dashLocker = true;
-                float x2 = controls.Player.Movement.ReadValue<Vector2>().x;
-                float z2 = controls.Player.Movement.ReadValue<Vector2>().y;
-                if (x2 == 0 && z2 == 0)
+                float dashX = controls.Player.Movement.ReadValue<Vector2>().x;
+                float dashZ = controls.Player.Movement.ReadValue<Vector2>().y;
+                //If the player dashes without a directional input, it will default to moving the player straight forward.
+
+                if (dashX == 0 && dashZ == 0)
                 {
                     dashDirection = transform.forward;
                 }
+                //If there is a direction input before dashing, dash in that direction
                 else
                 {
-                   
-                    dashDirection = (transform.right * x2 + transform.forward * z2).normalized;
+                    dashDirection = (transform.right * dashX + transform.forward * dashZ).normalized;
                 }
             }
+            //Moves the player in the given dash direction
             controller.Move(dashDirection * dashStrength * Time.deltaTime);
-            //controls.Player.Movement.Disable();
         }
         #endregion
 
@@ -421,6 +428,7 @@ public class PlayerMovement : MonoBehaviour
         #region Momentum
 
         //Allows the player to push against their momentum to slow it down without springing back after letting go
+        //This is accomplished by subtracting the player's input value 'move' from the player's velocity when they're in opposite directions
         if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
         {
             velocity.x += move.x;
@@ -432,7 +440,9 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
 
-        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)), velocity.y, Mathf.Abs(charController.velocity.z + velocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
+            velocity.y,
+            Mathf.Abs(charController.velocity.z + velocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
         //if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
         //{
