@@ -135,7 +135,7 @@ public class Enemy : MonoBehaviour
             {
                 case Blackboard.Actions.ATTACKING:
                     onAttack?.Invoke();
-                    CombatAudioManager.s_Instance.AddEnemy(this);
+                    CombatManager.s_Instance.AddEnemy(this);
                     break;
 
                 case Blackboard.Actions.PATROLING:
@@ -148,12 +148,12 @@ public class Enemy : MonoBehaviour
 
                 case Blackboard.Actions.LOST:
                     onGiveUp?.Invoke();
-                    CombatAudioManager.s_Instance.RemoveEnemy(this);
+                    CombatManager.s_Instance.RemoveEnemy(this);
                     break;
 
                 case Blackboard.Actions.FIRSTSPOTTED:
                     onSpotted?.Invoke();
-                    CombatAudioManager.s_Instance.AddEnemy(this);
+                    CombatManager.s_Instance.AddEnemy(this);
                     break;
             }
 
