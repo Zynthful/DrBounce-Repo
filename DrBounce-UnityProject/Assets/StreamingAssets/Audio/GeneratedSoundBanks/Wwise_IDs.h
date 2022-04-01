@@ -18,21 +18,37 @@ namespace AK
         static const AkUniqueID BOUNCEPAD_BOUNCE_OBJECT = 3449590119U;
         static const AkUniqueID BOUNCEPAD_BOUNCE_PLAYER = 179148629U;
         static const AkUniqueID CAMERA_FLY_QUICK = 3362723590U;
-        static const AkUniqueID CAUGHT = 816373421U;
         static const AkUniqueID COLLIDE_ANY = 2766579562U;
-        static const AkUniqueID COLLIDE_BOUNCE = 602641764U;
         static const AkUniqueID COLLIDE_BOUNCEABLE = 3104417468U;
-        static const AkUniqueID COLLIDE_NON_BOUNCE = 1752364416U;
         static const AkUniqueID COLLIDE_NONBOUNCEABLE = 402864233U;
+        static const AkUniqueID D0C_CAUGHT = 2245601839U;
+        static const AkUniqueID D0C_COLLIDE_BOUNCE = 1558343114U;
+        static const AkUniqueID D0C_COLLIDE_NON_BOUNCE = 3930748326U;
+        static const AkUniqueID D0C_FIRE = 44315403U;
+        static const AkUniqueID D0C_LEVEL_01_CCTV_FOUND = 2190674751U;
+        static const AkUniqueID D0C_LEVEL_01_CCTV_WATCHED = 184019241U;
+        static const AkUniqueID D0C_LEVEL_01_ELEVATOR_TRIGGER_01 = 2429894389U;
+        static const AkUniqueID D0C_LEVEL_01_ELEVATOR_TRIGGER_02 = 2429894390U;
+        static const AkUniqueID D0C_LEVEL_01_ELEVATOR_TRIGGER_03 = 2429894391U;
+        static const AkUniqueID D0C_LEVEL_01_ELEVATOR_TRIGGER_03_EXPLOSION = 2470798379U;
+        static const AkUniqueID D0C_LEVEL_01_ELEVATOR_TRIGGER_04 = 2429894384U;
+        static const AkUniqueID D0C_LEVEL_02_DOWN_THE_VENT = 260859967U;
+        static const AkUniqueID D0C_LEVEL_02_ELEVATOR_TRIGGER_01 = 3852377778U;
+        static const AkUniqueID D0C_LEVEL_02_ELEVATOR_TRIGGER_02 = 3852377777U;
+        static const AkUniqueID D0C_LEVEL_02_YELLOW_ENEMY_VENT_ENCOUNTERED = 2296906949U;
+        static const AkUniqueID D0C_LEVEL_02_YELLOW_ENEMY_VENT_VENTED = 1377102065U;
+        static const AkUniqueID D0C_LEVEL_COMPLETE = 1779956647U;
+        static const AkUniqueID D0C_LONELY = 513920766U;
+        static const AkUniqueID D0C_MAGNETISED = 1473555518U;
+        static const AkUniqueID D0C_MILO_LOW_HEALTH = 2164217686U;
+        static const AkUniqueID D0C_RECALLED = 27752611U;
+        static const AkUniqueID D0C_THROWN = 163293033U;
+        static const AkUniqueID D0C_UPGRADE_FOUND = 2668090908U;
+        static const AkUniqueID D0C_UPGRADE_USED = 2543556535U;
         static const AkUniqueID DASH = 1942692385U;
         static const AkUniqueID ELEVATOR_DESCEND = 3651634652U;
         static const AkUniqueID ELEVATOR_DOORS_OPEN = 3896169556U;
         static const AkUniqueID ELEVATOR_STOP = 2818913498U;
-        static const AkUniqueID ELEVATOR_TRIGGER_01 = 779930936U;
-        static const AkUniqueID ELEVATOR_TRIGGER_02 = 779930939U;
-        static const AkUniqueID ELEVATOR_TRIGGER_03 = 779930938U;
-        static const AkUniqueID ELEVATOR_TRIGGER_03_EXPLOSION = 2831787342U;
-        static const AkUniqueID ELEVATOR_TRIGGER_04 = 779930941U;
         static const AkUniqueID ENEMY_BULLET_IMPACT_PLAYER = 1082212733U;
         static const AkUniqueID ENEMY_BULLET_IMPACT_SURFACE = 936643039U;
         static const AkUniqueID ENEMY_GUN_BOUNCE_IMPACT = 177975784U;
@@ -47,7 +63,6 @@ namespace AK
         static const AkUniqueID ENTER_COMBAT = 2849890412U;
         static const AkUniqueID EXIT_COMBAT = 972748464U;
         static const AkUniqueID FAN_SPIN = 3325721147U;
-        static const AkUniqueID FIRE = 2678880713U;
         static const AkUniqueID FOOTSTEP = 1866025847U;
         static const AkUniqueID GUN_BOUNCE_FEEDBACK = 2862887114U;
         static const AkUniqueID GUN_CATCH = 4103136129U;
@@ -70,12 +85,9 @@ namespace AK
         static const AkUniqueID JUMP = 3833651337U;
         static const AkUniqueID LAND = 674522502U;
         static const AkUniqueID LEVEL_COMPLETE = 3736098925U;
-        static const AkUniqueID LONELY = 2487009732U;
         static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
         static const AkUniqueID MAGNET_PULLING_START = 2278189420U;
-        static const AkUniqueID MAGNETISED = 326990256U;
-        static const AkUniqueID MILO_LOW_HEALTH = 2089651132U;
         static const AkUniqueID PAUSE = 3092587493U;
         static const AkUniqueID PLAYER_HEAL = 780312891U;
         static const AkUniqueID PLAYER_INJURED = 27255824U;
@@ -83,7 +95,6 @@ namespace AK
         static const AkUniqueID PLAYER_THROW = 65181031U;
         static const AkUniqueID QUIT_LEVEL = 4088290975U;
         static const AkUniqueID REACHED_CHECKPOINT = 1122212922U;
-        static const AkUniqueID RECALLED = 1243887785U;
         static const AkUniqueID REDNECK_ROLLS_DICE = 3981690456U;
         static const AkUniqueID RELOAD_FROM_CHECKPOINT = 1432378914U;
         static const AkUniqueID RESTART_LEVEL = 1904346601U;
@@ -93,7 +104,6 @@ namespace AK
         static const AkUniqueID SLIME_PIT_OBJECT_ENTER = 1252905418U;
         static const AkUniqueID STOP_ALL_GAMEOBJECT = 3932352759U;
         static const AkUniqueID STOP_MUSIC = 2837384057U;
-        static const AkUniqueID THROWN = 2260218479U;
         static const AkUniqueID UHH_CHEESED_TO_MEET_YOU = 3276816688U;
         static const AkUniqueID UI_BP_BUTTON_CLICK_FAIL = 1780783421U;
         static const AkUniqueID UI_BP_BUTTON_CLICK_SUCCESS = 935477938U;
@@ -219,6 +229,18 @@ namespace AK
                 static const AkUniqueID SMALL = 1846755610U;
             } // namespace SWITCH
         } // namespace OBJECT_SIZE
+
+        namespace UPGRADE
+        {
+            static const AkUniqueID GROUP = 1323090623U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID MAGNET = 4183621763U;
+                static const AkUniqueID ROCKET_BOOTS = 917179771U;
+                static const AkUniqueID UNCHARGED_FIRING = 3973844254U;
+            } // namespace SWITCH
+        } // namespace UPGRADE
 
     } // namespace SWITCHES
 

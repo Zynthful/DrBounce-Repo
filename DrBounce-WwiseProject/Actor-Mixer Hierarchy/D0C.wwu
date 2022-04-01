@@ -19,7 +19,1791 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<WorkUnit Name="Level Specific" ID="{6D26E42B-484C-416D-904E-FDCCBD9FF155}" PersistMode="Reference"/>
+						<ActorMixer Name="Upgrades" ID="{50C5DD70-D5AE-4363-85FF-AA657FC417D9}" ShortID="1013131894">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<SwitchContainer Name="Pickup Upgrade" ID="{CC3A9AD6-209E-44CD-937E-EFC427DBD1C4}" ShortID="444492872">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="Upgrade" ID="{D03775E1-8854-4D23-A6AE-9726553A500B}" WorkUnitID="{2751C1A0-A102-49E8-B5E9-DD159F489AFD}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="Rocket Boots" ID="{8F5DB4AB-9BEE-401B-9E3A-D3388A067CD6}" ShortID="586857007">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="d0c_upgrade_boots_pickup_a" ID="{BFC53631-6D67-40A2-8001-7411960B7C92}" ShortID="52521187">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="d0c_upgrade_boots_pickup_a" ID="{00ABB3BB-E0D2-40C9-BCC2-E6496D63DD1E}">
+															<Language>SFX</Language>
+															<AudioFile>d0c_upgrade_boots_pickup_a.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="43328785"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="d0c_upgrade_boots_pickup_a" ID="{00ABB3BB-E0D2-40C9-BCC2-E6496D63DD1E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="Magnet" ID="{0AC5D885-17FC-4113-B290-058D999492BB}" ShortID="83845171">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="d0c_upgrade_magnet_pickup_a" ID="{7309B455-CCA0-4AA2-B389-AB2C87A08210}" ShortID="1007969855">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="d0c_upgrade_magnet_pickup_a" ID="{3617732D-458E-4044-B077-DE237DB2FFB6}">
+															<Language>SFX</Language>
+															<AudioFile>d0c_upgrade_magnet_pickup_a.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="621858226"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="d0c_upgrade_magnet_pickup_a" ID="{3617732D-458E-4044-B077-DE237DB2FFB6}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="Uncharged Firing" ID="{55D40973-A38F-4BC7-99B3-507885027707}" ShortID="99125118">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="d0c_upgrade_generic_pickup_a" ID="{B25C1B9A-89D6-44FF-9238-DE17AE95EAEC}" ShortID="152971426">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="d0c_upgrade_generic_pickup" ID="{8C266C79-2A18-4693-8DA2-53830561DC82}">
+															<Language>SFX</Language>
+															<AudioFile>d0c_upgrade_generic_pickup.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="715036869"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="d0c_upgrade_generic_pickup" ID="{8C266C79-2A18-4693-8DA2-53830561DC82}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="d0c_upgrade_generic_pickup_b" ID="{02C11E77-F3B2-4269-9DD3-6954EC30B493}" ShortID="451996614">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="d0c_upgrade_generic_pickup_b" ID="{E5C838CB-AB53-4DDD-89A9-38ACC3137FDB}">
+															<Language>SFX</Language>
+															<AudioFile>d0c_upgrade_generic_pickup_b.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="488009517"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="d0c_upgrade_generic_pickup_b" ID="{E5C838CB-AB53-4DDD-89A9-38ACC3137FDB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
+									</ChildrenList>
+									<ObjectLists/>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="Uncharged Firing" ID="{55D40973-A38F-4BC7-99B3-507885027707}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Magnet" ID="{0AC5D885-17FC-4113-B290-058D999492BB}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Rocket Boots" ID="{8F5DB4AB-9BEE-401B-9E3A-D3388A067CD6}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Uncharged_Firing" ID="{52AB8F38-C48E-4A7F-B082-AFFB35B128D4}"/>
+												<ItemList>
+													<ItemRef Name="Uncharged Firing" ID="{55D40973-A38F-4BC7-99B3-507885027707}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Magnet" ID="{BEAFBEBB-F140-4F40-B9F7-769C19C2032E}"/>
+												<ItemList>
+													<ItemRef Name="Magnet" ID="{0AC5D885-17FC-4113-B290-058D999492BB}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Rocket_Boots" ID="{C6A414CD-7695-41FC-9BB1-D7D9D613F11D}"/>
+												<ItemList>
+													<ItemRef Name="Rocket Boots" ID="{8F5DB4AB-9BEE-401B-9E3A-D3388A067CD6}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
+									</GroupingInfo>
+								</SwitchContainer>
+								<SwitchContainer Name="Used Upgrade" ID="{E4045C75-5CF4-4105-8010-D4F2BE0EE8BF}" ShortID="116982711">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="Upgrade" ID="{D03775E1-8854-4D23-A6AE-9726553A500B}" WorkUnitID="{2751C1A0-A102-49E8-B5E9-DD159F489AFD}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="Magnet" ID="{DF764371-F7C9-4B9C-84C1-86FD47586795}" ShortID="876876701">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="d0c_upgrade_magnet_use_a" ID="{550566C8-8888-4DE1-AAD9-80F0CDD63B31}" ShortID="959126185">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="d0c_upgrade_magnet_use_a" ID="{9C159631-13DE-4334-80F3-6F194939D263}">
+															<Language>SFX</Language>
+															<AudioFile>d0c_upgrade_magnet_use_a.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="738640628"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="d0c_upgrade_magnet_use_a" ID="{9C159631-13DE-4334-80F3-6F194939D263}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="Rocket Boots" ID="{166476C1-F172-4C91-A6A2-E775EFD3F226}" ShortID="271593093">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="d0c_upgrade_boots_use_a" ID="{289B5758-94C6-45FF-A429-6426F6C14460}" ShortID="552898263">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="d0c_upgrade_boots_use_a" ID="{62026A7C-DAC4-4FD6-A0F5-78CEAE76C785}">
+															<Language>SFX</Language>
+															<AudioFile>d0c_upgrade_boots_use_a.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="950846178"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="d0c_upgrade_boots_use_a" ID="{62026A7C-DAC4-4FD6-A0F5-78CEAE76C785}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="d0c_upgrade_boots_use_b" ID="{6A3457F4-12DE-41A6-89D2-DAE791AC3D56}" ShortID="580658453">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="d0c_upgrade_boots_use_b" ID="{E12E7C8A-C795-4CF6-92FB-FE528F38BAB4}">
+															<Language>SFX</Language>
+															<AudioFile>d0c_upgrade_boots_use_b.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="14069811"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="d0c_upgrade_boots_use_b" ID="{E12E7C8A-C795-4CF6-92FB-FE528F38BAB4}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="Uncharged Firing" ID="{BE250B2E-E5C3-4F1A-A7C8-5FB9E35F7164}" ShortID="188737787">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
+									</ChildrenList>
+									<ObjectLists/>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="Uncharged Firing" ID="{BE250B2E-E5C3-4F1A-A7C8-5FB9E35F7164}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Magnet" ID="{DF764371-F7C9-4B9C-84C1-86FD47586795}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="Rocket Boots" ID="{166476C1-F172-4C91-A6A2-E775EFD3F226}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Uncharged_Firing" ID="{52AB8F38-C48E-4A7F-B082-AFFB35B128D4}"/>
+												<ItemList>
+													<ItemRef Name="Uncharged Firing" ID="{BE250B2E-E5C3-4F1A-A7C8-5FB9E35F7164}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Magnet" ID="{BEAFBEBB-F140-4F40-B9F7-769C19C2032E}"/>
+												<ItemList>
+													<ItemRef Name="Magnet" ID="{DF764371-F7C9-4B9C-84C1-86FD47586795}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Rocket_Boots" ID="{C6A414CD-7695-41FC-9BB1-D7D9D613F11D}"/>
+												<ItemList>
+													<ItemRef Name="Rocket Boots" ID="{166476C1-F172-4C91-A6A2-E775EFD3F226}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
+									</GroupingInfo>
+								</SwitchContainer>
+							</ChildrenList>
+							<ObjectLists/>
+						</ActorMixer>
+						<ActorMixer Name="Level" ID="{9E63E0AF-DB95-4450-B093-60E35661CFE7}" ShortID="464518523">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<ActorMixer Name="Level_1" ID="{13CF76E5-30BB-4A09-A6C8-FF910F3A4C77}" ShortID="174018057">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<ActorMixer Name="CCTV Section" ID="{A1427C0A-77EE-45A4-BBBA-FD03E1E941A3}" ShortID="473428447">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<BlendContainer Name="Found" ID="{F1270335-ACD0-4B2E-821B-8D229EB2F2DF}" ShortID="436383495">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="lv01_a02_doc01A" ID="{F9F8B026-E0AE-4812-A651-A013BE1C2AA3}" ShortID="168124117">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv01_a02_doc01A" ID="{40203067-907F-4F87-AA9E-A999D150F69C}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv01_a02_doc01A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="356652058"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv01_a02_doc01A" ID="{40203067-907F-4F87-AA9E-A999D150F69C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Watched" ID="{78DC2727-403B-46F2-BE16-53A44EBCF78A}" ShortID="952314365">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="lv01_a02_doc02A" ID="{A9BA5979-492C-4F23-8F71-1665871F3282}" ShortID="666767812">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv01_a02_doc02A" ID="{AF49CBA0-4313-4341-A2A9-EC400A221830}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv01_a02_doc02A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="571060675"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv01_a02_doc02A" ID="{AF49CBA0-4313-4341-A2A9-EC400A221830}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+											</ChildrenList>
+											<ObjectLists/>
+										</ActorMixer>
+										<ActorMixer Name="Intro Elevator" ID="{AA8602F5-5450-4754-AB48-196121A50B7B}" ShortID="1001026393">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<RandomSequenceContainer Name="Pt_03_Explosion" ID="{E86A2A81-51ED-45CA-846E-EF15C6A8F9BC}" ShortID="474336526">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="lv01_a01_doc03-explA" ID="{E1F47A0F-2080-4A89-80B2-E9E27D088B06}" ShortID="332143476">
+															<PropertyList>
+																<Property Name="IsVoice" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv01_a01_doc03-explA" ID="{4A7BEB79-BB92-453A-9757-3A25378D054B}">
+																	<Language>English(US)</Language>
+																	<AudioFile>lv01_a01_doc03-explA.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="826912872"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv01_a01_doc03-explA" ID="{4A7BEB79-BB92-453A-9757-3A25378D054B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="lv01_a01_doc03-explB" ID="{00E70977-8CE6-49D4-98E6-61152E5A4CF6}" ShortID="727725926">
+															<PropertyList>
+																<Property Name="IsVoice" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv01_a01_doc03-explB" ID="{65AF2ACF-2FB6-4913-A2CA-1C442DE50469}">
+																	<Language>English(US)</Language>
+																	<AudioFile>lv01_a01_doc03-explB.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="160761537"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv01_a01_doc03-explB" ID="{65AF2ACF-2FB6-4913-A2CA-1C442DE50469}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</RandomSequenceContainer>
+												<BlendContainer Name="Pt_01" ID="{D9E2DC41-5EE1-436B-AFDD-C4315BC89891}" ShortID="967172277">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="Pt_01" ID="{283B88B0-4C1F-4721-8216-D277EA00E91E}" ShortID="581201944">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv01_a01_doc01A" ID="{7C33BCB9-F73C-4BCB-A31C-184CA6ABD1A7}" ShortID="140384460">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv01_a01_doc01A" ID="{A483BF1B-6F97-4CD9-8792-2912CD0B1453}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv01_a01_doc01A.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="557779749"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv01_a01_doc01A" ID="{A483BF1B-6F97-4CD9-8792-2912CD0B1453}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="lv01_a01_doc01E" ID="{9A056EFB-3FAA-41BD-A513-80FFE13DD696}" ShortID="875347361">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv01_a01_doc01E" ID="{9FE02098-54D9-4BF3-8AFE-203A3E20C0DE}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv01_a01_doc01E.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="677330791"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv01_a01_doc01E" ID="{9FE02098-54D9-4BF3-8AFE-203A3E20C0DE}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Pt_02" ID="{BCED48F9-437B-4A49-B66C-620CCD57A00F}" ShortID="971684563">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="Pt_02" ID="{F6732C63-2FAB-4A88-B653-0BE23A184D5B}" ShortID="100721553">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv01_a01_doc02C" ID="{A087B724-A805-4789-B376-34710C562754}" ShortID="1019921020">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv01_a01_doc02C" ID="{844B3F41-FEEF-424F-8F38-45AF7D9A9935}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv01_a01_doc02C.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="131877895"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv01_a01_doc02C" ID="{844B3F41-FEEF-424F-8F38-45AF7D9A9935}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="lv01_a01_doc02E" ID="{351CD673-4025-482D-A61C-FBE7CF8BD94E}" ShortID="650666406">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv01_a01_doc02E" ID="{B62C1FCB-B709-4355-9C14-0D6AFD95258B}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv01_a01_doc02E.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="691599594"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv01_a01_doc02E" ID="{B62C1FCB-B709-4355-9C14-0D6AFD95258B}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Pt_03" ID="{AAFC4A86-51ED-43D9-8DB8-E093FE14862F}" ShortID="623973455">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="Pt_03" ID="{134FD263-CFD4-4F68-A152-46455E6D6C24}" ShortID="1033376861">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv01_a01_doc03C" ID="{C5204A8C-FFFE-460F-8B76-4D9EDB1ABB5D}" ShortID="796156394">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv01_a01_doc03C" ID="{C6A77950-ECE8-4001-BA2C-C708AE217DC7}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv01_a01_doc03C.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="419227134"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv01_a01_doc03C" ID="{C6A77950-ECE8-4001-BA2C-C708AE217DC7}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="lv01_a01_doc03E" ID="{ED5B0489-C89C-476B-97F2-FB206CA9A0FC}" ShortID="465934890">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv01_a01_doc03E" ID="{BA0FF043-67C8-4883-AE98-548C589FAF6F}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv01_a01_doc03E.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="237217904"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv01_a01_doc03E" ID="{BA0FF043-67C8-4883-AE98-548C589FAF6F}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Pt_04" ID="{C6D254AE-613F-4067-AD4C-B9FAF9E3931C}" ShortID="366993348">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="Pt_04" ID="{4F4BF07D-30A6-4D16-871E-C572749CE167}" ShortID="120186405">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv01_a01_doc04C" ID="{5C876B24-E757-4178-A2F6-BF59BA6433E2}" ShortID="1063824914">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv01_a01_doc04C" ID="{24D502D7-6ED7-4B55-A248-82D31974FFF2}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv01_a01_doc04C.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="1067723351"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv01_a01_doc04C" ID="{24D502D7-6ED7-4B55-A248-82D31974FFF2}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="lv01_a01_doc04E" ID="{6124858F-FB1D-48A9-B087-341B18A45775}" ShortID="282949630">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv01_a01_doc04E" ID="{F2E0DF8A-FECD-47D8-A54F-3C0967BCD4FC}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv01_a01_doc04E.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="462393207"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv01_a01_doc04E" ID="{F2E0DF8A-FECD-47D8-A54F-3C0967BCD4FC}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+											</ChildrenList>
+											<ObjectLists/>
+										</ActorMixer>
+									</ChildrenList>
+									<ObjectLists/>
+								</ActorMixer>
+								<ActorMixer Name="Level_2" ID="{AA9618CC-5744-4552-89BE-6847DCBFEB9D}" ShortID="85204236">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<ActorMixer Name="Intro Elevator" ID="{73AA7ED5-5AD1-41B5-B0D2-3E4516375CB0}" ShortID="77840260">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<BlendContainer Name="Descend" ID="{E711EC9B-C494-47AA-B7F8-4A14971B64FF}" ShortID="309387402">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="lv02_a01_doc01A" ID="{0195E0F7-908A-452F-9321-ACC3681BFCB1}" ShortID="364469667">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv02_a01_doc01A" ID="{0EE5DFC2-4006-4839-9746-F128BA24DD35}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv02_a01_doc01A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="491508097"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv02_a01_doc01A" ID="{0EE5DFC2-4006-4839-9746-F128BA24DD35}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Seen Red Enemy" ID="{C4306D7D-846D-4A47-A0CE-DB48D7449594}" ShortID="436201545">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="lv02_a01_doc02A" ID="{F6AF3A08-F7FE-47C6-9DE8-426780872CF7}" ShortID="1031909408">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv02_a01_doc02A" ID="{0E563ECF-0E7C-4CE5-ABA0-F11DE37E3052}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv02_a01_doc02A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="407617393"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv02_a01_doc02A" ID="{0E563ECF-0E7C-4CE5-ABA0-F11DE37E3052}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+											</ChildrenList>
+											<ObjectLists/>
+										</ActorMixer>
+										<ActorMixer Name="Yellow Enemy Vent" ID="{302C4CBF-E70A-4966-86A7-ED893209A4A1}" ShortID="148995362">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<BlendContainer Name="Seen" ID="{D9619418-7D47-445C-AF0B-2B022DF19D68}" ShortID="560176071">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="lv02_a02_doc01A" ID="{411E3B24-A371-4B05-AB0D-3B981DB5F203}" ShortID="34609037">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv02_a02_doc01A" ID="{7151545E-05B1-41CB-94BA-A5438CADB039}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv02_a02_doc01A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="617274644"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv02_a02_doc01A" ID="{7151545E-05B1-41CB-94BA-A5438CADB039}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Vented" ID="{A90C60BF-E4EA-4D78-976C-3D8752BC341B}" ShortID="216330097">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="lv02_a02_doc02A" ID="{7663E0AD-1F85-4399-ADF7-724AC78DFF96}" ShortID="568832929">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv02_a02_doc02A" ID="{157986D1-F2D8-4865-9127-C0F79DA069DE}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv02_a02_doc02A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="661601270"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv02_a02_doc02A" ID="{157986D1-F2D8-4865-9127-C0F79DA069DE}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+											</ChildrenList>
+											<ObjectLists/>
+										</ActorMixer>
+										<BlendContainer Name="Down The Vent" ID="{96F0EF47-91C8-4671-BA06-0964B44E9C4B}" ShortID="471148236">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<RandomSequenceContainer Name="Down the vent" ID="{AA541DCC-518C-4889-B0DD-E017EB185301}" ShortID="193451709">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="lv02_a03_doc01C" ID="{F15E2A22-2270-43A7-ABAE-091B75C9F023}" ShortID="1057511618">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv02_a03_doc01C" ID="{744B6A64-17D2-4E89-A94F-0EBB0B603050}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv02_a03_doc01C.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="635858547"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv02_a03_doc01C" ID="{744B6A64-17D2-4E89-A94F-0EBB0B603050}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="lv02_a03_doc01A" ID="{BB302BE6-507C-4F19-9A14-ADC5FE3A2276}" ShortID="276353752">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv02_a03_doc01A" ID="{9FA0385B-966B-479B-88C0-8C8FFEF2E299}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv02_a03_doc01A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="484077771"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv02_a03_doc01A" ID="{9FA0385B-966B-479B-88C0-8C8FFEF2E299}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="lv02_a03_doc01B" ID="{B50AA374-CD7E-43D6-9E2D-814CF99ACE6E}" ShortID="184000840">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv02_a03_doc01B" ID="{E5ED1B07-1454-4C93-8462-15D933B69B81}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv02_a03_doc01B.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="498907096"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv02_a03_doc01B" ID="{E5ED1B07-1454-4C93-8462-15D933B69B81}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="lv02_a03_doc01D" ID="{80A095B2-6FF4-4DEB-A891-61098093E48F}" ShortID="1005371119">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="lv02_a03_doc01D" ID="{62ECB5CB-C312-41C4-865C-E26AE211BBD5}">
+																	<Language>SFX</Language>
+																	<AudioFile>lv02_a03_doc01D.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="38780635"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="lv02_a03_doc01D" ID="{62ECB5CB-C312-41C4-865C-E26AE211BBD5}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</RandomSequenceContainer>
+											</ChildrenList>
+											<ObjectLists/>
+										</BlendContainer>
+									</ChildrenList>
+									<ObjectLists/>
+								</ActorMixer>
+								<ActorMixer Name="Level_3" ID="{8686D5F2-0B0A-495A-89B5-71CC7EA2834D}" ShortID="529330711">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ObjectLists/>
+								</ActorMixer>
+								<ActorMixer Name="Level Complete" ID="{F7F383CA-28FC-4A61-A7A9-29D7EAA6468C}" ShortID="183376059">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<SwitchContainer Name="Level Complete" ID="{546F03A8-F5BE-47A8-9250-DBE09A3DC607}" ShortID="816422647">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="DefaultSwitchOrState">
+													<ObjectRef Name="None" ID="{526E3244-967B-4002-90EE-F2F20D71E451}" WorkUnitID="{CAD56C36-0C33-4D0B-BC72-9C9913779333}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="Current_Level" ID="{83FE44AB-F4BA-486F-9BB8-8A0E8C4EE98A}" WorkUnitID="{CAD56C36-0C33-4D0B-BC72-9C9913779333}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<BlendContainer Name="Level_01" ID="{9CF11BC8-5691-4D6E-943A-DCBC5A942CF4}" ShortID="395448001">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="Completed" ID="{7060EAD4-4AD4-4AED-BAAD-F72103556935}" ShortID="10012585">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="d0c_lvl_complete_generic_c" ID="{22F22A42-549E-4CBD-A33B-25CDDB915C02}" ShortID="210233031">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="d0c_lvl_complete_generic_c" ID="{F073EA90-96E8-4CF6-8F22-8A62FEB38C48}">
+																			<Language>SFX</Language>
+																			<AudioFile>d0c_lvl_complete_generic_c.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="471200752"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="d0c_lvl_complete_generic_c" ID="{F073EA90-96E8-4CF6-8F22-8A62FEB38C48}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="d0c_lvl_complete_generic_a" ID="{2138023E-1B18-40B6-ABF0-77BFE0E95294}" ShortID="428481313">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="d0c_lvl_complete_generic_a" ID="{E03955DA-99A0-40A1-843D-2B79F02674E4}">
+																			<Language>SFX</Language>
+																			<AudioFile>d0c_lvl_complete_generic_a.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="405672823"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="d0c_lvl_complete_generic_a" ID="{E03955DA-99A0-40A1-843D-2B79F02674E4}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="d0c_lvl_complete_generic_b" ID="{2F92BCB5-754D-4600-9EA0-37F80BA09E24}" ShortID="1013138789">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="d0c_lvl_complete_generic_b" ID="{FE478C54-49A8-4759-ADDC-279D354DF96C}">
+																			<Language>SFX</Language>
+																			<AudioFile>d0c_lvl_complete_generic_b.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="840611969"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="d0c_lvl_complete_generic_b" ID="{FE478C54-49A8-4759-ADDC-279D354DF96C}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Level_02" ID="{05E3BDCB-9127-4A40-B3D8-8BECCE4B08C5}" ShortID="106754653">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="Completed" ID="{0F514230-7416-43F2-A2AE-A2B4F21D3473}" ShortID="553729901">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="d0c_lvl_2_complete" ID="{FA899AE8-91A1-4BDD-9DDE-934C67654EE2}" ShortID="24461401">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="d0c_lvl_2_complete" ID="{8B2D78D8-CEF0-4082-BBD8-0454571BAB76}">
+																			<Language>SFX</Language>
+																			<AudioFile>d0c_lvl_2_complete.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="874560509"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="d0c_lvl_2_complete" ID="{8B2D78D8-CEF0-4082-BBD8-0454571BAB76}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Level_03" ID="{623086F4-A1BA-4E1A-AC86-7A0B8ADB9CCC}" ShortID="977413673">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="Completed" ID="{430DA735-DFBB-486B-BA3B-E09CAB2ABEE8}" ShortID="139844303">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="d0c_lvl_complete_generic_c" ID="{BB8B7E87-C933-4D30-9A54-C3910BD95977}" ShortID="379537519">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="d0c_lvl_complete_generic_c" ID="{9D8ECF04-B761-4EBE-9039-550E78CF3D91}">
+																			<Language>SFX</Language>
+																			<AudioFile>d0c_lvl_complete_generic_c.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="471200752"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="d0c_lvl_complete_generic_c" ID="{9D8ECF04-B761-4EBE-9039-550E78CF3D91}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="d0c_lvl_complete_generic_a" ID="{3E8CAE9B-D93D-4047-A26C-92D5E603462C}" ShortID="894271926">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="d0c_lvl_complete_generic_a" ID="{B7DC3D32-692D-49EF-BFB7-20D01EB35A10}">
+																			<Language>SFX</Language>
+																			<AudioFile>d0c_lvl_complete_generic_a.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="405672823"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="d0c_lvl_complete_generic_a" ID="{B7DC3D32-692D-49EF-BFB7-20D01EB35A10}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="d0c_lvl_complete_generic_b" ID="{DC61A5D3-BC0C-43D9-AE77-243B8C82E44F}" ShortID="416323138">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="d0c_lvl_complete_generic_b" ID="{9A04A69C-0B60-4013-B030-6E132DD169EF}">
+																			<Language>SFX</Language>
+																			<AudioFile>d0c_lvl_complete_generic_b.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="840611969"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="d0c_lvl_complete_generic_b" ID="{9A04A69C-0B60-4013-B030-6E132DD169EF}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+											</ChildrenList>
+											<ObjectLists/>
+											<GroupingInfo>
+												<GroupingBehaviorList>
+													<GroupingBehavior>
+														<ItemRef Name="Level_01" ID="{9CF11BC8-5691-4D6E-943A-DCBC5A942CF4}"/>
+													</GroupingBehavior>
+													<GroupingBehavior>
+														<ItemRef Name="Level_02" ID="{05E3BDCB-9127-4A40-B3D8-8BECCE4B08C5}"/>
+													</GroupingBehavior>
+													<GroupingBehavior>
+														<ItemRef Name="Level_03" ID="{623086F4-A1BA-4E1A-AC86-7A0B8ADB9CCC}"/>
+													</GroupingBehavior>
+												</GroupingBehaviorList>
+												<GroupingList>
+													<Grouping>
+														<SwitchRef Name="Level_02" ID="{D6CC0680-0376-4DB8-A076-569DA798DD49}"/>
+														<ItemList>
+															<ItemRef Name="Level_02" ID="{05E3BDCB-9127-4A40-B3D8-8BECCE4B08C5}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
+														<SwitchRef Name="Level_01" ID="{7509FF80-5560-4720-A0CE-31FA31599C09}"/>
+														<ItemList>
+															<ItemRef Name="Level_01" ID="{9CF11BC8-5691-4D6E-943A-DCBC5A942CF4}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
+														<SwitchRef Name="Level_03" ID="{4F246CD1-8869-4C77-83F3-4557F29E16BD}"/>
+														<ItemList>
+															<ItemRef Name="Level_03" ID="{623086F4-A1BA-4E1A-AC86-7A0B8ADB9CCC}"/>
+														</ItemList>
+													</Grouping>
+												</GroupingList>
+											</GroupingInfo>
+										</SwitchContainer>
+									</ChildrenList>
+									<ObjectLists/>
+								</ActorMixer>
+							</ChildrenList>
+							<ObjectLists/>
+						</ActorMixer>
 					</ChildrenList>
 					<ObjectLists/>
 				</ActorMixer>
