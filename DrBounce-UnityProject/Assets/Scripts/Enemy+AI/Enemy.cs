@@ -88,6 +88,19 @@ public class Enemy : MonoBehaviour
     private int id = 0;
 
     protected Stun stun;
+
+    [Header("Enemy Data")]
+    [SerializeField]
+    private EnemyType type = EnemyType.Normal;
+    [SerializeField]
+    [Tooltip("Name of the enemy. Currently used for Boss HP bars.")]
+    new private string name = "";
+
+    public enum EnemyType
+    {
+        Normal,
+        Boss,
+    }
     #endregion
 
     private void Start()
@@ -122,7 +135,7 @@ public class Enemy : MonoBehaviour
             {
                 case Blackboard.Actions.ATTACKING:
                     onAttack?.Invoke();
-                    CombatAudioManager.s_Instance.AddEnemy(id);
+                    CombatAudioManager.s_Instance.AddEnemy(this);
                     break;
 
                 case Blackboard.Actions.PATROLING:
@@ -135,12 +148,12 @@ public class Enemy : MonoBehaviour
 
                 case Blackboard.Actions.LOST:
                     onGiveUp?.Invoke();
-                    CombatAudioManager.s_Instance.RemoveEnemy(id);
+                    CombatAudioManager.s_Instance.RemoveEnemy(this);
                     break;
 
                 case Blackboard.Actions.FIRSTSPOTTED:
                     onSpotted?.Invoke();
-                    CombatAudioManager.s_Instance.AddEnemy(id);
+                    CombatAudioManager.s_Instance.AddEnemy(this);
                     break;
             }
 
@@ -162,4 +175,7 @@ public class Enemy : MonoBehaviour
     {
         m_root.reset();
     }
+
+    public string GetName() { return name; }
+    public EnemyType GetEnemyType() { return type; }
 }

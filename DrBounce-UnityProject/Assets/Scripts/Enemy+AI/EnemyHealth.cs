@@ -11,7 +11,7 @@ public class EnemyHealth : Health
 
     protected override void DIE()
     {
-        CombatAudioManager.s_Instance.RemoveEnemy(gameObject.GetInstanceID());
+        CombatAudioManager.s_Instance.RemoveEnemy(GetComponent<Enemy>());
 
         base.DIE();
 

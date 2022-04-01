@@ -7,16 +7,26 @@ public class CombatAudioManager : MonoBehaviour
 {
     public static CombatAudioManager s_Instance = null;
 
+    private bool inCombat = false;
+    private List<Enemy> enemiesInCombatWith = new List<Enemy>();
+
+    [Header("Events")]
+    public GameEvent onEnterCombat = null;
+    public GameEvent onExitCombat = null;
+    public GameEventEnemy onEnterCombatWithEnemy = null;
+    public GameEventEnemy onEnterCombatWithBossEnemy = null;
+    public GameEventEnemy onEnterCombatWithNormalEnemy = null;
+    public GameEventEnemy onExitCombatWithEnemy = null;
+    public GameEventEnemy onExitCombatWithBossEnemy = null;
+    public GameEventEnemy onExitCombatWithNormalEnemy = null;
+
+    [Header("Wwise")]
     [SerializeField]
     private AK.Wwise.State inCombatState = null;
     [SerializeField]
     private AK.Wwise.State outOfCombatState = null;
     [SerializeField]
     private AK.Wwise.RTPC numEnemiesEngaged = null;
-
-    private bool inCombat = false;
-
-    private List<int> enemiesInCombatWith = new List<int>();
 
     private void Awake()
     {
@@ -37,24 +47,52 @@ public class CombatAudioManager : MonoBehaviour
         RemoveAllEnemies();
     }
 
-    public void AddEnemy(int enemy)
+    public void AddEnemy(Enemy enemy)
     {
         if (!enemiesInCombatWith.Contains(enemy))
         {
             enemiesInCombatWith.Add(enemy);
             numEnemiesEngaged.SetGlobalValue(enemiesInCombatWith.Count);
             SetInCombat(true);
+
+            onEnterCombatWithEnemy?.Raise(enemy);
+
+            switch (enemy.GetEnemyType())
+            {
+                case Enemy.EnemyType.Normal:
+                    onEnterCombatWithNormalEnemy?.Raise(enemy);
+                    break;
+                case Enemy.EnemyType.Boss:
+                    onEnterCombatWithBossEnemy?.Raise(enemy);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    public void RemoveEnemy(int enemy)
+    public void RemoveEnemy(Enemy enemy)
     {
         enemiesInCombatWith.Remove(enemy);
         numEnemiesEngaged.SetGlobalValue(enemiesInCombatWith.Count);
 
+        onExitCombatWithEnemy?.Raise(enemy);
+
         if (enemiesInCombatWith.Count <= 0)
         {
             SetInCombat(false);
+        }
+
+        switch (enemy.GetEnemyType())
+        {
+            case Enemy.EnemyType.Normal:
+                onExitCombatWithNormalEnemy?.Raise(enemy);
+                break;
+            case Enemy.EnemyType.Boss:
+                onExitCombatWithBossEnemy?.Raise(enemy);
+                break;
+            default:
+                break;
         }
     }
 

@@ -9,3 +9,4 @@ using UnityEngine.Events;
 [Serializable] public class Vector2Event : UnityEvent<Vector2> { };
 [Serializable] public class Vector3Event : UnityEvent<Vector3> { };
 [Serializable] public class GameObjectEvent : UnityEvent<GameObject> { };
+[Serializable] public class EnemyEvent : UnityEvent<Enemy> { };

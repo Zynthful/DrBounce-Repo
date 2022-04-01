@@ -45,7 +45,7 @@ public class EnemyChase : BtNode
                     FirstSpotted = true;
                     m_blackboard.noBounceAIController.canMove = false;
                     headingBack = true;
-                    CombatAudioManager.s_Instance.AddEnemy(blackboard.owner.GetInstanceID());
+                    CombatAudioManager.s_Instance.AddEnemy(blackboard.aiController);
                     m_spotted?.Invoke();
                 }
             }
