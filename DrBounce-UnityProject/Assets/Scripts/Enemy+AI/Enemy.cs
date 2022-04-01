@@ -48,9 +48,7 @@ public class Enemy : MonoBehaviour
     protected Blackboard.Actions recentAction;
 
     [Header("Declarations")]
-    [SerializeField]
-    private EnemyHealth health = null;
-    [SerializeField]
+    public EnemyHealth health = null;
     public BulletType bullet;
     [SerializeField]
     private GameObject healthPackPrefab;
