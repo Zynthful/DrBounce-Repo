@@ -392,6 +392,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: da1c2127bd13f0f4f9f1af98ac197ad4, type: 2}
   objToPost: {fileID: 1521096752956535436}
+  postOn: 0
 --- !u!1 &1108555849792722324
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,7 +2476,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 51.125, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.375}
-  m_Children: []
+  m_Children:
+  - {fileID: 8500659510175003983}
   m_Father: {fileID: 1108555851501593634}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7026,6 +7028,116 @@ Transform:
   m_Father: {fileID: 1172574110356513545}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4298588592317264151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8500659510175003983}
+  - component: {fileID: 4187132229603947913}
+  - component: {fileID: 2569701353606532211}
+  m_Layer: 0
+  m_Name: ElevatorStartTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8500659510175003983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298588592317264151}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.7272727}
+  m_Children: []
+  m_Father: {fileID: 1108555850273273774}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4187132229603947913
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298588592317264151}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.434707, y: 5.156685, z: 7.210246}
+  m_Center: {x: -4.2173533, y: 2.0783424, z: 0.25129488}
+--- !u!114 &2569701353606532211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298588592317264151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720db78a2faa42e4b9981fb03399c127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookForLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  lookForGun: 0
+  triggerDelay: 0
+  onPreDetect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4187132229603947913}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7321943011418611548, guid: fa7b141c7648f314799e0477e3032dff, type: 3}
+        m_TargetAssemblyTypeName: Checkpoint, Assembly-CSharp
+        m_MethodName: SetElevator
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4298588592317264151}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4168893520118474961}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDetect:
+    m_PersistentCalls:
+      m_Calls: []
+  onDetectStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onLostDetection:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6074928856799887262
 GameObject:
   m_ObjectHideFlags: 0
@@ -8561,6 +8673,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 9f1c04b2b17a4f64fa2a950c4631b58f, type: 2}
   objToPost: {fileID: 1108555851501593635}
+  postOn: 0
 --- !u!1 &8774198348132238315
 GameObject:
   m_ObjectHideFlags: 0
@@ -8609,6 +8722,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: eaaedb2fdf2235f488c5da45e902c300, type: 2}
   objToPost: {fileID: 1108555851501593635}
+  postOn: 0
 --- !u!1 &8916320957553494449
 GameObject:
   m_ObjectHideFlags: 0
@@ -8706,3 +8820,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 248528367432673030, guid: ec33c53f0660e004b8a5984345ae5d93, type: 3}
   m_PrefabInstance: {fileID: 4226647673680711636}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4168893520118474961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 248528367432673029, guid: ec33c53f0660e004b8a5984345ae5d93, type: 3}
+  m_PrefabInstance: {fileID: 4226647673680711636}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -23,6 +23,10 @@ public class Checkpoint : MonoBehaviour
     public UnityEvent onCheckpointReached = null;
     public UnityEvent onReloadFromCheckpoint = null;
 
+    private GameObject elevator;
+
+    private bool testBool = false;
+
     private void Awake()
     {
         if (s_Instance == null)
@@ -64,7 +68,7 @@ public class Checkpoint : MonoBehaviour
         firstSetup = true;
     }
 
-    private void ReachedNextCheckpoint() 
+    private void ReachedNextCheckpoint()
     {
         if (currentCheckpoint < checkpoints.Length - 1)
         {
@@ -78,7 +82,7 @@ public class Checkpoint : MonoBehaviour
 
     private void SaveLevelProgress()
     {
-        if(currentSceneIndex == -1) { currentSceneIndex = SceneManager.GetActiveScene().buildIndex; }
+        if (currentSceneIndex == -1) { currentSceneIndex = SceneManager.GetActiveScene().buildIndex; }
 
         // Save Level Progress
         Transform player = PlayerMovement.player;
@@ -88,20 +92,23 @@ public class Checkpoint : MonoBehaviour
         //Debug.Log("Data saved at level " + checkpoint[1]);
 
         int[] unlockFilter = new int[GameManager.s_Instance.currentSettings.Length];
-        for(int i = 0; i < GameManager.s_Instance.currentSettings.Length; i++)
+        for (int i = 0; i < GameManager.s_Instance.currentSettings.Length; i++)
         {
             unlockFilter[i] = (int)GameManager.s_Instance.currentSettings[i];
             Debug.Log(unlockFilter[i]);
         }
 
-        LevelSaveData data = new LevelSaveData(checkpoint[1], 
-                                                checkpoint[0], 
-                                                player.GetComponent<PlayerHealth>().GetHealth(), 
-                                                new float[3]{player.position.x, player.position.y, player.position.z},
-                                                new float[4]{player.rotation.x, player.rotation.y, player.rotation.z, player.rotation.w},
+        LevelSaveData data = new LevelSaveData(checkpoint[1],
+                                                checkpoint[0],
+                                                player.GetComponent<PlayerHealth>().GetHealth(),
+                                                new float[3] { player.position.x, player.position.y, player.position.z },
+                                                new float[4] { player.rotation.x, player.rotation.y, player.rotation.z, player.rotation.w },
                                                 player.GetComponentInChildren<Shooting>().GetCharges(),
+                                                GameObject.Find("ElevatorStartTrigger").GetComponent<Collider>().enabled,
                                                 unlockFilter);
+        {
 
+        };
         SaveSystem.SaveInLevel(data);
     }
 
@@ -118,13 +125,15 @@ public class Checkpoint : MonoBehaviour
 
         currentCheckpoint = data.checkpoint;
 
+        GameObject.Find("ElevatorStartTrigger").GetComponent<Collider>().enabled = data.hasStarted;
+
         UnlockTracker.UnlockTypes[] unlocks = new UnlockTracker.UnlockTypes[data.unlocks.Length];
         for (int i = 0; i < data.unlocks.Length; i++)
         {
             unlocks[i] = (UnlockTracker.UnlockTypes)data.unlocks[i];
             //Debug.Log("Stuffherer: " + unlocks[i]);
         }
-        
+
         Transform player = PlayerMovement.player;
         UnlockTracker tracker = player.GetComponent<UnlockTracker>();
 
@@ -175,8 +184,14 @@ public class Checkpoint : MonoBehaviour
         PlayerMovement.player.transform.position = new Vector3(checkpoints[currentCheckpoint].position.x, checkpoints[currentCheckpoint].position.y + 1, checkpoints[currentCheckpoint].position.z);
     }
 
+    public void SetElevator(GameObject newElevator)
+    {
+        elevator = newElevator;
+        print(GameObject.Find(elevator.name).GetComponent<Collider>().enabled);
+    }
+
     public int[] GetCheckpointAndLevel()
     {
-        return new int[2]{currentCheckpoint,currentSceneIndex};
+        return new int[2] { currentCheckpoint, currentSceneIndex };
     }
 }
