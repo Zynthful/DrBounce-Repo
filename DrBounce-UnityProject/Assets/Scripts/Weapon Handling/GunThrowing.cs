@@ -28,6 +28,12 @@ public class GunThrowing : MonoBehaviour
 
     private bool held = true;
 
+    public delegate void LeftGun();
+    public static event LeftGun OnLeftGun;
+
+    public delegate void PickedUpGun();
+    public static event PickedUpGun OnPickedUpGun;
+
     // Coyote Time variables (gun collision time before drop charges)
 
     [System.Serializable]
@@ -201,13 +207,17 @@ public class GunThrowing : MonoBehaviour
         }
 
         // Handle loneliness time
-        if (!held && !alone && !pulledByMagnet) 
+        if (!held && !pulledByMagnet) 
         {
             timeOnGround = timeOnGround + Time.deltaTime;
-            if (timeOnGround >= timeToTriggerLonely) 
+            if (timeOnGround >= timeToTriggerLonely && !alone) 
             {
                 alone = true;
                 onLonely?.Invoke();
+            }
+            if (timeOnGround >= 20) 
+            {
+                OnLeftGun?.Invoke();
             }
         }
     }
@@ -383,6 +393,7 @@ public class GunThrowing : MonoBehaviour
 
             //here
             // here???
+            OnPickedUpGun?.Invoke();
         }
     }
 
