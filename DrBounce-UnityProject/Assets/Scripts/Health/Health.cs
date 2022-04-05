@@ -74,6 +74,9 @@ public class Health : MonoBehaviour
     [SerializeField]
     private GameEvent _onDeath = null;
 
+    public delegate void NotLowHealth();
+    public static event NotLowHealth HasHealed;
+
     public bool saveDamage;
     public int saveDamageValue;
 
@@ -134,6 +137,8 @@ public class Health : MonoBehaviour
 
     public virtual void Heal(int amount) 
     {
+        HasHealed?.Invoke();
+
         onHeal?.Invoke(amount);
         _onHeal?.Raise(amount);
 
