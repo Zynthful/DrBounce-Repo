@@ -111,6 +111,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameEventFloat onDashSliderValue = null;
     [SerializeField] private GameEvent _onLandOnNonBounceableGround = null;
 
+    private Collider[] test;
+
     private void Awake()
     {
         oldCoyoteTime = coyoteTime;
@@ -169,6 +171,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX
+
+        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube.transform.position = groundCheck.position;
+        //cube.transform.rotation = transform.rotation;
+        //cube.transform.localScale = new Vector3(0.01f, 0.75f, 0.01f) * 2;
+        //cube.GetComponent<Collider>().enabled = false;
+
+        print(gravity);
         //@cole :)
         if (isDashing == true)
         {
@@ -254,9 +265,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (isSliding == true)
         {
+
             knockbackPower = 0;
             acceleration = 1;
-            gravity = slideGravity;
             if (slideDirectionDecided == false)
             {
                 slideDirectionDecided = true;
@@ -291,9 +302,9 @@ public class PlayerMovement : MonoBehaviour
         #region GroundChecking
         bool wasGrounded = isGrounded;
 
-        //Returns true to isGrounded if a small sphere collider below the player overlaps with something with the ground Layer
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~groundMask);
+        //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
 
+        isGrounded = Physics.CheckBox(groundCheck.position, new Vector3(0.01f, 0.75F, 0.01f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
 
         coyoteTime -= Time.deltaTime;
