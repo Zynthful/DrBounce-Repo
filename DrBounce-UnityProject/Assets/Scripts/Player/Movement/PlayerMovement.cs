@@ -174,11 +174,11 @@ public class PlayerMovement : MonoBehaviour
     {
         //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX
 
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.position = groundCheck.position + move + Vector3.down;
-        cube.transform.rotation = transform.rotation;
-        cube.transform.localScale = new Vector3(0.01f, 1, 0.01f) * 2;
-        cube.GetComponent<Collider>().enabled = false;
+        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube.transform.position = groundCheck.position + move + Vector3.down;
+        //cube.transform.rotation = transform.rotation;
+        //cube.transform.localScale = new Vector3(0.01f, 1, 0.01f) * 2;
+        //cube.GetComponent<Collider>().enabled = false;
 
         print(gravity);
         //@cole :)
