@@ -35,6 +35,8 @@ public class MouseLook : MonoBehaviour
 
     private float currentControllerSensitivityMultiplier = 1f;
 
+    public Vector2 aimAssistInfluence { private get; set; } = Vector2.zero;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -70,6 +72,13 @@ public class MouseLook : MonoBehaviour
 
         float camX = conX + mouseX;
         float camY = conY + mouseY;
+
+        if(camX == 0 || camY == 0)
+        {
+            aimAssistInfluence = aimAssistInfluence / 2.25f;
+        }
+
+        camX -= aimAssistInfluence.x; camY -= aimAssistInfluence.y;
 
         xRotation -= camY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
