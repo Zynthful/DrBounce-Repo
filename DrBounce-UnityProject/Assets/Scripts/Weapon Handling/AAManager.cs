@@ -41,7 +41,7 @@ public class AAManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Gamepad.current == null)
+        if(Gamepad.current != null)
         {
             float closest = float.PositiveInfinity;
             Transform closestT = null;
