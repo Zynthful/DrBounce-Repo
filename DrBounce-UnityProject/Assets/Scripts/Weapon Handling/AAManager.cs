@@ -10,6 +10,8 @@ public class AAManager : MonoBehaviour
     MouseLook aimScript;
     Transform playerTransform;
 
+    [SerializeField] LayerMask wallLayers;
+
     public static List<Transform> enemiesOnScreen = new List<Transform> { };
     [field: SerializeField]
     public float assistDistance { get; private set; }
@@ -43,27 +45,36 @@ public class AAManager : MonoBehaviour
         {
             float closest = float.PositiveInfinity;
             Transform closestT = null;
-            Vector2 midScreen = new Vector2(main.pixelHeight, main.pixelWidth) / 2;
+            Vector2 midScreen = new Vector2(main.pixelWidth, main.pixelHeight) / 2;
+
             Debug.Log("Midscreen: " + midScreen);
             for (int i = 0; i < enemiesOnScreen.Count; i++)
             {
                 Vector3 posOnScreen = main.WorldToScreenPoint(enemiesOnScreen[i].position);
-                if (Vector2.Distance(midScreen, posOnScreen) <= assistDistance)
+                float dist = Vector2.Distance(midScreen, posOnScreen);
+
+                Ray wallCheck = new Ray(playerTransform.position, (enemiesOnScreen[i].position - playerTransform.position));
+
+                if (dist <= assistDistance && dist < closest)
                 {
-                    if (posOnScreen.z < closest)
+                    RaycastHit hit = new RaycastHit();
+                    if(Physics.Raycast(wallCheck, out hit, float.PositiveInfinity, wallLayers))
                     {
-                        closest = posOnScreen.z;
-                        closestT = enemiesOnScreen[i];
+                        if(hit.transform.GetComponentInParent<Enemy>())
+                        {
+                            Debug.DrawRay(wallCheck.origin, wallCheck.direction * 30, Color.magenta, Time.deltaTime);
+                            closest = dist;
+                            closestT = enemiesOnScreen[i];
+                        }
                     }
                 }
             }
             if (closestT != null)
             {
                 Vector2 posOnScreen = main.WorldToScreenPoint(closestT.position);
-                aimScript.aimAssistInfluence = (posOnScreen - midScreen).normalized * Time.deltaTime * aimAssistPower;
-                Debug.Log("Enemy position: " + posOnScreen);
-                Debug.Log("Distance to enemy " + closestT.name + ") "  + Vector2.Distance(midScreen, posOnScreen));
-                Debug.Log("Force to use: " + (posOnScreen - midScreen).normalized * Time.deltaTime * aimAssistPower);
+                aimScript.aimAssistInfluence = (midScreen - posOnScreen).normalized * Time.deltaTime * aimAssistPower;
+                Debug.Log("Enemy position: " + closestT.position, closestT);
+                Debug.Log("On Screen Position: " + posOnScreen, closestT);
             }
             else
                 aimScript.aimAssistInfluence = Vector2.zero;
