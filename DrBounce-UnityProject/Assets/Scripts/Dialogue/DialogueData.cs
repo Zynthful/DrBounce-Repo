@@ -88,6 +88,28 @@ public class DialogueData : ScriptableObject
     }
 
     /// <summary>
+    /// Attempts to play this dialogue on the source object.
+    /// </summary>
+    public void PlayFromSource()
+    {
+        if (speaker != null)
+        {
+            if (speaker.GetSourceObject() != null)
+            {
+                Play(speaker.GetSourceObject());
+            }
+            else
+            {
+                Debug.LogError($"uh oh, you're trying to play this dialogue line {@event.Name} on speaker {speaker.GetName()}'s source object, but their source object is null! (ask jamie)");
+            }
+        }
+        else
+        {
+            Debug.LogError($"uh oh, you're trying to play this dialogue line {@event.Name} but the speaker is null! you need to assign a speaker to this dialogue line. (ask jamie)");
+        }
+    }
+
+    /// <summary>
     /// Resets this scriptable object's variables to their initial values.
     /// </summary>
     private void Reset()

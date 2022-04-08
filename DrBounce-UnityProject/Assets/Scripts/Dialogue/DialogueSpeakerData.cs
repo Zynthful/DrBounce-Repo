@@ -9,10 +9,16 @@ public class DialogueSpeakerData : ScriptableObject
     [SerializeField]
     [Tooltip("Used for displaying the speaker's name in subtitles.")]
     new private string name;
+    public string GetName() { return name; }
+    public void SetName(string value) { name = value; }
+
     [SerializeField]
     [Tooltip("Used for displaying the color of the speaker's name in subtitles.")]
     private Color color;
-
-    public string GetName() { return name; }
     public Color GetColor() { return color; }
+    public void SetColor(Color value) { color = value; }
+
+    private GameObject sourceObject = null;     // Used for playing dialogue from this object
+    public GameObject GetSourceObject() { return sourceObject; }
+    public void SetSourceObject(GameObject value) { sourceObject = value; }
 }
