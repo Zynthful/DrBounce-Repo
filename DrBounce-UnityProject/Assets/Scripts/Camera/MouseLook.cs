@@ -66,9 +66,9 @@ public class MouseLook : MonoBehaviour
             conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivityX * 50.0f * Time.deltaTime;
             conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivityY * 50.0f * Time.deltaTime;
 
-            // Aim assist
-            conX *= currentControllerSensitivityMultiplier;
-            conY *= currentControllerSensitivityMultiplier;
+            // Old Aim assist
+            //conX *= currentControllerSensitivityMultiplier;
+            //conY *= currentControllerSensitivityMultiplier;
         }
 
         float mouseX = (Mouse.current.delta.x.ReadValue() * mouseSensitivityX * 3.5f) * Time.deltaTime;
@@ -83,10 +83,16 @@ public class MouseLook : MonoBehaviour
         {
             aimAssistInfluence = Vector2.zero;
         }
+        else if((Mathf.Sign(aimAssistInfluence.x) == Mathf.Sign(camX)) || (Mathf.Sign(aimAssistInfluence.y) == Mathf.Sign(camY)))
+        {
+            aimAssistInfluence = aimAssistInfluence / 2.25f;
+        }
         else if((camX == 0 && camY == 0) || (moveInput.x == 0 && moveInput.y == 0))
         {
             aimAssistInfluence = aimAssistInfluence / 1.5f;
         }
+
+        aimAssistInfluence /= controllerSensitivityX;
 
         camX -= aimAssistInfluence.x; camY -= aimAssistInfluence.y;
 
@@ -112,6 +118,6 @@ public class MouseLook : MonoBehaviour
 
     public void IsHovering(bool hover)
     {
-        currentControllerSensitivityMultiplier = hover ? controllerAssistSensitivityMultiplier : 1f;
+        //currentControllerSensitivityMultiplier = hover ? controllerAssistSensitivityMultiplier : 1f;
     }
 }

@@ -32,10 +32,10 @@ public class AAManager : MonoBehaviour
 
     void SetupAA()
     {
-        playerTransform = PlayerMovement.player;
-        enemiesOnScreen.Clear();
         main = Camera.main;
         aimScript = main.GetComponent<MouseLook>();
+        playerTransform = PlayerMovement.player;
+        enemiesOnScreen.Clear();
     }
 
     // Update is called once per frame
@@ -43,6 +43,10 @@ public class AAManager : MonoBehaviour
     {
         if(Gamepad.current != null)
         {
+            if(main == null)
+            {
+                SetupAA();
+            }
             float closest = float.PositiveInfinity;
             Transform closestT = null;
             Vector2 midScreen = new Vector2(main.pixelWidth, main.pixelHeight) / 2;
