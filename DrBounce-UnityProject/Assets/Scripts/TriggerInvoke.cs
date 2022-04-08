@@ -12,8 +12,12 @@ public class TriggerInvoke : MonoBehaviour
     private bool lookForGun = false;
     [SerializeField]
     private float triggerDelay = 0.0f;
+    [SerializeField]
+    private bool triggerOnce = false;
 
     private bool detected = false;
+    private bool triggeredEnter = false;
+    private bool triggeredExit = false;
 
     [Header("Events")]
     public UnityEvent<GameObject> onPreDetect = null;
@@ -23,7 +27,7 @@ public class TriggerInvoke : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsInTrigger(other) || (lookForGun && other.GetComponent<GunThrowing>()))
+        if ((!triggerOnce || !triggeredEnter) && (IsInTrigger(other) || (lookForGun && other.GetComponent<GunThrowing>())))
         {
             onPreDetect.Invoke(other.gameObject);
             StartCoroutine(DetectDelay(other.gameObject, other));
@@ -33,7 +37,7 @@ public class TriggerInvoke : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // Check the object we're detecting is the object we're looking for, and that we've passed the delay
-        if ((IsInTrigger(other) || (lookForGun && other.GetComponent<GunThrowing>())) && detected)
+        if ((!triggerOnce || !triggeredExit) && ((IsInTrigger(other) || (lookForGun && other.GetComponent<GunThrowing>())) && detected))
         {
             onDetectStay.Invoke(other.gameObject);
         }
@@ -41,7 +45,7 @@ public class TriggerInvoke : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (IsInTrigger(other) || (lookForGun && other.GetComponent<GunThrowing>()))
+        if ((!triggerOnce || !triggeredExit) && (IsInTrigger(other) || (lookForGun && other.GetComponent<GunThrowing>())))
         {
             LostDetection();
         }
@@ -65,12 +69,14 @@ public class TriggerInvoke : MonoBehaviour
 
     private void Detect(GameObject obj)
     {
+        triggeredEnter = true;
         detected = true;
         onDetect.Invoke(obj);
     }
 
     private void LostDetection()
     {
+        triggeredExit = true;
         detected = false;
         onLostDetection.Invoke();
     }
