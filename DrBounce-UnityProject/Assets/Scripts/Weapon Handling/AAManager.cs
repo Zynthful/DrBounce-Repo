@@ -55,7 +55,7 @@ public class AAManager : MonoBehaviour
 
                 Ray wallCheck = new Ray(playerTransform.position, (enemiesOnScreen[i].position - playerTransform.position));
 
-                if (dist <= assistDistance && dist < closest)
+                if (dist <= (assistDistance / posOnScreen.z) && dist < closest)
                 {
                     RaycastHit hit = new RaycastHit();
                     if(Physics.Raycast(wallCheck, out hit, float.PositiveInfinity, wallLayers))

@@ -37,8 +37,12 @@ public class MouseLook : MonoBehaviour
 
     public Vector2 aimAssistInfluence { private get; set; } = Vector2.zero;
 
+    public InputMaster controls;
+
     private void Start()
     {
+        controls = InputManager.inputMaster;
+
         Cursor.lockState = CursorLockMode.Locked;
 
         SetMouseSensitivity(mouseSensSetting.GetCurrentValue());
@@ -73,9 +77,15 @@ public class MouseLook : MonoBehaviour
         float camX = conX + mouseX;
         float camY = conY + mouseY;
 
-        if(camX == 0 || camY == 0)
+        Vector2 moveInput = controls.Player.Movement.ReadValue<Vector2>();
+
+        if((camX == 0 && camY == 0) && (moveInput.x == 0 && moveInput.y == 0))
         {
-            aimAssistInfluence = aimAssistInfluence / 2.25f;
+            aimAssistInfluence = Vector2.zero;
+        }
+        else if((camX == 0 && camY == 0) || (moveInput.x == 0 && moveInput.y == 0))
+        {
+            aimAssistInfluence = aimAssistInfluence / 1.5f;
         }
 
         camX -= aimAssistInfluence.x; camY -= aimAssistInfluence.y;
