@@ -93,6 +93,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3651634652	Elevator_Descend			\Default Work Unit\Objects\Elevator\Elevator_Descend	
 	3727984986	BGM_Level			\Default Work Unit\Music\BGM_Level	
 	3736098925	Level_Complete			\Default Work Unit\State\Levels\Level_Complete	
+	3807985526	Upgrade_Pickup			\Default Work Unit\Upgrade\Upgrade_Pickup	
 	3812533968	Vent_Grate_Fall_Land			\Default Work Unit\Objects\Vent\Vent_Grate_Fall_Land	
 	3833651337	Jump			\Default Work Unit\Player\Movement\Jump	
 	3852377777	D0C_Level_02_Elevator_Trigger_02			\Dialogue\D0C\Level\Level_02\Elevator\D0C_Level_02_Elevator_Trigger_02	
@@ -113,16 +114,12 @@ Event	ID	Name			Wwise Object Path	Notes
 
 Switch Group	ID	Name			Wwise Object Path	Notes
 	753474920	Button_Type			\Default Work Unit\UI\Button_Type	
-	1323090623	Upgrade			\Default Work Unit\Upgrade\Upgrade	
 	2158317749	Collision_Material			\Default Work Unit\Movement\Collision_Material	
 	3625945784	Object_Size			\Generic\Object_Size	
 
 Switch	ID	Name	Switch Group			Notes
 	2368844905	Enter	Button_Type			
 	3859834159	Return	Button_Type			
-	917179771	Rocket_Boots	Upgrade			
-	3973844254	Uncharged_Firing	Upgrade			
-	4183621763	Magnet	Upgrade			
 	578926554	Lab	Collision_Material			
 	3803999823	Slime	Collision_Material			
 	4248645337	Grass	Collision_Material			
@@ -133,6 +130,7 @@ Switch	ID	Name	Switch Group			Notes
 State Group	ID	Name			Wwise Object Path	Notes
 	952270134	Selected_Track			\Default Work Unit\Music\Selected_Track	
 	1238077023	Combat_State			\Default Work Unit\Combat\Combat_State	
+	1452483281	Last_Upgrade_Found			\Default Work Unit\Level\Last_Upgrade_Found	
 	1929983783	Current_Level			\Default Work Unit\Level\Current_Level	
 
 State	ID	Name	State Group			Notes
@@ -143,6 +141,10 @@ State	ID	Name	State Group			Notes
 	748895195	None	Combat_State			
 	2116791127	In_Combat	Combat_State			
 	2120752185	Not_In_Combat	Combat_State			
+	748895195	None	Last_Upgrade_Found			
+	917179771	Rocket_Boots	Last_Upgrade_Found			
+	3973844254	Uncharged_Firing	Last_Upgrade_Found			
+	4183621763	Magnet	Last_Upgrade_Found			
 	748895195	None	Current_Level			
 	987635873	Level_01	Current_Level			
 	987635874	Level_02	Current_Level			
@@ -270,7 +272,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	477234073	Whoosh_Ascending_1	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Whoosh_Ascending_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Jump\Jump\Generic\Whoosh\Whoosh_Ascending_1		4405
 	480408025	Footstep_Grass_2	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Footstep_Grass_2_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Movement\Footstep\Footstep\Grass\Footstep_Grass_2		13102
 	484077771	lv02_a03_doc01A	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\lv02_a03_doc01A_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Critical\Level\Level_2\Down The Vent\Down the vent\lv02_a03_doc01A		70297
-	488009517	d0c_upgrade_generic_pickup_b	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\d0c_upgrade_generic_pickup_b_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Critical\Upgrades\Pickup Upgrade\Uncharged Firing\d0c_upgrade_generic_pickup_b		41395
+	488009517	d0c_upgrade_generic_pickup_b	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\d0c_upgrade_generic_pickup_b_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Critical\Upgrades\Used Upgrade\Generic\d0c_upgrade_generic_pickup_b		41395
 	491508097	lv02_a01_doc01A	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\lv02_a01_doc01A_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\D0C\D0C\Critical\Level\Level_2\Intro Elevator\Descend\lv02_a01_doc01A		140108
 	493412819	Redneck_Rolls_Dice	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Redneck_Rolls_Dice-SoundBible.com-1100715950_E511C0EB.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Debug\Redneck_Rolls_Dice		48351
 	493608439	Explosive_Impact	D:\jcwksp\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Gun_Charged_Explosive_Impact_Explosion_Draft_3_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sound FX\Player\Gun\Fire\Impact\Explosive\Explosive_Impact		37006

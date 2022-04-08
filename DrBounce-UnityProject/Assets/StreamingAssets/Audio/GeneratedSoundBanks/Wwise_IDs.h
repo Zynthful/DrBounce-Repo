@@ -118,6 +118,7 @@ namespace AK
         static const AkUniqueID UI_TV_SELECTABLE_POINTERENTER = 3934313U;
         static const AkUniqueID UI_TV_SELECTABLE_SELECT = 1544786970U;
         static const AkUniqueID UNPAUSE = 3412868374U;
+        static const AkUniqueID UPGRADE_PICKUP = 3807985526U;
         static const AkUniqueID VENT_BREAKING = 3276954688U;
         static const AkUniqueID VENT_FALL_LAND = 3059471644U;
         static const AkUniqueID VENT_GRATE_CREAK = 2020572437U;
@@ -152,6 +153,19 @@ namespace AK
                 static const AkUniqueID NONE = 748895195U;
             } // namespace STATE
         } // namespace CURRENT_LEVEL
+
+        namespace LAST_UPGRADE_FOUND
+        {
+            static const AkUniqueID GROUP = 1452483281U;
+
+            namespace STATE
+            {
+                static const AkUniqueID MAGNET = 4183621763U;
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID ROCKET_BOOTS = 917179771U;
+                static const AkUniqueID UNCHARGED_FIRING = 3973844254U;
+            } // namespace STATE
+        } // namespace LAST_UPGRADE_FOUND
 
         namespace PAUSED_STATE
         {
@@ -229,18 +243,6 @@ namespace AK
                 static const AkUniqueID SMALL = 1846755610U;
             } // namespace SWITCH
         } // namespace OBJECT_SIZE
-
-        namespace UPGRADE
-        {
-            static const AkUniqueID GROUP = 1323090623U;
-
-            namespace SWITCH
-            {
-                static const AkUniqueID MAGNET = 4183621763U;
-                static const AkUniqueID ROCKET_BOOTS = 917179771U;
-                static const AkUniqueID UNCHARGED_FIRING = 3973844254U;
-            } // namespace SWITCH
-        } // namespace UPGRADE
 
     } // namespace SWITCHES
 
