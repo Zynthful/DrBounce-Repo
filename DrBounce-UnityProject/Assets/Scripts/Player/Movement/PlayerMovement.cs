@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool headIsTouchingSomething;
     public Vector3 velocity;
     private float oldGroundDistance;
+    private bool slopeCheck;
 
     [Header("Freeze")]
     [SerializeField] private bool Freeze = false;
@@ -173,11 +174,11 @@ public class PlayerMovement : MonoBehaviour
     {
         //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX
 
-        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube.transform.position = groundCheck.position;
-        //cube.transform.rotation = transform.rotation;
-        //cube.transform.localScale = new Vector3(0.01f, 0.75f, 0.01f) * 2;
-        //cube.GetComponent<Collider>().enabled = false;
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.position = groundCheck.position + move + Vector3.down;
+        cube.transform.rotation = transform.rotation;
+        cube.transform.localScale = new Vector3(0.01f, 1, 0.01f) * 2;
+        cube.GetComponent<Collider>().enabled = false;
 
         print(gravity);
         //@cole :)
@@ -282,6 +283,15 @@ public class PlayerMovement : MonoBehaviour
             charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely to the player's downard movement
+
+            if (slopeCheck)
+            {
+                gravity = (prevGrav * 20);
+            }
+            else
+            {
+                gravity = prevGrav;
+            }
         }
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
@@ -306,6 +316,9 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = Physics.CheckBox(groundCheck.position, new Vector3(0.01f, 0.75F, 0.01f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
+        slopeCheck = Physics.CheckBox(groundCheck.position + move + Vector3.down, new Vector3(0.01f, 1, 0.01f), transform.rotation, ~groundMask);
+
+        print(slopeCheck);
 
         coyoteTime -= Time.deltaTime;
 
