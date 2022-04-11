@@ -175,12 +175,11 @@ public class PlayerMovement : MonoBehaviour
         //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX
 
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube.transform.position = groundCheck.position + move + Vector3.down;
+        //cube.transform.position = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
         //cube.transform.rotation = transform.rotation;
-        //cube.transform.localScale = new Vector3(0.01f, 1, 0.01f) * 2;
+        //cube.transform.localScale = new Vector3(0.2f, 0.15f, 0.2f) * 2;
         //cube.GetComponent<Collider>().enabled = false;
 
-        print(gravity);
         //@cole :)
         if (isDashing == true)
         {
@@ -283,15 +282,6 @@ public class PlayerMovement : MonoBehaviour
             charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely to the player's downard movement
-
-            if (slopeCheck)
-            {
-                gravity = (prevGrav * 20);
-            }
-            else
-            {
-                gravity = prevGrav;
-            }
         }
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
@@ -313,12 +303,11 @@ public class PlayerMovement : MonoBehaviour
         bool wasGrounded = isGrounded;
 
         //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
+        
 
-        isGrounded = Physics.CheckBox(groundCheck.position, new Vector3(0.01f, 0.75F, 0.01f), transform.rotation, ~groundMask);
+        isGrounded = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z), new Vector3(0.2f, 0.15F, 0.2f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
-        slopeCheck = Physics.CheckBox(groundCheck.position + move + Vector3.down, new Vector3(0.01f, 1, 0.01f), transform.rotation, ~groundMask);
-
-        print(slopeCheck);
+        slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 1f, 0.1f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
 
@@ -350,7 +339,21 @@ public class PlayerMovement : MonoBehaviour
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
             }
 
-            bounceForce = Vector3.zero;
+            if (slopeCheck)
+            {
+                //print("Moving down!");
+                gravity = (prevGrav * 20);
+                canSlide = true;
+            }
+
+            else
+            {
+                bounceForce = Vector3.zero;
+            }
+        }
+        else
+        {
+            gravity = prevGrav;
         }
 
         if (headIsTouchingSomething)
@@ -541,7 +544,7 @@ public class PlayerMovement : MonoBehaviour
                     oldSpeed = speed;
                     speed /= 2;
                 }
-                else if(canSlide)
+                else if(canSlide || slopeCheck)
                 {
                     isSliding = true;
 
