@@ -51,28 +51,20 @@ public class Shooting : MonoBehaviour
     #region Events
 
     #region UnityEvents
-    [Header("Unity Events")]
-    [SerializeField]
-    private UnityEvent<int> onChargeUpdate = null;
-    [SerializeField]
-    private UnityEvent onUnchargedShotFired = null;
-    [SerializeField]
-    private UnityEvent<int> onChargedShotFired = null;
-    [SerializeField]
-    private UnityEvent onSingleChargeShotFired = null;
-    [SerializeField]
-    private UnityEvent onChargesEmpty = null;
-    [SerializeField]
-    private UnityEvent<bool> onHasCharge = null;
+    [Header("Gun Charge Events")]
+    public UnityEvent<int> onChargeUpdate = null;
+    public UnityEvent onChargesEmpty = null;
+    public UnityEvent<bool> onHasCharge = null;
     public UnityEvent<bool> onHasChargeAndIsHeld = null;
-    [SerializeField]
-    private UnityEvent onFirstGainChargeSinceEmpty = null;
-    [SerializeField]
-    private UnityEvent<bool> onEnemyHover = null;
-    [SerializeField]
-    private UnityEvent onExplosiveShot = null;
+    public UnityEvent onFirstGainChargeSinceEmpty = null;
 
-    [Header("Max Charge Shot Unity Events")]
+    [Header("Firing Events")]
+    public UnityEvent onUnchargedShotFired = null;
+    public UnityEvent<int> onChargedShotFired = null;
+    public UnityEvent onSingleChargeShotFired = null;
+    public UnityEvent onExplosiveShot = null;
+
+    [Header("Max Charge Shot Events")]
     public UnityEvent<float> onChargingMaxShotProgress = null;     // Every frame that the max shot is charging. Passes progress as a percentage between 0-1.
     public UnityEvent onChargeMaxShotBegin = null;                 // When starting to charge the max shot by holding the button
     public UnityEvent onChargeMaxShotCancel = null;                // When cancelling the max shot charge by letting go of the button too early
@@ -84,38 +76,31 @@ public class Shooting : MonoBehaviour
     public UnityEvent onFailHealFullHP = null;
     public UnityEvent onFailHealNoCharge = null;
     public UnityEvent onFailHealNotHeld = null;
+    public UnityEvent onFailHealAlreadyDead = null;
+
+    [Header("Mouse Look Events")]
+    public UnityEvent<bool> onEnemyHover = null;
     #endregion
 
     #region GameEvents
     [Header("Game Events")]
-    [SerializeField]
     [Tooltip("Passes gun charge")]
-    private GameEventInt _onChargeUpdate = null;
-    [SerializeField]
-    private GameEvent _onUnchargedShotFired = null;
-    [SerializeField]
+    public GameEventInt _onChargeUpdate = null;
+    public GameEvent _onUnchargedShotFired = null;
     [Tooltip("Passes gun charge")]
-    private GameEventInt _onChargedShotFired = null;
-    [SerializeField]
-    private GameEvent _onChargesEmpty = null;
-    [SerializeField]
+    public GameEventInt _onChargedShotFired = null;
+    public GameEvent _onChargesEmpty = null;
     [Tooltip("Occurs on charge update. Passes whether the gun has charge or not")]
-    private GameEventBool _onHasCharge = null;
+    public GameEventBool _onHasCharge = null;
     [Tooltip("Occurs on charge update. Passes whether the gun has charge and is currently being held or not")]
     public GameEventBool _onHasChargeAndIsHeld = null;
-    [SerializeField]
-    private GameEvent _onFirstGainChargeSinceEmpty = null;
-    [SerializeField]
+    public GameEvent _onFirstGainChargeSinceEmpty = null;
     [Tooltip("Passes whether the player is hovering over an enemy")]
-    private GameEventBool _onEnemyHover = null;
-    [SerializeField]
-    private GameEvent _onExplosiveShot = null;
+    public GameEventBool _onEnemyHover = null;
+    public GameEvent _onExplosiveShot = null;
     #endregion
 
     #endregion
-
-    public delegate void Activated(int value);
-    public static event Activated OnActivated;
 
     public MMFeedbacks ChargedFeedback;
     public GameObject impactEffect;
@@ -519,25 +504,34 @@ public class Shooting : MonoBehaviour
         {
             if (gunCharge > 0)
             {
-                // Successful heal
                 if (!health.GetIsAtFullHealth())
                 {
-                    int healAmount = GraphCalculator(shooter.healGraph, gunCharge);
-                    OnActivated?.Invoke(healAmount);    //calls the player heal function
-
-                    if (shooter.useAllChargesOnUse)
+                    // Successful heal
+                    if (!health.GetIsDead())
                     {
-                        SetCharge(0);
-                        Reset();
-                    }
-                    else
-                    {
-                        SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
+                        int healAmount = GraphCalculator(shooter.healGraph, gunCharge);
+                        health.Heal(healAmount);
 
-                        if (gunCharge <= 0)
+                        if (shooter.useAllChargesOnUse)
                         {
+                            SetCharge(0);
                             Reset();
                         }
+                        else
+                        {
+                            SetCharge(gunCharge - 1);   // Minus 1 from gunCharge
+
+                            if (gunCharge <= 0)
+                            {
+                                Reset();
+                            }
+                        }
+                    }
+                    // Fail heal: Already dead
+                    else
+                    {
+                        onFailHeal?.Invoke();
+                        onFailHealAlreadyDead?.Invoke();
                     }
                 }
                 // Fail heal: Full HP

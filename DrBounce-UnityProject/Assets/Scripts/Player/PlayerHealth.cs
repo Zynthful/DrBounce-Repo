@@ -17,14 +17,12 @@ public class PlayerHealth : Health
     private void OnEnable()
     {
         HealthPack.OnActivated += Heal;
-        Shooting.OnActivated += Heal;
         BulletMovement.OnHit += Damage;
     }
 
     private void OnDisable()
     {
         HealthPack.OnActivated -= Heal;
-        Shooting.OnActivated -= Heal;
         BulletMovement.OnHit -= Damage;
     }
 
