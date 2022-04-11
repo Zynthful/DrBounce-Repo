@@ -547,6 +547,12 @@ public class PlayerMovement : MonoBehaviour
                 {
                     isSliding = true;
 
+                    // Trigger used unlock for the first time, if it's the first time we've done so
+                    if (UnlockTracker.instance.lastUnlock == UnlockTracker.UnlockTypes.Slide && !UnlockTracker.instance.usedUnlock)
+                    {
+                        UnlockTracker.instance.UsedUnlockFirstTime();
+                    }
+
                     onSlide?.Invoke();
                     _onSlide?.Raise();
                 }
@@ -588,6 +594,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (!GameManager.s_Instance.paused && isGrounded != true && cooldown == false && isDashing == false && dashesPerformed < dashesBeforeLanding)
         {
+            // Trigger used unlock for the first time, if it's the first time we've done so
+            if ((UnlockTracker.instance.lastUnlock == UnlockTracker.UnlockTypes.FirstDash || UnlockTracker.instance.lastUnlock == UnlockTracker.UnlockTypes.SecondDash) && !UnlockTracker.instance.usedUnlock)
+            {
+                UnlockTracker.instance.UsedUnlockFirstTime();
+            }
+
             isDashing = true; //Set isDashing to true, which allows the if(dashing is true) statement in Update to start
             dashSliderTime = 0f;
 

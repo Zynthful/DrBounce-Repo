@@ -14,6 +14,7 @@ public class LevelPickup : MonoBehaviour
     [SerializeField]
     private float timeBeforeDestroy = .05f;
 
+    [Header("Events")]
     public UnityEvent onPickup = null;
 
     private void OnTriggerEnter(Collider other) 
@@ -21,7 +22,7 @@ public class LevelPickup : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             onPickup.Invoke();
-            UnlockTracker.instance.NewUnlocks(unlocksOnPickup.unlocks);
+            UnlockTracker.instance.PickupNewUnlocks(unlocksOnPickup.unlocks);
             if(destroyOnPickup)
                 Destroy(gameObject, timeBeforeDestroy);
                 Destroy(this);

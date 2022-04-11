@@ -23,27 +23,27 @@ public class UnlockTracker : MonoBehaviour
     public bool saveValues;
     public UnlockTypes[] saveUnlocks;
 
-    // Events to enable/disable unlocks
-    [SerializeField]
+    [HideInInspector]
+    public UnlockTypes? lastUnlock = null;      // Last unlock acquired
+    [HideInInspector]
+    public bool usedUnlock = false;     // False when acquired a new unlock, True after using the newly acquired unlock
+
+    [Header("Enable Unlock Events")]
     public UnityEvent unlockFirstDash = null;
-    [SerializeField]
     public UnityEvent unlockSecondDash = null;
-    [SerializeField]
     public UnityEvent unlockMagnet = null;
-    [SerializeField]
     public UnityEvent unlockSlide = null;
-    [SerializeField]
     public UnityEvent unlockNormalShooting = null;
-    [SerializeField]
+
+    [Header("Disable Unlock Events")]
     public UnityEvent disableFirstDash = null;
-    [SerializeField]
     public UnityEvent disableSecondDash = null;
-    [SerializeField]
     public UnityEvent disableMagnet = null;
-    [SerializeField]
     public UnityEvent disableSlide = null;
-    [SerializeField]
     public UnityEvent disableNormalShooting = null;
+
+    [Header("Use Unlock Events")]
+    public UnityEvent usedUnlockFirstTime = null;
 
     void EnableUnlock(UnlockTypes type)
     {
@@ -94,12 +94,26 @@ public class UnlockTracker : MonoBehaviour
         GameManager.s_Instance.currentSettings = newUnlocks;
     }
 
+    public void PickupNewUnlocks(UnlockTypes[] newUnlocks)
+    {
+        lastUnlock = newUnlocks[newUnlocks.Length - 1];
+        Debug.Log("new!! " + lastUnlock.ToString());
+        usedUnlock = false;
+        NewUnlocks(newUnlocks);
+    }
+
     public void ReloadUnlocks()
     {
         foreach (UnlockTypes unlock in GameManager.s_Instance.currentSettings)
         {
             EnableUnlock(unlock);
         }
+    }
+
+    public void UsedUnlockFirstTime()
+    {
+        usedUnlock = true;
+        usedUnlockFirstTime.Invoke();
     }
 
     // Start is called before the first frame update

@@ -76,10 +76,15 @@ public class MagnetAssist : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //print(controls.Player.Throw.ReadValue<float>());
-
         CheckRange();
 
+        // Pull objects toward us if the assist is active
+        if (assistActive)
+        {
+            MoveObjects();
+        }
+
+        /*
         // Check if we're holding down the assist button and we can activate the assist
         if (!assistActive && !gun.transform.parent && inRange && !gun.GetIsThrowing() && controls.Player.Throw.ReadValue<float>() >= 0.5f)
         {
@@ -97,6 +102,7 @@ public class MagnetAssist : MonoBehaviour
         {
             TryDeactivate();
         }
+        */
     }
 
     /// <summary>
@@ -104,8 +110,6 @@ public class MagnetAssist : MonoBehaviour
     /// </summary>
     private void TryActivate()
     {
-        //print(controls.Player.Throw.ReadValue<float>());
-
         onTryActivateAssist?.Invoke();
         _onTryActivateAssist?.Raise();
 
@@ -118,6 +122,13 @@ public class MagnetAssist : MonoBehaviour
 
                 onAssistStart?.Invoke();
                 _onAssistStart?.Raise();
+
+                // Trigger used unlock for the first time, if it's the first time we've done so
+                if (UnlockTracker.instance.lastUnlock == UnlockTracker.UnlockTypes.Magnet && !UnlockTracker.instance.usedUnlock)
+                {
+                    UnlockTracker.instance.UsedUnlockFirstTime();
+                }
+
             }
             else
             {

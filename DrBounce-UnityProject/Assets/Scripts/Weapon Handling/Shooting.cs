@@ -376,6 +376,12 @@ public class Shooting : MonoBehaviour
         // Fire an uncharged shot
         else if(canShoot)
         {
+            // Trigger used unlock for the first time, if it's the first time we've done so
+            if (UnlockTracker.instance.lastUnlock == UnlockTracker.UnlockTypes.NormalShooting && !UnlockTracker.instance.usedUnlock)
+            {
+                UnlockTracker.instance.UsedUnlockFirstTime();
+            }
+
             onUnchargedShotFired?.Invoke();
             _onUnchargedShotFired?.Raise();
 

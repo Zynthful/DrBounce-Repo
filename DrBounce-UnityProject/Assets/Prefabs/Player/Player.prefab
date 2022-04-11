@@ -6471,6 +6471,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onChargesEmpty:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6014676033296018911}
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: ProfileLoad
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: d3e18ef68dfe2c3468dc48c629731c53, type: 2}
+          m_ObjectArgumentAssemblyTypeName: HighlightPlus.HighlightProfile, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHasCharge:
+    m_PersistentCalls:
+      m_Calls: []
+  onHasChargeAndIsHeld:
+    m_PersistentCalls:
+      m_Calls: []
+  onFirstGainChargeSinceEmpty:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6014676033296018911}
+        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
+        m_MethodName: ProfileLoad
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 945a14009a33b694597c3d096bffa3f7, type: 2}
+          m_ObjectArgumentAssemblyTypeName: HighlightPlus.HighlightProfile, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onUnchargedShotFired:
     m_PersistentCalls:
       m_Calls:
@@ -6552,45 +6588,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onChargesEmpty:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6014676033296018911}
-        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
-        m_MethodName: ProfileLoad
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: d3e18ef68dfe2c3468dc48c629731c53, type: 2}
-          m_ObjectArgumentAssemblyTypeName: HighlightPlus.HighlightProfile, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onHasCharge:
-    m_PersistentCalls:
-      m_Calls: []
-  onHasChargeAndIsHeld:
-    m_PersistentCalls:
-      m_Calls: []
-  onFirstGainChargeSinceEmpty:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6014676033296018911}
-        m_TargetAssemblyTypeName: HighlightPlus.HighlightEffect, Assembly-CSharp
-        m_MethodName: ProfileLoad
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 945a14009a33b694597c3d096bffa3f7, type: 2}
-          m_ObjectArgumentAssemblyTypeName: HighlightPlus.HighlightProfile, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onEnemyHover:
-    m_PersistentCalls:
-      m_Calls: []
   onExplosiveShot:
     m_PersistentCalls:
       m_Calls: []
@@ -6787,6 +6784,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onFailHealNotHeld:
+    m_PersistentCalls:
+      m_Calls: []
+  onFailHealAlreadyDead:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnemyHover:
     m_PersistentCalls:
       m_Calls: []
   _onChargeUpdate: {fileID: 11400000, guid: 574d1cf6a39d32c4486bebea359b452f, type: 2}
@@ -8185,6 +8188,8 @@ MonoBehaviour:
   levelStartSettings: {fileID: 11400000, guid: 00bbc0525d28dc34283ee9d06a4a84a5, type: 2}
   saveValues: 0
   saveUnlocks: 
+  lastUnlock: 0
+  usedUnlock: 0
   unlockFirstDash:
     m_PersistentCalls:
       m_Calls:
@@ -8387,6 +8392,21 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Shooting, Assembly-CSharp
         m_MethodName: UpdateCanShoot
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  usedUnlockFirstTime:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: a4d80c30c405ee2489908534ec48c88c, type: 2}
+        m_TargetAssemblyTypeName: DialogueData, Assembly-CSharp
+        m_MethodName: PlayFromSource
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
