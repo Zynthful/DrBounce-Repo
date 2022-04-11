@@ -303,7 +303,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
         
-
+        //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
         isGrounded = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z), new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
         slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 1f, 0.1f), transform.rotation, ~groundMask);
@@ -340,7 +340,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (slopeCheck)
             {
-                //print("Moving down!");
+                //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
                 gravity = (prevGrav * 100);
                 canSlide = true;
             }
