@@ -29,8 +29,12 @@ public class DialogueData : ScriptableObject
     private bool triggerOnce = false;
 
     [SerializeField]
-    [Tooltip("If true, other dialogue lines can interrupt this dialogue line. This overrides whether other dialogue lines can interrupt or not.")]
-    private bool canBeInterrupted = true;
+    [Tooltip("The specific dialogue lines that this dialogue line can be interrupted by.")]
+    private List<DialogueData> interruptLines = null;
+
+    [SerializeField]
+    [Tooltip("If true, ALL other dialogue lines can interrupt this dialogue line. This overrides whether other dialogue lines can interrupt or not.")]
+    private bool canBeInterruptedByAll = true;
 
     [SerializeField]
     [Tooltip("If true, this dialogue line can interrupt other dialogue lines.")]
@@ -47,7 +51,8 @@ public class DialogueData : ScriptableObject
     public DialogueSpeakerData GetSpeaker() { return speaker; }
     public void SetCoolingDown(bool value) { coolingDown = value; }
     public bool GetCoolingDown() { return coolingDown; }
-    public bool GetCanBeInterrupted() { return canBeInterrupted; }
+    public List<DialogueData> GetInterruptLines() { return interruptLines; }
+    public bool GetCanBeInterruptedByAll() { return canBeInterruptedByAll; }
     public bool GetCanInterrupt() { return canInterrupt; }
 
     private void OnEnable()
@@ -62,29 +67,42 @@ public class DialogueData : ScriptableObject
 
     public void Play(GameObject @object)
     {
+        // Check against chance to play
+        if (Random.Range(0.0f, 1.0f) > chanceToPlay)
+            return;
+
         // Prevent re-triggering if we can only trigger once or we're cooling down
-        if ((triggerOnce && triggered) || coolingDown)
-            return;
-
-        // Prevent interrupting if we can't interrupt and dialogue is currently being played
-        else if (!canInterrupt && DialogueManager.s_Instance.GetIsPlaying())
-            return;
-
-        // Prevent interrupting if any currently playing dialogue is uninterruptable
-        else if (DialogueManager.s_Instance.GetLastPlayed() != null && !DialogueManager.s_Instance.GetLastPlayed().GetCanBeInterrupted() && DialogueManager.s_Instance.GetIsPlaying())
+        else if ((triggerOnce && triggered) || coolingDown)
             return;
 
         // Prevent playback if the global dialogue cooldown is in effect and we can't override it
         else if (DialogueManager.s_Instance.GetIsCoolingDown() && !overrideGlobalCooldown)
             return;
 
-        // Check against chance to play
-        else if (Random.Range(0.0f, 1.0f) <= chanceToPlay)
+        // If dialogue is already being played, we need to check if we can interrupt
+        else if (DialogueManager.s_Instance.GetIsPlaying())
         {
-            triggered = true;
-            DialogueManager.s_Instance.PlayDialogueLine(this, @object);
-            DialogueManager.s_Instance.StartCoroutine(DialogueManager.s_Instance.Cooldown(this, cooldown));
+            if (canInterrupt && (DialogueManager.s_Instance.GetLastPlayed().GetCanBeInterruptedByAll() || DialogueManager.s_Instance.GetLastPlayed().GetInterruptLines().Contains(this)))
+            {
+                // Interrupt
+                ConfirmPlay(@object);
+            }
+            else
+            {
+                return;
+            }
         }
+        else
+        {
+            ConfirmPlay(@object);
+        }
+    }
+
+    private void ConfirmPlay(GameObject @object)
+    {
+        triggered = true;
+        DialogueManager.s_Instance.PlayDialogueLine(this, @object);
+        DialogueManager.s_Instance.StartCoroutine(DialogueManager.s_Instance.Cooldown(this, cooldown));
     }
 
     /// <summary>
