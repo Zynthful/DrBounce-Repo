@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube.transform.position = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
         //cube.transform.rotation = transform.rotation;
-        //cube.transform.localScale = new Vector3(0.2f, 0.15f, 0.2f) * 2;
+        //cube.transform.localScale = new Vector3(0.25f, 0.15f, 0.25f) * 2;
         //cube.GetComponent<Collider>().enabled = false;
 
         //@cole :)
@@ -265,7 +265,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (isSliding == true)
         {
-
             knockbackPower = 0;
             acceleration = 1;
             if (slideDirectionDecided == false)
@@ -305,7 +304,7 @@ public class PlayerMovement : MonoBehaviour
         //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
         
 
-        isGrounded = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z), new Vector3(0.2f, 0.15F, 0.2f), transform.rotation, ~groundMask);
+        isGrounded = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z), new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
         slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 1f, 0.1f), transform.rotation, ~groundMask);
 
@@ -342,7 +341,7 @@ public class PlayerMovement : MonoBehaviour
             if (slopeCheck)
             {
                 //print("Moving down!");
-                gravity = (prevGrav * 20);
+                gravity = (prevGrav * 100);
                 canSlide = true;
             }
 
@@ -534,7 +533,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Crouch()
     {
-        if(!GameManager.s_Instance.paused && isGrounded == true)
+        if(!GameManager.s_Instance.paused && isGrounded)
         {
             if (isCrouching == false)
             {
@@ -544,7 +543,7 @@ public class PlayerMovement : MonoBehaviour
                     oldSpeed = speed;
                     speed /= 2;
                 }
-                else if(canSlide || slopeCheck)
+                else if(canSlide)
                 {
                     isSliding = true;
 
