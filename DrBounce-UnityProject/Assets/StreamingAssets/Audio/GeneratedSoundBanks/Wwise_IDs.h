@@ -307,7 +307,7 @@ namespace AK
     {
         static const AkUniqueID CRITICAL = 2534871658U;
         static const AkUniqueID DIALOGUE = 3930136735U;
-        static const AkUniqueID ENEMIES = 2242381963U;
+        static const AkUniqueID ENEMY = 2299321487U;
         static const AkUniqueID ENVIRONMENT = 1229948536U;
         static const AkUniqueID ENVIRONMENTAL = 1973600711U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
