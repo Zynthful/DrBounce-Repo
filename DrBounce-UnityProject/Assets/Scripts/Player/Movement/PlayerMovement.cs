@@ -184,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
         //GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube2.transform.position = groundCheck.position + move + (Vector3.down * 2);
         //cube2.transform.rotation = transform.rotation;
-        //cube2.transform.localScale = new Vector3(0.1f, 1f, 0.1f) * 2;
+        //cube2.transform.localScale = new Vector3(0.1f, 0.9f, 0.1f) * 2;
         //cube2.GetComponent<Collider>().enabled = false;
         //cube2.GetComponent<Renderer>().material.color = Color.red;
 
@@ -315,7 +315,7 @@ public class PlayerMovement : MonoBehaviour
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
         isGrounded = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z), new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
-        slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 1f, 0.1f), transform.rotation, ~groundMask);
+        slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 0.9f, 0.1f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
 
