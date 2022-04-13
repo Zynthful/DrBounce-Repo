@@ -172,13 +172,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX
+        //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX AND SLOPECHECK BOX RESPECTIVELY.
 
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube.transform.position = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
         //cube.transform.rotation = transform.rotation;
         //cube.transform.localScale = new Vector3(0.25f, 0.15f, 0.25f) * 2;
         //cube.GetComponent<Collider>().enabled = false;
+        //cube.GetComponent<Renderer>().material.color = Color.green;
+
+        //GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube2.transform.position = groundCheck.position + move + (Vector3.down * 2);
+        //cube2.transform.rotation = transform.rotation;
+        //cube2.transform.localScale = new Vector3(0.1f, 1f, 0.1f) * 2;
+        //cube2.GetComponent<Collider>().enabled = false;
+        //cube2.GetComponent<Renderer>().material.color = Color.red;
+
 
         //@cole :)
         if (isDashing == true)
@@ -306,7 +315,10 @@ public class PlayerMovement : MonoBehaviour
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
         isGrounded = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z), new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
-        slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 1f, 0.1f), transform.rotation, ~groundMask);
+        if(move != Vector3.zero)
+        {
+            slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 1f, 0.1f), transform.rotation, ~groundMask);
+        }
 
         coyoteTime -= Time.deltaTime;
 
@@ -347,6 +359,7 @@ public class PlayerMovement : MonoBehaviour
 
             else
             {
+                gravity = prevGrav;
                 bounceForce = Vector3.zero;
             }
         }
