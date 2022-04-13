@@ -172,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX AND SLOPECHECK BOX RESPECTIVELY.
+        //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX, SLOPECHECK BOX AND HEADCHECK BOX RESPECTIVELY.
 
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube.transform.position = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
@@ -187,6 +187,13 @@ public class PlayerMovement : MonoBehaviour
         //cube2.transform.localScale = new Vector3(0.1f, 0.9f, 0.1f) * 2;
         //cube2.GetComponent<Collider>().enabled = false;
         //cube2.GetComponent<Renderer>().material.color = Color.red;
+
+        //GameObject cube3 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube3.transform.position = headCheck.position;
+        //cube3.transform.rotation = transform.rotation;
+        //cube3.transform.localScale = new Vector3(0.25f, 0.15F, 0.25f) * 2;
+        //cube3.GetComponent<Collider>().enabled = false;
+        //cube3.GetComponent<Renderer>().material.color = Color.blue;
 
 
         //@cole :)
@@ -266,6 +273,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+            headCheck.transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the head check
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely
         }
         #endregion
@@ -290,6 +298,7 @@ public class PlayerMovement : MonoBehaviour
             charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
             groundCheck.transform.localPosition -= new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the Grounch check inversely to the player's downard movement
+            headCheck.transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0); //Moves the head check
         }
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
@@ -314,7 +323,7 @@ public class PlayerMovement : MonoBehaviour
         
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
         isGrounded = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z), new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
-        headIsTouchingSomething = Physics.CheckSphere(headCheck.position, headDistance, ~headMask);
+        headIsTouchingSomething = Physics.CheckBox(headCheck.position, new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~headMask);
         slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 0.9f, 0.1f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
@@ -368,6 +377,7 @@ public class PlayerMovement : MonoBehaviour
         if (headIsTouchingSomething)
         {
             velocity.y = (-40f * Time.fixedDeltaTime);
+
             if (isCrouching == true)
             {
                 isGrounded = false;
@@ -429,7 +439,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (controls.Player.Jump.ReadValue<float>() == 1)
             {
-
                 jumpHeight += (5f * Time.fixedDeltaTime);
             }
 
@@ -545,7 +554,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!GameManager.s_Instance.paused && isGrounded)
         {
-            if (isCrouching == false)
+            if (!isCrouching)
             {
                 if(controls.Player.Movement.ReadValue<Vector2>().y <= 0 || !canSlide)
                 {
