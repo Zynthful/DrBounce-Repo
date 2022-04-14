@@ -305,6 +305,7 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID AUX_BUSES = 1691680111U;
         static const AkUniqueID CRITICAL = 2534871658U;
         static const AkUniqueID DIALOGUE = 3930136735U;
         static const AkUniqueID ENEMY = 2299321487U;
@@ -314,6 +315,7 @@ namespace AK
         static const AkUniqueID MOTION_FACTORY_BUS = 985987111U;
         static const AkUniqueID MUSIC = 3991942870U;
         static const AkUniqueID NON_CRITICAL = 1182015412U;
+        static const AkUniqueID NON_ENVIRONMENTAL = 2101962433U;
         static const AkUniqueID PLAYER = 1069431850U;
         static const AkUniqueID SFX = 393239870U;
         static const AkUniqueID UI = 1551306167U;
