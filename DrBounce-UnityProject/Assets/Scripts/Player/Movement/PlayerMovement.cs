@@ -296,7 +296,7 @@ public class PlayerMovement : MonoBehaviour
             //Moves the player downward
             charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
-            
+            headCheckHeight -= new Vector3(0, (charController.height - lastHeight) / 2, 0);
         }
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
