@@ -92,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 velocity;
     private bool slopeCheck;
     private Vector3 headCheckHeight;
+    [HideInInspector] public Vector3 groundcheckPos;
 
     [Header("Freeze")]
     [SerializeField] private bool Freeze = false;
@@ -184,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
         //GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube2.transform.position = groundCheck.position + move + (Vector3.down * 2);
         //cube2.transform.rotation = transform.rotation;
-        //cube2.transform.localScale = new Vector3(0.1f, 0.9f, 0.1f) * 2;
+        //cube2.transform.localScale = new Vector3(0.1f, 0.8f, 0.1f) * 2;
         //cube2.GetComponent<Collider>().enabled = false;
         //cube2.GetComponent<Renderer>().material.color = Color.red;
 
@@ -305,7 +306,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (headIsTouchingSomething && headCheckPerformed == false) //Keeps the player crouched if they finish their slide underneath a small gap.
             {
-                print("Making you crouch!");
                 headCheckPerformed = true;
                 isCrouching = true;
                 oldSpeed = speed;
@@ -319,11 +319,12 @@ public class PlayerMovement : MonoBehaviour
         bool wasGrounded = isGrounded;
 
         //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
-        
+
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
-        isGrounded = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z), new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
+        groundcheckPos = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
+        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
-        slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 0.9f, 0.1f), transform.rotation, ~groundMask);
+        slopeCheck = Physics.CheckBox(groundcheckPos + move + (Vector3.down * 2), new Vector3(0.1f, 0.8f, 0.1f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
 
