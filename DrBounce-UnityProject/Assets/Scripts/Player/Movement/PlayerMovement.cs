@@ -90,8 +90,8 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool headIsTouchingSomething;
     public Vector3 velocity;
-    private float oldGroundDistance;
     private bool slopeCheck;
+    private Vector3 headCheckHeight;
 
     [Header("Freeze")]
     [SerializeField] private bool Freeze = false;
@@ -117,7 +117,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         oldCoyoteTime = coyoteTime;
-        oldGroundDistance = groundDistance;
         prevGrav = gravity;
         charController = GetComponent<CharacterController>();
         playerHeight = charController.height;
@@ -127,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
         instance = this;
         player = transform;
+        headCheckHeight = new Vector3(0.25f, 0.15F, 0.25f);
     }
 
     private void Start()
@@ -189,9 +189,9 @@ public class PlayerMovement : MonoBehaviour
         //cube2.GetComponent<Renderer>().material.color = Color.red;
 
         //GameObject cube3 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube3.transform.position = new Vector3(transform.position.x, transform.position.y + (charController.height / 2), transform.position.z);
+        //cube3.transform.position = new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z);
         //cube3.transform.rotation = transform.rotation;
-        //cube3.transform.localScale = new Vector3(0.25f, 0.15F, 0.25f) * 2;
+        //cube3.transform.localScale = headCheckHeight * 2;
         //cube3.GetComponent<Collider>().enabled = false;
         //cube3.GetComponent<Renderer>().material.color = Color.blue;
 
@@ -273,6 +273,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+            headCheckHeight -= new Vector3(0, (charController.height - lastHeight) / 2, 0);
         }
         #endregion
 
@@ -295,6 +296,7 @@ public class PlayerMovement : MonoBehaviour
             //Moves the player downward
             charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
             transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+            
         }
 
         if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
@@ -303,6 +305,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (headIsTouchingSomething && headCheckPerformed == false) //Keeps the player crouched if they finish their slide underneath a small gap.
             {
+                print("Making you crouch!");
                 headCheckPerformed = true;
                 isCrouching = true;
                 oldSpeed = speed;
@@ -319,7 +322,7 @@ public class PlayerMovement : MonoBehaviour
         
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
         isGrounded = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z), new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
-        headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2), transform.position.z), new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~headMask);
+        headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
         slopeCheck = Physics.CheckBox(groundCheck.position + move + (Vector3.down * 2), new Vector3(0.1f, 0.9f, 0.1f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
