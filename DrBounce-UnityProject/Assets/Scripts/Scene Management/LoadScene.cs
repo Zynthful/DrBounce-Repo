@@ -15,8 +15,11 @@ public class LoadScene : MonoBehaviour
         LoadSceneViaScreen(level.GetSceneName());
     }
 
-    public void ReloadActiveSceneViaScreen()
+    public void ReloadActiveScene(bool useLoadingScreen)
     {
-        LoadSceneViaScreen(SceneManager.GetActiveScene().name);
+        if (useLoadingScreen)
+            LoadSceneViaScreen(SceneManager.GetActiveScene().name);
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

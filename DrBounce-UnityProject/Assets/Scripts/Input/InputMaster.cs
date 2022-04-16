@@ -808,6 +808,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""65eaae44-bc23-4136-966e-23f86e5c5ece"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Previous"",
+                    ""type"": ""Button"",
+                    ""id"": ""0140d14a-8ec2-4737-a741-37d22d6c063f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -896,6 +912,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad34cd5e-889a-485b-a257-066db3cbfc39"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4590337-ca5b-4886-90d6-3d6d0f2f3d20"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Previous"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1259,6 +1297,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
         m_Menu_Continue = m_Menu.FindAction("Continue", throwIfNotFound: true);
+        m_Menu_Next = m_Menu.FindAction("Next", throwIfNotFound: true);
+        m_Menu_Previous = m_Menu.FindAction("Previous", throwIfNotFound: true);
         // Cutscene
         m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
         m_Cutscene_SkipCutscene = m_Cutscene.FindAction("SkipCutscene", throwIfNotFound: true);
@@ -1440,12 +1480,16 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private IMenuActions m_MenuActionsCallbackInterface;
     private readonly InputAction m_Menu_Pause;
     private readonly InputAction m_Menu_Continue;
+    private readonly InputAction m_Menu_Next;
+    private readonly InputAction m_Menu_Previous;
     public struct MenuActions
     {
         private @InputMaster m_Wrapper;
         public MenuActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_Menu_Pause;
         public InputAction @Continue => m_Wrapper.m_Menu_Continue;
+        public InputAction @Next => m_Wrapper.m_Menu_Next;
+        public InputAction @Previous => m_Wrapper.m_Menu_Previous;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1461,6 +1505,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Continue.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnContinue;
                 @Continue.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnContinue;
                 @Continue.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnContinue;
+                @Next.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
+                @Next.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
+                @Next.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
+                @Previous.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
+                @Previous.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
+                @Previous.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -1471,6 +1521,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Continue.started += instance.OnContinue;
                 @Continue.performed += instance.OnContinue;
                 @Continue.canceled += instance.OnContinue;
+                @Next.started += instance.OnNext;
+                @Next.performed += instance.OnNext;
+                @Next.canceled += instance.OnNext;
+                @Previous.started += instance.OnPrevious;
+                @Previous.performed += instance.OnPrevious;
+                @Previous.canceled += instance.OnPrevious;
             }
         }
     }
@@ -1602,6 +1658,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     {
         void OnPause(InputAction.CallbackContext context);
         void OnContinue(InputAction.CallbackContext context);
+        void OnNext(InputAction.CallbackContext context);
+        void OnPrevious(InputAction.CallbackContext context);
     }
     public interface ICutsceneActions
     {
