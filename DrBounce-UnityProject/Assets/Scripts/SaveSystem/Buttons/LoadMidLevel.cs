@@ -6,22 +6,49 @@ using UnityEngine.UI;
 
 public class LoadMidLevel : MonoBehaviour
 {
+    [SerializeField]
+    [Tooltip("The button that is used to load a checkpoint. This will be made uninteractable/interactable depending on if a checkpoint can be reloaded or not.")]
+    private Button button = null;
+
+    [SerializeField]
+    [Tooltip("Used for updating the button navigation. This should be the parent of the button used for loading the checkpoint.")]
+    private SelectableVerticalNavigation nav = null;
+
     private void Awake()
     {
+        if (button == null)
+        {
+            button = GetComponent<Button>();
+            if (button == null)
+            {
+                Debug.LogError("LoadMidLevel: No button set or no button has been detected on this object.", gameObject);
+                enabled = false;    // Disable this component if the button is not valid
+                return;
+            }
+            else if (nav == null)
+            {
+                nav = button.GetComponentInParent<SelectableVerticalNavigation>();
+                Debug.LogError("LoadMidLevel: SelectableVerticalNavigation has not been set or detected.", gameObject);
+            }
+        }
+
         //Debug.Log("Before " + GetComponent<Button>().interactable);
+
         if (SaveSystem.LevelSaveExists(SceneManager.GetActiveScene().buildIndex))
-            GetComponent<Button>().interactable = true;
+            button.interactable = true;
         else
-            GetComponent<Button>().interactable = false;
+            button.interactable = false;
+
         //Debug.Log("After " + GetComponent<Button>().interactable);
-        Checkpoint.s_Instance.onCheckpointReached.AddListener(ActivateLoadButton);
+
+        Checkpoint.s_Instance.onCheckpointReached.AddListener(() => { SetInteractable(true); });
+
     }
 
-    void ActivateLoadButton()
+    void SetInteractable(bool value)
     {
-        //Debug.Log("Checkpoint hit! Updating interactable status");
-        GetComponent<Button>().interactable = true;
-        //Debug.Log("Interactable? " + GetComponent<Button>().interactable);
+        button.interactable = value;
+        nav.FindNavigation();           // Update button navigation
     }
 
     public void OnClickedLoad()
