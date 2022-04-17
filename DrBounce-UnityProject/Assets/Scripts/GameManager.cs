@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     public UnlockTracker.UnlockTypes[] currentSettings;
 
+    public static Player player = null;
+
     [HideInInspector]
     public bool paused = false;
 

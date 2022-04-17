@@ -140,11 +140,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void UnFreezeMovement()
+    public static void SetMovementActive(bool active)
     {
-        controls.Player.Movement.Enable();
-        controls.Player.Jump.Enable();
-        controls.Player.Crouch.Enable();
+        if (active)
+        {
+            InputManager.inputMaster.Player.Movement.Enable();
+            InputManager.inputMaster.Player.Jump.Enable();
+            InputManager.inputMaster.Player.Crouch.Enable();
+        }
+        else
+        {
+            InputManager.inputMaster.Player.Movement.Disable();
+            InputManager.inputMaster.Player.Jump.Disable();
+            InputManager.inputMaster.Player.Crouch.Disable();
+        }
     }
 
     #region BrackeysMoment
