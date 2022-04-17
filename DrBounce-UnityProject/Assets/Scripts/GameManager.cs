@@ -29,11 +29,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool openUrlOnQuit;
     [SerializeField][Tooltip("The url to be opened when the game is quit")] string urlToOpen;
 
-    public void SetPaused(bool value)
-    {
-        paused = value;
-    }
-
     private void Awake()
     {
         if (s_Instance == null)

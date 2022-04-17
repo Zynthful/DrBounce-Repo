@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PauseMenu : MonoBehaviour
 {
-    private bool paused = false;
     private bool hasPausedOnce = false; // Has the player paused at least once since initialisation?
 
     [Header("Pause Settings")]
@@ -46,24 +45,24 @@ public class PauseMenu : MonoBehaviour
 
     private void InvertPause()
     {
-        SetPaused(!paused);
+        SetPaused(!GameManager.s_Instance.paused);
     }
 
     public void SetPaused(bool value)
     {
-        paused = value;
+        GameManager.s_Instance.paused = value;
         
         // Enable/disable gameplay controls
         InputManager.SetActionMapActive(InputManager.inputMaster.Player, !value);
 
         // Update cursor lock state and visibility
-        Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = paused;
+        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = value;
 
         // Raise events
-        onPauseStateChange?.Raise(paused);
-        _onPauseStateChange.Invoke(paused);
-        if (paused)
+        onPauseStateChange?.Raise(value);
+        _onPauseStateChange.Invoke(value);
+        if (value)
         {
             hasPausedOnce = true;
             onPause?.Raise();
