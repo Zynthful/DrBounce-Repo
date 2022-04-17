@@ -6,7 +6,6 @@
 				<ActorMixer Name="World" ID="{7D6AFAB2-5A16-4C4F-B93A-911DC6F36DD9}" ShortID="830554526">
 					<PropertyList>
 						<Property Name="Color" Type="int16" Value="1"/>
-						<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 						<Property Name="OverrideColor" Type="bool" Value="True"/>
 						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 					</PropertyList>
@@ -28,7 +27,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+									<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -79,7 +78,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Magnet" ID="{7A890573-BF94-4FF0-94AF-15DB0D7A1009}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Magnet" ID="{7A890573-BF94-4FF0-94AF-15DB0D7A1009}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -127,7 +126,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Magnet" ID="{7A890573-BF94-4FF0-94AF-15DB0D7A1009}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Magnet" ID="{7A890573-BF94-4FF0-94AF-15DB0D7A1009}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -161,7 +160,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Magnet" ID="{7A890573-BF94-4FF0-94AF-15DB0D7A1009}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Magnet" ID="{7A890573-BF94-4FF0-94AF-15DB0D7A1009}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -246,6 +245,7 @@
 										<Sound Name="Heal" ID="{AD7B4360-D477-486D-BF9B-9435AF1947DD}" ShortID="804950783">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
 														<Value>-9</Value>
@@ -254,7 +254,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -279,6 +279,7 @@
 										</Sound>
 										<Sound Name="Injured_Enemy_Bullet" ID="{C1DC0423-7A8A-4B89-90EB-5D156CEA3D13}" ShortID="55205266">
 											<PropertyList>
+												<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
 														<Value>-4</Value>
@@ -368,7 +369,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -420,7 +421,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -553,7 +554,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -605,7 +606,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -652,7 +653,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -721,7 +722,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -781,7 +782,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -828,7 +829,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -875,7 +876,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1597,7 +1598,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1617,7 +1618,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1650,7 +1651,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1683,7 +1684,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1716,7 +1717,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1749,7 +1750,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1782,7 +1783,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1815,7 +1816,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1848,7 +1849,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1881,7 +1882,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1914,7 +1915,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1947,7 +1948,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -1980,7 +1981,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2013,7 +2014,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2046,7 +2047,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2079,7 +2080,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2112,7 +2113,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2145,7 +2146,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2178,7 +2179,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2211,7 +2212,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2244,7 +2245,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2277,7 +2278,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2394,7 +2395,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2428,7 +2429,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2449,7 +2450,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2485,7 +2486,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2855,7 +2856,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2889,7 +2890,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2912,7 +2913,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3123,7 +3124,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+											<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3166,7 +3167,6 @@
 														<ActorMixer Name="Explosive" ID="{49F2BE97-A819-48B8-A5B1-03A1229F4D7D}" ShortID="300549177">
 															<PropertyList>
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 																<Property Name="OverridePositioning" Type="bool" Value="True"/>
 																<Property Name="Volume" Type="Real64">
 																	<ValueList>
@@ -3193,7 +3193,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3260,7 +3260,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3310,7 +3310,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3375,7 +3375,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3432,7 +3432,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3495,7 +3495,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3641,7 +3641,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -3667,7 +3667,6 @@
 												<Sound Name="Charge_Lost" ID="{5360BBE4-9A1B-4579-BFD9-25F1C3C81B30}" ShortID="186535251">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 														<Property Name="OverridePositioning" Type="bool" Value="True"/>
 													</PropertyList>
 													<ReferenceList>
@@ -3818,7 +3817,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -4298,7 +4297,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Camera" ID="{AC28D13A-5E8C-4586-92B2-3DBCE3A8C50E}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Camera" ID="{AC28D13A-5E8C-4586-92B2-3DBCE3A8C50E}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -4356,7 +4355,6 @@
 								<ActorMixer Name="Bounce Pad" ID="{2B77C582-373B-45CB-81CA-F9A0CA555552}" ShortID="418947213">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
@@ -4366,7 +4364,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Bounce Pad" ID="{5A72D2F8-E82B-4417-9E7D-EC86F79D0469}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+											<ObjectRef Name="Bounce Pad" ID="{5A72D2F8-E82B-4417-9E7D-EC86F79D0469}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -4403,7 +4401,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Bounce Pad" ID="{5A72D2F8-E82B-4417-9E7D-EC86F79D0469}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Bounce Pad" ID="{5A72D2F8-E82B-4417-9E7D-EC86F79D0469}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -4776,8 +4774,12 @@
 								<ActorMixer Name="Slime Pit" ID="{3AF8733B-C3CF-435F-AAF0-0E766C73E99A}" ShortID="199695799">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-7</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -4795,7 +4797,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-12</Value>
+														<Value>-24</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -5679,7 +5681,6 @@
 								<ActorMixer Name="Window Wall" ID="{09515A75-E892-4490-BD3F-8987A51BC8C9}" ShortID="54447062">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
@@ -5736,7 +5737,6 @@
 								<ActorMixer Name="Elevator" ID="{FFB28B17-85AC-4488-BE29-B9BE04BEB37D}" ShortID="134325056">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
@@ -5991,10 +5991,11 @@
 						</ActorMixer>
 						<ActorMixer Name="Enemy" ID="{99503A3E-CE99-40DE-A01A-F7F2D4F2D3B2}" ShortID="739719913">
 							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
 								<Property Name="Color" Type="int16" Value="4"/>
-								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
 								<Property Name="OverrideOutput" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
 										<Value>-3</Value>
@@ -6028,6 +6029,9 @@
 								</Property>
 							</PropertyList>
 							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 								</Reference>
@@ -6148,7 +6152,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -6210,7 +6214,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Enemy Slime Particle" ID="{3AAE2152-65BD-4263-BAE6-BED30FDEEEEA}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Enemy Slime Particle" ID="{3AAE2152-65BD-4263-BAE6-BED30FDEEEEA}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -6383,6 +6387,7 @@
 										</RandomSequenceContainer>
 										<BlendContainer Name="Death" ID="{B0AE8333-9853-4A8E-AD99-AE2B7EC28480}" ShortID="351856876">
 											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 												<Property Name="BypassEffect0" Type="bool">
 													<RTPCList>
 														<RTPC Name="" ID="{A8EC4FFF-E736-4C01-BC71-961C5B331B10}" ShortID="818085189">
@@ -6416,6 +6421,7 @@
 														</RTPC>
 													</RTPCList>
 												</Property>
+												<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 												<Property Name="InitialDelay" Type="Real64">
 													<RTPCList>
 														<RTPC Name="" ID="{4C198155-F409-4097-A77E-DA257698AE88}" ShortID="923930670">
@@ -6449,6 +6455,7 @@
 														</RTPC>
 													</RTPCList>
 												</Property>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
 												<Property Name="Pitch" Type="int32">
 													<ModifierList>
 														<ModifierInfo>
@@ -6497,6 +6504,9 @@
 												</Property>
 											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Enemy Death" ID="{06336F2B-FD14-4BDB-B589-6353AA81D833}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 												</Reference>
@@ -6536,7 +6546,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -6597,7 +6607,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -6816,6 +6826,7 @@
 									<ChildrenList>
 										<SwitchContainer Name="Stunned" ID="{329C98AB-2407-47FE-95E2-9A1C7BEE9EE6}" ShortID="725767056">
 											<PropertyList>
+												<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 												<Property Name="Pitch" Type="int32">
 													<ModifierList>
 														<ModifierInfo>
@@ -6923,7 +6934,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -6966,7 +6977,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -7002,7 +7013,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -7027,7 +7038,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -7065,7 +7076,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -7166,7 +7177,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Enemy Spark Particle" ID="{387E9938-5388-47FF-A0E8-63E89C53E146}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="Enemy Spark Particle" ID="{387E9938-5388-47FF-A0E8-63E89C53E146}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -7518,6 +7529,7 @@
 										</BlendContainer>
 										<BlendContainer Name="Stun_Progress" ID="{E683CF77-CECB-4CF3-B7EA-B7919EBA3428}" ShortID="658833133">
 											<PropertyList>
+												<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 												<Property Name="Pitch" Type="int32">
 													<ModifierList>
 														<ModifierInfo>
@@ -7727,7 +7739,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+											<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -7745,7 +7757,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -7877,7 +7889,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8022,7 +8034,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8066,7 +8078,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+													<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8120,7 +8132,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+											<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8315,7 +8327,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Blueprint" ID="{2FCDC646-3026-48F4-931B-C67EDC953BCB}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+											<ObjectRef Name="Blueprint" ID="{2FCDC646-3026-48F4-931B-C67EDC953BCB}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8442,7 +8454,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8459,7 +8471,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8489,7 +8501,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="TV" ID="{7C33A52A-AA7A-49E3-820F-79F9EBD200D6}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8548,7 +8560,7 @@
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Blueprint" ID="{2FCDC646-3026-48F4-931B-C67EDC953BCB}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																			<ObjectRef Name="Blueprint" ID="{2FCDC646-3026-48F4-931B-C67EDC953BCB}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8652,7 +8664,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8669,7 +8681,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8699,7 +8711,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8776,7 +8788,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+															<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8793,7 +8805,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8823,7 +8835,7 @@
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
-																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
+																	<ObjectRef Name="Toolbox" ID="{B72F21DE-6641-4422-8762-67DD62AE20B8}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
 																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8863,10 +8875,15 @@
 				</ActorMixer>
 				<ActorMixer Name="Dialogue" ID="{2E96524C-83BE-4934-8797-AC236C51A4A2}" ShortID="446910760">
 					<PropertyList>
+						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 						<Property Name="Color" Type="int16" Value="5"/>
 						<Property Name="OverrideColor" Type="bool" Value="True"/>
+						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 					</PropertyList>
 					<ReferenceList>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="Dialogue Speaker" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+						</Reference>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 						</Reference>
@@ -8877,6 +8894,7 @@
 					<ChildrenList>
 						<ActorMixer Name="D0C" ID="{7E3E5C65-0BAF-493C-B355-4EEFB80615A2}" ShortID="1001376648">
 							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
 								<Property Name="Color" Type="int16" Value="5"/>
 								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 								<Property Name="MaxSoundPerInstance" Type="int16">
@@ -8897,6 +8915,9 @@
 								</Property>
 							</PropertyList>
 							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 								</Reference>
@@ -8959,9 +8980,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -8991,9 +9009,6 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 															</PropertyList>
 															<ReferenceList>
-																<Reference Name="Attenuation">
-																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																</Reference>
@@ -9007,9 +9022,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9049,9 +9061,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9078,9 +9087,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9120,9 +9126,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9197,9 +9200,6 @@
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 														</Reference>
@@ -9219,9 +9219,6 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 															</PropertyList>
 															<ReferenceList>
-																<Reference Name="Attenuation">
-																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																</Reference>
@@ -9235,9 +9232,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9267,9 +9261,6 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 															</PropertyList>
 															<ReferenceList>
-																<Reference Name="Attenuation">
-																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																</Reference>
@@ -9283,9 +9274,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9312,9 +9300,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9344,9 +9329,6 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 															</PropertyList>
 															<ReferenceList>
-																<Reference Name="Attenuation">
-																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																</Reference>
@@ -9361,9 +9343,6 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 															</PropertyList>
 															<ReferenceList>
-																<Reference Name="Attenuation">
-																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																</Reference>
@@ -9377,9 +9356,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9477,9 +9453,6 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 															</PropertyList>
 															<ReferenceList>
-																<Reference Name="Attenuation">
-																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																</Reference>
@@ -9503,9 +9476,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -9545,9 +9515,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -9580,9 +9547,6 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 															</PropertyList>
 															<ReferenceList>
-																<Reference Name="Attenuation">
-																	<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																</Reference>
@@ -9671,9 +9635,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -9688,9 +9649,6 @@
 																						<Property Name="IsVoice" Type="bool" Value="True"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -9718,9 +9676,6 @@
 																						<Property Name="IsVoice" Type="bool" Value="True"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -9753,9 +9708,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9769,9 +9721,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -9786,9 +9735,6 @@
 																						<Property Name="IsVoice" Type="bool" Value="True"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -9816,9 +9762,6 @@
 																						<Property Name="IsVoice" Type="bool" Value="True"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -9851,9 +9794,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9867,9 +9807,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -9884,9 +9821,6 @@
 																						<Property Name="IsVoice" Type="bool" Value="True"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -9914,9 +9848,6 @@
 																						<Property Name="IsVoice" Type="bool" Value="True"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -9949,9 +9880,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -9965,9 +9893,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -9982,9 +9907,6 @@
 																						<Property Name="IsVoice" Type="bool" Value="True"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -10012,9 +9934,6 @@
 																						<Property Name="IsVoice" Type="bool" Value="True"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -10053,9 +9972,6 @@
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 														</Reference>
@@ -10089,9 +10005,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10131,9 +10044,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10186,9 +10096,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10218,9 +10125,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -10234,9 +10138,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10279,9 +10180,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -10295,9 +10193,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10324,9 +10219,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10353,9 +10245,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10382,9 +10271,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10420,9 +10306,6 @@
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 														</Reference>
@@ -10437,9 +10320,6 @@
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 														</Reference>
@@ -10479,9 +10359,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10495,9 +10372,6 @@
 																						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -10524,9 +10398,6 @@
 																						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -10553,9 +10424,6 @@
 																						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -10588,9 +10456,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -10604,9 +10469,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10620,9 +10482,6 @@
 																						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -10655,9 +10514,6 @@
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																	</PropertyList>
 																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																		</Reference>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																		</Reference>
@@ -10671,9 +10527,6 @@
 																				<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																			</PropertyList>
 																			<ReferenceList>
-																				<Reference Name="Attenuation">
-																					<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																				</Reference>
 																				<Reference Name="Conversion">
 																					<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																				</Reference>
@@ -10687,9 +10540,6 @@
 																						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -10716,9 +10566,6 @@
 																						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>
@@ -10745,9 +10592,6 @@
 																						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																					</PropertyList>
 																					<ReferenceList>
-																						<Reference Name="Attenuation">
-																							<ObjectRef Name="Dialogue" ID="{06C30F73-2E1A-46DA-BEB6-700D22C8AE96}" WorkUnitID="{9DD2FBF0-750D-4781-B66A-0B1B37AB015D}"/>
-																						</Reference>
 																						<Reference Name="Conversion">
 																							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																						</Reference>

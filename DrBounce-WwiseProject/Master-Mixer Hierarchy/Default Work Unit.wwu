@@ -124,12 +124,21 @@
 											<ObjectLists/>
 										</Bus>
 										<Bus Name="Environment" ID="{A6D48AFC-F4D0-422B-99CD-7C6C71109A02}">
+											<PropertyList>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
 											<ObjectLists/>
 										</Bus>
 										<Bus Name="Player" ID="{2C807CF7-0F0E-4A44-9E71-1D17899904F5}">
+											<PropertyList>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
 											<ObjectLists/>
 										</Bus>
 										<Bus Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}">
+											<PropertyList>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
 											<ObjectLists/>
 										</Bus>
 									</ChildrenList>
@@ -206,16 +215,20 @@
 												<Property Name="ListenerRelativeRouting" Type="bool" Value="True"/>
 												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 											</PropertyList>
-											<ReferenceList/>
 											<ObjectLists/>
 										</AuxBus>
 										<AuxBus Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 												<Property Name="ListenerRelativeRouting" Type="bool" Value="True"/>
 												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 											</PropertyList>
-											<ReferenceList/>
+											<ReferenceList>
+												<Reference Name="Effect0" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+													<ObjectRef Name="Room_Medium" ID="{F5C06EC1-E4A4-4332-A7D3-A89E2986B74F}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+												</Reference>
+											</ReferenceList>
 											<ObjectLists/>
 										</AuxBus>
 									</ChildrenList>
