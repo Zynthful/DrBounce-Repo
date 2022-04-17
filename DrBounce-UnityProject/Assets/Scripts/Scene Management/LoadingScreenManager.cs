@@ -131,9 +131,21 @@ public class LoadingScreenManager : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Unload all loaded scenes EXCEPT the loading screen scene. Then, load the destination scene.
+    /// </summary>
     public void UnloadPrevScene()
     {
-        SceneManager.UnloadSceneAsync(prevSceneIndex, UnloadSceneOptions.None);
+        int countLoaded = SceneManager.sceneCount;
+        Scene[] loadedScenes = new Scene[countLoaded];
+        for (int i = 0; i < countLoaded; i++)
+        {
+            loadedScenes[i] = SceneManager.GetSceneAt(i);
+            if (loadedScenes[i] != SceneManager.GetSceneByName(loadingScreenSceneName))
+            {
+                SceneManager.UnloadSceneAsync(loadedScenes[i], UnloadSceneOptions.None);
+            }
+        }
         LoadDestination();
     }
 
