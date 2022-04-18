@@ -43,6 +43,7 @@ public class PauseHandler : MonoBehaviour
             return;
 
         GameManager.s_Instance.paused = value;
+        onIsPaused.Invoke(value);
 
         // To ensure we only re-enable controls if we were the one to disable them:
         // Disables player controls if they were enabled and we're pausing
