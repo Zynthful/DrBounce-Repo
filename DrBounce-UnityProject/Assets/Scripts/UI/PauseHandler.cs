@@ -75,14 +75,17 @@ public class PauseHandler : MonoBehaviour
             if (hasPausedOnce)
                 onUnpauseAfterPauseBegin.Invoke();
 
-            AsyncOperation unload = SceneManager.UnloadSceneAsync("PauseMenu_SCN", UnloadSceneOptions.None);
-            unload.completed += _ =>
+            if (SceneManagement.IsSceneLoaded("PauseMenu_SCN"))
             {
-                onUnpauseComplete.Invoke();
+                AsyncOperation unload = SceneManager.UnloadSceneAsync("PauseMenu_SCN", UnloadSceneOptions.None);
+                unload.completed += _ =>
+                {
+                    onUnpauseComplete.Invoke();
 
-                if (hasPausedOnce)
-                    onUnpauseAfterPauseComplete.Invoke();
-            };
+                    if (hasPausedOnce)
+                        onUnpauseAfterPauseComplete.Invoke();
+                };
+            }
         }
     }
 }

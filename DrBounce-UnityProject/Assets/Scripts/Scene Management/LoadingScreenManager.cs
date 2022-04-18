@@ -136,11 +136,9 @@ public class LoadingScreenManager : MonoBehaviour
     /// </summary>
     public void UnloadPrevScene()
     {
-        int countLoaded = SceneManager.sceneCount;
-        Scene[] loadedScenes = new Scene[countLoaded];
-        for (int i = 0; i < countLoaded; i++)
+        Scene[] loadedScenes = SceneManagement.GetLoadedScenes();
+        for (int i = 0; i < loadedScenes.Length; i++)
         {
-            loadedScenes[i] = SceneManager.GetSceneAt(i);
             if (loadedScenes[i] != SceneManager.GetSceneByName(loadingScreenSceneName))
             {
                 SceneManager.UnloadSceneAsync(loadedScenes[i], UnloadSceneOptions.None);
