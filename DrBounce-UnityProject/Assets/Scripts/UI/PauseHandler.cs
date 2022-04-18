@@ -4,15 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "Pause Handler", menuName = "ScriptableObjects/Scripts/Pause Handler")]
-public class PauseHandler : ScriptableObject
+public class PauseHandler : MonoBehaviour
 {
     private bool hasPausedOnce = false; // Has the player paused at least once since initialisation?
     private bool disabledControls = false;
 
     private bool canPause = true;
     public bool GetCanPause() { return canPause; }
-    public void SetCanPause(bool value) { canPause = value; Debug.Log("hmmm"); }
+    public void SetCanPause(bool value) { canPause = value; }
 
     [Header("Events")]
     public UnityEvent onPauseBegin = null;
@@ -25,18 +24,12 @@ public class PauseHandler : ScriptableObject
 
     private void OnEnable()
     {
-        Reset();
         InputManager.inputMaster.Menu.Pause.performed += _ => InvertPause();
     }
 
     private void OnDisable()
     {
         InputManager.inputMaster.Menu.Pause.performed -= _ => InvertPause();
-    }
-
-    private void Reset()
-    {
-        canPause = true;
     }
 
     private void InvertPause()
