@@ -35,8 +35,8 @@ public class MouseLook : MonoBehaviour
 
         if (Gamepad.current != null)
         {
-            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity.GetCurrentValue() * 0.4f;
-            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity.GetCurrentValue() * 0.4f;
+            conX = Gamepad.current.rightStick.x.ReadValue() * controllerSensitivity.GetCurrentValue() * 25.0f * Time.deltaTime;
+            conY = Gamepad.current.rightStick.y.ReadValue() * controllerSensitivity.GetCurrentValue() * 25.0f * Time.deltaTime;
 
             // Old Aim assist
             //conX *= currentControllerSensitivityMultiplier;
