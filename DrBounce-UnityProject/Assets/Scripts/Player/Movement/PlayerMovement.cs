@@ -98,22 +98,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool Freeze = false;
 
     [Header("UnityEvents")]
-    [SerializeField] private UnityEvent onJump = null;
-    [SerializeField] private UnityEvent onDash = null;
-    [SerializeField] private UnityEvent onSlide = null;
-    [SerializeField] private UnityEvent onSlideEnd = null;
-    [SerializeField] private UnityEvent onLand = null;
-    [SerializeField] private UnityEvent onLandOnNonBounceableGround = null;
+    public UnityEvent onJump = null;
+    public UnityEvent onDash = null;
+    public UnityEvent onSlide = null;
+    public UnityEvent onSlideEnd = null;
+    public UnityEvent onLand = null;
+    public UnityEvent onLandOnNonBounceableGround = null;
 
     [Header("Game Events")]
-    [SerializeField] private GameEvent _onJump = null;
-    [SerializeField] private GameEvent _onDash = null;
-    [SerializeField] private GameEvent _onSlide = null;
-    [SerializeField] private GameEvent _onSlideEnd = null;
-    [SerializeField] private GameEventFloat onDashSliderValue = null;
-    [SerializeField] private GameEvent _onLandOnNonBounceableGround = null;
+    public GameEvent _onJump = null;
+    public GameEvent _onDash = null;
+    public GameEvent _onSlide = null;
+    public GameEvent _onSlideEnd = null;
+    public GameEventFloat onDashSliderValue = null;
+    public GameEvent _onLandOnNonBounceableGround = null;
 
-    private Collider[] test;
+    //private Collider[] test;
 
     private void Awake()
     {
@@ -369,7 +369,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
                 gravity = (prevGrav * 100);
-                canSlide = true;
             }
 
             else
