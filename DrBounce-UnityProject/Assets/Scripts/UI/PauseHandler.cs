@@ -6,12 +6,20 @@ using UnityEngine.Events;
 
 public class PauseHandler : MonoBehaviour
 {
-    private bool hasPausedOnce = false; // Has the player paused at least once since initialisation?
-    private bool disabledControls = false;
+    private static bool hasPausedOnce = false;         // Has the player paused at least once since initialisation?
+    private static bool disabledControls = false;      // So we only re-enable controls if we disabled them
+    private static bool pausingOrUnpausing = false;    // So we don't pause/unpause whilst already doing so
 
-    private bool canPause = true;
-    public bool GetCanPause() { return canPause; }
-    public void SetCanPause(bool value) { canPause = value; }
+    /// <summary>
+    /// Use to prevent/allow pausing.
+    /// </summary>
+    private static bool canPause = true;
+    public static bool GetCanPause() { return canPause; }
+    public static void SetCanPause(bool value) { canPause = value; }
+
+    [SerializeField]
+    [Tooltip("MUST match the name of the Pause Menu scene to load when pausing.")]
+    private string pauseMenuSceneName = "PauseMenu_SCN";
 
     [Header("Events")]
     public UnityEvent onPauseBegin = null;
@@ -39,13 +47,11 @@ public class PauseHandler : MonoBehaviour
 
     public void SetPaused(bool value)
     {
-        if (!canPause || Player.GetPlayer() == null)
+        if (pausingOrUnpausing || !canPause || value == GameManager.s_Instance.paused || Player.GetPlayer() == null)
             return;
 
-        GameManager.s_Instance.paused = value;
-        onIsPaused.Invoke(value);
+        pausingOrUnpausing = true;
 
-        // To ensure we only re-enable controls if we were the one to disable them:
         // Disables player controls if they were enabled and we're pausing
         if (InputManager.inputMaster.Player.enabled && value)
         {
@@ -63,12 +69,16 @@ public class PauseHandler : MonoBehaviour
         Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = value;
 
+        AsyncOperation operation = null;
         if (value)
         {
             onPauseBegin.Invoke();
             hasPausedOnce = true;
-            AsyncOperation load = SceneManager.LoadSceneAsync("PauseMenu_SCN", LoadSceneMode.Additive);
-            load.completed += _ => onPauseComplete.Invoke();
+            operation = SceneManager.LoadSceneAsync(pauseMenuSceneName, LoadSceneMode.Additive);
+            operation.completed += _ =>
+            {
+                onPauseComplete.Invoke();
+            };
         }
         else
         {
@@ -76,10 +86,10 @@ public class PauseHandler : MonoBehaviour
             if (hasPausedOnce)
                 onUnpauseAfterPauseBegin.Invoke();
 
-            if (SceneManagement.IsSceneLoaded("PauseMenu_SCN"))
+            if (SceneManagement.IsSceneLoaded(pauseMenuSceneName))
             {
-                AsyncOperation unload = SceneManager.UnloadSceneAsync("PauseMenu_SCN", UnloadSceneOptions.None);
-                unload.completed += _ =>
+                operation = SceneManager.UnloadSceneAsync(pauseMenuSceneName, UnloadSceneOptions.None);
+                operation.completed += _ =>
                 {
                     onUnpauseComplete.Invoke();
 
@@ -87,6 +97,22 @@ public class PauseHandler : MonoBehaviour
                         onUnpauseAfterPauseComplete.Invoke();
                 };
             }
+        }
+
+        if (operation != null)
+        {
+            operation.completed += _ =>
+            {
+                GameManager.s_Instance.paused = value;
+                onIsPaused.Invoke(value);
+                pausingOrUnpausing = false;
+            };
+        }
+        else
+        {
+            GameManager.s_Instance.paused = value;
+            onIsPaused.Invoke(value);
+            pausingOrUnpausing = false;
         }
     }
 }
