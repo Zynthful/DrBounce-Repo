@@ -9,8 +9,6 @@ public class TriggerInvoke : MonoBehaviour
     [SerializeField]
     private LayerMask lookForLayer = new LayerMask();
     [SerializeField]
-    private bool lookForGun = false;
-    [SerializeField]
     private float triggerDelay = 0.0f;
     [SerializeField]
     private bool triggerOnce = false;
@@ -27,7 +25,7 @@ public class TriggerInvoke : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((!triggerOnce || !triggeredEnter) && (IsInTrigger(other) || (lookForGun && other.GetComponent<GunThrowing>())))
+        if ((!triggerOnce || !triggeredEnter) && IsInTrigger(other))
         {
             onPreDetect.Invoke(other.gameObject);
             StartCoroutine(DetectDelay(other.gameObject, other));
@@ -37,7 +35,7 @@ public class TriggerInvoke : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // Check the object we're detecting is the object we're looking for, and that we've passed the delay
-        if ((!triggerOnce || !triggeredExit) && ((IsInTrigger(other) || (lookForGun && other.GetComponent<GunThrowing>())) && detected))
+        if ((!triggerOnce || !triggeredExit) && IsInTrigger(other) && detected)
         {
             onDetectStay.Invoke(other.gameObject);
         }
@@ -45,7 +43,7 @@ public class TriggerInvoke : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if ((!triggerOnce || !triggeredExit) && (IsInTrigger(other) || (lookForGun && other.GetComponent<GunThrowing>())))
+        if ((!triggerOnce || !triggeredExit) && IsInTrigger(other))
         {
             LostDetection();
         }
@@ -61,7 +59,7 @@ public class TriggerInvoke : MonoBehaviour
     private IEnumerator DetectDelay(GameObject obj, Collider trigger)
     {
         yield return new WaitForSeconds(triggerDelay);
-        if (IsInTrigger(trigger) || (lookForGun && obj.GetComponent<GunThrowing>()))
+        if (IsInTrigger(trigger))
         {
             Detect(obj);
         }
