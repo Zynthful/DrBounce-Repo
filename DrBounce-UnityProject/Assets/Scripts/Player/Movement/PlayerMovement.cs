@@ -184,15 +184,17 @@ public class PlayerMovement : MonoBehaviour
     {
         //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX, SLOPECHECK BOX AND HEADCHECK BOX RESPECTIVELY.
 
+        groundcheckPos = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
+
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube.transform.position = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
+        //cube.transform.position = groundcheckPos;
         //cube.transform.rotation = transform.rotation;
         //cube.transform.localScale = new Vector3(0.25f, 0.15f, 0.25f) * 2;
         //cube.GetComponent<Collider>().enabled = false;
         //cube.GetComponent<Renderer>().material.color = Color.green;
 
         //GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube2.transform.position = groundCheck.position + move + (Vector3.down * 2);
+        //cube2.transform.position = groundcheckPos + move + (Vector3.down / 2);
         //cube2.transform.rotation = transform.rotation;
         //cube2.transform.localScale = new Vector3(0.1f, 0.8f, 0.1f) * 2;
         //cube2.GetComponent<Collider>().enabled = false;
@@ -264,76 +266,15 @@ public class PlayerMovement : MonoBehaviour
 
         #endregion
 
-        #region Crouching
-        //print(isCrouching);
-        float h = playerHeight;
-        if (isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
-        {
-            h = playerHeight * 0.35f;
-        }
-        if (isSliding == false)
-        {
-            float lastHeight = charController.height;
-            charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
-
-            //If crouching height is close enough to its target number (with a threshold of 0.05), then set it to that number
-            if (((charController.height - h) < 0 ? ((charController.height - h) * -1) : (charController.height - h)) <= 0.05)
-            {
-                charController.height = h;
-            }
-
-            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
-            headCheckHeight -= new Vector3(0, (charController.height - lastHeight) / 2, 0);
-        }
-        #endregion
-
-        #region Slide
-
-        if (isSliding == true)
-        {
-            knockbackPower = 0;
-            acceleration = 1;
-            if (slideDirectionDecided == false)
-            {
-                slideDirectionDecided = true;
-                slideDirection = transform.forward;
-                slideLeftRight = transform.right;
-                velocity = (slideDirection * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
-            }
-            controller.Move(slideDirection * slideStrength * Time.deltaTime);
-            h = playerHeight * 0.35f;
-            float lastHeight = charController.height;
-            //Moves the player downward
-            charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
-            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
-            headCheckHeight -= new Vector3(0, (charController.height - lastHeight) / 2, 0);
-        }
-
-        if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
-        {
-            DisableSlide();
-
-            if (headIsTouchingSomething && headCheckPerformed == false) //Keeps the player crouched if they finish their slide underneath a small gap.
-            {
-                headCheckPerformed = true;
-                isCrouching = true;
-                oldSpeed = speed;
-                speed /= 2;
-            }
-        }
-
-        #endregion
-
         #region GroundChecking
         bool wasGrounded = isGrounded;
 
         //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
 
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
-        groundcheckPos = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
         isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
-        slopeCheck = Physics.CheckBox(groundcheckPos + move + (Vector3.down * 2), new Vector3(0.1f, 0.8f, 0.1f), transform.rotation, ~groundMask);
+        slopeCheck = Physics.CheckBox(groundcheckPos + move + (Vector3.down / 2), new Vector3(0.1f, 0.8f, 0.1f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
 
@@ -403,6 +344,66 @@ public class PlayerMovement : MonoBehaviour
         if (!wasGrounded && isGrounded)
         {
             Land();
+        }
+
+        #endregion
+
+        #region Crouching
+        //print(isCrouching);
+        float h = playerHeight;
+        if (isCrouching == true) //If dash button is being held down, and the isCrouching is enabled by the dash coroutine
+        {
+            h = playerHeight * 0.35f;
+        }
+        if (isSliding == false)
+        {
+            float lastHeight = charController.height;
+            charController.height = Mathf.Lerp(charController.height, h, 5 * Time.deltaTime);
+
+            //If crouching height is close enough to its target number (with a threshold of 0.05), then set it to that number
+            if (((charController.height - h) < 0 ? ((charController.height - h) * -1) : (charController.height - h)) <= 0.05)
+            {
+                charController.height = h;
+            }
+
+            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+            headCheckHeight -= new Vector3(0, (charController.height - lastHeight) / 2, 0);
+        }
+        #endregion
+
+        #region Slide
+
+        if (isSliding == true)
+        {
+            knockbackPower = 0;
+            acceleration = 1;
+            if (slideDirectionDecided == false)
+            {
+                slideDirectionDecided = true;
+                slideDirection = transform.forward;
+                slideLeftRight = transform.right;
+                velocity = (slideDirection * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
+            }
+            controller.Move(slideDirection * slideStrength * Time.deltaTime);
+            h = playerHeight * 0.35f;
+            float lastHeight = charController.height;
+            //Moves the player downward
+            charController.height = Mathf.Lerp(charController.height, h, 20 * Time.deltaTime);
+            transform.localPosition += new Vector3(0, (charController.height - lastHeight) / 2, 0);
+            headCheckHeight -= new Vector3(0, (charController.height - lastHeight) / 2, 0);
+        }
+
+        if (controls.Player.Crouch.ReadValue<float>() == 0 && isSliding == true) //Stops the player from Sliding
+        {
+            DisableSlide();
+
+            if (headIsTouchingSomething && headCheckPerformed == false) //Keeps the player crouched if they finish their slide underneath a small gap.
+            {
+                headCheckPerformed = true;
+                isCrouching = true;
+                oldSpeed = speed;
+                speed /= 2;
+            }
         }
 
         #endregion
