@@ -167,6 +167,21 @@ namespace AK
             } // namespace STATE
         } // namespace LAST_UPGRADE_FOUND
 
+        namespace LEVEL_ZONE
+        {
+            static const AkUniqueID GROUP = 1295892610U;
+
+            namespace STATE
+            {
+                static const AkUniqueID BOSS = 1560169506U;
+                static const AkUniqueID END = 529726532U;
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID PT_1 = 2227921645U;
+                static const AkUniqueID PT_2 = 2227921646U;
+                static const AkUniqueID PT_3 = 2227921647U;
+            } // namespace STATE
+        } // namespace LEVEL_ZONE
+
         namespace PAUSED_STATE
         {
             static const AkUniqueID GROUP = 3336199605U;
