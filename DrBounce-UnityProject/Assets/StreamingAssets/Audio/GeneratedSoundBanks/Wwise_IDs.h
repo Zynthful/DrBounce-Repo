@@ -70,6 +70,7 @@ namespace AK
         static const AkUniqueID MUSIC_MAIN_MENU = 1840167780U;
         static const AkUniqueID MUSIC_STOP = 3227181061U;
         static const AkUniqueID PAUSE = 3092587493U;
+        static const AkUniqueID PLAYER_CROUCH = 3055475155U;
         static const AkUniqueID PLAYER_DASH = 2394582229U;
         static const AkUniqueID PLAYER_FOOTSTEP = 2453392179U;
         static const AkUniqueID PLAYER_GUN_BOUNCE_CHARGE_FEEDBACK = 3737049291U;
@@ -99,6 +100,7 @@ namespace AK
         static const AkUniqueID PLAYER_SLIDE_END = 3081347554U;
         static const AkUniqueID PLAYER_SLIDE_START = 3639754241U;
         static const AkUniqueID PLAYER_THROW = 65181031U;
+        static const AkUniqueID PLAYER_UNCROUCH = 3425609278U;
         static const AkUniqueID UI_BP_BUTTON_CLICK_FAIL = 1780783421U;
         static const AkUniqueID UI_BP_BUTTON_CLICK_SUCCESS = 935477938U;
         static const AkUniqueID UI_BP_SELECTABLE_POINTERENTER = 2987181893U;
@@ -278,6 +280,7 @@ namespace AK
         static const AkUniqueID BOUNCEPAD_NUMOFBOUNCES = 856530565U;
         static const AkUniqueID COLLISION_IMPULSE_MAGNITUDE = 2292195936U;
         static const AkUniqueID CRITICAL_DIALOGUE_VOLUME = 3513493796U;
+        static const AkUniqueID CROUCHING = 499013305U;
         static const AkUniqueID D0C_DIALOGUE_VOLUME = 3657827626U;
         static const AkUniqueID DIALOGUE_VOLUME = 725232568U;
         static const AkUniqueID GUN_ACTIVE_CHARGE = 1163307585U;

@@ -97,21 +97,18 @@ public class PlayerMovement : MonoBehaviour
     [Header("Freeze")]
     [SerializeField] private bool Freeze = false;
 
-    [Header("UnityEvents")]
+    [Header("Unity Events")]
     public UnityEvent onJump = null;
     public UnityEvent onDash = null;
     public UnityEvent onSlide = null;
     public UnityEvent onSlideEnd = null;
     public UnityEvent onLand = null;
     public UnityEvent onLandOnNonBounceableGround = null;
+    public UnityEvent onCrouch = null;
+    public UnityEvent onUncrouch = null;
 
     [Header("Game Events")]
-    public GameEvent _onJump = null;
-    public GameEvent _onDash = null;
-    public GameEvent _onSlide = null;
-    public GameEvent _onSlideEnd = null;
     public GameEventFloat onDashSliderValue = null;
-    public GameEvent _onLandOnNonBounceableGround = null;
 
     //private Collider[] test;
 
@@ -538,7 +535,6 @@ public class PlayerMovement : MonoBehaviour
             jump = true;
 
             onJump?.Invoke();
-            _onJump?.Raise();
         }
     }
 
@@ -555,44 +551,45 @@ public class PlayerMovement : MonoBehaviour
         if (!Physics.CheckSphere(groundCheck.position, groundDistance, bounceableMask))
         {
             onLandOnNonBounceableGround?.Invoke();
-            _onLandOnNonBounceableGround?.Raise();
         }
     }
 
     void Crouch()
     {
-        if(!GameManager.s_Instance.paused && isGrounded)
+        if (GameManager.s_Instance.paused || !isGrounded)
+            return;
+
+        if (!isCrouching)
         {
-            if (!isCrouching)
+            // Crouch
+            if (controls.Player.Movement.ReadValue<Vector2>().y <= 0 || !canSlide)
             {
-                if(controls.Player.Movement.ReadValue<Vector2>().y <= 0 || !canSlide)
-                {
-                    isCrouching = true;
-                    oldSpeed = speed;
-                    speed /= 2;
-                }
-                else if(canSlide)
-                {
-                    isSliding = true;
-
-                    // Trigger used unlock for the first time, if it's the first time we've done so
-                    if (UnlockTracker.instance.lastUnlock == UnlockTracker.UnlockTypes.Slide && !UnlockTracker.instance.usedUnlock)
-                    {
-                        UnlockTracker.instance.UsedUnlockFirstTime();
-                    }
-
-                    onSlide?.Invoke();
-                    _onSlide?.Raise();
-                }
+                isCrouching = true;
+                oldSpeed = speed;
+                speed /= 2;
+                onCrouch.Invoke();
             }
-
-            else
+            // Slide
+            else if (canSlide)
             {
-                isCrouching = false;
-                speed = oldSpeed;
+                isSliding = true;
+
+                // Trigger used unlock for the first time, if it's the first time we've done so
+                if (UnlockTracker.instance.lastUnlock == UnlockTracker.UnlockTypes.Slide && !UnlockTracker.instance.usedUnlock)
+                {
+                    UnlockTracker.instance.UsedUnlockFirstTime();
+                }
+
+                onSlide.Invoke();
             }
         }
-
+        // Uncrouch
+        else
+        {
+            onUncrouch.Invoke();
+            isCrouching = false;
+            speed = oldSpeed;
+        }
     }
 
     public void ApplyKnockback(Vector3 dir, float power)
@@ -632,7 +629,6 @@ public class PlayerMovement : MonoBehaviour
             dashSliderTime = 0f;
 
             onDash?.Invoke();
-            _onDash?.Raise();
 
             isCrouching = false;
             StartCoroutine(Cooldown());
@@ -659,7 +655,6 @@ public class PlayerMovement : MonoBehaviour
     void DisableSlide()
     {
         onSlideEnd?.Invoke();
-        _onSlideEnd?.Raise();
 
         isSliding = false;
         headCheckPerformed = false;

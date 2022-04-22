@@ -23,4 +23,9 @@ public class WwiseSwitch : MonoBehaviour
             @switch.SetValue(assignedObject == null ? gameObject : assignedObject);
         }
     }
+
+    public void SetValue()
+    {
+        @switch.SetValue(assignedObject);
+    }
 }
