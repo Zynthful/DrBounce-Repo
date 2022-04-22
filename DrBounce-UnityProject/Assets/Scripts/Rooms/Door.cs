@@ -106,28 +106,26 @@ public class Door : MonoBehaviour
         if (open == value)
             return;
 
+        open = value;
+
         if (value)
-            Open();
+        {
+            onOpen.Invoke();
+        }
         else
-            Close();
+        {
+            onClose.Invoke();
+        }
     }
 
-    public void Open() 
+    public void Open()
     {
-        if (open)
-            return;
-
-        open = true;
-        onOpen?.Invoke();
+        SetOpen(true);
     }
 
-    public void Close() 
+    public void Close()
     {
-        if (!open)
-            return;
-
-        open = false;
-        onClose?.Invoke();
+        SetOpen(false);
     }
 
     /// <summary>
