@@ -7,12 +7,9 @@
 				<Property Name="OverrideColor" Type="bool" Value="True"/>
 			</PropertyList>
 			<ChildrenList>
-				<Event Name="Collide_NonBounceable" ID="{3E0E1BC2-DE47-426D-9BAB-2B87F1C8C19D}"/>
-				<Event Name="Collide_Bounceable" ID="{8FDE9EBB-C376-4E71-882B-93FB5458A30A}"/>
-				<Event Name="Collide_Any" ID="{02BF0C83-71A4-4451-964E-6B03D37D02BD}"/>
 				<Folder Name="Interactions - Throwing, Catching, Magnet" ID="{D3DC4103-B80C-4428-BB91-28842CC6CFBE}" ShortID="447433777">
 					<ChildrenList>
-						<Event Name="Gun_Throw" ID="{399151D9-9F0E-4359-9BBC-755EBD837D4B}">
+						<Event Name="Player_Gun_Throw" ID="{399151D9-9F0E-4359-9BBC-755EBD837D4B}">
 							<ChildrenList>
 								<Action Name="" ID="{361889B7-A64F-4DAA-94AB-AE4752DDCFE8}" ShortID="599371350">
 									<PropertyList>
@@ -26,7 +23,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_PickUpFromGround" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}">
+						<Event Name="Player_Gun_PickUpFromGround" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}">
 							<ChildrenList>
 								<Action Name="" ID="{39F8EDFE-812C-4776-9BA8-39B4200224BF}" ShortID="99691336">
 									<ReferenceList>
@@ -37,31 +34,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_Recall" ID="{C84A4462-9A55-4FB1-B3BB-3781178727B1}">
-							<ChildrenList>
-								<Action Name="" ID="{C6C6B37D-9762-4EBA-B5E2-42DC8AC084F4}" ShortID="12087058">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="41"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Magnet_Impact" ID="{028806C1-B906-4ED9-8AE6-19614234117F}" WorkUnitID="{CBE4FE5F-E167-483B-8F9A-CC119FA00988}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{F1DD0CA6-38E8-4698-9AA5-F4EA1E1E1A01}" ShortID="262689445">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="41"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Gun_Catch" ID="{4C37F9AD-9D14-422A-9797-F0B3CEDDFFD7}" WorkUnitID="{CBE4FE5F-E167-483B-8F9A-CC119FA00988}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Catch" ID="{4C37F9AD-9D14-422A-9797-F0B3CEDDFFD7}">
+						<Event Name="Player_Gun_Catch" ID="{4C37F9AD-9D14-422A-9797-F0B3CEDDFFD7}">
 							<ChildrenList>
 								<Action Name="" ID="{F03D2F0C-715C-4EB6-8855-B850EB002EE5}" ShortID="271835669">
 									<PropertyList>
@@ -69,7 +42,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Gun_PickUpFromGround" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}" WorkUnitID="{CBE4FE5F-E167-483B-8F9A-CC119FA00988}"/>
+											<ObjectRef Name="Player_Gun_PickUpFromGround" ID="{05D2F1CE-126B-4156-8432-4F0742864AD1}" WorkUnitID="{CBE4FE5F-E167-483B-8F9A-CC119FA00988}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -79,13 +52,13 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Gun_Charged" ID="{1FD630F0-A0B7-45A9-8393-4A5305D3248B}" WorkUnitID="{CBE4FE5F-E167-483B-8F9A-CC119FA00988}"/>
+											<ObjectRef Name="Player_Gun_Charged" ID="{1FD630F0-A0B7-45A9-8393-4A5305D3248B}" WorkUnitID="{CBE4FE5F-E167-483B-8F9A-CC119FA00988}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_Magnet_Impact" ID="{028806C1-B906-4ED9-8AE6-19614234117F}">
+						<Event Name="Player_Gun_Magnet_Impact" ID="{028806C1-B906-4ED9-8AE6-19614234117F}">
 							<ChildrenList>
 								<Action Name="" ID="{31EF2884-2E75-4EA9-BEEE-6C33093FE4F2}" ShortID="277401726">
 									<ReferenceList>
@@ -100,7 +73,7 @@
 				</Folder>
 				<Folder Name="Charge" ID="{6E6BD568-9756-4862-82A6-D7707746B6B0}" ShortID="936780703">
 					<ChildrenList>
-						<Event Name="Gun_Charge_Lost" ID="{16DC8C0A-52EB-4709-9064-9A589D3C10EB}">
+						<Event Name="Player_Gun_Charge_Lost" ID="{16DC8C0A-52EB-4709-9064-9A589D3C10EB}">
 							<ChildrenList>
 								<Action Name="" ID="{9836380E-6C7A-4A66-8F93-7ECF9E7178E1}" ShortID="794838078">
 									<ReferenceList>
@@ -111,7 +84,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_Charged" ID="{1FD630F0-A0B7-45A9-8393-4A5305D3248B}">
+						<Event Name="Player_Gun_Charged" ID="{1FD630F0-A0B7-45A9-8393-4A5305D3248B}">
 							<ChildrenList>
 								<Action Name="" ID="{D866B551-1A4D-4C17-9879-F4F1071204B4}" ShortID="31595146">
 									<ReferenceList>
@@ -132,7 +105,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_OutOfCharge" ID="{75915A2E-25F0-4901-95B8-4BA659554186}">
+						<Event Name="Player_Gun_OutOfCharge" ID="{75915A2E-25F0-4901-95B8-4BA659554186}">
 							<ChildrenList>
 								<Action Name="" ID="{E23B2F48-9E01-4068-B9B4-A4F0F50C7766}" ShortID="881437830">
 									<PropertyList>
@@ -160,56 +133,7 @@
 				</Folder>
 				<Folder Name="Environment Interactions" ID="{A7FB212B-CD7C-4A25-829D-B337C363B2ED}" ShortID="364807358">
 					<ChildrenList>
-						<Event Name="Gun_Collide" ID="{E34870CE-A51A-40AA-BF06-BD595B34E0D0}">
-							<ChildrenList>
-								<Action Name="" ID="{CA273F5D-D36B-42FC-B032-F93A135C2023}" ShortID="1028708825">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Redneck_Rolls_Dice" ID="{2A1195A1-BCA6-408D-8367-593D166E44F3}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Explosive_Explode" ID="{E31E608E-1EF9-4AF2-9802-10F31AF2E868}">
-							<ChildrenList>
-								<Action Name="" ID="{B8E3ED35-F40D-457A-85D9-0788FCF13D22}" ShortID="269891323">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Explosive_Impact" ID="{38877AED-7009-46C3-814B-C3FBB17AAADA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{123C5B4C-9323-436D-A373-157A66489A3F}" ShortID="999003887">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="38"/>
-										<Property Name="FadeTime" Type="Real64" Value="0.3"/>
-										<Property Name="GameParameterValue" Type="Real64" Value="1"/>
-										<Property Name="Scope" Type="int16" Value="1"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Music_Low_Pass" ID="{F45BCBEB-1A9A-4744-96A2-024054D8AEF5}" WorkUnitID="{9D2E2264-0334-4D69-A05C-D2220A5521E4}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{9A62941D-860D-4267-8D30-CC83383BED1E}" ShortID="948634105">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="38"/>
-										<Property Name="Delay" Type="Real64" Value="0.3"/>
-										<Property Name="FadeInCurve" Type="int16" Value="2"/>
-										<Property Name="FadeTime" Type="Real64" Value="1"/>
-										<Property Name="Scope" Type="int16" Value="1"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Music_Low_Pass" ID="{F45BCBEB-1A9A-4744-96A2-024054D8AEF5}" WorkUnitID="{9D2E2264-0334-4D69-A05C-D2220A5521E4}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Gun_Bounce_Feedback" ID="{101F1357-D625-4651-8686-829FE0520A41}">
+						<Event Name="Player_Gun_Bounce_Charge_Feedback" ID="{101F1357-D625-4651-8686-829FE0520A41}">
 							<ChildrenList>
 								<Action Name="" ID="{27D07BFA-782F-409B-9531-63F4284FF329}" ShortID="558159582">
 									<ReferenceList>
@@ -220,11 +144,14 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Player_Gun_Collide_NonBounceable" ID="{3E0E1BC2-DE47-426D-9BAB-2B87F1C8C19D}"/>
+						<Event Name="Player_Gun_Collide_Bounceable" ID="{8FDE9EBB-C376-4E71-882B-93FB5458A30A}"/>
+						<Event Name="Player_Gun_Collide_Any" ID="{02BF0C83-71A4-4451-964E-6B03D37D02BD}"/>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Shoot" ID="{1C27BF28-7EF7-4C10-AD8B-0DEECA6D8F67}" ShortID="292782226">
 					<ChildrenList>
-						<Event Name="Gun_Shoot_Uncharged" ID="{8F8B59A1-5C24-4239-B362-19E40B247799}">
+						<Event Name="Player_Gun_Shoot_Uncharged_Fired" ID="{8F8B59A1-5C24-4239-B362-19E40B247799}">
 							<ChildrenList>
 								<Action Name="" ID="{EA736E60-FDDA-4F4E-BF99-7B38B3B2AD88}" ShortID="656185561">
 									<ReferenceList>
@@ -235,7 +162,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_Shoot_Charged_Explosive" ID="{F6D7B027-5AE7-445F-B5A3-4E14A8983CB0}">
+						<Event Name="Player_Gun_Shoot_Charged_Explosive_Fired" ID="{F6D7B027-5AE7-445F-B5A3-4E14A8983CB0}">
 							<ChildrenList>
 								<Action Name="" ID="{2915F09B-A14C-4F48-83D5-2C661FDD4E91}" ShortID="999375873">
 									<ReferenceList>
@@ -273,11 +200,49 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Player_Gun_Shoot_Charged_Explosive_Explode" ID="{E31E608E-1EF9-4AF2-9802-10F31AF2E868}">
+							<ChildrenList>
+								<Action Name="" ID="{B8E3ED35-F40D-457A-85D9-0788FCF13D22}" ShortID="269891323">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Explosive_Impact" ID="{38877AED-7009-46C3-814B-C3FBB17AAADA}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{123C5B4C-9323-436D-A373-157A66489A3F}" ShortID="999003887">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="1"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Music_Low_Pass" ID="{F45BCBEB-1A9A-4744-96A2-024054D8AEF5}" WorkUnitID="{9D2E2264-0334-4D69-A05C-D2220A5521E4}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{9A62941D-860D-4267-8D30-CC83383BED1E}" ShortID="948634105">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="Delay" Type="Real64" Value="0.3"/>
+										<Property Name="FadeInCurve" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Music_Low_Pass" ID="{F45BCBEB-1A9A-4744-96A2-024054D8AEF5}" WorkUnitID="{9D2E2264-0334-4D69-A05C-D2220A5521E4}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Max Shot" ID="{C73957CB-F219-468F-852D-E5A1C4A172DB}" ShortID="594780002">
 					<ChildrenList>
-						<Event Name="Gun_Max_Shot_Charging" ID="{46446DDF-C2D4-4207-9B86-7814E12C1166}">
+						<Event Name="Player_Gun_Max_Shot_Charging" ID="{46446DDF-C2D4-4207-9B86-7814E12C1166}">
 							<ChildrenList>
 								<Action Name="" ID="{152164FD-1827-419E-82AB-0007A0B55D0B}" ShortID="386582221">
 									<ReferenceList>
@@ -288,7 +253,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_Max_Shot_Charging_Start" ID="{614EDDBC-1387-4DF7-AF6C-2DB412EDAD5E}">
+						<Event Name="Player_Gun_Max_Shot_Charging_Start" ID="{614EDDBC-1387-4DF7-AF6C-2DB412EDAD5E}">
 							<ChildrenList>
 								<Action Name="" ID="{60666F82-19EA-41D8-853E-80D36D3FC91A}" ShortID="269421199">
 									<PropertyList>
@@ -296,13 +261,13 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Gun_Max_Shot_Charging" ID="{46446DDF-C2D4-4207-9B86-7814E12C1166}" WorkUnitID="{CBE4FE5F-E167-483B-8F9A-CC119FA00988}"/>
+											<ObjectRef Name="Player_Gun_Max_Shot_Charging" ID="{46446DDF-C2D4-4207-9B86-7814E12C1166}" WorkUnitID="{CBE4FE5F-E167-483B-8F9A-CC119FA00988}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_Max_Shot_Charged" ID="{654DB1F8-B699-40B2-B778-4B0A1761D208}">
+						<Event Name="Player_Gun_Max_Shot_Charged" ID="{654DB1F8-B699-40B2-B778-4B0A1761D208}">
 							<ChildrenList>
 								<Action Name="" ID="{6564D936-61A5-46BD-B774-3B39889477E7}" ShortID="132168175">
 									<PropertyList>
@@ -316,7 +281,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_Max_Shot_Charging_Cancel" ID="{864A55BF-AB65-4620-ABF7-C1EB15772D38}">
+						<Event Name="Player_Gun_Max_Shot_Charging_Cancel" ID="{864A55BF-AB65-4620-ABF7-C1EB15772D38}">
 							<ChildrenList>
 								<Action Name="" ID="{ABE52687-8FD4-45AB-9529-04F5E29D4BE5}" ShortID="788491829">
 									<PropertyList>
@@ -330,7 +295,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Gun_Max_Shot_Fired" ID="{47701EB0-2B72-4370-9310-0E01978DB5B4}">
+						<Event Name="Player_Gun_Max_Shot_Fired" ID="{47701EB0-2B72-4370-9310-0E01978DB5B4}">
 							<ChildrenList>
 								<Action Name="" ID="{376571AF-F9DD-4653-99BE-59C526238064}" ShortID="624617179">
 									<PropertyList>

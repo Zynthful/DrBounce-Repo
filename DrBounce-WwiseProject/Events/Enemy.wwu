@@ -21,6 +21,7 @@
 							</ChildrenList>
 						</Event>
 						<Event Name="Enemy_Bullet_Impact_Surface" ID="{01260D73-2E30-44BD-8B0C-D5DE22974262}"/>
+						<Event Name="Enemy_Bullet_Fire" ID="{4BCE3740-15AB-4CEB-8D7F-F03CAC7C656A}"/>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Health" ID="{6D799F90-053F-4505-A8FD-F03727B4D5C2}" ShortID="747942249">
@@ -70,24 +71,9 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
-				<Folder Name="Bouncing" ID="{46694129-CD7B-4619-9963-6E3848DC6843}" ShortID="904866695">
-					<ChildrenList>
-						<Event Name="Enemy_Gun_Bounce_Impact" ID="{145EE972-B19C-4CE3-881B-2A4F630E0483}">
-							<ChildrenList>
-								<Action Name="" ID="{EE52427C-C3AE-4F5A-9F54-780DD0F0A7A9}" ShortID="466842576">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Bounced_Gun" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-					</ChildrenList>
-				</Folder>
 				<Folder Name="Stun" ID="{DD53D391-ED98-4E6C-AF43-C3DECAB557D8}" ShortID="692724463">
 					<ChildrenList>
-						<Event Name="Enemy_Stunned" ID="{9E515C50-BFCF-4108-BC80-AC6E05F57D3B}">
+						<Event Name="Enemy_Stun_Stunned" ID="{9E515C50-BFCF-4108-BC80-AC6E05F57D3B}">
 							<ChildrenList>
 								<Action Name="" ID="{8E673118-720A-4F89-BB05-DB731F35F165}" ShortID="834705030">
 									<ReferenceList>
@@ -151,6 +137,17 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Event Name="Enemy_Bounced" ID="{145EE972-B19C-4CE3-881B-2A4F630E0483}">
+					<ChildrenList>
+						<Action Name="" ID="{EE52427C-C3AE-4F5A-9F54-780DD0F0A7A9}" ShortID="466842576">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Bounced_Gun" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
