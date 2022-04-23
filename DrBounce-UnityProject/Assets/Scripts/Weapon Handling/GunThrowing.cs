@@ -27,6 +27,17 @@ public class GunThrowing : MonoBehaviour
     private bool throwBuffer = false;
 
     private bool held = true;
+    public bool GetIsThrowing() { return throwing; }
+    public bool GetIsHeld() { return held; }
+    private void SetIsHeld(bool value)
+    {
+        if (held == value)
+            return;
+
+        held = value;
+        shooting.onHasChargeAndIsHeld.Invoke(shooting.GetHasCharge() && value);
+        shooting._onHasChargeAndIsHeld.Raise(shooting.GetHasCharge() && value);
+    }
 
     public delegate void LeftGun();
     public static event LeftGun OnLeftGun;
@@ -162,7 +173,7 @@ public class GunThrowing : MonoBehaviour
             //outlineScript.enabled = false;
             handPosition = transform.localPosition;
             canThrow = true;
-            held = true;
+            SetIsHeld(true);
             transform.parent = weaponHolderTransform;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
@@ -173,7 +184,7 @@ public class GunThrowing : MonoBehaviour
             handPosition = new Vector3(.4f, -.2f, .65f);
             exitedPlayer = true;
             canThrow = false;
-            held = false;
+            SetIsHeld(false);
             alone = true;
         }
 
@@ -207,7 +218,7 @@ public class GunThrowing : MonoBehaviour
         }
 
         // Handle loneliness time
-        if (!held && !pulledByMagnet) 
+        if (!GetIsHeld() && !pulledByMagnet) 
         {
             timeOnGround = timeOnGround + Time.deltaTime;
             if (timeOnGround >= timeToTriggerLonely && !alone) 
@@ -300,8 +311,8 @@ public class GunThrowing : MonoBehaviour
         if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
             throwing = true;
-            held = false;
-            
+            SetIsHeld(false);
+
             // Disable throwing for set duration
             StartCoroutine(DisableThrowForDuration(throwDisableTime));
 
@@ -346,9 +357,6 @@ public class GunThrowing : MonoBehaviour
             Vector3 dir = transform.forward;
             rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * throwForceMod; currentVel = rb.velocity;
 
-            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
-            shooting.CheckIfCharged();
-
             AffectPhysics(0.2f, 0.2f);
         }
     }
@@ -375,7 +383,7 @@ public class GunThrowing : MonoBehaviour
             canThrow = true;
             inFlight = false;
             hasLetGoOfTrigger = false;
-            held = true;
+            SetIsHeld(true);
             timeOnGround = 0;
             alone = false;
 
@@ -387,9 +395,6 @@ public class GunThrowing : MonoBehaviour
             currentVel = Vector3.zero;
 
             onReset?.Invoke();
-
-            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
-            shooting.CheckIfCharged();
 
             //here
             // here???
@@ -591,7 +596,4 @@ public class GunThrowing : MonoBehaviour
         }
 
     }
-
-    public bool GetIsThrowing() { return throwing; }
-    public bool GetIsHeld() { return held; }
 }
