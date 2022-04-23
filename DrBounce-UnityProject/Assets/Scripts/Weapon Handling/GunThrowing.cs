@@ -7,15 +7,19 @@ using MoreMountains.Feedbacks;
 
 public class GunThrowing : MonoBehaviour
 {
+    [Header("Declarations")]
+    [SerializeField] MagnetAssist magnet = null;
+    [SerializeField] BoxCollider catchCollider = null;
+    [SerializeField] Transform weaponHolderTransform = null;
+
+    [Header("GunThrowing Settings")]
+    [SerializeField] bool startOnPlayer = true;    // Should the item start on the player?
+    [SerializeField] bool canThrow;
     [SerializeField] bool returning;
     [SerializeField] float throwForceMod;
-    [SerializeField] bool canThrow;
-    [SerializeField] Transform weaponHolderTransform = null;
-    [SerializeField] bool startOnPlayer;    // Should the item start on the player or not?
     [SerializeField] float noHitDetectAfterThrowTime;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Collider[] gunColliders = null;
-    [SerializeField] BoxCollider catchCollider;
     [SerializeField] LayerMask throwCheckLayers;
     bool throwGunDelay;
     Transform owner; // The player
@@ -26,7 +30,7 @@ public class GunThrowing : MonoBehaviour
     private bool pickupDelayCoroutineRunning;
     private bool throwBuffer = false;
 
-    private bool held = true;
+    private bool held = false;
     public bool GetIsThrowing() { return throwing; }
     public bool GetIsHeld() { return held; }
     private void SetIsHeld(bool value)
@@ -35,6 +39,7 @@ public class GunThrowing : MonoBehaviour
             return;
 
         held = value;
+        onIsHeld.Invoke(value);
         shooting.onHasChargeAndIsHeld.Invoke(shooting.GetHasCharge() && value);
         shooting._onHasChargeAndIsHeld.Raise(shooting.GetHasCharge() && value);
     }
@@ -117,6 +122,7 @@ public class GunThrowing : MonoBehaviour
     public UnityEvent onRecall = null;
     public UnityEvent onPickup = null;
     public UnityEvent onReset = null;
+    public UnityEvent<bool> onIsHeld = null;
 
     [Header("Game Events")]
     [SerializeField]
@@ -143,9 +149,6 @@ public class GunThrowing : MonoBehaviour
         InputManager.inputMaster.Player.Throw.performed += _ => SetThrowGunDelay();
         InputManager.inputMaster.Player.Throw.performed += _ => CancelThrow();
         InputManager.inputMaster.Player.Recall.performed += _ => RecallGun();
-
-        // Listen for event
-        MagnetAssist.OnMagnetUse += Magnet;
     }
 
     private void OnDisable()
@@ -154,9 +157,6 @@ public class GunThrowing : MonoBehaviour
         InputManager.inputMaster.Player.Throw.performed -= _ => SetThrowGunDelay();
         InputManager.inputMaster.Player.Throw.performed -= _ => CancelThrow();
         InputManager.inputMaster.Player.Recall.performed -= _ => ResetScript();
-
-        // Stop listening for event
-        MagnetAssist.OnMagnetUse -= Magnet;
     }
 
 
@@ -164,8 +164,7 @@ public class GunThrowing : MonoBehaviour
     {
         //outlineScript = GetComponentInChildren<Outline>();
 
-        owner = PlayerMovement.player;
-
+        owner = GameManager.player.transform;
         rb = GetComponent<Rigidbody>();
 
         if (startOnPlayer)
@@ -218,7 +217,7 @@ public class GunThrowing : MonoBehaviour
         }
 
         // Handle loneliness time
-        if (!GetIsHeld() && !pulledByMagnet) 
+        if (!GetIsHeld() && !magnet.GetIsAssistActive()) 
         {
             timeOnGround = timeOnGround + Time.deltaTime;
             if (timeOnGround >= timeToTriggerLonely && !alone) 
@@ -245,18 +244,6 @@ public class GunThrowing : MonoBehaviour
         InputManager.inputMaster.Player.Throw.Enable();
     }
 
-    private void Magnet(bool active) 
-    {
-        if (active)
-        {
-            pulledByMagnet = true;
-        }
-        else 
-        {
-            pulledByMagnet = false;
-        }
-    }
-
     // Delay throwing to avoid recalling immediately after throwing
     public void SetThrowGunDelay()
     {
@@ -277,18 +264,11 @@ public class GunThrowing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (transform.parent)
+        if (GetIsHeld())
         {
             transform.rotation = weaponHolderTransform.rotation;
         }
-
-        if (throwGunDelay)
-        {
-            throwGunDelay = false;
-            Thrown();
-        }
-
-        if (!transform.parent && !exitedPlayer)
+        else if (!exitedPlayer)
         {
             bool fail = false;
             foreach (Collider col in gunColliders)
@@ -303,6 +283,12 @@ public class GunThrowing : MonoBehaviour
             {
                 exitedPlayer = true;
             }
+        }
+
+        if (throwGunDelay)
+        {
+            throwGunDelay = false;
+            Thrown();
         }
     }
 
@@ -365,7 +351,7 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused)
         {
-            if (!transform.parent)
+            if (!GetIsHeld())
                 throwGunDelay = false;
             //outlineScript.enabled = false;
             gameObject.layer = 7;

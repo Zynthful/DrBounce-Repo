@@ -300,8 +300,10 @@ GameObject:
   - component: {fileID: 6719411725505913232}
   - component: {fileID: 9101050876889639876}
   - component: {fileID: 2535445797479561887}
+  - component: {fileID: 4455944242078390598}
+  - component: {fileID: 9071205226182522219}
   m_Layer: 0
-  m_Name: pCylinder3
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,6 +393,76 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4455944242078390598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329532421701624337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533a3c1250a46794ebb7d90413ad4ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: b005289125b85e3498dc3807d1ba1e97, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9071205226182522219}
+        m_TargetAssemblyTypeName: CompareBoolInvoke, Assembly-CSharp
+        m_MethodName: Compare
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9071205226182522219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329532421701624337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dae3696c78390b40aa3988d14a37c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  True:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2535445797479561887}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Drop
+          m_BoolArgument: 0
+        m_CallState: 2
+  False:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2535445797479561887}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Reveal
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3175416278294190670
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +544,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: f6719e42bcc57bf448151e456ca92b30, type: 2}
   objToPost: {fileID: 5866358497386595400}
+  postOn: 0
 --- !u!114 &6829661780190677376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,7 +706,7 @@ GameObject:
   - component: {fileID: 2784282697300590279}
   - component: {fileID: 3366123237591541978}
   - component: {fileID: 1540974337157197138}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Madnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,6 +958,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: e5683ceb02200fc43ab3f610cd9ed38f, type: 2}
   objToPost: {fileID: 5866358497386595400}
+  postOn: 0
 --- !u!1 &6676376771906026456
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,6 +1039,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 8c1eefc7fb96bd042a4e855a4bbbe988, type: 2}
   objToPost: {fileID: 5866358497386595400}
+  postOn: 0
 --- !u!114 &6297920961190681042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,6 +1116,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 05ba9a45133f03047a1b65a30a4c3980, type: 2}
   objToPost: {fileID: 5866358497386595400}
+  postOn: 0
 --- !u!1 &7396665273488189446
 GameObject:
   m_ObjectHideFlags: 0
