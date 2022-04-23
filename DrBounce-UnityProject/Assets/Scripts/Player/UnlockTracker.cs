@@ -97,7 +97,6 @@ public class UnlockTracker : MonoBehaviour
     public void PickupNewUnlocks(UnlockTypes[] newUnlocks)
     {
         lastUnlock = newUnlocks[newUnlocks.Length - 1];
-        Debug.Log("new!! " + lastUnlock.ToString());
         usedUnlock = false;
         NewUnlocks(newUnlocks);
     }
