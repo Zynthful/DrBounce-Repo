@@ -22,13 +22,12 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     [SerializeField]
     private LayerMask[] layersToIgnore = null;
 
-    [Header("Events")]
-    [SerializeField]
-    private UnityEvent<GameObject> onHitAny = null;
-    [SerializeField]
-    private UnityEvent<GameObject> onHitPlayer = null;
-    [SerializeField]
-    private UnityEvent<GameObject> onHitAnyExceptPlayer = null;
+    [Header("Base Bullet Events")]
+    public UnityEvent onSpawn = null;
+    public UnityEvent onDeath = null;
+    public UnityEvent<GameObject> onHitAny = null;
+    public UnityEvent<GameObject> onHitPlayer = null;
+    public UnityEvent<GameObject> onHitAnyExceptPlayer = null;
 
     public delegate void Hit(int value);
     public static event Hit OnHit;
@@ -48,12 +47,19 @@ public class BulletMovement : MonoBehaviour, IPooledObject
         
         rb.velocity = dir * speed * Time.fixedDeltaTime;
 
+        onSpawn.Invoke();
+
         StartCoroutine(DieTime());
     }
 
     protected virtual void Start()
     {
         objectPool = ObjectPooler.Instance;
+    }
+
+    protected virtual void OnDisable()
+    {
+        onDeath.Invoke();
     }
 
     protected List<BezierCurve> GenerateCurves()
@@ -139,10 +145,9 @@ public class BulletMovement : MonoBehaviour, IPooledObject
                     onHitAny?.Invoke(other.gameObject);
                     onHitAnyExceptPlayer?.Invoke(other.gameObject);
                 }
-
                 gameObject.SetActive(false);
             }
-    }
+        }
 }
 
     protected virtual IEnumerator DieTime()

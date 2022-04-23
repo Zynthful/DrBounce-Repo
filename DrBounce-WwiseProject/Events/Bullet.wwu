@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{B7484D10-9637-4607-81BF-D9A7AE2AB43B}" SchemaVersion="103" RootDocumentID="{8348917E-205A-4290-A4C0-D425B674D15F}" ParentDocumentID="{190D6DB7-CD42-40A6-A9C0-ED08564874FE}">
+	<Events>
+		<WorkUnit Name="Bullet" ID="{B7484D10-9637-4607-81BF-D9A7AE2AB43B}" OwnerID="{190D6DB7-CD42-40A6-A9C0-ED08564874FE}" PersistMode="Nested">
+			<ChildrenList>
+				<Event Name="Bullet_Fire" ID="{4BCE3740-15AB-4CEB-8D7F-F03CAC7C656A}">
+					<ChildrenList>
+						<Action Name="" ID="{8AAE2833-56CE-4DE7-88BF-F48721756B22}" ShortID="761485839">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Fire" ID="{51E069FE-B10A-449B-8B08-1C7BE8F9FDC2}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Bullet_Impact" ID="{ACB00281-50CF-46C2-A09D-8222252607ED}"/>
+				<Event Name="Bullet_Death" ID="{BEFBA8FD-6567-4F7C-B494-8526F49900EC}">
+					<ChildrenList>
+						<Action Name="" ID="{DB7FE19A-8369-4AD9-A8AD-04E2FD32969A}" ShortID="629304322">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Fire" ID="{51E069FE-B10A-449B-8B08-1C7BE8F9FDC2}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

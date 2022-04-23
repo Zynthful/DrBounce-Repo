@@ -6549,6 +6549,361 @@
 									</ChildrenList>
 									<ObjectLists/>
 								</ActorMixer>
+								<ActorMixer Name="Bullet" ID="{AA8E133C-45A5-44CD-84FB-A4E1779F41D9}" ShortID="362776903">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Slime Bullet" ID="{92BE29B9-F81E-4C11-9CD6-3F40E74870A2}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<SwitchContainer Name="Fire" ID="{51E069FE-B10A-449B-8B08-1C7BE8F9FDC2}" ShortID="890714579">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="Bullet_Type" ID="{72071FD4-7E8B-4EB6-AE77-014E75E0D51F}" WorkUnitID="{606E8175-9B1F-4B0D-9DFC-9363697F7C29}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<BlendContainer Name="Slime Bullet" ID="{DB7276BC-9E19-4911-A474-5CC76800F57D}" ShortID="32316755">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="OverridePositioning" Type="bool" Value="True"/>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Slime Bullet" ID="{92BE29B9-F81E-4C11-9CD6-3F40E74870A2}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Environment" ID="{A6D48AFC-F4D0-422B-99CD-7C6C71109A02}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="Slime" ID="{73BB220D-D530-4BE8-A22B-792CC28E67AC}" ShortID="367080321">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Pitch" Type="int32">
+																	<ValueList>
+																		<Value>680</Value>
+																	</ValueList>
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{D939D5B1-8674-4731-A420-ABB9B3FB7AED}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Max" Type="Real64" Value="100"/>
+																					<Property Name="Min" Type="Real64" Value="-100"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="DB_SFX_Enemy_Bullet_Fire_Slime_1" ID="{813DD809-B42E-418F-AE69-568E4C228C28}" ShortID="587798997">
+																	<ReferenceList>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_1" ID="{525557E3-7AD5-4FD7-A88C-8AA2DFD106E5}">
+																			<Language>SFX</Language>
+																			<AudioFile>DB_SFX_Enemy_Bullet_Fire_Slime_1.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="198590378"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_1" ID="{525557E3-7AD5-4FD7-A88C-8AA2DFD106E5}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="DB_SFX_Enemy_Bullet_Fire_Slime_2" ID="{B21FC681-479A-44B4-B178-CC94AF2C3172}" ShortID="528337130">
+																	<ReferenceList>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_2" ID="{BF97BC03-AC2B-48CE-8E2E-B440727F0E86}">
+																			<Language>SFX</Language>
+																			<AudioFile>DB_SFX_Enemy_Bullet_Fire_Slime_2.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="531288322"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_2" ID="{BF97BC03-AC2B-48CE-8E2E-B440727F0E86}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="DB_SFX_Enemy_Bullet_Fire_Slime_3" ID="{A76FED5F-2E7A-4A3D-B668-207EE15A4607}" ShortID="995105397">
+																	<ReferenceList>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_3" ID="{0E03D166-2372-49E9-BD8A-196F19E50870}">
+																			<Language>SFX</Language>
+																			<AudioFile>DB_SFX_Enemy_Bullet_Fire_Slime_3.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="124381320"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_3" ID="{0E03D166-2372-49E9-BD8A-196F19E50870}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="DB_SFX_Enemy_Bullet_Fire_Slime_4" ID="{AEA02E71-7B24-4C9B-872E-BE46EC973442}" ShortID="586699663">
+																	<ReferenceList>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_4" ID="{F4FEABED-1C79-4ABA-AE0E-F94C22CBBBF4}">
+																			<Language>SFX</Language>
+																			<AudioFile>DB_SFX_Enemy_Bullet_Fire_Slime_4.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="788533629"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_4" ID="{F4FEABED-1C79-4ABA-AE0E-F94C22CBBBF4}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+														<Sound Name="DB_SFX_Enemy_Bullet_Fire_Peashooter" ID="{9F6D87BA-13B8-42A6-9F96-6B0AD156B313}" ShortID="178886971">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-15</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Peashooter" ID="{BCDF14F1-5A21-42E2-85E0-3D021E514F84}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Bullet_Fire_Peashooter.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="168829232"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Peashooter" ID="{BCDF14F1-5A21-42E2-85E0-3D021E514F84}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<BlendContainer Name="Flyby Loop" ID="{CFA483B8-0FA9-4775-9E45-D446752AFA52}" ShortID="753844676">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="OverridePositioning" Type="bool" Value="True"/>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-22</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<Custom CreatedFrom="{92BE29B9-F81E-4C11-9CD6-3F40E74870A2}">
+																		<Attenuation Name="Enemy Bullet (Custom)" ID="{A22308D5-87E8-491E-8E00-D7E7BBFD6945}" ShortID="727744747">
+																			<PropertyList>
+																				<Property Name="RadiusMax" Type="Real64" Value="10"/>
+																			</PropertyList>
+																			<CurveUsageInfoList>
+																				<VolumeDryUsage>
+																					<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																						<Curve Name="VolumeDry" ID="{4AC5A44C-91F2-47DD-AD59-7430DA367E13}">
+																							<PropertyList>
+																								<Property Name="Flags" Type="int32" Value="3"/>
+																							</PropertyList>
+																							<PointList>
+																								<Point>
+																									<XPos>0</XPos>
+																									<YPos>0</YPos>
+																									<Flags>5</Flags>
+																									<SegmentShape>Exp2</SegmentShape>
+																								</Point>
+																								<Point>
+																									<XPos>10</XPos>
+																									<YPos>-200</YPos>
+																									<Flags>37</Flags>
+																								</Point>
+																							</PointList>
+																						</Curve>
+																					</CurveUsageInfo>
+																				</VolumeDryUsage>
+																				<VolumeWetGameUsage>
+																					<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+																				</VolumeWetGameUsage>
+																				<VolumeWetUserUsage>
+																					<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+																				</VolumeWetUserUsage>
+																				<LowPassFilterUsage>
+																					<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																				</LowPassFilterUsage>
+																				<HighPassFilterUsage>
+																					<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																				</HighPassFilterUsage>
+																				<SpreadUsage>
+																					<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																						<Curve Name="Spread" ID="{90276DDC-981B-4BD3-8A5E-66B3336D5334}">
+																							<PropertyList>
+																								<Property Name="Flags" Type="int32" Value="1"/>
+																							</PropertyList>
+																							<PointList>
+																								<Point>
+																									<XPos>0</XPos>
+																									<YPos>100</YPos>
+																									<Flags>5</Flags>
+																									<SegmentShape>Log3</SegmentShape>
+																								</Point>
+																								<Point>
+																									<XPos>4.987113</XPos>
+																									<YPos>0</YPos>
+																									<Flags>0</Flags>
+																									<SegmentShape>Exp3</SegmentShape>
+																								</Point>
+																								<Point>
+																									<XPos>10</XPos>
+																									<YPos>0</YPos>
+																									<Flags>37</Flags>
+																								</Point>
+																							</PointList>
+																						</Curve>
+																					</CurveUsageInfo>
+																				</SpreadUsage>
+																				<FocusUsage>
+																					<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																				</FocusUsage>
+																			</CurveUsageInfoList>
+																		</Attenuation>
+																	</Custom>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Environment" ID="{A6D48AFC-F4D0-422B-99CD-7C6C71109A02}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="DB_SFX_Enemy_Bullet_Hum_Loop" ID="{AA586ECB-B6DB-4414-9C0C-2AF436EC8889}" ShortID="815469682">
+																	<PropertyList>
+																		<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="DB_SFX_Enemy_Bullet_Hum_Loop" ID="{5D2F72B3-9A3D-4B35-81D4-63D02668B58D}">
+																			<Language>SFX</Language>
+																			<AudioFile>DB_SFX_Enemy_Bullet_Hum_Loop.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="524345892"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="DB_SFX_Enemy_Bullet_Hum_Loop" ID="{5D2F72B3-9A3D-4B35-81D4-63D02668B58D}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</BlendContainer>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+											</ChildrenList>
+											<ObjectLists/>
+											<GroupingInfo>
+												<GroupingBehaviorList>
+													<GroupingBehavior>
+														<ItemRef Name="Slime Bullet" ID="{DB7276BC-9E19-4911-A474-5CC76800F57D}"/>
+													</GroupingBehavior>
+												</GroupingBehaviorList>
+												<GroupingList>
+													<Grouping>
+														<SwitchRef Name="Slime_Bullet" ID="{C423C19F-DA55-4EBA-9116-F2022F779911}"/>
+														<ItemList>
+															<ItemRef Name="Slime Bullet" ID="{DB7276BC-9E19-4911-A474-5CC76800F57D}"/>
+														</ItemList>
+													</Grouping>
+												</GroupingList>
+											</GroupingInfo>
+										</SwitchContainer>
+									</ChildrenList>
+									<ObjectLists/>
+								</ActorMixer>
 							</ChildrenList>
 							<ObjectLists/>
 						</ActorMixer>
@@ -8242,327 +8597,6 @@
 													<ObjectLists/>
 													<ActiveSourceList>
 														<ActiveSource Name="DB_SFX_Slime_Jump_1" ID="{FE7D9003-74EF-4D1C-8713-67105BD0D8CC}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-											<ObjectLists/>
-										</BlendContainer>
-									</ChildrenList>
-									<ObjectLists/>
-								</ActorMixer>
-								<ActorMixer Name="Bullet" ID="{AA8E133C-45A5-44CD-84FB-A4E1779F41D9}" ShortID="362776903">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="OverridePositioning" Type="bool" Value="True"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="Enemy Bullet" ID="{92BE29B9-F81E-4C11-9CD6-3F40E74870A2}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<BlendContainer Name="Fire" ID="{DB7276BC-9E19-4911-A474-5CC76800F57D}" ShortID="32316755">
-											<PropertyList>
-												<Property Name="3DSpatialization" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Attenuation">
-													<ObjectRef Name="Enemy Bullet" ID="{92BE29B9-F81E-4C11-9CD6-3F40E74870A2}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
-												</Reference>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<RandomSequenceContainer Name="Slime" ID="{73BB220D-D530-4BE8-A22B-792CC28E67AC}" ShortID="367080321">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Pitch" Type="int32">
-															<ValueList>
-																<Value>680</Value>
-															</ValueList>
-															<ModifierList>
-																<ModifierInfo>
-																	<Modifier Name="" ID="{D939D5B1-8674-4731-A420-ABB9B3FB7AED}">
-																		<PropertyList>
-																			<Property Name="Enabled" Type="bool" Value="True"/>
-																			<Property Name="Max" Type="Real64" Value="100"/>
-																			<Property Name="Min" Type="Real64" Value="-100"/>
-																		</PropertyList>
-																	</Modifier>
-																</ModifierInfo>
-															</ModifierList>
-														</Property>
-														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
-														</Reference>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<Sound Name="DB_SFX_Enemy_Bullet_Fire_Slime_1" ID="{813DD809-B42E-418F-AE69-568E4C228C28}" ShortID="587798997">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_1" ID="{525557E3-7AD5-4FD7-A88C-8AA2DFD106E5}">
-																	<Language>SFX</Language>
-																	<AudioFile>DB_SFX_Enemy_Bullet_Fire_Slime_1.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="198590378"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ObjectLists/>
-															<ActiveSourceList>
-																<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_1" ID="{525557E3-7AD5-4FD7-A88C-8AA2DFD106E5}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="DB_SFX_Enemy_Bullet_Fire_Slime_2" ID="{B21FC681-479A-44B4-B178-CC94AF2C3172}" ShortID="528337130">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_2" ID="{BF97BC03-AC2B-48CE-8E2E-B440727F0E86}">
-																	<Language>SFX</Language>
-																	<AudioFile>DB_SFX_Enemy_Bullet_Fire_Slime_2.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="531288322"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ObjectLists/>
-															<ActiveSourceList>
-																<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_2" ID="{BF97BC03-AC2B-48CE-8E2E-B440727F0E86}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="DB_SFX_Enemy_Bullet_Fire_Slime_3" ID="{A76FED5F-2E7A-4A3D-B668-207EE15A4607}" ShortID="995105397">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_3" ID="{0E03D166-2372-49E9-BD8A-196F19E50870}">
-																	<Language>SFX</Language>
-																	<AudioFile>DB_SFX_Enemy_Bullet_Fire_Slime_3.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="124381320"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ObjectLists/>
-															<ActiveSourceList>
-																<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_3" ID="{0E03D166-2372-49E9-BD8A-196F19E50870}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="DB_SFX_Enemy_Bullet_Fire_Slime_4" ID="{AEA02E71-7B24-4C9B-872E-BE46EC973442}" ShortID="586699663">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_4" ID="{F4FEABED-1C79-4ABA-AE0E-F94C22CBBBF4}">
-																	<Language>SFX</Language>
-																	<AudioFile>DB_SFX_Enemy_Bullet_Fire_Slime_4.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="788533629"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ObjectLists/>
-															<ActiveSourceList>
-																<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Slime_4" ID="{F4FEABED-1C79-4ABA-AE0E-F94C22CBBBF4}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-													</ChildrenList>
-													<ObjectLists/>
-												</RandomSequenceContainer>
-												<Sound Name="DB_SFX_Enemy_Bullet_Fire_Peashooter" ID="{9F6D87BA-13B8-42A6-9F96-6B0AD156B313}" ShortID="178886971">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>-15</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="DB_SFX_Enemy_Bullet_Fire_Peashooter" ID="{BCDF14F1-5A21-42E2-85E0-3D021E514F84}">
-															<Language>SFX</Language>
-															<AudioFile>DB_SFX_Enemy_Bullet_Fire_Peashooter.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="168829232"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="DB_SFX_Enemy_Bullet_Fire_Peashooter" ID="{BCDF14F1-5A21-42E2-85E0-3D021E514F84}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-											<ObjectLists/>
-										</BlendContainer>
-										<BlendContainer Name="Flyby Loop" ID="{CFA483B8-0FA9-4775-9E45-D446752AFA52}" ShortID="753844676">
-											<PropertyList>
-												<Property Name="3DSpatialization" Type="int16" Value="1"/>
-												<Property Name="OverridePositioning" Type="bool" Value="True"/>
-												<Property Name="Volume" Type="Real64">
-													<ValueList>
-														<Value>-13</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Attenuation">
-													<Custom CreatedFrom="{92BE29B9-F81E-4C11-9CD6-3F40E74870A2}">
-														<Attenuation Name="Enemy Bullet (Custom)" ID="{A22308D5-87E8-491E-8E00-D7E7BBFD6945}" ShortID="727744747">
-															<PropertyList>
-																<Property Name="RadiusMax" Type="Real64" Value="30"/>
-															</PropertyList>
-															<CurveUsageInfoList>
-																<VolumeDryUsage>
-																	<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
-																		<Curve Name="VolumeDry" ID="{4AC5A44C-91F2-47DD-AD59-7430DA367E13}">
-																			<PropertyList>
-																				<Property Name="Flags" Type="int32" Value="3"/>
-																			</PropertyList>
-																			<PointList>
-																				<Point>
-																					<XPos>0</XPos>
-																					<YPos>0</YPos>
-																					<Flags>5</Flags>
-																					<SegmentShape>Exp2</SegmentShape>
-																				</Point>
-																				<Point>
-																					<XPos>30</XPos>
-																					<YPos>-200</YPos>
-																					<Flags>37</Flags>
-																				</Point>
-																			</PointList>
-																		</Curve>
-																	</CurveUsageInfo>
-																</VolumeDryUsage>
-																<VolumeWetGameUsage>
-																	<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
-																</VolumeWetGameUsage>
-																<VolumeWetUserUsage>
-																	<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
-																</VolumeWetUserUsage>
-																<LowPassFilterUsage>
-																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-																</LowPassFilterUsage>
-																<HighPassFilterUsage>
-																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-																</HighPassFilterUsage>
-																<SpreadUsage>
-																	<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
-																		<Curve Name="Spread" ID="{90276DDC-981B-4BD3-8A5E-66B3336D5334}">
-																			<PropertyList>
-																				<Property Name="Flags" Type="int32" Value="1"/>
-																			</PropertyList>
-																			<PointList>
-																				<Point>
-																					<XPos>0</XPos>
-																					<YPos>100</YPos>
-																					<Flags>5</Flags>
-																					<SegmentShape>Log3</SegmentShape>
-																				</Point>
-																				<Point>
-																					<XPos>14.961339</XPos>
-																					<YPos>0</YPos>
-																					<Flags>0</Flags>
-																					<SegmentShape>Exp3</SegmentShape>
-																				</Point>
-																				<Point>
-																					<XPos>30</XPos>
-																					<YPos>0</YPos>
-																					<Flags>37</Flags>
-																				</Point>
-																			</PointList>
-																		</Curve>
-																	</CurveUsageInfo>
-																</SpreadUsage>
-																<FocusUsage>
-																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-																</FocusUsage>
-															</CurveUsageInfoList>
-														</Attenuation>
-													</Custom>
-												</Reference>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<Sound Name="DB_SFX_Enemy_Bullet_Hum_Loop" ID="{AA586ECB-B6DB-4414-9C0C-2AF436EC8889}" ShortID="815469682">
-													<PropertyList>
-														<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="DB_SFX_Enemy_Bullet_Hum_Loop" ID="{5D2F72B3-9A3D-4B35-81D4-63D02668B58D}">
-															<Language>SFX</Language>
-															<AudioFile>DB_SFX_Enemy_Bullet_Hum_Loop.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="524345892"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="DB_SFX_Enemy_Bullet_Hum_Loop" ID="{5D2F72B3-9A3D-4B35-81D4-63D02668B58D}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>

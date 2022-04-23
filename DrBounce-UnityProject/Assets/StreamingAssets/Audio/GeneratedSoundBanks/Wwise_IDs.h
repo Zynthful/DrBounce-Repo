@@ -13,6 +13,9 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID BULLET_DEATH = 1084022590U;
+        static const AkUniqueID BULLET_FIRE = 2832877796U;
+        static const AkUniqueID BULLET_IMPACT = 3921814510U;
         static const AkUniqueID CAMERA_FLY_QUICK = 3362723590U;
         static const AkUniqueID COMBAT_START = 1137411260U;
         static const AkUniqueID COMBAT_STOP = 1600024336U;
@@ -45,7 +48,6 @@ namespace AK
         static const AkUniqueID DOOR_CLOSE = 128625444U;
         static const AkUniqueID DOOR_OPEN = 535830432U;
         static const AkUniqueID ENEMY_BOUNCED = 524693026U;
-        static const AkUniqueID ENEMY_BULLET_FIRE = 3403589593U;
         static const AkUniqueID ENEMY_BULLET_IMPACT = 3738812119U;
         static const AkUniqueID ENEMY_HEALTH_DEATH = 2932285363U;
         static const AkUniqueID ENEMY_HEALTH_DEATH_PARTICLE_COLLIDE = 4019809755U;
@@ -213,6 +215,17 @@ namespace AK
 
     namespace SWITCHES
     {
+        namespace BULLET_TYPE
+        {
+            static const AkUniqueID GROUP = 4230884304U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID EXPLOSIVE = 433216386U;
+                static const AkUniqueID SLIME_BULLET = 2478666286U;
+            } // namespace SWITCH
+        } // namespace BULLET_TYPE
+
         namespace BUTTON_TYPE
         {
             static const AkUniqueID GROUP = 753474920U;

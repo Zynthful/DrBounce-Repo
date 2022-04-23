@@ -86,6 +86,8 @@ public class ObjectPooler : MonoBehaviour
 
         objToSpawn.SetActive(true);
 
+        bul.typeSwitch.SetValue(objToSpawn);
+
         if (mat != null)
         {
             objToSpawn.GetComponent<Renderer>().material = mat;
