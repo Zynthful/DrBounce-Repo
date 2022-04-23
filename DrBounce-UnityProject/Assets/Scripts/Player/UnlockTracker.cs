@@ -26,7 +26,7 @@ public class UnlockTracker : MonoBehaviour
     [HideInInspector]
     public UnlockTypes? lastUnlock = null;      // Last unlock acquired
     [HideInInspector]
-    public bool usedUnlock = false;     // False when acquired a new unlock, True after using the newly acquired unlock
+    public bool usedUnlock = false;             // False when acquired a new unlock, True after using the newly acquired unlock
 
     [Header("Enable Unlock Events")]
     public UnityEvent unlockFirstDash = null;
