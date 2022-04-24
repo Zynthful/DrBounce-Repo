@@ -21,17 +21,23 @@ public abstract class Vibration : ScriptableObject
 
     protected virtual void OnEnable()
     {
-        for (int i = 0; i < triggerEvents.Length; i++)
+        if (triggerEvents != null)
         {
-            triggerEvents[i].RegisterListener(Trigger);
+            for (int i = 0; i < triggerEvents.Length; i++)
+            {
+                triggerEvents[i].RegisterListener(Trigger);
+            }
         }
     }
 
     protected virtual void OnDisable()
     {
-        for (int i = 0; i < triggerEvents.Length; i++)
+        if (triggerEvents != null)
         {
-            triggerEvents[i].UnregisterListener(Trigger);
+            for (int i = 0; i < triggerEvents.Length; i++)
+            {
+                triggerEvents[i].UnregisterListener(Trigger);
+            }
         }
     }
 

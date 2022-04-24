@@ -32,18 +32,24 @@ public class ContinuousVibration : Vibration
     protected override void OnEnable()
     {
         base.OnEnable();
-        for (int i = 0; i < stopEvents.Length; i++)
+        if (stopEvents != null)
         {
-            stopEvents[i].RegisterListener(Stop);
+            for (int i = 0; i < stopEvents.Length; i++)
+            {
+                stopEvents[i].RegisterListener(Stop);
+            }
         }
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
-        for (int i = 0; i < stopEvents.Length; i++)
+        if (stopEvents != null)
         {
-            stopEvents[i].UnregisterListener(Stop);
+            for (int i = 0; i < stopEvents.Length; i++)
+            {
+                stopEvents[i].UnregisterListener(Stop);
+            }
         }
     }
 
