@@ -95,7 +95,7 @@ public class Checkpoint : MonoBehaviour
         for (int i = 0; i < GameManager.s_Instance.currentSettings.Length; i++)
         {
             unlockFilter[i] = (int)GameManager.s_Instance.currentSettings[i];
-            Debug.Log(unlockFilter[i]);
+            //Debug.Log(unlockFilter[i]);
         }
 
         LevelSaveData data = new LevelSaveData(checkpoint[1],
@@ -187,7 +187,7 @@ public class Checkpoint : MonoBehaviour
     public void SetElevator(GameObject newElevator)
     {
         elevator = newElevator;
-        print(GameObject.Find(elevator.name).GetComponent<Collider>().enabled);
+        //print(GameObject.Find(elevator.name).GetComponent<Collider>().enabled);
     }
 
     public int[] GetCheckpointAndLevel()

@@ -51,7 +51,7 @@ public class AAManager : MonoBehaviour
             Transform closestT = null;
             Vector2 midScreen = new Vector2(main.pixelWidth, main.pixelHeight) / 2;
 
-            Debug.Log("Midscreen: " + midScreen);
+            //Debug.Log("Midscreen: " + midScreen);
             for (int i = 0; i < enemiesOnScreen.Count; i++)
             {
                 Vector3 posOnScreen = main.WorldToScreenPoint(enemiesOnScreen[i].position);
@@ -77,8 +77,8 @@ public class AAManager : MonoBehaviour
             {
                 Vector2 posOnScreen = main.WorldToScreenPoint(closestT.position);
                 aimScript.aimAssistInfluence = (midScreen - posOnScreen).normalized * Time.deltaTime * aimAssistPower;
-                Debug.Log("Enemy position: " + closestT.position, closestT);
-                Debug.Log("On Screen Position: " + posOnScreen, closestT);
+                //Debug.Log("Enemy position: " + closestT.position, closestT);
+                //Debug.Log("On Screen Position: " + posOnScreen, closestT);
             }
             else
                 aimScript.aimAssistInfluence = Vector2.zero;
