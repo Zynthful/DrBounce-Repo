@@ -20,7 +20,7 @@ public class DeathZone : MonoBehaviour
             }
 
             // Kill player
-            playerHealth.Damage(playerHealth.GetMaxHealth());
+            playerHealth.Damage(playerHealth.GetMaxHealth(), true);
         }
         else
         {

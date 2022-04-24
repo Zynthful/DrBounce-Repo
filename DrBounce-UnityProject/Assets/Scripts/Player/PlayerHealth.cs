@@ -38,13 +38,13 @@ public class PlayerHealth : Health
         OnPlayerDeath?.Invoke();
     }
 
-    public override void Damage(int amount)
+    public override void Damage(int amount, bool ignoreGod = false)
     {
         if (((float)health / (float)maxHealth) * 100.0f <= 50) 
         {
             ShouldHeal?.Invoke();
         }
 
-        base.Damage(amount);
+        base.Damage(amount, ignoreGod);
     }
 }

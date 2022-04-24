@@ -29,7 +29,7 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     public UnityEvent<GameObject> onHitPlayer = null;
     public UnityEvent<GameObject> onHitAnyExceptPlayer = null;
 
-    public delegate void Hit(int value);
+    public delegate void Hit(int value, bool ignoreGod = false);
     public static event Hit OnHit;
 
     /// <summary>

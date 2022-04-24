@@ -14,7 +14,7 @@ public class EnemyHealth : Health
     [SerializeField]
     private Enemy enemy = null;
 
-    protected override void SetHealth(int value, bool showBar)
+    protected override void SetHealth(int value, bool showBar, bool ignoreGod = false)
     {
         base.SetHealth(value, showBar);
         switch (enemy.GetEnemyType())

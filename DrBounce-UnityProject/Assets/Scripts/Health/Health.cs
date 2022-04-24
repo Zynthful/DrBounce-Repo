@@ -6,11 +6,6 @@ using MoreMountains.Tools;
 
 public class Health : MonoBehaviour
 {
-    /*
-    public delegate void CurrentHealth();
-    public static event CurrentHealth ReportHealth;
-    */
-
     [Header("Health Settings")]
     protected int health = 100;
 
@@ -23,6 +18,9 @@ public class Health : MonoBehaviour
     protected MMHealthBar healthBar;
 
     protected bool canSetStartingHealth = true;
+
+    protected bool godmode = false;
+    public virtual void SetGodmodeActive(bool value) { godmode = value; }
 
     [Header("Low Health Settings")]
     [SerializeField]
@@ -87,7 +85,7 @@ public class Health : MonoBehaviour
         if (saveDamage)
         {
             saveDamage = false;
-            Damage(saveDamageValue);
+            Damage(saveDamageValue, true);
         }
     }
 
@@ -101,8 +99,11 @@ public class Health : MonoBehaviour
         canSetStartingHealth = false;
     }
 
-    protected virtual void SetHealth(int value, bool showBar)
+    protected virtual void SetHealth(int value, bool showBar, bool ignoreGod = false)
     {
+        if (godmode && !ignoreGod)
+            return;
+
         health = value;
 
         if (GetIsDead())
@@ -145,10 +146,10 @@ public class Health : MonoBehaviour
         onHeal?.Invoke(amount);
         _onHeal?.Raise(amount);
 
-        SetHealth(health + amount, true);
+        SetHealth(health + amount, true, true);
     }
 
-    public virtual void Damage(int amount) 
+    public virtual void Damage(int amount, bool ignoreGod = false) 
     {
         if (GetIsDead())
             return;
@@ -156,7 +157,7 @@ public class Health : MonoBehaviour
         onDamage?.Invoke(amount);
         _onDamage?.Raise(amount);
 
-        SetHealth(health - amount, true);
+        SetHealth(health - amount, true, ignoreGod);
 
         // Only call injured events if we're not dead after taking damage
         if (!GetIsDead())

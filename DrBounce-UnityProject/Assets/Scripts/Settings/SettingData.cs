@@ -20,10 +20,10 @@ public abstract class SettingData : ScriptableObject
 
     public enum SettingType
     {
-        Game,
         Video,
         Audio,
         Controls,
+        Debug,
     }
 
     public enum SettingSubType
