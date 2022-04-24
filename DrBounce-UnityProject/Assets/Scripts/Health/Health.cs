@@ -29,6 +29,19 @@ public class Health : MonoBehaviour
     protected float lowHealthThreshold = 25.0f;
 
     protected bool isOnLowHealth = false;
+    protected virtual void SetLowHealth(bool value)
+    {
+        if (value && !isOnLowHealth)
+        {
+            onLowHealth?.Invoke();
+        }
+        else if (!value && isOnLowHealth)
+        {
+            onNotLowHealth?.Invoke();
+        }
+
+        isOnLowHealth = value;
+    }
 
     [Header("Unity Events")]
     // Passes health value
@@ -119,16 +132,7 @@ public class Health : MonoBehaviour
 
         UpdateHealthBar(showBar);
 
-        bool wasOnLowHealth = isOnLowHealth;    // Checked against to prevent calling low health events multiple times
-        isOnLowHealth = ((float) health / (float) maxHealth) * 100.0f <= lowHealthThreshold;
-        if (isOnLowHealth && !wasOnLowHealth)
-        {
-            onLowHealth?.Invoke();
-        }
-        else if (!isOnLowHealth && wasOnLowHealth)
-        {
-            onNotLowHealth?.Invoke();
-        }
+        SetLowHealth(((float)health / (float)maxHealth) * 100.0f <= lowHealthThreshold);
 
         onHealthChange?.Invoke(health);
         onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());

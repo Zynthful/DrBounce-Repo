@@ -11,8 +11,9 @@ public class PlayerHealth : Health
     public delegate void LowHealth();
     public static event LowHealth ShouldHeal;
 
-    [SerializeField]
-    private UnityEvent onRespawn = null;
+    public UnityEvent onRespawn = null;
+    public UnityEvent onLowHealthFirstTimeThisSave = null;
+    public UnityEvent onHealedLowHealthFirstTimeThisSave = null;
 
     private void OnEnable()
     {
@@ -24,6 +25,23 @@ public class PlayerHealth : Health
     {
         HealthPack.OnActivated -= Heal;
         BulletMovement.OnHit -= Damage;
+    }
+
+    protected override void SetLowHealth(bool value)
+    {
+        base.SetLowHealth(value);
+
+        // Update game save data
+        GameSaveData data = SaveSystem.LoadGameData();
+        if (data != null)
+        {
+            if (value && !data.beenOnLowHealth)
+            {
+                data.beenOnLowHealth = true;
+                onLowHealthFirstTimeThisSave.Invoke();
+                SaveSystem.SaveGameData(data);
+            }
+        }
     }
 
     protected override void DIE()
@@ -46,5 +64,24 @@ public class PlayerHealth : Health
         }
 
         base.Damage(amount, ignoreGod);
+    }
+
+    public override void Heal(int amount)
+    {
+        bool wasOnLowHealth = isOnLowHealth;
+        base.Heal(amount);
+
+        // If we healed whilst on low health
+        if (wasOnLowHealth)
+        {
+            // Update game save data
+            GameSaveData data = SaveSystem.LoadGameData();
+            if (data.beenOnLowHealth && !data.healedOnLowHealth)
+            {
+                data.healedOnLowHealth = true;
+                onHealedLowHealthFirstTimeThisSave.Invoke();
+                SaveSystem.SaveGameData(data);
+            }
+        }
     }
 }

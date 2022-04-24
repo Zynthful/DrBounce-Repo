@@ -64,6 +64,11 @@ public static class SaveSystem
         {
             //Debug.LogError("No existing save file found in path " + path);
             return null;
+
+            /*
+            Debug.LogWarning($"No existing save file found in path {path}. Creating new save...");
+            return NewGameSave();
+            */
         }
     }
 
@@ -86,5 +91,12 @@ public static class SaveSystem
         { 
             return false; 
         } 
+    }
+
+    public static GameSaveData NewGameSave()
+    {
+        GameSaveData save = new GameSaveData();
+        SaveGameData(save);
+        return save;
     }
 }
