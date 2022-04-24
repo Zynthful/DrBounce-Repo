@@ -17,9 +17,8 @@ public class PauseHandler : MonoBehaviour
     public static bool GetCanPause() { return canPause; }
     public static void SetCanPause(bool value) { canPause = value; }
 
-    [SerializeField]
-    [Tooltip("MUST match the name of the Pause Menu scene to load when pausing.")]
-    private string pauseMenuSceneName = "PauseMenu_SCN";
+    // MUST match the name of the Pause Menu scene to load when pausing
+    public static string pauseMenuSceneName = "PauseMenu_SCN";
 
     [Header("Events")]
     public UnityEvent onPauseBegin = null;      // Begin and complete events currently happen at the same time
@@ -35,24 +34,9 @@ public class PauseHandler : MonoBehaviour
         InputManager.inputMaster.Menu.Pause.performed += _ => InvertPause();
     }
 
-    private void Awake()
-    {
-        // Load in pause menu
-        if (!SceneManagement.IsSceneLoaded(pauseMenuSceneName) && GameManager.player != null)
-        {
-            SceneManager.LoadSceneAsync(pauseMenuSceneName, LoadSceneMode.Additive);
-        }
-    }
-
     private void OnDisable()
     {
         InputManager.inputMaster.Menu.Pause.performed -= _ => InvertPause();
-
-        // Unload pause menu
-        if (SceneManagement.IsSceneLoaded(pauseMenuSceneName))
-        {
-            SceneManager.UnloadSceneAsync(pauseMenuSceneName, UnloadSceneOptions.None);
-        }
     }
 
     private void InvertPause()
