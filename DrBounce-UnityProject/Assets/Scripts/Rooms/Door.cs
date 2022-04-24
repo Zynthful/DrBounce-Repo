@@ -27,6 +27,7 @@ public class Door : MonoBehaviour
 
     [Header("Unity Events")]
     public UnityEvent onInitOpen = null;
+    public UnityEvent onInitNoEnemiesAlive = null;
     public UnityEvent onInitCloseWithEnemiesAlive = null;
     public UnityEvent onOpen = null;
     public UnityEvent onClose = null;
@@ -57,6 +58,9 @@ public class Door : MonoBehaviour
     private void OnEnable()
     {
         numAlive = GetNumAlive();
+
+        if (numAlive <= 0)
+            onInitNoEnemiesAlive.Invoke();
 
         switch (initialState)
         {
@@ -133,7 +137,7 @@ public class Door : MonoBehaviour
         else
         {
             onClose.Invoke();
-            if (numAlive >= 0)
+            if (numAlive >= 1)
                 onCloseWithEnemiesAlive.Invoke();
         }
 
