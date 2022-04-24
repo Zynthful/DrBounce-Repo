@@ -37,22 +37,17 @@ public abstract class Vibration : ScriptableObject
 
     public virtual void Trigger()
     {
-        //Debug.Log("triggering vibration " + name, this);
+        // doesn't work lol
+        /*
+        // Prevent triggering if a continuous vibration is already active
+        // (this stops continuous vibrations from stopping)
+        if (VibrationManager.activeContinuousVibrations.Count >= 1)
+            return;
+        */
     }
 
     public virtual void StopAll()
     {
         MMVibrationManager.StopAllHaptics();
-    }
-
-    public virtual void StopAllContinuous(bool alsoStopRumble)
-    {
-        //Debug.Log("stopping all continuous... " + name, this);
-        MMVibrationManager.StopContinuousHaptic(alsoStopRumble);
-    }
-
-    public virtual void StopAllContinuous()
-    {
-        StopAllContinuous(true);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.NiceVibrations;
 
@@ -33,7 +34,7 @@ public class ContinuousVibration : Vibration
         base.OnEnable();
         for (int i = 0; i < stopEvents.Length; i++)
         {
-            stopEvents[i].RegisterListener(StopAllContinuous);
+            stopEvents[i].RegisterListener(Stop);
         }
     }
 
@@ -42,13 +43,36 @@ public class ContinuousVibration : Vibration
         base.OnDisable();
         for (int i = 0; i < stopEvents.Length; i++)
         {
-            stopEvents[i].UnregisterListener(StopAllContinuous);
+            stopEvents[i].UnregisterListener(Stop);
         }
     }
 
     public override void Trigger()
     {
         base.Trigger();
+        VibrationManager.activeContinuousVibrations.Add(this);
         MMVibrationManager.ContinuousHaptic(intensity, sharpness, duration, HapticTypes.None, GameManager.s_Instance, alsoRumble, controllerID, threaded, fullIntensity);
+    }
+
+    public virtual void Stop(bool alsoStopRumble)
+    {
+        if (!VibrationManager.activeContinuousVibrations.Contains(this))
+            return;
+
+        MMVibrationManager.StopContinuousHaptic(alsoStopRumble);
+        List<ContinuousVibration> activeConts = new List<ContinuousVibration>(VibrationManager.activeContinuousVibrations);
+        VibrationManager.activeContinuousVibrations.Clear();
+
+        // Play the last triggered continuous vibration if we're stopping multiple, as there's no way to stop specific vibrations
+        if (activeConts.Count > 1)
+        {
+            ContinuousVibration lastCont = activeConts[activeConts.Count - 1];
+            lastCont.Trigger();
+        }
+    }
+
+    public virtual void Stop()
+    {
+        Stop(true);
     }
 }
