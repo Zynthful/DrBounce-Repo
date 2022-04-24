@@ -71,6 +71,7 @@ public class Shooting : MonoBehaviour
     public UnityEvent onFirstGainChargeSinceEmpty = null;
 
     [Header("Firing Events")]
+    public UnityEvent onFire = null;
     public UnityEvent onUnchargedShotFired = null;
     public UnityEvent<int> onChargedShotFired = null;
     public UnityEvent onSingleChargeShotFired = null;
@@ -297,38 +298,38 @@ public class Shooting : MonoBehaviour
 
     private void ShootReleased()
     {
-        if (!GameManager.s_Instance.paused)
+        if (GameManager.s_Instance.paused)
+            return;
+
+        maxShotCharging = false;
+        onChargingMaxShotProgress?.Invoke(0.0f);
+
+        // Release a max charged shot if we've fully charged and we're holding the gun
+        if (maxShotCharged && gunThrowing.GetIsHeld())
         {
-            maxShotCharging = false;
-            onChargingMaxShotProgress?.Invoke(0.0f);
-
-            // Release a max charged shot if we've fully charged and we're holding the gun
-            if (maxShotCharged && gunThrowing.GetIsHeld())
-            {
-                maxShotCharged = false;
-                HandleChargedShot(gunCharge);
-                onMaxShotFired?.Invoke(gunCharge);
-            }
-
-            // Cancel if we haven't reached the threshold, shooting if we're still holding the gun
-            else if (currentHoldTime / holdTimeToFullCharge < chargeCancelThreshold)
-            {
-                onChargeMaxShotCancel?.Invoke();
-
-                if (gunThrowing.GetIsHeld())
-                {
-                    TryShoot();
-                }
-            }
-
-            // Cancel without trying to fire a regular shot
-            else
-            {
-                onChargeMaxShotCancel?.Invoke();
-            }
-
-            currentHoldTime = 0.0f;
+            maxShotCharged = false;
+            HandleChargedShot(gunCharge);
+            onMaxShotFired?.Invoke(gunCharge);
         }
+
+        // Cancel if we haven't reached the threshold, shooting if we're still holding the gun
+        else if (currentHoldTime / holdTimeToFullCharge < chargeCancelThreshold)
+        {
+            onChargeMaxShotCancel?.Invoke();
+
+            if (gunThrowing.GetIsHeld())
+            {
+                TryShoot();
+            }
+        }
+
+        // Cancel without trying to fire a regular shot
+        else
+        {
+            onChargeMaxShotCancel?.Invoke();
+        }
+
+        currentHoldTime = 0.0f;
     }
 
     /// <summary>
@@ -345,6 +346,8 @@ public class Shooting : MonoBehaviour
     private void Shoot() 
     {
         timeSinceLastShot = 0;
+
+        onFire.Invoke();
 
         // Fire a single charged shot if we have sufficient charges
         if (gunCharge > 0)
