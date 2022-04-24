@@ -9,6 +9,9 @@ public class TriggerInvoke : MonoBehaviour
     [SerializeField]
     private LayerMask lookForLayer = new LayerMask();
     [SerializeField]
+    [Tooltip("NOTE: Only works when the gun is not held by the player (since its colliders are disabled).")]
+    private bool lookForThrownGun = false;
+    [SerializeField]
     private float triggerDelay = 0.0f;
     [SerializeField]
     private bool triggerOnce = false;
@@ -25,7 +28,10 @@ public class TriggerInvoke : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((!triggerOnce || !triggeredEnter) && IsInTrigger(other))
+        if (triggerOnce && triggeredEnter)
+            return;
+
+        if (IsInTrigger(other))
         {
             onPreDetect.Invoke(other.gameObject);
             StartCoroutine(DetectDelay(other.gameObject, other));
@@ -34,8 +40,16 @@ public class TriggerInvoke : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // Check the object we're detecting is the object we're looking for, and that we've passed the delay
-        if ((!triggerOnce || !triggeredExit) && IsInTrigger(other) && detected)
+        // Stop if we're triggering only once and we've already triggered
+        if (triggerOnce && triggeredExit)
+            return;
+
+        // Stop if we've not the delay
+        if (!detected)
+            return;
+
+        // Check the object we're detecting is the object we're looking for
+        if (IsInTrigger(other))
         {
             onDetectStay.Invoke(other.gameObject);
         }
@@ -43,7 +57,10 @@ public class TriggerInvoke : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if ((!triggerOnce || !triggeredExit) && IsInTrigger(other))
+        if (triggerOnce && triggeredExit)
+            return;
+
+        if (IsInTrigger(other))
         {
             LostDetection();
         }
@@ -52,7 +69,7 @@ public class TriggerInvoke : MonoBehaviour
     private bool IsInTrigger(Collider trigger)
     {
         // wtf
-        return (lookForLayer.value & (1 << trigger.gameObject.layer)) > 0;
+        return ((lookForLayer.value & (1 << trigger.gameObject.layer)) > 0) || lookForThrownGun && trigger.gameObject.GetComponent<GunThrowing>();
     }
 
     // cringe
