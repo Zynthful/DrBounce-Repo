@@ -1624,7 +1624,8 @@
 														<SourceFadeOut>
 															<MusicFade Name="Source Fade-out" ID="{75E48C79-39A9-4744-A2CB-0E0FA99BD413}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																	<Property Name="FadeTime" Type="Real64" Value="2"/>
 																	<Property Name="FadeType" Type="int16" Value="1"/>
 																</PropertyList>
@@ -1633,7 +1634,8 @@
 														<DestinationFadeIn>
 															<MusicFade Name="Destination Fade-in" ID="{76EA8DD0-7FA2-403E-A57C-14CA14C7471F}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																	<Property Name="FadeTime" Type="Real64" Value="3"/>
 																</PropertyList>
 															</MusicFade>
@@ -1663,7 +1665,8 @@
 														<SourceFadeOut>
 															<MusicFade Name="Source Fade-out" ID="{3381F086-5F00-4F00-ABF8-2FDFA6F8B2B1}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																	<Property Name="FadeTime" Type="Real64" Value="2"/>
 																	<Property Name="FadeType" Type="int16" Value="1"/>
 																</PropertyList>
@@ -1672,7 +1675,8 @@
 														<DestinationFadeIn>
 															<MusicFade Name="Destination Fade-in" ID="{106F57CD-8E3D-4FD6-8285-F860F47EABBA}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																	<Property Name="FadeTime" Type="Real64" Value="3"/>
 																</PropertyList>
 															</MusicFade>
@@ -4719,8 +4723,8 @@
 														<MusicTransition Name="Transition" ID="{3CF37EEE-41B8-4851-95F5-0C63C07DB191}">
 															<PropertyList>
 																<Property Name="DestinationContextType" Type="int16" Value="2"/>
+																<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
 																<Property Name="EnableTransitionFadeIn" Type="bool" Value="True"/>
-																<Property Name="EnableTransitionFadeOut" Type="bool" Value="True"/>
 																<Property Name="ExitSourceAt" Type="int16" Value="5"/>
 																<Property Name="ExitSourceCustomCueMatchName" Type="string" Value="Cue To Battle"/>
 																<Property Name="SourceContextType" Type="int16" Value="2"/>
@@ -4736,11 +4740,27 @@
 															</ReferenceList>
 															<TransitionInfo>
 																<TransitionObjectRef Name="DB_MSC_Lv2_Pt2_Transition_Med-Battle_141bpm" ID="{3829EE35-802A-4331-AE83-2CE13AD5D4CB}" WorkUnitID="{BDF29459-0CBE-4DBA-8AC7-BFABDCC212CF}"/>
+																<SourceFadeOut>
+																	<MusicFade Name="Source Fade-out" ID="{CDBE36EB-12F6-49AB-B806-B7D473017C6B}">
+																		<PropertyList>
+																			<Property Name="FadeCurve" Type="int16" Value="1"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="1"/>
+																			<Property Name="FadeTime" Type="Real64" Value="1"/>
+																			<Property Name="FadeType" Type="int16" Value="1"/>
+																		</PropertyList>
+																	</MusicFade>
+																</SourceFadeOut>
+																<DestinationFadeIn>
+																	<MusicFade Name="Destination Fade-in" ID="{C8B74B45-3871-49BC-A912-CD54AB8F6AEA}">
+																		<PropertyList>
+																			<Property Name="FadeCurve" Type="int16" Value="1"/>
+																		</PropertyList>
+																	</MusicFade>
+																</DestinationFadeIn>
 																<TransitionFadeIn>
 																	<MusicFade Name="Transition Fade-in" ID="{338AE1A7-11CE-4246-AA16-A03B2B17A55A}">
 																		<PropertyList>
 																			<Property Name="FadeCurve" Type="int16" Value="1"/>
-																			<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
 																			<Property Name="FadeTime" Type="Real64" Value="1"/>
 																		</PropertyList>
 																	</MusicFade>
@@ -4749,8 +4769,8 @@
 																	<MusicFade Name="Transition Fade-out" ID="{E4251EE5-6A0C-48AD-B6F9-041CEEB5F60C}">
 																		<PropertyList>
 																			<Property Name="FadeCurve" Type="int16" Value="1"/>
-																			<Property Name="FadeOffset" Type="Real64" Value="1"/>
-																			<Property Name="FadeTime" Type="Real64" Value="1"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="2"/>
+																			<Property Name="FadeTime" Type="Real64" Value="2"/>
 																			<Property Name="FadeType" Type="int16" Value="1"/>
 																		</PropertyList>
 																	</MusicFade>
@@ -4820,7 +4840,7 @@
 																<SourceFadeOut>
 																	<MusicFade Name="Source Fade-out" ID="{5E654732-6D5E-49D7-8453-B6994EE4DB96}">
 																		<PropertyList>
-																			<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																			<Property Name="FadeTime" Type="Real64" Value="2"/>
 																			<Property Name="FadeType" Type="int16" Value="1"/>
 																		</PropertyList>
@@ -4829,7 +4849,7 @@
 																<DestinationFadeIn>
 																	<MusicFade Name="Destination Fade-in" ID="{4754C52B-BB2C-482B-A845-0748848B8295}">
 																		<PropertyList>
-																			<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																			<Property Name="FadeTime" Type="Real64" Value="3"/>
 																		</PropertyList>
 																	</MusicFade>
@@ -4859,7 +4879,7 @@
 																<SourceFadeOut>
 																	<MusicFade Name="Source Fade-out" ID="{0722B403-D32C-447C-9274-252749D6B2DC}">
 																		<PropertyList>
-																			<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																			<Property Name="FadeTime" Type="Real64" Value="2"/>
 																			<Property Name="FadeType" Type="int16" Value="1"/>
 																		</PropertyList>
@@ -4868,7 +4888,7 @@
 																<DestinationFadeIn>
 																	<MusicFade Name="Destination Fade-in" ID="{AA548746-479D-4907-A1AC-623578839017}">
 																		<PropertyList>
-																			<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																			<Property Name="FadeTime" Type="Real64" Value="3"/>
 																		</PropertyList>
 																	</MusicFade>
@@ -4898,7 +4918,7 @@
 																<SourceFadeOut>
 																	<MusicFade Name="Source Fade-out" ID="{AE58FD3D-E828-4CBE-99C2-37A6CE2F6A19}">
 																		<PropertyList>
-																			<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																			<Property Name="FadeTime" Type="Real64" Value="2"/>
 																			<Property Name="FadeType" Type="int16" Value="1"/>
 																		</PropertyList>
@@ -4907,7 +4927,7 @@
 																<DestinationFadeIn>
 																	<MusicFade Name="Destination Fade-in" ID="{F7E4360C-DE98-4134-B583-034F34F36C3E}">
 																		<PropertyList>
-																			<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																			<Property Name="FadeTime" Type="Real64" Value="3"/>
 																		</PropertyList>
 																	</MusicFade>
@@ -4937,7 +4957,7 @@
 																<SourceFadeOut>
 																	<MusicFade Name="Source Fade-out" ID="{A1C0D6B8-CC22-4FE2-BFAC-321311A7C707}">
 																		<PropertyList>
-																			<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																			<Property Name="FadeTime" Type="Real64" Value="2"/>
 																			<Property Name="FadeType" Type="int16" Value="1"/>
 																		</PropertyList>
@@ -4946,7 +4966,7 @@
 																<DestinationFadeIn>
 																	<MusicFade Name="Destination Fade-in" ID="{6D6D7B7D-EEB2-4491-BA6A-AD827CFD3660}">
 																		<PropertyList>
-																			<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																			<Property Name="FadeTime" Type="Real64" Value="3"/>
 																		</PropertyList>
 																	</MusicFade>
@@ -4983,7 +5003,7 @@
 																	<MusicFade Name="Source Fade-out" ID="{4D2A8BDE-0F88-443A-93E8-80B8C7C79C1C}">
 																		<PropertyList>
 																			<Property Name="FadeCurve" Type="int16" Value="1"/>
-																			<Property Name="FadeOffset" Type="Real64" Value="10"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																			<Property Name="FadeTime" Type="Real64" Value="2"/>
 																			<Property Name="FadeType" Type="int16" Value="1"/>
 																		</PropertyList>
@@ -4993,7 +5013,7 @@
 																	<MusicFade Name="Destination Fade-in" ID="{00AB62F5-9B25-44BA-BCB1-9EDDECA7B578}">
 																		<PropertyList>
 																			<Property Name="FadeCurve" Type="int16" Value="1"/>
-																			<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																			<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																			<Property Name="FadeTime" Type="Real64" Value="3"/>
 																		</PropertyList>
 																	</MusicFade>
@@ -5588,7 +5608,8 @@
 														<SourceFadeOut>
 															<MusicFade Name="Source Fade-out" ID="{687DA97C-C9E1-49D6-AD40-E22F2D94A8E0}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																	<Property Name="FadeTime" Type="Real64" Value="2"/>
 																	<Property Name="FadeType" Type="int16" Value="1"/>
 																</PropertyList>
@@ -5597,7 +5618,8 @@
 														<DestinationFadeIn>
 															<MusicFade Name="Destination Fade-in" ID="{64F78D61-3E9C-4B9C-B208-557FA113D119}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																	<Property Name="FadeTime" Type="Real64" Value="3"/>
 																</PropertyList>
 															</MusicFade>
@@ -5622,7 +5644,8 @@
 														<SourceFadeOut>
 															<MusicFade Name="Source Fade-out" ID="{A03926E8-D70B-4252-895E-EBA68EC42324}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																	<Property Name="FadeTime" Type="Real64" Value="2"/>
 																	<Property Name="FadeType" Type="int16" Value="1"/>
 																</PropertyList>
@@ -5631,7 +5654,8 @@
 														<DestinationFadeIn>
 															<MusicFade Name="Destination Fade-in" ID="{5FAAE1BC-79A5-4983-9BEF-6D8876044493}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																	<Property Name="FadeTime" Type="Real64" Value="3"/>
 																</PropertyList>
 															</MusicFade>
@@ -5656,7 +5680,8 @@
 														<SourceFadeOut>
 															<MusicFade Name="Source Fade-out" ID="{B60FC901-37E9-49EF-B650-1B7EA369368C}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																	<Property Name="FadeTime" Type="Real64" Value="2"/>
 																	<Property Name="FadeType" Type="int16" Value="1"/>
 																</PropertyList>
@@ -5665,7 +5690,8 @@
 														<DestinationFadeIn>
 															<MusicFade Name="Destination Fade-in" ID="{1069DB84-8420-480A-B942-E447434142C9}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																	<Property Name="FadeTime" Type="Real64" Value="3"/>
 																</PropertyList>
 															</MusicFade>
@@ -5690,7 +5716,8 @@
 														<SourceFadeOut>
 															<MusicFade Name="Source Fade-out" ID="{38F14558-CB46-41D9-AECF-74CEFFB11C86}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="8"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="1"/>
 																	<Property Name="FadeTime" Type="Real64" Value="2"/>
 																	<Property Name="FadeType" Type="int16" Value="1"/>
 																</PropertyList>
@@ -5699,7 +5726,8 @@
 														<DestinationFadeIn>
 															<MusicFade Name="Destination Fade-in" ID="{73EDF19C-E223-4E6D-927C-93EC1D07985F}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="6"/>
+																	<Property Name="FadeCurve" Type="int16" Value="1"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="-1.5"/>
 																	<Property Name="FadeTime" Type="Real64" Value="3"/>
 																</PropertyList>
 															</MusicFade>

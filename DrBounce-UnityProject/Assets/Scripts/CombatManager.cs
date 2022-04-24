@@ -7,8 +7,37 @@ public class CombatManager : MonoBehaviour
 {
     public static CombatManager s_Instance = null;
 
-    private bool inCombat = false;
     private List<Enemy> enemiesInCombatWith = new List<Enemy>();
+
+    private Coroutine delayCoroutine = null;
+
+    private bool inCombat = false;
+    public bool GetInCombat() { return inCombat; }
+    private void SetInCombat(bool value)
+    {
+        if (inCombat == value)
+            return;
+
+        inCombat = value;
+        if (value)
+        {
+            if (delayCoroutine != null)
+            {
+                StopCoroutine(delayCoroutine);
+                delayCoroutine = null;
+            }
+            onEnterCombat?.Raise();
+        }
+        else
+        {
+            onExitCombat?.Raise();
+        }
+    }
+
+    [Header("Combat Settings")]
+    [SerializeField]
+    [Tooltip("The duration to wait when there are no enemies in combat with before considering the player as having exited combat.")]
+    private float outOfCombatDelay = 5.0f;
 
     [Header("Events")]
     public GameEvent onEnterCombat = null;
@@ -40,7 +69,8 @@ public class CombatManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        RemoveAllEnemies();
+        RemoveAllEnemies(true);
+        onExitCombat?.Raise();
     }
 
     public void AddEnemy(Enemy enemy)
@@ -67,7 +97,12 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void RemoveEnemy(Enemy enemy)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="enemy"></param>
+    /// <param name="ignoreDelay"></param>
+    public void RemoveEnemy(Enemy enemy, bool ignoreDelay = false)
     {
         enemiesInCombatWith.Remove(enemy);
         numEnemiesEngaged.SetGlobalValue(enemiesInCombatWith.Count);
@@ -76,7 +111,10 @@ public class CombatManager : MonoBehaviour
 
         if (enemiesInCombatWith.Count <= 0)
         {
-            SetInCombat(false);
+            if (ignoreDelay)
+                SetInCombat(false);
+            else
+                delayCoroutine = StartCoroutine(DelayOutOfCombat());
         }
 
         switch (enemy.GetEnemyType())
@@ -92,25 +130,36 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void RemoveAllEnemies()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="ignoreDelay"></param>
+    public void RemoveAllEnemies(bool ignoreDelay = false)
     {
-        enemiesInCombatWith.Clear();
-        numEnemiesEngaged.SetGlobalValue(0);
-        SetInCombat(false);
+        foreach (Enemy enemy in enemiesInCombatWith)
+        {
+            RemoveEnemy(enemy, ignoreDelay);
+        }
+
+        // Failsafe if we didn't get rid of all enemies before
+        if (enemiesInCombatWith.Count >= 1)
+        {
+            enemiesInCombatWith.Clear();
+            numEnemiesEngaged.SetGlobalValue(0);
+
+            if (ignoreDelay)
+                SetInCombat(false);
+            else
+                delayCoroutine = StartCoroutine(DelayOutOfCombat());
+        }
     }
 
-    private void SetInCombat(bool value)
+    private IEnumerator DelayOutOfCombat()
     {
-        inCombat = value;
-        if (inCombat)
-        {
-            onEnterCombat?.Raise();
-        }
-        else
-        {
-            onExitCombat?.Raise();
-        }
-    }
+        yield return new WaitForSeconds(outOfCombatDelay);
 
-    public bool GetInCombat() { return inCombat; }
+        // Make sure we're still out of combat
+        if (enemiesInCombatWith.Count <= 0)
+            SetInCombat(false);
+    }
 }
