@@ -11,6 +11,8 @@ public class Door : MonoBehaviour
     [Tooltip("All enemies below have to be dead for this door to open.")]
     private EnemyHealth[] enemies = null;
 
+    private int numAlive = 0;
+
     [SerializeField]
     [Tooltip("Whether the door should start [OPEN] or [CLOSED].")]
     private InitialState initialState = InitialState.Closed;
@@ -26,6 +28,8 @@ public class Door : MonoBehaviour
     [Header("Unity Events")]
     public UnityEvent onOpen = null;
     public UnityEvent onClose = null;
+    public UnityEvent<bool> onStartOpen = null;
+    public UnityEvent<int> onNumEnemiesValueChanged = null;
 
     private enum InitialState
     {
@@ -50,19 +54,13 @@ public class Door : MonoBehaviour
 
     private void OnEnable()
     {
-        // Listen to enemy death event for each enemy within our list
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            if (enemies[i] != null)
-            {
-                enemies[i].OnDeath += CheckIfCanOpen;
-            }
-        }
+        numAlive = GetNumAlive();
 
         switch (initialState)
         {
             case InitialState.Open:
                 open = true;
+                onStartOpen.Invoke(true);
                 foreach (OpenTransformInfo info in openTransformInfo)
                 {
                     info.transformToUpdate.localPosition = info.openPosition;
@@ -70,11 +68,24 @@ public class Door : MonoBehaviour
                     info.transformToUpdate.localScale = info.openScale;
                 }
                 break;
+
             case InitialState.Closed:
                 open = false;
+                onStartOpen.Invoke(false);
                 break;
+
             default:
                 break;
+        }
+
+
+        // Listen to enemy death event for each enemy within our list
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].OnDeath += CheckIfCanOpen;
+            }
         }
 
         switch (closeSettings)
@@ -91,12 +102,15 @@ public class Door : MonoBehaviour
 
     private void OnDisable()
     {
-        // Stop listening to enemy death events
-        for (int i = 0; i < enemies.Length; i++)
+        if (enemies != null)
         {
-            if (enemies[i] != null)
+            // Stop listening to enemy death events
+            for (int i = 0; i < enemies.Length; i++)
             {
-                enemies[i].OnDeath -= CheckIfCanOpen;
+                if (enemies[i] != null)
+                {
+                    enemies[i].OnDeath -= CheckIfCanOpen;
+                }
             }
         }
     }
@@ -116,6 +130,8 @@ public class Door : MonoBehaviour
         {
             onClose.Invoke();
         }
+
+        numAlive = GetNumAlive();
     }
 
     public void Open()
@@ -133,19 +149,24 @@ public class Door : MonoBehaviour
     /// </summary>
     private void CheckIfCanOpen() 
     {
-        bool isAnEnemyAlive = false;
+        numAlive = GetNumAlive();
+        SetOpen(numAlive <= 0);
+    }
 
-        foreach (EnemyHealth health in enemies) 
+    private int GetNumAlive()
+    {
+        int numAlive = 0;
+        foreach (EnemyHealth health in enemies)
         {
             if (health != null)
             {
                 if (!health.GetIsDead())
                 {
-                    isAnEnemyAlive = true;
+                    numAlive++;
                 }
             }
         }
-
-        SetOpen(!isAnEnemyAlive);
+        onNumEnemiesValueChanged.Invoke(numAlive);
+        return numAlive;
     }
 }
