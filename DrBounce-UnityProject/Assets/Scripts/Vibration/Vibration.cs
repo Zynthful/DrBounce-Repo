@@ -3,6 +3,7 @@ using MoreMountains.NiceVibrations;
 
 public abstract class Vibration : ScriptableObject
 {
+    [Header("Base Vibration Settings")]
     [SerializeField]
     [Tooltip("Type of haptic to trigger.")]
     protected HapticTypes type = HapticTypes.None;
@@ -12,6 +13,27 @@ public abstract class Vibration : ScriptableObject
     [SerializeField]
     [Tooltip("Controller ID to trigger this vibration on.")]
     protected int controllerID = -1;
+
+    [Space]
+    [SerializeField]
+    [Tooltip("[OPTIONAL] The events that will trigger this vibration. Only supports null events : (")]
+    protected GameEvent[] triggerEvents = null;
+
+    protected virtual void OnEnable()
+    {
+        for (int i = 0; i < triggerEvents.Length; i++)
+        {
+            triggerEvents[i].RegisterListener(Trigger);
+        }
+    }
+
+    protected virtual void OnDisable()
+    {
+        for (int i = 0; i < triggerEvents.Length; i++)
+        {
+            triggerEvents[i].UnregisterListener(Trigger);
+        }
+    }
 
     public virtual void Trigger()
     {
