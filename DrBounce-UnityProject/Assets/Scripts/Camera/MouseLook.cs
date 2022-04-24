@@ -21,11 +21,6 @@ public class MouseLook : MonoBehaviour
 
     public Vector2 aimAssistInfluence { private get; set; } = Vector2.zero;
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
     private void LateUpdate()
     {
         if (GameManager.s_Instance.paused) { return; }

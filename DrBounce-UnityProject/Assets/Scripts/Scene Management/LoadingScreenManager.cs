@@ -36,8 +36,7 @@ public class LoadingScreenManager : MonoBehaviour
     }
 
     [Header("Declarations")]
-    [SerializeField]
-    private string loadingScreenSceneName = null;
+    public string loadingScreenSceneName = null;
 
     [Header("Loading Events")]
     public GameEvent onLoadLoadingScreenStart = null;

@@ -74,8 +74,17 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Time.timeScale = 1.0f;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+
+        if (scene.name == LoadingScreenManager.s_Instance.loadingScreenSceneName)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = player == null;
+            Cursor.lockState = player == null ? CursorLockMode.None : CursorLockMode.Locked;
+        }
     }
 
     public void Stop() 

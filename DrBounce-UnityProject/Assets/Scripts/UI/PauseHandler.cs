@@ -22,8 +22,8 @@ public class PauseHandler : MonoBehaviour
     private string pauseMenuSceneName = "PauseMenu_SCN";
 
     [Header("Events")]
-    public UnityEvent onPauseBegin = null;
-    public UnityEvent onPauseComplete = null;
+    public UnityEvent onPauseBegin = null;      // Begin and complete events currently happen at the same time
+    public UnityEvent onPauseComplete = null;   // but if we wanted to have a transition for pausing (such as slowing the game down), this would be useful for it
     public UnityEvent onUnpauseBegin = null;
     public UnityEvent onUnpauseComplete = null;
     public UnityEvent onUnpauseAfterPauseBegin = null;
@@ -35,9 +35,24 @@ public class PauseHandler : MonoBehaviour
         InputManager.inputMaster.Menu.Pause.performed += _ => InvertPause();
     }
 
+    private void Awake()
+    {
+        // Load in pause menu
+        if (!SceneManagement.IsSceneLoaded(pauseMenuSceneName) && GameManager.player != null)
+        {
+            SceneManager.LoadSceneAsync(pauseMenuSceneName, LoadSceneMode.Additive);
+        }
+    }
+
     private void OnDisable()
     {
         InputManager.inputMaster.Menu.Pause.performed -= _ => InvertPause();
+
+        // Unload pause menu
+        if (SceneManagement.IsSceneLoaded(pauseMenuSceneName))
+        {
+            SceneManager.UnloadSceneAsync(pauseMenuSceneName, UnloadSceneOptions.None);
+        }
     }
 
     private void InvertPause()
@@ -51,6 +66,27 @@ public class PauseHandler : MonoBehaviour
             return;
 
         pausingOrUnpausing = true;
+
+        GameManager.s_Instance.paused = value;
+        onIsPaused.Invoke(value);
+
+        if (value)
+        {
+            onPauseBegin.Invoke();
+            onPauseComplete.Invoke();
+            hasPausedOnce = true;
+        }
+        else
+        {
+            onUnpauseBegin.Invoke();
+            onUnpauseComplete.Invoke();
+
+            if (hasPausedOnce)
+            {
+                onUnpauseAfterPauseBegin.Invoke();
+                onUnpauseAfterPauseComplete.Invoke();
+            }
+        }
 
         // Disables player controls if they were enabled and we're pausing
         if (InputManager.inputMaster.Player.enabled && value)
@@ -66,9 +102,13 @@ public class PauseHandler : MonoBehaviour
         }
 
         // Update cursor lock state and visibility
-        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = value;
+        Cursor.lockState = value || GameManager.player == null ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = value || GameManager.player == null;
 
+        pausingOrUnpausing = false;
+        
+        // ASYNC PAUSING AND UNPAUSING (was very laggy when pausing/unpausing)
+        /*
         AsyncOperation operation = null;
         if (value)
         {
@@ -114,5 +154,6 @@ public class PauseHandler : MonoBehaviour
             onIsPaused.Invoke(value);
             pausingOrUnpausing = false;
         }
+        */
     }
 }
