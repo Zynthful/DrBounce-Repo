@@ -26,9 +26,11 @@ public class Door : MonoBehaviour
     private OpenTransformInfo[] openTransformInfo;
 
     [Header("Unity Events")]
+    public UnityEvent onInitOpen = null;
+    public UnityEvent onInitCloseWithEnemiesAlive = null;
     public UnityEvent onOpen = null;
     public UnityEvent onClose = null;
-    public UnityEvent<bool> onStartOpen = null;
+    public UnityEvent onCloseWithEnemiesAlive = null;
     public UnityEvent<int> onNumEnemiesValueChanged = null;
 
     private enum InitialState
@@ -59,8 +61,8 @@ public class Door : MonoBehaviour
         switch (initialState)
         {
             case InitialState.Open:
+                onInitOpen.Invoke();
                 open = true;
-                onStartOpen.Invoke(true);
                 foreach (OpenTransformInfo info in openTransformInfo)
                 {
                     info.transformToUpdate.localPosition = info.openPosition;
@@ -71,7 +73,8 @@ public class Door : MonoBehaviour
 
             case InitialState.Closed:
                 open = false;
-                onStartOpen.Invoke(false);
+                if (numAlive >= 1)
+                    onInitCloseWithEnemiesAlive.Invoke();
                 break;
 
             default:
@@ -121,6 +124,7 @@ public class Door : MonoBehaviour
             return;
 
         open = value;
+        numAlive = GetNumAlive();
 
         if (value)
         {
@@ -129,9 +133,10 @@ public class Door : MonoBehaviour
         else
         {
             onClose.Invoke();
+            if (numAlive >= 0)
+                onCloseWithEnemiesAlive.Invoke();
         }
 
-        numAlive = GetNumAlive();
     }
 
     public void Open()
