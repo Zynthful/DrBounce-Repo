@@ -5796,6 +5796,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 16879569682278619, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: SetControlsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8790834390513273033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5823,6 +5835,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 16879569682278619, guid: 62b57673bec93214e8354cbce48a391d, type: 3}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: SetControlsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1307299018756893376
 GameObject:
@@ -6132,8 +6156,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.434707, y: 5.156685, z: 7.210246}
-  m_Center: {x: -4.2173533, y: 2.0783424, z: 0.25129488}
+  m_Size: {x: 12.359015, y: 7.9175506, z: 7.210246}
+  m_Center: {x: -5.679507, y: 3.4587758, z: 0.25129503}
 --- !u!114 &2569701353606532211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6149,6 +6173,7 @@ MonoBehaviour:
   lookForLayer:
     serializedVersion: 2
     m_Bits: 512
+  lookForThrownGun: 0
   triggerDelay: 0
   triggerOnce: 1
   onPreDetect:
@@ -6157,24 +6182,12 @@ MonoBehaviour:
   onDetect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4168893520118474961}
-        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
-        m_MethodName: PlayFeedbacks
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 7321943011418611548, guid: fa7b141c7648f314799e0477e3032dff, type: 3}
         m_TargetAssemblyTypeName: Checkpoint, Assembly-CSharp
-        m_MethodName: SetElevator
+        m_MethodName: ElevatorCheck
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 4298588592317264151}
+          m_ObjectArgument: {fileID: 4168893520118474967}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -7729,6 +7742,7 @@ MonoBehaviour:
   lookForLayer:
     serializedVersion: 2
     m_Bits: 512
+  lookForThrownGun: 0
   triggerDelay: 0
   triggerOnce: 0
   onPreDetect:
@@ -8642,28 +8656,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec33c53f0660e004b8a5984345ae5d93, type: 3}
+--- !u!1 &4168893520118474967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 248528367432673027, guid: ec33c53f0660e004b8a5984345ae5d93, type: 3}
+  m_PrefabInstance: {fileID: 4226647673680711636}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4168893520118474962 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 248528367432673030, guid: ec33c53f0660e004b8a5984345ae5d93, type: 3}
   m_PrefabInstance: {fileID: 4226647673680711636}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4168893520118474961 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 248528367432673029, guid: ec33c53f0660e004b8a5984345ae5d93, type: 3}
-  m_PrefabInstance: {fileID: 4226647673680711636}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8924982471497084362 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4716388040423219742, guid: ec33c53f0660e004b8a5984345ae5d93, type: 3}
   m_PrefabInstance: {fileID: 4226647673680711636}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4168893520118474967}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23a102c1a91e34644aa37f1e4f00c31a, type: 3}
