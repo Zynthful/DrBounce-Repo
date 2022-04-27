@@ -23,8 +23,6 @@ public class Checkpoint : MonoBehaviour
     public UnityEvent onCheckpointReached = null;
     public UnityEvent onReloadFromCheckpoint = null;
 
-    private bool elevatorActive = false;
-
     private void Awake()
     {
         if (s_Instance == null)
@@ -69,7 +67,6 @@ public class Checkpoint : MonoBehaviour
     private void Update()
     {
         print(currentCheckpoint + " currentCheckPoint");
-        print("elevatorActive " + elevatorActive);
     }
 
     private void ReachedNextCheckpoint()
@@ -127,11 +124,6 @@ public class Checkpoint : MonoBehaviour
         //Debug.Log("Run Load level progress");
 
         currentCheckpoint = data.checkpoint;
-
-        if (currentCheckpoint >= 1)
-        {
-            elevatorActive = false;
-        }
 
         UnlockTracker.UnlockTypes[] unlocks = new UnlockTracker.UnlockTypes[data.unlocks.Length];
         for (int i = 0; i < data.unlocks.Length; i++)
@@ -192,8 +184,7 @@ public class Checkpoint : MonoBehaviour
 
     public void ElevatorCheck(GameObject feedback)
     {
-        print(elevatorActive);
-        if (elevatorActive == true)
+        if (currentCheckpoint == 0)
         {
             print("PlayingFeedback");
             feedback.GetComponent<MoreMountains.Feedbacks.MMFeedbacks>().PlayFeedbacks();
