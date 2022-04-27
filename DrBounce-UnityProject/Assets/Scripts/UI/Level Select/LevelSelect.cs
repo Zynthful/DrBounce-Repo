@@ -10,8 +10,8 @@ using TMPro;
 public class LevelSelect : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("Level scriptable objects")]
-    private LevelData[] levels = null;
+    [Tooltip("Level scriptable object")]
+    private LevelsData levelsData = null;
 
     private int selectedLevel = 0;
 
@@ -92,16 +92,16 @@ public class LevelSelect : MonoBehaviour
     /// </summary>
     private void GenerateLevels()
     {
-        for (int i = 0; i < levels.Length; i++)
+        for (int i = 0; i < levelsData.levels.Count; i++)
         {
             GameObject level = Instantiate(levelPrefab, transform);
             levelObjects.Add(level);
-            level.name = $"{levels[i].GetLevelName()}";
+            level.name = $"{levelsData.levels[i].GetLevelName()}";
 
             LevelTemplateUI ui = level.GetComponent<LevelTemplateUI>();
-            ui.SetName(levels[i].GetLevelName());
-            ui.SetDescription(levels[i].GetDescription());
-            ui.SetPreviewSprite(levels[i].GetSprite());
+            ui.SetName(levelsData.levels[i].GetLevelName());
+            ui.SetDescription(levelsData.levels[i].GetDescription());
+            ui.SetPreviewSprite(levelsData.levels[i].GetSprite());
 
             level.SetActive(false);
 
@@ -118,7 +118,7 @@ public class LevelSelect : MonoBehaviour
 
         selectedLevel = levelIndex;
 
-        onSelectLevelToLoad.Invoke(levels[levelIndex].GetSceneName());
+        onSelectLevelToLoad.Invoke(levelsData.levels[levelIndex].GetSceneName());
     }
 
     public void SelectDefaultButton()
@@ -128,7 +128,7 @@ public class LevelSelect : MonoBehaviour
 
     public void NextLevel()
     {
-        if (selectedLevel == levels.Length - 1)
+        if (selectedLevel == levelsData.levels.Count - 1)
         {
             SelectLevel(0);
         }
@@ -142,7 +142,7 @@ public class LevelSelect : MonoBehaviour
     {
         if (selectedLevel == 0)
         {
-            SelectLevel(levels.Length - 1);
+            SelectLevel(levelsData.levels.Count - 1);
         }
         else
         {
@@ -152,6 +152,6 @@ public class LevelSelect : MonoBehaviour
 
     public void StartLevel()
     {
-        LoadingScreenManager.s_Instance.LoadScene(levels[selectedLevel].GetSceneName(), LoadingScreenManager.ContinueOptions.RequireInput, LoadingScreenManager.UnloadOptions.Manual, LoadingScreenManager.UnloadOptions.Manual, 1.2f);
+        levelsData.LoadLevel(selectedLevel);
     }
 }

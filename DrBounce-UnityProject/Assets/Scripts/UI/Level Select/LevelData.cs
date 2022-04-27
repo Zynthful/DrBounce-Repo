@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/Level")]
+[CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/Levels/Level")]
 
 public class LevelData : ScriptableObject
 {
@@ -18,28 +18,24 @@ public class LevelData : ScriptableObject
     [SerializeField]
     [Tooltip("This name is reflected in-game, e.g., 'BouncePad'.")]
     private string levelName = "New Level";
+    public string GetLevelName() { return levelName; }
+    public void SetLevelName(string value) { levelName = value; }
 
     [SerializeField]
     [Tooltip("This description is shown in the UI for each level.")]
     private string description = "";
+    public string GetDescription() { return description; }
+    public void SetDescription(string value) { description = value; }
 
     [SerializeField]
     [Tooltip("This should be the exact name of the scene asset, e.g., 'BouncePad_SCN'.")]
     private string sceneName = "Scene Name";
+    public string GetSceneName() { return sceneName; }
+    public void SetSceneName(string value) { sceneName = value; }
 
     [SerializeField]
     [Tooltip("This sprite is reflected in-game.")]
     private Sprite previewSprite = null;
-
-    public void SetLevelName(string value) { levelName = value; }
-    public string GetLevelName() { return levelName; }
-
-    public void SetDescription(string value) { description = value; }
-    public string GetDescription() { return description; }
-
-    public void SetSceneName(string value) { sceneName = value; }
-    public string GetSceneName() { return sceneName; }
-
-    public void SetSprite(Sprite value) { previewSprite = value; }
     public Sprite GetSprite() { return previewSprite; }
+    public void SetSprite(Sprite value) { previewSprite = value; }
 }
