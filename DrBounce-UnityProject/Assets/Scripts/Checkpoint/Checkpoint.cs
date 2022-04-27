@@ -23,7 +23,7 @@ public class Checkpoint : MonoBehaviour
     public UnityEvent onCheckpointReached = null;
     public UnityEvent onReloadFromCheckpoint = null;
 
-    private bool elevatorActive = true;
+    private bool elevatorActive = false;
 
     private void Awake()
     {
@@ -68,8 +68,8 @@ public class Checkpoint : MonoBehaviour
 
     private void Update()
     {
-        //print(currentCheckpoint + " currentCheckPoint");
-        //print("elevatorActive " + elevatorActive);
+        print(currentCheckpoint + " currentCheckPoint");
+        print("elevatorActive " + elevatorActive);
     }
 
     private void ReachedNextCheckpoint()
@@ -128,21 +128,17 @@ public class Checkpoint : MonoBehaviour
 
         currentCheckpoint = data.checkpoint;
 
+        if (currentCheckpoint >= 1)
+        {
+            elevatorActive = false;
+        }
+
         UnlockTracker.UnlockTypes[] unlocks = new UnlockTracker.UnlockTypes[data.unlocks.Length];
         for (int i = 0; i < data.unlocks.Length; i++)
         {
             unlocks[i] = (UnlockTracker.UnlockTypes)data.unlocks[i];
             //Debug.Log("Stuffherer: " + unlocks[i]);
         }
-
-        if (currentCheckpoint >= 1)
-        {
-            elevatorActive = false;
-        }
-        //else
-        //{
-        //    elevatorActive = true;
-        //}
 
         Transform player = PlayerMovement.player;
         UnlockTracker tracker = player.GetComponent<UnlockTracker>();
@@ -196,8 +192,10 @@ public class Checkpoint : MonoBehaviour
 
     public void ElevatorCheck(GameObject feedback)
     {
+        print(elevatorActive);
         if (elevatorActive == true)
         {
+            print("PlayingFeedback");
             feedback.GetComponent<MoreMountains.Feedbacks.MMFeedbacks>().PlayFeedbacks();
         }
     }
