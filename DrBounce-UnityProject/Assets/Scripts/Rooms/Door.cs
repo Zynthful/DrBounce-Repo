@@ -49,7 +49,10 @@ public class Door : MonoBehaviour
     [System.Serializable]
     private struct OpenTransformInfo
     {
+        [Tooltip("The transform which should be updated on Awake if the door's initial state is set to [OPEN].")]
         public Transform transformToUpdate;
+        [Tooltip("[OPTIONAL] Overrides the position, rotation, and scale.")]
+        public Transform openTransform;
         public Vector3 openPosition;
         public Quaternion openRotation;
         public Vector3 openScale;
@@ -69,9 +72,18 @@ public class Door : MonoBehaviour
                 open = true;
                 foreach (OpenTransformInfo info in openTransformInfo)
                 {
-                    info.transformToUpdate.localPosition = info.openPosition;
-                    info.transformToUpdate.localRotation = info.openRotation;
-                    info.transformToUpdate.localScale = info.openScale;
+                    if (info.openTransform != null)
+                    {
+                        info.transformToUpdate.localPosition = info.openTransform.localPosition;
+                        info.transformToUpdate.localRotation = info.openTransform.localRotation;
+                        info.transformToUpdate.localScale = info.openTransform.localScale;
+                    }
+                    else
+                    {
+                        info.transformToUpdate.localPosition = info.openPosition;
+                        info.transformToUpdate.localRotation = info.openRotation;
+                        info.transformToUpdate.localScale = info.openScale;
+                    }
                 }
                 break;
 
