@@ -63,6 +63,11 @@ public class LevelsData : ScriptableObject
         }
     }
 
+    public void RestartLevel()
+    {
+        LoadLevel(currentLevelIndex);
+    }
+
     public bool IsLevelValid(int levelIndex)
     {
         return levels[levelIndex] != null;
@@ -71,5 +76,10 @@ public class LevelsData : ScriptableObject
     public bool IsLevelValid(LevelData level)
     {
         return levels.Contains(level);
+    }
+
+    public bool ReachedLastLevel()
+    {
+        return currentLevelIndex + 1 >= levels.Count;
     }
 }

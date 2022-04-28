@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class LevelComplete : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class LevelComplete : MonoBehaviour
     private Condition condition = Condition.Trigger;
     [SerializeField]
     private TriggerInvoke trigger = null;
+    [SerializeField]
+    private string resultsScreenSceneName = "Results_SCN";
 
     [Header("Events")]
     public UnityEvent onLevelComplete = null;
-    public GameEvent _onLevelComplete = null;
+    public UnityEvent onResultsLoadComplete = null;
 
     public delegate void LevelCompleted();
     public static event LevelCompleted onComplete;
@@ -49,8 +52,16 @@ public class LevelComplete : MonoBehaviour
     {
         SaveSystem.DeleteLevelData();
         GameManager.s_Instance.currentSettings = null;
-        onComplete?.Invoke();
+        onComplete.Invoke();
         onLevelComplete?.Invoke();
-        _onLevelComplete?.Raise();
+    }
+
+    public void ShowResults()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(resultsScreenSceneName, LoadSceneMode.Additive);
+        operation.completed += _ =>
+        {
+            onResultsLoadComplete.Invoke();
+        };
     }
 }

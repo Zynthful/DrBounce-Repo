@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 591008932604269980}
   - component: {fileID: 8624660549875345726}
   - component: {fileID: 6761953480337197374}
-  - component: {fileID: 6988735229372821448}
   m_Layer: 3
   m_Name: End Elevator
   m_TagString: Untagged
@@ -52,9 +51,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   condition: 0
   trigger: {fileID: 7399401890724256850}
+  resultsScreenSceneName: Results_SCN
   onLevelComplete:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0822a2d09b8dce7478284e246107bb32, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 6820281451315717410}
         m_TargetAssemblyTypeName: Door, Assembly-CSharp
         m_MethodName: Close
@@ -79,7 +91,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _onLevelComplete: {fileID: 11400000, guid: 0822a2d09b8dce7478284e246107bb32, type: 2}
+  onResultsLoadComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 89dbab55eaf8e8c4099cea8ecd401b07, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6761953480337197374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,18 +128,6 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
---- !u!114 &6988735229372821448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 591008932604269955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a07755ef3c08c540b3a50145c645edb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &676036245914896509
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +544,7 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    InitialDelay: 4
+    InitialDelay: 1
     CooldownDuration: 0
     ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
@@ -585,11 +599,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Load Next Level
+  Label: Show Results
   Chance: 100
   Timing:
     TimescaleMode: 0
-    InitialDelay: 8
+    InitialDelay: 5
     CooldownDuration: 0
     ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
@@ -610,9 +624,9 @@ MonoBehaviour:
   PlayEvents:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 6c9624ee56dab6d42ade1bd6c083ef34, type: 2}
-        m_TargetAssemblyTypeName: LevelsData, Assembly-CSharp
-        m_MethodName: LoadNextLevel
+      - m_Target: {fileID: 8624660549875345726}
+        m_TargetAssemblyTypeName: LevelComplete, Assembly-CSharp
+        m_MethodName: ShowResults
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4024,6 +4038,10 @@ PrefabInstance:
     - target: {fileID: 6559752410087876672, guid: 47cb9064fdec00c4fb01bb1f92615189, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836645712060360462, guid: 47cb9064fdec00c4fb01bb1f92615189, type: 3}
+      propertyPath: InitialDelay
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7753398765734792618, guid: 47cb9064fdec00c4fb01bb1f92615189, type: 3}
       propertyPath: m_Mesh

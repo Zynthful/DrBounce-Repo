@@ -5,10 +5,10 @@ using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
-    private float timePaused = 0.0f;                            // Duration spent paused. Used for calculating checkpoint/finish time.
-    private float startTime = 0.0f;                             // Current time when starting the timer
-    private List<float> checkpointTimes = new List<float>();    // List of times taken to get to each checkpoint
-    private bool active = false;                                // Whether the timer is active or not
+    private static float timePaused = 0.0f;                            // Duration spent paused. Used for calculating checkpoint/finish time.
+    private static float startTime = 0.0f;                             // Current time when starting the timer
+    private static List<float> checkpointTimes = new List<float>();    // List of times taken to get to each checkpoint
+    private static bool active = false;                                // Whether the timer is active or not
 
     [Header("Unity Events")]
     public UnityEvent onStartTimer = null;                      // Called every time a new timer is started (i.e., at the start and on every checkpoint)
@@ -58,6 +58,7 @@ public class Timer : MonoBehaviour
 
     public void RestartTimer()
     {
+        checkpointTimes.Clear();
         timePaused = 0.0f;
         startTime = Time.time;
         active = true;
@@ -71,14 +72,13 @@ public class Timer : MonoBehaviour
         checkpointTimes.Add(Time.time - startTime - timePaused);
         active = false;
         onCompleteTime?.Invoke(LevelEndTime());
-        checkpointTimes.Clear();
     }
 
     /// <summary>
     /// Stops the active timer.
     /// </summary>
     /// <returns>The completion time.</returns>
-    public float LevelEndTime()
+    public static float LevelEndTime()
     {
         float completionTime = 0.0f;
         for (int i = 0; i < checkpointTimes.Count; i++)
