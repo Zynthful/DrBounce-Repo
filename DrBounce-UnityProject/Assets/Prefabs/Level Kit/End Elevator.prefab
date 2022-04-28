@@ -49,8 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5878c5c55185e4aa4f1b9fb9f7b60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: 0
-  trigger: {fileID: 7399401890724256850}
   resultsScreenSceneName: Results_SCN
   onLevelComplete:
     m_PersistentCalls:
@@ -603,7 +601,7 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    InitialDelay: 8
+    InitialDelay: 6
     CooldownDuration: 0
     ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
@@ -743,16 +741,16 @@ MonoBehaviour:
     m_Bits: 512
   lookForThrownGun: 0
   triggerDelay: 0
-  triggerOnce: 0
+  triggerOnce: 1
   onPreDetect:
     m_PersistentCalls:
       m_Calls: []
   onDetect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 281466244128192616}
-        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
-        m_MethodName: PlayFeedbacks
+      - m_Target: {fileID: 8624660549875345726}
+        m_TargetAssemblyTypeName: LevelComplete, Assembly-CSharp
+        m_MethodName: Complete
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

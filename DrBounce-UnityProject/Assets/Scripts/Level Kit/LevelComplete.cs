@@ -4,16 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelComplete : MonoBehaviour
 {
-    private enum Condition
-    {
-        Trigger,
-    }
-
     [Header("Level Completion Settings")]
-    [SerializeField]
-    private Condition condition = Condition.Trigger;
-    [SerializeField]
-    private TriggerInvoke trigger = null;
     [SerializeField]
     private string resultsScreenSceneName = "Results_SCN";
 
@@ -24,31 +15,10 @@ public class LevelComplete : MonoBehaviour
     public delegate void LevelCompleted();
     public static event LevelCompleted onComplete;
 
-    private void Start()
-    {
-        switch (condition)
-        {
-            case Condition.Trigger:
-                // Listen for trigger detect
-                trigger.onDetect.AddListener((obj) => TryComplete());
-                break;
-            default:
-                break;
-        }
-    }
-
-    /// <summary>
-    /// Attempts to run Complete, only doing so if conditions are fulfilled
-    /// </summary>
-    public void TryComplete()
-    {
-        Complete();
-    }
-
     /// <summary>
     /// Completes level and invokes level completion events.
     /// </summary>
-    private void Complete() 
+    public void Complete() 
     {
         SaveSystem.DeleteLevelData();
         GameManager.s_Instance.currentSettings = null;
@@ -58,12 +28,15 @@ public class LevelComplete : MonoBehaviour
 
     public void ShowResults()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(resultsScreenSceneName, LoadSceneMode.Additive);
-        operation.completed += _ =>
+        if (!SceneManagement.IsSceneLoaded(resultsScreenSceneName))
         {
-            GameManager.SetCursorEnabled(true);
-            PauseHandler.SetCanPause(false);
-            onResultsLoadComplete.Invoke();
-        };
+            AsyncOperation operation = SceneManager.LoadSceneAsync(resultsScreenSceneName, LoadSceneMode.Additive);
+            operation.completed += _ =>
+            {
+                GameManager.SetCursorEnabled(true);
+                PauseHandler.SetCanPause(false);
+                onResultsLoadComplete.Invoke();
+            };
+        }
     }
 }
