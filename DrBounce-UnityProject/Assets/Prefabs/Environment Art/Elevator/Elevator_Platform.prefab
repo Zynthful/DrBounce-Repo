@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 392616210761860777}
   - component: {fileID: 3665087631488338188}
   - component: {fileID: 1529524585125035462}
-  m_Layer: 0
+  - component: {fileID: 8989280065283645670}
+  m_Layer: 6
   m_Name: Elevator Platform Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8989280065283645670
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024862422910180371}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5226349349717534276, guid: 0301721879cebb842aed16d06f319c26, type: 3}
 --- !u!1 &1305839407506262456
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 269815447031677116}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Elevator_Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,6 +142,8 @@ GameObject:
   - component: {fileID: 6535453747581641587}
   - component: {fileID: 8039245326771881417}
   - component: {fileID: 2471779250942438368}
+  - component: {fileID: 7025343526755067540}
+  - component: {fileID: 1342457705645397361}
   m_Layer: 2
   m_Name: ElevatorStartTrigger
   m_TagString: Untagged
@@ -191,6 +208,41 @@ MonoBehaviour:
   onLostDetection:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7025343526755067540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976308984927280352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bddc7c9e595b124481030d15914d3bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &1342457705645397361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976308984927280352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9266e32e44f290a4481de77fa046e6b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Collider: {fileID: 0}
 --- !u!1 &2445717521483027900
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221007829855203803}
   - component: {fileID: 7040850214631799368}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +347,7 @@ GameObject:
   - component: {fileID: 3898903191939610835}
   - component: {fileID: 1142524384978033834}
   - component: {fileID: 1934525480061818820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +384,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: eaaedb2fdf2235f488c5da45e902c300, type: 2}
-  objToPost: {fileID: 7239176657686542769}
+  objToPost: {fileID: 1024862422910180371}
   postOn: 0
 --- !u!114 &1934525480061818820
 MonoBehaviour:
@@ -371,7 +423,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8030907920541970322}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: -- Audio --
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,15 +459,13 @@ GameObject:
   - component: {fileID: 3426484248336832517}
   - component: {fileID: 8250194171198468003}
   - component: {fileID: 7136540022222290818}
-  - component: {fileID: 1430013012661088521}
-  - component: {fileID: 1314081394165063849}
-  m_Layer: 0
-  m_Name: Elevator Platform Collider
+  m_Layer: 6
+  m_Name: Elevator Platform Mesh (old)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7345853506183799371
 Transform:
   m_ObjectHideFlags: 0
@@ -1525,41 +1575,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7239176657686542769}
   m_Mesh: {fileID: 0}
---- !u!114 &1430013012661088521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7239176657686542769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bddc7c9e595b124481030d15914d3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_listeners:
-    initialListenerList: []
-    useDefaultListeners: 1
-  isEnvironmentAware: 1
-  isStaticObject: 0
-  m_positionOffsetData:
-    KeepMe: 0
-    positionOffset: {x: 0, y: 0, z: 0}
-  m_posOffsetData: {fileID: 0}
-  listenerMask: 1
---- !u!114 &1314081394165063849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7239176657686542769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9266e32e44f290a4481de77fa046e6b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Collider: {fileID: 0}
 --- !u!1 &8568440851692343866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,7 +1585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8011964934470135587}
   - component: {fileID: 2405513099382468061}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Start Descent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1607,5 +1622,5 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 9f1c04b2b17a4f64fa2a950c4631b58f, type: 2}
-  objToPost: {fileID: 7239176657686542769}
+  objToPost: {fileID: 1024862422910180371}
   postOn: 0
