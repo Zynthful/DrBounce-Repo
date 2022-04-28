@@ -180,32 +180,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX, SLOPECHECK BOX AND HEADCHECK BOX RESPECTIVELY.
-
-        groundcheckPos = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
-
-        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube.transform.position = groundcheckPos;
-        //cube.transform.rotation = transform.rotation;
-        //cube.transform.localScale = new Vector3(0.25f, 0.1f, 0.25f) * 2;
-        //cube.GetComponent<Collider>().enabled = false;
-        //cube.GetComponent<Renderer>().material.color = Color.green;
-
-        //GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube2.transform.position = groundcheckPos + move + (Vector3.down / 2.5f);
-        //cube2.transform.rotation = transform.rotation;
-        //cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
-        //cube2.GetComponent<Collider>().enabled = false;
-        //cube2.GetComponent<Renderer>().material.color = Color.red;
-
-        //GameObject cube3 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube3.transform.position = new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z);
-        //cube3.transform.rotation = transform.rotation;
-        //cube3.transform.localScale = headCheckHeight * 2;
-        //cube3.GetComponent<Collider>().enabled = false;
-        //cube3.GetComponent<Renderer>().material.color = Color.blue;
-
-
         //@cole :)
         if (isDashing == true)
         {
@@ -429,6 +403,31 @@ public class PlayerMovement : MonoBehaviour
         #region GroundChecking
         bool wasGrounded = isGrounded;
 
+
+        //CUBE DEBUGGING COMMENTED OUT BELOW - PLACES CUBES THAT MIMIC THE PLAYER'S GROUNDCHECK BOX, SLOPECHECK BOX AND HEADCHECK BOX RESPECTIVELY.
+
+        groundcheckPos = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
+
+        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube.transform.position = groundcheckPos;
+        //cube.transform.rotation = transform.rotation;
+        //cube.transform.localScale = new Vector3(0.25f, 0.1f, 0.25f) * 2;
+        //cube.GetComponent<Collider>().enabled = false;
+        //cube.GetComponent<Renderer>().material.color = Color.green;
+
+        GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube2.transform.position = groundcheckPos + move + (Vector3.down / 2.5f);
+        cube2.transform.rotation = transform.rotation;
+        cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
+        cube2.GetComponent<Collider>().enabled = false;
+        cube2.GetComponent<Renderer>().material.color = Color.red;
+
+        //GameObject cube3 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube3.transform.position = new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z);
+        //cube3.transform.rotation = transform.rotation;
+        //cube3.transform.localScale = headCheckHeight * 2;
+        //cube3.GetComponent<Collider>().enabled = false;
+        //cube3.GetComponent<Renderer>().material.color = Color.blue;
         //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
 
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
@@ -472,11 +471,11 @@ public class PlayerMovement : MonoBehaviour
                 bounceForce = Vector3.zero;
             }
 
-            if (isGrounded && (slopeCheck || isSliding))
+            if (slopeCheck)
             {
                 print("Spongebob");
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
-                velocity.y = -100;
+                gravity = prevGrav - 100;
             }
         }
         else

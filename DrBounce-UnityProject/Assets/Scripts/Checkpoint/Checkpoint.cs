@@ -64,11 +64,6 @@ public class Checkpoint : MonoBehaviour
         firstSetup = true;
     }
 
-    private void Update()
-    {
-        print(currentCheckpoint + " currentCheckPoint");
-    }
-
     private void ReachedNextCheckpoint()
     {
         if (currentCheckpoint < checkpoints.Length - 1)
