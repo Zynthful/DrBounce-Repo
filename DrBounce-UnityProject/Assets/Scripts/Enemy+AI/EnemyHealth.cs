@@ -19,14 +19,17 @@ public class EnemyHealth : Health
         base.Start();
 
         //Workaround fix to enemy colliders being disabled on prefab randomly
-        if (GetComponent<Collider>().enabled == false)
+        if (GetComponent<Collider>())
         {
-            GetComponent<Collider>().enabled = true;
-        }
+            if (GetComponent<Collider>().enabled == false)
+            {
+                GetComponent<Collider>().enabled = true;
+            }
 
-        if (GetComponent<Collider>().enabled == false)
-        {
-            Destroy(gameObject);
+            if (GetComponent<Collider>().enabled == false)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
