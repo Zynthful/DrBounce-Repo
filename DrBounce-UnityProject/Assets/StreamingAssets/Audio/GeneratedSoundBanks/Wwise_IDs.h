@@ -57,6 +57,7 @@ namespace AK
         static const AkUniqueID ENEMY_STUN_INCREASE = 3231467681U;
         static const AkUniqueID ENEMY_STUN_PARTICLE_SPAWN = 865452671U;
         static const AkUniqueID ENEMY_STUN_STUNNED = 1850312910U;
+        static const AkUniqueID FREEZE = 3285814624U;
         static const AkUniqueID GENERIC_STOP_ALL_GAMEOBJECT = 3857490017U;
         static const AkUniqueID LEVEL_CHECKPOINT_REACHED = 3200076801U;
         static const AkUniqueID LEVEL_COMPLETE = 3736098925U;
@@ -114,6 +115,7 @@ namespace AK
         static const AkUniqueID UI_TV_BUTTON_CLICK_SUCCESS = 2770946982U;
         static const AkUniqueID UI_TV_SELECTABLE_POINTERENTER = 3934313U;
         static const AkUniqueID UI_TV_SELECTABLE_SELECT = 1544786970U;
+        static const AkUniqueID UNFREEZE = 1984048681U;
         static const AkUniqueID UNPAUSE = 3412868374U;
         static const AkUniqueID UPGRADE_PICKUP = 3807985526U;
         static const AkUniqueID WORLD_BOUNCEPAD_BOUNCE_OBJECT = 3194510422U;

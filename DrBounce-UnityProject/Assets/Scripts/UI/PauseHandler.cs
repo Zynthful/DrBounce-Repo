@@ -1,7 +1,4 @@
-/// This script is used to pause and unpause the game via additively loading/unloading a Pause Menu scene
-
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
 public class PauseHandler : MonoBehaviour
@@ -17,10 +14,13 @@ public class PauseHandler : MonoBehaviour
     public static bool GetCanPause() { return canPause; }
     public static void SetCanPause(bool value) { canPause = value; }
 
-    // MUST match the name of the Pause Menu scene to load when pausing
+    // MUST match the name of the Pause Menu scene to load
     public static string pauseMenuSceneName = "PauseMenu_SCN";
 
-    [Header("Events")]
+    [SerializeField]
+    private MoreMountains.Feedbacks.MMFeedbacks freezeFeedback = null;
+
+    [Header("Pause Events")]
     public UnityEvent onPauseBegin = null;      // Begin and complete events currently happen at the same time
     public UnityEvent onPauseComplete = null;   // but if we wanted to have a transition for pausing (such as slowing the game down), this would be useful for it
     public UnityEvent onUnpauseBegin = null;
@@ -28,6 +28,11 @@ public class PauseHandler : MonoBehaviour
     public UnityEvent onUnpauseAfterPauseBegin = null;
     public UnityEvent onUnpauseAfterPauseComplete = null;
     public UnityEvent<bool> onIsPaused = null;
+
+    [Header("Time Freeze Events")]
+    public UnityEvent onFreeze = null;
+    public UnityEvent onUnfreeze = null;
+    public UnityEvent<bool> onIsFrozen = null;
 
     private void OnEnable()
     {
@@ -44,13 +49,18 @@ public class PauseHandler : MonoBehaviour
         SetPaused(!GameManager.s_Instance.paused);
     }
 
-    public void SetPaused(bool value)
+    public void SetPaused(bool value, bool overrideCursor = false, bool showCursor = true)
     {
-        if (pausingOrUnpausing || !canPause || value == GameManager.s_Instance.paused || Player.GetPlayer() == null)
+        if (pausingOrUnpausing || !canPause)
+            return;
+
+        // Don't pause if there's no player in the scene
+        if (value && Player.GetPlayer() == null)
             return;
 
         pausingOrUnpausing = true;
 
+        SetTimeFreeze(value);
         GameManager.s_Instance.paused = value;
         onIsPaused.Invoke(value);
 
@@ -72,72 +82,70 @@ public class PauseHandler : MonoBehaviour
             }
         }
 
-        // Disables player controls if they were enabled and we're pausing
+        if (overrideCursor)
+        {
+            GameManager.SetCursorEnabled(showCursor);
+        }
+        else
+        {
+            if (Player.GetPlayer() == null)
+                GameManager.SetCursorEnabled(true);
+            else
+                GameManager.SetCursorEnabled(value);
+        }
+
+        pausingOrUnpausing = false;
+    }
+
+    public void SetPaused(bool value) { SetPaused(value, false, true); }
+
+    public void Pause() { SetPaused(true); }
+    public void Pause(bool showCursor) { SetPaused(true, true, showCursor); }
+
+    public void Unpause() { SetPaused(false); }
+    public void Unpause(bool showCursor) { SetPaused(false, true, showCursor); }
+
+    public void SetTimeFreeze(bool value)
+    {
+        Time.timeScale = value ? 0.0f : 1.0f;
+
+        /*
+        // Handle freeze feedback
+        if (freezeFeedback != null)
+        {
+            if (value)
+            {
+                freezeFeedback.PlayFeedbacks();
+            }
+            else
+            {
+                freezeFeedback.StopFeedbacks();
+            }
+        }
+        else
+        {
+            Debug.LogError("PauseHandler: The Freeze Feedbacks has not been set and is null! You probably need to assign it in the inspector.", this);
+        }
+        */
+
+        // Disables player controls if they were enabled and we're freezing
         if (InputManager.inputMaster.Player.enabled && value)
         {
             InputManager.SetActionMapActive(InputManager.inputMaster.Player, false);
             disabledControls = true;
         }
-        // Re-enables player controls if we disabled them and we're unpausing
+        // Re-enables player controls if we disabled them and we're unfreezing
         else if (disabledControls && !value)
         {
             InputManager.SetActionMapActive(InputManager.inputMaster.Player, true);
             disabledControls = false;
         }
 
-        // Update cursor lock state and visibility
-        Cursor.lockState = value || GameManager.player == null ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = value || GameManager.player == null;
-
-        pausingOrUnpausing = false;
-        
-        // ASYNC PAUSING AND UNPAUSING (was very laggy when pausing/unpausing)
-        /*
-        AsyncOperation operation = null;
+        // Handle events
+        onIsFrozen.Invoke(value);
         if (value)
-        {
-            onPauseBegin.Invoke();
-            hasPausedOnce = true;
-            operation = SceneManager.LoadSceneAsync(pauseMenuSceneName, LoadSceneMode.Additive);
-            operation.completed += _ =>
-            {
-                onPauseComplete.Invoke();
-            };
-        }
+            onFreeze.Invoke();
         else
-        {
-            onUnpauseBegin.Invoke();
-            if (hasPausedOnce)
-                onUnpauseAfterPauseBegin.Invoke();
-
-            if (SceneManagement.IsSceneLoaded(pauseMenuSceneName))
-            {
-                operation = SceneManager.UnloadSceneAsync(pauseMenuSceneName, UnloadSceneOptions.None);
-                operation.completed += _ =>
-                {
-                    onUnpauseComplete.Invoke();
-
-                    if (hasPausedOnce)
-                        onUnpauseAfterPauseComplete.Invoke();
-                };
-            }
-        }
-
-        if (operation != null)
-        {
-            operation.completed += _ =>
-            {
-                GameManager.s_Instance.paused = value;
-                onIsPaused.Invoke(value);
-                pausingOrUnpausing = false;
-            };
-        }
-        else
-        {
-            GameManager.s_Instance.paused = value;
-            onIsPaused.Invoke(value);
-            pausingOrUnpausing = false;
-        }
-        */
+            onUnfreeze.Invoke();
     }
 }

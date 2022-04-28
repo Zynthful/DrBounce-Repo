@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         GameManager.player = this;
+        GameManager.SetCursorEnabled(false);
+        PauseHandler.SetCanPause(true);
 
         // Load in pause menu
         if (!SceneManagement.IsSceneLoaded(PauseHandler.pauseMenuSceneName))

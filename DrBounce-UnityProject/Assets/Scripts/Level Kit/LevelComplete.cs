@@ -61,6 +61,8 @@ public class LevelComplete : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(resultsScreenSceneName, LoadSceneMode.Additive);
         operation.completed += _ =>
         {
+            GameManager.SetCursorEnabled(true);
+            PauseHandler.SetCanPause(false);
             onResultsLoadComplete.Invoke();
         };
     }
