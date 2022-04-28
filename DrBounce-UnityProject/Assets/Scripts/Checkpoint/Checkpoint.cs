@@ -6,96 +6,76 @@ using UnityEngine.Events;
 
 public class Checkpoint : MonoBehaviour
 {
-    //need to be where the player spawns
-
     [SerializeField]
-    private Transform[] checkpoints;
+    private LevelsData levelsData = null;
 
-    private static int currentCheckpoint = 0;
-
-    private int currentSceneIndex = -1;
-    public static Checkpoint s_Instance = null;
-    public static bool firstSetup;
-
-    private bool levelReloadFromSave;
-
-    [Header("Events")]
-    public UnityEvent onCheckpointReached = null;
-    public UnityEvent onReloadFromCheckpoint = null;
+    private static int currentCheckpointID = -1;
 
     private void Awake()
     {
-        if (s_Instance == null)
-        {
-            s_Instance = FindObjectOfType(typeof(Checkpoint)) as Checkpoint;
-        }
-        if (s_Instance == null)
-        {
-            s_Instance = this;
-        }
-        else if (s_Instance != this)
-        {
-            Destroy(gameObject);
-        }
+        DontDestroyOnLoad(gameObject);
 
-        DontDestroyOnLoad(this.gameObject);
-        GoToCurrentCheckpoint();
+        /*
+#if UNITY_EDITOR
+        SaveSystem.DeleteLevelData();
+        ResetCurrentCheckpoint();
+#endif
+        */
     }
 
     private void OnEnable()
     {
-        CheckpointHit.OnCollision += ReachedNextCheckpoint;
-        PlayerHealth.OnPlayerDeath += ReloadFromCheckpoint;
+        CheckpointHit.onHit += HitCheckpoint;
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        CheckpointHit.onHit -= HitCheckpoint;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (levelReloadFromSave && scene.buildIndex == currentSceneIndex)
+        if (SceneManager.GetActiveScene().name == levelsData.levels[levelsData.GetCurrentLevelIndex()].GetSceneName())
         {
-            levelReloadFromSave = false;
-            //Debug.Log("LevelLoadFromSave");
-            LoadLevelProgress(SaveSystem.LoadInLevel());
+            LevelSaveData save = SaveSystem.LoadInLevel();
+            if (save != null)
+            {
+                LoadLevelProgress(save);
+            }
         }
     }
 
-    private void Start()
+    private void HitCheckpoint(CheckpointHit checkpoint)
     {
-        firstSetup = true;
+        if (checkpoint.id > currentCheckpointID)
+        {
+            currentCheckpointID = checkpoint.id;
+            SaveLevelProgress();
+        }
     }
 
-    private void ReachedNextCheckpoint()
+    public static void ReloadFromCheckpoint()
     {
-        if (currentCheckpoint < checkpoints.Length - 1)
-        {
-            currentCheckpoint++;
-        }
-
-        SaveLevelProgress();
-
-        onCheckpointReached?.Invoke();
+        LoadingScreenManager.s_Instance.LoadScene(
+            SceneManager.GetActiveScene().name,
+            LoadingScreenManager.ContinueOptions.RequireInput,
+            LoadingScreenManager.UnloadOptions.Manual,
+            LoadingScreenManager.UnloadOptions.Manual,
+            1.2f);
     }
 
     private void SaveLevelProgress()
     {
-        if (currentSceneIndex == -1) { currentSceneIndex = SceneManager.GetActiveScene().buildIndex; }
-
-        // Save Level Progress
-        Transform player = PlayerMovement.player;
-
-        int[] checkpoint = GetCheckpointAndLevel();
-
-        //Debug.Log("Data saved at level " + checkpoint[1]);
-
+        Transform player = Player.GetPlayer().transform;
         int[] unlockFilter = new int[GameManager.s_Instance.currentSettings.Length];
         for (int i = 0; i < GameManager.s_Instance.currentSettings.Length; i++)
         {
             unlockFilter[i] = (int)GameManager.s_Instance.currentSettings[i];
-            //Debug.Log(unlockFilter[i]);
         }
-
-        LevelSaveData data = new LevelSaveData(checkpoint[1],
-                                                checkpoint[0],
+        LevelSaveData data = new LevelSaveData(levelsData.GetCurrentLevelIndex(),
+                                                currentCheckpointID,
                                                 player.GetComponent<PlayerHealth>().GetHealth(),
                                                 new float[3] { player.position.x, player.position.y, player.position.z },
                                                 new float[4] { player.rotation.x, player.rotation.y, player.rotation.z, player.rotation.w },
@@ -107,24 +87,14 @@ public class Checkpoint : MonoBehaviour
         SaveSystem.SaveInLevel(data);
     }
 
-    public void ReloadFromCheckpoint()
-    {
-        onReloadFromCheckpoint?.Invoke();
-        levelReloadFromSave = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
     public void LoadLevelProgress(LevelSaveData data)
     {
-        //Debug.Log("Run Load level progress");
-
-        currentCheckpoint = data.checkpoint;
+        currentCheckpointID = data.checkpointID;
 
         UnlockTracker.UnlockTypes[] unlocks = new UnlockTracker.UnlockTypes[data.unlocks.Length];
         for (int i = 0; i < data.unlocks.Length; i++)
         {
             unlocks[i] = (UnlockTracker.UnlockTypes)data.unlocks[i];
-            //Debug.Log("Stuffherer: " + unlocks[i]);
         }
 
         Transform player = PlayerMovement.player;
@@ -144,50 +114,20 @@ public class Checkpoint : MonoBehaviour
         player.GetComponentInChildren<Shooting>().SetCharge(data.charges);
     }
 
-    private void GoToCurrentCheckpoint()
-    {
-        if (SceneManager.GetActiveScene().buildIndex != 1)  //needs to be the build index for the loading screen
-        {
-            if (currentSceneIndex == -1)
-            {
-                currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            }
-            if (SceneManager.GetActiveScene().buildIndex == currentSceneIndex)
-            {
-                GoToCheckpoint(currentCheckpoint);
-            }
-            else
-            {
-                GameManager.s_Instance.currentSettings = null;
-                s_Instance = null;
-                firstSetup = false;
-                currentSceneIndex = -1;
-
-                foreach (Transform trans in checkpoints)
-                {
-                    Destroy(trans.gameObject);
-                }
-                Destroy(gameObject);
-            }
-        }
-    }
-
-    private void GoToCheckpoint(int checkpointIndex)
-    {
-        PlayerMovement.player.transform.position = new Vector3(checkpoints[currentCheckpoint].position.x, checkpoints[currentCheckpoint].position.y + 1, checkpoints[currentCheckpoint].position.z);
-    }
-
+    /// <summary>
+    /// Checks if our current checkpoint is 0 before triggering the elevator intro feedback
+    /// </summary>
+    /// <param name="feedback"></param>
     public void ElevatorCheck(GameObject feedback)
     {
-        if (currentCheckpoint == 0)
+        if (currentCheckpointID == -1)
         {
-            print("PlayingFeedback");
             feedback.GetComponent<MoreMountains.Feedbacks.MMFeedbacks>().PlayFeedbacks();
         }
     }
 
-    public int[] GetCheckpointAndLevel()
+    public static void ResetCurrentCheckpoint()
     {
-        return new int[2] { currentCheckpoint, currentSceneIndex };
+        currentCheckpointID = -1;
     }
 }

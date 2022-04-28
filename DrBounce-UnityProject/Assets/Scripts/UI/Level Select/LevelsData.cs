@@ -55,6 +55,7 @@ public class LevelsData : ScriptableObject
     {
         if (levels.Count > currentLevelIndex + 1)
         {
+            SaveSystem.DeleteLevelData();
             LoadLevel(currentLevelIndex + 1);
         }
         else
@@ -65,6 +66,7 @@ public class LevelsData : ScriptableObject
 
     public void RestartLevel()
     {
+        SaveSystem.DeleteLevelData();
         LoadLevel(currentLevelIndex);
     }
 

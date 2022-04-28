@@ -80,6 +80,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 6307cfaccf763c748a0874b7e2e21a18, type: 2}
   objToPost: {fileID: 7321943011418611551}
+  postOn: 0
 --- !u!1 &7321943011418611551
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +92,6 @@ GameObject:
   - component: {fileID: 7321943011418611549}
   - component: {fileID: 7321943011418611548}
   - component: {fileID: 4971703086310018375}
-  - component: {fileID: 7321943011418611618}
   m_Layer: 3
   m_Name: CheckpointManager
   m_TagString: Untagged
@@ -126,41 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b664eb8d1a7224e42b3ab1520875ac2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpoints:
-  - {fileID: 7321943011418611549}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  onCheckpointReached:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8280921116806044898}
-        m_TargetAssemblyTypeName: WwiseEvent, Assembly-CSharp
-        m_MethodName: Post
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onReloadFromCheckpoint:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7302249661853136583}
-        m_TargetAssemblyTypeName: WwiseEvent, Assembly-CSharp
-        m_MethodName: Post
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  levelsData: {fileID: 11400000, guid: 6c9624ee56dab6d42ade1bd6c083ef34, type: 2}
 --- !u!114 &4971703086310018375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,19 +149,6 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
---- !u!65 &7321943011418611618
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7321943011418611551}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 4, z: 4}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7940415415936525141
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,3 +197,4 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 77827630f6e153c42969c018cffb87fa, type: 2}
   objToPost: {fileID: 7321943011418611551}
+  postOn: 0

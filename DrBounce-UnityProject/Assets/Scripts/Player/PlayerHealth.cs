@@ -4,9 +4,6 @@ using UnityEngine.Events;
 
 public class PlayerHealth : Health
 {
-    public delegate void PlayerDeath();
-    public static event PlayerDeath OnPlayerDeath;
-
     public delegate void LowHealth();
     public static event LowHealth ShouldHeal;
 
@@ -47,15 +44,6 @@ public class PlayerHealth : Health
     {
         base.DIE();
     }
-
-    /*
-    public void Respawn()
-    {
-        onRespawn?.Invoke();
-        ResetHealth();
-        OnPlayerDeath?.Invoke();
-    }
-    */
 
     public void OnDeathComplete()
     {

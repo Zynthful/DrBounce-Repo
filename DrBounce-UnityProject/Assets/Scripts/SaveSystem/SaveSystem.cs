@@ -6,7 +6,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
-
     public static void SaveInLevel(LevelSaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -76,21 +75,22 @@ public static class SaveSystem
     {
         if (File.Exists(Application.persistentDataPath + "/levelData.dat"))
         {
+            Checkpoint.ResetCurrentCheckpoint();
             File.Delete(Application.persistentDataPath + "/levelData.dat");
         }
     }
 
     public static bool LevelSaveExists(int levelIndex) 
     { 
-        LevelSaveData data = LoadInLevel(); 
-        if (data.level == levelIndex) 
-        { 
-            return true; 
-        } 
-        else 
-        { 
-            return false; 
-        } 
+        LevelSaveData data = LoadInLevel();
+        if (data != null)
+        {
+            return data.level == levelIndex;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static GameSaveData NewGameSave()

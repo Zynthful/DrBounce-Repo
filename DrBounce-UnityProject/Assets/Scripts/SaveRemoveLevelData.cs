@@ -7,5 +7,6 @@ public class SaveRemoveLevelData : MonoBehaviour
     public void DeleteLevelSaveData()
     {
         SaveSystem.DeleteLevelData();
+        Checkpoint.ResetCurrentCheckpoint();
     }
 }

@@ -17,14 +17,14 @@ public class Timer : MonoBehaviour
 
     private void OnEnable()
     {
-        CheckpointHit.OnCollision += Checkpoint;        // Listen for checkpoint hit
-        LevelComplete.onComplete += Complete;           // Listen for level complete
+        CheckpointHit.onHit += _ => Checkpoint();   // Listen for checkpoint hit
+        LevelComplete.onComplete += Complete;       // Listen for level complete
     }
 
     private void OnDisable()
     {
-        CheckpointHit.OnCollision -= Checkpoint;        // Stop listening for checkpoint hit
-        LevelComplete.onComplete -= Complete;           // Stop listening for level complete
+        CheckpointHit.onHit -= _ => Checkpoint();   // Stop listening for checkpoint hit
+        LevelComplete.onComplete -= Complete;       // Stop listening for level complete
     }
 
     private void Update()

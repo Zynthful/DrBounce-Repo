@@ -14,7 +14,10 @@ public class LoadMidLevel : MonoBehaviour
     [Tooltip("Used for updating the button navigation. This should be the parent of the button used for loading the checkpoint.")]
     private SelectableVerticalNavigation nav = null;
 
-    private void Awake()
+    [SerializeField]
+    private LevelsData levelsData = null;
+
+    private void OnEnable()
     {
         if (button == null)
         {
@@ -32,17 +35,13 @@ public class LoadMidLevel : MonoBehaviour
             }
         }
 
-        //Debug.Log("Before " + GetComponent<Button>().interactable);
+        CheckpointHit.onHit += _ => SetInteractable(true);
+        button.interactable = SaveSystem.LevelSaveExists(levelsData.GetCurrentLevelIndex());
+    }
 
-        if (SaveSystem.LevelSaveExists(SceneManager.GetActiveScene().buildIndex))
-            button.interactable = true;
-        else
-            button.interactable = false;
-
-        //Debug.Log("After " + GetComponent<Button>().interactable);
-
-        Checkpoint.s_Instance.onCheckpointReached.AddListener(() => { SetInteractable(true); });
-
+    private void OnDisable()
+    {
+        CheckpointHit.onHit -= _ => SetInteractable(true);
     }
 
     void SetInteractable(bool value)
@@ -55,7 +54,7 @@ public class LoadMidLevel : MonoBehaviour
     {
         LevelSaveData data = SaveSystem.LoadInLevel();
 
-        if(SceneManager.GetActiveScene().buildIndex != data.level)
+        if(levelsData.GetCurrentLevelIndex() != data.level)
         {
             Debug.LogError("Load level failed, not on the correct level, this button should be disabled");
             Debug.LogError("Current Level " + SceneManager.GetActiveScene().buildIndex + ", desired level: " + data.level);
@@ -63,7 +62,7 @@ public class LoadMidLevel : MonoBehaviour
         }
         else
         {
-            Checkpoint.s_Instance.ReloadFromCheckpoint();
+            Checkpoint.ReloadFromCheckpoint();
         }
     }
 }

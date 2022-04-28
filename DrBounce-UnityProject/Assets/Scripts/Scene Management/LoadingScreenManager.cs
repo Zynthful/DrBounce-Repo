@@ -93,7 +93,7 @@ public class LoadingScreenManager : MonoBehaviour
     /// <param name="_smoothMultiplier">Additional parameter that affects smoothing of load progress (useful for progress bars).</param>
     public void LoadScene(
             string _destination,
-            ContinueOptions _continueOptions = ContinueOptions.Automatic,
+            ContinueOptions _continueOptions = ContinueOptions.RequireInput,
             UnloadOptions _unloadPrevOptions = UnloadOptions.Automatic,
             UnloadOptions _unloadLoadScreenOptions = UnloadOptions.Automatic,
             float _smoothMultiplier = 1.0f)
