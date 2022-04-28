@@ -14,6 +14,22 @@ public class EnemyHealth : Health
     [SerializeField]
     private Enemy enemy = null;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        //Workaround fix to enemy colliders being disabled on prefab randomly
+        if (GetComponent<Collider>().enabled == false)
+        {
+            GetComponent<Collider>().enabled = true;
+        }
+
+        if (GetComponent<Collider>().enabled == false)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     protected override void SetHealth(int value, bool showBar, bool ignoreGod = false)
     {
         base.SetHealth(value, showBar);
