@@ -191,12 +191,12 @@ public class PlayerMovement : MonoBehaviour
         //cube.GetComponent<Collider>().enabled = false;
         //cube.GetComponent<Renderer>().material.color = Color.green;
 
-        GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube2.transform.position = groundcheckPos + move + (Vector3.down / 2.5f);
-        cube2.transform.rotation = transform.rotation;
-        cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
-        cube2.GetComponent<Collider>().enabled = false;
-        cube2.GetComponent<Renderer>().material.color = Color.red;
+        //GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube2.transform.position = groundcheckPos + move + (Vector3.down / 2.5f);
+        //cube2.transform.rotation = transform.rotation;
+        //cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
+        //cube2.GetComponent<Collider>().enabled = false;
+        //cube2.GetComponent<Renderer>().material.color = Color.red;
 
         //GameObject cube3 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube3.transform.position = new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z);
