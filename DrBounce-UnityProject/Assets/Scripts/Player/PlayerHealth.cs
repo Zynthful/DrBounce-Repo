@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
 public class PlayerHealth : Health
@@ -49,11 +48,20 @@ public class PlayerHealth : Health
         base.DIE();
     }
 
+    /*
     public void Respawn()
     {
         onRespawn?.Invoke();
         ResetHealth();
         OnPlayerDeath?.Invoke();
+    }
+    */
+
+    public void OnDeathComplete()
+    {
+        GameManager.SetCursorEnabled(true);
+        PauseHandler.SetCanPause(false);
+        SceneManager.LoadScene("GameOver_SCN");
     }
 
     public override void Damage(int amount, bool ignoreGod = false)
