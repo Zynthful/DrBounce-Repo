@@ -406,7 +406,7 @@ public class PlayerMovement : MonoBehaviour
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube.transform.position = groundcheckPos;
         //cube.transform.rotation = transform.rotation;
-        //cube.transform.localScale = new Vector3(0.2f, 0.2F, 0.2f) * 2;
+        //cube.transform.localScale = new Vector3(0.25f, 0.2F, 0.25f) * 2;
         //cube.GetComponent<Collider>().enabled = false;
         //cube.GetComponent<Renderer>().material.color = Color.green;
 
@@ -426,7 +426,7 @@ public class PlayerMovement : MonoBehaviour
         //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
 
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
-        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.2f, 0.2F, 0.2f), transform.rotation, ~groundMask);
+        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.25f, 0.2F, 0.25f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
         slopeCheck = Physics.CheckBox(groundcheckPos + move + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
 
