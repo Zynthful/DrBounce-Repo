@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using TMPro;
-using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -70,8 +68,6 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public Vector3 slideDirection;
     private Vector3 slideLeftRight;
     private bool headCheckPerformed = false;
-
-    private bool hasLetGo = false;
     public bool canSlide = true;
 
     // Knockback values
@@ -272,7 +268,8 @@ public class PlayerMovement : MonoBehaviour
                 slideDirectionDecided = true;
                 slideDirection = transform.forward;
                 slideLeftRight = transform.right;
-                velocity = (slideDirection * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
+                velocity.x = (slideDirection.x * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
+                velocity.z = (slideDirection.z * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
             }
             controller.Move(slideDirection * slideStrength * Time.deltaTime);
             h = playerHeight * 0.35f;
@@ -382,8 +379,6 @@ public class PlayerMovement : MonoBehaviour
             velocity.z += move.z;
         }
 
-        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
-
         controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
             velocity.y,
             Mathf.Abs(charController.velocity.z + velocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
@@ -411,16 +406,16 @@ public class PlayerMovement : MonoBehaviour
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube.transform.position = groundcheckPos;
         //cube.transform.rotation = transform.rotation;
-        //cube.transform.localScale = new Vector3(0.25f, 0.1f, 0.25f) * 2;
+        //cube.transform.localScale = new Vector3(0.2f, 0.2F, 0.2f) * 2;
         //cube.GetComponent<Collider>().enabled = false;
         //cube.GetComponent<Renderer>().material.color = Color.green;
 
-        GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube2.transform.position = groundcheckPos + move + (Vector3.down / 2.5f);
-        cube2.transform.rotation = transform.rotation;
-        cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
-        cube2.GetComponent<Collider>().enabled = false;
-        cube2.GetComponent<Renderer>().material.color = Color.red;
+        //GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube2.transform.position = groundcheckPos + move + (Vector3.down / 2.5f);
+        //cube2.transform.rotation = transform.rotation;
+        //cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
+        //cube2.GetComponent<Collider>().enabled = false;
+        //cube2.GetComponent<Renderer>().material.color = Color.red;
 
         //GameObject cube3 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube3.transform.position = new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z);
@@ -431,7 +426,7 @@ public class PlayerMovement : MonoBehaviour
         //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
 
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
-        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.25f, 0.1F, 0.25f), transform.rotation, ~groundMask);
+        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.2f, 0.2F, 0.2f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
         slopeCheck = Physics.CheckBox(groundcheckPos + move + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
 
@@ -454,7 +449,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = (-40f * Time.fixedDeltaTime);
             }
 
-            //If the player has movement velocity and is on the ground
+            //If the player has movement velocity and isn't sliding
             if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
             {
                 // reduce the velocity over time by the momentum loss rate.
@@ -473,19 +468,18 @@ public class PlayerMovement : MonoBehaviour
 
             if (slopeCheck)
             {
-                print("Spongebob");
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
-                gravity = (prevGrav * 100);
+                velocity.y = -1000;
             }
         }
         else
         {
-            gravity = prevGrav;
+            Gravity();
         }
 
-        if (headIsTouchingSomething)
+        if (headIsTouchingSomething && !isGrounded)
         {
-            velocity.y = (-40f * Time.fixedDeltaTime);
+            Gravity();
 
             if (isCrouching == true)
             {
@@ -651,6 +645,11 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(extendedNoGravTime);
             gravity = oldGravity;
         }
+    }
+
+    void Gravity()
+    {
+        velocity.y += gravity * Time.deltaTime; //Raises velocity the longer the player falls for.
     }
 
     void DisableSlide()
