@@ -187,16 +187,16 @@ public class PlayerMovement : MonoBehaviour
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube.transform.position = groundcheckPos;
         //cube.transform.rotation = transform.rotation;
-        //cube.transform.localScale = new Vector3(0.25f, 0.15f, 0.25f) * 2;
+        //cube.transform.localScale = new Vector3(0.25f, 0.1f, 0.25f) * 2;
         //cube.GetComponent<Collider>().enabled = false;
         //cube.GetComponent<Renderer>().material.color = Color.green;
 
-        //GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube2.transform.position = groundcheckPos + move + (Vector3.down / 2.5f);
-        //cube2.transform.rotation = transform.rotation;
-        //cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
-        //cube2.GetComponent<Collider>().enabled = false;
-        //cube2.GetComponent<Renderer>().material.color = Color.red;
+        GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube2.transform.position = groundcheckPos + move + (Vector3.down / 2.5f);
+        cube2.transform.rotation = transform.rotation;
+        cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
+        cube2.GetComponent<Collider>().enabled = false;
+        cube2.GetComponent<Renderer>().material.color = Color.red;
 
         //GameObject cube3 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube3.transform.position = new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z);
@@ -261,88 +261,6 @@ public class PlayerMovement : MonoBehaviour
             acceleration = 0;
         }
 
-
-        #endregion
-
-        #region GroundChecking
-        bool wasGrounded = isGrounded;
-
-        //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
-
-        //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
-        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.25f, 0.15F, 0.25f), transform.rotation, ~groundMask);
-        headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
-        slopeCheck = Physics.CheckBox(groundcheckPos + move + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
-
-        coyoteTime -= Time.deltaTime;
-
-        if (isGrounded)
-        {
-            coyoteTime = oldCoyoteTime;
-            hasJumped = false;
-            dashesPerformed = 0;
-
-            onDashSliderValue?.Raise(100);
-
-            if (dashesPerformed > 0)
-            {
-                StartCoroutine(StopDash()); //Starts coroutine stopdash, which waits a split second after hitting the ground to reset the dash counter.
-            } //This delay is to prevent the player being able to dash just before they hit the ground.
-            if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
-            {
-                velocity.y = (-40f * Time.fixedDeltaTime);
-            }
-
-            //If the player has movement velocity and is on the ground
-            if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
-            {
-                // reduce the velocity over time by the momentum loss rate.
-                //If the player is moving with the momentum, it won't be depleted.
-                //Move is always between 0 & 1 - if the player's movement is at its max,
-                //then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
-                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) * Time.deltaTime;
-                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
-            }
-
-            if (slopeCheck)
-            {
-                //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
-                gravity = (prevGrav * 100);
-            }
-
-            else
-            {
-                gravity = prevGrav;
-                bounceForce = Vector3.zero;
-            }
-        }
-        else
-        {
-            gravity = prevGrav;
-        }
-
-        if (headIsTouchingSomething)
-        {
-            velocity.y = (-40f * Time.fixedDeltaTime);
-
-            if (isCrouching == true)
-            {
-                isGrounded = false;
-                cooldown = true;
-            }
-        }
-
-        if (!headIsTouchingSomething && isCrouching == true)
-        {
-            isGrounded = true;
-            cooldown = false;
-        }
-
-        // Check if we've just become grounded
-        if (!wasGrounded && isGrounded)
-        {
-            Land();
-        }
 
         #endregion
 
@@ -505,6 +423,89 @@ public class PlayerMovement : MonoBehaviour
         //{
         //    velocity.z = 0;
         //}
+
+        #endregion
+
+        #region GroundChecking
+        bool wasGrounded = isGrounded;
+
+        //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
+
+        //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
+        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.25f, 0.1F, 0.25f), transform.rotation, ~groundMask);
+        headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
+        slopeCheck = Physics.CheckBox(groundcheckPos + move + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
+
+        coyoteTime -= Time.deltaTime;
+
+        if (isGrounded)
+        {
+            coyoteTime = oldCoyoteTime;
+            hasJumped = false;
+            dashesPerformed = 0;
+
+            onDashSliderValue?.Raise(100);
+
+            if (dashesPerformed > 0)
+            {
+                StartCoroutine(StopDash()); //Starts coroutine stopdash, which waits a split second after hitting the ground to reset the dash counter.
+            } //This delay is to prevent the player being able to dash just before they hit the ground.
+            if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
+            {
+                velocity.y = (-40f * Time.fixedDeltaTime);
+            }
+
+            //If the player has movement velocity and is on the ground
+            if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
+            {
+                // reduce the velocity over time by the momentum loss rate.
+                //If the player is moving with the momentum, it won't be depleted.
+                //Move is always between 0 & 1 - if the player's movement is at its max,
+                //then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
+                velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) * Time.deltaTime;
+                velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
+            }
+
+            else
+            {
+                gravity = prevGrav;
+                bounceForce = Vector3.zero;
+            }
+
+            if (isGrounded && (slopeCheck || isSliding))
+            {
+                print("Spongebob");
+                //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
+                velocity.y = -100;
+            }
+        }
+        else
+        {
+            gravity = prevGrav;
+        }
+
+        if (headIsTouchingSomething)
+        {
+            velocity.y = (-40f * Time.fixedDeltaTime);
+
+            if (isCrouching == true)
+            {
+                isGrounded = false;
+                cooldown = true;
+            }
+        }
+
+        if (!headIsTouchingSomething && isCrouching == true)
+        {
+            isGrounded = true;
+            cooldown = false;
+        }
+
+        // Check if we've just become grounded
+        if (!wasGrounded && isGrounded)
+        {
+            Land();
+        }
 
         #endregion
     }
