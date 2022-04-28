@@ -475,7 +475,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 print("Spongebob");
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
-                gravity = prevGrav - 100;
+                gravity = (prevGrav * 100);
             }
         }
         else
