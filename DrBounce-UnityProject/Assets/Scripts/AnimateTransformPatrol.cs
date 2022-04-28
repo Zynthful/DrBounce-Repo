@@ -5,7 +5,14 @@ using UnityEngine;
 public class AnimateTransformPatrol : MonoBehaviour
 {
     [SerializeField]
-    private Transform[] points = null;
+    private Point[] points = null;
+
+    [System.Serializable]
+    private struct Point
+    {
+        public Transform transform;
+        public float timeToReach;
+    }
 
     [SerializeField]
     private GameObject[] objsToInstantiate = null;
@@ -13,15 +20,9 @@ public class AnimateTransformPatrol : MonoBehaviour
     [SerializeField]
     private List<AnimatedObject> activeObjs = new List<AnimatedObject>();
 
-    [SerializeField]
-    private float distanceThreshold = 1.0f;
-
-    [SerializeField]
-    private float durationPerPoint = 5.0f;
-
     public class AnimatedObject
     {
-        public GameObject obj = null;
+        public GameObject obj = null;   
         public int lastPoint = 0;
 
         public void OnReachedPoint()
@@ -44,14 +45,14 @@ public class AnimateTransformPatrol : MonoBehaviour
     public IEnumerator Move(AnimatedObject activeObj)
     {
         float elapsedTime = 0;
-        while (elapsedTime < durationPerPoint)
+        while (elapsedTime < points[activeObj.lastPoint + 1].timeToReach)
         {
-            activeObj.obj.transform.position = Vector3.Lerp(points[activeObj.lastPoint].position, points[activeObj.lastPoint + 1].position, elapsedTime / durationPerPoint);
+            activeObj.obj.transform.position = Vector3.Lerp(points[activeObj.lastPoint].transform.position, points[activeObj.lastPoint + 1].transform.position, elapsedTime / points[activeObj.lastPoint + 1].timeToReach);
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        activeObj.obj.transform.position = points[activeObj.lastPoint + 1].position;
+        activeObj.obj.transform.position = points[activeObj.lastPoint + 1].transform.position;
         activeObj.OnReachedPoint();
 
         // Check if we've reached the final point
@@ -79,7 +80,7 @@ public class AnimateTransformPatrol : MonoBehaviour
         coolingDown = true;
         AnimatedObject animateObject = new AnimatedObject();
         animateObject.obj = Instantiate(objsToInstantiate[Random.Range(0, objsToInstantiate.Length - 1)]);
-        animateObject.obj.transform.position = points[animateObject.lastPoint].position;
+        animateObject.obj.transform.position = points[animateObject.lastPoint].transform.position;
         animateObject.obj.transform.parent = transform;
         activeObjs.Add(animateObject);
         StartCoroutine(Move(animateObject));
