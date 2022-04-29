@@ -13,7 +13,10 @@ public class Checkpoint : MonoBehaviour
     // The ID of our current checkpoint. When we hit a new checkpoint, this ID is set to the ID of the hit checkpoint (but only if the new ID is higher than our current one).
     private static int currentCheckpointID = -1;
 
+#if UNITY_EDITOR
+    // Whether we've ran awake or not
     private static bool doneAwake = false;
+#endif
 
     private void Awake()
     {
@@ -26,7 +29,6 @@ public class Checkpoint : MonoBehaviour
         }
 #endif
     }
-
     private void OnEnable()
     {
         CheckpointHit.onHit += HitCheckpoint;           // Listen for when we hit a checkpoint. Passes through the checkpoint we've hit.
