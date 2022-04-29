@@ -13,12 +13,17 @@ public class Checkpoint : MonoBehaviour
     // The ID of our current checkpoint. When we hit a new checkpoint, this ID is set to the ID of the hit checkpoint (but only if the new ID is higher than our current one).
     private static int currentCheckpointID = -1;
 
+    private static bool doneAwake = false;
+
     private void Awake()
     {
 #if UNITY_EDITOR
-        // Delete level save and reset current checkpoint when in editor (duct-tape solution to current checkpoint ID not being reset when entering playmode)
-        SaveSystem.DeleteLevelData();
-        ResetCurrentCheckpoint();
+        // When entering playmode (and running Awake for the first time) in editor, delete our save data
+        if (!doneAwake)
+        {
+            doneAwake = true;
+            SaveSystem.DeleteLevelData();
+        }
 #endif
     }
 

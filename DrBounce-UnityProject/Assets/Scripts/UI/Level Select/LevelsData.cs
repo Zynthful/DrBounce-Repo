@@ -10,8 +10,8 @@ public class LevelsData : ScriptableObject
     private int currentLevelIndex = -1;
     public int GetCurrentLevelIndex() { return currentLevelIndex; }
 
-    // Only need to update our current level in editor
 #if UNITY_EDITOR
+    // Only need to update our current level in editor
     private void OnEnable()
     {
         UpdateCurrentLevel();
@@ -67,6 +67,10 @@ public class LevelsData : ScriptableObject
     public void RestartLevel()
     {
         SaveSystem.DeleteLevelData();
+    }
+
+    public void ReloadLevelFromCheckpoint()
+    {
         LoadLevel(currentLevelIndex);
     }
 

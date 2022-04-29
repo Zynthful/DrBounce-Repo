@@ -75,9 +75,9 @@ public static class SaveSystem
     {
         if (File.Exists(Application.persistentDataPath + "/levelData.dat"))
         {
-            Checkpoint.ResetCurrentCheckpoint();
             File.Delete(Application.persistentDataPath + "/levelData.dat");
         }
+        Checkpoint.ResetCurrentCheckpoint();
     }
 
     public static bool LevelSaveExists(int levelIndex) 
