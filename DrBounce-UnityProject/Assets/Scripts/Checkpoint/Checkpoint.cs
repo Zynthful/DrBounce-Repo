@@ -13,8 +13,6 @@ public class Checkpoint : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-
         /*
 #if UNITY_EDITOR
         SaveSystem.DeleteLevelData();
