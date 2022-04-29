@@ -34,6 +34,11 @@ public class Health : MonoBehaviour
         if (value && !isOnLowHealth)
         {
             onLowHealth?.Invoke();
+
+            if (!GetIsDead())
+            {
+                onLowHealthNoDeath?.Invoke();
+            }
         }
         else if (!value && isOnLowHealth)
         {
@@ -44,46 +49,23 @@ public class Health : MonoBehaviour
     }
 
     [Header("Unity Events")]
-    // Passes health value
-    [SerializeField]
-    protected UnityEvent<float> onHealthChange = null;
-    // Passes health percentage normalized (between 0-1)
-    [SerializeField]
-    protected UnityEvent<float> onHealthChangeNormalized = null;
-    // Passes damage taken
-    [SerializeField]
-    protected UnityEvent<float> onDamage = null;    // Triggers when taking damage
-    // Passes damage taken
-    [SerializeField]
-    protected UnityEvent<float> onInjured = null;   // Triggers when taking damage BUT NOT dying as a result of it
-    // Passes health healed
-    [SerializeField]
-    protected UnityEvent<float> onHeal = null;
-    [SerializeField]
-    protected UnityEvent onDeath = null;
-    [SerializeField]
-    protected UnityEvent onLowHealth = null;
-    [SerializeField]
-    protected UnityEvent onNotLowHealth = null;
+    public UnityEvent<float> onHealthChange = null;             // Passes new health value
+    public UnityEvent<float> onHealthChangeNormalized = null;   // Passes new health percentage, normalized between 0-1
+    public UnityEvent<float> onDamage = null;                   // Passes damage taken
+    public UnityEvent<float> onInjured = null;                  // Passes damage taken. Triggered when taking damage *but without dying*
+    public UnityEvent<float> onHeal = null;                     // Passes health healed
+    public UnityEvent onDeath = null;
+    public UnityEvent onLowHealth = null;                       // Triggered when health falls below a given percentage threshold.
+    public UnityEvent onLowHealthNoDeath = null;                // Triggered when on low health *but without dying*
+    public UnityEvent onNotLowHealth = null;                    // Triggered when health rises above the low health percentage threshold that we were on before
 
     [Header("Game Events")]
-    // Passes health percentage
-    [SerializeField]
-    private GameEventFloat _onHealthChange = null;
-    // Passes health percentage normalized (between 0-1)
-    [SerializeField]
-    private GameEventFloat _onHealthChangeNormalized = null;
-    // Passes damage taken
-    [SerializeField]
-    private GameEventFloat _onDamage = null;    // Triggers when taking damage
-    // Passes damage taken
-    [SerializeField]
-    private GameEventFloat _onInjured = null;   // Triggers when taking damage but not dying as a result of it
-    // Passes health healed
-    [SerializeField]
-    private GameEventFloat _onHeal = null;
-    [SerializeField]
-    private GameEvent _onDeath = null;
+    public GameEventFloat _onHealthChange = null;
+    public GameEventFloat _onHealthChangeNormalized = null;
+    public GameEventFloat _onDamage = null;
+    public GameEventFloat _onInjured = null;
+    public GameEventFloat _onHeal = null;
+    public GameEvent _onDeath = null;
 
     public delegate void NotLowHealth();
     public static event NotLowHealth HasHealed;

@@ -11590,6 +11590,114 @@
 											</ChildrenList>
 											<ObjectLists/>
 										</ActorMixer>
+										<RandomSequenceContainer Name="Death" ID="{6D72A1B4-8BFE-4B52-8B74-3757CD37C80C}" ShortID="621317737">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Dialogue Speaker" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="Effect0">
+													<Custom>
+														<Effect Name="Wwise Flanger (Custom)" ID="{F7EB0D17-B5E1-4D97-AAB3-EE012B1D3193}" ShortID="979719332" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+															<PropertyList>
+																<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																<Property Name="EnableLFO" Type="bool" Value="False"/>
+																<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																<Property Name="WetDryMix" Type="Real32" Value="35"/>
+															</PropertyList>
+														</Effect>
+													</Custom>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Non-Critical" ID="{44E62693-147A-4801-BBC6-72498F157A45}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="Milo Low Health" ID="{D138D97F-3864-4F4C-9F1C-2E71AE3A4976}" ShortID="956651860">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Dialogue Speaker" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="Effect0">
+													<Custom>
+														<Effect Name="Wwise Flanger (Custom)" ID="{7759182B-214F-4B3C-823F-89F374540FB9}" ShortID="1011580323" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+															<PropertyList>
+																<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																<Property Name="EnableLFO" Type="bool" Value="False"/>
+																<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																<Property Name="WetDryMix" Type="Real32" Value="35"/>
+															</PropertyList>
+														</Effect>
+													</Custom>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Non-Critical" ID="{44E62693-147A-4801-BBC6-72498F157A45}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="doc_lowhealth_a" ID="{6D1E29EB-4EDD-4DD3-9111-65A00034F099}" ShortID="606665532">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="doc_lowhealth_a" ID="{54D292CF-0F5D-46E8-828D-D9E5FD9ED78C}">
+															<Language>SFX</Language>
+															<AudioFile>doc_lowhealth_a.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="448821155"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="doc_lowhealth_a" ID="{54D292CF-0F5D-46E8-828D-D9E5FD9ED78C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="doc_lowhealth_b" ID="{AA39284B-2FD9-4BD3-AFB1-C55916C575DD}" ShortID="357434990">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="doc_lowhealth_b" ID="{03739EF7-9ADA-44CE-9390-18D6AFCC9460}">
+															<Language>SFX</Language>
+															<AudioFile>doc_lowhealth_b.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="919263471"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists/>
+													<ActiveSourceList>
+														<ActiveSource Name="doc_lowhealth_b" ID="{03739EF7-9ADA-44CE-9390-18D6AFCC9460}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<ObjectLists/>
+										</RandomSequenceContainer>
 									</ChildrenList>
 									<ObjectLists/>
 								</ActorMixer>

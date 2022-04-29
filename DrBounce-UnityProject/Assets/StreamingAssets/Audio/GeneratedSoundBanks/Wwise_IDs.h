@@ -38,6 +38,7 @@ namespace AK
         static const AkUniqueID D0C_LEVEL_COMPLETE = 1779956647U;
         static const AkUniqueID D0C_LONELY = 513920766U;
         static const AkUniqueID D0C_MAGNETISED = 1473555518U;
+        static const AkUniqueID D0C_MILO_DEATH = 816336509U;
         static const AkUniqueID D0C_MILO_LOW_HEALTH = 2164217686U;
         static const AkUniqueID D0C_RECALLED = 27752611U;
         static const AkUniqueID D0C_THROWN = 163293033U;
