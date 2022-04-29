@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -109,25 +110,6 @@ public class PauseHandler : MonoBehaviour
     {
         Time.timeScale = value ? 0.0f : 1.0f;
 
-        /*
-        // Handle freeze feedback
-        if (freezeFeedback != null)
-        {
-            if (value)
-            {
-                freezeFeedback.PlayFeedbacks();
-            }
-            else
-            {
-                freezeFeedback.StopFeedbacks();
-            }
-        }
-        else
-        {
-            Debug.LogError("PauseHandler: The Freeze Feedbacks has not been set and is null! You probably need to assign it in the inspector.", this);
-        }
-        */
-
         // Disables player controls if they were enabled and we're freezing
         if (InputManager.inputMaster.Player.enabled && value)
         {
@@ -147,5 +129,20 @@ public class PauseHandler : MonoBehaviour
             onFreeze.Invoke();
         else
             onUnfreeze.Invoke();
+    }
+
+    public void InvokeFreezeForDuration(float duration)
+    {
+        if (Time.timeScale != 0)
+        {
+            StartCoroutine(FreezeFrame(duration));
+        }
+    }
+
+    public IEnumerator FreezeFrame(float duration)
+    {
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1.0f;
     }
 }
