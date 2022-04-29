@@ -476,14 +476,16 @@ public class PlayerMovement : MonoBehaviour
             Gravity();
         }
 
-        if (headIsTouchingSomething && !isGrounded)
+        if (headIsTouchingSomething)
         {
-            Gravity();
-
             if (isCrouching == true)
             {
                 isGrounded = false;
                 cooldown = true;
+            }
+            if (!isGrounded)
+            {
+                Gravity();
             }
         }
 
