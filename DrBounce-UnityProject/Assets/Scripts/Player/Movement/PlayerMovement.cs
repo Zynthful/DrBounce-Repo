@@ -88,8 +88,10 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool headIsTouchingSomething;
     public Vector3 velocity;
     private bool slopeCheck;
+    [SerializeField] private float groundCheckRadius;
     private Vector3 headCheckHeight;
     [HideInInspector] public Vector3 groundcheckPos;
+
 
     [Header("Freeze")]
     [SerializeField] private bool Freeze = false;
@@ -107,6 +109,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Game Events")]
     public GameEventFloat onDashSliderValue = null;
 
+    [Header("Debug")]
+    [SerializeField] private bool debugGroundCheck = false;
+    [SerializeField] private bool debugSlopeCheck = false;
+    [SerializeField] private bool debugHeadCheck = false;
+
     //private Collider[] test;
 
     private void Awake()
@@ -122,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
         instance = this;
         player = transform;
         headCheckHeight = new Vector3(0.25f, 0.15F, 0.25f);
+        groundCheckRadius = charController.radius;
     }
 
     private void Start()
@@ -402,30 +410,14 @@ public class PlayerMovement : MonoBehaviour
 
         groundcheckPos = new Vector3(transform.position.x, transform.position.y - (charController.height / 2), transform.position.z);
 
-        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube.transform.position = groundcheckPos;
-        //cube.transform.rotation = transform.rotation;
-        //cube.transform.localScale = new Vector3(0.25f, 0.2F, 0.25f) * 2;
-        //cube.GetComponent<Collider>().enabled = false;
-        //cube.GetComponent<Renderer>().material.color = Color.green;
-
-        //GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube2.transform.position = groundcheckPos + move + slideDirection + (Vector3.down / 2.5f);
-        //cube2.transform.rotation = transform.rotation;
-        //cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
-        //cube2.GetComponent<Collider>().enabled = false;
-        //cube2.GetComponent<Renderer>().material.color = Color.red;
-
-        //GameObject cube3 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube3.transform.position = new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z);
-        //cube3.transform.rotation = transform.rotation;
-        //cube3.transform.localScale = headCheckHeight * 2;
-        //cube3.GetComponent<Collider>().enabled = false;
-        //cube3.GetComponent<Renderer>().material.color = Color.blue;
-        //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
+        DebugGroundCheck();
+        DebugSlopeCheck();
+        DebugHeadCheck();
+        //print("isgrounded");
 
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
-        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.25f, 0.2F, 0.25f), transform.rotation, ~groundMask);
+        
+        isGrounded = Physics.CheckCapsule(groundcheckPos, groundcheckPos, groundCheckRadius, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
         slopeCheck = Physics.CheckBox(groundcheckPos + move + slideDirection + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
 
@@ -674,6 +666,52 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         dashesPerformed = 0;
+    }
+
+    void DebugGroundCheck()
+    {
+        if (debugGroundCheck)
+        {
+            GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            capsule.transform.position = groundcheckPos;
+            capsule.transform.rotation = transform.rotation;
+            capsule.transform.localScale = new Vector3(groundCheckRadius, groundCheckRadius, groundCheckRadius) * 2;
+            capsule.GetComponent<Collider>().enabled = false;
+            if (isGrounded)
+            {
+                capsule.GetComponent<Renderer>().material.color = Color.green;
+            }
+            else
+            {
+                capsule.GetComponent<Renderer>().material.color = Color.red;
+            }
+
+        }
+    }
+    void DebugSlopeCheck()
+    {
+        if (debugSlopeCheck)
+        {
+            GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube2.transform.position = groundcheckPos + move + slideDirection + (Vector3.down / 2.5f);
+            cube2.transform.rotation = transform.rotation;
+            cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
+            cube2.GetComponent<Collider>().enabled = false;
+            cube2.GetComponent<Renderer>().material.color = Color.white;
+        }
+    }
+    void DebugHeadCheck()
+    {
+        if (debugHeadCheck)
+        {
+            GameObject cube3 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube3.transform.position = new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z);
+            cube3.transform.rotation = transform.rotation;
+            cube3.transform.localScale = headCheckHeight * 2;
+            cube3.GetComponent<Collider>().enabled = false;
+            cube3.GetComponent<Renderer>().material.color = Color.blue;
+            //Returns true to isGrounded if a small cube collider below the player overlaps with something with the ground Layer
+        }
     }
 
     public bool GetIsCrouching() { return isCrouching; }
