@@ -17,7 +17,7 @@ public class LoadMidLevel : MonoBehaviour
     [SerializeField]
     private LevelsData levelsData = null;
 
-    private void OnEnable()
+    private void Awake()
     {
         if (button == null)
         {
@@ -31,12 +31,19 @@ public class LoadMidLevel : MonoBehaviour
             else if (nav == null)
             {
                 nav = button.GetComponentInParent<SelectableVerticalNavigation>();
-                Debug.LogError("LoadMidLevel: SelectableVerticalNavigation has not been set or detected.", gameObject);
+                if (nav == null)
+                {
+                    Debug.LogError("LoadMidLevel: SelectableVerticalNavigation has not been set or detected.", gameObject);
+                    enabled = false;
+                }
             }
         }
+    }
 
+    private void OnEnable()
+    {
         CheckpointHit.onHit += _ => SetInteractable(true);
-        button.interactable = SaveSystem.LevelSaveExists(levelsData.GetCurrentLevelIndex());
+        SetInteractable(SaveSystem.LevelSaveExists(levelsData.GetCurrentLevelIndex()));
     }
 
     private void OnDisable()
