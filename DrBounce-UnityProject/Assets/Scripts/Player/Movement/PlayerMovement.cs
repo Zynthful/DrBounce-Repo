@@ -426,7 +426,6 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             coyoteTime = oldCoyoteTime;
-            hasJumped = false;
             dashesPerformed = 0;
 
             onDashSliderValue?.Raise(100);
@@ -462,6 +461,11 @@ public class PlayerMovement : MonoBehaviour
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
                 velocity.y = -1000;
             }
+
+            if (!headIsTouchingSomething)
+            {
+                hasJumped = false;
+            }
         }
         else
         {
@@ -470,6 +474,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (headIsTouchingSomething)
         {
+            hasJumped = true;   
             if (isCrouching == true)
             {
                 isGrounded = false;
