@@ -13,13 +13,21 @@ public class RandomisedTip : MonoBehaviour
     [SerializeField]
     private Sprite[] tips = null;
     [SerializeField]
+    private float initialDelay = 2.0f;
+    [SerializeField]
     private float tipDelay = 8.0f;
 
-    private List<Sprite> unusedTips = null;
+    private List<Sprite> unusedTips = new List<Sprite>();
 
     private void OnEnable()
     {
-        SelectNew();
+        image.enabled = false;
+        StartCoroutine(TipDelay(initialDelay));
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     private void SelectNew()
@@ -34,7 +42,7 @@ public class RandomisedTip : MonoBehaviour
             Debug.LogError("No Image set.", gameObject);
             return;
         }
-        else if (unusedTips.Count <= 0)
+        else if (unusedTips.Count <= 0 || unusedTips == null)
         {
             ResetTips();
             SelectNew();
@@ -42,21 +50,22 @@ public class RandomisedTip : MonoBehaviour
         }
 
         int spriteIndex = Random.Range(0, unusedTips.Count - 1);
+        image.enabled = true;
         image.sprite = unusedTips[spriteIndex];
+        image.preserveAspect = true;
         unusedTips.RemoveAt(spriteIndex);
 
-        StartCoroutine(TipDelay());
+        StartCoroutine(TipDelay(tipDelay));
     }
 
     private void ResetTips()
     {
-        unusedTips.Clear();
-        tips.CopyTo(unusedTips.ToArray(), 0);
+        unusedTips = new List<Sprite>(tips);
     }
 
-    private IEnumerator TipDelay()
+    private IEnumerator TipDelay(float delay)
     {
-        yield return new WaitForSecondsRealtime(tipDelay);
+        yield return new WaitForSecondsRealtime(delay);
         SelectNew();
     }
 }
