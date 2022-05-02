@@ -1247,6 +1247,44 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Comic"",
+            ""id"": ""08a5f253-9d17-4bb6-97d9-dbb752b6dc71"",
+            ""actions"": [
+                {
+                    ""name"": ""Next Page"",
+                    ""type"": ""Value"",
+                    ""id"": ""fab9747b-eb6a-42e3-8018-43e377c67edc"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""101c50e0-8652-4d17-a725-9fe987b0d90a"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Next Page"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1711354f-8718-4942-a669-897206085cbe"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Next Page"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1308,6 +1346,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Debug_DEBUG_NextLevel = m_Debug.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
         m_Debug_DEBUG_Pause = m_Debug.FindAction("DEBUG_Pause", throwIfNotFound: true);
         m_Debug_DEBUG_ReloadScene = m_Debug.FindAction("DEBUG_ReloadScene", throwIfNotFound: true);
+        // Comic
+        m_Comic = asset.FindActionMap("Comic", throwIfNotFound: true);
+        m_Comic_NextPage = m_Comic.FindAction("Next Page", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1621,6 +1662,39 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public DebugActions @Debug => new DebugActions(this);
+
+    // Comic
+    private readonly InputActionMap m_Comic;
+    private IComicActions m_ComicActionsCallbackInterface;
+    private readonly InputAction m_Comic_NextPage;
+    public struct ComicActions
+    {
+        private @InputMaster m_Wrapper;
+        public ComicActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @NextPage => m_Wrapper.m_Comic_NextPage;
+        public InputActionMap Get() { return m_Wrapper.m_Comic; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ComicActions set) { return set.Get(); }
+        public void SetCallbacks(IComicActions instance)
+        {
+            if (m_Wrapper.m_ComicActionsCallbackInterface != null)
+            {
+                @NextPage.started -= m_Wrapper.m_ComicActionsCallbackInterface.OnNextPage;
+                @NextPage.performed -= m_Wrapper.m_ComicActionsCallbackInterface.OnNextPage;
+                @NextPage.canceled -= m_Wrapper.m_ComicActionsCallbackInterface.OnNextPage;
+            }
+            m_Wrapper.m_ComicActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @NextPage.started += instance.OnNextPage;
+                @NextPage.performed += instance.OnNextPage;
+                @NextPage.canceled += instance.OnNextPage;
+            }
+        }
+    }
+    public ComicActions @Comic => new ComicActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1671,5 +1745,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDEBUG_NextLevel(InputAction.CallbackContext context);
         void OnDEBUG_Pause(InputAction.CallbackContext context);
         void OnDEBUG_ReloadScene(InputAction.CallbackContext context);
+    }
+    public interface IComicActions
+    {
+        void OnNextPage(InputAction.CallbackContext context);
     }
 }

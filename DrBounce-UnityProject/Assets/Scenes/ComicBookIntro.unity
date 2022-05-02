@@ -544,12 +544,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292615487}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_MaxPlayerCount: -1
   m_AllowJoining: 1
   m_JoinBehavior: 0
@@ -658,19 +658,7 @@ MonoBehaviour:
     m_ActionId: 28685e3a-3b2e-4a8e-b3b9-c3829b63052a
     m_ActionName: Menu/Pause[/Keyboard/escape,/Keyboard/p]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1292615490}
-        m_TargetAssemblyTypeName: StoryScroll, Assembly-CSharp
-        m_MethodName: Continue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 80ce1b7b-3fce-4595-b9af-ae7bba271b21
     m_ActionName: Menu/Continue[/Keyboard/e,/Mouse/leftButton]
   - m_PersistentCalls:
@@ -701,9 +689,25 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e8737602-6d0b-4cb5-8884-74f917cfaeed
     m_ActionName: Debug/DEBUG_ReloadScene[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1292615490}
+        m_TargetAssemblyTypeName: StoryScroll, Assembly-CSharp
+        m_MethodName: OnNextPage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fab9747b-eb6a-42e3-8018-43e377c67edc
+    m_ActionName: Comic/Next Page[/Keyboard/anyKey,/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Comic
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1821340103}
 --- !u!114 &1292615490
@@ -718,8 +722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7466cbab7433f4085c4bf76286e3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad:
-    m_Handle: 0
 --- !u!114 &1292615491
 MonoBehaviour:
   m_ObjectHideFlags: 0
