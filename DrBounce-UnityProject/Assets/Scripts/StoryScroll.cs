@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
@@ -9,7 +10,11 @@ public class StoryScroll : MonoBehaviour
     private List<GameObject> pages = new List<GameObject>();
     public InputMaster controls;
     private int pageNo = 0;
-    private Scene sceneToLoad;
+    [SerializeField]
+    private string sceneToLoad;
+    [SerializeField]
+    private float fadeRate = 1;
+    private bool doneFadingIn;
     // Start is called before the first frame update
 
     void Awake()
@@ -31,16 +36,49 @@ public class StoryScroll : MonoBehaviour
     {
         if (context.performed)
         {
-            print("Input!");
-            pages[pageNo].SetActive(false);
+            if(doneFadingIn == true || pageNo == 0)
+            {
+                StartCoroutine(FadeOut(pages[pageNo].GetComponent<Image>()));
+                doneFadingIn = false;
+            }
+
+        }
+    }
+
+    private IEnumerator FadeIn(Image image)
+    {
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+        image.gameObject.SetActive(true);
+        while (image.color.a < 1.0f)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (Time.deltaTime * fadeRate));
+            yield return null;
+        }
+        if(image.color.a >= 1)
+        {
+            doneFadingIn = true;
+        }
+    }
+
+    private IEnumerator FadeOut(Image image)
+    {
+        while (image.color.a > 0.0f)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime * fadeRate));
+            yield return null;
+        }
+        if (image.color.a <= 0.0f)
+        {
+            image.gameObject.SetActive(false);
             pageNo += 1;
             if (pages[pageNo] == null)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                print("LoadingScene...");
+                SceneManager.LoadScene("test");
             }
             else
             {
-                pages[pageNo].SetActive(true);
+                StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
             }
         }
     }

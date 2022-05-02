@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
         instance = this;
         player = transform;
         headCheckHeight = new Vector3(0.25f, 0.15F, 0.25f);
-        groundCheckRadius = charController.radius;
+        groundCheckRadius = charController.radius - 1;
     }
 
     private void Start()
@@ -474,7 +474,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (headIsTouchingSomething)
         {
-            hasJumped = true;   
+            hasJumped = true;
+            jump = false;
             if (isCrouching == true)
             {
                 isGrounded = false;
