@@ -45,23 +45,14 @@ public class StoryScroll : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeIn(Image image)
-    {
-        image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
-        image.gameObject.SetActive(true);
-        while (image.color.a < 1.0f)
-        {
-            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (Time.deltaTime * fadeRate));
-            yield return null;
-        }
-        if(image.color.a >= 1)
-        {
-            doneFadingIn = true;
-        }
-    }
-
     private IEnumerator FadeOut(Image image)
     {
+        if (pages.Count == pageNo + 1)
+        {
+            SceneManager.LoadScene(sceneToLoad);
+            yield break;
+        }
+
         while (image.color.a > 0.0f)
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime * fadeRate));
@@ -71,15 +62,22 @@ public class StoryScroll : MonoBehaviour
         {
             image.gameObject.SetActive(false);
             pageNo += 1;
-            if (pages[pageNo] == null)
-            {
-                print("LoadingScene...");
-                SceneManager.LoadScene("test");
-            }
-            else
-            {
-                StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
-            }
+            StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+        }
+    }
+
+    private IEnumerator FadeIn(Image image)
+    {
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+        image.gameObject.SetActive(true);
+        while (image.color.a < 1.0f)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (Time.deltaTime * fadeRate));
+            yield return null;
+        }
+        if (image.color.a >= 1)
+        {
+            doneFadingIn = true;
         }
     }
 }
