@@ -14,7 +14,7 @@ public class StoryScroll : MonoBehaviour
     private string sceneToLoad;
     [SerializeField]
     private float fadeRate = 1;
-    private bool doneFadingIn;
+    private bool doneFadingIn = true;
     // Start is called before the first frame update
 
     void Awake()
@@ -36,10 +36,10 @@ public class StoryScroll : MonoBehaviour
     {
         if (context.performed)
         {
-            if(doneFadingIn == true || pageNo == 0)
+            if(doneFadingIn == true)
             {
-                StartCoroutine(FadeOut(pages[pageNo].GetComponent<Image>()));
                 doneFadingIn = false;
+                StartCoroutine(FadeOut(pages[pageNo].GetComponent<Image>()));
             }
 
         }
