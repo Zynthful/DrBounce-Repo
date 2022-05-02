@@ -1,22 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    public void LoadSceneByIndex(int index)
+    public void LoadSceneViaScreen(string name)
     {
-        SceneManager.LoadScene(index);
+        LoadingScreenManager.s_Instance.LoadScene(
+            name,
+            LoadingScreenManager.ContinueOptions.RequireInput,
+            LoadingScreenManager.UnloadOptions.Manual,
+            LoadingScreenManager.UnloadOptions.Manual,
+            1.2f);
     }
 
-    public void LoadSceneByName(string name)
+    public void LoadLevelViaScreen(LevelData level)
     {
-        SceneManager.LoadScene(name);
+        LoadSceneViaScreen(level.GetSceneName());
     }
 
-    public void ReloadActiveScene()
+    public void ReloadActiveScene(bool useLoadingScreen)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (useLoadingScreen)
+            LoadSceneViaScreen(SceneManager.GetActiveScene().name);
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

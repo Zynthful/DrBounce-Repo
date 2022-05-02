@@ -11,7 +11,6 @@
 /// </summary>
 
 [UnityEngine.AddComponentMenu("Wwise/Spatial Audio/AkRoomAwareObject")]
-[UnityEngine.RequireComponent(typeof(AkGameObj))]
 [UnityEngine.DisallowMultipleComponent]
 public class AkRoomAwareObject : UnityEngine.MonoBehaviour
 {

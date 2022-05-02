@@ -74,7 +74,7 @@ namespace HighlightPlus {
 			if (raycastCamera == null) {
 				raycastCamera = GetCamera ();
 				if (raycastCamera == null) {
-					Debug.LogError ("Highlight Manager: no camera found!");
+					//Debug.LogError ("Highlight Manager: no camera found!");
 				}
 			}
 		}

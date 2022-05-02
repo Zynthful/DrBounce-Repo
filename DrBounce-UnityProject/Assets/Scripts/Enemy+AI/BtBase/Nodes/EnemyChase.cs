@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 public class EnemyChase : BtNode
 {
-
+    private UnityEvent m_spotted;
     private Blackboard m_blackboard;
     private NavMeshAgent m_navMeshAgent;
     private bool headingBack = false;
@@ -14,18 +15,16 @@ public class EnemyChase : BtNode
     public NavMeshPath path = new NavMeshPath();
 
 
-    public EnemyChase(Blackboard blackboard, NavMeshAgent navMeshAgent, float attackRange)
+    public EnemyChase(Blackboard blackboard, NavMeshAgent navMeshAgent, float attackRange, UnityEvent spotted)
     {
         m_blackboard = blackboard;
         m_navMeshAgent = navMeshAgent;
         m_attackRange = attackRange;
+        m_spotted = spotted;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
     {
-
-        Debug.Log(path.status);
-
         if (m_blackboard.spottedPlayer == true)
         {
 
@@ -39,24 +38,28 @@ public class EnemyChase : BtNode
             {
                 //target the player
                 m_navMeshAgent.destination = PlayerMovement.player.transform.position;
-                Debug.Log("TESTE");
                 m_blackboard.currentAction = Blackboard.Actions.CHASING;
 
                 if(FirstSpotted == false)
                 {
-                    targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
                     FirstSpotted = true;
                     m_blackboard.noBounceAIController.canMove = false;
                     headingBack = true;
-                    m_blackboard.currentAction = Blackboard.Actions.FIRSTSPOTTED;
+                    CombatManager.s_Instance.AddEnemy(blackboard.aiController);
+                    m_spotted?.Invoke();
                 }
             }
         }
 
-        if (m_blackboard.searchTime <= -10 || path.status != NavMeshPathStatus.PathComplete && headingBack == true)
+        if ((m_blackboard.searchTime <= -10 || path.status != NavMeshPathStatus.PathComplete) && headingBack == true)
         {
             m_blackboard.spottedPlayer = false;
             m_blackboard.noBounceAIController.canMove = true;
+            headingBack = false;
+            FirstSpotted = false;
+            //targetWaypoint = m_blackboard.noBounceAIController.patrolPoints[0];
+            //Debug.Log("I'm not broken!");
+            m_navMeshAgent.destination = m_blackboard.target.spottedPosition;
             //Move back to nearest waypoint is commented out below, is a bit buggy with new optimised script
 
             //for (int i = 0; i < m_blackboard.noBounceAIController.patrolPoints.Count; i++)
@@ -70,8 +73,6 @@ public class EnemyChase : BtNode
             //    Debug.Log("Reps of loop");
             //}
             //m_blackboard.target.spottedPosition = targetWaypoint;
-            m_navMeshAgent.destination = m_blackboard.target.spottedPosition;
-            headingBack = false;
         }
 
 
@@ -128,7 +129,6 @@ public class EnemyChase : BtNode
         {
             //Start counting down on the timer
             countDown();
-            Debug.Log("TESTB");
         }
 
         //Always return failure so the script always runs

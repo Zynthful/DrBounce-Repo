@@ -1403,7 +1403,7 @@ namespace HighlightPlus {
             if (material != null) return;
             Shader shaderFX = Shader.Find(shaderName);
             if (shaderFX == null) {
-                Debug.LogError("Shader " + shaderName + " not found.");
+                //Debug.LogError("Shader " + shaderName + " not found.");
                 enabled = false;
                 return;
             }

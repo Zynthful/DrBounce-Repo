@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{B45D1803-BC2F-4953-9E74-1A47E19203B1}" SchemaVersion="103" RootDocumentID="{8348917E-205A-4290-A4C0-D425B674D15F}" ParentDocumentID="{E60A796A-48FE-43E5-AB40-2E68E11C33F2}">
+	<Events>
+		<WorkUnit Name="Combat" ID="{B45D1803-BC2F-4953-9E74-1A47E19203B1}" OwnerID="{E60A796A-48FE-43E5-AB40-2E68E11C33F2}" PersistMode="Nested">
+			<ChildrenList>
+				<Event Name="Combat_Start" ID="{26536C3A-4818-4999-BAA4-8EA903A7328E}">
+					<ChildrenList>
+						<Action Name="" ID="{424D0BF2-C91F-4582-88F0-15B02D22CAE8}" ShortID="865179484">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="22"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="In_Combat" ID="{27BF420F-3B1C-4E7D-B574-238AFD988FC8}" WorkUnitID="{6E7E9D7E-A074-49C6-B345-D98204919BB5}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Combat_Stop" ID="{8001B6C2-4F41-41BB-81C8-4FABFF741789}">
+					<ChildrenList>
+						<Action Name="" ID="{97F3A8F3-CBDE-4A1D-9E8D-75BD0925997F}" ShortID="193241027">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="22"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Not_In_Combat" ID="{1C474832-0CB2-42E3-8EE5-7DD765168E07}" WorkUnitID="{6E7E9D7E-A074-49C6-B345-D98204919BB5}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

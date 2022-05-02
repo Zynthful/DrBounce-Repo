@@ -5,6 +5,9 @@ using MoreMountains.NiceVibrations;
 
 public class VibrationManager : MonoBehaviour
 {
+    [HideInInspector]
+    public static List<ContinuousVibration> activeContinuousVibrations = new List<ContinuousVibration>();
+
     // List of vibration Haptic types
 
     [Header("Movement")]

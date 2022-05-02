@@ -61,32 +61,37 @@ public class TargetInSight : BtNode
     /// 
     protected bool PlayerLosCheck()
     {
-        if (Vector3.Dot(enemyPosition.TransformDirection(Vector3.forward), (PlayerMovement.player.position - enemyPosition.position).normalized) > (90 - m_sightAngle) / 90)
+        //added null check to stop error in console 
+        if (PlayerMovement.player != null)
         {
-            RaycastHit hit;
-
-            Ray ray = new Ray(enemyPosition.position, (PlayerMovement.player.position - enemyPosition.position).normalized);
-
-            if (Physics.Raycast(ray, out hit, m_viewDist) && hit.transform.root.CompareTag("Player"))
+            if (Vector3.Dot(enemyPosition.TransformDirection(Vector3.forward), (PlayerMovement.player.position - enemyPosition.position).normalized) > (90 - m_sightAngle) / 90)
             {
-                Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.green);
+                RaycastHit hit;
 
-                if(m_blackboard.noBounceAIController == false)
+                Ray ray = new Ray(enemyPosition.position, (PlayerMovement.player.position - enemyPosition.position).normalized);
+
+                if (Physics.Raycast(ray, out hit, m_viewDist) && hit.transform.root.CompareTag("Player"))
                 {
+                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.green);
+
+                    if (m_blackboard.noBounceAIController == false)
+                    {
+                        return true;
+                    }
+
+                    m_blackboard.searchTime = 0;
+                    m_blackboard.notSeenPlayer = false;
+                    m_blackboard.spottedPlayer = true;
                     return true;
                 }
 
-                m_blackboard.searchTime = 0;
-                m_blackboard.notSeenPlayer = false;
-                m_blackboard.spottedPlayer = true;
-                return true;
+                else
+                {
+                    m_blackboard.notSeenPlayer = true;
+                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.red);
+                }
             }
-
-            else
-            {
-                m_blackboard.notSeenPlayer = true;
-                Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.red);
-            }
+            return false;
         }
         return false;
     }

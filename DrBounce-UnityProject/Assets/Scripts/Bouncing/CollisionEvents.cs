@@ -11,7 +11,7 @@ public class CollisionEvents : MonoBehaviour
 
     [Header("Events")]
     [SerializeField]
-    private UnityEvent onCollisionEnter = null;
+    private UnityEvent<float> onCollisionEnter = null;      // Passes collision impulse magnitude
     [SerializeField]
     private UnityEvent onCollisionExit = null;
     [SerializeField]
@@ -21,7 +21,7 @@ public class CollisionEvents : MonoBehaviour
     {
         if (IsMatchingLayer(collision.gameObject, layerMask))
         {
-            onCollisionEnter?.Invoke();
+            onCollisionEnter?.Invoke(collision.impulse.magnitude);
         }
     }
 

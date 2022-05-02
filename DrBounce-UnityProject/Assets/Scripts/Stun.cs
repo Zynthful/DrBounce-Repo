@@ -30,10 +30,10 @@ public class Stun : MonoBehaviour
 
     [Space]
     [Header("Events")]
-    [SerializeField]
     public UnityEvent onStun = null;
-    [SerializeField]
-    public UnityEvent onUnStun = null;
+    public UnityEvent onStunEnd = null;
+    public UnityEvent<float> onStunProgress = null;     // passes stun progress as a percentage between 0-1
+    public UnityEvent onStunIncrease = null;            // called when hit
 
     private void Start()
     {
@@ -110,6 +110,10 @@ public class Stun : MonoBehaviour
             {
                 Stunned();
             }
+            else
+            {
+                onStunIncrease?.Invoke();
+            }
         }
     }
 
@@ -154,7 +158,7 @@ public class Stun : MonoBehaviour
         //print("not Stunned");
         stunCounter = 0;
         UpdateStunBar(false);
-        onUnStun?.Invoke();
+        onStunEnd?.Invoke();
         stunTimer = 0;
         isStunned = false;
     }
@@ -173,6 +177,7 @@ public class Stun : MonoBehaviour
         if (stunBar != null)
         {
             stunBar.UpdateBar(stunCounter, minStun, maxStun, showBar);
+            onStunProgress?.Invoke(stunCounter / (float)maxStun);
         }
     }
 }

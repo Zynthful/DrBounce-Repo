@@ -13,7 +13,9 @@ public class TargetClose : BtNode {
 
     public override NodeState evaluate(Blackboard blackboard) 
     {
-        Vector3 closest = m_positions[0];
+        Vector3 closest = blackboard.owner.transform.position;
+        if (m_positions.Length > 0)
+            closest = m_positions[0];
         float closestDistance = float.MaxValue;
 
         foreach (Vector3 pos in m_positions) {
@@ -31,7 +33,7 @@ public class TargetClose : BtNode {
             return NodeState.SUCCESS;
         }
 
-        Debug.Log("Failed to target");
+        //Debug.Log("Failed to target");
         return NodeState.FAILURE;
     }
 

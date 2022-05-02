@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{4F0872AB-66D5-4B24-8E2E-FEC09821F58C}" SchemaVersion="103" RootDocumentID="{8348917E-205A-4290-A4C0-D425B674D15F}" ParentDocumentID="{190D6DB7-CD42-40A6-A9C0-ED08564874FE}">
+	<Events>
+		<WorkUnit Name="Elevator" ID="{4F0872AB-66D5-4B24-8E2E-FEC09821F58C}" OwnerID="{190D6DB7-CD42-40A6-A9C0-ED08564874FE}" PersistMode="Nested">
+			<ChildrenList>
+				<Event Name="World_Elevator_Descend" ID="{E35E6F63-27CB-48D0-B81F-C9E6BDE77DBF}">
+					<ChildrenList>
+						<Action Name="" ID="{0BFA9402-DC02-44B6-BC9F-CED8D402ED9B}" ShortID="771328151">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Descend" ID="{7F344D9F-EBEE-41D9-88C0-EFD0E0934AD1}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="World_Elevator_Stop" ID="{155BB777-92BB-4E04-BC26-8C400C201DB3}">
+					<ChildrenList>
+						<Action Name="" ID="{7164DE57-D468-47AF-BEE8-F5D7121B5005}" ShortID="150225784">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Stop" ID="{8BF76006-9D8C-4D8B-A62B-4A1BA6C98FB0}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{F578FCA6-C119-45AE-AA90-B66B6116EAD9}" ShortID="727029667">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Descend" ID="{7F344D9F-EBEE-41D9-88C0-EFD0E0934AD1}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

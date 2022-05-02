@@ -4,12 +4,28 @@ using UnityEngine;
 
 public class WwiseRTPC : MonoBehaviour
 {
+    [Header("RTPC Settings")]
     [SerializeField]
     private AK.Wwise.RTPC rtpc = null;
-
     [SerializeField]
     [Tooltip("The gameObject that the RTPC is assigned to")]
     private GameObject assignedObject = null;
+
+    [Header("Starting Value (OPTIONAL)")]
+    [SerializeField]
+    [Tooltip("If enabled, this RTPC will be set on start using the starting value.")]
+    private bool setValueOnStart = false;
+    [SerializeField]
+    [Tooltip("The starting value that the RTPC will be set, if enabled.")]
+    private float startingValue = 0.0f;
+
+    private void Start()
+    {
+        if (setValueOnStart)
+        {
+            SetValue(startingValue);
+        }
+    }
 
     public void SetValue(float value)
     {
@@ -25,26 +41,19 @@ public class WwiseRTPC : MonoBehaviour
 
     public void SetValue(int value)
     {
-        SetValue((float) value);
+        SetValue((float)value);
     }
-
-    public void SetGlobalValue(float value)
+    public void SetValue(GameObject @object, float value)
     {
-        rtpc.SetGlobalValue(value);
+        rtpc.SetValue(@object, value);
     }
+    public float GetValue(GameObject gameObject) { return rtpc.GetValue(gameObject); }
+    public float GetValue() { return rtpc.GetValue(assignedObject); }
 
-    public float GetValue(GameObject gameObject)
-    {
-        return rtpc.GetValue(gameObject);
-    }
 
-    public float GetValue()
-    {
-        return rtpc.GetValue(assignedObject);
-    }
+    public void SetGlobalValue(float value) { rtpc.SetGlobalValue(value); }
+    public float GetGlobalValue() { return rtpc.GetGlobalValue(); }
 
-    public float GetGlobalValue()
-    {
-        return rtpc.GetGlobalValue();
-    }
+    public void SetAssignedObject(GameObject value) { assignedObject = value; }
+    public GameObject GetAssignedObject() { return assignedObject; }
 }

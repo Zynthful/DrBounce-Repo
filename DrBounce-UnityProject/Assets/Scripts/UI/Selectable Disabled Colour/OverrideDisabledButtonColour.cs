@@ -25,6 +25,15 @@ public class OverrideDisabledButtonColour : MonoBehaviour
     {
         enabledGraphic = button.targetGraphic;
         enabledColors = button.colors;
+        
+        if (button == null)
+        {
+            button = GetComponent<Button>();
+            if (button == null)
+            {
+                Debug.LogError("No button set or detected on this object", this);
+            }
+        }
     }
 
     private void OnEnable()

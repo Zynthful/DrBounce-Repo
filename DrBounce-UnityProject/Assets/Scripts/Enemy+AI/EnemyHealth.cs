@@ -6,13 +6,52 @@ using MoreMountains.Tools;
 
 public class EnemyHealth : Health
 {
-    
-
     public delegate void Death();
-    public static event Death OnDeath;
+    public event Death OnDeath;
+
+    public GameEventFloat onBossDamage = null;
+
+    [SerializeField]
+    private Enemy enemy = null;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        //Workaround fix to enemy colliders being disabled on prefab randomly
+        if (GetComponent<Collider>())
+        {
+            if (GetComponent<Collider>().enabled == false)
+            {
+                GetComponent<Collider>().enabled = true;
+            }
+
+            if (GetComponent<Collider>().enabled == false)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    protected override void SetHealth(int value, bool showBar, bool ignoreGod = false)
+    {
+        base.SetHealth(value, showBar);
+        switch (enemy.GetEnemyType())
+        {
+            case Enemy.EnemyType.Boss:
+                onBossDamage?.Raise(value);
+                break;
+            case Enemy.EnemyType.Normal:
+                break;
+            default:
+                break;
+        }
+    }
 
     protected override void DIE()
     {
+        CombatManager.s_Instance.RemoveEnemy(GetComponent<Enemy>());
+
         base.DIE();
 
         OnDeath?.Invoke();

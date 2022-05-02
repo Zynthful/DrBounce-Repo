@@ -26,7 +26,7 @@ public class Search : BtNode
 
         if (Rotate())
         {
-            Debug.Log("Searching");
+            //Debug.Log("Searching");
             return NodeState.FAILURE;
         }
         else

@@ -48,9 +48,7 @@ public class Enemy : MonoBehaviour
     protected Blackboard.Actions recentAction;
 
     [Header("Declarations")]
-    [SerializeField]
-    private EnemyHealth health = null;
-    [SerializeField]
+    public EnemyHealth health = null;
     public BulletType bullet;
     [SerializeField]
     private GameObject healthPackPrefab;
@@ -74,26 +72,40 @@ public class Enemy : MonoBehaviour
     public float rateOfFire;
 
     [Header("Events")]
-    [SerializeField]
     public UnityEvent onPatrol = null;
-    [SerializeField]
     public UnityEvent onAttack = null;
-    [SerializeField]
     public UnityEvent onChase = null;
-    [SerializeField]
     public UnityEvent onGiveUp = null;
+    public UnityEvent onSpotted = null;
 
     public NavMeshAgent navMeshAgent;
 
     [Space(10)]
     public List<Vector3> patrolPoints = new List<Vector3> { };
 
+    private int id = 0;
+
     protected Stun stun;
+
+    [Header("Enemy Data")]
+    [SerializeField]
+    private EnemyType type = EnemyType.Normal;
+    [SerializeField]
+    [Tooltip("Name of the enemy. Currently used for Boss HP bars.")]
+    new private string name = "";
+
+    public enum EnemyType
+    {
+        Normal,
+        Boss,
+    }
     #endregion
 
     private void Start()
     {
         pool = ObjectPooler.Instance;
+
+        id = gameObject.GetInstanceID();
     }
 
     protected virtual void Awake()
@@ -121,6 +133,7 @@ public class Enemy : MonoBehaviour
             {
                 case Blackboard.Actions.ATTACKING:
                     onAttack?.Invoke();
+                    CombatManager.s_Instance.AddEnemy(this);
                     break;
 
                 case Blackboard.Actions.PATROLING:
@@ -133,6 +146,12 @@ public class Enemy : MonoBehaviour
 
                 case Blackboard.Actions.LOST:
                     onGiveUp?.Invoke();
+                    CombatManager.s_Instance.RemoveEnemy(this);
+                    break;
+
+                case Blackboard.Actions.FIRSTSPOTTED:
+                    onSpotted?.Invoke();
+                    CombatManager.s_Instance.AddEnemy(this);
                     break;
             }
 
@@ -154,4 +173,7 @@ public class Enemy : MonoBehaviour
     {
         m_root.reset();
     }
+
+    public string GetName() { return name; }
+    public EnemyType GetEnemyType() { return type; }
 }

@@ -6,11 +6,6 @@ using MoreMountains.Tools;
 
 public class Health : MonoBehaviour
 {
-    /*
-    public delegate void CurrentHealth();
-    public static event CurrentHealth ReportHealth;
-    */
-
     [Header("Health Settings")]
     protected int health = 100;
 
@@ -24,6 +19,9 @@ public class Health : MonoBehaviour
 
     protected bool canSetStartingHealth = true;
 
+    protected bool godmode = false;
+    public virtual void SetGodmodeActive(bool value) { godmode = value; }
+
     [Header("Low Health Settings")]
     [SerializeField]
     [Tooltip("When this object's health drops below this percentage value, it will be considered as being on low health.")]
@@ -31,52 +29,59 @@ public class Health : MonoBehaviour
     protected float lowHealthThreshold = 25.0f;
 
     protected bool isOnLowHealth = false;
+    protected virtual void SetLowHealth(bool value)
+    {
+        if (value && !isOnLowHealth)
+        {
+            onLowHealth?.Invoke();
+
+            if (!GetIsDead())
+            {
+                onLowHealthNoDeath?.Invoke();
+            }
+        }
+        else if (!value && isOnLowHealth)
+        {
+            onNotLowHealth?.Invoke();
+        }
+
+        isOnLowHealth = value;
+    }
 
     [Header("Unity Events")]
-    // Passes health value
-    [SerializeField]
-    protected UnityEvent<float> onHealthChange = null;
-    // Passes health percentage normalized (between 0-1)
-    [SerializeField]
-    protected UnityEvent<float> onHealthChangeNormalized = null;
-    // Passes damage taken
-    [SerializeField]
-    protected UnityEvent<float> onDamage = null;    // Triggers when taking damage
-    // Passes damage taken
-    [SerializeField]
-    protected UnityEvent<float> onInjured = null;   // Triggers when taking damage BUT NOT dying as a result of it
-    // Passes health healed
-    [SerializeField]
-    protected UnityEvent<float> onHeal = null;
-    [SerializeField]
-    protected UnityEvent onDeath = null;
-    [SerializeField]
-    protected UnityEvent onLowHealth = null;
-    [SerializeField]
-    protected UnityEvent onNotLowHealth = null;
+    public UnityEvent<float> onHealthChange = null;             // Passes new health value
+    public UnityEvent<float> onHealthChangeNormalized = null;   // Passes new health percentage, normalized between 0-1
+    public UnityEvent<float> onDamage = null;                   // Passes damage taken
+    public UnityEvent<float> onInjured = null;                  // Passes damage taken. Triggered when taking damage *but without dying*
+    public UnityEvent<float> onHeal = null;                     // Passes health healed
+    public UnityEvent onDeath = null;
+    public UnityEvent onLowHealth = null;                       // Triggered when health falls below a given percentage threshold.
+    public UnityEvent onLowHealthNoDeath = null;                // Triggered when on low health *but without dying*
+    public UnityEvent onNotLowHealth = null;                    // Triggered when health rises above the low health percentage threshold that we were on before
 
     [Header("Game Events")]
-    // Passes health percentage
-    [SerializeField]
-    private GameEventFloat _onHealthChange = null;
-    // Passes health percentage normalized (between 0-1)
-    [SerializeField]
-    private GameEventFloat _onHealthChangeNormalized = null;
-    // Passes damage taken
-    [SerializeField]
-    private GameEventFloat _onDamage = null;    // Triggers when taking damage
-    // Passes damage taken
-    [SerializeField]
-    private GameEventFloat _onInjured = null;   // Triggers when taking damage but not dying as a result of it
-    // Passes health healed
-    [SerializeField]
-    private GameEventFloat _onHeal = null;
-    [SerializeField]
-    private GameEvent _onDeath = null;
+    public GameEventFloat _onHealthChange = null;
+    public GameEventFloat _onHealthChangeNormalized = null;
+    public GameEventFloat _onDamage = null;
+    public GameEventFloat _onInjured = null;
+    public GameEventFloat _onHeal = null;
+    public GameEvent _onDeath = null;
+
+    public delegate void NotLowHealth();
+    public static event NotLowHealth HasHealed;
+
+    public bool saveDamage;
+    public int saveDamageValue;
 
     protected virtual void Start()
     {
         ResetHealth();
+
+        if (saveDamage)
+        {
+            saveDamage = false;
+            Damage(saveDamageValue, true);
+        }
     }
 
     protected virtual void Update()
@@ -89,8 +94,11 @@ public class Health : MonoBehaviour
         canSetStartingHealth = false;
     }
 
-    protected virtual void SetHealth(int value, bool showBar)
+    protected virtual void SetHealth(int value, bool showBar, bool ignoreGod = false)
     {
+        if (godmode && !ignoreGod)
+            return;
+
         health = value;
 
         if (GetIsDead())
@@ -106,16 +114,7 @@ public class Health : MonoBehaviour
 
         UpdateHealthBar(showBar);
 
-        bool wasOnLowHealth = isOnLowHealth;    // Checked against to prevent calling low health events multiple times
-        isOnLowHealth = ((float) health / (float) maxHealth) * 100.0f <= lowHealthThreshold;
-        if (isOnLowHealth && !wasOnLowHealth)
-        {
-            onLowHealth?.Invoke();
-        }
-        else if (!isOnLowHealth && wasOnLowHealth)
-        {
-            onNotLowHealth?.Invoke();
-        }
+        SetLowHealth(((float)health / (float)maxHealth) * 100.0f <= lowHealthThreshold);
 
         onHealthChange?.Invoke(health);
         onHealthChangeNormalized?.Invoke(GetHealthPercentageNormalized());
@@ -125,18 +124,26 @@ public class Health : MonoBehaviour
 
     public virtual void Heal(int amount) 
     {
+        if (GetIsDead())
+            return;
+
+        HasHealed?.Invoke();
+
         onHeal?.Invoke(amount);
         _onHeal?.Raise(amount);
 
-        SetHealth(health + amount, true);
+        SetHealth(health + amount, true, true);
     }
 
-    public virtual void Damage(int amount) 
+    public virtual void Damage(int amount, bool ignoreGod = false) 
     {
+        if (GetIsDead())
+            return;
+
         onDamage?.Invoke(amount);
         _onDamage?.Raise(amount);
 
-        SetHealth(health - amount, true);
+        SetHealth(health - amount, true, ignoreGod);
 
         // Only call injured events if we're not dead after taking damage
         if (!GetIsDead())
@@ -160,8 +167,6 @@ public class Health : MonoBehaviour
     {
         onDeath?.Invoke();
         _onDeath?.Raise();
-
-        // Debug.Log($"DIE (►__◄), {gameObject.name}");
     }
 
     protected virtual void ResetHealth() 
@@ -178,6 +183,7 @@ public class Health : MonoBehaviour
     }
 
     public int GetHealth() { return health; }
+    public int GetMaxHealth() { return maxHealth; }
 
     public bool GetIsAtFullHealth() { return (health >= maxHealth); }
 

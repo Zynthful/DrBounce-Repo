@@ -88,7 +88,7 @@ namespace HighlightPlus {
                 if (raycastCamera == null) {
                     raycastCamera = HighlightManager.GetCamera();
                     if (raycastCamera == null) {
-                        Debug.LogError("Highlight Trigger on " + gameObject.name + ": no camera found!");
+                        //Debug.LogError("Highlight Trigger on " + gameObject.name + ": no camera found!");
                     }
                 }
                 if (colliders != null && colliders.Length > 0) {

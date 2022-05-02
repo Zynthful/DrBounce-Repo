@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     private InputMaster controls;
     private DecalManager decalM;
 
+    public UnlockTracker.UnlockTypes[] currentSettings;
+
+    public static Player player = null;
+
     [HideInInspector]
     public bool paused = false;
 
@@ -24,11 +28,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] bool openUrlOnQuit;
     [SerializeField][Tooltip("The url to be opened when the game is quit")] string urlToOpen;
-
-    public void SetPaused(bool value)
-    {
-        paused = value;
-    }
 
     private void Awake()
     {
@@ -54,6 +53,8 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(s_Instance);
 
+        Time.fixedDeltaTime = 0.02f;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -72,9 +73,13 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        decalM.ClearDecals();
+        //Time.timeScale = 1.0f;
+    }
+
+    public static void SetCursorEnabled(bool showCursor)
+    {
+        Cursor.visible = showCursor;
+        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     public void Stop() 

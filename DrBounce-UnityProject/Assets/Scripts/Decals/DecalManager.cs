@@ -100,16 +100,24 @@ public class DecalManager : MonoBehaviour
         Quaternion decalRotation = Quaternion.FromToRotation(Vector3.back, normal);
 
         //rotate around the z axis randomly
-        decalRotation *= Quaternion.Euler(Vector3.forward * Random.Range(0, 180));
+        decalRotation *= Quaternion.Euler(Vector3.forward * (Random.Range(0, 4) * 90f));
 
         //place object from pool
         GameObject decalObject = pool.SpawnNonBulletFromPool("Decal", position + (decalRotation * Vector3.back * (0.01f + Random.Range(0f, 0.02f))), decalRotation, decalToSpawn);
+
+        Vector3 lossyScale = decalObject.transform.lossyScale;
+        Vector3 localScale = decalObject.transform.localScale;
+
+        Vector3 realScale = new Vector3(
+            localScale.x / lossyScale.x,
+            localScale.y / lossyScale.y,
+            localScale.z / lossyScale.z);
 
         //randomly adjust decal scale for fun :)
         decalScale *= Random.Range(0.9f, 1.1f);
 
         //scale that bad boy and flip randomly
-        decalObject.transform.localScale = new Vector3(((Random.Range(0, 2) * 2) - 1) * decalScale, decalScale, decalScale);
+        decalObject.transform.localScale = new Vector3((((Random.Range(0, 2) * 2) - 1) * decalScale) * realScale.x, decalScale * realScale.y, decalScale * realScale.z);
 
         //set parent to manager or supplied transform
         decalObject.transform.SetParent(t, true);
@@ -124,7 +132,8 @@ public class DecalManager : MonoBehaviour
         //whatever
         foreach (var decal in spawnedDecals)
         {
-            decal.SetActive(false);
+            if(decal != null)
+                decal.SetActive(false);
         }
         spawnedDecals.Clear();
     }

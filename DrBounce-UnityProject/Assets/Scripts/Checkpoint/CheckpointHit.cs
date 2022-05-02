@@ -4,38 +4,29 @@ using UnityEngine;
 
 public class CheckpointHit : MonoBehaviour
 {
-    public delegate void CollisionActive();
-    public static event CollisionActive OnCollision;
+    // Event for when we hit this checkpoint
+    public delegate void Hit(CheckpointHit checkpoint);
+    public static event Hit onHit;
 
-    private bool activated = false;
-
-    public static CheckpointHit checkpointInstance = null;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player" && !activated)
-        {
-            activated = true;
-            OnCollision?.Invoke();
-        }
-    }
+    [Tooltip("Unique ID for this checkpoint. Each checkpoint should be ordered ascending by ID (i.e., later checkpoints = use higher id). When we hit this checkpoint, this ID will be used to set our current checkpoint.")]
+    public int id = -1;
 
     private void Awake()
     {
-        if (checkpointInstance == null)
-        {
-            checkpointInstance = FindObjectOfType(typeof(CheckpointHit)) as CheckpointHit;
-        }
-
-        if (checkpointInstance == null)
-        {
-            checkpointInstance = this;
-        }
-        else if (checkpointInstance != this)
+        /*
+        if (Checkpoint.firstSetup)
         {
             Destroy(gameObject);
         }
+        else 
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
+        */
+    }
 
-        DontDestroyOnLoad(this.gameObject);
+    public void OnHit()
+    {
+        onHit?.Invoke(this);
     }
 }

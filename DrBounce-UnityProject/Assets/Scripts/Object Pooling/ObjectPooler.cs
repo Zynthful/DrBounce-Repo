@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectPooler : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class ObjectPooler : MonoBehaviour
 
     void Start()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
         foreach(Pool pool in pools)
@@ -56,17 +59,34 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        foreach (Queue<GameObject> pool in poolDictionary.Values)
+        {
+            foreach(GameObject obj in pool)
+            {
+                if(obj != null)
+                {
+                    obj.transform.parent = transform;
+                    obj.SetActive(false);
+                }
+            }
+        }
+    }
+
     public GameObject SpawnBulletFromPool(string tag, Vector3 position, Quaternion rotation, Vector3 dir, BulletType bul, Material mat)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
+            //Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
             return null;
         }
 
         GameObject objToSpawn = poolDictionary[tag].Dequeue();
 
         objToSpawn.SetActive(true);
+
+        bul.typeSwitch.SetValue(objToSpawn);
 
         if (mat != null)
         {
@@ -108,7 +128,7 @@ public class ObjectPooler : MonoBehaviour
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
+            //Debug.LogWarning("Pool with tag " + tag + " doesn't exist!");
             return null;
         }
 

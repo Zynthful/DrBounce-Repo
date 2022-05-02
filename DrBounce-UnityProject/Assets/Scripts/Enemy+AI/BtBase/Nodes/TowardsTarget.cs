@@ -46,14 +46,18 @@ public class TowardsTarget : BtNode
             m_navMeshAgent.destination = targetPosition;
             return NodeState.SUCCESS;
         }
+        else
+        {
+            m_movement.position = Vector3.MoveTowards(m_movement.position, targetPosition, Time.deltaTime / moveSpeed);
+        }
 
         //Debug.Log("Start Pos " + blackboard.startPosition + "  & target pos " + targetPosition);
 
-        m_movement.position = Vector3.MoveTowards(m_movement.position, targetPosition, Time.deltaTime / moveSpeed);
-
-        if (!blackboard.HasTarget(true))
+        //throws up debug log if the target is zero, help from Chris 
+        Vector3 target = (targetPosition - m_movement.position).normalized;
+        if (!blackboard.HasTarget(true) && target.sqrMagnitude > 0)
         {
-            m_movement.rotation = Quaternion.RotateTowards(m_movement.rotation, Quaternion.LookRotation((targetPosition - m_movement.position).normalized), Time.deltaTime / .0045f);
+            m_movement.rotation = Quaternion.RotateTowards(m_movement.rotation, Quaternion.LookRotation(target), Time.deltaTime / .0045f);
         }
 
         blackboard.currentAction = Blackboard.Actions.PATROLING;

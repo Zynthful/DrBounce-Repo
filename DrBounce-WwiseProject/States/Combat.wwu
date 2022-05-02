@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{6E7E9D7E-A074-49C6-B345-D98204919BB5}" SchemaVersion="103" RootDocumentID="{BEC7B4BD-77BC-40C7-A50A-B4304EC2D254}" ParentDocumentID="{BEC7B4BD-77BC-40C7-A50A-B4304EC2D254}">
+	<States>
+		<WorkUnit Name="Combat" ID="{6E7E9D7E-A074-49C6-B345-D98204919BB5}" OwnerID="{BEC7B4BD-77BC-40C7-A50A-B4304EC2D254}" PersistMode="Nested">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="10"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<StateGroup Name="Combat_State" ID="{89462096-88C7-4528-BF00-A43D40F01A8C}">
+					<ChildrenList>
+						<State Name="None" ID="{5C1C4954-7EFC-4B07-B651-DD16FFA68EE9}"/>
+						<State Name="In_Combat" ID="{27BF420F-3B1C-4E7D-B574-238AFD988FC8}"/>
+						<State Name="Not_In_Combat" ID="{1C474832-0CB2-42E3-8EE5-7DD765168E07}"/>
+					</ChildrenList>
+					<TransitionList>
+						<Transition>
+							<StartState Name="In_Combat" ID="{27BF420F-3B1C-4E7D-B574-238AFD988FC8}"/>
+							<EndState Name="Not_In_Combat" ID="{1C474832-0CB2-42E3-8EE5-7DD765168E07}"/>
+							<Time>3</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+					</TransitionList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</States>
+</WwiseDocument>

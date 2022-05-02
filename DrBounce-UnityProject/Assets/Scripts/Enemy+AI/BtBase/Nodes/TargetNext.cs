@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class TargetNext : BtNode
 {
@@ -16,11 +15,11 @@ public class TargetNext : BtNode
     {
         if (m_positions.Length == 0)
         {
-            Debug.Log("Failed to target next");
+            //Debug.Log("Failed to target next");
             return NodeState.FAILURE;
         }
 
-        if (blackboard.aiController != null)
+        if (blackboard.noBounceAIController == null)
         {
             blackboard.aiController.currentTargetIndex++;
             if (blackboard.aiController.currentTargetIndex > m_positions.Length - 1)
@@ -52,7 +51,6 @@ public class TargetNext : BtNode
             m_nodeState = NodeState.SUCCESS;
             return m_nodeState;
         }
-        // pick the next one
 
     }
 

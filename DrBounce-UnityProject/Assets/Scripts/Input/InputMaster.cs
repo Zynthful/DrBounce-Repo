@@ -68,7 +68,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Shoot"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""0de4bb50-dd38-4346-8e6d-db9b81f0c5e6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -800,6 +800,30 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Continue"",
+                    ""type"": ""Button"",
+                    ""id"": ""80ce1b7b-3fce-4595-b9af-ae7bba271b21"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""65eaae44-bc23-4136-966e-23f86e5c5ece"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Previous"",
+                    ""type"": ""Button"",
+                    ""id"": ""0140d14a-8ec2-4737-a741-37d22d6c063f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -844,6 +868,72 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2bcf952-4677-44ad-9253-78915fb66d7d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34707ae8-d614-4e5f-b272-b03699283f78"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b385402-ca43-45c0-9ba9-673f69a74662"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e847bdbf-b8fa-4d38-a8e1-cbb660220b5a"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad34cd5e-889a-485b-a257-066db3cbfc39"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4590337-ca5b-4886-90d6-3d6d0f2f3d20"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Previous"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1157,6 +1247,44 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Comic"",
+            ""id"": ""08a5f253-9d17-4bb6-97d9-dbb752b6dc71"",
+            ""actions"": [
+                {
+                    ""name"": ""Next Page"",
+                    ""type"": ""Value"",
+                    ""id"": ""fab9747b-eb6a-42e3-8018-43e377c67edc"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""101c50e0-8652-4d17-a725-9fe987b0d90a"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Next Page"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1711354f-8718-4942-a669-897206085cbe"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Next Page"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1206,6 +1334,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
+        m_Menu_Continue = m_Menu.FindAction("Continue", throwIfNotFound: true);
+        m_Menu_Next = m_Menu.FindAction("Next", throwIfNotFound: true);
+        m_Menu_Previous = m_Menu.FindAction("Previous", throwIfNotFound: true);
         // Cutscene
         m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
         m_Cutscene_SkipCutscene = m_Cutscene.FindAction("SkipCutscene", throwIfNotFound: true);
@@ -1215,6 +1346,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Debug_DEBUG_NextLevel = m_Debug.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
         m_Debug_DEBUG_Pause = m_Debug.FindAction("DEBUG_Pause", throwIfNotFound: true);
         m_Debug_DEBUG_ReloadScene = m_Debug.FindAction("DEBUG_ReloadScene", throwIfNotFound: true);
+        // Comic
+        m_Comic = asset.FindActionMap("Comic", throwIfNotFound: true);
+        m_Comic_NextPage = m_Comic.FindAction("Next Page", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1386,11 +1520,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Menu;
     private IMenuActions m_MenuActionsCallbackInterface;
     private readonly InputAction m_Menu_Pause;
+    private readonly InputAction m_Menu_Continue;
+    private readonly InputAction m_Menu_Next;
+    private readonly InputAction m_Menu_Previous;
     public struct MenuActions
     {
         private @InputMaster m_Wrapper;
         public MenuActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_Menu_Pause;
+        public InputAction @Continue => m_Wrapper.m_Menu_Continue;
+        public InputAction @Next => m_Wrapper.m_Menu_Next;
+        public InputAction @Previous => m_Wrapper.m_Menu_Previous;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1403,6 +1543,15 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
+                @Continue.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnContinue;
+                @Continue.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnContinue;
+                @Continue.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnContinue;
+                @Next.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
+                @Next.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
+                @Next.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
+                @Previous.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
+                @Previous.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
+                @Previous.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -1410,6 +1559,15 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Continue.started += instance.OnContinue;
+                @Continue.performed += instance.OnContinue;
+                @Continue.canceled += instance.OnContinue;
+                @Next.started += instance.OnNext;
+                @Next.performed += instance.OnNext;
+                @Next.canceled += instance.OnNext;
+                @Previous.started += instance.OnPrevious;
+                @Previous.performed += instance.OnPrevious;
+                @Previous.canceled += instance.OnPrevious;
             }
         }
     }
@@ -1504,6 +1662,39 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public DebugActions @Debug => new DebugActions(this);
+
+    // Comic
+    private readonly InputActionMap m_Comic;
+    private IComicActions m_ComicActionsCallbackInterface;
+    private readonly InputAction m_Comic_NextPage;
+    public struct ComicActions
+    {
+        private @InputMaster m_Wrapper;
+        public ComicActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @NextPage => m_Wrapper.m_Comic_NextPage;
+        public InputActionMap Get() { return m_Wrapper.m_Comic; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ComicActions set) { return set.Get(); }
+        public void SetCallbacks(IComicActions instance)
+        {
+            if (m_Wrapper.m_ComicActionsCallbackInterface != null)
+            {
+                @NextPage.started -= m_Wrapper.m_ComicActionsCallbackInterface.OnNextPage;
+                @NextPage.performed -= m_Wrapper.m_ComicActionsCallbackInterface.OnNextPage;
+                @NextPage.canceled -= m_Wrapper.m_ComicActionsCallbackInterface.OnNextPage;
+            }
+            m_Wrapper.m_ComicActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @NextPage.started += instance.OnNextPage;
+                @NextPage.performed += instance.OnNextPage;
+                @NextPage.canceled += instance.OnNextPage;
+            }
+        }
+    }
+    public ComicActions @Comic => new ComicActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1540,6 +1731,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
     public interface IMenuActions
     {
         void OnPause(InputAction.CallbackContext context);
+        void OnContinue(InputAction.CallbackContext context);
+        void OnNext(InputAction.CallbackContext context);
+        void OnPrevious(InputAction.CallbackContext context);
     }
     public interface ICutsceneActions
     {
@@ -1551,5 +1745,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDEBUG_NextLevel(InputAction.CallbackContext context);
         void OnDEBUG_Pause(InputAction.CallbackContext context);
         void OnDEBUG_ReloadScene(InputAction.CallbackContext context);
+    }
+    public interface IComicActions
+    {
+        void OnNextPage(InputAction.CallbackContext context);
     }
 }

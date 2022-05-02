@@ -7,17 +7,20 @@ using MoreMountains.Feedbacks;
 
 public class GunThrowing : MonoBehaviour
 {
-    [SerializeField] private float waitTime = 0.2f;
+    [Header("Declarations")]
+    [SerializeField] MagnetAssist magnet = null;
+    [SerializeField] BoxCollider catchCollider = null;
+    [SerializeField] Transform weaponHolderTransform = null;
 
+    [Header("GunThrowing Settings")]
+    [SerializeField] bool startOnPlayer = true;    // Should the item start on the player?
+    [SerializeField] bool canThrow;
     [SerializeField] bool returning;
     [SerializeField] float throwForceMod;
-    [SerializeField] bool canThrow;
-    [SerializeField] Transform weaponHolderTransform = null;
-    [SerializeField] bool startOnPlayer;    // Should the item start on the player or not?
     [SerializeField] float noHitDetectAfterThrowTime;
     List<PhysicMaterial> physicMaterials = new List<PhysicMaterial> { };
     Collider[] gunColliders = null;
-    [SerializeField] BoxCollider catchCollider;
+    [SerializeField] LayerMask throwCheckLayers;
     bool throwGunDelay;
     Transform owner; // The player
     Vector3 handPosition;
@@ -27,7 +30,25 @@ public class GunThrowing : MonoBehaviour
     private bool pickupDelayCoroutineRunning;
     private bool throwBuffer = false;
 
-    private bool held = true;
+    private bool held = false;
+    public bool GetIsThrowing() { return throwing; }
+    public bool GetIsHeld() { return held; }
+    private void SetIsHeld(bool value)
+    {
+        if (held == value)
+            return;
+
+        held = value;
+        onIsHeld.Invoke(value);
+        shooting.onHasChargeAndIsHeld.Invoke(shooting.GetHasCharge() && value);
+        shooting._onHasChargeAndIsHeld.Raise(shooting.GetHasCharge() && value);
+    }
+
+    public delegate void LeftGun();
+    public static event LeftGun OnLeftGun;
+
+    public delegate void PickedUpGun();
+    public static event PickedUpGun OnPickedUpGun;
 
     // Coyote Time variables (gun collision time before drop charges)
 
@@ -47,16 +68,27 @@ public class GunThrowing : MonoBehaviour
     private List<coyote> hitObjects = new List<coyote> { };
 
 
-    [Header("Coyote Time")]
+    [Header("Coyote Time Settings")]
     [Space(10)]
     [SerializeField] private float coyoteTimeDuration;
-    
 
-    SwitchHeldItem inventory;
+    [Header("Throwing Settings")]
+    [SerializeField]
+    [Tooltip("When throwing the gun, the Throw control is disabled for this duration in seconds.")]
+    private float throwDisableTime = 0.2f;
+
+    [Header("Loneliness Settings")]
+    [SerializeField]
+    [Tooltip("Duration in seconds the gun needs to be left alone on the ground in order to trigger loneliness event.")]
+    private float timeToTriggerLonely = 5;
+
+    private float timeOnGround = 0;
+    private bool alone = false;
+
+
     private int amountOfBounces;
     private int amountOfBouncesUnique;  // bounces where it's not bounced against the same object twice in succession
 
-    public InputMaster controls;
     [Space(10)]
     public Vector3 currentVel; // Used to influence aim assist to be less snappy.
     private bool exitedPlayer; // Controls when the gun can be caught by waiting until it's left the player's hitbox
@@ -70,27 +102,27 @@ public class GunThrowing : MonoBehaviour
     public bool inFlight;
     private bool throwing = false;
 
+    private bool pulledByMagnet = false;
+
     //public Outline outlineScript;
 
-    [Header("Unity Events")]
-    [SerializeField]
-    private UnityEvent<int> onBounce = null;
-    [SerializeField]
-    private UnityEvent onPickup = null;
-    [SerializeField]
+    #region Events
+    [Header("Bouncing Events")]
+    public UnityEvent<int> onBounce = null;
+
+    [Header("Dropped Events")]
+    public UnityEvent onDroppedPreCoyote = null;
+    public UnityEvent onDropped = null;
+    public UnityEvent onDroppedAndLostAllCharges = null;    // Invoked only if the item loses charges on drop
+    public UnityEvent onLonely = null;                      // Invoked when left on the ground for a set duration
+
+    [Header("Throwing Events")]
     public UnityEvent onThrown = null;
-    [SerializeField]
-    private UnityEvent onCatch = null;
-    [SerializeField]
-    private UnityEvent onDropped = null;
-    [SerializeField]
-    private UnityEvent onDroppedAndLostAllCharges = null; // Invoked only if the item loses charges on drop
-    [SerializeField]
-    private UnityEvent onRecall = null;
-    [SerializeField]
-    private UnityEvent onReset = null;
-    [SerializeField]
-    private UnityEvent onDroppedPreCoyote = null;
+    public UnityEvent onCatch = null;
+    public UnityEvent onRecall = null;
+    public UnityEvent onPickup = null;
+    public UnityEvent onReset = null;
+    public UnityEvent<bool> onIsHeld = null;
 
     [Header("Game Events")]
     [SerializeField]
@@ -109,44 +141,30 @@ public class GunThrowing : MonoBehaviour
     private GameEvent _onRecall = null;
     [SerializeField]
     private GameEvent _onDroppedPreCoyote = null;
-
-    private void Awake()
-    {
-        controls = InputManager.inputMaster;
-    }
+    #endregion
 
     private void OnEnable()
     {
         // Listen for input
-        controls.Player.Throw.performed += _ => SetThrowGunDelay();
-        controls.Player.Throw.performed += _ => CancelThrow();
-        controls.Player.Recall.performed += _ => RecallGun();
+        InputManager.inputMaster.Player.Throw.performed += _ => SetThrowGunDelay();
+        InputManager.inputMaster.Player.Throw.performed += _ => CancelThrow();
+        InputManager.inputMaster.Player.Recall.performed += _ => RecallGun();
     }
 
     private void OnDisable()
     {
         // Stop listening for input
-        controls.Player.Throw.performed -= _ => SetThrowGunDelay();
-        controls.Player.Throw.performed -= _ => CancelThrow();
-        controls.Player.Recall.performed -= _ => ResetScript();
+        InputManager.inputMaster.Player.Throw.performed -= _ => SetThrowGunDelay();
+        InputManager.inputMaster.Player.Throw.performed -= _ => CancelThrow();
+        InputManager.inputMaster.Player.Recall.performed -= _ => ResetScript();
     }
 
-    private IEnumerator WaitAndPrint(float waitTime)
-    {
-        controls.Player.Throw.Disable();
-
-        yield return new WaitForSeconds(waitTime);
-
-        controls.Player.Throw.Enable();
-    }
 
     void Start()
     {
         //outlineScript = GetComponentInChildren<Outline>();
 
-        owner = PlayerMovement.player;
-        inventory = SwitchHeldItem.instance;
-
+        owner = GameManager.player.transform;
         rb = GetComponent<Rigidbody>();
 
         if (startOnPlayer)
@@ -154,7 +172,7 @@ public class GunThrowing : MonoBehaviour
             //outlineScript.enabled = false;
             handPosition = transform.localPosition;
             canThrow = true;
-            held = true;
+            SetIsHeld(true);
             transform.parent = weaponHolderTransform;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
@@ -165,7 +183,8 @@ public class GunThrowing : MonoBehaviour
             handPosition = new Vector3(.4f, -.2f, .65f);
             exitedPlayer = true;
             canThrow = false;
-            held = false;
+            SetIsHeld(false);
+            alone = true;
         }
 
         transform.rotation = Quaternion.identity;
@@ -196,6 +215,33 @@ public class GunThrowing : MonoBehaviour
         {
             hasLetGoOfTrigger = true;
         }
+
+        // Handle loneliness time
+        if (!GetIsHeld() && !magnet.GetIsAssistActive()) 
+        {
+            timeOnGround = timeOnGround + Time.deltaTime;
+            if (timeOnGround >= timeToTriggerLonely && !alone) 
+            {
+                alone = true;
+                onLonely?.Invoke();
+            }
+            if (timeOnGround >= 20) 
+            {
+                OnLeftGun?.Invoke();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Disable throwing for a given duration in seconds.
+    /// </summary>
+    /// <param name="waitTime">The duration in seconds to disable throwing.</param>
+    /// <returns></returns>
+    private IEnumerator DisableThrowForDuration(float disabledTime)
+    {
+        InputManager.inputMaster.Player.Throw.Disable();
+        yield return new WaitForSeconds(disabledTime);
+        InputManager.inputMaster.Player.Throw.Enable();
     }
 
     // Delay throwing to avoid recalling immediately after throwing
@@ -204,7 +250,7 @@ public class GunThrowing : MonoBehaviour
         //float test = controls.Player.Throw.ReadValue<float>();
         //print(test);
 
-        if (!GameManager.s_Instance.paused && controls.Player.Throw.ReadValue<float>() >= 0.5f)
+        if (!GameManager.s_Instance.paused && InputManager.inputMaster.Player.Throw.ReadValue<float>() >= 0.5f)
         {
             throwGunDelay = true;
         }
@@ -218,29 +264,11 @@ public class GunThrowing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        int f = 1;
-        foreach (coyote coy in hitObjects)
-        {
-            if(f == 1)
-            {
-                Debug.Log("I am currently colliding with: ");
-            }
-            Debug.Log(f + " " + coy.hitObject.gameObject.name);
-            f++;
-        }
-
-        if (transform.parent)
+        if (GetIsHeld())
         {
             transform.rotation = weaponHolderTransform.rotation;
         }
-
-        if (throwGunDelay)
-        {
-            throwGunDelay = false;
-            Thrown();
-        }
-
-        if (!transform.parent && !exitedPlayer)
+        else if (!exitedPlayer)
         {
             bool fail = false;
             foreach (Collider col in gunColliders)
@@ -256,20 +284,35 @@ public class GunThrowing : MonoBehaviour
                 exitedPlayer = true;
             }
         }
+
+        if (throwGunDelay)
+        {
+            throwGunDelay = false;
+            Thrown();
+        }
     }
 
     public void Thrown()
     {
         if (!GameManager.s_Instance.paused && canThrow && hasLetGoOfTrigger)
         {
-            StartCoroutine(WaitAndPrint(waitTime));
-
             throwing = true;
-            held = false;
+            SetIsHeld(false);
+
+            // Disable throwing for set duration
+            StartCoroutine(DisableThrowForDuration(throwDisableTime));
 
             if (pickupDelayCoroutineRunning) 
             {
                 StopCoroutine(pickupDelayCoroutine); 
+            }
+
+            // Stops the gun from moving through walls when thrown up against them
+            Vector3 raycastOrigin = new Vector3(transform.position.x, transform.position.y, transform.position.z) - (transform.forward * transform.localScale.magnitude / 3);
+            RaycastHit hit;
+            if(Physics.Raycast(raycastOrigin, transform.forward, out hit, 1, throwCheckLayers))
+            {
+                transform.position = (owner.position + hit.point) / 2;
             }
 
             ResetCoyoteTimes();
@@ -300,15 +343,7 @@ public class GunThrowing : MonoBehaviour
             Vector3 dir = transform.forward;
             rb.velocity = new Vector3(dir.x, dir.y + .1f, dir.z) * throwForceMod; currentVel = rb.velocity;
 
-            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
-            shooting.CheckIfCharged();
-
             AffectPhysics(0.2f, 0.2f);
-
-            if(inventory.currentHeldTransform == transform)
-            {
-                inventory.currentHeldTransform = null; inventory.SwitchActiveItem();
-            }
         }
     }
 
@@ -316,7 +351,7 @@ public class GunThrowing : MonoBehaviour
     {
         if (!GameManager.s_Instance.paused)
         {
-            if (!transform.parent)
+            if (!GetIsHeld())
                 throwGunDelay = false;
             //outlineScript.enabled = false;
             gameObject.layer = 7;
@@ -334,7 +369,9 @@ public class GunThrowing : MonoBehaviour
             canThrow = true;
             inFlight = false;
             hasLetGoOfTrigger = false;
-            held = true;
+            SetIsHeld(true);
+            timeOnGround = 0;
+            alone = false;
 
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -345,13 +382,9 @@ public class GunThrowing : MonoBehaviour
 
             onReset?.Invoke();
 
-            inventory.OnPickupItem(transform);
-
-            // check if charged so it updates onHasChargeAndIsHeld -> update vibrations accordingly
-            shooting.CheckIfCharged();
-
             //here
             // here???
+            OnPickedUpGun?.Invoke();
         }
     }
 
@@ -371,10 +404,10 @@ public class GunThrowing : MonoBehaviour
     {
         for (int i = 0; i < hitObjects.Count; i++)
         {
-            Debug.Log("Number of total objects: " + hitObjects.Count + "... HitObject checking is: " + hitObjects[i].hitObject.gameObject.name);
+            //Debug.Log("Number of total objects: " + hitObjects.Count + "... HitObject checking is: " + hitObjects[i].hitObject.gameObject.name);
             if (hitObjects[i].hitObject.gameObject.name == check.gameObject.name)
             {
-                Debug.Log("This object: " + hitObjects[i].hitObject.gameObject.name + " ... == " + check.gameObject.name);
+                //Debug.Log("This object: " + hitObjects[i].hitObject.gameObject.name + " ... == " + check.gameObject.name);
                 StopCoroutine(hitObjects[i].coyoteCoroutine);
                 hitObjects.RemoveAt(i);
                 return true;
@@ -391,8 +424,8 @@ public class GunThrowing : MonoBehaviour
             onDroppedPreCoyote?.Invoke();
             _onDroppedPreCoyote?.Raise();
 
-            Debug.Log("Gotta add this now: " + collision.gameObject);
-
+            //Debug.Log("Gotta add this now: " + collision.gameObject);
+            
             // Check for/end current coyote time on this object and start a new one
             EndSpecificCoyoteTime(collision);
             var coy = new coyote(collision, StartCoroutine(CoyoteTimeForPickup(collision)));
@@ -520,13 +553,13 @@ public class GunThrowing : MonoBehaviour
     {
         yield return new WaitForSeconds(coyoteTimeDuration);
 
-        Debug.Log("FUrther Beyond: " + hit.gameObject.name);
+        //Debug.Log("FUrther Beyond: " + hit.gameObject.name);
 
         for (int i = 0; i < hitObjects.Count; i++)
         {
             if (hitObjects[i].hitObject.gameObject == hit.gameObject)
             {
-                Debug.Log("cob: " + hit.gameObject.name);
+                //Debug.Log("cob: " + hit.gameObject.name);
 
                 returning = false;
 
@@ -549,7 +582,4 @@ public class GunThrowing : MonoBehaviour
         }
 
     }
-
-    public bool GetIsThrowing() { return throwing; }
-    public bool GetIsHeld() { return held; }
 }

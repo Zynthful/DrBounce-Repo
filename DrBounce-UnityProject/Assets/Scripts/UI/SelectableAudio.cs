@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(Selectable))]
 public class SelectableAudio : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 {
     protected Selectable selectable;

@@ -1,80 +1,193 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
     private bool open = false;
-    private bool isAnEnemyAlive = false;
 
-    [Header("Declarations")]
-    /*
-    [Tooltip("The door then opens and closes")]
+    [Header("Door Settings")]
+
     [SerializeField]
-    private GameObject door = null;
-    */
-    [Tooltip("All enemies below have to be dead for this door to open")]
+    [Tooltip("All enemies below have to be dead for this door to open.")]
+    private EnemyHealth[] enemies = null;
+
+    private int numAlive = 0;
+
     [SerializeField]
-    private GameObject[] enemies;
+    [Tooltip("Whether the door should start [OPEN] or [CLOSED].")]
+    private InitialState initialState = InitialState.Closed;
+
+    [SerializeField]
+    [Tooltip("If automatic, it will close when it detects an enemy is alive. If manual, it will only close when [Close()] is called.")]
+    private CloseSettings closeSettings = CloseSettings.Automatic;
+
+    [SerializeField]
+    [Tooltip("The transform information (position, rotation, scale) that should be applied to the given transforms when [Initial State] is set to [OPEN].")]
+    private OpenTransformInfo[] openTransformInfo;
 
     [Header("Unity Events")]
-    [SerializeField]
-    private UnityEvent onOpen = null;
-    [SerializeField]
-    private UnityEvent onClose = null;
+    public UnityEvent onInitOpen = null;
+    public UnityEvent onInitNoEnemiesAlive = null;
+    public UnityEvent onInitCloseWithEnemiesAlive = null;
+    public UnityEvent onOpen = null;
+    public UnityEvent onClose = null;
+    public UnityEvent onCloseWithEnemiesAlive = null;
+    public UnityEvent<int> onNumEnemiesValueChanged = null;
 
-    // Start is called before the first frame update
-    private void Start()
+    private enum InitialState
     {
-        //door = GetComponentInChildren<GameObject>(); need to get first child not all children
-
-        CheckIfCanOpen();
+        Open,
+        Closed,
     }
 
-    private void Open() 
+    private enum CloseSettings
     {
-        // door.SetActive(false);
-
-        onOpen?.Invoke();
+        Automatic,
+        Manual,
     }
 
-    private void Close() 
+    [System.Serializable]
+    private struct OpenTransformInfo
     {
-        // door.SetActive(true);
-
-        onClose?.Invoke();
+        [Tooltip("The transform which should be updated on Awake if the door's initial state is set to [OPEN].")]
+        public Transform transformToUpdate;
+        [Tooltip("[OPTIONAL] Overrides the position, rotation, and scale.")]
+        public Transform openTransform;
+        public Vector3 openPosition;
+        public Quaternion openRotation;
+        public Vector3 openScale;
     }
 
-    private void CheckIfCanOpen() 
+    private void OnEnable()
     {
-        isAnEnemyAlive = false;
-        foreach (GameObject enemy in enemies) 
-        {        
-            if (enemy != null)
-            {
-                if (!enemy.GetComponent<EnemyHealth>().GetIsDead())
+        numAlive = GetNumAlive();
+
+        if (numAlive <= 0)
+            onInitNoEnemiesAlive.Invoke();
+
+        switch (initialState)
+        {
+            case InitialState.Open:
+                onInitOpen.Invoke();
+                open = true;
+                foreach (OpenTransformInfo info in openTransformInfo)
                 {
-                    isAnEnemyAlive = true;
-                    Close();
+                    if (info.openTransform != null)
+                    {
+                        info.transformToUpdate.localPosition = info.openTransform.localPosition;
+                        info.transformToUpdate.localRotation = info.openTransform.localRotation;
+                        info.transformToUpdate.localScale = info.openTransform.localScale;
+                    }
+                    else
+                    {
+                        info.transformToUpdate.localPosition = info.openPosition;
+                        info.transformToUpdate.localRotation = info.openRotation;
+                        info.transformToUpdate.localScale = info.openScale;
+                    }
+                }
+                break;
+
+            case InitialState.Closed:
+                open = false;
+                if (numAlive >= 1)
+                    onInitCloseWithEnemiesAlive.Invoke();
+                break;
+
+            default:
+                break;
+        }
+
+
+        // Listen to enemy death event for each enemy within our list
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].OnDeath += CheckIfCanOpen;
+            }
+        }
+
+        switch (closeSettings)
+        {
+            case CloseSettings.Automatic:
+                CheckIfCanOpen();
+                break;
+            case CloseSettings.Manual:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (enemies != null)
+        {
+            // Stop listening to enemy death events
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                if (enemies[i] != null)
+                {
+                    enemies[i].OnDeath -= CheckIfCanOpen;
                 }
             }
         }
-        if (!isAnEnemyAlive) 
+    }
+
+    public void SetOpen(bool value)
+    {
+        if (open == value)
+            return;
+
+        open = value;
+        numAlive = GetNumAlive();
+
+        if (value)
         {
-            Open();
-            isAnEnemyAlive = false;
+            onOpen.Invoke();
         }
+        else
+        {
+            onClose.Invoke();
+            if (numAlive >= 1)
+                onCloseWithEnemiesAlive.Invoke();
+        }
+
     }
 
-    void OnEnable()
+    public void Open()
     {
-        EnemyHealth.OnDeath += CheckIfCanOpen;
+        SetOpen(true);
     }
 
-
-    void OnDisable()
+    public void Close()
     {
-        EnemyHealth.OnDeath -= CheckIfCanOpen;
+        SetOpen(false);
+    }
+
+    /// <summary>
+    /// Checks if any enemies are alive. If not, the door opens, otherwise, it closes.
+    /// </summary>
+    private void CheckIfCanOpen() 
+    {
+        numAlive = GetNumAlive();
+        SetOpen(numAlive <= 0);
+    }
+
+    private int GetNumAlive()
+    {
+        int numAlive = 0;
+        foreach (EnemyHealth health in enemies)
+        {
+            if (health != null)
+            {
+                if (!health.GetIsDead())
+                {
+                    numAlive++;
+                }
+            }
+        }
+        onNumEnemiesValueChanged.Invoke(numAlive);
+        return numAlive;
     }
 }
