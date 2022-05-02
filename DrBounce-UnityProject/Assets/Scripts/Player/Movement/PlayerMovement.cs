@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
         instance = this;
         player = transform;
         headCheckHeight = new Vector3(0.25f, 0.15F, 0.25f);
-        groundCheckRadius = charController.radius;
+        groundCheckRadius = charController.radius - 0.1f;
     }
 
     private void Start()
