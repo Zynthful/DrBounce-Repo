@@ -48,6 +48,8 @@ public class BulletMovement : MonoBehaviour, IPooledObject
         rb.constraints = RigidbodyConstraints.None;
         rb.velocity = dir * speed * Time.fixedDeltaTime;
 
+        transform.LookAt(transform.position + dir);
+
         onSpawn.Invoke();
 
         StartCoroutine(DieTime());
