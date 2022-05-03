@@ -37,10 +37,12 @@ public class Player : MonoBehaviour
         if (active)
         {
             InputManager.inputMaster.Player.Enable();
+            PlayerMovement.input.enabled = true;
         }
         else
         {
             InputManager.inputMaster.Player.Disable();
+            PlayerMovement.input.enabled = false;
         }
     }
 }
