@@ -12,8 +12,8 @@ public class ExplosiveShot : BulletMovement
     private GameObject explosionTrigger;
     private bool expanding;
 
-    [SerializeField] [Range(10f, 1000f)] float expansionSpeed = 20;
-    [SerializeField] [Range(10f, 1000f)] float shrinkSpeed = 20;
+    [SerializeField] [Range(10f, 1000f)] float expansionSpeed;
+    [SerializeField] [Range(10f, 1000f)] float shrinkSpeed;
     private MeshRenderer shotRenderer;
     private MeshCollider shotModelCollider;
     private CheckForBouncing bounceCheck;
@@ -101,7 +101,7 @@ public class ExplosiveShot : BulletMovement
             explosionTrigger.transform.localScale -= Vector3.one * ((comboSize * explosionSizeMultiplier) * (.1f / startScale)) / shrinkSpeed;
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(.1f);
         gameObject.SetActive(false);
     }
 }
