@@ -22,6 +22,7 @@ public class ExplosiveShot : BulletMovement
 
     [Header("Explosive Shot Events")]
     public UnityEvent onExplode = null;
+    public UnityEvent onShrank = null;
 
     public override void OnObjectSpawn()
     {
@@ -101,6 +102,7 @@ public class ExplosiveShot : BulletMovement
             explosionTrigger.transform.localScale -= Vector3.one * ((comboSize * explosionSizeMultiplier) * (.1f / startScale)) / shrinkSpeed;
             yield return new WaitForSeconds(Time.deltaTime);
         }
+        onShrank?.Invoke();
         yield return new WaitForSeconds(.1f);
         gameObject.SetActive(false);
     }
