@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -158,30 +159,6 @@ public class PlayerMovement : MonoBehaviour
             InputManager.inputMaster.Player.Crouch.Disable();
         }
     }
-
-    #region BrackeysMoment
-    private void OnEnable()
-    {
-        // Listen for player inputs
-        controls.Player.Jump.performed += _ => Jump();
-        controls.Player.Dash.performed += _ => InitiateDash();
-        controls.Player.Crouch.performed += _ => Crouch();
-    }
-
-    private void OnDestroy()
-    {
-        controls.Player.Jump.performed -= _ => Jump();
-        controls.Player.Dash.performed -= _ => InitiateDash();
-        controls.Player.Crouch.performed -= _ => Crouch();
-    }
-
-    private void OnDisable()//Brackeys Moment   // brackeys is gone :(
-    {
-        controls.Player.Jump.performed -= _ => Jump();
-        controls.Player.Dash.performed -= _ => InitiateDash();
-        controls.Player.Crouch.performed -= _ => Crouch();
-    }
-    #endregion
 
     private void FixedUpdate()
     {
@@ -476,7 +453,6 @@ public class PlayerMovement : MonoBehaviour
         if (headIsTouchingSomething)
         {
             hasJumped = true;
-            jump = false;
             if (isCrouching == true)
             {
                 isGrounded = false;
@@ -502,9 +478,9 @@ public class PlayerMovement : MonoBehaviour
 
         #endregion
     }
-    void Jump()
+    public void Jump(InputAction.CallbackContext context)
     {
-        if (!GameManager.s_Instance.paused && coyoteTime > 0 && hasJumped == false)
+        if (!GameManager.s_Instance.paused && coyoteTime > 0 && hasJumped == false && context.performed)
         {
             
             if (prevJump == false)
@@ -516,7 +492,9 @@ public class PlayerMovement : MonoBehaviour
             gravity = prevGrav;
             if (isCrouching == true)
             {
-                Crouch(); //Un-crouches the player before jumping
+                onUncrouch.Invoke();
+                isCrouching = false;
+                speed = oldSpeed; //Un-crouches the player before jumping
             }
 
             gravity = prevGrav;
@@ -533,9 +511,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void InitiateDash()
+    public void InitiateDash(InputAction.CallbackContext context)
     {
-        StartCoroutine(Dash());
+        if (context.performed)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     void Land()
@@ -549,41 +530,44 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Crouch()
+    public void Crouch(InputAction.CallbackContext context)
     {
-        if (GameManager.s_Instance.paused || !isGrounded)
-            return;
-
-        if (!isCrouching)
+        if (context.performed)
         {
-            // Crouch
-            if (controls.Player.Movement.ReadValue<Vector2>().y <= 0 || !canSlide)
-            {
-                isCrouching = true;
-                oldSpeed = speed;
-                speed /= 2;
-                onCrouch.Invoke();
-            }
-            // Slide
-            else if (canSlide)
-            {
-                isSliding = true;
+            if (GameManager.s_Instance.paused || !isGrounded)
+                return;
 
-                // Trigger used unlock for the first time, if it's the first time we've done so
-                if (UnlockTracker.instance.lastUnlock == UnlockTracker.UnlockTypes.Slide && !UnlockTracker.instance.usedUnlock)
+            if (!isCrouching)
+            {
+                // Crouch
+                if (controls.Player.Movement.ReadValue<Vector2>().y <= 0 || !canSlide)
                 {
-                    UnlockTracker.instance.UsedUnlockFirstTime();
+                    isCrouching = true;
+                    oldSpeed = speed;
+                    speed /= 2;
+                    onCrouch.Invoke();
                 }
+                // Slide
+                else if (canSlide)
+                {
+                    isSliding = true;
 
-                onSlide.Invoke();
+                    // Trigger used unlock for the first time, if it's the first time we've done so
+                    if (UnlockTracker.instance.lastUnlock == UnlockTracker.UnlockTypes.Slide && !UnlockTracker.instance.usedUnlock)
+                    {
+                        UnlockTracker.instance.UsedUnlockFirstTime();
+                    }
+
+                    onSlide.Invoke();
+                }
             }
-        }
-        // Uncrouch
-        else
-        {
-            onUncrouch.Invoke();
-            isCrouching = false;
-            speed = oldSpeed;
+            // Uncrouch
+            else
+            {
+                onUncrouch.Invoke();
+                isCrouching = false;
+                speed = oldSpeed;
+            }
         }
     }
 
