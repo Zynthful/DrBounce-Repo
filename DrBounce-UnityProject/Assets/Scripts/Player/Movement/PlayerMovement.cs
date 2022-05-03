@@ -124,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
         playerHeight = charController.height;
         GameManager.gravity = gravity;
 
+        controls = new InputMaster();
         controls = InputManager.inputMaster;
 
         instance = this;
