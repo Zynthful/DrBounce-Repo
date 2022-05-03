@@ -12,8 +12,8 @@ public class ExplosiveShot : BulletMovement
     private GameObject explosionTrigger;
     private bool expanding;
 
-    [SerializeField] [Range(10f, 1000f)] float expansionSpeed;
-    [SerializeField] [Range(10f, 1000f)] float shrinkSpeed;
+    [SerializeField] [Range(.01f, 50f)] float expansionSpeed;
+    [SerializeField] [Range(.01f, 50f)] float shrinkSpeed;
     private MeshRenderer shotRenderer;
     private MeshCollider shotModelCollider;
     private CheckForBouncing bounceCheck;
