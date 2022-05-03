@@ -43,7 +43,7 @@ public class AAManager : MonoBehaviour
     {
         if(Gamepad.current != null)
         {
-            if(main == null)
+            if(main == null || aimScript == null)
             {
                 SetupAA();
             }
@@ -84,7 +84,10 @@ public class AAManager : MonoBehaviour
                 aimScript.aimAssistInfluence = Vector2.zero;
         }
         else
-            aimScript.aimAssistInfluence = Vector2.zero;
+        {
+            if(aimScript != null)
+                aimScript.aimAssistInfluence = Vector2.zero;
+        }
     }
 
     public static void RemoveTransform(Transform t)
