@@ -17,7 +17,7 @@ public class ExplosiveShot : BulletMovement
     private MeshCollider shotModelCollider;
     private CheckForBouncing bounceCheck;
     private Vector3 explosionTriggerBaseScale = Vector3.zero;
-    private float explosionLifespan = .25f;
+    [SerializeField] private float explosionLifespan = .25f;
 
     [Header("Explosive Shot Events")]
     public UnityEvent onExplode = null;
