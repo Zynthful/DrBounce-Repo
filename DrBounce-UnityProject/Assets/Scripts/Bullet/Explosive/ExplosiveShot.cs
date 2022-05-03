@@ -17,6 +17,7 @@ public class ExplosiveShot : BulletMovement
     private MeshCollider shotModelCollider;
     private CheckForBouncing bounceCheck;
     private Vector3 explosionTriggerBaseScale = Vector3.zero;
+    private float explosionLifespan = .25f;
 
     [Header("Explosive Shot Events")]
     public UnityEvent onExplode = null;
@@ -93,7 +94,7 @@ public class ExplosiveShot : BulletMovement
             explosionTrigger.transform.localScale += Vector3.one * ((comboSize * explosionSizeMultiplier) * (.1f / startScale)) / expansionSpeed;
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(explosionLifespan);
         gameObject.SetActive(false);
     }
 }
