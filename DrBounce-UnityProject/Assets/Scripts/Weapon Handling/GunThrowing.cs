@@ -166,6 +166,10 @@ public class GunThrowing : MonoBehaviour
 
         owner = GameManager.player.transform;
         rb = GetComponent<Rigidbody>();
+        if(shooting == null)
+        {
+            shooting = GetComponent<Shooting>();
+        }
 
         if (startOnPlayer)
         {
@@ -298,6 +302,8 @@ public class GunThrowing : MonoBehaviour
         {
             throwing = true;
             SetIsHeld(false);
+
+            shooting.CancelMaxShot();
 
             // Disable throwing for set duration
             StartCoroutine(DisableThrowForDuration(throwDisableTime));

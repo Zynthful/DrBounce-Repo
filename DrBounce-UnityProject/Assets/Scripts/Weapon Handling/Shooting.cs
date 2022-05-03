@@ -332,6 +332,14 @@ public class Shooting : MonoBehaviour
         currentHoldTime = 0.0f;
     }
 
+    public void CancelMaxShot()
+    {
+        maxShotCharging = false;
+        onChargingMaxShotProgress?.Invoke(0.0f);
+        maxShotCharged = false;
+        onChargeMaxShotCancel?.Invoke();
+    }
+
     /// <summary>
     /// Attempts to shoot, checking if we're unpaused, holding the gun, the gun is not cooling down, and we're not already charging a max shot
     /// </summary>
