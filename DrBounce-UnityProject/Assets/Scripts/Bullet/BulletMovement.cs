@@ -44,7 +44,8 @@ public class BulletMovement : MonoBehaviour, IPooledObject
             if (!rb)
                 rb = GetComponentInChildren<Rigidbody>();
         }
-        
+
+        rb.constraints = RigidbodyConstraints.None;
         rb.velocity = dir * speed * Time.fixedDeltaTime;
 
         onSpawn.Invoke();

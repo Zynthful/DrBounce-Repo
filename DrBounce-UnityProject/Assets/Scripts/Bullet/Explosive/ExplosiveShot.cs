@@ -16,6 +16,7 @@ public class ExplosiveShot : BulletMovement
     private MeshRenderer shotRenderer;
     private MeshCollider shotModelCollider;
     private CheckForBouncing bounceCheck;
+    private Vector3 explosionTriggerBaseScale = Vector3.zero;
 
     [Header("Explosive Shot Events")]
     public UnityEvent onExplode = null;
@@ -36,12 +37,15 @@ public class ExplosiveShot : BulletMovement
 
         shotRenderer.enabled = true;
         shotModelCollider.enabled = true;
+
+        if(explosionTriggerBaseScale == Vector3.zero)
+            explosionTriggerBaseScale = explosionTrigger.transform.localScale;
+
+        explosionTrigger.transform.localScale = explosionTriggerBaseScale;
         explosionTrigger.SetActive(false);
-        
-        rb.constraints = RigidbodyConstraints.None;
     }
 
-   public void OnCollisionEnter(Collision other)
+    public void OnCollisionEnter(Collision other)
     {
         if (!other.transform.GetComponentInChildren<BulletMovement>() && other.transform.root != PlayerMovement.player.root && !expanding)
         {
