@@ -89,9 +89,10 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool headIsTouchingSomething;
     public Vector3 velocity;
     private bool slopeCheck;
-    [SerializeField] private float groundCheckRadius;
     private Vector3 headCheckHeight;
     [HideInInspector] public Vector3 groundcheckPos;
+    [SerializeField] private int groundCheckBoxes;
+    private int boxDegrees;
 
 
     [Header("Freeze")]
@@ -131,7 +132,6 @@ public class PlayerMovement : MonoBehaviour
         input = GetComponent<PlayerInput>();
         player = transform;
         headCheckHeight = new Vector3(0.25f, 0.15F, 0.25f);
-        groundCheckRadius = charController.radius - 0.1f;
     }
 
     private void Start()
@@ -340,13 +340,16 @@ public class PlayerMovement : MonoBehaviour
 
         //Allows the player to push against their momentum to slow it down without springing back after letting go
         //This is accomplished by subtracting the player's input value 'move' from the player's velocity when they're in opposite directions
-        if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
+        if(bounceForce == Vector3.zero)
         {
-            velocity.x += move.x;
-        }
-        if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
-        {
-            velocity.z += move.z;
+            if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
+            {
+                velocity.x += move.x;
+            }
+            if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
+            {
+                velocity.z += move.z;
+            }
         }
 
         controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
@@ -378,8 +381,9 @@ public class PlayerMovement : MonoBehaviour
         //print("isgrounded");
 
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
-        
-        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.2f,0.1f,0.2f), transform.rotation, ~groundMask);
+
+        GroundCheck();
+        //isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.2f,0.1f,0.2f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
         slopeCheck = Physics.CheckBox(groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
 
@@ -549,6 +553,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void GroundCheck()
+    {
+        for (int i = 0; i < groundCheckBoxes; i++)
+        {
+            boxDegrees = (360 / groundCheckBoxes);
+            print(boxDegrees * i);
+            isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.1f, 0.1f, 0.2f), transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up), ~groundMask);
+        }
+    }
+
     public void ApplyKnockback(Vector3 dir, float power)
     {
         knockbackDir = (knockbackDir + dir).normalized;
@@ -641,21 +655,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (debugGroundCheck)
         {
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube.transform.position = groundcheckPos;
-            cube.transform.rotation = transform.rotation;
-            cube.transform.localScale = new Vector3(0.2f,0.1f,0.2f) * 2;
-            cube.GetComponent<Collider>().enabled = false;
-
-            if (isGrounded)
+            for (int i = 0; i < groundCheckBoxes; i++)
             {
-                cube.GetComponent<Renderer>().material.color = Color.green;
-            }
-            else
-            {
-                cube.GetComponent<Renderer>().material.color = Color.red;
-            }
+                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                cube.transform.position = groundcheckPos;
+                cube.transform.rotation = transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up);
+                cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.2f) * 2;
+                cube.GetComponent<Collider>().enabled = false;
 
+                if (isGrounded)
+                {
+                    cube.GetComponent<Renderer>().material.color = Color.green;
+                }
+                else
+                {
+                    cube.GetComponent<Renderer>().material.color = Color.red;
+                }
+            }
         }
     }
     void DebugSlopeCheck()
