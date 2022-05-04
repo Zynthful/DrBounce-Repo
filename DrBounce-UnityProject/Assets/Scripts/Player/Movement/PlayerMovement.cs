@@ -355,15 +355,15 @@ public class PlayerMovement : MonoBehaviour
             velocity.y,
             Mathf.Abs(charController.velocity.z + velocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
-        //if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
-        //{
-        //    velocity.x = 0;
-        //}
+        if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
+        {
+            velocity.x = 0;
+        }
 
-        //if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce.z == 0)
-        //{
-        //    velocity.z = 0;
-        //}
+        if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce.z == 0)
+        {
+            velocity.z = 0;
+        }
 
         #endregion
 
@@ -400,6 +400,7 @@ public class PlayerMovement : MonoBehaviour
             } //This delay is to prevent the player being able to dash just before they hit the ground.
             if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
             {
+                print(velocity);
                 velocity.y = (-40f * Time.fixedDeltaTime);
             }
 
@@ -420,7 +421,7 @@ public class PlayerMovement : MonoBehaviour
                 bounceForce = Vector3.zero;
             }
 
-            if (slopeCheck)
+            if (slopeCheck && bounceForce == Vector3.zero)
             {
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
                 velocity.y = -1000;
