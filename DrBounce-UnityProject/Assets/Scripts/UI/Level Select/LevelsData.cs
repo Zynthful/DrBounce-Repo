@@ -10,6 +10,11 @@ public class LevelsData : ScriptableObject
     private int currentLevelIndex = -1;
     public int GetCurrentLevelIndex() { return currentLevelIndex; }
 
+    public GameEvent onLoadLevel = null;
+
+    [SerializeField]
+    private AK.Wwise.Event loadLevelEvent = null;
+
 #if UNITY_EDITOR
     // Only need to update our current level in editor
     private void OnEnable()
@@ -42,6 +47,11 @@ public class LevelsData : ScriptableObject
         if (IsLevelValid(level))
         {
             //currentLevel = level;
+            onLoadLevel.Raise();
+            if (loadLevelEvent != null)
+            {
+                loadLevelEvent.Post(GameManager.s_Instance.gameObject);
+            }
             currentLevelIndex = levels.IndexOf(level);
             LoadingScreenManager.s_Instance.LoadScene(level.GetSceneName(), LoadingScreenManager.ContinueOptions.RequireInput, LoadingScreenManager.UnloadOptions.Manual, LoadingScreenManager.UnloadOptions.Manual, 1.2f);
         }

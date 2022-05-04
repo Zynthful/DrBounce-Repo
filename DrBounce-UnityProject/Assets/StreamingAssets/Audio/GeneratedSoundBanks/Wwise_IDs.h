@@ -60,6 +60,7 @@ namespace AK
         static const AkUniqueID ENEMY_STUN_STUNNED = 1850312910U;
         static const AkUniqueID FREEZE = 3285814624U;
         static const AkUniqueID GENERIC_STOP_ALL_GAMEOBJECT = 3857490017U;
+        static const AkUniqueID LEVEL_BEGIN_LOAD = 2221566714U;
         static const AkUniqueID LEVEL_CHECKPOINT_REACHED = 3200076801U;
         static const AkUniqueID LEVEL_COMPLETE = 3736098925U;
         static const AkUniqueID LEVEL_QUIT = 1419047013U;
