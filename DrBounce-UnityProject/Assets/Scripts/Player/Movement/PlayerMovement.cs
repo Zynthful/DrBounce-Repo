@@ -43,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
     private bool jump = false;
     private float jumpHeight = 0f;
     private bool prevJump = false;
-    private float prevGrav;
     private bool hasJumped = false;
 
     [Header("Dashing")]
@@ -121,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         oldCoyoteTime = coyoteTime;
-        prevGrav = gravity;
         charController = GetComponent<CharacterController>();
         playerHeight = charController.height;
         GameManager.gravity = gravity;
@@ -381,7 +379,7 @@ public class PlayerMovement : MonoBehaviour
 
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
         
-        isGrounded = Physics.CheckCapsule(groundcheckPos, groundcheckPos, groundCheckRadius, ~groundMask);
+        isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.2f,0.1f,0.2f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
         slopeCheck = Physics.CheckBox(groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
 
@@ -389,6 +387,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
+            bounceForce = Vector3.zero;
+
             coyoteTime = oldCoyoteTime;
             dashesPerformed = 0;
 
@@ -412,12 +412,6 @@ public class PlayerMovement : MonoBehaviour
                 //then the full momentum loss rate will be subtracted from itself, making the momentum loss very low.
                 velocity.x -= ((velocity.normalized.x * momentumLossRate) - ((move.normalized.x * momentumLossRate / 2))) * Time.deltaTime;
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
-            }
-
-            else
-            {
-                gravity = prevGrav;
-                bounceForce = Vector3.zero;
             }
 
             if (slopeCheck && bounceForce == Vector3.zero)
@@ -475,7 +469,6 @@ public class PlayerMovement : MonoBehaviour
                 jumpHeight += (jumpMin);
             }
 
-            gravity = prevGrav;
             if (isCrouching == true)
             {
                 onUncrouch.Invoke();
@@ -483,7 +476,6 @@ public class PlayerMovement : MonoBehaviour
                 speed = oldSpeed; //Un-crouches the player before jumping
             }
 
-            gravity = prevGrav;
             isDashing = false;
             if(isSliding == true)
             {
@@ -649,18 +641,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (debugGroundCheck)
         {
-            GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-            capsule.transform.position = groundcheckPos;
-            capsule.transform.rotation = transform.rotation;
-            capsule.transform.localScale = new Vector3(groundCheckRadius, groundCheckRadius, groundCheckRadius) * 2;
-            capsule.GetComponent<Collider>().enabled = false;
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube.transform.position = groundcheckPos;
+            cube.transform.rotation = transform.rotation;
+            cube.transform.localScale = new Vector3(0.2f,0.1f,0.2f) * 2;
+            cube.GetComponent<Collider>().enabled = false;
+
             if (isGrounded)
             {
-                capsule.GetComponent<Renderer>().material.color = Color.green;
+                cube.GetComponent<Renderer>().material.color = Color.green;
             }
             else
             {
-                capsule.GetComponent<Renderer>().material.color = Color.red;
+                cube.GetComponent<Renderer>().material.color = Color.red;
             }
 
         }
