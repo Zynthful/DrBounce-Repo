@@ -29,7 +29,7 @@ public class InputSequence : MonoBehaviour
             case 0:
                 if (controls.Keypress.L_Pressed.triggered)
                 {
-                    ++sequenceIndex;
+                    sequenceIndex++;
                     if(timer != null)
                         StopCoroutine(timer);
                     timer = StartCoroutine(Timer());
@@ -38,7 +38,7 @@ public class InputSequence : MonoBehaviour
             case 1:
                 if (controls.Keypress.Y_Pressed.triggered)
                 {
-                    ++sequenceIndex;
+                    sequenceIndex++;
                     StopCoroutine(timer);
                     timer = StartCoroutine(Timer());
                 }
@@ -46,15 +46,15 @@ public class InputSequence : MonoBehaviour
             case 2:
                 if (controls.Keypress.S_Pressed.triggered)
                 {
-                    ++sequenceIndex;
+                    sequenceIndex++;
                     StopCoroutine(timer);
                     timer = StartCoroutine(Timer());
                 }
                 break;
             case 3:
-                if (controls.Keypress.Y_Pressed.triggered)
+                if (controls.Keypress.U_Pressed.triggered)
                 {
-                    ++sequenceIndex;
+                    sequenceIndex++;
                     StopCoroutine(timer);
                     timer = StartCoroutine(Timer());
                 }
@@ -62,7 +62,6 @@ public class InputSequence : MonoBehaviour
             case 4:
                 if (controls.Keypress.S_Pressed.triggered)
                 {
-                    ++sequenceIndex;
                     StopCoroutine(timer);
                     sequenceIndex = 0;
                     onSequence?.Invoke();
