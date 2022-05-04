@@ -50,7 +50,7 @@ public class ExplosiveShot : BulletMovement
 
     public void OnCollisionEnter(Collision other)
     {
-        if (!other.transform.GetComponentInChildren<BulletMovement>() && other.transform.root != PlayerMovement.player.root && !expanding)
+        if (!other.transform.GetComponentInChildren<BulletMovement>() && other.transform.root != PlayerMovement.player && !expanding)
         {
             if (GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << other.gameObject.layer))
             {
@@ -68,9 +68,9 @@ public class ExplosiveShot : BulletMovement
             shotRenderer.GetComponent<MeshCollider>().enabled = false;
             shotRenderer.enabled = false; rb.velocity = Vector3.zero;
 
-            StartCoroutine(ExplosionExpansion());
-
             onExplode?.Invoke();
+
+            StartCoroutine(ExplosionExpansion());
         }
     }
 
