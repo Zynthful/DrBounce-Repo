@@ -249,6 +249,7 @@ namespace AK
             {
                 static const AkUniqueID GRASS = 4248645337U;
                 static const AkUniqueID LAB = 578926554U;
+                static const AkUniqueID METAL = 2473969246U;
                 static const AkUniqueID SLIME = 3803999823U;
             } // namespace SWITCH
         } // namespace COLLISION_MATERIAL

@@ -15,9 +15,11 @@ public class CheckMaterial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("trigg " + other.gameObject.name);
         MaterialSwitch matSwitch = other.gameObject.GetComponent<MaterialSwitch>();
         if (matSwitch != null)
         {
+            Debug.Log("we got one " + other.gameObject.name); ;
             SetMaterial(matSwitch.GetMaterial());
         }
     }
@@ -35,6 +37,7 @@ public class CheckMaterial : MonoBehaviour
     {
         if (currentMaterial != material)
         {
+            Debug.Log("setting new mat!!!" + material.Name);
             currentMaterial = material;
             currentMaterial.SetValue(switchObj);
         }
