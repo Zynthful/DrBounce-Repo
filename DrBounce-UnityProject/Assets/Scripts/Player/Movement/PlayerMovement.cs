@@ -94,10 +94,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int groundCheckBoxes;
     private int boxDegrees;
 
-
-    [Header("Freeze")]
-    [SerializeField] private bool Freeze = false;
-
     [Header("Unity Events")]
     public UnityEvent onJump = null;
     public UnityEvent onDash = null;
@@ -125,7 +121,6 @@ public class PlayerMovement : MonoBehaviour
         playerHeight = charController.height;
         GameManager.gravity = gravity;
 
-        controls = new InputMaster();
         controls = InputManager.inputMaster;
 
         instance = this;
@@ -134,14 +129,18 @@ public class PlayerMovement : MonoBehaviour
         headCheckHeight = new Vector3(0.25f, 0.15F, 0.25f);
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        if (Freeze)
-        {
-            controls.Player.Movement.Disable();
-            controls.Player.Jump.Disable();
-            controls.Player.Crouch.Disable();
-        }
+        controls.Player.Crouch.performed += Crouch;
+        controls.Player.Jump.performed += Jump;
+        controls.Player.Dash.performed += InitiateDash;
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Crouch.performed -= Crouch;
+        controls.Player.Jump.performed -= Jump;
+        controls.Player.Dash.performed -= InitiateDash;
     }
 
     private void FixedUpdate()
@@ -514,11 +513,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch(InputAction.CallbackContext context)
     {
+        if (GameManager.s_Instance.paused || !isGrounded)
+            return;
+
         if (context.performed)
         {
-            if (GameManager.s_Instance.paused || !isGrounded)
-                return;
-
             if (!isCrouching)
             {
                 // Crouch
@@ -558,7 +557,7 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < groundCheckBoxes; i++)
         {
             boxDegrees = (360 / groundCheckBoxes);
-            print(boxDegrees * i);
+            //print(boxDegrees * i);
             isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.1f, 0.1f, 0.2f), transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up), ~groundMask);
         }
     }
