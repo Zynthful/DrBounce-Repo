@@ -383,7 +383,7 @@ public class PlayerMovement : MonoBehaviour
         
         isGrounded = Physics.CheckCapsule(groundcheckPos, groundcheckPos, groundCheckRadius, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
-        slopeCheck = Physics.CheckBox(groundcheckPos + move + slideDirection + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
+        slopeCheck = Physics.CheckBox(groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
 
@@ -400,7 +400,6 @@ public class PlayerMovement : MonoBehaviour
             } //This delay is to prevent the player being able to dash just before they hit the ground.
             if (velocity.y < 0) //If player is grounded and velocity is lower than 0, set it to 0.
             {
-                print(velocity);
                 velocity.y = (-40f * Time.fixedDeltaTime);
             }
 
@@ -671,7 +670,7 @@ public class PlayerMovement : MonoBehaviour
         if (debugSlopeCheck)
         {
             GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube2.transform.position = groundcheckPos + move + slideDirection + (Vector3.down / 2.5f);
+            cube2.transform.position = groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f);
             cube2.transform.rotation = transform.rotation;
             cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
             cube2.GetComponent<Collider>().enabled = false;
