@@ -428,7 +428,6 @@ public class PlayerMovement : MonoBehaviour
             hasJumped = true;
             if (isCrouching == true)
             {
-                isGrounded = false;
                 cooldown = true;
             }
             if (!isGrounded)
@@ -528,7 +527,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         // Uncrouch
-        else
+        else if(!headIsTouchingSomething)
         {
             onUncrouch.Invoke();
             isCrouching = false;
