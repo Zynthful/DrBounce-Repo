@@ -145,8 +145,8 @@ public class Health : MonoBehaviour
 
         SetHealth(health - amount, true, ignoreGod);
 
-        // Only call injured events if we're not dead after taking damage
-        if (!GetIsDead())
+        // Only call injured events if we're taking at least 1 damage AND we're not dead after taking damage
+        if (amount >= 1 && !GetIsDead())
         {
             onInjured?.Invoke(amount);
             _onInjured?.Raise(amount);
