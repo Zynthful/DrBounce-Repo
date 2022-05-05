@@ -124,7 +124,7 @@ public class InputManager : MonoBehaviour
         // Rebind completed operation
         rebind.OnComplete(operation =>
         {
-            // Reenable our action if it was disabled previously
+            // Re-enable our action if it was disabled previously
             if (wasEnabled)
                 action.Enable();
 
@@ -175,7 +175,10 @@ public class InputManager : MonoBehaviour
         // Rebind cancelled operation
         rebind.OnCancel(operation =>
         {
-            action.Enable();
+            // Re-enable our action if it was disabled previously
+            if (wasEnabled)
+                action.Enable();
+
             operation.Dispose();
 
             onRebindCancel?.Invoke();
