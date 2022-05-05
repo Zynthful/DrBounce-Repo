@@ -247,6 +247,7 @@ namespace AK
 
             namespace SWITCH
             {
+                static const AkUniqueID GLASS_PIPE = 3681794790U;
                 static const AkUniqueID GRASS = 4248645337U;
                 static const AkUniqueID LAB = 578926554U;
                 static const AkUniqueID METAL = 2473969246U;
