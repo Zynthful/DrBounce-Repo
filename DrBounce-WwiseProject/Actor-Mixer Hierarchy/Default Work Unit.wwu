@@ -2644,7 +2644,7 @@
 													</ChildrenList>
 													<ObjectLists/>
 												</RandomSequenceContainer>
-												<RandomSequenceContainer Name="Slime Pool" ID="{AE6E7D91-BDDE-4D75-A1D5-E75601E881CB}" ShortID="129410375">
+												<BlendContainer Name="Slime Pool" ID="{157ED96D-22B5-4411-8BE8-9857160214D9}" ShortID="289373294">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -2654,15 +2654,25 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<Sound Name="snd_ralseising1" ID="{DD68595C-36AD-48FF-825D-87008E57C72F}" ShortID="902110436">
+														<Sound Name="snd_ralseising4" ID="{AEEB9F20-2886-49A6-8ACF-A286C450CA58}" ShortID="533432475">
 															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Pitch" Type="int32">
+																	<ValueList>
+																		<Value>780</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 																<Property Name="Volume" Type="Real64">
 																	<ValueList>
-																		<Value>-5</Value>
+																		<Value>-6</Value>
 																	</ValueList>
 																</Property>
 															</PropertyList>
 															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																</Reference>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 																</Reference>
@@ -2671,22 +2681,112 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="snd_ralseising1" ID="{8E635995-CBDA-4D50-9A55-356513D52C77}">
+																<AudioFileSource Name="snd_ralseising4" ID="{346AB0A6-5FF4-4B31-9B61-7F9AF92E0865}">
 																	<Language>SFX</Language>
-																	<AudioFile>snd_ralseising1.wav</AudioFile>
+																	<AudioFile>snd_ralseising4.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="693329528"/>
+																		<MediaID ID="477628353"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ObjectLists/>
 															<ActiveSourceList>
-																<ActiveSource Name="snd_ralseising1" ID="{8E635995-CBDA-4D50-9A55-356513D52C77}" Platform="Linked"/>
+																<ActiveSource Name="snd_ralseising4" ID="{346AB0A6-5FF4-4B31-9B61-7F9AF92E0865}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
+														<RandomSequenceContainer Name="Slap" ID="{0EE541B5-8CD8-4873-9E09-3D20E0313A82}" ShortID="74556442">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="DB_SFX_Slime Pit_Object_Fall_Small_3" ID="{56D1231D-C276-4B9B-B52D-F3830C5BBB85}" ShortID="575483315">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="Pitch" Type="int32">
+																			<ValueList>
+																				<Value>560</Value>
+																			</ValueList>
+																		</Property>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Slime Pit" ID="{B6E36169-86E4-4B84-8967-B8D148B4194C}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Environment" ID="{A6D48AFC-F4D0-422B-99CD-7C6C71109A02}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="DB_SFX_Slime Pit_Object_Fall_Small_3" ID="{E56B6D7A-AF8F-48E5-9C0F-4D71E33F9C5F}">
+																			<Language>SFX</Language>
+																			<AudioFile>DB_SFX_Slime Pit_Object_Fall_Small_3.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="701217798"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="DB_SFX_Slime Pit_Object_Fall_Small_3" ID="{E56B6D7A-AF8F-48E5-9C0F-4D71E33F9C5F}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="DB_SFX_Slime Pit_Object_Fall_Small_2" ID="{949E9894-1CDD-4704-8F89-BBF9354471E7}" ShortID="818472418">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="Pitch" Type="int32">
+																			<ValueList>
+																				<Value>480</Value>
+																			</ValueList>
+																		</Property>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Slime Pit" ID="{B6E36169-86E4-4B84-8967-B8D148B4194C}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Environment" ID="{A6D48AFC-F4D0-422B-99CD-7C6C71109A02}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="DB_SFX_Slime Pit_Object_Fall_Small_2" ID="{4075DCE2-EED3-4DEB-8B92-BF4DC2D47FA3}">
+																			<Language>SFX</Language>
+																			<AudioFile>DB_SFX_Slime Pit_Object_Fall_Small_2.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="403637389"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="DB_SFX_Slime Pit_Object_Fall_Small_2" ID="{4075DCE2-EED3-4DEB-8B92-BF4DC2D47FA3}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
 													</ChildrenList>
 													<ObjectLists/>
-												</RandomSequenceContainer>
+												</BlendContainer>
 											</ChildrenList>
 											<ObjectLists/>
 											<GroupingInfo>
@@ -2695,7 +2795,7 @@
 														<ItemRef Name="Lab" ID="{06B4BB25-3863-47CC-94E4-D492DE129D1A}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
-														<ItemRef Name="Slime Pool" ID="{AE6E7D91-BDDE-4D75-A1D5-E75601E881CB}"/>
+														<ItemRef Name="Slime Pool" ID="{157ED96D-22B5-4411-8BE8-9857160214D9}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
 														<ItemRef Name="Grass" ID="{23857294-2B7B-47DA-96D0-71482D013631}"/>
@@ -2717,7 +2817,7 @@
 													<Grouping>
 														<SwitchRef Name="Slime_Pool" ID="{1C82C72F-F0B9-46D0-8184-E2B2D5311405}"/>
 														<ItemList>
-															<ItemRef Name="Slime Pool" ID="{AE6E7D91-BDDE-4D75-A1D5-E75601E881CB}"/>
+															<ItemRef Name="Slime Pool" ID="{157ED96D-22B5-4411-8BE8-9857160214D9}"/>
 														</ItemList>
 													</Grouping>
 													<Grouping>
@@ -2789,17 +2889,6 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<RandomSequenceContainer Name="Lab" ID="{7B71BA06-C8A2-4F06-8DF9-25F3E55FCA0D}" ShortID="578301514">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ObjectLists/>
-												</RandomSequenceContainer>
 												<RandomSequenceContainer Name="Slime" ID="{30005DB1-73AD-43DD-8760-DAD2E3CC2587}" ShortID="737043570">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
@@ -3332,15 +3421,563 @@
 													</ChildrenList>
 													<ObjectLists/>
 												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="Slime Pool" ID="{8A176EF9-0CA1-4524-B487-B8CC927E9382}" ShortID="864012133">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="snd_ralseising3" ID="{48C0C811-D164-4E6D-99D4-822612060F98}" ShortID="442388768">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="snd_ralseising3" ID="{75B533F4-9734-4908-A0D2-1C5657C326B3}">
+																	<Language>SFX</Language>
+																	<AudioFile>snd_ralseising3.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="782787679"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="snd_ralseising3" ID="{75B533F4-9734-4908-A0D2-1C5657C326B3}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</RandomSequenceContainer>
+												<BlendContainer Name="Lab" ID="{6EC54913-8A6E-4379-9F95-032CCCD78213}" ShortID="844288256">
+													<PropertyList>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>400</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="1" ID="{6F38002F-B2FF-4C1E-8571-DFCC90C437EE}" ShortID="779266807">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_8L" ID="{94B7F9D8-E43E-4AAA-805F-D5ACE5F2E8B3}" ShortID="860125926">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_8L" ID="{AE380C9B-AC74-41E0-912E-200418EF29D5}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_8L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="993805855"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_8L" ID="{AE380C9B-AC74-41E0-912E-200418EF29D5}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_4R" ID="{57C4B5C0-44C6-4287-997B-79CE6583F9FA}" ShortID="1064758966">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																		<Reference Name="ReflectionsAuxSend">
+																			<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_4R" ID="{FBFD656F-DDE2-4F12-84FA-66BC4C8A923B}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_4R.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="405458385"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_4R" ID="{FBFD656F-DDE2-4F12-84FA-66BC4C8A923B}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_2L" ID="{0B4E4950-026F-4051-938F-C7A11B1DBDE1}" ShortID="1013253308">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_2L" ID="{A992E4F6-C328-4B78-ADFA-A97D8E33E622}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_2L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="808191837"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_2L" ID="{A992E4F6-C328-4B78-ADFA-A97D8E33E622}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_16L" ID="{175F1E91-98F3-4F57-A7B0-B34339B8FEF0}" ShortID="79303635">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_16L" ID="{3F1AB71D-BE21-41CC-B55E-FCEE85CDC903}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_16L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="412437146"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_16L" ID="{3F1AB71D-BE21-41CC-B55E-FCEE85CDC903}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_19L" ID="{3226053F-C673-4F8A-B014-271ABA4A30EC}" ShortID="625434522">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_19L" ID="{3DBA72EE-C2FD-4799-AFF5-AB9291D4D30F}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_19L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="239369368"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_19L" ID="{3DBA72EE-C2FD-4799-AFF5-AB9291D4D30F}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_21R" ID="{510BA58F-EFB4-4243-93A3-94D272C0FFA6}" ShortID="627802520">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																		<Reference Name="ReflectionsAuxSend">
+																			<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_21R" ID="{E0CF6C16-9102-459C-A9BE-0664EC6AEE56}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_21R.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="12420384"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_21R" ID="{E0CF6C16-9102-459C-A9BE-0664EC6AEE56}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+														<RandomSequenceContainer Name="2" ID="{9E8E2C53-0658-455A-B7D2-DF145ECF10E4}" ShortID="572511941">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_10L" ID="{EBBC4619-5DB6-444D-A60A-5D92078F090C}" ShortID="502446233">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_10L" ID="{9CF35EA2-8B8F-4967-84ED-A144664653EA}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_10L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="588009869"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_10L" ID="{9CF35EA2-8B8F-4967-84ED-A144664653EA}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_12R" ID="{D03A661B-CA2A-4AB0-B17D-0A1D7004DEC2}" ShortID="938278075">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																		<Reference Name="ReflectionsAuxSend">
+																			<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_12R" ID="{7F4FB0F9-369A-4A65-BFEA-B2288A58971A}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_12R.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="840905633"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_12R" ID="{7F4FB0F9-369A-4A65-BFEA-B2288A58971A}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_11L" ID="{8FD2F0E3-8ED2-449F-9130-1A205A7F82D0}" ShortID="253079673">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_11L" ID="{C304B501-271F-4945-9313-86E9BD451343}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_11L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="63257599"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_11L" ID="{C304B501-271F-4945-9313-86E9BD451343}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_20L" ID="{00AF66F8-F3E0-413D-B52C-777EF2A7CD4A}" ShortID="493040414">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_20L" ID="{F73D55FE-9658-4160-9BCF-F67A172DDAC6}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_20L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="309614483"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_20L" ID="{F73D55FE-9658-4160-9BCF-F67A172DDAC6}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+														<RandomSequenceContainer Name="3" ID="{FD50A930-EF36-4D24-8347-6D26633D1553}" ShortID="263123567">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_13L" ID="{265F61A8-AFFF-4D77-869E-DE700748CDB8}" ShortID="85961894">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_13L" ID="{289AD4BD-385B-4C3F-87F8-AF2AB0B27789}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_13L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="417720015"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_13L" ID="{289AD4BD-385B-4C3F-87F8-AF2AB0B27789}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_15L" ID="{BBE5BA5A-6BB8-4025-8610-5B97B0DBFFA0}" ShortID="579810394">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_15L" ID="{F5A5049D-5EB5-40EC-8354-870A31516399}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_15L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="763033548"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_15L" ID="{F5A5049D-5EB5-40EC-8354-870A31516399}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_14R" ID="{F2776597-1F30-4F97-9299-2009A0571B7B}" ShortID="355671119">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																		<Reference Name="ReflectionsAuxSend">
+																			<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_14R" ID="{6147D712-AA72-4896-93CA-0B8DD9A1D863}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_14R.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="231792024"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_14R" ID="{6147D712-AA72-4896-93CA-0B8DD9A1D863}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="FEETHmn_BootsRunningDCFloor_JC_DB_21L" ID="{718C1230-9AAB-47CC-9624-B404206BCDE1}" ShortID="30828708">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_21L" ID="{07210545-D734-4279-8C43-FBB9040D3401}">
+																			<Language>SFX</Language>
+																			<AudioFile>FEETHmn_BootsRunningDCFloor_JC_DB_21L.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="233811053"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="FEETHmn_BootsRunningDCFloor_JC_DB_21L" ID="{07210545-D734-4279-8C43-FBB9040D3401}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
 											</ChildrenList>
 											<ObjectLists/>
 											<GroupingInfo>
 												<GroupingBehaviorList>
 													<GroupingBehavior>
-														<ItemRef Name="Lab" ID="{7B71BA06-C8A2-4F06-8DF9-25F3E55FCA0D}"/>
+														<ItemRef Name="Metal" ID="{E841CF08-E087-4ECA-87B0-942A2C684343}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
-														<ItemRef Name="Metal" ID="{E841CF08-E087-4ECA-87B0-942A2C684343}"/>
+														<ItemRef Name="Lab" ID="{6EC54913-8A6E-4379-9F95-032CCCD78213}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
 														<ItemRef Name="Grass" ID="{71C3DAA9-4E50-497E-BBE8-19FFDC1BCB52}"/>
@@ -3351,12 +3988,22 @@
 													<GroupingBehavior>
 														<ItemRef Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}"/>
 													</GroupingBehavior>
+													<GroupingBehavior>
+														<ItemRef Name="Slime Pool" ID="{8A176EF9-0CA1-4524-B487-B8CC927E9382}"/>
+													</GroupingBehavior>
 												</GroupingBehaviorList>
 												<GroupingList>
 													<Grouping>
 														<SwitchRef Name="Grass" ID="{87F5B304-D58D-4ACA-B0B5-361B10AA4782}"/>
 														<ItemList>
 															<ItemRef Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
+														<SwitchRef Name="Slime_Pool" ID="{1C82C72F-F0B9-46D0-8184-E2B2D5311405}"/>
+														<ItemList>
+															<ItemRef Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}"/>
+															<ItemRef Name="Slime Pool" ID="{8A176EF9-0CA1-4524-B487-B8CC927E9382}"/>
 														</ItemList>
 													</Grouping>
 													<Grouping>
@@ -3373,8 +4020,15 @@
 														</ItemList>
 													</Grouping>
 													<Grouping>
+														<SwitchRef Name="Glass_Pipe" ID="{8E929579-A900-4DE6-822D-3CEC5142A270}"/>
+														<ItemList>
+															<ItemRef Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
 														<SwitchRef Name="Lab" ID="{FAF1B0A1-4F2C-435E-AB7A-6533E59B9F1F}"/>
 														<ItemList>
+															<ItemRef Name="Lab" ID="{6EC54913-8A6E-4379-9F95-032CCCD78213}"/>
 															<ItemRef Name="Generic" ID="{7DD274B7-0645-417D-ACAF-BA7DA3E60099}"/>
 														</ItemList>
 													</Grouping>
@@ -3785,6 +4439,149 @@
 													</ChildrenList>
 													<ObjectLists/>
 												</RandomSequenceContainer>
+												<BlendContainer Name="Slime Pool" ID="{DB39DA67-4EB7-41DC-A150-EA72775E562F}" ShortID="652877735">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<RandomSequenceContainer Name="Slap" ID="{D930163E-2A06-441A-A22B-2DE8365618B7}" ShortID="878126573">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="DB_SFX_Slime Pit_Object_Fall_Small_3" ID="{B9A6EC88-0F32-453F-9A5C-FEFF07B38166}" ShortID="23527170">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="Pitch" Type="int32">
+																			<ValueList>
+																				<Value>830</Value>
+																			</ValueList>
+																		</Property>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Slime Pit" ID="{B6E36169-86E4-4B84-8967-B8D148B4194C}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Environment" ID="{A6D48AFC-F4D0-422B-99CD-7C6C71109A02}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="DB_SFX_Slime Pit_Object_Fall_Small_3" ID="{74C1A3D4-EDF0-42FF-AF82-636B1E54C2B2}">
+																			<Language>SFX</Language>
+																			<AudioFile>DB_SFX_Slime Pit_Object_Fall_Small_3.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="701217798"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="DB_SFX_Slime Pit_Object_Fall_Small_3" ID="{74C1A3D4-EDF0-42FF-AF82-636B1E54C2B2}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="DB_SFX_Slime Pit_Object_Fall_Small_2" ID="{7615BBF6-2232-4EF4-BBCC-97662FC89552}" ShortID="816456205">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="Pitch" Type="int32">
+																			<ValueList>
+																				<Value>760</Value>
+																			</ValueList>
+																		</Property>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="Slime Pit" ID="{B6E36169-86E4-4B84-8967-B8D148B4194C}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Environment" ID="{A6D48AFC-F4D0-422B-99CD-7C6C71109A02}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="DB_SFX_Slime Pit_Object_Fall_Small_2" ID="{E10C284D-79EF-4793-A9BB-AEBA8FAAF193}">
+																			<Language>SFX</Language>
+																			<AudioFile>DB_SFX_Slime Pit_Object_Fall_Small_2.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="403637389"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="DB_SFX_Slime Pit_Object_Fall_Small_2" ID="{E10C284D-79EF-4793-A9BB-AEBA8FAAF193}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</RandomSequenceContainer>
+														<Sound Name="snd_ralseising2" ID="{023168FB-4671-4100-99D8-58B625DAA69C}" ShortID="516808377">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Pitch" Type="int32">
+																	<ValueList>
+																		<Value>450</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-14</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="snd_ralseising2" ID="{009109E6-6B03-4DC6-B616-0B2CE62516C0}">
+																	<Language>SFX</Language>
+																	<AudioFile>snd_ralseising2.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="537987791"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="snd_ralseising2" ID="{009109E6-6B03-4DC6-B616-0B2CE62516C0}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
 											</ChildrenList>
 											<ObjectLists/>
 											<GroupingInfo>
@@ -3799,10 +4596,19 @@
 														<ItemRef Name="Metal" ID="{F671F958-FF92-4B3E-A1F7-C57AA9E06116}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
+														<ItemRef Name="Slime Pool" ID="{DB39DA67-4EB7-41DC-A150-EA72775E562F}"/>
+													</GroupingBehavior>
+													<GroupingBehavior>
 														<ItemRef Name="Grass" ID="{76879C7B-DC8B-4ECD-8B28-9A8FE74FEBF6}"/>
 													</GroupingBehavior>
 												</GroupingBehaviorList>
 												<GroupingList>
+													<Grouping>
+														<SwitchRef Name="Slime_Pool" ID="{1C82C72F-F0B9-46D0-8184-E2B2D5311405}"/>
+														<ItemList>
+															<ItemRef Name="Slime Pool" ID="{DB39DA67-4EB7-41DC-A150-EA72775E562F}"/>
+														</ItemList>
+													</Grouping>
 													<Grouping>
 														<SwitchRef Name="Metal" ID="{05248E42-60B0-4FC4-A9E2-EF12BA2562A3}"/>
 														<ItemList>
@@ -12489,6 +13295,41 @@
 							<ObjectLists/>
 							<ActiveSourceList>
 								<ActiveSource Name="Redneck_Rolls_Dice-SoundBible_com-1100715950" ID="{3EA16A4C-1481-4D2B-9769-AE1E35CE0E2B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="snd_ralseising1" ID="{DD68595C-36AD-48FF-825D-87008E57C72F}" ShortID="902110436">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-5</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="Player Body" ID="{7B9761BB-5ADF-4188-B9D7-42DEAD56E652}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="snd_ralseising1" ID="{8E635995-CBDA-4D50-9A55-356513D52C77}">
+									<Language>SFX</Language>
+									<AudioFile>snd_ralseising1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="693329528"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="snd_ralseising1" ID="{8E635995-CBDA-4D50-9A55-356513D52C77}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
