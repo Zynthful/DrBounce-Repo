@@ -28,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float accelerationSpeed;
     private bool isMoving = false;
     [HideInInspector] public Vector3 bounceForce;
-    private bool hasMoved = false;
     private Vector3 oldMove;
 
     [Header("Jump")]
@@ -64,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float slideStrength;
     public bool isSliding = false;
     [SerializeField] private float strafeStrength;
-    [SerializeField] private float slideGravity;
     private bool slideDirectionDecided = false;
     [HideInInspector] public Vector3 slideDirection;
     private Vector3 slideLeftRight;
@@ -77,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
     private int knockbackDecayMultiplier = 8;
 
     [Header("Ground+Head Checking")]
-    public Transform groundCheck;
     public Transform headCheck;
     public LayerMask groundMask;
     public LayerMask bounceableMask;
@@ -91,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     private bool slopeCheck;
     private Vector3 headCheckHeight;
     [HideInInspector] public Vector3 groundcheckPos;
+    [SerializeField] private Vector3 GroundCheckSize;
     [SerializeField] private int groundCheckBoxes;
     private int boxDegrees;
 
@@ -187,12 +185,6 @@ public class PlayerMovement : MonoBehaviour
 
             // Check if moving
             isMoving = move != Vector3.zero ? true : false;
-        }
-
-        if (move == new Vector3(0,0,0))
-        {
-            //print(move);
-            hasMoved = false;
         }
 
         if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
@@ -505,7 +497,7 @@ public class PlayerMovement : MonoBehaviour
         onLand?.Invoke();
 
         // Is the ground we landed on NOT bounceable?
-        if (!Physics.CheckSphere(groundCheck.position, groundDistance, bounceableMask))
+        if (!isGrounded && bounceForce == Vector3.zero)
         {
             onLandOnNonBounceableGround?.Invoke();
         }
@@ -558,7 +550,7 @@ public class PlayerMovement : MonoBehaviour
         {
             boxDegrees = (360 / groundCheckBoxes);
             //print(boxDegrees * i);
-            isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.1f, 0.1f, 0.2f), transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up), ~groundMask);
+            isGrounded = Physics.CheckBox(groundcheckPos, GroundCheckSize, transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up), ~groundMask);
         }
     }
 
@@ -659,7 +651,7 @@ public class PlayerMovement : MonoBehaviour
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cube.transform.position = groundcheckPos;
                 cube.transform.rotation = transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up);
-                cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.2f) * 2;
+                cube.transform.localScale = GroundCheckSize * 2;
                 cube.GetComponent<Collider>().enabled = false;
 
                 if (isGrounded)
