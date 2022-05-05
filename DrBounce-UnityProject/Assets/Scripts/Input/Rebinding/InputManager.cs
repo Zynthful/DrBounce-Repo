@@ -101,7 +101,10 @@ public class InputManager : MonoBehaviour
 
         statusText.text = $"Press a {action.expectedControlType}";
 
-        action.Disable();
+        // Store wasEnabled so we can re-enable the action if we disabled it
+        bool wasEnabled = action.enabled;
+        if (wasEnabled)
+            action.Disable();
 
         // Create instance for rebinding
         var rebind = action.PerformInteractiveRebinding(index);
@@ -121,7 +124,10 @@ public class InputManager : MonoBehaviour
         // Rebind completed operation
         rebind.OnComplete(operation =>
         {
-            action.Enable();
+            // Reenable our action if it was disabled previously
+            if (wasEnabled)
+                action.Enable();
+
             operation.Dispose();
 
             // Rebind next binding if it is composite
