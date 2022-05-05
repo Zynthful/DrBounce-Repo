@@ -252,6 +252,7 @@ namespace AK
                 static const AkUniqueID LAB = 578926554U;
                 static const AkUniqueID METAL = 2473969246U;
                 static const AkUniqueID SLIME = 3803999823U;
+                static const AkUniqueID SLIME_POOL = 3579635620U;
             } // namespace SWITCH
         } // namespace COLLISION_MATERIAL
 

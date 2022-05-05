@@ -47,7 +47,7 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<MusicPlaylistContainer Name="Medium" ID="{B9E72022-E624-4061-978B-4973D3FB9CD9}" ShortID="785311285">
+								<MusicPlaylistContainer Name="Pt1 Medium" ID="{B9E72022-E624-4061-978B-4973D3FB9CD9}" ShortID="785311285">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -70,23 +70,23 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Bass_Synth" ID="{F3EF9412-1C2F-4CD8-8F66-D91D50667395}" ShortID="453275830">
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{F8F74B5F-6A15-4094-8E5A-38916CABAADA}" ShortID="240425750">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Bass_Synth" ID="{515A6DA8-2818-4EAE-97B2-BC3CCA0FFB57}">
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{A7A5DE8B-BBD5-44A7-9E30-000D940743F7}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Medium_141bpm_Bass_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="941138875"/>
+																<MediaID ID="722067424"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{F1134834-F6CD-4CE3-AA0B-2BA673902954}">
+														<MusicTransition Name="Root" ID="{096BCE41-D035-4387-AEDB-75172AE9431D}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -97,18 +97,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{4983FE6F-8E2B-4291-A9BB-D1670B20CA8D}">
+																	<MusicTrackSequence Name="" ID="{F483D667-5696-406F-8F7B-602A21EC6F8D}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Bass_Synth" ID="{4035A835-32C5-4F48-AE14-CF5766B5272C}">
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{755751BF-D182-4FF3-A3D1-E1BC6E4BC0FA}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Bass_Synth" ID="{515A6DA8-2818-4EAE-97B2-BC3CCA0FFB57}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{A7A5DE8B-BBD5-44A7-9E30-000D940743F7}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{B9DE373A-040A-4D83-81A9-DACE8560EE93}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{A7A5DE8B-BBD5-44A7-9E30-000D940743F7}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -120,53 +133,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Drums" ID="{A12E2FD1-39F5-44DF-A070-651BA4EAB13B}" ShortID="246895830">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64">
-															<RTPCList>
-																<RTPC Name="" ID="{19B28EB3-2FBF-47A8-AB11-B5746BA42F1E}" ShortID="214497117">
-																	<ReferenceList>
-																		<Reference Name="ControlInput">
-																			<ObjectRef Name="Gun_MaxShot_Charge_Progress" ID="{58E4EA3E-DE47-4FFF-A6A4-2CB2EC21B2A5}" WorkUnitID="{4E71A38A-235C-4320-A9A8-B6BB92B7CC8A}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<Curve Name="" ID="{A2B92EAD-A6A9-4D2A-8AB9-EC5C8B62D5E9}">
-																		<PropertyList>
-																			<Property Name="Flags" Type="int32" Value="3"/>
-																		</PropertyList>
-																		<PointList>
-																			<Point>
-																				<XPos>0</XPos>
-																				<YPos>0</YPos>
-																				<Flags>5</Flags>
-																			</Point>
-																			<Point>
-																				<XPos>1</XPos>
-																				<YPos>-200</YPos>
-																				<Flags>37</Flags>
-																			</Point>
-																		</PointList>
-																	</Curve>
-																</RTPC>
-															</RTPCList>
-														</Property>
-													</PropertyList>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{1DE0CDD0-E47D-4604-8B7F-1A840593103C}" ShortID="237082398">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Drums" ID="{B0C336B3-36B1-4147-B031-1C4B190D797D}">
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{013817BA-BB96-4809-8F9A-9C38CFFB517C}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Medium_141bpm_Drums.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="213169282"/>
+																<MediaID ID="354316"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{4FD05DFA-FCC8-418A-9AE8-71769D5E5863}">
+														<MusicTransition Name="Root" ID="{C6642019-B913-467B-BD8A-62ACE671837C}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -177,18 +160,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{EF7BC570-68FF-418B-BA6A-4EE01FEC1C94}">
+																	<MusicTrackSequence Name="" ID="{3740CE69-6D2E-4C75-9E36-C1FD8A8FE19D}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Drums" ID="{65D94780-EE2E-47AA-8748-F3D41B6AFEEF}">
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{4A10BA1E-F63C-49C2-BC18-E1DCBD918310}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Drums" ID="{B0C336B3-36B1-4147-B031-1C4B190D797D}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{013817BA-BB96-4809-8F9A-9C38CFFB517C}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{A298AD34-3D75-465E-BEC6-A4134532F968}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{013817BA-BB96-4809-8F9A-9C38CFFB517C}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -200,23 +196,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Ld_Synth" ID="{4603676D-E1F0-4181-B469-1B3EE2529B48}" ShortID="400213640">
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{072AFC4A-FC07-42BF-994C-55638550A9CE}" ShortID="342519178">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Ld_Synth" ID="{84952184-49FE-43CE-86C8-F1960A6CE249}">
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{3642AC38-F7E5-40DC-B0FD-0FE45EBEFA28}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Medium_141bpm_Ld_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="152996443"/>
+																<MediaID ID="719433237"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{F50C97A5-CCF3-4A76-8F61-64A512EB69EE}">
+														<MusicTransition Name="Root" ID="{625BC72E-9CBC-4D94-BACF-BC90AC196D86}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -227,18 +223,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{BF3C3D3E-709A-4295-B037-4512F650766D}">
+																	<MusicTrackSequence Name="" ID="{210CA68A-D074-4F46-8C2C-80086D442D0C}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Ld_Synth" ID="{DB4A9077-981E-4908-BDDE-28D298AC5705}">
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{39F5EFC4-B750-4E8D-A7D5-B064F7E8C316}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Ld_Synth" ID="{84952184-49FE-43CE-86C8-F1960A6CE249}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{3642AC38-F7E5-40DC-B0FD-0FE45EBEFA28}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{620022C7-8236-4087-B600-2F5004C4136C}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{3642AC38-F7E5-40DC-B0FD-0FE45EBEFA28}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -250,23 +259,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Riff_Synth" ID="{F10FB0D3-6CE4-4527-8080-35A9319F4047}" ShortID="320134266">
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{8C5E7FEB-FA10-4688-9A3E-B62772A0FAE7}" ShortID="568932332">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Riff_Synth" ID="{CB1029EF-6B4A-402A-9B7C-3D5A04036A7C}">
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{3C0068A8-6A32-454E-B785-EBC0BE017AA8}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Medium_141bpm_Riff_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="698774650"/>
+																<MediaID ID="485478002"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{1F1CBB7E-68E1-47F2-861D-3E022D1AC17F}">
+														<MusicTransition Name="Root" ID="{132EC934-B3DE-4EC3-8AAD-6CF2A65339C2}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -277,18 +286,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{7D742187-D4A4-449B-BF4C-977C741F2AC7}">
+																	<MusicTrackSequence Name="" ID="{5816391C-2FB5-460F-B335-AC8B0D8F7A48}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Riff_Synth" ID="{C3C8C24C-3F1A-496B-A730-158260BA84A4}">
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{9EFBE45E-014C-4497-9335-96ABFAC78C5B}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Medium_141bpm_Riff_Synth" ID="{CB1029EF-6B4A-402A-9B7C-3D5A04036A7C}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{3C0068A8-6A32-454E-B785-EBC0BE017AA8}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{14120382-BAB1-4B8A-969B-5006FC6A9799}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{3C0068A8-6A32-454E-B785-EBC0BE017AA8}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -323,7 +345,7 @@
 										</MusicSegment>
 										<MusicSegment Name="Riff" ID="{569F9474-B471-4F39-986E-1E6EB07C3E38}" ShortID="742222858">
 											<PropertyList>
-												<Property Name="EndPosition" Type="Real64" Value="29787.2340425532"/>
+												<Property Name="EndPosition" Type="Real64" Value="30638.297429078"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -334,23 +356,23 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<MusicTrack Name="DB_MSC_Lv2_Riff_Medium_141bpm_Bass_Synth" ID="{94C22B06-D615-4C0B-80E4-B6E730374267}" ShortID="184272720">
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Bass Synth" ID="{E582278F-A053-41CB-BB7F-3A8898D93127}" ShortID="556482410">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Riff_Medium_141bpm_Bass_Synth" ID="{8A075557-3EF0-46A5-B25C-1F516395054A}">
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Bass Synth" ID="{2431F12E-ADFE-4739-91F5-20C7B1C86B88}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Riff_Medium_141bpm_Bass_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Bass Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="634247204"/>
+																<MediaID ID="827540526"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{3FA870AA-A0D9-42C8-981F-76224EAB45BC}">
+														<MusicTransition Name="Root" ID="{575B1616-2447-4A18-A9C8-FD4EB292AC1B}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -361,18 +383,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{9D039904-9B85-4F9C-B06B-DA26EECE6667}">
+																	<MusicTrackSequence Name="" ID="{82A17877-D383-4791-B70E-29CF85EDA7E8}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Riff_Medium_141bpm_Bass_Synth" ID="{2CC41DB4-6F33-4803-A223-8E8737170D88}">
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Bass Synth" ID="{D4FD28CC-ED82-4BA8-859D-F629106404A5}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Riff_Medium_141bpm_Bass_Synth" ID="{8A075557-3EF0-46A5-B25C-1F516395054A}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Bass Synth" ID="{2431F12E-ADFE-4739-91F5-20C7B1C86B88}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Bass Synth" ID="{B23247C5-7708-4109-A1F5-86FB3E7B453B}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Bass Synth" ID="{2431F12E-ADFE-4739-91F5-20C7B1C86B88}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -384,53 +419,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Riff_Medium_141bpm_Drums" ID="{08F85D73-6EF0-4B10-A7EB-89F32D21A53D}" ShortID="543263327">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64">
-															<RTPCList>
-																<RTPC Name="" ID="{47E5C244-C68D-4BE8-95F6-D4840E7930FF}" ShortID="222796872">
-																	<ReferenceList>
-																		<Reference Name="ControlInput">
-																			<ObjectRef Name="Gun_MaxShot_Charge_Progress" ID="{58E4EA3E-DE47-4FFF-A6A4-2CB2EC21B2A5}" WorkUnitID="{4E71A38A-235C-4320-A9A8-B6BB92B7CC8A}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<Curve Name="" ID="{6F36F47C-4300-41A0-BAC2-F3DCCC86DFB0}">
-																		<PropertyList>
-																			<Property Name="Flags" Type="int32" Value="3"/>
-																		</PropertyList>
-																		<PointList>
-																			<Point>
-																				<XPos>0</XPos>
-																				<YPos>0</YPos>
-																				<Flags>5</Flags>
-																			</Point>
-																			<Point>
-																				<XPos>1</XPos>
-																				<YPos>-200</YPos>
-																				<Flags>37</Flags>
-																			</Point>
-																		</PointList>
-																	</Curve>
-																</RTPC>
-															</RTPCList>
-														</Property>
-													</PropertyList>
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Drums" ID="{F0908395-78C0-40A7-B06D-D5B5D2B4D457}" ShortID="673368974">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Riff_Medium_141bpm_Drums" ID="{B74DAE12-A3C4-4EED-9F49-037A03934B48}">
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Drums" ID="{2C2018FE-24FB-4163-B60B-A903360D953F}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Riff_Medium_141bpm_Drums.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Drums.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="319528228"/>
+																<MediaID ID="673580137"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{0B6958B2-9F0E-455E-8B31-1775A3DAAAD1}">
+														<MusicTransition Name="Root" ID="{73159CE2-93A3-40C5-AF6C-FED99D35C364}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -441,18 +446,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{42622DDB-6C86-4009-BA7A-40DFB60ED067}">
+																	<MusicTrackSequence Name="" ID="{9D475417-7884-40AC-B8AD-1E01B4AC5DF0}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Riff_Medium_141bpm_Drums" ID="{0CF9E181-803B-489A-AB4F-E1A2C6C84128}">
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Drums" ID="{E64CC5F3-1BD2-4ABC-BCF3-1EE4380C6DA4}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Riff_Medium_141bpm_Drums" ID="{B74DAE12-A3C4-4EED-9F49-037A03934B48}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Drums" ID="{2C2018FE-24FB-4163-B60B-A903360D953F}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Drums" ID="{BC445987-B5B0-4873-A16C-1576E53EA700}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Drums" ID="{2C2018FE-24FB-4163-B60B-A903360D953F}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -464,23 +482,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Riff_Medium_141bpm_Riff_Synth" ID="{686FDA84-24DB-429C-BBB3-BDC65BC913E4}" ShortID="494772081">
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Riff Synth" ID="{4723BF6A-957F-4F22-8686-1FFA3C91786C}" ShortID="305662097">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Riff_Medium_141bpm_Riff_Synth" ID="{A2679505-AA59-4A7B-B94B-5FFC28E4460E}">
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Riff Synth" ID="{175C7579-2ADC-4524-A220-3D7FFFBDCA29}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Riff_Medium_141bpm_Riff_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Riff Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="176680301"/>
+																<MediaID ID="912796245"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{DB71EF84-6B6A-4886-ADBE-AE48CB439822}">
+														<MusicTransition Name="Root" ID="{E655E360-AC82-4C8F-9582-9E95F07D4277}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -491,18 +509,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{D239ED07-F299-4C8E-8204-26BFFFD7EDCB}">
+																	<MusicTrackSequence Name="" ID="{DB4E9439-840E-4F05-9E02-C1CB5E63E0EA}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Riff_Medium_141bpm_Riff_Synth" ID="{8F31BD24-3190-4D2A-B06B-89C659241CF6}">
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Riff Synth" ID="{220FD952-DE0A-4242-87E9-2B6DA91D908E}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Riff_Medium_141bpm_Riff_Synth" ID="{A2679505-AA59-4A7B-B94B-5FFC28E4460E}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Riff Synth" ID="{175C7579-2ADC-4524-A220-3D7FFFBDCA29}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Riff Synth" ID="{7B42A476-67FC-4E03-A82B-23AC9A7244AD}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Medium_4-4_141bpm_Riff Synth" ID="{175C7579-2ADC-4524-A220-3D7FFFBDCA29}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -556,23 +587,23 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<MusicTrack Name="DB_MSC_Lv2_Intro_Medium_141bpm_Bass_Synth" ID="{E29E813C-3BFD-421B-BEA0-3D9CC1E2CCE6}" ShortID="842230120">
+												<MusicTrack Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Bass Synth" ID="{70595B53-16B5-4840-8348-5A89F8EC3AA5}" ShortID="677927138">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Intro_Medium_141bpm_Bass_Synth" ID="{10F5557E-265B-4446-AEA4-6726D9043B66}">
+														<AudioFileSource Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Bass Synth" ID="{477415D5-13A6-44BA-93E9-25B1858FC5B0}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Intro_Medium_141bpm_Bass_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Bass Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="354337462"/>
+																<MediaID ID="792372750"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{2D257878-536E-4EC2-A2AD-E21E202ACF39}">
+														<MusicTransition Name="Root" ID="{8524A6CB-FB08-4E9D-9ECD-36303D0C67BE}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -583,18 +614,18 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{614C096E-FC06-4BCB-82E9-261861BB9896}">
+																	<MusicTrackSequence Name="" ID="{3E550CBF-C5AC-480E-95C8-4EA5879C1D77}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Intro_Medium_141bpm_Bass_Synth" ID="{022BDC64-D086-4901-BD38-1AE125750F8B}">
+																						<MusicClip Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Bass Synth" ID="{3B2C420B-3CAC-40B9-86E0-DA1D9F9737A6}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Intro_Medium_141bpm_Bass_Synth" ID="{10F5557E-265B-4446-AEA4-6726D9043B66}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Bass Synth" ID="{477415D5-13A6-44BA-93E9-25B1858FC5B0}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -606,23 +637,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Intro_Medium_141bpm_Drums" ID="{0165A7B5-FDC1-4259-971A-68FCFEF40209}" ShortID="20819281">
+												<MusicTrack Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Drums" ID="{6B70C8EC-72F5-48C3-B54F-2AEDFE3A3008}" ShortID="210500468">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Intro_Medium_141bpm_Drums" ID="{32E01A39-28D3-41C1-A487-B5A524BF96C1}">
+														<AudioFileSource Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Drums" ID="{16D8D674-F8EE-4D58-BEFF-95FF8EEBFAF5}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Intro_Medium_141bpm_Drums.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Drums.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="670182655"/>
+																<MediaID ID="848648776"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{3DE14591-6DEA-4D66-BBF6-A1E61D8300BC}">
+														<MusicTransition Name="Root" ID="{1A3DF6F1-BBA5-4AC6-AABA-DD82F6E95BA2}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -633,18 +664,19 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{78C09901-3631-46F0-897A-52AE588A626A}">
+																	<MusicTrackSequence Name="" ID="{477B51A6-4A7E-4A78-AEA2-AF8A744777D5}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Intro_Medium_141bpm_Drums" ID="{2BD3AB9B-3A61-48F2-8D5B-692BD64187FE}">
+																						<MusicClip Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Drums" ID="{E9C34996-0FED-4CAF-A01F-E2075C92B7B1}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Intro_Medium_141bpm_Drums" ID="{32E01A39-28D3-41C1-A487-B5A524BF96C1}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Drums" ID="{16D8D674-F8EE-4D58-BEFF-95FF8EEBFAF5}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -656,23 +688,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Intro_Medium_141bpm_Riff_Synth" ID="{49D8A46C-5E2B-4157-A833-61499FB307FD}" ShortID="232705192">
+												<MusicTrack Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Riff Synth" ID="{2051FC87-E93A-4DB9-800E-A22DBA4A16E4}" ShortID="669737380">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Intro_Medium_141bpm_Riff_Synth" ID="{31A7F89B-AA06-43B7-B608-F55918F48CD2}">
+														<AudioFileSource Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Riff Synth" ID="{ABBEC03A-67A4-4398-8C8C-1EFEB24FCCC5}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Intro_Medium_141bpm_Riff_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Riff Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="767130425"/>
+																<MediaID ID="975413899"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{B4933FF9-7B78-4001-8AA3-5520C7BD7A95}">
+														<MusicTransition Name="Root" ID="{0D03E29F-F9D3-4C62-8841-FCFA0D70420A}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -683,18 +715,18 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{FE80AE46-9E89-4E6C-8842-1EBFD3F6C7D7}">
+																	<MusicTrackSequence Name="" ID="{3051A035-1A6E-4037-B5EC-1CAC21DF43C2}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Intro_Medium_141bpm_Riff_Synth" ID="{F9451F40-31D8-4F94-91E4-06B5DA92B9A4}">
+																						<MusicClip Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Riff Synth" ID="{218D5EF9-404C-45A9-AC3D-C0CBD37DB43E}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Intro_Medium_141bpm_Riff_Synth" ID="{31A7F89B-AA06-43B7-B608-F55918F48CD2}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Intro_Medium_4-4_141bpm_Riff Synth" ID="{ABBEC03A-67A4-4398-8C8C-1EFEB24FCCC5}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -777,7 +809,7 @@
 										</MusicPlaylistItem>
 									</Playlist>
 								</MusicPlaylistContainer>
-								<MusicPlaylistContainer Name="Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" ShortID="448276380">
+								<MusicPlaylistContainer Name="Pt1 Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" ShortID="448276380">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -800,23 +832,23 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<MusicTrack Name="DB_MSC_Lv2_Riff_Battle_141bpm_Bass_Synth" ID="{6417BA6F-982A-4826-ABF0-2C5942510106}" ShortID="699151551">
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth" ID="{000800DA-429B-4C43-A1C9-EF0BBB8588C9}" ShortID="54633709">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Riff_Battle_141bpm_Bass_Synth" ID="{284F3263-C22B-40EC-BB09-3500750EC4C9}">
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth" ID="{8250F2BB-C14B-44EA-930C-58DBA967CC59}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Riff_Battle_141bpm_Bass_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="203555604"/>
+																<MediaID ID="730387768"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{9F73D71B-A5CE-4463-8F99-661C69480E0E}">
+														<MusicTransition Name="Root" ID="{E764C427-C584-49B9-8151-317992C6FD21}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -827,18 +859,18 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{085BC924-EB9A-43B0-965B-26D4253B3974}">
+																	<MusicTrackSequence Name="" ID="{C13F1AD6-918E-4880-A57E-8511DE85FA48}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Riff_Battle_141bpm_Bass_Synth" ID="{0A80F198-297D-4A17-850F-318371E38F96}">
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth" ID="{F9667081-1A72-4D34-8771-7E17C0067D27}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Riff_Battle_141bpm_Bass_Synth" ID="{284F3263-C22B-40EC-BB09-3500750EC4C9}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth" ID="{8250F2BB-C14B-44EA-930C-58DBA967CC59}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -850,35 +882,62 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Riff_Battle_141bpm_Drums" ID="{37D93B5C-2DF0-4F29-B845-1FBA3127A6D7}" ShortID="246052855">
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums" ID="{A69AFFB2-7926-4394-AE91-739E1D05AE80}" ShortID="1035485012">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums" ID="{783F79E1-F29E-49C4-92D2-FE4BCB076A0D}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="623325976"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{C0A0D8D8-1D26-48F7-9BC5-AD0E4261F8FD}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{31218355-5F50-4247-B690-C6345469989B}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums" ID="{7722CDC9-F7DE-4AE3-9E85-D05888D729B6}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums" ID="{783F79E1-F29E-49C4-92D2-FE4BCB076A0D}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth" ID="{D7C2E921-8BB6-49DC-8BC5-CDC20102425B}" ShortID="130925950">
 													<PropertyList>
-														<Property Name="Volume" Type="Real64">
-															<RTPCList>
-																<RTPC Name="" ID="{9B4A751E-4BE0-42B9-890E-911A50C34FC9}" ShortID="80250203">
-																	<ReferenceList>
-																		<Reference Name="ControlInput">
-																			<ObjectRef Name="Gun_MaxShot_Charge_Progress" ID="{58E4EA3E-DE47-4FFF-A6A4-2CB2EC21B2A5}" WorkUnitID="{4E71A38A-235C-4320-A9A8-B6BB92B7CC8A}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<Curve Name="" ID="{9BC55504-5F4A-459D-974E-5B6904C31EB9}">
-																		<PropertyList>
-																			<Property Name="Flags" Type="int32" Value="3"/>
-																		</PropertyList>
-																		<PointList>
-																			<Point>
-																				<XPos>0</XPos>
-																				<YPos>0</YPos>
-																				<Flags>5</Flags>
-																			</Point>
-																			<Point>
-																				<XPos>1</XPos>
-																				<YPos>-200</YPos>
-																				<Flags>37</Flags>
-																			</Point>
-																		</PointList>
-																	</Curve>
-																</RTPC>
-															</RTPCList>
+														<Property Name="Inclusion" Type="bool">
+															<ValueList>
+																<Value>False</Value>
+															</ValueList>
 														</Property>
 													</PropertyList>
 													<ReferenceList>
@@ -887,16 +946,16 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Riff_Battle_141bpm_Drums" ID="{D497ED5A-D49A-432E-8A72-883C08C03FB1}">
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth" ID="{773A73AB-91D8-473E-8ACC-E94DF89612BB}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Riff_Battle_141bpm_Drums.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="920642472"/>
+																<MediaID ID="899916510"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{2991BC71-746C-43BD-9A34-36A0F47062AE}">
+														<MusicTransition Name="Root" ID="{E72673A2-781A-4547-8B50-1D5D3E2F00EC}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -907,18 +966,18 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{C0F92AD7-6A31-4C6E-A420-9CE999095130}">
+																	<MusicTrackSequence Name="" ID="{742136F9-015F-4653-A365-BE60F52FECBD}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Riff_Battle_141bpm_Drums" ID="{398F2439-05B1-47A2-8FA8-CD53D8B0C660}">
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth" ID="{B3CE12A6-0570-4347-A497-108146D322A5}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Riff_Battle_141bpm_Drums" ID="{D497ED5A-D49A-432E-8A72-883C08C03FB1}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth" ID="{773A73AB-91D8-473E-8ACC-E94DF89612BB}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -930,23 +989,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_1" ID="{7F356DCA-DB43-4411-BEF9-91F849730028}" ShortID="755017833">
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth" ID="{E1AD6611-F94F-4ED8-98DD-409EDD357DD9}" ShortID="795132271">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_1" ID="{35BA07E3-239A-4490-9656-82268F3F2466}">
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth" ID="{A7AF077A-8D83-4912-B3EE-F112FCA987BB}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_1.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="849422081"/>
+																<MediaID ID="660533329"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{AD1D7D7D-31E6-4DC5-895B-F47BEF649E2A}">
+														<MusicTransition Name="Root" ID="{1E66AFD2-CAFE-459A-994E-2F875CE79F26}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -957,18 +1016,18 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{3BB09E11-CF33-4E2F-A52D-32595D72A4C5}">
+																	<MusicTrackSequence Name="" ID="{78334207-35C5-4FD2-9064-EB60A0410C00}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_1" ID="{F8A54C38-0951-45B7-87AD-9A928D80F384}">
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth" ID="{CCFAC084-8258-4227-A452-FFCEFDA5A6B4}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_1" ID="{35BA07E3-239A-4490-9656-82268F3F2466}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth" ID="{A7AF077A-8D83-4912-B3EE-F112FCA987BB}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -980,23 +1039,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_2" ID="{5BC6E982-05EE-4BAE-9364-92920C6B287F}" ShortID="225242820">
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser" ID="{32E4A5D8-87AD-4DCB-B31E-47048EF93345}" ShortID="202922889">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_2" ID="{32BD2C87-A01D-4599-B790-889F3CEF29C7}">
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser" ID="{60C71B42-A1B0-4D07-BDEF-DF5B6901AC45}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_2.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="140325362"/>
+																<MediaID ID="41118351"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{A9296FA1-9051-4D56-99D2-47182C6242FF}">
+														<MusicTransition Name="Root" ID="{7A18849A-9322-45B0-9F3B-F65F8A0891C8}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -1007,118 +1066,19 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{7FC4E9A7-CA1F-42F5-B777-C7E67A95B322}">
+																	<MusicTrackSequence Name="" ID="{34AD5B66-F072-406D-A0B8-7B828427AE06}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_2" ID="{7C9D87E6-F7CD-4B44-B089-E50AE0E48012}">
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser" ID="{4B63DDFD-30DE-4050-AE71-E2250B171BFD}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="6808.52083333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="20425.5319148936"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Riff_Battle_141bpm_Ld_Synth_2" ID="{32BD2C87-A01D-4599-B790-889F3CEF29C7}"/>
-																						</MusicClip>
-																					</Local>
-																				</Reference>
-																			</ObjectList>
-																		</ObjectLists>
-																	</MusicTrackSequence>
-																</Local>
-															</Reference>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Riff_Battle_141bpm_Riff_Synth" ID="{91219786-A10F-4167-9D6A-A86AE2777C5F}" ShortID="542775841">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Riff_Battle_141bpm_Riff_Synth" ID="{93EA386C-28CF-48EE-850E-C525C029AE75}">
-															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Riff_Battle_141bpm_Riff_Synth.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="303722989"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<TransitionList>
-														<MusicTransition Name="Root" ID="{F3004A9C-BBAB-4C7E-9538-FA8A05FC442F}">
-															<PropertyList>
-																<Property Name="IsFolder" Type="bool" Value="True"/>
-															</PropertyList>
-															<TransitionInfo/>
-														</MusicTransition>
-													</TransitionList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<Reference>
-																<Local>
-																	<MusicTrackSequence Name="" ID="{E06D0C9D-45AF-4A13-A457-71B7A3DE36F3}">
-																		<ObjectLists>
-																			<ObjectList Name="Clips">
-																				<Reference>
-																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Riff_Battle_141bpm_Riff_Synth" ID="{143DD877-9CFB-4A37-A4CE-E28588665910}">
-																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
-																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Riff_Battle_141bpm_Riff_Synth" ID="{93EA386C-28CF-48EE-850E-C525C029AE75}"/>
-																						</MusicClip>
-																					</Local>
-																				</Reference>
-																			</ObjectList>
-																		</ObjectLists>
-																	</MusicTrackSequence>
-																</Local>
-															</Reference>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Riff_Battle_141bpm_Riser" ID="{093CCD7B-F187-476E-BB0B-45306EEEE278}" ShortID="406040683">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Riff_Battle_141bpm_Riser" ID="{43807C6A-A5C4-4887-95BF-14A84EC3B82C}">
-															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Riff_Battle_141bpm_Riser.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="604602277"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<TransitionList>
-														<MusicTransition Name="Root" ID="{762BE0FA-14A7-43B3-AB65-E999045F37F5}">
-															<PropertyList>
-																<Property Name="IsFolder" Type="bool" Value="True"/>
-															</PropertyList>
-															<TransitionInfo/>
-														</MusicTransition>
-													</TransitionList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<Reference>
-																<Local>
-																	<MusicTrackSequence Name="" ID="{DDAF1BFA-F512-4713-B265-7BD1D0AF64A6}">
-																		<ObjectLists>
-																			<ObjectList Name="Clips">
-																				<Reference>
-																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Riff_Battle_141bpm_Riser" ID="{8A4812E3-3EF6-4F8E-A2BF-410D4A4E6AB7}">
-																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
-																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Riff_Battle_141bpm_Riser" ID="{43807C6A-A5C4-4887-95BF-14A84EC3B82C}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser" ID="{60C71B42-A1B0-4D07-BDEF-DF5B6901AC45}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -1153,7 +1113,7 @@
 										</MusicSegment>
 										<MusicSegment Name="Chorus" ID="{33BC35B8-1924-44DF-9E7B-C050ADC35B4B}" ShortID="963694565">
 											<PropertyList>
-												<Property Name="EndPosition" Type="Real64" Value="30638.2978723404"/>
+												<Property Name="EndPosition" Type="Real64" Value="31914.8931737589"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -1164,23 +1124,23 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Bass_Synth" ID="{3F6C60B4-A320-40B1-BD51-3E1134AAFE69}" ShortID="1032945277">
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{D6CF022D-1FC0-4189-B5C1-71ED94DD2DA7}" ShortID="955663029">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Bass_Synth" ID="{D1CD29D7-4907-4285-8776-0142BBE7E42E}">
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{39168F32-8D73-41AE-BD3F-4DE7760B9AB7}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Battle_141bpm_Bass_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="370220968"/>
+																<MediaID ID="653734203"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{59B6F744-1E07-459D-8A73-60128962C7F2}">
+														<MusicTransition Name="Root" ID="{C1C462A8-58C9-446F-8224-C1D4A8D567E2}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -1191,18 +1151,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{22218237-F570-4BC2-925E-24B950F32D6A}">
+																	<MusicTrackSequence Name="" ID="{0FA115FF-C5E9-4508-A30F-342112229C41}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Bass_Synth" ID="{6C20188A-0945-4317-8EC4-5C550FD544CE}">
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{3390734F-3F52-4A1E-9305-4DAEA7FAB079}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Bass_Synth" ID="{D1CD29D7-4907-4285-8776-0142BBE7E42E}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{39168F32-8D73-41AE-BD3F-4DE7760B9AB7}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{B6A41443-71B4-4E26-9E2F-9FB009C8060A}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{39168F32-8D73-41AE-BD3F-4DE7760B9AB7}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -1214,53 +1187,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Drums" ID="{E5122DEB-AC7F-4DAD-8AB2-DAD4F1EDFFB9}" ShortID="969478260">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64">
-															<RTPCList>
-																<RTPC Name="" ID="{640AE41D-452C-4E51-8719-01B38B7BD7D9}" ShortID="188660732">
-																	<ReferenceList>
-																		<Reference Name="ControlInput">
-																			<ObjectRef Name="Gun_MaxShot_Charge_Progress" ID="{58E4EA3E-DE47-4FFF-A6A4-2CB2EC21B2A5}" WorkUnitID="{4E71A38A-235C-4320-A9A8-B6BB92B7CC8A}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<Curve Name="" ID="{FB6DCEB2-B851-4A60-9C6D-3A3D5E9ECB58}">
-																		<PropertyList>
-																			<Property Name="Flags" Type="int32" Value="3"/>
-																		</PropertyList>
-																		<PointList>
-																			<Point>
-																				<XPos>0</XPos>
-																				<YPos>0</YPos>
-																				<Flags>5</Flags>
-																			</Point>
-																			<Point>
-																				<XPos>1</XPos>
-																				<YPos>-200</YPos>
-																				<Flags>37</Flags>
-																			</Point>
-																		</PointList>
-																	</Curve>
-																</RTPC>
-															</RTPCList>
-														</Property>
-													</PropertyList>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{8E37294B-F320-479B-A81B-14D967A420A5}" ShortID="521576552">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Drums" ID="{2BF5D975-8D15-410A-BD9A-75D4CF82B52B}">
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{73885DFA-6D7F-4732-A16C-A291E3AC87A1}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Battle_141bpm_Drums.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="30571857"/>
+																<MediaID ID="749628214"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{04CB45B2-EECB-46E3-9A9C-90425D8081B7}">
+														<MusicTransition Name="Root" ID="{97D6A476-E573-45DD-BC28-E61A821F0BE9}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -1271,18 +1214,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{2D366BA5-8F54-45E1-9626-51BB16B1B7F8}">
+																	<MusicTrackSequence Name="" ID="{E432164F-1335-4026-9E2C-CA2E502CD7AA}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Drums" ID="{0E6510E1-EE1E-4618-920D-8B080C6FDC62}">
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{56037901-4871-4BF1-97F1-1B6BF5FDFB37}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Drums" ID="{2BF5D975-8D15-410A-BD9A-75D4CF82B52B}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{73885DFA-6D7F-4732-A16C-A291E3AC87A1}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{37583670-B083-476C-8784-72387D0F2066}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{73885DFA-6D7F-4732-A16C-A291E3AC87A1}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -1294,23 +1250,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_1" ID="{28D39EBD-8097-4C2D-BEF0-71A69ED7DF49}" ShortID="245593352">
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{63702E28-3C79-440A-AD84-06E78CAA02B3}" ShortID="795996687">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_1" ID="{84633D4B-1FE4-4A22-BC33-A65B28F64CFE}">
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{FBA6E6FA-3199-485E-A67D-C98D209C537A}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_1.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="1042049356"/>
+																<MediaID ID="271513161"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{84724297-7B2F-49DA-BD80-5590370D250E}">
+														<MusicTransition Name="Root" ID="{440F7EAC-7978-4EB1-9FD3-61EA58E07E05}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -1321,18 +1277,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{11369F69-7AAA-41C5-9E21-D6E40D2BA451}">
+																	<MusicTrackSequence Name="" ID="{2727625C-9D5D-4C49-8921-F0EC425B7E6C}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_1" ID="{D4D2F6BF-6169-4C03-8E9B-7A3C48320327}">
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{63C5B83A-1507-432E-9911-8D995A8195B6}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_1" ID="{84633D4B-1FE4-4A22-BC33-A65B28F64CFE}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{FBA6E6FA-3199-485E-A67D-C98D209C537A}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{1DE7B0F7-264E-4389-8016-026F33FF59DC}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{FBA6E6FA-3199-485E-A67D-C98D209C537A}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -1344,23 +1313,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_2" ID="{CA0E8DF5-DD95-4117-ACBC-AF18E04BA4F8}" ShortID="711823603">
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{EEA02F9C-BDC5-4D5B-8CC5-2F0750197713}" ShortID="506953066">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_2" ID="{5475334C-0096-4557-982A-816F32264349}">
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{B55E135E-AA83-43AB-A819-DEE93A5B78E3}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_2.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="953620320"/>
+																<MediaID ID="622741648"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{0B6FA0F5-9D33-4603-A4B1-A845BDECAAA2}">
+														<MusicTransition Name="Root" ID="{5A230A81-EDCE-4E19-B6EC-F8874E5B7739}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -1371,18 +1340,31 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{C2F485E9-17CC-47BD-9E38-7C8311F3E8A7}">
+																	<MusicTrackSequence Name="" ID="{83FF358A-B298-4928-9578-2D5DB0DCC120}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_2" ID="{C485F40D-7388-4A1E-B425-38F5EC669F54}">
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{DA11C923-C371-46B6-B3BF-1988F6BC4F3B}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Ld_Synth_2" ID="{5475334C-0096-4557-982A-816F32264349}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{B55E135E-AA83-43AB-A819-DEE93A5B78E3}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{C3C9BE06-F2FD-4AAE-9939-6D098254A92D}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{B55E135E-AA83-43AB-A819-DEE93A5B78E3}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -1394,23 +1376,23 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Riff_Synth" ID="{3F40B3E7-BE4E-465E-8AE9-EAF93846D1EA}" ShortID="805027626">
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser" ID="{B66B94A1-95E3-4365-A925-9CBF778727BC}" ShortID="399469687">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Riff_Synth" ID="{812A892F-5A5E-491E-B491-ECC583F44800}">
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser" ID="{5D5648D1-B46C-4259-82DC-6E700D603CB7}">
 															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Battle_141bpm_Riff_Synth.wav</AudioFile>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="516204698"/>
+																<MediaID ID="639912469"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<TransitionList>
-														<MusicTransition Name="Root" ID="{8E1AFF48-0670-4D02-9B6D-E5B276AF4B37}">
+														<MusicTransition Name="Root" ID="{3C360276-5D4E-4D2E-A459-4083A42850CD}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -1421,68 +1403,18 @@
 														<ObjectList Name="Sequences">
 															<Reference>
 																<Local>
-																	<MusicTrackSequence Name="" ID="{3D98661D-0A24-4A6C-B6BE-789F0DB702C9}">
+																	<MusicTrackSequence Name="" ID="{48FBD542-BDB3-4EBA-B025-DDFE5D8B9095}">
 																		<ObjectLists>
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Riff_Synth" ID="{F83B8020-69FF-415D-A30E-67FC09BE9F2A}">
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser" ID="{34BE64E0-ED94-42EF-AEAB-B4622412E548}">
 																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Riff_Synth" ID="{812A892F-5A5E-491E-B491-ECC583F44800}"/>
-																						</MusicClip>
-																					</Local>
-																				</Reference>
-																			</ObjectList>
-																		</ObjectLists>
-																	</MusicTrackSequence>
-																</Local>
-															</Reference>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Riser" ID="{2E3A97C4-0748-4ECB-964B-982A1DC559C3}" ShortID="319200096">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Riser" ID="{21C3FAC3-8740-4268-B911-8AD8DC1897CF}">
-															<Language>SFX</Language>
-															<AudioFile>DB_MSC_Lv2_Chorus_Battle_141bpm_Riser.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="970700046"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<TransitionList>
-														<MusicTransition Name="Root" ID="{3B493FDF-7A66-4BED-BC6A-50BD6D725AFA}">
-															<PropertyList>
-																<Property Name="IsFolder" Type="bool" Value="True"/>
-															</PropertyList>
-															<TransitionInfo/>
-														</MusicTransition>
-													</TransitionList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<Reference>
-																<Local>
-																	<MusicTrackSequence Name="" ID="{EF837D6D-FEB6-4FB4-92BD-43825A968FB0}">
-																		<ObjectLists>
-																			<ObjectList Name="Clips">
-																				<Reference>
-																					<Local>
-																						<MusicClip Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Riser" ID="{4DC141AD-B3F4-4F88-8CCE-C0F60D9413A6}">
-																							<PropertyList>
-																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0362811791"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
-																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																							</PropertyList>
-																							<AudioSourceRef Name="DB_MSC_Lv2_Chorus_Battle_141bpm_Riser" ID="{21C3FAC3-8740-4268-B911-8AD8DC1897CF}"/>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser" ID="{5D5648D1-B46C-4259-82DC-6E700D603CB7}"/>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -1552,6 +1484,1721 @@
 										</MusicPlaylistItem>
 									</Playlist>
 								</MusicPlaylistContainer>
+								<MusicPlaylistContainer Name="Pt2 Combat" ID="{D6E40127-D1CA-4293-B197-CBD1195BD634}" ShortID="403206137">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Tempo" Type="Real64" Value="141"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicSegment Name="Riff" ID="{79F270BC-0DEF-4AA4-8706-F4E9BFD2D217}" ShortID="826744403">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="30638.2978723404"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Bass Synth" ID="{2CDF0E1D-16A3-4706-B686-D268A7D2C24B}" ShortID="330654962">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Bass Synth" ID="{B5B4F055-EA76-4108-A231-FE66F408F38C}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Bass Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="670908876"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{954FC55A-E9DA-4F4C-B953-5DCEDFC4F8B2}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{2B62F3C0-7393-45AA-831F-CA4A6E7B1CF4}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Bass Synth" ID="{1F59F677-1085-4BB4-9515-7E8F36946549}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Bass Synth" ID="{B5B4F055-EA76-4108-A231-FE66F408F38C}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Drums" ID="{59B190DB-5A67-418B-A7F5-2AF88A8349E4}" ShortID="556276061">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Drums" ID="{1AC83CB9-E8AC-489F-BD5F-0CDE9808C199}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Drums.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="664191887"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{AED5C563-5432-467D-A35C-66E6540DB7A7}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{20C7A7F2-1219-4593-B37B-491E2F0BC2E6}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Drums" ID="{48D02034-CD7F-417B-A565-13B0771AD7FE}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Drums" ID="{1AC83CB9-E8AC-489F-BD5F-0CDE9808C199}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riff Synth" ID="{8E25681A-1CF4-4FD3-8992-D98F20BF288C}" ShortID="278837727">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riff Synth" ID="{EFF882D6-EB42-4DAE-86CB-D4D1817C3A98}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riff Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="664896381"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{DBC30F18-71FF-4CB6-A823-445234E20FF1}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{3687A1A8-01D3-460E-B5B1-F43BBC702036}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riff Synth" ID="{84728BB4-0B51-4077-8800-4D66CC1D9347}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riff Synth" ID="{EFF882D6-EB42-4DAE-86CB-D4D1817C3A98}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riser" ID="{3800A5F6-EBD5-4234-8DEC-B6F0C670D413}" ShortID="55450727">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riser" ID="{E326A899-87EB-4142-B2BD-7E571E40E489}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riser.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="472923659"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{05C5A436-EF09-412E-AA7D-70950CEDB614}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{C62C8D7B-E062-4E76-AAB5-A1A188E842C7}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riser" ID="{5BFB2762-0C11-4072-94B7-162C18EE0EE8}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="6808.52083333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="20425.5319148936"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Pt2_Battle_4-4_141bpm_Riser" ID="{E326A899-87EB-4142-B2BD-7E571E40E489}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{CBE94555-8B13-4D5B-908D-1D21C61443F0}"/>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{D4AAC52A-5509-4DC0-81F7-735083C2348A}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="27234.0362811791"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+										<MusicSegment Name="Chorus" ID="{5C61B732-D4C8-46A0-A8BB-5A61D3E2B4DE}" ShortID="25504842">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="30638.2978723404"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{82363512-7931-440F-945A-BF18722AD6AA}" ShortID="953797765">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+														<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{213446C8-7945-45F4-B00F-8A44F3A7A1E6}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="271513161"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{65E08276-CB6C-4925-AEC5-0F27538EAFA9}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{56444CC1-76AD-4F25-A526-74F71FCB15B4}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{9ED45174-8D9D-40C1-8933-485223507D3F}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{213446C8-7945-45F4-B00F-8A44F3A7A1E6}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{4A986916-30CD-4814-A5CA-E485E86D80F9}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth" ID="{213446C8-7945-45F4-B00F-8A44F3A7A1E6}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{FB6AF819-9E80-4802-897E-26054EEBBA86}" ShortID="973498903">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+														<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{80898336-995B-467C-A6AB-B5728A80D320}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="653734203"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{611AFBDB-DD79-4AC0-B8C0-94526DB82818}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{B29A370A-CD13-413E-B4FC-5B57D4F92B70}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{2B8AADC4-7EA9-43CD-B7CA-52967326A9D7}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{80898336-995B-467C-A6AB-B5728A80D320}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{69EAAE97-4C27-46FC-A294-4CD75525A57F}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Bass Synth" ID="{80898336-995B-467C-A6AB-B5728A80D320}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{92007AC3-330D-4534-BF3E-FC89698AE6A1}" ShortID="849763084">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+														<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{DDCA0D66-E41B-47AB-A5BC-2763629F840A}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="749628214"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{7F3D7380-BE96-4633-B7BD-3FCA65737F51}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{5B60E8B6-43BC-42E8-BA18-8C1BC05830F8}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{5D9AC306-575F-4CF2-92A5-2B181600C692}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{DDCA0D66-E41B-47AB-A5BC-2763629F840A}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{0054612A-1FBF-406A-B7BD-A4BB126D47D0}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Drums" ID="{DDCA0D66-E41B-47AB-A5BC-2763629F840A}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser" ID="{6C292593-01A0-4173-B805-97842E60BB71}" ShortID="906801233">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+														<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser" ID="{9610478E-78B0-474F-895F-381836941DDE}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="639912469"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{F1FD82CD-1F40-4DEC-ABA3-2C28CD3C75F0}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{B0853C45-9D99-4AE4-9652-1A67C630CF8F}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser" ID="{A3E7B74C-47B1-43C2-AFEB-5088C5274D8E}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riser" ID="{9610478E-78B0-474F-895F-381836941DDE}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{F346A1C5-CA5D-453A-BD06-0515F41B3D78}" ShortID="393517002">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+														<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{3F9D5DD4-F70B-40D4-B986-28BD60CE9E03}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="622741648"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{4AA9C437-30E8-471A-9FF0-1CB89B85CC00}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{2F2FD19C-D71C-4DB7-B041-BC79C4621BC9}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{92D13548-E956-476D-AE83-4CD596E5B668}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{3F9D5DD4-F70B-40D4-B986-28BD60CE9E03}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{A5BF41EB-740C-40F6-9C1F-6B1D8D579F58}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Riff Synth" ID="{3F9D5DD4-F70B-40D4-B986-28BD60CE9E03}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{786EBF7A-1C17-474A-BEBD-F4517D76A27A}"/>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{04559823-3CF9-4C22-8030-C12147984597}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="27234.0425531915"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+										<MusicSegment Name="Riff 1 Reprise" ID="{811023BC-9DFB-4182-A13B-E4F57CDCB3B7}" ShortID="698329733">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+												<Property Name="EndPosition" Type="Real64" Value="30638.2978723404"/>
+												<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+												<Property Name="MaxSoundPerInstance" Type="int16">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Tempo" Type="Real64" Value="141"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth" ID="{03366F7B-7BA5-4BA0-904A-B97283BA9036}" ShortID="571416941">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth" ID="{27323EAE-D963-4DA5-A797-C8CDB390B2A3}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="730387768"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{F74EEA14-D37C-4717-AD1D-1FC12D015206}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{F8895679-3372-4D76-AEE4-EA1A89CC707C}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth" ID="{925D6A0F-8D59-41D2-9792-F8E1C9A54F76}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Bass Synth" ID="{27323EAE-D963-4DA5-A797-C8CDB390B2A3}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums" ID="{14B8F56C-241A-4F47-959A-7F4038429A9C}" ShortID="570876030">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums" ID="{1712583D-40D7-423E-A56C-75029ACDF57F}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="623325976"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{BDAB4626-12F9-43C2-91D6-A46E9839CE2E}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{D4F97DE4-6817-48AB-948C-E7A256EEC906}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums" ID="{2A1A3A91-EC22-49A1-9E75-3762A9EB74BF}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Drums" ID="{1712583D-40D7-423E-A56C-75029ACDF57F}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth" ID="{B194C926-4F60-4870-ABA8-C9FD7AFEF44D}" ShortID="726976045">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth" ID="{4C3FAD30-4E85-4C9A-8AC3-D0C3AB223077}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="899916510"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{7F29E5AE-43C0-4D23-850C-E74EBB671DBF}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{4DF74DE1-48ED-4555-8503-4F37E8534F02}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth" ID="{5B103304-FD4A-4F42-A326-D989020E917C}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Ld Synth" ID="{4C3FAD30-4E85-4C9A-8AC3-D0C3AB223077}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth" ID="{2B79EF11-A80E-4257-AA34-1B854AEFD46A}" ShortID="621032145">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth" ID="{F7F17147-3B0F-4E06-9F26-58088BD89832}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="660533329"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{76A1465D-1A80-4513-B4AA-F3CF4A154EDC}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{B6E8379D-91F0-4FF3-BC9E-C39A36298430}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth" ID="{D4AE8EE1-5188-4449-8C09-6D4526FD06E9}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riff Synth" ID="{F7F17147-3B0F-4E06-9F26-58088BD89832}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser" ID="{60669656-CCD5-4502-AEEE-B1B8F063B4A2}" ShortID="393314391">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser" ID="{0CA76A75-D70C-4972-A586-FF49532769AE}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="41118351"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{CD4B3B2D-1C1F-4DC7-BC7A-8E8AB53360B9}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{7F0D1AF8-B170-4984-80A4-4B9E6403269A}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser" ID="{F88A5997-D9E2-403E-959E-05EDE66442D4}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="6808.52083333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="20425.5319148936"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Riff_Battle_4-4_141bpm_Riser" ID="{0CA76A75-D70C-4972-A586-FF49532769AE}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{0D427032-3970-4AC1-A762-9442F92021F3}"/>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{427721CA-8D05-44BC-BF09-1D5EB67F45E4}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="27234.0362811791"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+									</ChildrenList>
+									<TransitionList>
+										<MusicTransition Name="Root" ID="{8FDEB550-8E11-41AC-A07F-84BE190AFD67}">
+											<PropertyList>
+												<Property Name="IsFolder" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<MusicTransition Name="Transition" ID="{1D21B945-390C-4CED-8778-0B56F1B407A8}">
+													<TransitionInfo/>
+												</MusicTransition>
+											</ChildrenList>
+											<TransitionInfo/>
+										</MusicTransition>
+									</TransitionList>
+									<ObjectLists/>
+									<Playlist>
+										<MusicPlaylistItem Name="" ID="{93A0A9FA-BE0F-4986-AF1F-4558A9C7AD27}" ShortID="796475364">
+											<PropertyList>
+												<Property Name="LoopCount" Type="int16" Value="0"/>
+											</PropertyList>
+											<ChildrenList>
+												<MusicPlaylistItem Name="" ID="{3DE45B94-3A11-41F3-8421-FF72FE3F1E65}" ShortID="578103277">
+													<PropertyList>
+														<Property Name="PlayMode" Type="int16" Value="3"/>
+													</PropertyList>
+													<ChildrenList>
+														<MusicPlaylistItem Name="" ID="{30D875BD-9E05-43D6-AD6D-3624B22CFC99}" ShortID="72743432">
+															<PropertyList>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<SegmentRef Name="Riff" ID="{79F270BC-0DEF-4AA4-8706-F4E9BFD2D217}"/>
+														</MusicPlaylistItem>
+														<MusicPlaylistItem Name="" ID="{9044E31A-EFC9-410D-A50C-D3C2CA6F35C7}" ShortID="869918135">
+															<PropertyList>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<SegmentRef Name="Riff 1 Reprise" ID="{811023BC-9DFB-4182-A13B-E4F57CDCB3B7}"/>
+														</MusicPlaylistItem>
+													</ChildrenList>
+												</MusicPlaylistItem>
+												<MusicPlaylistItem Name="" ID="{A9F182AF-A21F-4D35-8326-A8541FCF8073}" ShortID="881410373">
+													<ChildrenList>
+														<MusicPlaylistItem Name="" ID="{DD3C146D-7479-42F5-BE9A-14D72EA07F5F}" ShortID="996270663">
+															<PropertyList>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<SegmentRef Name="Chorus" ID="{5C61B732-D4C8-46A0-A8BB-5A61D3E2B4DE}"/>
+														</MusicPlaylistItem>
+													</ChildrenList>
+												</MusicPlaylistItem>
+											</ChildrenList>
+										</MusicPlaylistItem>
+									</Playlist>
+								</MusicPlaylistContainer>
+								<MusicPlaylistContainer Name="Pt2 Medium" ID="{5DF6913D-EAC1-41EA-97F1-B7BC4A980605}" ShortID="4125345">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Tempo" Type="Real64" Value="141"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicSegment Name="Chorus" ID="{E8EF7F19-B53F-4E2A-9C36-6B74BDFBE947}" ShortID="495484904">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="31489.3617021277"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{D0EC9339-D374-4703-82A9-B85E0B1AC6BA}" ShortID="1793595">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+														<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{355FA598-AE51-4BA1-BCC7-4B949DBFE9DC}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="722067424"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{689582DD-761B-489B-8085-0B218599E9A2}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{176F5C9A-37EB-4B54-966E-983A801E95EB}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{3E67A7A8-02B7-4E8E-A276-A5D264316B05}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{355FA598-AE51-4BA1-BCC7-4B949DBFE9DC}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{5D7F9E30-360B-40CF-B474-83A44143BB18}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Bass Synth" ID="{355FA598-AE51-4BA1-BCC7-4B949DBFE9DC}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{0975A497-1035-494F-9BA4-11FCDFBFD09D}" ShortID="609788863">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+														<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{ACB88721-F9A7-4DAB-B7A8-A9712F76AC02}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="485478002"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{4BF2D906-DA59-497A-A984-523076F12AF9}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{A348FB30-90E6-4AE8-AD23-E7450A41D5CA}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{0209488E-B360-48A3-AAF0-16EF49EEBEF6}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{ACB88721-F9A7-4DAB-B7A8-A9712F76AC02}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{7A03E2BD-A8D0-4E00-8A4E-CF8B36751FF2}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Riff Synth" ID="{ACB88721-F9A7-4DAB-B7A8-A9712F76AC02}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{5A8CFB43-7D7B-4620-B8B6-36266C94369D}" ShortID="607335750">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+														<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{664ADCFD-4137-452F-A444-044588D40455}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="719433237"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{03FFE050-D029-4E5A-99F1-CB3C918357B0}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{0E48FEC2-FECF-468E-BC59-3CD18A6C74C3}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{FDA76AB9-158E-4C59-83C5-DB6CE360A4E2}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{664ADCFD-4137-452F-A444-044588D40455}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{364795F7-FC37-4D24-836B-2ED5BEC97DCD}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Ld Synth" ID="{664ADCFD-4137-452F-A444-044588D40455}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{AB3CA039-106B-4FB2-8FDA-D3D459ED72F1}" ShortID="363530919">
+													<PropertyList>
+														<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+														<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>1</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{365736DD-7C96-4980-8FE2-C91268172A05}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="354316"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{3E33FCA4-CB69-45C8-9542-15442572673D}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{3CAF7F14-64EB-4259-983B-729D9EF4F5CE}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{49D8325B-C191-4F93-9FAD-7F00563C2A9D}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{365736DD-7C96-4980-8FE2-C91268172A05}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{F8F8482B-0933-4EFC-8C90-6DDE2C37EC33}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="13617.0208333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="13617.0212765957"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Chorus_Medium_4-4_141bpm_Drums" ID="{365736DD-7C96-4980-8FE2-C91268172A05}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{025DE66E-984D-4514-B721-F3AF4C85487E}"/>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{3B0AFB05-8786-4E97-8C6D-D16FCE72FAF5}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="27234.0425531915"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+										<MusicSegment Name="Riff" ID="{F2313C7C-D059-4794-9E2B-E1C9BF1ED7F5}" ShortID="382874394">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="29787.2340425532"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Bass Synth" ID="{2E2A4D0B-3CD5-456B-AF8C-BEF6260AD888}" ShortID="482781706">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Bass Synth" ID="{BAE78522-9C5E-4FA8-A46E-4E74F1A30177}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Bass Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="571461969"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{77B71C97-04E6-48D6-900D-22D97176A110}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{0287C098-8B09-4C30-BA49-C3F3F796B9C8}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Bass Synth" ID="{AF0A765E-D08C-461E-AB2A-485203508D7D}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Bass Synth" ID="{BAE78522-9C5E-4FA8-A46E-4E74F1A30177}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Drums" ID="{CE779522-D9AC-4BD9-8CEB-5A7142B38E53}" ShortID="44133702">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Drums" ID="{0BB1ED68-487B-4CF2-BC2A-D5399AA3F4C6}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Drums.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="174264836"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{CCA32137-580B-4E08-AF03-F97BBAA07E69}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{DD061297-1EA6-4C3A-9232-68E65F17AFB3}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Drums" ID="{137C1574-09E5-41EA-A311-2AE219921229}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Drums" ID="{0BB1ED68-487B-4CF2-BC2A-D5399AA3F4C6}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Riff Synth" ID="{ED917D3C-F2A4-4746-B7FB-8A938D225FD3}" ShortID="323381852">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Riff Synth" ID="{9653CAF6-0D7F-414A-9D63-7B3BB42D59CA}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Riff Synth.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="329343887"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{B03C07B3-61E5-410A-AD80-1CABF3F487FB}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{D7ADE0BD-DA51-4DAB-8C90-D0A041FF4780}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Riff Synth" ID="{D2BA2F65-543F-4DC9-BD45-68DD149F2F44}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="27234.0416666667"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Riff Synth" ID="{9653CAF6-0D7F-414A-9D63-7B3BB42D59CA}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{AE4F2EB3-919F-440A-8A3E-0ED978812A00}"/>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{1565F8CB-7A9A-408E-B4A3-0AD171341E69}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="27234.0362811791"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+									</ChildrenList>
+									<TransitionList>
+										<MusicTransition Name="Root" ID="{BF450F1D-D8AA-4C27-9261-3E9DB649F00A}">
+											<PropertyList>
+												<Property Name="IsFolder" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<MusicTransition Name="Transition" ID="{24ACE6D8-675B-47A8-A9AF-4A8E3A260C8D}">
+													<TransitionInfo/>
+												</MusicTransition>
+											</ChildrenList>
+											<TransitionInfo/>
+										</MusicTransition>
+									</TransitionList>
+									<ObjectLists/>
+									<Playlist>
+										<MusicPlaylistItem Name="" ID="{1570F599-4AAF-4DE6-8C6E-196C8C1762B7}" ShortID="859655117">
+											<PropertyList>
+												<Property Name="LoopCount" Type="int16" Value="0"/>
+											</PropertyList>
+											<ChildrenList>
+												<MusicPlaylistItem Name="" ID="{C78F2D25-AF4B-4A1B-B0B5-A8452B17B733}" ShortID="501000537">
+													<PropertyList>
+														<Property Name="LoopCount" Type="int16" Value="0"/>
+													</PropertyList>
+													<ChildrenList>
+														<MusicPlaylistItem Name="" ID="{19A82617-9D4B-4CB4-8813-A1868FE0FD48}" ShortID="794571962">
+															<PropertyList>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<SegmentRef Name="Riff" ID="{F2313C7C-D059-4794-9E2B-E1C9BF1ED7F5}"/>
+														</MusicPlaylistItem>
+														<MusicPlaylistItem Name="" ID="{175FAA0E-8DF1-44A5-9DA5-1907BED09E60}" ShortID="839993211">
+															<PropertyList>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<SegmentRef Name="Chorus" ID="{E8EF7F19-B53F-4E2A-9C36-6B74BDFBE947}"/>
+														</MusicPlaylistItem>
+													</ChildrenList>
+												</MusicPlaylistItem>
+											</ChildrenList>
+										</MusicPlaylistItem>
+									</Playlist>
+								</MusicPlaylistContainer>
+								<MusicPlaylistContainer Name="End" ID="{9831CFF7-79FA-4EB9-B501-99A17DFA4BB5}" ShortID="378575108">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Tempo" Type="Real64" Value="141"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Music" ID="{4563B3BF-3DFD-487D-872C-A902AA17C58B}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicSegment Name="DB_MSC_Trck3_End" ID="{E55602CA-15A5-425C-937A-9EC0E111BA0C}" ShortID="619290290">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="11914.8958333333"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="DB_MSC_Trck3_End" ID="{D310B4AC-55E3-41A8-BF85-6E00677A298C}" ShortID="758961923">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="DB_MSC_Trck3_End" ID="{47810D04-AF83-4634-8EB4-BBE990157850}">
+															<Language>SFX</Language>
+															<AudioFile>DB_MSC_Trck3_End.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="262900642"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<TransitionList>
+														<MusicTransition Name="Root" ID="{FF407D66-A9B9-4733-B79A-2F66E68A188C}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</TransitionList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{87F519AB-890C-49CA-B38E-A9A559500E39}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="DB_MSC_Trck3_End" ID="{BC6DECF8-75FF-4E60-98FC-3766C8EEB21C}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="11914.8958333333"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="DB_MSC_Trck3_End" ID="{47810D04-AF83-4634-8EB4-BBE990157850}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{2E25BB10-0202-4E2B-A23C-57AD4CE316AB}"/>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{99FE1C5A-2B56-4A78-A5C5-67C9DDD4DF23}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="11914.8958333333"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+									</ChildrenList>
+									<TransitionList>
+										<MusicTransition Name="Root" ID="{0E7F304E-4C18-4F74-9B11-8F28A40A3139}">
+											<PropertyList>
+												<Property Name="IsFolder" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<MusicTransition Name="Transition" ID="{F4983E65-BB20-4F83-84C1-C18C45F0391B}">
+													<TransitionInfo/>
+												</MusicTransition>
+											</ChildrenList>
+											<TransitionInfo/>
+										</MusicTransition>
+									</TransitionList>
+									<ObjectLists/>
+									<Playlist>
+										<MusicPlaylistItem Name="" ID="{F699FEDE-39FC-4BDB-8275-BC8D4A75403C}" ShortID="250611630">
+											<PropertyList>
+												<Property Name="LoopCount" Type="int16" Value="0"/>
+											</PropertyList>
+											<ChildrenList>
+												<MusicPlaylistItem Name="" ID="{44D9134C-EE66-4520-9FE9-D45A86993721}" ShortID="467978610">
+													<PropertyList>
+														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+													</PropertyList>
+													<SegmentRef Name="DB_MSC_Trck3_End" ID="{E55602CA-15A5-425C-937A-9EC0E111BA0C}"/>
+												</MusicPlaylistItem>
+											</ChildrenList>
+										</MusicPlaylistItem>
+									</Playlist>
+								</MusicPlaylistContainer>
 							</ChildrenList>
 							<StateInfo>
 								<StatePropertyList>
@@ -1614,7 +3261,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="DestinationContextObject">
-															<ObjectRef Name="Medium" ID="{B9E72022-E624-4061-978B-4973D3FB9CD9}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
+															<ObjectRef Name="Pt1 Medium" ID="{B9E72022-E624-4061-978B-4973D3FB9CD9}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
 														</Reference>
 														<Reference Name="SourceContextObject">
 															<ObjectRef Name="Riff" ID="{D95268DB-D010-402D-B784-E24FB7F2E1BB}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
@@ -1655,7 +3302,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="DestinationContextObject">
-															<ObjectRef Name="Medium" ID="{B9E72022-E624-4061-978B-4973D3FB9CD9}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
+															<ObjectRef Name="Pt1 Medium" ID="{B9E72022-E624-4061-978B-4973D3FB9CD9}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
 														</Reference>
 														<Reference Name="SourceContextObject">
 															<ObjectRef Name="Chorus" ID="{33BC35B8-1924-44DF-9E7B-C050ADC35B4B}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
@@ -1704,7 +3351,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="DestinationContextObject">
-															<ObjectRef Name="Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
+															<ObjectRef Name="Pt1 Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
 														</Reference>
 														<Reference Name="SourceContextObject">
 															<ObjectRef Name="Intro" ID="{D670301C-FECC-4C99-802B-1C49A24D027D}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
@@ -1743,7 +3390,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="DestinationContextObject">
-															<ObjectRef Name="Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
+															<ObjectRef Name="Pt1 Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
 														</Reference>
 														<Reference Name="SourceContextObject">
 															<ObjectRef Name="Riff" ID="{569F9474-B471-4F39-986E-1E6EB07C3E38}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
@@ -1782,7 +3429,7 @@
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="DestinationContextObject">
-															<ObjectRef Name="Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
+															<ObjectRef Name="Pt1 Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
 														</Reference>
 														<Reference Name="SourceContextObject">
 															<ObjectRef Name="Chorus" ID="{E7D712EE-A082-44BC-8992-B5DE52107CC0}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}"/>
@@ -1818,31 +3465,53 @@
 							</TransitionList>
 							<ObjectLists/>
 							<ArgumentList>
+								<ArgumentRef Name="Level_Zone" ID="{D8E853AF-F858-442F-A9CD-5DF6AC59CD7B}"/>
 								<ArgumentRef Name="Combat_State" ID="{89462096-88C7-4528-BF00-A43D40F01A8C}"/>
 							</ArgumentList>
 							<EntryList>
 								<Entry>
 									<Path>
-										<PathElementRef Name="In_Combat" ID="{27BF420F-3B1C-4E7D-B574-238AFD988FC8}"/>
-									</Path>
-									<AudioNodeInfo>
-										<AudioNodeRef Name="Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}" Platform="Linked"/>
-									</AudioNodeInfo>
-								</Entry>
-								<Entry>
-									<Path>
+										<PathElementRef Name="Pt_1" ID="{97D3CA23-752A-4F7B-87E7-C5CD5A6A2B0B}"/>
 										<PathElementRef Name="Not_In_Combat" ID="{1C474832-0CB2-42E3-8EE5-7DD765168E07}"/>
 									</Path>
 									<AudioNodeInfo>
-										<AudioNodeRef Name="Medium" ID="{B9E72022-E624-4061-978B-4973D3FB9CD9}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}" Platform="Linked"/>
+										<AudioNodeRef Name="Pt1 Medium" ID="{B9E72022-E624-4061-978B-4973D3FB9CD9}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}" Platform="Linked"/>
 									</AudioNodeInfo>
 								</Entry>
 								<Entry>
 									<Path>
-										<PathElementRef Name="None" ID="{5C1C4954-7EFC-4B07-B651-DD16FFA68EE9}"/>
+										<PathElementRef Name="Pt_1" ID="{97D3CA23-752A-4F7B-87E7-C5CD5A6A2B0B}"/>
+										<PathElementRef Name="In_Combat" ID="{27BF420F-3B1C-4E7D-B574-238AFD988FC8}"/>
 									</Path>
 									<AudioNodeInfo>
-										<AudioNodeRef Name="Medium" ID="{B9E72022-E624-4061-978B-4973D3FB9CD9}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}" Platform="Linked"/>
+										<AudioNodeRef Name="Pt1 Combat" ID="{B88B1AD1-16A2-4F1B-BA53-13C791828C38}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}" Platform="Linked"/>
+									</AudioNodeInfo>
+								</Entry>
+								<Entry>
+									<Path>
+										<PathElementRef Name="Pt_2" ID="{F5C8594C-D5F2-4B5F-B311-2443D0EFB710}"/>
+										<PathElementRef Name="Not_In_Combat" ID="{1C474832-0CB2-42E3-8EE5-7DD765168E07}"/>
+									</Path>
+									<AudioNodeInfo>
+										<AudioNodeRef Name="Pt2 Medium" ID="{5DF6913D-EAC1-41EA-97F1-B7BC4A980605}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}" Platform="Linked"/>
+									</AudioNodeInfo>
+								</Entry>
+								<Entry>
+									<Path>
+										<PathElementRef Name="Pt_2" ID="{F5C8594C-D5F2-4B5F-B311-2443D0EFB710}"/>
+										<PathElementRef Name="In_Combat" ID="{27BF420F-3B1C-4E7D-B574-238AFD988FC8}"/>
+									</Path>
+									<AudioNodeInfo>
+										<AudioNodeRef Name="Pt2 Combat" ID="{D6E40127-D1CA-4293-B197-CBD1195BD634}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}" Platform="Linked"/>
+									</AudioNodeInfo>
+								</Entry>
+								<Entry>
+									<Path>
+										<PathElementRef Name="End" ID="{2B614FD1-7504-4D2B-8F5C-66A5277E65C8}"/>
+										<PathElementRef Name="Combat_State" ID="{89462096-88C7-4528-BF00-A43D40F01A8C}"/>
+									</Path>
+									<AudioNodeInfo>
+										<AudioNodeRef Name="End" ID="{9831CFF7-79FA-4EB9-B501-99A17DFA4BB5}" WorkUnitID="{4E306BED-E6D5-425F-98E0-D2B4C7B6C892}" Platform="Linked"/>
 									</AudioNodeInfo>
 								</Entry>
 							</EntryList>
@@ -6213,7 +7882,6 @@
 										<Property Name="DestinationContextType" Type="int16" Value="1"/>
 										<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
 									</PropertyList>
-									<ReferenceList/>
 									<TransitionInfo>
 										<SourceFadeOut>
 											<MusicFade Name="Source Fade-out" ID="{16520792-D9EF-4DA1-A65C-130FAD9F91D0}">
