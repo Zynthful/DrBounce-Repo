@@ -109,7 +109,7 @@ public class RebindUI : Settings
     }
 
     /// <summary>
-    /// Update action and rebind text
+    /// Update action and rebind texts
     /// </summary>
     protected override void UpdateUI()
     {

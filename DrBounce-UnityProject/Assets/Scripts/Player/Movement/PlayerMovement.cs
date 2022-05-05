@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController charController;
     private float playerHeight;
     private float oldSpeed;
-    public static PlayerInput input;
 
     [Header("Base Movement")]
     [SerializeField] private float speed = 8f;
@@ -122,7 +121,6 @@ public class PlayerMovement : MonoBehaviour
         controls = InputManager.inputMaster;
 
         instance = this;
-        input = GetComponent<PlayerInput>();
         player = transform;
         headCheckHeight = new Vector3(0.25f, 0.15F, 0.25f);
     }
