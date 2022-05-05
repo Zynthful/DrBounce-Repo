@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 GroundCheckSize;
     [SerializeField] private int groundCheckBoxes;
     private int boxDegrees;
+    [SerializeField] private CheckMaterial materialChecker = null;
 
     [Header("Unity Events")]
     public UnityEvent onJump = null;
@@ -540,8 +541,9 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < groundCheckBoxes; i++)
         {
             boxDegrees = (360 / groundCheckBoxes);
-            //print(boxDegrees * i);
-            isGrounded = Physics.CheckBox(groundcheckPos, GroundCheckSize, transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up), ~groundMask);
+            Quaternion orientation = transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up);
+            materialChecker.Check(groundcheckPos, GroundCheckSize, Vector3.down, orientation, groundDistance);
+            isGrounded = Physics.CheckBox(groundcheckPos, GroundCheckSize, orientation, ~groundMask);
         }
     }
 
