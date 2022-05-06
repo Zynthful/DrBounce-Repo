@@ -34,6 +34,14 @@ public class BouncyEnemy : Enemy
         return new Selector(new CheckIfStunned(stun), Attack, Move);
     }
 
+    private void OnEnable() 
+    {
+        if(m_root == null)
+        {
+            createTree();
+        }
+    }
+
     protected BtNode createMovementTree()
     {
         // Movement Node Section

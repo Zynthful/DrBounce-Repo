@@ -41,6 +41,14 @@ public class NoBounceEnemy : Enemy
         return new Selector(new CheckIfStunned(stun), Attack, Chase, Patrol);
     }
 
+    private void OnEnable() 
+    {
+        if(m_root == null)
+        {
+            createTree();
+        }
+    }
+
     protected BtNode createPatrolTree()
     {
         // Movement Node Section
