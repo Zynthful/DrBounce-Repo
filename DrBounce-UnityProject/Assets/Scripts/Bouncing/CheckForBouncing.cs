@@ -20,7 +20,7 @@ public class CheckForBouncing : MonoBehaviour
     private int numOfPlayerBounces = 0;
 
     [Tooltip("Only used if specific bounces is a requirement")]
-    [SerializeField] private GameObject[] specificBounces;
+    [SerializeField] private List<GameObject> exceptions;
 
     private GameObject lastBounced = null;  // Object that this has bounced off of last
     private float timeSinceLastBounce = 0.0f;
@@ -136,6 +136,9 @@ public class CheckForBouncing : MonoBehaviour
 
     private bool HandleReq(RequirementsForBounce.Requirements req, GameObject other)
     {
+        if(exceptions.Contains(other))
+            return true;
+        
         switch (req)
         {
             case RequirementsForBounce.Requirements.noParent:
@@ -172,25 +175,12 @@ public class CheckForBouncing : MonoBehaviour
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
-
+                return false;
+    
             case RequirementsForBounce.Requirements.dontBounceAgainstEnemies:
                 if (!other.GetComponent<Enemy>())
                 {
                     return true;
-                }
-                break;
-
-            case RequirementsForBounce.Requirements.specificBounces:
-                foreach(GameObject obj in specificBounces)
-                {
-                    if(other.gameObject == obj)
-                    {
-                        return true;
-                    }
                 }
                 return false;
         }
