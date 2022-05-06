@@ -10,6 +10,8 @@ public class Blackboard {
     public NoBounceEnemy noBounceAIController;
     public float shotDelay;
 
+    public float chargedShotDelay;
+
     public enum Actions
     {
         NONE,
