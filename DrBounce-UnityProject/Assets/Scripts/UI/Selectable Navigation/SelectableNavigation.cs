@@ -7,17 +7,29 @@ using UnityEngine.UI;
 public abstract class SelectableNavigation : MonoBehaviour
 {
     protected List<Selectable> selectables = null;
+    public List<Selectable> GetSelectables() { return selectables; }
+
+    [SerializeField]
+    protected bool autoFindNavigation = true;
 
     protected virtual void Start()
     {
         #if UNITY_EDITOR
         if (UnityEditor.EditorApplication.isPlaying)
         {
+            selectables = RemoveUninteractables(FindSelectables());
+            if (autoFindNavigation)
+            {
+                FindNavigation();
+            }
+        }
+#else
+        if (autoFindNavigation)
+        {
+            selectables = RemoveUninteractables(FindSelectables());
             FindNavigation();
         }
-        #else
-        FindNavigation();
-        #endif
+#endif
     }
 
     protected virtual List<Selectable> FindSelectables()
@@ -58,6 +70,21 @@ public abstract class SelectableNavigation : MonoBehaviour
 
     public virtual void FindNavigation()
     {
-        selectables = RemoveUninteractables(FindSelectables());
+
+    }
+
+    public void SelectIndex(int index)
+    {
+        selectables[index].Select();
+    }
+
+    public void SelectFirst()
+    {
+        SelectIndex(0);
+    }
+
+    public void SelectLast()
+    {
+        SelectIndex(selectables.Count - 1);
     }
 }
