@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     public static Player player = null;
 
+    [SerializeField]
+    private LevelsData levelsData = null;
+
     [HideInInspector]
     public bool paused = false;
 
@@ -85,6 +88,19 @@ public class GameManager : MonoBehaviour
     public void Stop() 
     {
         Debug.Break();
+    }
+
+    public void NewgameStart()
+    {
+        SaveSystem.DeleteGameData();
+        LoadingScreenManager.s_Instance.LoadScene("ComicBookIntro");
+    }
+
+    public void Continue()
+    {
+        GameSaveData data = SaveSystem.LoadGameData();
+        Debug.Log("Level Unlocked: " + data.levelUnlocked);
+        levelsData.LoadLevel(data.levelUnlocked);
     }
 
 #if !UNITY_EDITOR

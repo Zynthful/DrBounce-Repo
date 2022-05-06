@@ -94,8 +94,8 @@ public class LoadingScreenManager : MonoBehaviour
     public void LoadScene(
             string _destination,
             ContinueOptions _continueOptions = ContinueOptions.RequireInput,
-            UnloadOptions _unloadPrevOptions = UnloadOptions.Automatic,
-            UnloadOptions _unloadLoadScreenOptions = UnloadOptions.Automatic,
+            UnloadOptions _unloadPrevOptions = UnloadOptions.Manual,
+            UnloadOptions _unloadLoadScreenOptions = UnloadOptions.Manual,
             float _smoothMultiplier = 1.0f)
     {
         // Prevent loading whilst we're already performing a loading operation

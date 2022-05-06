@@ -75,6 +75,8 @@ GameObject:
   - component: {fileID: 4801134291109171971}
   - component: {fileID: 4130791928364568718}
   - component: {fileID: 8023894486247070126}
+  - component: {fileID: 7107455236282018537}
+  - component: {fileID: 7532164126925055873}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -122,6 +124,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   currentSettings: 
+  levelsData: {fileID: 11400000, guid: 6c9624ee56dab6d42ade1bd6c083ef34, type: 2}
   paused: 0
   openUrlOnQuit: 0
   urlToOpen: https://docs.google.com/forms/d/e/1FAIpQLSc8icaGfWVslwk930GGBPkCmK58m_N9V-zvYrjz1KqgQegViw/viewform
@@ -177,6 +180,62 @@ MonoBehaviour:
     m_Bits: 329
   <assistDistance>k__BackingField: 1250
   aimAssistPower: 120
+--- !u!114 &7107455236282018537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801134291109171996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1e9df3e5f9fe79f4381e541fb9813eba, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8606042030066711758}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: NewgameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7532164126925055873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801134291109171996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: fc64cf014cad0c147afda9bf1f6a2d64, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8606042030066711758}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Continue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4908176780010922964
 GameObject:
   m_ObjectHideFlags: 0

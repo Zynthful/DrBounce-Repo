@@ -80,6 +80,15 @@ public static class SaveSystem
         Checkpoint.ResetCurrentCheckpoint();
     }
 
+    public static void DeleteGameData()
+    {
+        DeleteLevelData();
+        if (File.Exists(Application.persistentDataPath + "/save.dat"))
+        {
+            File.Delete(Application.persistentDataPath + "/save.dat");
+        }
+    }
+
     public static bool LevelSaveExists(int levelIndex) 
     { 
         LevelSaveData data = LoadInLevel();
