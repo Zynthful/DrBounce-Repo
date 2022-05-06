@@ -17,9 +17,6 @@ public class RequirementsForBounce : ScriptableObject
 
     public Requirements[] requirements;
 
-    [Tooltip("Only used if specific bounces is a requirement")]
-    public GameObject[] specificBounces;
-
     [SerializeField]
     [Tooltip("Cooldown before bouncing off of the same object again is counted as a 'unique' bounce (e.g., granting charges)")]
     private float sameBounceCooldown = 2.0f;

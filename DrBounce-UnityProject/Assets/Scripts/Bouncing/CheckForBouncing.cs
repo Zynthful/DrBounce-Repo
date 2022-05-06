@@ -19,6 +19,9 @@ public class CheckForBouncing : MonoBehaviour
 
     private int numOfPlayerBounces = 0;
 
+    [Tooltip("Only used if specific bounces is a requirement")]
+    [SerializeField] private GameObject[] specificBounces;
+
     private GameObject lastBounced = null;  // Object that this has bounced off of last
     private float timeSinceLastBounce = 0.0f;
 
@@ -182,7 +185,7 @@ public class CheckForBouncing : MonoBehaviour
                 break;
 
             case RequirementsForBounce.Requirements.specificBounces:
-                foreach(GameObject obj in bounceRequirements.specificBounces)
+                foreach(GameObject obj in specificBounces)
                 {
                     if(other.gameObject == obj)
                     {
