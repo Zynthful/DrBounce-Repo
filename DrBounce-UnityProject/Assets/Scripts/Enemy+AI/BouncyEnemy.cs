@@ -44,7 +44,7 @@ public class BouncyEnemy : Enemy
         }
     }
 
-    protected BtNode createMovementTree()
+    protected virtual BtNode createMovementTree()
     {
         // Movement Node Section
         BtNode GetPatrolPoint = new Sequence(new IsClose(false, .2f), new TargetNext(patrolPoints.ToArray()));
@@ -53,7 +53,7 @@ public class BouncyEnemy : Enemy
         return new Sequence(new CheckBool(0), new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
     }
 
-    protected BtNode createAttackingTree()
+    protected virtual BtNode createAttackingTree()
     {
         // Attack Node Section
         BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle, visionOrigin));
