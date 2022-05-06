@@ -110,6 +110,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool debugSlopeCheck = false;
     [SerializeField] private bool debugHeadCheck = false;
 
+    [HideInInspector] public Vector3 trueVelocity;
+
     //private Collider[] test;
 
     private void Awake()
@@ -142,6 +144,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        trueVelocity = new Vector3(move.x + velocity.x, 0, move.z + velocity.z);
+        print(trueVelocity.magnitude);
         //@cole :)
         if (isDashing == true)
         {
@@ -158,7 +162,6 @@ public class PlayerMovement : MonoBehaviour
         #region Movement
         if (!GameManager.s_Instance.paused && isDashing == false)
         {
-
             acceleration += Time.deltaTime * accelerationSpeed;
 
             if (acceleration >= 1)
@@ -171,10 +174,10 @@ public class PlayerMovement : MonoBehaviour
 
             if (isSliding == false)
             {
-                oldMove = move * speed;
-                move = (transform.right * x + transform.forward * z).normalized * acceleration; //Creates a value to move the player in local space based on this value.
-                controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
-                velocity -= (((move * speed) - (oldMove)) * 0.5f);
+                oldMove = move;
+                move = ((transform.right * x + transform.forward * z).normalized * acceleration) * speed; //Creates a value to move the player in local space based on this value.
+                controller.Move(move * Time.deltaTime); //uses move value to move the player.
+                velocity -= ((move - oldMove) * 0.5f);
             }
             else
             {
@@ -190,8 +193,6 @@ public class PlayerMovement : MonoBehaviour
         {
             acceleration = 0;
         }
-
-
         #endregion
 
         #region Crouching
@@ -330,7 +331,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Allows the player to push against their momentum to slow it down without springing back after letting go
         //This is accomplished by subtracting the player's input value 'move' from the player's velocity when they're in opposite directions
-        if(bounceForce == Vector3.zero)
+        if (bounceForce == Vector3.zero)
         {
             if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
             {
