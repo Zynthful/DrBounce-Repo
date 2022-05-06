@@ -12,9 +12,13 @@ public class ElSlimoAttackTarget : BtNode
 
     protected BulletType m_bullet;
 
+    protected BulletType m_chargedBullet;
+
     protected Transform targetPosition;
     protected Transform enemyPosition;
     protected float m_rateOfFire;
+
+    protected float m_chargedShotDelay;
 
     protected Vector3 m_originLos;
 
@@ -29,10 +33,12 @@ public class ElSlimoAttackTarget : BtNode
     /// <returns></returns>
     /// 
 
-    public ElSlimoAttackTarget(Blackboard blackboard, float rateOfFire, BulletType bullet, Vector3 originLos)
+    public ElSlimoAttackTarget(Blackboard blackboard, float rateOfFire, float chargedShotDelay, BulletType bullet, BulletType chargedBullet, Vector3 originLos)
     {
         m_blackboard = blackboard;
         m_rateOfFire = rateOfFire;
+        m_chargedBullet = chargedBullet;
+        m_chargedShotDelay = chargedShotDelay;
         m_bullet = bullet;
         pool = ObjectPooler.Instance;
         m_originLos = originLos;
@@ -47,7 +53,12 @@ public class ElSlimoAttackTarget : BtNode
 
         enemyPosition = m_blackboard.owner.transform;
         targetPosition = m_blackboard.target.playerObject.transform;
-        GameObject bullet = ShootNormal();
+
+        GameObject bullet;
+        if(m_blackboard.chargedShotDelay <= 0)
+            bullet = ShootCharged();
+        else
+            bullet = ShootNormal();
 
         if (bullet != null)
         {
@@ -68,8 +79,8 @@ public class ElSlimoAttackTarget : BtNode
 
     protected GameObject ShootCharged()
     {
-        m_blackboard.shotDelay = m_rateOfFire;
-        return pool.SpawnBulletFromPool("Bullet", enemyPosition.position + m_originLos, Quaternion.identity, (m_blackboard.target.playerObject.transform.position - (enemyPosition.position + m_originLos)).normalized, m_bullet, null);
+        m_blackboard.chargedShotDelay = m_rateOfFire;
+        return pool.SpawnBulletFromPool("BossChargedShot", enemyPosition.position + m_originLos, Quaternion.identity, (m_blackboard.target.playerObject.transform.position - (enemyPosition.position + m_originLos)).normalized, m_bullet, null);
     }
 
     /// <summary>

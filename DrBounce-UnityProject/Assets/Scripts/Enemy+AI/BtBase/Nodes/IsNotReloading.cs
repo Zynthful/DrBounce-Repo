@@ -24,6 +24,9 @@ public class IsNotReloading : BtNode
         if(m_blackboard.shotDelay >= 0)
         {
             m_blackboard.shotDelay -= Time.deltaTime;
+            if(m_blackboard.chargedShotDelay >= 0)
+                m_blackboard.chargedShotDelay -= Time.deltaTime;
+
             return NodeState.FAILURE;
         }
 
