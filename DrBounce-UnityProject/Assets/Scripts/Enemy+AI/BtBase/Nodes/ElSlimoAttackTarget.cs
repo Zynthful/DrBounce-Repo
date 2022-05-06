@@ -79,7 +79,7 @@ public class ElSlimoAttackTarget : BtNode
 
     protected GameObject ShootCharged()
     {
-        m_blackboard.chargedShotDelay = m_rateOfFire;
+        m_blackboard.chargedShotDelay = m_chargedShotDelay;
         return pool.SpawnBulletFromPool("BossChargedShot", enemyPosition.position + m_originLos, Quaternion.identity, (m_blackboard.target.playerObject.transform.position - (enemyPosition.position + m_originLos)).normalized, m_bullet, null);
     }
 
