@@ -172,6 +172,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable() 
     {
+        m_root = null;
         m_blackboard.currentAction = Blackboard.Actions.NONE;
         CombatManager.s_Instance.RemoveEnemy(this);
     }
