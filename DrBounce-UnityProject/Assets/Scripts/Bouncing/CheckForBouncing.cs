@@ -180,6 +180,16 @@ public class CheckForBouncing : MonoBehaviour
                     return true;
                 }
                 break;
+
+            case RequirementsForBounce.Requirements.specificBounces:
+                foreach(GameObject obj in bounceRequirements.specificBounces)
+                {
+                    if(other.gameObject == obj)
+                    {
+                        return true;
+                    }
+                }
+                return false;
         }
         return false;
     }

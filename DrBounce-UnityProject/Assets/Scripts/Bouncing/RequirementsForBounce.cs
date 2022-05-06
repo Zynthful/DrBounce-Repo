@@ -12,9 +12,13 @@ public class RequirementsForBounce : ScriptableObject
         amAlive,
         onlyBounceAgainstEnemies,
         dontBounceAgainstEnemies,
+        specificBounces,
     }
 
     public Requirements[] requirements;
+
+    [Tooltip("Only used if specific bounces is a requirement")]
+    public GameObject[] specificBounces;
 
     [SerializeField]
     [Tooltip("Cooldown before bouncing off of the same object again is counted as a 'unique' bounce (e.g., granting charges)")]
