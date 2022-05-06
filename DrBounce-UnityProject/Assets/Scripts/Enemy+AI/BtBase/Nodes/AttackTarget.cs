@@ -5,15 +5,17 @@ using System;
 
 public class AttackTarget : BtNode
 {
-    private Blackboard m_blackboard;
+    protected Blackboard m_blackboard;
 
-    private ObjectPooler pool;
+    protected ObjectPooler pool;
 
-    private BulletType m_bullet;
+    protected BulletType m_bullet;
 
-    Transform targetPosition;
-    Transform enemyPosition;
-    float m_rateOfFire;
+    protected Transform targetPosition;
+    protected Transform enemyPosition;
+    protected float m_rateOfFire;
+
+    protected Vector3 m_originLos;
 
     /// <summary>
     /// Used to get variables from else where (custimisation)
@@ -26,12 +28,13 @@ public class AttackTarget : BtNode
     /// <returns></returns>
     /// 
 
-    public AttackTarget(Blackboard blackboard, float rateOfFire, BulletType bullet)
+    public AttackTarget(Blackboard blackboard, float rateOfFire, BulletType bullet, Vector3 originLos)
     {
         m_blackboard = blackboard;
         m_rateOfFire = rateOfFire;
         m_bullet = bullet;
         pool = ObjectPooler.Instance;
+        m_originLos = originLos;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
@@ -59,7 +62,7 @@ public class AttackTarget : BtNode
     protected GameObject Shoot()
     {
         m_blackboard.shotDelay = m_rateOfFire;
-        return pool.SpawnBulletFromPool("Bullet", enemyPosition.position, Quaternion.identity, (m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized, m_bullet, null);
+        return pool.SpawnBulletFromPool("Bullet", enemyPosition.position + m_originLos, Quaternion.identity, (m_blackboard.target.playerObject.transform.position - (enemyPosition.position + m_originLos)).normalized, m_bullet, null);
     }
 
     /// <summary>
