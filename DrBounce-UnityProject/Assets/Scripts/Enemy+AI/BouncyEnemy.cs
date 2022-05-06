@@ -10,6 +10,8 @@ public class BouncyEnemy : Enemy
     public int currentTargetIndex;
     public float enemySpeed = 2;
 
+    public Vector3 visionOrigin;
+
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -54,7 +56,7 @@ public class BouncyEnemy : Enemy
     protected BtNode createAttackingTree()
     {
         // Attack Node Section
-        BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle));
+        BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle, visionOrigin));
         BtNode LookAt = new Selector(CanSee, new AfterAttacked());
         BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist), new Callout());
         return new Sequence(new CheckBool(1), CheckForTarget, new IsNotReloading(m_blackboard), new AttackTarget(m_blackboard, rateOfFire, bullet));
