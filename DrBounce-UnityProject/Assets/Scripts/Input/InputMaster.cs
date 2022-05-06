@@ -824,6 +824,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""df6187da-1734-43d9-a826-2df3c5d3d8b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -934,6 +942,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d83f03cb-0a77-44b1-8625-e56c378a7867"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7123851-a0f6-4e64-9311-ea1a54d4e9c2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1421,6 +1451,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Menu_Continue = m_Menu.FindAction("Continue", throwIfNotFound: true);
         m_Menu_Next = m_Menu.FindAction("Next", throwIfNotFound: true);
         m_Menu_Previous = m_Menu.FindAction("Previous", throwIfNotFound: true);
+        m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
         // Cutscene
         m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
         m_Cutscene_SkipCutscene = m_Cutscene.FindAction("SkipCutscene", throwIfNotFound: true);
@@ -1613,6 +1644,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Menu_Continue;
     private readonly InputAction m_Menu_Next;
     private readonly InputAction m_Menu_Previous;
+    private readonly InputAction m_Menu_Back;
     public struct MenuActions
     {
         private @InputMaster m_Wrapper;
@@ -1621,6 +1653,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Continue => m_Wrapper.m_Menu_Continue;
         public InputAction @Next => m_Wrapper.m_Menu_Next;
         public InputAction @Previous => m_Wrapper.m_Menu_Previous;
+        public InputAction @Back => m_Wrapper.m_Menu_Back;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1642,6 +1675,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Previous.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
                 @Previous.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
                 @Previous.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
+                @Back.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -1658,6 +1694,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Previous.started += instance.OnPrevious;
                 @Previous.performed += instance.OnPrevious;
                 @Previous.canceled += instance.OnPrevious;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
             }
         }
     }
@@ -1881,6 +1920,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnContinue(InputAction.CallbackContext context);
         void OnNext(InputAction.CallbackContext context);
         void OnPrevious(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
     public interface ICutsceneActions
     {

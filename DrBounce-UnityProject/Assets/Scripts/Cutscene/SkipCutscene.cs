@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class SkipCutscene : MonoBehaviour
 {
     public delegate void CameraAnim();
     public static event CameraAnim OnEnd;
-
-    private InputMaster controls = null;
 
     [Header("Input Settings")]
     [SerializeField]
@@ -37,21 +36,16 @@ public class SkipCutscene : MonoBehaviour
     [SerializeField]
     private GameEvent _onFinish = null;
 
-    private void Awake()
-    {
-        controls = InputManager.inputMaster;
-    }
-
     private void OnEnable()
     {
-        controls.Cutscene.SkipCutscene.started += _ => StartSkip();
-        controls.Cutscene.SkipCutscene.canceled += _ => ResetProgress(true);
+        InputManager.inputMaster.Cutscene.SkipCutscene.started += OnSkipStarted;
+        InputManager.inputMaster.Cutscene.SkipCutscene.canceled += OnSkipCancelled;
     }
 
     private void OnDisable()
     {
-        controls.Cutscene.SkipCutscene.started -= _ => StartSkip();
-        controls.Cutscene.SkipCutscene.canceled -= _ => ResetProgress(true);
+        InputManager.inputMaster.Cutscene.SkipCutscene.started -= OnSkipStarted;
+        InputManager.inputMaster.Cutscene.SkipCutscene.canceled -= OnSkipCancelled;
     }
 
     private void Start()
@@ -73,6 +67,16 @@ public class SkipCutscene : MonoBehaviour
                 Finish();
             }
         }
+    }
+
+    private void OnSkipStarted(InputAction.CallbackContext ctx)
+    {
+        StartSkip();
+    }
+
+    private void OnSkipCancelled(InputAction.CallbackContext ctx)
+    {
+        ResetProgress(true);
     }
 
     private void ResetProgress(bool doFadeDelay)
