@@ -164,9 +164,16 @@ public class Enemy : MonoBehaviour
             NodeState result = m_root.evaluate(m_blackboard);
             if (result != NodeState.RUNNING)
             {
+                m_blackboard.currentAction = Blackboard.Actions.NONE;
                 m_root.reset();
             }
         }
+    }
+
+    private void OnDisable() 
+    {
+        m_blackboard.currentAction = Blackboard.Actions.NONE;
+        CombatManager.s_Instance.RemoveEnemy(this);
     }
 
     public void ResetRoot()
