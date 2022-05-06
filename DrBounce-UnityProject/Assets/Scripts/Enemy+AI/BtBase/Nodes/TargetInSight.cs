@@ -31,7 +31,7 @@ public class TargetInSight : BtNode
         m_viewDist = viewDist;
         m_sightAngle = sightAngle;
         m_blackboard = blackboard;
-        m_originLos = originLos + enemyPosition.position;
+        m_originLos = originLos + blackboard.owner.transform.position;
     }
 
 
