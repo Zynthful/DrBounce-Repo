@@ -171,11 +171,10 @@ public class PlayerMovement : MonoBehaviour
 
             if (isSliding == false)
             {
-                velocity -= move;
-                oldMove = move;
-                move = ((transform.right * x + transform.forward * z).normalized * acceleration) * speed; //Creates a value to move the player in local space based on this value.
-                controller.Move(move * Time.deltaTime); //uses move value to move the player.
-                velocity -= ((move - oldMove) * 0.5f);
+                oldMove = move * speed;
+                move = (transform.right * x + transform.forward * z).normalized * acceleration; //Creates a value to move the player in local space based on this value.
+                controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
+                velocity -= (((move * speed) - (oldMove)) * 0.5f);
             }
             else
             {
@@ -342,8 +341,6 @@ public class PlayerMovement : MonoBehaviour
                 velocity.z += move.z;
             }
         }
-
-        velocity += move;
 
         controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
             velocity.y,
