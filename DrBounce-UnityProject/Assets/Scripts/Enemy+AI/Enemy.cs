@@ -59,6 +59,10 @@ public class Enemy : MonoBehaviour
     private Coroutine shootingDelayCoroutine;
 
     public bool recentlyAttacked;
+
+    protected bool rotateToDefault = false;
+
+    protected Vector3 defaultRotation;
     private Coroutine recentAttackCoroutine;
 
     public bool canSeePlayer;
@@ -114,6 +118,8 @@ public class Enemy : MonoBehaviour
 
         navMeshAgent = GetComponent<NavMeshAgent>();
 
+        defaultRotation = transform.rotation.eulerAngles;
+
         foreach (Transform child in transform)
         {
             if (child.tag == "PatrolPoint")
@@ -132,30 +138,40 @@ public class Enemy : MonoBehaviour
             switch (m_blackboard.currentAction)
             {
                 case Blackboard.Actions.ATTACKING:
+                    rotateToDefault = false;
                     onAttack?.Invoke();
                     CombatManager.s_Instance.AddEnemy(this);
                     break;
 
                 case Blackboard.Actions.PATROLING:
+                    rotateToDefault = false;
                     onPatrol?.Invoke();
                     break;
 
                 case Blackboard.Actions.CHASING:
+                    rotateToDefault = false;
                     onChase?.Invoke();
                     break;
 
                 case Blackboard.Actions.LOST:
+                    rotateToDefault = true;
                     onGiveUp?.Invoke();
                     CombatManager.s_Instance.RemoveEnemy(this);
                     break;
 
                 case Blackboard.Actions.FIRSTSPOTTED:
+                    rotateToDefault = false;
                     onSpotted?.Invoke();
                     CombatManager.s_Instance.AddEnemy(this);
                     break;
             }
 
             recentAction = m_blackboard.currentAction;
+        }
+
+        if(rotateToDefault && !recentlyAttacked)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(defaultRotation), Time.deltaTime / .01f);
         }
 
         if (!GameManager.s_Instance.paused && m_root != null && !health.GetIsDead())

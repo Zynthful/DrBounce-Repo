@@ -11,12 +11,17 @@ public class EnemyHealth : Health
 
     public GameEventFloat onBossDamage = null;
 
+    private Coroutine attackedResetCor;
+
     [SerializeField]
     private Enemy enemy = null;
 
     protected override void Start()
     {
         base.Start();
+
+        if(enemy == null)
+            enemy = GetComponent<Enemy>();
 
         //Workaround fix to enemy colliders being disabled on prefab randomly
         if (GetComponent<Collider>())
@@ -46,6 +51,11 @@ public class EnemyHealth : Health
             default:
                 break;
         }
+        enemy.recentlyAttacked = true;
+        if(attackedResetCor != null)
+            StopCoroutine(attackedResetCor);
+        attackedResetCor = StartCoroutine(RecentAttackReset());
+        Debug.Log(enemy.recentlyAttacked + " on " + transform.name);
     }
 
     protected override void DIE()
@@ -57,5 +67,11 @@ public class EnemyHealth : Health
         OnDeath?.Invoke();
 
         Destroy(this);
+    }
+
+    IEnumerator RecentAttackReset()
+    {
+        yield return new WaitForSeconds(.2f);
+        enemy.recentlyAttacked = false;
     }
 }
