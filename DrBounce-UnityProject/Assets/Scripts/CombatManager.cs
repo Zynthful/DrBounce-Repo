@@ -59,7 +59,6 @@ public class CombatManager : MonoBehaviour
         {
             s_Instance = FindObjectOfType(typeof(CombatManager)) as CombatManager;
         }
-
         if (s_Instance == null)
         {
             s_Instance = this;
@@ -116,7 +115,12 @@ public class CombatManager : MonoBehaviour
             if (ignoreDelay)
                 SetInCombat(false);
             else
+            {
+                if (delayCoroutine != null)
+                    StopCoroutine(delayCoroutine);
+
                 delayCoroutine = StartCoroutine(DelayOutOfCombat());
+            }
         }
 
         switch (enemy.GetEnemyType())
@@ -152,7 +156,12 @@ public class CombatManager : MonoBehaviour
             if (ignoreDelay)
                 SetInCombat(false);
             else
+            {
+                if (delayCoroutine != null)
+                    StopCoroutine(delayCoroutine);
+
                 delayCoroutine = StartCoroutine(DelayOutOfCombat());
+            }
         }
     }
 
