@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using TMPro;
 
 [ExecuteInEditMode]
@@ -40,10 +41,36 @@ public class LevelSelect : MonoBehaviour
         if (UnityEditor.EditorApplication.isPlaying)
         {
             RegenerateLevels();
+            InputManager.inputMaster.Menu.Next.performed += OnNextPerformed;
+            InputManager.inputMaster.Menu.Previous.performed += OnPreviousPerformed;
         }
-        #else
+#else
         RegenerateLevels();
-        #endif
+        InputManager.inputMaster.Menu.Next.performed += OnNextPerformed;
+        InputManager.inputMaster.Menu.Previous.performed += OnPreviousPerformed;
+#endif
+    }
+
+    private void OnDisable()
+    {
+        InputManager.inputMaster.Menu.Next.performed -= OnNextPerformed;
+        InputManager.inputMaster.Menu.Previous.performed -= OnPreviousPerformed;
+    }
+
+    private void OnNextPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            NextLevel();
+        }
+    }
+
+    private void OnPreviousPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            PreviousLevel();
+        }
     }
 
 
@@ -163,6 +190,12 @@ public class LevelSelect : MonoBehaviour
             {
                 startButtons[i].interactable = SaveSystem.IsLevelUnlocked(levelIndex);
             }
+        }
+
+        // Select our first start button, if it's interactable
+        if (startButtons[0].interactable)
+        {
+            startButtons[0].Select();
         }
     }
 
