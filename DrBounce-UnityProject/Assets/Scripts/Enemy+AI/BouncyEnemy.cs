@@ -36,7 +36,7 @@ public class BouncyEnemy : Enemy
         return new Selector(new CheckIfStunned(stun), Attack, Move);
     }
 
-    private void OnEnable() 
+    protected void OnEnable() 
     {
         if(m_root == null)
         {

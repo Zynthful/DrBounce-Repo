@@ -55,7 +55,6 @@ public class EnemyHealth : Health
         if(attackedResetCor != null)
             StopCoroutine(attackedResetCor);
         attackedResetCor = StartCoroutine(RecentAttackReset());
-        Debug.Log(enemy.recentlyAttacked + " on " + transform.name);
     }
 
     protected override void DIE()
@@ -71,7 +70,7 @@ public class EnemyHealth : Health
 
     IEnumerator RecentAttackReset()
     {
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.4f);
         enemy.recentlyAttacked = false;
     }
 }
