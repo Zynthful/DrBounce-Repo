@@ -31,7 +31,10 @@ public class LevelSelect : MonoBehaviour
     [SerializeField]
     private Button[] startButtons = null;
 
-    private void Awake()
+    [SerializeField]
+    private BoolSetting unlockAllLevelsSetting = null;
+
+    private void OnEnable()
     {
         #if UNITY_EDITOR
         if (UnityEditor.EditorApplication.isPlaying)
@@ -110,12 +113,25 @@ public class LevelSelect : MonoBehaviour
 
         // Then unlock them:
         UnlockLevel(0);         // Always unlock first level
-        GameSaveData data = SaveSystem.LoadGameData();
-        if (data != null)
+        
+        // Unlock all levels if we're using the debug setting to do so
+        if (unlockAllLevelsSetting.GetCurrentValue())
         {
-            for (int i = 1; i < data.levelUnlocked + 1; i++)
+            for (int i = 1; i < levelsData.levels.Count; i++)
             {
                 UnlockLevel(i);
+            }
+        }
+        // Unlock levels according to our game save, if one exists
+        else
+        {
+            GameSaveData data = SaveSystem.LoadGameData();
+            if (data != null)
+            {
+                for (int i = 1; i < data.levelUnlocked + 1; i++)
+                {
+                    UnlockLevel(i);
+                }
             }
         }
 
@@ -139,7 +155,14 @@ public class LevelSelect : MonoBehaviour
         // Disable/enable our start buttons if our selected level is locked/unlocked
         for (int i = 0; i < startButtons.Length; i++)
         {
-            startButtons[i].interactable = SaveSystem.IsLevelUnlocked(levelIndex);
+            if (unlockAllLevelsSetting.GetCurrentValue())
+            {
+                startButtons[i].interactable = true;
+            }
+            else
+            {
+                startButtons[i].interactable = SaveSystem.IsLevelUnlocked(levelIndex);
+            }
         }
     }
 
