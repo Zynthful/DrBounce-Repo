@@ -46,6 +46,7 @@ public class LevelComplete : MonoBehaviour
             {
                 GameManager.SetCursorEnabled(true);
                 PauseHandler.SetCanPause(false);
+                PauseHandler.SetTimeFreeze(true);
                 onResultsLoadComplete.Invoke();
             };
         }
