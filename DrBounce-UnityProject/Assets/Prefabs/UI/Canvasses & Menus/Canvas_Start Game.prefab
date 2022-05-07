@@ -112,6 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9191286820705451284}
   - component: {fileID: 3535471718538107880}
+  - component: {fileID: 4856080791845747842}
   m_Layer: 5
   m_Name: New Game Action Confirmation
   m_TagString: Untagged
@@ -166,6 +167,46 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4856080791845747842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764983241281441348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5c99857c5ebec4499ffbc378702a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onActionPerformed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cc332e8a1d97caa4c81ea18bc6c821c2, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9153229873036650427}
+        m_TargetAssemblyTypeName: DeselectCurrent, Assembly-CSharp
+        m_MethodName: Deselect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  inputAction: {fileID: 6109138126033607271, guid: 6b12349f2974fbb4282601c867959b87, type: 3}
 --- !u!114 &8363618302825807045
 MonoBehaviour:
   m_ObjectHideFlags: 0
