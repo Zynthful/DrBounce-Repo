@@ -125,8 +125,8 @@ public class Checkpoint : MonoBehaviour
 
         Transform player = PlayerMovement.player;
         UnlockTracker tracker = player.GetComponent<UnlockTracker>();
-
-        tracker.saveValues = true; tracker.saveUnlocks = unlocks;
+        tracker.NewUnlocks(unlocks);
+        GameManager.s_Instance.currentSettings = unlocks;
 
         Vector3 newPosition = new Vector3(data.position[0], data.position[1], data.position[2]);
         Quaternion rotation = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
@@ -134,8 +134,7 @@ public class Checkpoint : MonoBehaviour
         player.rotation = rotation;
 
         PlayerHealth health = player.GetComponent<PlayerHealth>();
-        health.saveDamageValue = player.GetComponent<PlayerHealth>().GetMaxHealth() - data.health;
-        health.saveDamage = true;
+        health.Damage(Mathf.Abs(data.health - health.GetMaxHealth()));
 
         player.GetComponentInChildren<Shooting>().SetCharge(data.charges);
     }

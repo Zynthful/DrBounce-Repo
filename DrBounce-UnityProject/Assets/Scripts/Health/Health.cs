@@ -70,18 +70,9 @@ public class Health : MonoBehaviour
     public delegate void NotLowHealth();
     public static event NotLowHealth HasHealed;
 
-    public bool saveDamage;
-    public int saveDamageValue;
-
     protected virtual void Start()
     {
         ResetHealth();
-
-        if (saveDamage)
-        {
-            saveDamage = false;
-            Damage(saveDamageValue, true);
-        }
     }
 
     protected virtual void Update()
