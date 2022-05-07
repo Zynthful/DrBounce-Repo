@@ -52,6 +52,7 @@ public class TargetInSight : BtNode
         }
         else
         {
+            m_blackboard.currentAction = Blackboard.Actions.LOST;
             m_blackboard.target.NewTarget(false, null);
             return NodeState.FAILURE;
         }

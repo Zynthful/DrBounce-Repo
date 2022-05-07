@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour
             recentAction = m_blackboard.currentAction;
         }
 
-        if (!GameManager.s_Instance.paused && m_root != null)
+        if (!GameManager.s_Instance.paused && m_root != null && !health.GetIsDead())
         {
             //Debug.Log(m_blackboard.currentAction);
             NodeState result = m_root.evaluate(m_blackboard);
@@ -171,7 +171,6 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable() 
     {
-        m_root = null;
         m_blackboard.currentAction = Blackboard.Actions.NONE;
         CombatManager.s_Instance.RemoveEnemy(this);
     }
