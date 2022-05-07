@@ -103,7 +103,7 @@ public class CombatManager : MonoBehaviour
     /// <param name="ignoreDelay"></param>
     public void RemoveEnemy(Enemy enemy, bool ignoreDelay = false)
     {
-        if(enemiesInCombatWith.Contains(enemy))
+        while(enemiesInCombatWith.Contains(enemy))
             enemiesInCombatWith.Remove(enemy);
             
         numEnemiesEngaged.SetGlobalValue(enemiesInCombatWith.Count);
