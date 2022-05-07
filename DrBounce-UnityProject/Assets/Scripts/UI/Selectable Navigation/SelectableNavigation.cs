@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public abstract class SelectableNavigation : MonoBehaviour
 {
-    protected List<Selectable> selectables = null;
+    protected List<Selectable> selectables = new List<Selectable>();
     public List<Selectable> GetSelectables() { return selectables; }
 
     [SerializeField]
@@ -30,6 +30,11 @@ public abstract class SelectableNavigation : MonoBehaviour
             FindNavigation();
         }
 #endif
+    }
+
+    protected virtual void OnValidate()
+    {
+        selectables = RemoveUninteractables(FindSelectables());
     }
 
     protected virtual List<Selectable> FindSelectables()

@@ -43,6 +43,9 @@ public class Checkpoint : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (!levelsData.IsLevelValid(levelsData.GetCurrentLevelIndex()))
+            return;
+
         // Check if our active scene matches our current level
         if (SceneManager.GetActiveScene().name == levelsData.levels[levelsData.GetCurrentLevelIndex()].GetSceneName())
         {
