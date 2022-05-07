@@ -161,6 +161,7 @@ public class Stun : MonoBehaviour
         onStunEnd?.Invoke();
         stunTimer = 0;
         isStunned = false;
+        
     }
 
     /// <summary>

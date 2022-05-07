@@ -51,6 +51,11 @@ public class EnemyHealth : Health
             default:
                 break;
         }
+        SetRecentAttacked();
+    }
+
+    public void SetRecentAttacked()
+    {
         enemy.recentlyAttacked = true;
         if(attackedResetCor != null)
             StopCoroutine(attackedResetCor);
