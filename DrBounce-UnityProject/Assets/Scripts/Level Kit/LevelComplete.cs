@@ -28,11 +28,11 @@ public class LevelComplete : MonoBehaviour
             data = new GameSaveData();
         
         data.levelUnlocked = levelsData.GetCurrentLevelIndex() + 1;
-        Debug.Log("We are level: " + levelsData.GetCurrentLevelIndex() + " , Saved data: " + data.levelUnlocked);
         SaveSystem.SaveGameData(data);
-
         SaveSystem.DeleteLevelData();
+
         GameManager.s_Instance.currentSettings = null;
+
         onComplete.Invoke();
         onLevelComplete?.Invoke();
     }

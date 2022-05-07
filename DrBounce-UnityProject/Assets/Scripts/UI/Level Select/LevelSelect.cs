@@ -15,7 +15,7 @@ public class LevelSelect : MonoBehaviour
 
     private int selectedLevel = 0;
 
-    private List<GameObject> levelObjects = new List<GameObject>();
+    private List<LevelTemplateUI> levelObjects = new List<LevelTemplateUI>();
     
     [SerializeField]
     [Tooltip("The prefab which is instantiated into the grid")]
@@ -27,6 +27,9 @@ public class LevelSelect : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent<string> onSelectLevelToLoad = null;
+
+    [SerializeField]
+    private Button[] startButtons = null;
 
     private void Awake()
     {
@@ -88,37 +91,56 @@ public class LevelSelect : MonoBehaviour
     }
 
     /// <summary>
-    /// Generates level objects from the level data.
+    /// Generates level objects from the level data, using our save system to unlock certain levels
     /// </summary>
     private void GenerateLevels()
     {
+        // Generate our locked levels:
         for (int i = 0; i < levelsData.levels.Count; i++)
         {
             GameObject level = Instantiate(levelPrefab, transform);
-            levelObjects.Add(level);
             level.name = $"{levelsData.levels[i].GetLevelName()}";
 
             LevelTemplateUI ui = level.GetComponent<LevelTemplateUI>();
-            ui.SetName(levelsData.levels[i].GetLevelName());
-            ui.SetDescription(levelsData.levels[i].GetDescription());
-            ui.SetPreviewSprite(levelsData.levels[i].GetSprite());
+            ui.Initialise(levelsData.levels[i]);
 
+            levelObjects.Add(ui);
             level.SetActive(false);
+        }
 
-            //todo: set pb time from save system
+        // Then unlock them:
+        UnlockLevel(0);         // Always unlock first level
+        GameSaveData data = SaveSystem.LoadGameData();
+        if (data != null)
+        {
+            for (int i = 1; i < data.levelUnlocked + 1; i++)
+            {
+                UnlockLevel(i);
+            }
         }
 
         SelectLevel(0);
     }
 
+    private void UnlockLevel(int index)
+    {
+        levelObjects[index].Unlock();
+    }
+
     public void SelectLevel(int levelIndex)
     {
-        levelObjects[selectedLevel].SetActive(false);
-        levelObjects[levelIndex].SetActive(true);
+        levelObjects[selectedLevel].gameObject.SetActive(false);
+        levelObjects[levelIndex].gameObject.SetActive(true);
 
         selectedLevel = levelIndex;
 
         onSelectLevelToLoad.Invoke(levelsData.levels[levelIndex].GetSceneName());
+
+        // Disable/enable our start buttons if our selected level is locked/unlocked
+        for (int i = 0; i < startButtons.Length; i++)
+        {
+            startButtons[i].interactable = SaveSystem.IsLevelUnlocked(levelIndex);
+        }
     }
 
     public void SelectDefaultButton()
@@ -152,6 +174,7 @@ public class LevelSelect : MonoBehaviour
 
     public void StartLevel()
     {
+        SaveSystem.DeleteLevelData();
         levelsData.LoadLevel(selectedLevel);
     }
 }

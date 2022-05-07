@@ -108,4 +108,17 @@ public static class SaveSystem
         SaveGameData(save);
         return save;
     }
+
+    public static bool IsLevelUnlocked(int index)
+    {
+        if (index == 0)
+            return true;
+
+        GameSaveData data = SaveSystem.LoadGameData();
+        if (data == null)
+        {
+            return false;
+        }
+        else return data.levelUnlocked == index;
+    }
 }
