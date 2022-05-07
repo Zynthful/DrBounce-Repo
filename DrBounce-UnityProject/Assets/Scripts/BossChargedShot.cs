@@ -30,6 +30,8 @@ public class BossChargedShot : BulletMovement
 
         expanding = false;
 
+        comboSize = 1;
+
         if (!shotRenderer || !explosionTrigger || !shotModelCollider || !bounceCheck)
         {
             explosionTrigger = GetComponentInChildren<SphereCollider>().gameObject;
