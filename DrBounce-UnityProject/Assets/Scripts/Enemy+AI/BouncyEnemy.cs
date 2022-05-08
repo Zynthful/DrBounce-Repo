@@ -10,6 +10,8 @@ public class BouncyEnemy : Enemy
     public int currentTargetIndex;
     public float enemySpeed = 2;
 
+    public Vector3 visionOrigin;
+
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -34,7 +36,15 @@ public class BouncyEnemy : Enemy
         return new Selector(new CheckIfStunned(stun), Attack, Move);
     }
 
-    protected BtNode createMovementTree()
+    protected void OnEnable() 
+    {
+        if(m_root == null)
+        {
+            createTree();
+        }
+    }
+
+    protected virtual BtNode createMovementTree()
     {
         // Movement Node Section
         BtNode GetPatrolPoint = new Sequence(new IsClose(false, .2f), new TargetNext(patrolPoints.ToArray()));
@@ -43,12 +53,12 @@ public class BouncyEnemy : Enemy
         return new Sequence(new CheckBool(0), new Inverter(new CheckIfSearching()), UpdatePatrolPoint);
     }
 
-    protected BtNode createAttackingTree()
+    protected virtual BtNode createAttackingTree()
     {
         // Attack Node Section
-        BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle));
+        BtNode CanSee = new Selector(new TargetInSight(m_blackboard, viewDist, sightAngle, visionOrigin));
         BtNode LookAt = new Selector(CanSee, new AfterAttacked());
         BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist), new Callout());
-        return new Sequence(new CheckBool(1), CheckForTarget, new IsNotReloading(m_blackboard), new AttackTarget(m_blackboard, rateOfFire, bullet));
+        return new Sequence(new CheckBool(1), CheckForTarget, new IsNotReloading(m_blackboard), new AttackTarget(m_blackboard, rateOfFire, bullet, visionOrigin));
     }
 }

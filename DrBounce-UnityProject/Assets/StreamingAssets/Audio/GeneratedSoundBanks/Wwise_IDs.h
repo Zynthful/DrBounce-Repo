@@ -317,7 +317,7 @@ namespace AK
         static const AkUniqueID OBJECT_ENTER_SPEED = 2436325575U;
         static const AkUniqueID OBJECT_SIZE = 3625945784U;
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
-        static const AkUniqueID PLAYER_HEALTH_PERCENTAGE = 3361892810U;
+        static const AkUniqueID PLAYER_HEALTH_NORMALIZED = 3470275985U;
         static const AkUniqueID RPM = 796049864U;
         static const AkUniqueID SFX_VOLUME = 1564184899U;
         static const AkUniqueID SFX_VOLUME_OUTPUT = 3836597185U;
@@ -354,6 +354,7 @@ namespace AK
         static const AkUniqueID AUX_BUSES = 1691680111U;
         static const AkUniqueID CRITICAL = 2534871658U;
         static const AkUniqueID DIALOGUE = 3930136735U;
+        static const AkUniqueID DRUMS = 2726606664U;
         static const AkUniqueID ENEMY = 2299321487U;
         static const AkUniqueID ENVIRONMENT = 1229948536U;
         static const AkUniqueID ENVIRONMENTAL = 1973600711U;

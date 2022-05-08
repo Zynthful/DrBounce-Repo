@@ -7,15 +7,16 @@ using UnityEngine.InputSystem;
 
 public class StoryScroll : MonoBehaviour
 {
+    [SerializeField]
+    private LevelsData levelsData = null;
+
     private List<GameObject> pages = new List<GameObject>();
     public InputMaster controls;
     private int pageNo = 0;
-    [SerializeField]
-    private string sceneToLoad;
+
     [SerializeField]
     private float fadeRate = 1;
     private bool doneFadingIn = true;
-    // Start is called before the first frame update
 
     void Awake()
     {
@@ -49,7 +50,7 @@ public class StoryScroll : MonoBehaviour
     {
         if (pages.Count == pageNo + 1)
         {
-            SceneManager.LoadScene(sceneToLoad);
+            levelsData.LoadLevel(0);
             yield break;
         }
 

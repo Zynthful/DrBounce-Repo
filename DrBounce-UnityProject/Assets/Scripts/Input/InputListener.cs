@@ -14,16 +14,18 @@ public class InputListener : MonoBehaviour
 
     private void OnEnable()
     {
-        inputAction.action.performed += _ => onActionPerformed.Invoke();
+        inputAction.action.performed += OnActionPerformed;
         inputAction.action.Enable();
     }
 
     private void OnDisable()
     {
-        if (inputAction != null)
-        {
-            inputAction.action.performed -= _ => onActionPerformed.Invoke();
-            inputAction.action.Disable();
-        }
+        inputAction.action.performed -= OnActionPerformed;
+        inputAction.action.Disable();
+    }
+
+    private void OnActionPerformed(InputAction.CallbackContext ctx)
+    {
+        onActionPerformed.Invoke();
     }
 }

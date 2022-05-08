@@ -86,7 +86,14 @@ public class LevelsData : ScriptableObject
 
     public bool IsLevelValid(int levelIndex)
     {
-        return levels[levelIndex] != null;
+        if (levelIndex < 0 || levelIndex >= levels.Count)
+        {
+            return false;
+        }
+        else
+        {
+            return levels[levelIndex] != null;
+        }
     }
     
     public bool IsLevelValid(LevelData level)

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class SelectableVerticalNavigation : SelectableNavigation
 {
+    [SerializeField]
+    protected bool allowLeftRightOverride = false;
+
     public override void FindNavigation()
     {
         base.FindNavigation();
@@ -16,6 +19,13 @@ public class SelectableVerticalNavigation : SelectableNavigation
 
             nav.selectOnUp = i == 0 ? selectables[selectables.Count - 1] : selectables[i - 1];
             nav.selectOnDown = i == selectables.Count - 1 ? selectables[0] : selectables[i + 1];
+
+            // Don't change select on left/right if we're overriding
+            if (allowLeftRightOverride)
+            {
+                nav.selectOnLeft = selectables[i].navigation.selectOnLeft;
+                nav.selectOnRight = selectables[i].navigation.selectOnRight;
+            }
 
             selectables[i].navigation = nav;
         }

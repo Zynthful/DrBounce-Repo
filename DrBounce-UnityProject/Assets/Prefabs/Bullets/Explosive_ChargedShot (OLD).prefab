@@ -48,6 +48,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 7b7d724c80527344ba3ffd07cf50b799, type: 2}
   objToPost: {fileID: 6224650039348094081}
+  postOn: 0
 --- !u!1 &727712435248929292
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  damageTarget: 00000000
 --- !u!1 &6224650039348094081
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceRequirements: {fileID: 11400000, guid: 53d7c731289f5114ca6f0a46e08cfe57, type: 2}
+  exceptions: []
 --- !u!114 &8761576255234807835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +443,12 @@ MonoBehaviour:
   overrideMovement: 0
   bezierPower: -0.025
   layersToIgnore: []
+  onSpawn:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
   onHitAny:
     m_PersistentCalls:
       m_Calls: []
@@ -454,6 +463,8 @@ MonoBehaviour:
   maxComboSize: 8
   explosionDamageMultiplier: 0.5
   expansionSpeed: 20
+  shrinkSpeed: 0
+  explosionLifespan: 0.25
   onExplode:
     m_PersistentCalls:
       m_Calls:
@@ -469,6 +480,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onShrank:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1273825903911050021
 MonoBehaviour:
   m_ObjectHideFlags: 0

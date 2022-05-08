@@ -12,6 +12,7 @@ public class RequirementsForBounce : ScriptableObject
         amAlive,
         onlyBounceAgainstEnemies,
         dontBounceAgainstEnemies,
+        exceptions,
     }
 
     public Requirements[] requirements;

@@ -818,9 +818,41 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Reset All"",
+                    ""type"": ""Button"",
+                    ""id"": ""97727f55-d72a-4d18-ac4f-421eb6e33fce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Next (Sub Tab)"",
+                    ""type"": ""Button"",
+                    ""id"": ""4bfed5c6-139e-4e25-aa0c-225b741528d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Previous"",
                     ""type"": ""Button"",
                     ""id"": ""0140d14a-8ec2-4737-a741-37d22d6c063f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Previous (Sub Tab)"",
+                    ""type"": ""Button"",
+                    ""id"": ""e00f4a2c-268d-4ed7-9ec9-b6c4c278d28c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""df6187da-1734-43d9-a826-2df3c5d3d8b5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -918,6 +950,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ad34cd5e-889a-485b-a257-066db3cbfc39"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""208692bd-7aa4-4e1c-a725-0a9c7e56bf8c"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b70b55b6-ecaa-423a-b1d7-bf3dd9e8414c"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -928,12 +982,232 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c73fd05d-586a-4665-9d98-56d55412424b"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a4590337-ca5b-4886-90d6-3d6d0f2f3d20"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24eb8c38-c345-43b5-ac32-5093e27a6a30"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d37ea3d-a70c-4e67-9dcf-ce59c814c374"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""96d2f91e-db2c-48ba-a414-ce79943b227d"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7123851-a0f6-4e64-9311-ea1a54d4e9c2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73bafa72-c4b3-490a-a4dc-787f4ef1fb03"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d83f03cb-0a77-44b1-8625-e56c378a7867"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fabc3998-edd8-4d18-b318-282c7aec9b52"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82e9040f-d517-478e-8b4f-9d36368f7617"",
+                    ""path"": """",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Next (Sub Tab)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41fe3cda-dfda-4939-92a4-208a1d6d7ca8"",
+                    ""path"": """",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Next (Sub Tab)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a3f7ce4-d795-4d8a-aed1-6b3131aa841f"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Next (Sub Tab)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b4d427f-2610-4914-ac38-6019ada5675a"",
+                    ""path"": """",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Next (Sub Tab)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01f52bbc-757b-4d41-9590-45cc15ce1b88"",
+                    ""path"": """",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Previous (Sub Tab)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""478c3aa2-10af-449d-b482-0dbca6bcbfc2"",
+                    ""path"": """",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Previous (Sub Tab)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""915c5bea-1b55-4bea-80b7-107e72b9029d"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Previous (Sub Tab)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5494439e-0399-4ece-bcc7-0b2c647fcd7a"",
+                    ""path"": """",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Previous (Sub Tab)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9817b89-e398-423d-9efd-62b21733c0ba"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Reset All"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8669adfe-1276-4e4e-b67a-cc29ea99296b"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Reset All"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c0aaf6c-f22b-4c22-b6bc-f182d86aa3c3"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Reset All"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5947f8ac-467e-4dc1-98c9-49a4634744ed"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Reset All"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1420,7 +1694,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
         m_Menu_Continue = m_Menu.FindAction("Continue", throwIfNotFound: true);
         m_Menu_Next = m_Menu.FindAction("Next", throwIfNotFound: true);
+        m_Menu_ResetAll = m_Menu.FindAction("Reset All", throwIfNotFound: true);
+        m_Menu_NextSubTab = m_Menu.FindAction("Next (Sub Tab)", throwIfNotFound: true);
         m_Menu_Previous = m_Menu.FindAction("Previous", throwIfNotFound: true);
+        m_Menu_PreviousSubTab = m_Menu.FindAction("Previous (Sub Tab)", throwIfNotFound: true);
+        m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
         // Cutscene
         m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
         m_Cutscene_SkipCutscene = m_Cutscene.FindAction("SkipCutscene", throwIfNotFound: true);
@@ -1612,7 +1890,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Menu_Pause;
     private readonly InputAction m_Menu_Continue;
     private readonly InputAction m_Menu_Next;
+    private readonly InputAction m_Menu_ResetAll;
+    private readonly InputAction m_Menu_NextSubTab;
     private readonly InputAction m_Menu_Previous;
+    private readonly InputAction m_Menu_PreviousSubTab;
+    private readonly InputAction m_Menu_Back;
     public struct MenuActions
     {
         private @InputMaster m_Wrapper;
@@ -1620,7 +1902,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Pause => m_Wrapper.m_Menu_Pause;
         public InputAction @Continue => m_Wrapper.m_Menu_Continue;
         public InputAction @Next => m_Wrapper.m_Menu_Next;
+        public InputAction @ResetAll => m_Wrapper.m_Menu_ResetAll;
+        public InputAction @NextSubTab => m_Wrapper.m_Menu_NextSubTab;
         public InputAction @Previous => m_Wrapper.m_Menu_Previous;
+        public InputAction @PreviousSubTab => m_Wrapper.m_Menu_PreviousSubTab;
+        public InputAction @Back => m_Wrapper.m_Menu_Back;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1639,9 +1925,21 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Next.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
                 @Next.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
                 @Next.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
+                @ResetAll.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnResetAll;
+                @ResetAll.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnResetAll;
+                @ResetAll.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnResetAll;
+                @NextSubTab.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnNextSubTab;
+                @NextSubTab.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnNextSubTab;
+                @NextSubTab.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnNextSubTab;
                 @Previous.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
                 @Previous.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
                 @Previous.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
+                @PreviousSubTab.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPreviousSubTab;
+                @PreviousSubTab.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPreviousSubTab;
+                @PreviousSubTab.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPreviousSubTab;
+                @Back.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -1655,9 +1953,21 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Next.started += instance.OnNext;
                 @Next.performed += instance.OnNext;
                 @Next.canceled += instance.OnNext;
+                @ResetAll.started += instance.OnResetAll;
+                @ResetAll.performed += instance.OnResetAll;
+                @ResetAll.canceled += instance.OnResetAll;
+                @NextSubTab.started += instance.OnNextSubTab;
+                @NextSubTab.performed += instance.OnNextSubTab;
+                @NextSubTab.canceled += instance.OnNextSubTab;
                 @Previous.started += instance.OnPrevious;
                 @Previous.performed += instance.OnPrevious;
                 @Previous.canceled += instance.OnPrevious;
+                @PreviousSubTab.started += instance.OnPreviousSubTab;
+                @PreviousSubTab.performed += instance.OnPreviousSubTab;
+                @PreviousSubTab.canceled += instance.OnPreviousSubTab;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
             }
         }
     }
@@ -1880,7 +2190,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnContinue(InputAction.CallbackContext context);
         void OnNext(InputAction.CallbackContext context);
+        void OnResetAll(InputAction.CallbackContext context);
+        void OnNextSubTab(InputAction.CallbackContext context);
         void OnPrevious(InputAction.CallbackContext context);
+        void OnPreviousSubTab(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
     public interface ICutsceneActions
     {

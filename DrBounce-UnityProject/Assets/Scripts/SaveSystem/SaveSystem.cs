@@ -80,6 +80,15 @@ public static class SaveSystem
         Checkpoint.ResetCurrentCheckpoint();
     }
 
+    public static void DeleteGameData()
+    {
+        DeleteLevelData();
+        if (File.Exists(Application.persistentDataPath + "/save.dat"))
+        {
+            File.Delete(Application.persistentDataPath + "/save.dat");
+        }
+    }
+
     public static bool LevelSaveExists(int levelIndex) 
     { 
         LevelSaveData data = LoadInLevel();
@@ -98,5 +107,18 @@ public static class SaveSystem
         GameSaveData save = new GameSaveData();
         SaveGameData(save);
         return save;
+    }
+
+    public static bool IsLevelUnlocked(int index)
+    {
+        if (index == 0)
+            return true;
+
+        GameSaveData data = SaveSystem.LoadGameData();
+        if (data == null)
+        {
+            return false;
+        }
+        else return data.levelUnlocked >= index;
     }
 }

@@ -38,7 +38,7 @@ public class FootstepAudio : MonoBehaviour
             if (!startedDelay)
             {
                 // Begin delay
-                activeDelay = Delay(CalculateDelayFromSpeed(movement.velocity.magnitude));
+                activeDelay = Delay(CalculateDelayFromSpeed(movement.trueVelocity.magnitude * 150));
                 StartCoroutine(activeDelay);
             }
         }

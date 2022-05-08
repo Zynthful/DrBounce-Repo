@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 
 public class LevelTemplateUI : MonoBehaviour
 {
+    private LevelData data = null;
+
     [Header("Declarations")]
     [SerializeField]
     new private TextMeshProUGUI name = null;
@@ -16,17 +19,36 @@ public class LevelTemplateUI : MonoBehaviour
     [SerializeField]
     private Image previewImage = null;
 
-    public void SetName(string value) { name.text = value; }
-    public void SetDescription(string value) { description.text = value; }
-    public void SetPBTime(float value)
+    [Header("Events")]
+    public UnityEvent onLock;
+    public UnityEvent onUnlock;
+
+    public void Initialise(LevelData _data)
     {
-        float minutes = Mathf.Floor(value / 60);
-        float seconds = Mathf.Round(value - (minutes * 60));
+        data = _data;
+
+        Lock();
+
+        previewImage.preserveAspect = true;
+
+        float minutes = Mathf.Floor(data.GetPBTime() / 60);
+        float seconds = Mathf.Round(data.GetPBTime() - (minutes * 60));
         pbTime.text = $"{minutes}:{seconds}";
     }
-    public void SetPreviewSprite(Sprite value)
+
+    private void Lock()
     {
-        previewImage.sprite = value;
-        previewImage.preserveAspect = true;
+        onLock.Invoke();
+        name.text = data.GetLockedName();
+        description.text = data.GetLockedDescription();
+        previewImage.sprite = data.GetLockedSprite();
+    }
+
+    public void Unlock()
+    {
+        onUnlock.Invoke();
+        name.text = data.GetLevelName();
+        description.text = data.GetDescription();
+        previewImage.sprite = data.GetSprite();
     }
 }
