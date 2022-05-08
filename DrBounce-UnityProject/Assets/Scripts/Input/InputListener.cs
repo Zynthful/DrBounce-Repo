@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class InputListener : MonoBehaviour
 {
+    [SerializeField]
+    [Tooltip("Automatically starts and stops listening via OnEnable and OnDisable.")]
+    private bool autoListenOnEnable = true;
+
     [SerializeField]
     private UnityEvent onActionPerformed = null;
 
@@ -14,11 +16,23 @@ public class InputListener : MonoBehaviour
 
     private void OnEnable()
     {
+        if (autoListenOnEnable)
+            Listen();
+    }
+
+    private void OnDisable()
+    {
+        if (autoListenOnEnable)
+            StopListening();
+    }
+
+    public void Listen()
+    {
         inputAction.action.performed += OnActionPerformed;
         inputAction.action.Enable();
     }
 
-    private void OnDisable()
+    public void StopListening()
     {
         inputAction.action.performed -= OnActionPerformed;
         inputAction.action.Disable();
