@@ -4,6 +4,7 @@ using Unity.VectorGraphics;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.DualShock;
 
 public class SetSpriteFromInputAction : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class SetSpriteFromInputAction : MonoBehaviour
         {
             if (actionSettingKeyboard != null)
             {
-                image.sprite = actionSettingKeyboard.GetSprite();
+                image.sprite = actionSettingKeyboard.GetDefaultSprite();
             }
             else
             {
@@ -66,7 +67,7 @@ public class SetSpriteFromInputAction : MonoBehaviour
         {
             if (actionSettingController != null)
             {
-                image.sprite = actionSettingController.GetSprite();
+                image.sprite = device is DualShockGamepad ? actionSettingController.GetDualshockSprite() : actionSettingController.GetDefaultSprite();
             }
             else
             {

@@ -25,10 +25,17 @@ public class InputActionSetting : SettingData
     private string actionName;              // Name of the action to be rebinded, taken from the input action reference.
     private string[] blockingActionNames = null;
 
+    [Header("Sprite Settings")]
+
     [SerializeField]
     [Tooltip("The sprite associated with the action.")]
-    private Sprite sprite;
-    public Sprite GetSprite() { return sprite; }
+    private Sprite defaultSprite = null;
+    public Sprite GetDefaultSprite() { return defaultSprite; }
+
+    [SerializeField]
+    [Tooltip("Dualshock-specific sprite associated with this action.")]
+    private Sprite dualshockSprite = null;
+    public Sprite GetDualshockSprite() { return dualshockSprite; }
 
     public override void Initialise()
     {
