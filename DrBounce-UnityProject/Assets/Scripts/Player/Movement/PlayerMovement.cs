@@ -145,7 +145,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         trueVelocity = new Vector3(move.x + velocity.x, 0, move.z + velocity.z);
-        print(trueVelocity.magnitude);
         //@cole :)
         if (isDashing == true)
         {
@@ -177,11 +176,11 @@ public class PlayerMovement : MonoBehaviour
                 oldMove = move;
                 move = ((transform.right * x + transform.forward * z).normalized * acceleration) * speed; //Creates a value to move the player in local space based on this value.
                 controller.Move(move * Time.deltaTime); //uses move value to move the player.
-                velocity -= ((move - oldMove) * 0.5f);
+                //velocity -= ((move - oldMove) * 0.5f);
             }
             else
             {
-                move = (slideLeftRight * x) * strafeStrength; //Creates a value to move the player in local space based on this value.
+                move = (slideLeftRight * x).normalized * strafeStrength; //Creates a value to move the player in local space based on this value.
                 controller.Move(move * Time.deltaTime); //uses move value to move the player.
             }
 
@@ -227,12 +226,12 @@ public class PlayerMovement : MonoBehaviour
             if (slideDirectionDecided == false)
             {
                 slideDirectionDecided = true;
-                slideDirection = transform.forward;
+                slideDirection = transform.forward * slideStrength;
                 slideLeftRight = transform.right;
-                velocity.x = (slideDirection.x * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
-                velocity.z = (slideDirection.z * slideStrength) * 1.5f;
+                velocity.x = (slideDirection.x) * 1.5f; //Move them forward at a speed based on the dash strength
+                velocity.z = (slideDirection.z) * 1.5f; //Multiplying by 1.5f allows higher speed to be kept without granting a huge jump distance
             }
-            controller.Move(slideDirection * slideStrength * Time.deltaTime);
+            controller.Move(slideDirection * Time.deltaTime);
             h = playerHeight * 0.35f;
             float lastHeight = charController.height;
             //Moves the player downward
@@ -343,9 +342,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
-            velocity.y,
-            Mathf.Abs(charController.velocity.z + velocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+        controller.Move(new Vector3((Mathf.Abs(trueVelocity.x + bounceForce.x) * velocity.x) / (10 / (0.1f * momentumStrength)),
+        velocity.y,
+        (Mathf.Abs(trueVelocity.z + bounceForce.z) * velocity.z) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+
 
         if (gameObject.GetComponent<CharacterController>().velocity.x == 0)
         {
@@ -399,7 +399,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //If the player has movement velocity and isn't sliding
-            if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
+            if ((velocity.z != 0 || velocity.x != 0) && !isSliding)
             {
                 // reduce the velocity over time by the momentum loss rate.
                 //If the player is moving with the momentum, it won't be depleted.
