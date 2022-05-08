@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {

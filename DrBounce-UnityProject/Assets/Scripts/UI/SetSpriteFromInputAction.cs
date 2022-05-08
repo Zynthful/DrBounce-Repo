@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.VectorGraphics;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.InputSystem.LowLevel;
 
-[ExecuteInEditMode]
 public class SetSpriteFromInputAction : MonoBehaviour
 {
     [SerializeField]
@@ -18,15 +20,24 @@ public class SetSpriteFromInputAction : MonoBehaviour
 
     private void OnEnable()
     {
-        UpdateUI();
+        InputUser.listenForUnpairedDeviceActivity = 1;
+        InputUser.onUnpairedDeviceUsed += OnUnpairedDeviceUsed;
     }
 
-    private void OnValidate()
+    private void OnDisable()
     {
-        UpdateUI();
+        InputUser.onUnpairedDeviceUsed -= OnUnpairedDeviceUsed;
     }
 
-    private void UpdateUI()
+    private void OnUnpairedDeviceUsed(InputControl control, InputEventPtr ptr)
+    {
+        if (!control.device.noisy)
+        {
+            UpdateUI(control.device);
+        }
+    }
+
+    private void UpdateUI(InputDevice device)
     {
         if (image == null)
         {
@@ -49,8 +60,15 @@ public class SetSpriteFromInputAction : MonoBehaviour
         }
         else
         {
-            //todo: make it change for keyboard/controller
-
+            // Set the sprite based on whether we're currently using a Gamepad or Mouse/Keyboard
+            if (device is Mouse || device is Keyboard)
+            {
+                image.sprite = actionSettingKeyboard.GetSprite();
+            }
+            else if (device is Gamepad)
+            {
+                image.sprite = actionSettingController.GetSprite();
+            }
         }
     }
 }
