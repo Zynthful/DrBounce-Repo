@@ -25,6 +25,11 @@ public class InputActionSetting : SettingData
     private string actionName;              // Name of the action to be rebinded, taken from the input action reference.
     private string[] blockingActionNames = null;
 
+    [SerializeField]
+    [Tooltip("The sprite associated with the action.")]
+    private Sprite sprite;
+    public Sprite GetSprite() { return sprite; }
+
     public override void Initialise()
     {
         base.Initialise();

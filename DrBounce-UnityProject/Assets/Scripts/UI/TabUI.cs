@@ -91,7 +91,6 @@ public class TabUI : MonoBehaviour
 
     private void OnNextPerformed(InputAction.CallbackContext ctx)
     {
-        Debug.Log("next.");
         if (ctx.performed)
         {
             Next();
