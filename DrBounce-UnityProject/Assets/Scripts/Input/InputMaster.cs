@@ -818,9 +818,25 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Next (Sub Tab)"",
+                    ""type"": ""Button"",
+                    ""id"": ""4bfed5c6-139e-4e25-aa0c-225b741528d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Previous"",
                     ""type"": ""Button"",
                     ""id"": ""0140d14a-8ec2-4737-a741-37d22d6c063f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Previous (Sub Tab)"",
+                    ""type"": ""Button"",
+                    ""id"": ""e00f4a2c-268d-4ed7-9ec9-b6c4c278d28c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -964,6 +980,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82e9040f-d517-478e-8b4f-9d36368f7617"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Next (Sub Tab)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01f52bbc-757b-4d41-9590-45cc15ce1b88"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Previous (Sub Tab)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1450,7 +1488,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
         m_Menu_Continue = m_Menu.FindAction("Continue", throwIfNotFound: true);
         m_Menu_Next = m_Menu.FindAction("Next", throwIfNotFound: true);
+        m_Menu_NextSubTab = m_Menu.FindAction("Next (Sub Tab)", throwIfNotFound: true);
         m_Menu_Previous = m_Menu.FindAction("Previous", throwIfNotFound: true);
+        m_Menu_PreviousSubTab = m_Menu.FindAction("Previous (Sub Tab)", throwIfNotFound: true);
         m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
         // Cutscene
         m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
@@ -1643,7 +1683,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Menu_Pause;
     private readonly InputAction m_Menu_Continue;
     private readonly InputAction m_Menu_Next;
+    private readonly InputAction m_Menu_NextSubTab;
     private readonly InputAction m_Menu_Previous;
+    private readonly InputAction m_Menu_PreviousSubTab;
     private readonly InputAction m_Menu_Back;
     public struct MenuActions
     {
@@ -1652,7 +1694,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Pause => m_Wrapper.m_Menu_Pause;
         public InputAction @Continue => m_Wrapper.m_Menu_Continue;
         public InputAction @Next => m_Wrapper.m_Menu_Next;
+        public InputAction @NextSubTab => m_Wrapper.m_Menu_NextSubTab;
         public InputAction @Previous => m_Wrapper.m_Menu_Previous;
+        public InputAction @PreviousSubTab => m_Wrapper.m_Menu_PreviousSubTab;
         public InputAction @Back => m_Wrapper.m_Menu_Back;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
@@ -1672,9 +1716,15 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Next.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
                 @Next.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
                 @Next.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnNext;
+                @NextSubTab.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnNextSubTab;
+                @NextSubTab.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnNextSubTab;
+                @NextSubTab.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnNextSubTab;
                 @Previous.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
                 @Previous.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
                 @Previous.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
+                @PreviousSubTab.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPreviousSubTab;
+                @PreviousSubTab.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPreviousSubTab;
+                @PreviousSubTab.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPreviousSubTab;
                 @Back.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
                 @Back.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
                 @Back.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
@@ -1691,9 +1741,15 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Next.started += instance.OnNext;
                 @Next.performed += instance.OnNext;
                 @Next.canceled += instance.OnNext;
+                @NextSubTab.started += instance.OnNextSubTab;
+                @NextSubTab.performed += instance.OnNextSubTab;
+                @NextSubTab.canceled += instance.OnNextSubTab;
                 @Previous.started += instance.OnPrevious;
                 @Previous.performed += instance.OnPrevious;
                 @Previous.canceled += instance.OnPrevious;
+                @PreviousSubTab.started += instance.OnPreviousSubTab;
+                @PreviousSubTab.performed += instance.OnPreviousSubTab;
+                @PreviousSubTab.canceled += instance.OnPreviousSubTab;
                 @Back.started += instance.OnBack;
                 @Back.performed += instance.OnBack;
                 @Back.canceled += instance.OnBack;
@@ -1919,7 +1975,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnContinue(InputAction.CallbackContext context);
         void OnNext(InputAction.CallbackContext context);
+        void OnNextSubTab(InputAction.CallbackContext context);
         void OnPrevious(InputAction.CallbackContext context);
+        void OnPreviousSubTab(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
     }
     public interface ICutsceneActions
