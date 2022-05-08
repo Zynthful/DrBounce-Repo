@@ -30,16 +30,6 @@
 				</Event>
 				<Event Name="Level_Complete" ID="{7ED7CCD8-1B1A-46F8-AA5E-F552F1D2FCEB}">
 					<ChildrenList>
-						<Action Name="" ID="{83CA9F3F-889F-44FC-854C-7AE12BCBBA80}" ShortID="224918958">
-							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="41"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Music_Stop" ID="{B87AF80C-767D-4106-8679-19F412638650}" WorkUnitID="{E77FE1BE-C949-47D0-BE4A-BEF66442F80A}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
 						<Action Name="" ID="{2F5F646D-4545-47DC-8C0F-8135E00CC246}" ShortID="785058738">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="22"/>
@@ -81,6 +71,20 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="Level_Checkpoint_Reached" ID="{C0C51079-55DE-4F15-A26F-9E82AD5CB037}"/>
+				<Event Name="Level_Begin_Load" ID="{F51D2C29-D009-4C73-B1CB-9D5F4E9CC11D}">
+					<ChildrenList>
+						<Action Name="" ID="{E05BA245-DC65-450B-93AF-DF9758150220}" ShortID="167115278">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="41"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Music_Stop" ID="{B87AF80C-767D-4106-8679-19F412638650}" WorkUnitID="{E77FE1BE-C949-47D0-BE4A-BEF66442F80A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

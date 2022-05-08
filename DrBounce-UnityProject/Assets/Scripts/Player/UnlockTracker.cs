@@ -20,9 +20,6 @@ public class UnlockTracker : MonoBehaviour
 
     public static UnlockTracker instance;
 
-    public bool saveValues;
-    public UnlockTypes[] saveUnlocks;
-
     [HideInInspector]
     public UnlockTypes? lastUnlock = null;      // Last unlock acquired
     [HideInInspector]
@@ -121,16 +118,10 @@ public class UnlockTracker : MonoBehaviour
         instance = this;
         
         DisableAllUnlocks();
-        if (levelStartSettings != null && !saveValues)
+        if (levelStartSettings != null)
         {
             NewUnlocks(levelStartSettings.unlocks);
             GameManager.s_Instance.currentSettings = levelStartSettings.unlocks;
-        }
-        else if (saveValues)
-        {
-            NewUnlocks(saveUnlocks);
-            GameManager.s_Instance.currentSettings = saveUnlocks;
-            saveValues = false;
         }
         else { }
             //Debug.Log("Running without any unlocks, have you forgotten to setup the scriptableObject?");

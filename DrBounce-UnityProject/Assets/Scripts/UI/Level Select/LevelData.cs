@@ -38,4 +38,21 @@ public class LevelData : ScriptableObject
     private Sprite previewSprite = null;
     public Sprite GetSprite() { return previewSprite; }
     public void SetSprite(Sprite value) { previewSprite = value; }
+
+    private float pbTime;
+    public float GetPBTime() { return pbTime; }
+    public void SetPBTime(float value) { pbTime = value; }
+
+    [Header("Locked Settings")]
+    [SerializeField]
+    private string lockedName = "???";
+    public string GetLockedName() { return lockedName; }
+
+    [SerializeField]
+    private string lockedDescription = "";
+    public string GetLockedDescription() { return lockedDescription; }
+
+    [SerializeField]
+    private Sprite lockedSprite = null;
+    public Sprite GetLockedSprite() { return lockedSprite; }
 }

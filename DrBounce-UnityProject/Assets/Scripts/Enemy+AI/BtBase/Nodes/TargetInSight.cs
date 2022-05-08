@@ -11,6 +11,8 @@ public class TargetInSight : BtNode
     private float m_sightAngle;
     public bool m_canSeePlayer;
 
+    private Vector3 m_originLos;
+
     /// <summary>
     /// Used to get variables from else where (custimisation)
     /// </summary>
@@ -24,11 +26,12 @@ public class TargetInSight : BtNode
     /// <returns></returns>
     /// 
 
-    public TargetInSight(Blackboard blackboard, float viewDist, float sightAngle)
+    public TargetInSight(Blackboard blackboard, float viewDist, float sightAngle, Vector3 originLos)
     {
         m_viewDist = viewDist;
         m_sightAngle = sightAngle;
         m_blackboard = blackboard;
+        m_originLos = originLos + blackboard.owner.transform.position;
     }
 
 
@@ -49,6 +52,7 @@ public class TargetInSight : BtNode
         }
         else
         {
+            m_blackboard.currentAction = Blackboard.Actions.LOST;
             m_blackboard.target.NewTarget(false, null);
             return NodeState.FAILURE;
         }
@@ -64,15 +68,15 @@ public class TargetInSight : BtNode
         //added null check to stop error in console 
         if (PlayerMovement.player != null)
         {
-            if (Vector3.Dot(enemyPosition.TransformDirection(Vector3.forward), (PlayerMovement.player.position - enemyPosition.position).normalized) > (90 - m_sightAngle) / 90)
+            if (Vector3.Dot(enemyPosition.TransformDirection(Vector3.forward), (PlayerMovement.player.position - m_originLos).normalized) > (90 - m_sightAngle) / 90)
             {
                 RaycastHit hit;
 
-                Ray ray = new Ray(enemyPosition.position, (PlayerMovement.player.position - enemyPosition.position).normalized);
+                Ray ray = new Ray(m_originLos, (PlayerMovement.player.position - m_originLos).normalized);
 
                 if (Physics.Raycast(ray, out hit, m_viewDist) && hit.transform.root.CompareTag("Player"))
                 {
-                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.green);
+                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - m_originLos).normalized * m_viewDist, Color.green);
 
                     if (m_blackboard.noBounceAIController == false)
                     {
@@ -88,7 +92,7 @@ public class TargetInSight : BtNode
                 else
                 {
                     m_blackboard.notSeenPlayer = true;
-                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - enemyPosition.position).normalized * m_viewDist, Color.red);
+                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - m_originLos).normalized * m_viewDist, Color.red);
                 }
             }
             return false;

@@ -12,13 +12,17 @@ public class ExplosiveShot : BulletMovement
     private GameObject explosionTrigger;
     private bool expanding;
 
-    [SerializeField] [Range(10f, 1000f)] float expansionSpeed;
+    [SerializeField] [Range(.01f, 50f)] float expansionSpeed;
+    [SerializeField] [Range(.01f, 50f)] float shrinkSpeed;
     private MeshRenderer shotRenderer;
     private MeshCollider shotModelCollider;
     private CheckForBouncing bounceCheck;
+    private Vector3 explosionTriggerBaseScale = Vector3.zero;
+    [SerializeField] private float explosionLifespan = .25f;
 
     [Header("Explosive Shot Events")]
     public UnityEvent onExplode = null;
+    public UnityEvent onShrank = null;
 
     public override void OnObjectSpawn()
     {
@@ -36,14 +40,17 @@ public class ExplosiveShot : BulletMovement
 
         shotRenderer.enabled = true;
         shotModelCollider.enabled = true;
+
+        if(explosionTriggerBaseScale == Vector3.zero)
+            explosionTriggerBaseScale = explosionTrigger.transform.localScale;
+
+        explosionTrigger.transform.localScale = explosionTriggerBaseScale;
         explosionTrigger.SetActive(false);
-        
-        rb.constraints = RigidbodyConstraints.None;
     }
 
-   public void OnCollisionEnter(Collision other)
+    public void OnCollisionEnter(Collision other)
     {
-        if (!other.transform.GetComponentInChildren<BulletMovement>() && other.transform.root != PlayerMovement.player.root && !expanding)
+        if (!other.transform.GetComponentInChildren<BulletMovement>() && other.transform.root != PlayerMovement.player && !expanding)
         {
             if (GameManager.s_Instance.bounceableLayers == (GameManager.s_Instance.bounceableLayers | 1 << other.gameObject.layer))
             {
@@ -61,9 +68,9 @@ public class ExplosiveShot : BulletMovement
             shotRenderer.GetComponent<MeshCollider>().enabled = false;
             shotRenderer.enabled = false; rb.velocity = Vector3.zero;
 
-            StartCoroutine(ExplosionExpansion());
-
             onExplode?.Invoke();
+
+            StartCoroutine(ExplosionExpansion());
         }
     }
 
@@ -89,7 +96,14 @@ public class ExplosiveShot : BulletMovement
             explosionTrigger.transform.localScale += Vector3.one * ((comboSize * explosionSizeMultiplier) * (.1f / startScale)) / expansionSpeed;
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(explosionLifespan);
+        while (explosionTrigger.transform.localScale.x > 0)
+        {
+            explosionTrigger.transform.localScale -= Vector3.one * ((comboSize * explosionSizeMultiplier) * (.1f / startScale)) / shrinkSpeed;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        onShrank?.Invoke();
+        yield return new WaitForSeconds(.1f);
         gameObject.SetActive(false);
     }
 }

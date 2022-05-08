@@ -70,18 +70,9 @@ public class Health : MonoBehaviour
     public delegate void NotLowHealth();
     public static event NotLowHealth HasHealed;
 
-    public bool saveDamage;
-    public int saveDamageValue;
-
     protected virtual void Start()
     {
         ResetHealth();
-
-        if (saveDamage)
-        {
-            saveDamage = false;
-            Damage(saveDamageValue, true);
-        }
     }
 
     protected virtual void Update()
@@ -145,8 +136,8 @@ public class Health : MonoBehaviour
 
         SetHealth(health - amount, true, ignoreGod);
 
-        // Only call injured events if we're not dead after taking damage
-        if (!GetIsDead())
+        // Only call injured events if we're taking at least 1 damage AND we're not dead after taking damage
+        if (amount >= 1 && !GetIsDead())
         {
             onInjured?.Invoke(amount);
             _onInjured?.Raise(amount);

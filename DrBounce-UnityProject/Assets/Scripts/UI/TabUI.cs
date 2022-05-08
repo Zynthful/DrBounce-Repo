@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class TabUI : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class TabUI : MonoBehaviour
         public UnityEngine.UI.Button button;
         [Tooltip("The GameObjects which are enabled when selecting the tab.")]
         public GameObject[] gameObjects;
+
+        public UnityEvent onSelect;
 
         public void SetActive(bool active)
         {
@@ -44,21 +48,38 @@ public class TabUI : MonoBehaviour
     private void OnEnable()
     {
         // Listen for input
-        InputManager.inputMaster.Menu.Next.performed += _ => Next();
-        InputManager.inputMaster.Menu.Previous.performed += _ => Previous();
+        InputManager.inputMaster.Menu.Next.performed += OnNextPerformed;
+        InputManager.inputMaster.Menu.Previous.performed += OnPreviousPerformed;
     }
 
     private void OnDisable()
     {
         // Stop listening for input
-        InputManager.inputMaster.Menu.Next.performed -= _ => Next();
-        InputManager.inputMaster.Menu.Previous.performed -= _ => Previous();
+        InputManager.inputMaster.Menu.Next.performed -= OnNextPerformed;
+        InputManager.inputMaster.Menu.Previous.performed -= OnPreviousPerformed;
+    }
+
+    private void OnNextPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            Next();
+        }
+    }
+
+    private void OnPreviousPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            Previous();
+        }
     }
 
     private void SelectTab(int index)
     {
         tabs[selectedTabIndex].SetActive(false);    // Disable last tab objects
         tabs[index].SetActive(true);                // Enable new tab objects
+        tabs[index].onSelect.Invoke();
         selectedTabIndex = index;
     }
 

@@ -25,7 +25,7 @@ public class AfterAttacked : BtNode
             if (blackboard.aiController.recentlyAttacked)
             {
                 blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
-                blackboard.owner.transform.rotation = Quaternion.RotateTowards(blackboard.owner.transform.rotation, Quaternion.LookRotation((blackboard.target.playerObject.transform.position - blackboard.owner.transform.position).normalized), Time.deltaTime / .0005f);
+                blackboard.owner.transform.rotation = Quaternion.RotateTowards(blackboard.owner.transform.rotation, Quaternion.LookRotation((blackboard.target.playerObject.transform.position - blackboard.owner.transform.position).normalized), Time.deltaTime / .005f);
                 return NodeState.SUCCESS;
             }
         }
@@ -34,7 +34,7 @@ public class AfterAttacked : BtNode
             if (blackboard.noBounceAIController.recentlyAttacked)
             {
                 blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
-                blackboard.owner.transform.rotation = Quaternion.RotateTowards(blackboard.owner.transform.rotation, Quaternion.LookRotation((blackboard.target.playerObject.transform.position - blackboard.owner.transform.position).normalized), Time.deltaTime / .0005f);
+                blackboard.owner.transform.rotation = Quaternion.RotateTowards(blackboard.owner.transform.rotation, Quaternion.LookRotation((blackboard.target.playerObject.transform.position - blackboard.owner.transform.position).normalized), Time.deltaTime / .005f);
                 return NodeState.SUCCESS;
             }
         }

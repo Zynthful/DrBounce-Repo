@@ -59,7 +59,6 @@ public class CombatManager : MonoBehaviour
         {
             s_Instance = FindObjectOfType(typeof(CombatManager)) as CombatManager;
         }
-
         if (s_Instance == null)
         {
             s_Instance = this;
@@ -104,7 +103,9 @@ public class CombatManager : MonoBehaviour
     /// <param name="ignoreDelay"></param>
     public void RemoveEnemy(Enemy enemy, bool ignoreDelay = false)
     {
-        enemiesInCombatWith.Remove(enemy);
+        while(enemiesInCombatWith.Contains(enemy))
+            enemiesInCombatWith.Remove(enemy);
+            
         numEnemiesEngaged.SetGlobalValue(enemiesInCombatWith.Count);
 
         onExitCombatWithEnemy?.Raise(enemy);
@@ -114,7 +115,12 @@ public class CombatManager : MonoBehaviour
             if (ignoreDelay)
                 SetInCombat(false);
             else
+            {
+                if (delayCoroutine != null)
+                    StopCoroutine(delayCoroutine);
+
                 delayCoroutine = StartCoroutine(DelayOutOfCombat());
+            }
         }
 
         switch (enemy.GetEnemyType())
@@ -150,7 +156,12 @@ public class CombatManager : MonoBehaviour
             if (ignoreDelay)
                 SetInCombat(false);
             else
+            {
+                if (delayCoroutine != null)
+                    StopCoroutine(delayCoroutine);
+
                 delayCoroutine = StartCoroutine(DelayOutOfCombat());
+            }
         }
     }
 

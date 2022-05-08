@@ -824,6 +824,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""df6187da-1734-43d9-a826-2df3c5d3d8b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -934,6 +942,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d83f03cb-0a77-44b1-8625-e56c378a7867"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7123851-a0f6-4e64-9311-ea1a54d4e9c2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1253,7 +1283,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
             ""id"": ""08a5f253-9d17-4bb6-97d9-dbb752b6dc71"",
             ""actions"": [
                 {
-                    ""name"": ""Next Page"",
+                    ""name"": ""NextPage"",
                     ""type"": ""Value"",
                     ""id"": ""fab9747b-eb6a-42e3-8018-43e377c67edc"",
                     ""expectedControlType"": ""Analog"",
@@ -1269,7 +1299,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Next Page"",
+                    ""action"": ""NextPage"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1280,7 +1310,91 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Next Page"",
+                    ""action"": ""NextPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Keypress"",
+            ""id"": ""1132a19e-df41-41bd-8099-9fbbacf9b8a8"",
+            ""actions"": [
+                {
+                    ""name"": ""L_Pressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""714baed6-1ece-4cd1-afec-dda2a218421e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Y_Pressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""82a58678-407d-4845-a50f-881133b3f4da"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""S_Pressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""66b6ca37-e34e-4b5a-bed1-22987a0f2e70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""U_Pressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f23aa79-93eb-4d31-98ff-cd95c035b8aa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b1787add-def7-49de-8935-e98c37df23dd"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""L_Pressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17385329-70a9-4ea6-966d-e5b8e0740ffe"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Y_Pressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43cea505-7630-4ee6-b8e9-fe80ac62e436"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""S_Pressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""932b6338-5e62-4b3b-bc3b-5607f944b435"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""U_Pressed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1337,6 +1451,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Menu_Continue = m_Menu.FindAction("Continue", throwIfNotFound: true);
         m_Menu_Next = m_Menu.FindAction("Next", throwIfNotFound: true);
         m_Menu_Previous = m_Menu.FindAction("Previous", throwIfNotFound: true);
+        m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
         // Cutscene
         m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
         m_Cutscene_SkipCutscene = m_Cutscene.FindAction("SkipCutscene", throwIfNotFound: true);
@@ -1348,7 +1463,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Debug_DEBUG_ReloadScene = m_Debug.FindAction("DEBUG_ReloadScene", throwIfNotFound: true);
         // Comic
         m_Comic = asset.FindActionMap("Comic", throwIfNotFound: true);
-        m_Comic_NextPage = m_Comic.FindAction("Next Page", throwIfNotFound: true);
+        m_Comic_NextPage = m_Comic.FindAction("NextPage", throwIfNotFound: true);
+        // Keypress
+        m_Keypress = asset.FindActionMap("Keypress", throwIfNotFound: true);
+        m_Keypress_L_Pressed = m_Keypress.FindAction("L_Pressed", throwIfNotFound: true);
+        m_Keypress_Y_Pressed = m_Keypress.FindAction("Y_Pressed", throwIfNotFound: true);
+        m_Keypress_S_Pressed = m_Keypress.FindAction("S_Pressed", throwIfNotFound: true);
+        m_Keypress_U_Pressed = m_Keypress.FindAction("U_Pressed", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1523,6 +1644,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Menu_Continue;
     private readonly InputAction m_Menu_Next;
     private readonly InputAction m_Menu_Previous;
+    private readonly InputAction m_Menu_Back;
     public struct MenuActions
     {
         private @InputMaster m_Wrapper;
@@ -1531,6 +1653,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Continue => m_Wrapper.m_Menu_Continue;
         public InputAction @Next => m_Wrapper.m_Menu_Next;
         public InputAction @Previous => m_Wrapper.m_Menu_Previous;
+        public InputAction @Back => m_Wrapper.m_Menu_Back;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1552,6 +1675,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Previous.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
                 @Previous.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
                 @Previous.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPrevious;
+                @Back.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -1568,6 +1694,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Previous.started += instance.OnPrevious;
                 @Previous.performed += instance.OnPrevious;
                 @Previous.canceled += instance.OnPrevious;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
             }
         }
     }
@@ -1695,6 +1824,63 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public ComicActions @Comic => new ComicActions(this);
+
+    // Keypress
+    private readonly InputActionMap m_Keypress;
+    private IKeypressActions m_KeypressActionsCallbackInterface;
+    private readonly InputAction m_Keypress_L_Pressed;
+    private readonly InputAction m_Keypress_Y_Pressed;
+    private readonly InputAction m_Keypress_S_Pressed;
+    private readonly InputAction m_Keypress_U_Pressed;
+    public struct KeypressActions
+    {
+        private @InputMaster m_Wrapper;
+        public KeypressActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @L_Pressed => m_Wrapper.m_Keypress_L_Pressed;
+        public InputAction @Y_Pressed => m_Wrapper.m_Keypress_Y_Pressed;
+        public InputAction @S_Pressed => m_Wrapper.m_Keypress_S_Pressed;
+        public InputAction @U_Pressed => m_Wrapper.m_Keypress_U_Pressed;
+        public InputActionMap Get() { return m_Wrapper.m_Keypress; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeypressActions set) { return set.Get(); }
+        public void SetCallbacks(IKeypressActions instance)
+        {
+            if (m_Wrapper.m_KeypressActionsCallbackInterface != null)
+            {
+                @L_Pressed.started -= m_Wrapper.m_KeypressActionsCallbackInterface.OnL_Pressed;
+                @L_Pressed.performed -= m_Wrapper.m_KeypressActionsCallbackInterface.OnL_Pressed;
+                @L_Pressed.canceled -= m_Wrapper.m_KeypressActionsCallbackInterface.OnL_Pressed;
+                @Y_Pressed.started -= m_Wrapper.m_KeypressActionsCallbackInterface.OnY_Pressed;
+                @Y_Pressed.performed -= m_Wrapper.m_KeypressActionsCallbackInterface.OnY_Pressed;
+                @Y_Pressed.canceled -= m_Wrapper.m_KeypressActionsCallbackInterface.OnY_Pressed;
+                @S_Pressed.started -= m_Wrapper.m_KeypressActionsCallbackInterface.OnS_Pressed;
+                @S_Pressed.performed -= m_Wrapper.m_KeypressActionsCallbackInterface.OnS_Pressed;
+                @S_Pressed.canceled -= m_Wrapper.m_KeypressActionsCallbackInterface.OnS_Pressed;
+                @U_Pressed.started -= m_Wrapper.m_KeypressActionsCallbackInterface.OnU_Pressed;
+                @U_Pressed.performed -= m_Wrapper.m_KeypressActionsCallbackInterface.OnU_Pressed;
+                @U_Pressed.canceled -= m_Wrapper.m_KeypressActionsCallbackInterface.OnU_Pressed;
+            }
+            m_Wrapper.m_KeypressActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @L_Pressed.started += instance.OnL_Pressed;
+                @L_Pressed.performed += instance.OnL_Pressed;
+                @L_Pressed.canceled += instance.OnL_Pressed;
+                @Y_Pressed.started += instance.OnY_Pressed;
+                @Y_Pressed.performed += instance.OnY_Pressed;
+                @Y_Pressed.canceled += instance.OnY_Pressed;
+                @S_Pressed.started += instance.OnS_Pressed;
+                @S_Pressed.performed += instance.OnS_Pressed;
+                @S_Pressed.canceled += instance.OnS_Pressed;
+                @U_Pressed.started += instance.OnU_Pressed;
+                @U_Pressed.performed += instance.OnU_Pressed;
+                @U_Pressed.canceled += instance.OnU_Pressed;
+            }
+        }
+    }
+    public KeypressActions @Keypress => new KeypressActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1734,6 +1920,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnContinue(InputAction.CallbackContext context);
         void OnNext(InputAction.CallbackContext context);
         void OnPrevious(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
     public interface ICutsceneActions
     {
@@ -1749,5 +1936,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
     public interface IComicActions
     {
         void OnNextPage(InputAction.CallbackContext context);
+    }
+    public interface IKeypressActions
+    {
+        void OnL_Pressed(InputAction.CallbackContext context);
+        void OnY_Pressed(InputAction.CallbackContext context);
+        void OnS_Pressed(InputAction.CallbackContext context);
+        void OnU_Pressed(InputAction.CallbackContext context);
     }
 }

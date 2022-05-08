@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float accelerationSpeed;
     private bool isMoving = false;
     [HideInInspector] public Vector3 bounceForce;
-    private bool hasMoved = false;
     private Vector3 oldMove;
 
     [Header("Jump")]
@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     private bool jump = false;
     private float jumpHeight = 0f;
     private bool prevJump = false;
-    private float prevGrav;
     private bool hasJumped = false;
 
     [Header("Dashing")]
@@ -63,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float slideStrength;
     public bool isSliding = false;
     [SerializeField] private float strafeStrength;
-    [SerializeField] private float slideGravity;
     private bool slideDirectionDecided = false;
     [HideInInspector] public Vector3 slideDirection;
     private Vector3 slideLeftRight;
@@ -76,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
     private int knockbackDecayMultiplier = 8;
 
     [Header("Ground+Head Checking")]
-    public Transform groundCheck;
     public Transform headCheck;
     public LayerMask groundMask;
     public LayerMask bounceableMask;
@@ -88,13 +85,12 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool headIsTouchingSomething;
     public Vector3 velocity;
     private bool slopeCheck;
-    [SerializeField] private float groundCheckRadius;
     private Vector3 headCheckHeight;
     [HideInInspector] public Vector3 groundcheckPos;
-
-
-    [Header("Freeze")]
-    [SerializeField] private bool Freeze = false;
+    [SerializeField] private Vector3 GroundCheckSize;
+    [SerializeField] private int groundCheckBoxes;
+    private int boxDegrees;
+    [SerializeField] private CheckMaterial materialChecker = null;
 
     [Header("Unity Events")]
     public UnityEvent onJump = null;
@@ -114,12 +110,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool debugSlopeCheck = false;
     [SerializeField] private bool debugHeadCheck = false;
 
+    [HideInInspector] public Vector3 trueVelocity;
+
     //private Collider[] test;
 
     private void Awake()
     {
         oldCoyoteTime = coyoteTime;
-        prevGrav = gravity;
         charController = GetComponent<CharacterController>();
         playerHeight = charController.height;
         GameManager.gravity = gravity;
@@ -129,61 +126,26 @@ public class PlayerMovement : MonoBehaviour
         instance = this;
         player = transform;
         headCheckHeight = new Vector3(0.25f, 0.15F, 0.25f);
-        groundCheckRadius = charController.radius - 0.1f;
     }
 
-    private void Start()
-    {
-        if (Freeze)
-        {
-            controls.Player.Movement.Disable();
-            controls.Player.Jump.Disable();
-            controls.Player.Crouch.Disable();
-        }
-    }
-
-    public static void SetMovementActive(bool active)
-    {
-        if (active)
-        {
-            InputManager.inputMaster.Player.Movement.Enable();
-            InputManager.inputMaster.Player.Jump.Enable();
-            InputManager.inputMaster.Player.Crouch.Enable();
-        }
-        else
-        {
-            InputManager.inputMaster.Player.Movement.Disable();
-            InputManager.inputMaster.Player.Jump.Disable();
-            InputManager.inputMaster.Player.Crouch.Disable();
-        }
-    }
-
-    #region BrackeysMoment
     private void OnEnable()
     {
-        // Listen for player inputs
-        controls.Player.Jump.performed += _ => Jump();
-        controls.Player.Dash.performed += _ => InitiateDash();
-        controls.Player.Crouch.performed += _ => Crouch();
+        controls.Player.Crouch.performed += OnCrouch;
+        controls.Player.Jump.performed += OnJump;
+        controls.Player.Dash.performed += OnDash;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        controls.Player.Jump.performed -= _ => Jump();
-        controls.Player.Dash.performed -= _ => InitiateDash();
-        controls.Player.Crouch.performed -= _ => Crouch();
+        controls.Player.Crouch.performed -= OnCrouch;
+        controls.Player.Jump.performed -= OnJump;
+        controls.Player.Dash.performed -= OnDash;
     }
-
-    private void OnDisable()//Brackeys Moment   // brackeys is gone :(
-    {
-        controls.Player.Jump.performed -= _ => Jump();
-        controls.Player.Dash.performed -= _ => InitiateDash();
-        controls.Player.Crouch.performed -= _ => Crouch();
-    }
-    #endregion
 
     private void FixedUpdate()
     {
+        trueVelocity = new Vector3(move.x + velocity.x, 0, move.z + velocity.z);
+        print(trueVelocity.magnitude);
         //@cole :)
         if (isDashing == true)
         {
@@ -200,7 +162,6 @@ public class PlayerMovement : MonoBehaviour
         #region Movement
         if (!GameManager.s_Instance.paused && isDashing == false)
         {
-
             acceleration += Time.deltaTime * accelerationSpeed;
 
             if (acceleration >= 1)
@@ -213,33 +174,25 @@ public class PlayerMovement : MonoBehaviour
 
             if (isSliding == false)
             {
-                oldMove = move * speed;
-                move = (transform.right * x + transform.forward * z).normalized * acceleration; //Creates a value to move the player in local space based on this value.
-                controller.Move(move * speed * Time.deltaTime); //uses move value to move the player.
-                velocity -= (((move * speed) - (oldMove)) * 0.5f);
+                oldMove = move;
+                move = ((transform.right * x + transform.forward * z).normalized * acceleration) * speed; //Creates a value to move the player in local space based on this value.
+                controller.Move(move * Time.deltaTime); //uses move value to move the player.
+                velocity -= ((move - oldMove) * 0.5f);
             }
             else
             {
-                move = (slideLeftRight * x); //Creates a value to move the player in local space based on this value.
-                controller.Move(move * strafeStrength * Time.deltaTime); //uses move value to move the player.
+                move = (slideLeftRight * x) * strafeStrength; //Creates a value to move the player in local space based on this value.
+                controller.Move(move * Time.deltaTime); //uses move value to move the player.
             }
 
             // Check if moving
             isMoving = move != Vector3.zero ? true : false;
         }
 
-        if (move == new Vector3(0,0,0))
-        {
-            //print(move);
-            hasMoved = false;
-        }
-
         if (controls.Player.Movement.ReadValue<Vector2>().x == 0 && controls.Player.Movement.ReadValue<Vector2>().y == 0)
         {
             acceleration = 0;
         }
-
-
         #endregion
 
         #region Crouching
@@ -277,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
                 slideDirection = transform.forward;
                 slideLeftRight = transform.right;
                 velocity.x = (slideDirection.x * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
-                velocity.z = (slideDirection.z * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
+                velocity.z = (slideDirection.z * slideStrength) * 1.5f;
             }
             controller.Move(slideDirection * slideStrength * Time.deltaTime);
             h = playerHeight * 0.35f;
@@ -378,28 +331,31 @@ public class PlayerMovement : MonoBehaviour
 
         //Allows the player to push against their momentum to slow it down without springing back after letting go
         //This is accomplished by subtracting the player's input value 'move' from the player's velocity when they're in opposite directions
-        if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
+        if (bounceForce == Vector3.zero && !isSliding)
         {
-            velocity.x += move.x;
-        }
-        if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
-        {
-            velocity.z += move.z;
+            if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
+            {
+                velocity.x += move.x;
+            }
+            if (velocity.z > 0 && move.z < 0 || velocity.z < 0 && move.z > 0)
+            {
+                velocity.z += move.z;
+            }
         }
 
-        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
+        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + trueVelocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
             velocity.y,
-            Mathf.Abs(charController.velocity.z + velocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+            Mathf.Abs(charController.velocity.z + trueVelocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
-        //if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
-        //{
-        //    velocity.x = 0;
-        //}
+        if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
+        {
+            velocity.x = 0;
+        }
 
-        //if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce.z == 0)
-        //{
-        //    velocity.z = 0;
-        //}
+        if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce.z == 0)
+        {
+            velocity.z = 0;
+        }
 
         #endregion
 
@@ -416,15 +372,18 @@ public class PlayerMovement : MonoBehaviour
         //print("isgrounded");
 
         //A wider checkbox for isGrounded helps with slope detection, but too large allows player to jump off of walls.
-        
-        isGrounded = Physics.CheckCapsule(groundcheckPos, groundcheckPos, groundCheckRadius, ~groundMask);
+
+        GroundCheck();
+        //isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.2f,0.1f,0.2f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
-        slopeCheck = Physics.CheckBox(groundcheckPos + move + slideDirection + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
+        slopeCheck = Physics.CheckBox(groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
 
         if (isGrounded)
         {
+            bounceForce = Vector3.zero;
+
             coyoteTime = oldCoyoteTime;
             dashesPerformed = 0;
 
@@ -450,13 +409,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
             }
 
-            else
-            {
-                gravity = prevGrav;
-                bounceForce = Vector3.zero;
-            }
-
-            if (slopeCheck)
+            if (slopeCheck && bounceForce == Vector3.zero)
             {
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
                 velocity.y = -1000;
@@ -475,10 +428,8 @@ public class PlayerMovement : MonoBehaviour
         if (headIsTouchingSomething)
         {
             hasJumped = true;
-            jump = false;
             if (isCrouching == true)
             {
-                isGrounded = false;
                 cooldown = true;
             }
             if (!isGrounded)
@@ -501,24 +452,24 @@ public class PlayerMovement : MonoBehaviour
 
         #endregion
     }
-    void Jump()
+    public void OnJump(InputAction.CallbackContext context)
     {
-        if (!GameManager.s_Instance.paused && coyoteTime > 0 && hasJumped == false)
+        if (!GameManager.s_Instance.paused && coyoteTime > 0 && hasJumped == false && context.performed)
         {
-            
+
             if (prevJump == false)
             {
                 prevJump = true;
                 jumpHeight += (jumpMin);
             }
 
-            gravity = prevGrav;
             if (isCrouching == true)
             {
-                Crouch(); //Un-crouches the player before jumping
+                onUncrouch.Invoke();
+                isCrouching = false;
+                speed = oldSpeed; //Un-crouches the player before jumping
             }
 
-            gravity = prevGrav;
             isDashing = false;
             if(isSliding == true)
             {
@@ -532,7 +483,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void InitiateDash()
+    public void OnDash(InputAction.CallbackContext context)
     {
         StartCoroutine(Dash());
     }
@@ -542,13 +493,13 @@ public class PlayerMovement : MonoBehaviour
         onLand?.Invoke();
 
         // Is the ground we landed on NOT bounceable?
-        if (!Physics.CheckSphere(groundCheck.position, groundDistance, bounceableMask))
+        if (!isGrounded && bounceForce == Vector3.zero)
         {
             onLandOnNonBounceableGround?.Invoke();
         }
     }
 
-    void Crouch()
+    public void OnCrouch(InputAction.CallbackContext context)
     {
         if (GameManager.s_Instance.paused || !isGrounded)
             return;
@@ -578,11 +529,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         // Uncrouch
-        else
+        else if(!headIsTouchingSomething)
         {
             onUncrouch.Invoke();
             isCrouching = false;
             speed = oldSpeed;
+        }
+    }
+
+    void GroundCheck()
+    {
+        for (int i = 0; i < groundCheckBoxes; i++)
+        {
+            boxDegrees = (360 / groundCheckBoxes);
+            Quaternion orientation = transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up);
+            materialChecker.Check(groundcheckPos, GroundCheckSize, Vector3.down, orientation, groundDistance);
+            isGrounded = Physics.CheckBox(groundcheckPos, GroundCheckSize, orientation, ~groundMask);
         }
     }
 
@@ -678,20 +640,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (debugGroundCheck)
         {
-            GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-            capsule.transform.position = groundcheckPos;
-            capsule.transform.rotation = transform.rotation;
-            capsule.transform.localScale = new Vector3(groundCheckRadius, groundCheckRadius, groundCheckRadius) * 2;
-            capsule.GetComponent<Collider>().enabled = false;
-            if (isGrounded)
+            for (int i = 0; i < groundCheckBoxes; i++)
             {
-                capsule.GetComponent<Renderer>().material.color = Color.green;
-            }
-            else
-            {
-                capsule.GetComponent<Renderer>().material.color = Color.red;
-            }
+                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                cube.transform.position = groundcheckPos;
+                cube.transform.rotation = transform.rotation * Quaternion.AngleAxis(boxDegrees * i, Vector3.up);
+                cube.transform.localScale = GroundCheckSize * 2;
+                cube.GetComponent<Collider>().enabled = false;
 
+                if (isGrounded)
+                {
+                    cube.GetComponent<Renderer>().material.color = Color.green;
+                }
+                else
+                {
+                    cube.GetComponent<Renderer>().material.color = Color.red;
+                }
+            }
         }
     }
     void DebugSlopeCheck()
@@ -699,7 +664,7 @@ public class PlayerMovement : MonoBehaviour
         if (debugSlopeCheck)
         {
             GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube2.transform.position = groundcheckPos + move + slideDirection + (Vector3.down / 2.5f);
+            cube2.transform.position = groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f);
             cube2.transform.rotation = transform.rotation;
             cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
             cube2.GetComponent<Collider>().enabled = false;

@@ -6,28 +6,38 @@ using UnityEngine;
 
 public class CheckMaterial : MonoBehaviour
 {
+    [Header("CheckMaterial Settings")]
     [SerializeField]
     [Tooltip("The object to set the switch on.")]
     private GameObject switchObj = null;
 
+    [SerializeField]
+    private LayerMask layerMask;
+
     // Current/last material switch that this object is colliding/has collided with
     private AK.Wwise.Switch currentMaterial = null;
 
-    private void OnTriggerEnter(Collider other)
+    public void Check(Vector3 centre, Vector3 halfExtents, Vector3 direction, Quaternion orientation, float distance)
     {
-        MaterialSwitch matSwitch = other.gameObject.GetComponent<MaterialSwitch>();
-        if (matSwitch != null)
+        RaycastHit[] hits = Physics.BoxCastAll(centre, halfExtents, direction, orientation, distance, ~layerMask);
+        MaterialSwitch[] mats = new MaterialSwitch[hits.Length];
+        int indexOfHighestPriority = -1;
+        for (int i = 0; i < hits.Length; i++)
         {
-            SetMaterial(matSwitch.GetMaterial());
+            mats[i] = hits[i].collider.gameObject.GetComponent<MaterialSwitch>();
+            if (mats[i] != null)
+            {
+                // Compare priority
+                if (indexOfHighestPriority == -1 || mats[i].GetPriority() > mats[indexOfHighestPriority].GetPriority())
+                {
+                    indexOfHighestPriority = i;
+                }
+            }
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        MaterialSwitch matSwitch = other.gameObject.GetComponent<MaterialSwitch>();
-        if (matSwitch != null)
+        // Check if we found a material
+        if (indexOfHighestPriority != -1)
         {
-            SetMaterial(null);
+            SetMaterial(mats[indexOfHighestPriority].GetMaterial());
         }
     }
 

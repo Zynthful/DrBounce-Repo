@@ -14,6 +14,8 @@ public class NoBounceEnemy : Enemy
     public float knockbackForce = 12f;
     public int contactDamage;
 
+    public Vector3 visionOrigin;
+
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -41,6 +43,14 @@ public class NoBounceEnemy : Enemy
         return new Selector(new CheckIfStunned(stun), Attack, Chase, Patrol);
     }
 
+    private void OnEnable() 
+    {
+        if(m_root == null)
+        {
+            createTree();
+        }
+    }
+
     protected BtNode createPatrolTree()
     {
         // Movement Node Section
@@ -52,7 +62,7 @@ public class NoBounceEnemy : Enemy
 
     protected BtNode createChaseTree()
     {
-        BtNode CanSee = new Selector(new EnemyChase(m_blackboard, navMeshAgent, attackRange, onSpotted), new TargetInSight(m_blackboard, viewDist, sightAngle));
+        BtNode CanSee = new Selector(new EnemyChase(m_blackboard, navMeshAgent, attackRange, onSpotted), new TargetInSight(m_blackboard, viewDist, sightAngle, visionOrigin));
         BtNode LookAt = new Selector(CanSee, new AfterAttacked());
         BtNode CheckForTarget = new Sequence(LookAt, new IsClose(true, viewDist));
         return new Sequence(new CheckBool(4), CheckForTarget);

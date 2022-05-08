@@ -246,10 +246,10 @@ public class Shooting : MonoBehaviour
         else
             gunCharge = value;
 
-        anim.SetInteger("ChargesLeft", value);
+        anim.SetInteger("ChargesLeft", gunCharge);
 
-        onChargeUpdate?.Invoke(value);
-        _onChargeUpdate?.Raise(value);
+        onChargeUpdate?.Invoke(gunCharge);
+        _onChargeUpdate?.Raise(gunCharge);
         
         hasCharge = HasCharge();
     }
@@ -330,6 +330,14 @@ public class Shooting : MonoBehaviour
         }
 
         currentHoldTime = 0.0f;
+    }
+
+    public void CancelMaxShot()
+    {
+        maxShotCharging = false;
+        onChargingMaxShotProgress?.Invoke(0.0f);
+        maxShotCharged = false;
+        onChargeMaxShotCancel?.Invoke();
     }
 
     /// <summary>

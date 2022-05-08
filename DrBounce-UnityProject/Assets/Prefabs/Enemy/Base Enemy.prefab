@@ -427,19 +427,7 @@ MonoBehaviour:
   onDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3626998618547916347}
-        m_TargetAssemblyTypeName: FloatToString, Assembly-CSharp
-        m_MethodName: InvokeConversion
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1845772016897994287}
+      - m_Target: {fileID: 6381897718329153953}
         m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
         m_MethodName: PlayFeedbacks
         m_Mode: 1
@@ -463,12 +451,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onInjured:
-    m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 2466429204824234814}
         m_TargetAssemblyTypeName: WwiseEvent, Assembly-CSharp
         m_MethodName: Post
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onInjured:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3626998618547916347}
+        m_TargetAssemblyTypeName: FloatToString, Assembly-CSharp
+        m_MethodName: InvokeConversion
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1845772016897994287}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -523,6 +535,9 @@ MonoBehaviour:
   onLowHealth:
     m_PersistentCalls:
       m_Calls: []
+  onLowHealthNoDeath:
+    m_PersistentCalls:
+      m_Calls: []
   onNotLowHealth:
     m_PersistentCalls:
       m_Calls: []
@@ -532,8 +547,6 @@ MonoBehaviour:
   _onInjured: {fileID: 0}
   _onHeal: {fileID: 0}
   _onDeath: {fileID: 0}
-  saveDamage: 0
-  saveDamageValue: 0
   onBossDamage: {fileID: 11400000, guid: 548d62968a5f731448c8b28657ed83a7, type: 2}
   enemy: {fileID: 0}
 --- !u!114 &3191203114709652961
@@ -597,6 +610,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3722863078154279149}
         m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
         m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1333837119961363757}
+        m_TargetAssemblyTypeName: EnemyHealth, Assembly-CSharp
+        m_MethodName: SetRecentAttacked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1024,6 +1049,167 @@ Transform:
   m_Father: {fileID: 4216198890021323320}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2104717310131718736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6578002405084564037}
+  - component: {fileID: 6381897718329153953}
+  - component: {fileID: 7506558447130997056}
+  - component: {fileID: 7646511269928880142}
+  m_Layer: 0
+  m_Name: Damage Feedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6578002405084564037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104717310131718736}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8521636709362193907}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6381897718329153953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104717310131718736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Feedbacks:
+  - {fileID: 7506558447130997056}
+  - {fileID: 7646511269928880142}
+  InitializationMode: 2
+  SafeMode: 3
+  Direction: 0
+  AutoChangeDirectionOnEnd: 0
+  AutoPlayOnStart: 0
+  AutoPlayOnEnable: 0
+  DurationMultiplier: 1
+  DisplayFullDurationDetails: 0
+  CooldownDuration: 0
+  InitialDelay: 0
+  CanPlayWhileAlreadyPlaying: 1
+  FeedbacksIntensity: 1
+  Events:
+    TriggerMMFeedbacksEvents: 0
+    TriggerUnityEvents: 1
+    OnPlay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPause:
+      m_PersistentCalls:
+        m_Calls: []
+    OnResume:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRevert:
+      m_PersistentCalls:
+        m_Calls: []
+    OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  DebugActive: 0
+--- !u!114 &7506558447130997056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104717310131718736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83ae645c92af634f89036dd5302f84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Flicker
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  BoundRenderer: {fileID: 0}
+  Mode: 1
+  PropertyName: _FlashColor
+  FlickerDuration: 0.25
+  FlickerOctave: 0.05
+  FlickerColor: {r: 1, g: 1, b: 1, a: 1}
+  MaterialIndexes: 
+  UseMaterialPropertyBlocks: 0
+--- !u!114 &7646511269928880142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104717310131718736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c27131831afa28b499cb120fc9059997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Particles Play
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Mode: 0
+  BoundParticleSystem: {fileID: 5841493249296417098}
+  MoveToPosition: 0
+  RandomParticleSystems: []
 --- !u!1 &2217642869941797929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,6 +1406,7 @@ Transform:
   m_Children:
   - {fileID: 962519145221760154}
   - {fileID: 7431700691846292131}
+  - {fileID: 6578002405084564037}
   - {fileID: 2579757423658624861}
   - {fileID: 2235704470533588477}
   - {fileID: 6147291124461919100}
@@ -1473,7 +1660,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8521636709362193907}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3722863078154279149
 MonoBehaviour:
@@ -1758,7 +1945,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8521636709362193907}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3924644698427810977
 MonoBehaviour:
@@ -2817,7 +3004,7 @@ GameObject:
   - component: {fileID: 7720760333439041021}
   - component: {fileID: 2466429204824234814}
   m_Layer: 2
-  m_Name: Injured
+  m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2914,12 +3101,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2579757423658624861}
   - component: {fileID: 1845772016897994287}
-  - component: {fileID: 1448171371370849376}
   - component: {fileID: 8650805498741159190}
-  - component: {fileID: 2168607816537947288}
   - component: {fileID: 3626998618547916347}
   m_Layer: 0
-  m_Name: Hit Feedback
+  m_Name: Injured Feedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2937,7 +3122,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8521636709362193907}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1845772016897994287
 MonoBehaviour:
@@ -2952,9 +3137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks:
-  - {fileID: 1448171371370849376}
   - {fileID: 8650805498741159190}
-  - {fileID: 2168607816537947288}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -2986,49 +3169,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   DebugActive: 0
---- !u!114 &1448171371370849376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7213832519559974935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d83ae645c92af634f89036dd5302f84a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: Flicker
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    InitialDelay: 0
-    CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  BoundRenderer: {fileID: 0}
-  Mode: 1
-  PropertyName: _FlashColor
-  FlickerDuration: 0.25
-  FlickerOctave: 0.05
-  FlickerColor: {r: 1, g: 1, b: 1, a: 1}
-  MaterialIndexes: 
-  UseMaterialPropertyBlocks: 0
 --- !u!114 &8650805498741159190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3103,45 +3243,6 @@ MonoBehaviour:
   PositionMode: 1
   TargetTransform: {fileID: 0}
   Direction: {x: 0, y: 0, z: 0}
---- !u!114 &2168607816537947288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7213832519559974935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c27131831afa28b499cb120fc9059997, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: Particles Play
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    InitialDelay: 0
-    CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  Mode: 0
-  BoundParticleSystem: {fileID: 5841493249296417098}
-  MoveToPosition: 0
-  RandomParticleSystems: []
 --- !u!114 &3626998618547916347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3207,7 +3308,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8521636709362193907}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3444384602201189450
 MonoBehaviour:
@@ -4445,14 +4546,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
---- !u!4 &1245645463396242079 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
-  m_PrefabInstance: {fileID: 1126625749129356748}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &2254212061096785724 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1218793019897729776, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
+  m_PrefabInstance: {fileID: 1126625749129356748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1245645463396242079 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2228155732340422483, guid: 33826a6d2d32f034f8b5e92b4bd211d1, type: 3}
   m_PrefabInstance: {fileID: 1126625749129356748}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1688557898801661475
@@ -4661,14 +4762,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
---- !u!4 &2901231033860579686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1979605991996497547, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
-  m_PrefabInstance: {fileID: 3691763570337841133}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &1707096343152186541 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2633220930310155072, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
+  m_PrefabInstance: {fileID: 3691763570337841133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2901231033860579686 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1979605991996497547, guid: 4fb36ea2f34e6494c855cfaab3db8dbe, type: 3}
   m_PrefabInstance: {fileID: 3691763570337841133}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8979443653804786771 stripped
@@ -4892,9 +4993,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
---- !u!1 &2477126865757436135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7727765714656273622, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
+--- !u!198 &2647583789505025117 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7917353803556079724, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
   m_PrefabInstance: {fileID: 5286676463486753841}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7405821791535812720 stripped
@@ -4902,9 +5003,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3429719356355710017, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
   m_PrefabInstance: {fileID: 5286676463486753841}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &2647583789505025117 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7917353803556079724, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
+--- !u!1 &2477126865757436135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7727765714656273622, guid: aae4e8a2064896642a0ae8d738f2572c, type: 3}
   m_PrefabInstance: {fileID: 5286676463486753841}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6000883626182487223

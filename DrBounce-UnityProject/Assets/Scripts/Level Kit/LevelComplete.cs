@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class LevelComplete : MonoBehaviour
 {
+    [SerializeField]
+    private LevelsData levelsData;
+
     [Header("Level Completion Settings")]
     [SerializeField]
     private string resultsScreenSceneName = "Results_SCN";
@@ -20,8 +23,16 @@ public class LevelComplete : MonoBehaviour
     /// </summary>
     public void Complete() 
     {
+        GameSaveData data = SaveSystem.LoadGameData();
+        if(data == null)
+            data = new GameSaveData();
+        
+        data.levelUnlocked = levelsData.GetCurrentLevelIndex() + 1;
+        SaveSystem.SaveGameData(data);
         SaveSystem.DeleteLevelData();
+
         GameManager.s_Instance.currentSettings = null;
+
         onComplete.Invoke();
         onLevelComplete?.Invoke();
     }
@@ -35,6 +46,7 @@ public class LevelComplete : MonoBehaviour
             {
                 GameManager.SetCursorEnabled(true);
                 PauseHandler.SetCanPause(false);
+                PauseHandler.SetTimeFreeze(true);
                 onResultsLoadComplete.Invoke();
             };
         }

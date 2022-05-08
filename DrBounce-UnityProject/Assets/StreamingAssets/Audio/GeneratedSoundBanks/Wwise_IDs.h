@@ -60,6 +60,7 @@ namespace AK
         static const AkUniqueID ENEMY_STUN_STUNNED = 1850312910U;
         static const AkUniqueID FREEZE = 3285814624U;
         static const AkUniqueID GENERIC_STOP_ALL_GAMEOBJECT = 3857490017U;
+        static const AkUniqueID LEVEL_BEGIN_LOAD = 2221566714U;
         static const AkUniqueID LEVEL_CHECKPOINT_REACHED = 3200076801U;
         static const AkUniqueID LEVEL_COMPLETE = 3736098925U;
         static const AkUniqueID LEVEL_QUIT = 1419047013U;
@@ -246,9 +247,12 @@ namespace AK
 
             namespace SWITCH
             {
+                static const AkUniqueID GLASS_PIPE = 3681794790U;
                 static const AkUniqueID GRASS = 4248645337U;
                 static const AkUniqueID LAB = 578926554U;
+                static const AkUniqueID METAL = 2473969246U;
                 static const AkUniqueID SLIME = 3803999823U;
+                static const AkUniqueID SLIME_POOL = 3579635620U;
             } // namespace SWITCH
         } // namespace COLLISION_MATERIAL
 
@@ -313,7 +317,7 @@ namespace AK
         static const AkUniqueID OBJECT_ENTER_SPEED = 2436325575U;
         static const AkUniqueID OBJECT_SIZE = 3625945784U;
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
-        static const AkUniqueID PLAYER_HEALTH_PERCENTAGE = 3361892810U;
+        static const AkUniqueID PLAYER_HEALTH_NORMALIZED = 3470275985U;
         static const AkUniqueID RPM = 796049864U;
         static const AkUniqueID SFX_VOLUME = 1564184899U;
         static const AkUniqueID SFX_VOLUME_OUTPUT = 3836597185U;
@@ -350,6 +354,7 @@ namespace AK
         static const AkUniqueID AUX_BUSES = 1691680111U;
         static const AkUniqueID CRITICAL = 2534871658U;
         static const AkUniqueID DIALOGUE = 3930136735U;
+        static const AkUniqueID DRUMS = 2726606664U;
         static const AkUniqueID ENEMY = 2299321487U;
         static const AkUniqueID ENVIRONMENT = 1229948536U;
         static const AkUniqueID ENVIRONMENTAL = 1973600711U;

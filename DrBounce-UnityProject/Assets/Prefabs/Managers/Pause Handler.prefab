@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 4607f60a5d772584bb5fb716c02cc0b9, type: 2}
+  Event: {fileID: 11400000, guid: a322b7b992a23ad41bdd4e17f652fbee, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: caae12276d44547409fd6660818b9a6d, type: 2}
+  Event: {fileID: 11400000, guid: 754c6c2c50dc71342ad9e18ce4a81150, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -506,8 +506,6 @@ GameObject:
   - component: {fileID: 2006435721774614693}
   - component: {fileID: 8931194360946134378}
   - component: {fileID: 4889058881558278210}
-  - component: {fileID: 5696735917590050740}
-  - component: {fileID: 3987728988042786118}
   - component: {fileID: 4773944102230238324}
   m_Layer: 0
   m_Name: Pause Handler
@@ -544,14 +542,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 777dca064b5071e43bb85204c81f7a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeFeedback: {fileID: 5955343317188424463}
-  onPauseBegin:
+  onIsPaused:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 4607f60a5d772584bb5fb716c02cc0b9, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 337c7b3b3c4a6d243b5fd9e77d42e2ce, type: 2}
+        m_TargetAssemblyTypeName: GameEventBool, Assembly-CSharp
         m_MethodName: Raise
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -560,7 +557,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onPauseComplete:
+  onPause:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: a322b7b992a23ad41bdd4e17f652fbee, type: 2}
@@ -575,22 +572,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onUnpauseBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: caae12276d44547409fd6660818b9a6d, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onUnpauseComplete:
+  onUnpause:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 754c6c2c50dc71342ad9e18ce4a81150, type: 2}
@@ -605,22 +587,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onUnpauseAfterPauseBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 3b8389297b76202439327740dd813e7d, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onUnpauseAfterPauseComplete:
+  onUnpauseAfterPause:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 2fdf58e661072514d99b0c45207bfe8e, type: 2}
@@ -635,10 +602,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onIsPaused:
+  onIsFrozen:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 337c7b3b3c4a6d243b5fd9e77d42e2ce, type: 2}
+      - m_Target: {fileID: 11400000, guid: af7fec70833b8c14396084baf5a319b7, type: 2}
         m_TargetAssemblyTypeName: GameEventBool, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 0
@@ -672,21 +639,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onIsFrozen:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: af7fec70833b8c14396084baf5a319b7, type: 2}
-        m_TargetAssemblyTypeName: GameEventBool, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -751,62 +703,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5696735917590050740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7903956733884620506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 89dbab55eaf8e8c4099cea8ecd401b07, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2006435721774614693}
-        m_TargetAssemblyTypeName: PauseHandler, Assembly-CSharp
-        m_MethodName: SetTimeFreeze
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &3987728988042786118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7903956733884620506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 6d42ae0a8fad70c498e15a31ee530a86, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2006435721774614693}
-        m_TargetAssemblyTypeName: PauseHandler, Assembly-CSharp
-        m_MethodName: SetPaused
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4773944102230238324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,8 +720,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2006435721774614693}
-        m_TargetAssemblyTypeName: PauseHandler, Assembly-CSharp
-        m_MethodName: InvokeFreezeForDuration
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: FreezeForDuration
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
