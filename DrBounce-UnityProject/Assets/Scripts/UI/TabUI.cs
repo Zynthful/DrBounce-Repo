@@ -40,9 +40,6 @@ public class TabUI : MonoBehaviour
             // Disable all tabs
             tabs[i].SetActive(false);
         }
-
-        // After all tabs have been disabled, select (enable) the first one
-        SelectTab(0);
     }
 
     private void OnEnable()
@@ -50,6 +47,9 @@ public class TabUI : MonoBehaviour
         // Listen for input
         InputManager.inputMaster.Menu.Next.performed += OnNextPerformed;
         InputManager.inputMaster.Menu.Previous.performed += OnPreviousPerformed;
+
+        // Select (or re-select) the starting tab (or our last selected one if we're re-selecting)
+        SelectTab(selectedTabIndex);
     }
 
     private void OnDisable()
