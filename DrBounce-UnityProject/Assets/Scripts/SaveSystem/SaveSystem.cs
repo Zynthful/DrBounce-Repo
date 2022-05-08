@@ -119,6 +119,6 @@ public static class SaveSystem
         {
             return false;
         }
-        else return data.levelUnlocked == index;
+        else return data.levelUnlocked >= index;
     }
 }
