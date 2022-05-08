@@ -31,7 +31,7 @@ public class TestFireSomeShots : MonoBehaviour
                 pooler.SpawnBulletFromPool("ExplosiveShot", spawners[0].transform.position + (Vector3.down * 2), Quaternion.LookRotation(transform.TransformDirection(Vector3.down)), Vector3.down, shotType, null);
             else
                 pooler.SpawnBulletFromPool("ExplosiveShot", spawners[1].transform.position + (Vector3.down * 2), Quaternion.LookRotation(transform.TransformDirection(Vector3.down)), Vector3.down, shotType, null);
-            shotDelay = 0.55f;
+            shotDelay = 0.275f;
             switchSpawn = !switchSpawn;
         }
 
