@@ -181,8 +181,8 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                move = (slideLeftRight * x); //Creates a value to move the player in local space based on this value.
-                controller.Move(move * strafeStrength * Time.deltaTime); //uses move value to move the player.
+                move = (slideLeftRight * x) * strafeStrength; //Creates a value to move the player in local space based on this value.
+                controller.Move(move * Time.deltaTime); //uses move value to move the player.
             }
 
             // Check if moving
@@ -230,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
                 slideDirection = transform.forward;
                 slideLeftRight = transform.right;
                 velocity.x = (slideDirection.x * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
-                velocity.z = (slideDirection.z * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
+                velocity.z = (slideDirection.z * slideStrength) * 1.5f;
             }
             controller.Move(slideDirection * slideStrength * Time.deltaTime);
             h = playerHeight * 0.35f;
@@ -331,7 +331,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Allows the player to push against their momentum to slow it down without springing back after letting go
         //This is accomplished by subtracting the player's input value 'move' from the player's velocity when they're in opposite directions
-        if (bounceForce == Vector3.zero)
+        if (bounceForce == Vector3.zero && !isSliding)
         {
             if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
             {
@@ -343,9 +343,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + velocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
+        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + trueVelocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
             velocity.y,
-            Mathf.Abs(charController.velocity.z + velocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+            Mathf.Abs(charController.velocity.z + trueVelocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
         if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
         {
