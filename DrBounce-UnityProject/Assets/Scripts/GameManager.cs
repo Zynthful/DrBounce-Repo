@@ -106,6 +106,11 @@ public class GameManager : MonoBehaviour
         levelsData.LoadLevel(data.levelUnlocked);
     }
 
+    public void SetTriggerThatThing()
+    {
+        triggerThatThing = true;
+    }
+
 #if !UNITY_EDITOR
     private void OnApplicationQuit()
     {

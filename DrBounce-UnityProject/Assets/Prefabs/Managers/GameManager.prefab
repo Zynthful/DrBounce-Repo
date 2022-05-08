@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 8023894486247070126}
   - component: {fileID: 7107455236282018537}
   - component: {fileID: 7532164126925055873}
+  - component: {fileID: 2289079196333604201}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -124,6 +125,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   currentSettings: 
+  triggerThatThing: 0
   levelsData: {fileID: 11400000, guid: 6c9624ee56dab6d42ade1bd6c083ef34, type: 2}
   paused: 0
   openUrlOnQuit: 0
@@ -230,6 +232,34 @@ MonoBehaviour:
       - m_Target: {fileID: 8606042030066711758}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Continue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2289079196333604201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801134291109171996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c460e60a10e24ab43a16e437f939d562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: e9680615a38775e4285972d8ab4f4637, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8606042030066711758}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetTriggerThatThing
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
