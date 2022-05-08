@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
 
     public UnlockTracker.UnlockTypes[] currentSettings;
 
+    [HideInInspector]
+    public bool triggerThatThing = false;
+
     public static Player player = null;
 
     [SerializeField]
