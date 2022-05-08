@@ -19,8 +19,7 @@ public class BulletMovement : MonoBehaviour, IPooledObject
     public float bezierPower = -.025f;
     float currentProgress;
 
-    [SerializeField]
-    private LayerMask[] layersToIgnore = null;
+    public LayerMask[] layersToIgnore = null;
 
     [Header("Base Bullet Events")]
     public UnityEvent onSpawn = null;

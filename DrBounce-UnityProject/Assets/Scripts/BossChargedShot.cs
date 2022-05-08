@@ -50,7 +50,7 @@ public class BossChargedShot : BulletMovement
         explosionTrigger.SetActive(false);
     }
 
-    public void OnCollisionEnter(Collision other)
+    public override void OnTriggerEnter(Collider other)
     {
         if (!other.transform.GetComponentInChildren<BulletMovement>() && other.gameObject.GetComponent<Enemy>() == null && !expanding)
         {
@@ -62,23 +62,32 @@ public class BossChargedShot : BulletMovement
                 }
             }
 
-            explosionTrigger.SetActive(true);
-            //if (comboSize > 1 && explosionDamageMultiplier > 0)
-            //dam = (int)(dam * comboSize * explosionDamageMultiplier);
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            // Check for any ignored layers, and if we haven't found one, we've hit something not ignored
+            bool foundIgnoredLayer = false;
+            for (int i = 0; i < layersToIgnore.Length; i++)
+            {
+                // Check if colliding object's layer matches ignored layer (h e l p)
+                if ((layersToIgnore[i].value & (1 << other.gameObject.layer)) > 0)
+                {
+                    foundIgnoredLayer = true;
+                    break;
+                }
+            }
+            if (!foundIgnoredLayer)
+            {
+                explosionTrigger.SetActive(true);
+                //if (comboSize > 1 && explosionDamageMultiplier > 0)
+                //dam = (int)(dam * comboSize * explosionDamageMultiplier);
+                rb.constraints = RigidbodyConstraints.FreezeAll;
 
-            shotRenderer.GetComponent<MeshCollider>().enabled = false;
-            shotRenderer.enabled = false; rb.velocity = Vector3.zero;
+                shotRenderer.GetComponent<MeshCollider>().enabled = false;
+                shotRenderer.enabled = false; rb.velocity = Vector3.zero;
 
-            onExplode?.Invoke();
+                onExplode?.Invoke();
 
-            StartCoroutine(ExplosionExpansion());
+                StartCoroutine(ExplosionExpansion());
+            }
         }
-    }
-
-    public override void OnTriggerEnter(Collider other)
-    {
-        return;
     }
 
     IEnumerator ExplosionExpansion()
