@@ -6,10 +6,19 @@ using UnityEngine.InputSystem;
 
 public class TabUI : MonoBehaviour
 {
-    private int selectedTabIndex = 0;
+    [Header("Input Override Settings")]
+    [Tooltip("Override Input for cycling to the Next tab (does NOT support runtime rebinding i think)")]
+    [SerializeField]
+    private InputActionReference nextOverride = null;
+    [Tooltip("Override Input for cycling to the Previous tab (does NOT support runtime rebinding i think)")]
+    [SerializeField]
+    private InputActionReference previousOverride = null;
 
+    [Header("Tab Settings")]
     [SerializeField]
     private Tab[] tabs = null;
+
+    private int selectedTabIndex = 0;
 
     [System.Serializable]
     private struct Tab
@@ -40,27 +49,49 @@ public class TabUI : MonoBehaviour
             // Disable all tabs
             tabs[i].SetActive(false);
         }
-
-        // After all tabs have been disabled, select (enable) the first one
-        SelectTab(0);
     }
 
     private void OnEnable()
     {
         // Listen for input
-        InputManager.inputMaster.Menu.Next.performed += OnNextPerformed;
-        InputManager.inputMaster.Menu.Previous.performed += OnPreviousPerformed;
+        if (nextOverride != null && previousOverride != null)
+        {
+            nextOverride.action.performed += OnNextPerformed;
+            previousOverride.action.performed += OnPreviousPerformed;
+            nextOverride.action.Enable();
+            previousOverride.action.Enable();
+        }
+        else
+        {
+            InputManager.inputMaster.Menu.Next.performed += OnNextPerformed;
+            InputManager.inputMaster.Menu.Previous.performed += OnPreviousPerformed;
+        }
+
+        // Select (or re-select) the starting tab (or our last selected one if we're re-selecting)
+        SelectTab(selectedTabIndex);
     }
 
     private void OnDisable()
     {
         // Stop listening for input
-        InputManager.inputMaster.Menu.Next.performed -= OnNextPerformed;
-        InputManager.inputMaster.Menu.Previous.performed -= OnPreviousPerformed;
+        // Listen for input
+        if (nextOverride && previousOverride != null)
+        {
+            nextOverride.action.performed -= OnNextPerformed;
+            previousOverride.action.performed -= OnPreviousPerformed;
+            nextOverride.action.Disable();
+            previousOverride.action.Disable();
+        }
+        else
+        {
+            InputManager.inputMaster.Menu.Next.performed -= OnNextPerformed;
+            InputManager.inputMaster.Menu.Previous.performed -= OnPreviousPerformed;
+        }
     }
 
     private void OnNextPerformed(InputAction.CallbackContext ctx)
     {
+        Debug.Log("next.");
         if (ctx.performed)
         {
             Next();

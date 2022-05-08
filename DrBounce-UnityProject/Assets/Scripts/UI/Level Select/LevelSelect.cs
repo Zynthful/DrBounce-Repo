@@ -23,13 +23,6 @@ public class LevelSelect : MonoBehaviour
     private GameObject levelPrefab = null;
 
     [SerializeField]
-    [Tooltip("This is overriden by the first level button, however this should be set to the Return button by default if there are no levels.")]
-    private Button defaultSelectedButton = null;
-
-    [Header("Events")]
-    public UnityEvent<string> onSelectLevelToLoad = null;
-
-    [SerializeField]
     private Button[] startButtons = null;
 
     [SerializeField]
@@ -177,8 +170,6 @@ public class LevelSelect : MonoBehaviour
 
         selectedLevel = levelIndex;
 
-        onSelectLevelToLoad.Invoke(levelsData.levels[levelIndex].GetSceneName());
-
         // Disable/enable our start buttons if our selected level is locked/unlocked
         for (int i = 0; i < startButtons.Length; i++)
         {
@@ -197,11 +188,6 @@ public class LevelSelect : MonoBehaviour
         {
             startButtons[0].Select();
         }
-    }
-
-    public void SelectDefaultButton()
-    {
-        defaultSelectedButton.Select();
     }
 
     public void NextLevel()
