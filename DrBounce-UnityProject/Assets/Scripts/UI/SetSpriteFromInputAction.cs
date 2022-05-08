@@ -50,24 +50,27 @@ public class SetSpriteFromInputAction : MonoBehaviour
             return;
         }
 
-        if (actionSettingController != null && actionSettingKeyboard == null)
+        // Set the sprite based on whether we're currently using a Gamepad or Mouse/Keyboard
+        if (device is Mouse || device is Keyboard)
         {
-            image.sprite = actionSettingController.GetSprite();
-        }
-        else if (actionSettingKeyboard != null && actionSettingController == null)
-        {
-            image.sprite = actionSettingKeyboard.GetSprite();
-        }
-        else
-        {
-            // Set the sprite based on whether we're currently using a Gamepad or Mouse/Keyboard
-            if (device is Mouse || device is Keyboard)
+            if (actionSettingKeyboard != null)
             {
                 image.sprite = actionSettingKeyboard.GetSprite();
             }
-            else if (device is Gamepad)
+            else
+            {
+                image.enabled = false;
+            }
+        }
+        else if (device is Gamepad)
+        {
+            if (actionSettingController != null)
             {
                 image.sprite = actionSettingController.GetSprite();
+            }
+            else
+            {
+                image.enabled = false;
             }
         }
     }
