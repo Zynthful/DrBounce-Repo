@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int groundCheckBoxes;
     private int boxDegrees;
     [SerializeField] private CheckMaterial materialChecker = null;
+    [SerializeField] private float slopeCheckDistance;
 
     [Header("Unity Events")]
     public UnityEvent onJump = null;
@@ -228,8 +229,8 @@ public class PlayerMovement : MonoBehaviour
                 slideDirectionDecided = true;
                 slideDirection = transform.forward * slideStrength;
                 slideLeftRight = transform.right;
-                velocity.x = (slideDirection.x) * 1.5f; //Move them forward at a speed based on the dash strength
-                velocity.z = (slideDirection.z) * 1.5f; //Multiplying by 1.5f allows higher speed to be kept without granting a huge jump distance
+                velocity.x = (slideDirection.x); //Move them forward at a speed based on the dash strength
+                velocity.z = (slideDirection.z);
             }
             controller.Move(slideDirection * Time.deltaTime);
             h = playerHeight * 0.35f;
@@ -342,9 +343,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        controller.Move(new Vector3((Mathf.Abs(trueVelocity.x + bounceForce.x) * velocity.x) / (10 / (0.1f * momentumStrength)),
+        controller.Move(new Vector3((trueVelocity.x + bounceForce.x) / (10 / (0.1f * momentumStrength)),
         velocity.y,
-        (Mathf.Abs(trueVelocity.z + bounceForce.z) * velocity.z) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+        (trueVelocity.z + bounceForce.z) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
 
         if (gameObject.GetComponent<CharacterController>().velocity.x == 0)
@@ -376,7 +377,7 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         //isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.2f,0.1f,0.2f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
-        slopeCheck = Physics.CheckBox(groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
+        slopeCheck = Physics.CheckBox(groundcheckPos + (move / slopeCheckDistance) + (slideDirection / (slopeCheckDistance * 2)) + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
 
@@ -664,7 +665,7 @@ public class PlayerMovement : MonoBehaviour
         if (debugSlopeCheck)
         {
             GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube2.transform.position = groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f);
+            cube2.transform.position = groundcheckPos + (move / slopeCheckDistance) + (slideDirection / (slopeCheckDistance * 2)) + (Vector3.down / 2.5f);
             cube2.transform.rotation = transform.rotation;
             cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
             cube2.GetComponent<Collider>().enabled = false;
