@@ -33,12 +33,12 @@ public class FootstepAudio : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (movement.GetIsMoving() && movement.GetIsGrounded() && !movement.isSliding)
+        if (movement.GetIsMoving() && movement.isGrounded && !movement.isSliding)
         {
             if (!startedDelay)
             {
                 // Begin delay
-                activeDelay = Delay(CalculateDelayFromSpeed(movement.trueVelocity.magnitude * 150));
+                activeDelay = Delay(CalculateDelayFromSpeed(movement.trueVelocity.magnitude + 1));
                 StartCoroutine(activeDelay);
             }
         }
@@ -71,7 +71,6 @@ public class FootstepAudio : MonoBehaviour
             startedMoving = true;
             speedFactor *= initialDelayFactor;
         }
-
         return speedFactor;
     }
 
@@ -87,7 +86,7 @@ public class FootstepAudio : MonoBehaviour
         startedDelay = false;
 
         // Check if we're still moving after the delay
-        if (movement.GetIsMoving() && movement.GetIsGrounded() && !movement.isSliding)
+        if (movement.GetIsMoving() && movement.isGrounded && !movement.isSliding)
         {
             onFootstep?.Invoke();
         }

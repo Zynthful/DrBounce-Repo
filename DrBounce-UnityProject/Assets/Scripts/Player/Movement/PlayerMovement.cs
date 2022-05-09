@@ -494,7 +494,7 @@ public class PlayerMovement : MonoBehaviour
         onLand?.Invoke();
 
         // Is the ground we landed on NOT bounceable?
-        if (!isGrounded && bounceForce == Vector3.zero)
+        if (!Physics.CheckSphere(groundcheckPos, groundDistance, bounceableMask))
         {
             onLandOnNonBounceableGround?.Invoke();
         }
@@ -689,6 +689,4 @@ public class PlayerMovement : MonoBehaviour
     public bool GetIsCrouching() { return isCrouching; }
 
     public bool GetIsMoving() { return isMoving; }
-
-    public bool GetIsGrounded() { return isGrounded; }
 }
