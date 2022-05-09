@@ -57,7 +57,8 @@ public class SetSpriteFromInputAction : MonoBehaviour
             image.enabled = actionSettingKeyboard != null;      // Disable image if we have no keyboard action
             if (actionSettingKeyboard != null)
             {
-                image.sprite = actionSettingKeyboard.GetDefaultSprite();
+                image.sprite =
+                    InputManager.s_Instance.FindDescription(actionSettingKeyboard.GetEffectivePath()).defaultSprite;
             }
         }
         else if (device is Gamepad)
@@ -65,7 +66,9 @@ public class SetSpriteFromInputAction : MonoBehaviour
             image.enabled = actionSettingController != null;    // Disable image if we have no controller action
             if (actionSettingController != null)
             {
-                image.sprite = device is DualShockGamepad ? actionSettingController.GetDualshockSprite() : actionSettingController.GetDefaultSprite();
+                image.sprite = device is DualShockGamepad ?
+                    InputManager.s_Instance.FindDescription(actionSettingController.GetEffectivePath()).dualshockSprite :
+                    InputManager.s_Instance.FindDescription(actionSettingController.GetEffectivePath()).defaultSprite;
             }
         }
     }
