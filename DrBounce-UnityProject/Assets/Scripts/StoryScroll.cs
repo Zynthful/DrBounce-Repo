@@ -17,6 +17,8 @@ public class StoryScroll : MonoBehaviour
     [SerializeField]
     private float fadeRate = 1;
     private bool doneFadingIn = true;
+    private bool waitComplete = false;
+    [SerializeField] private float waitTime;
 
     void Awake()
     {
@@ -31,18 +33,18 @@ public class StoryScroll : MonoBehaviour
                 pages[i].SetActive(false);
             }
         }
+        StartCoroutine(WaitOnSceneLoad());
     }
 
     public void OnNextPage(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if(doneFadingIn == true)
+            if(doneFadingIn == true && waitComplete == true)
             {
                 doneFadingIn = false;
                 StartCoroutine(FadeOut(pages[pageNo].GetComponent<Image>()));
             }
-
         }
     }
 
@@ -80,5 +82,11 @@ public class StoryScroll : MonoBehaviour
         {
             doneFadingIn = true;
         }
+    }
+
+    private IEnumerator WaitOnSceneLoad()
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        waitComplete = true;
     }
 }
