@@ -28,6 +28,7 @@ public class LevelComplete : MonoBehaviour
             data = new GameSaveData();
         
         data.levelUnlocked = levelsData.GetCurrentLevelIndex() + 1;
+        data.levelPBTimes[levelsData.GetCurrentLevelIndex()] = Timer.GetEndTime();
         SaveSystem.SaveGameData(data);
         SaveSystem.DeleteLevelData();
 
