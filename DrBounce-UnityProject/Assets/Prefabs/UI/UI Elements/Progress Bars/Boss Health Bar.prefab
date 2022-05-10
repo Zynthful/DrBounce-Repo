@@ -174,6 +174,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2957122828841318708}
   bossNameText: {fileID: 6183403552612755259}
+  barObjects:
+  - {fileID: 36876276108254726}
+  - {fileID: 6140129779416237539}
+  - {fileID: 1014052754955420061}
+  - {fileID: 626808620133059650}
+  - {fileID: 8131380511947363684}
   onEnable:
     m_PersistentCalls:
       m_Calls:
@@ -196,6 +202,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Feedbacks
         m_MethodName: PlayFeedbacks
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2945232143457606023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6839050957292549034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0f7e3940c2a514bbe80fc4a6f599dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 97f5f3e0d087e0e44bbad8b0ff719de8, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 885942912669740662}
+        m_TargetAssemblyTypeName: UpdateBossBar, Assembly-CSharp
+        m_MethodName: Disable
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -260,7 +294,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2945232143457606023
+--- !u!114 &9151959186281869347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,16 +303,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6839050957292549034}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab0f7e3940c2a514bbe80fc4a6f599dc, type: 3}
+  m_Script: {fileID: 11500000, guid: c38fb99f84e415f43a5b64d69cdfc265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 97f5f3e0d087e0e44bbad8b0ff719de8, type: 2}
+  Event: {fileID: 11400000, guid: 548d62968a5f731448c8b28657ed83a7, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 885942912669740662}
         m_TargetAssemblyTypeName: UpdateBossBar, Assembly-CSharp
-        m_MethodName: Disable
+        m_MethodName: UpdateBar
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -303,7 +337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3709584785399390130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -424,12 +458,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3893590077297795632, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4456277296063616121, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
       propertyPath: m_Name
       value: Boss Health Bar
       objectReference: {fileID: 0}
     - target: {fileID: 5347777720916762343, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
       propertyPath: SetInitialFillValueOnStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187132355589929429, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749585641726946193, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7866789715048588878, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -455,12 +505,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a42a23ce4f9ed24abde69beacbef2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &36876276108254726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7187132355589929429, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
+  m_PrefabInstance: {fileID: 7151382006032836563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6140129779416237539 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3893590077297795632, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
+  m_PrefabInstance: {fileID: 7151382006032836563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1014052754955420061 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7866789715048588878, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
+  m_PrefabInstance: {fileID: 7151382006032836563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &626808620133059650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7749585641726946193, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
+  m_PrefabInstance: {fileID: 7151382006032836563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6183403552612755259 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3958959627863458024, guid: 0a97f75856089fd4891f0ff2df42d65b, type: 3}
   m_PrefabInstance: {fileID: 7151382006032836563}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 626808620133059650}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
