@@ -7,15 +7,20 @@ using TMPro;
 public class ResultsMenuUI : MonoBehaviour
 {
     [SerializeField]
+    private LevelsData levelsData;
+
+    [SerializeField]
     private TextMeshProUGUI currentTimeText = null;
     [SerializeField]
     private TextMeshProUGUI pbText = null;
 
     private void OnEnable()
     {
-        //currentTimeText.text = Timer.LevelEndTime().ToString();
-
-        // get pb from save system?
-        //pbText.text = SaveSystem.
+        GameSaveData data = SaveSystem.LoadGameData();
+        if (data != null)
+        {
+            currentTimeText.text = TimeConversion.ToTime(data.lastLevelTimes[levelsData.GetCurrentLevelIndex()]);
+            pbText.text = TimeConversion.ToTime(data.levelPBTimes[levelsData.GetCurrentLevelIndex()]);
+        }
     }
 }

@@ -7,6 +7,10 @@ public class Timer : MonoBehaviour
 {
     private static float timePaused = 0.0f;                            // Duration spent paused. Used for calculating checkpoint/finish time.
     private static float startTime = 0.0f;                             // Current time when starting the timer
+
+    private static float endTime = 0.0f;
+    public static float GetEndTime() { return endTime; }
+
     private static List<float> checkpointTimes = new List<float>();    // List of times taken to get to each checkpoint
     private static bool active = false;                                // Whether the timer is active or not
 
@@ -17,14 +21,15 @@ public class Timer : MonoBehaviour
 
     private void OnEnable()
     {
-        CheckpointHit.onHit += _ => Checkpoint();   // Listen for checkpoint hit
-        LevelComplete.onComplete += Complete;       // Listen for level complete
+        CheckpointHit.onHit += Checkpoint;              // Listen for checkpoint hit
+        LevelComplete.onComplete += OnLevelComplete;    // Listen for level complete
     }
 
     private void OnDisable()
     {
-        CheckpointHit.onHit -= _ => Checkpoint();   // Stop listening for checkpoint hit
-        LevelComplete.onComplete -= Complete;       // Stop listening for level complete
+        CheckpointHit.onHit += Checkpoint;              // Stop listening for checkpoint hit
+        LevelComplete.onComplete -= OnLevelComplete;    // Stop listening for level complete
+
     }
 
     private void Update()
@@ -39,7 +44,7 @@ public class Timer : MonoBehaviour
     /// <summary>
     /// Adds new checkpoint time and starts a new timer.
     /// </summary>
-    private void Checkpoint()
+    private void Checkpoint(CheckpointHit hit = null)
     {
         float checkpointTime = Time.time - startTime - timePaused;
         checkpointTimes.Add(checkpointTime);
@@ -64,21 +69,28 @@ public class Timer : MonoBehaviour
         active = true;
     }
 
+    private void OnLevelComplete()
+    {
+        endTime = Complete();
+    }
+
     /// <summary>
     /// Level completed. Stops timer.
     /// </summary>
-    public void Complete()
+    public float Complete()
     {
         checkpointTimes.Add(Time.time - startTime - timePaused);
         active = false;
-        onCompleteTime?.Invoke(LevelEndTime());
+        endTime = LevelEndTime();
+        onCompleteTime?.Invoke(endTime);
+        return endTime;
     }
 
     /// <summary>
     /// Stops the active timer.
     /// </summary>
     /// <returns>The completion time.</returns>
-    public static float LevelEndTime()
+    public float LevelEndTime()
     {
         float completionTime = 0.0f;
         for (int i = 0; i < checkpointTimes.Count; i++)
