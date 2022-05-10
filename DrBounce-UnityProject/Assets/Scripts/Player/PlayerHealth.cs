@@ -43,10 +43,12 @@ public class PlayerHealth : Health
     protected override void DIE()
     {
         base.DIE();
+        TimeManager.SetTimeScale(0.1f);
     }
 
     public void OnDeathComplete()
     {
+        TimeManager.SetLastTimeScale();
         GameManager.SetCursorEnabled(true);
         PauseHandler.SetCanPause(false);
         SceneManager.LoadScene("GameOver_SCN");
