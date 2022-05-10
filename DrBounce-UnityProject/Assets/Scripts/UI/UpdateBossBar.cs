@@ -12,11 +12,19 @@ public class UpdateBossBar : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI bossNameText = null;
 
+    [SerializeField]
+    private GameObject[] barObjects = null;
+
     private Enemy currentBoss = null;
 
     [Header("Events")]
     public UnityEvent onEnable;
     public UnityEvent onDisable;
+
+    private void Awake()
+    {
+        Disable(currentBoss);
+    }
 
     public void Enable(Enemy boss)
     {
@@ -30,10 +38,22 @@ public class UpdateBossBar : MonoBehaviour
 
     public void SetEnabled(Enemy boss, bool value)
     {
-        healthBar.enabled = value;
+        for (int i = 0; i < barObjects.Length; i++)
+        {
+            barObjects[i].SetActive(value);
+        }
+
+        if (boss == null)
+            return;
+
         if (value)
         {
+            onEnable.Invoke();
             InitialiseBar(boss);
+        }
+        else
+        {
+            onDisable.Invoke();
         }
     }
 
