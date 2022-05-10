@@ -16,6 +16,11 @@ public class SetSpriteFromInputAction : MonoBehaviour
     private InputActionSetting actionSettingController;
 
     [SerializeField]
+    private bool disableImageIfKeyboardActionNull = true;
+    [SerializeField]
+    private bool disableImageIfControllerActionNull = true;
+
+    [SerializeField]
     [Tooltip("The SVG image to apply the sprite to.")]
     private SVGImage image;
 
@@ -54,7 +59,9 @@ public class SetSpriteFromInputAction : MonoBehaviour
         // Set the sprite based on whether we're currently using a Gamepad or Mouse/Keyboard
         if (device is Mouse || device is Keyboard)
         {
-            image.enabled = actionSettingKeyboard != null;      // Disable image if we have no keyboard action
+            if (disableImageIfKeyboardActionNull)
+                image.enabled = actionSettingKeyboard != null;      // Disable image if we have no keyboard action
+
             if (actionSettingKeyboard != null)
             {
                 image.sprite =
@@ -63,7 +70,9 @@ public class SetSpriteFromInputAction : MonoBehaviour
         }
         else if (device is Gamepad)
         {
-            image.enabled = actionSettingController != null;    // Disable image if we have no controller action
+            if (disableImageIfControllerActionNull)
+                image.enabled = actionSettingController != null;    // Disable image if we have no controller action
+
             if (actionSettingController != null)
             {
                 image.sprite = device is DualShockGamepad ?
