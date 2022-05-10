@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -18,6 +16,28 @@ public class InputManager : MonoBehaviour
     public static event Action onRebindCancel = null;
     public static event Action onRebindReset = null;
     public static event Action<InputAction, InputAction> onRebindMatchedBlockingAction = null;
+
+    public InputDescription[] inputs = null;    // to associate sprites with inputs
+
+    [Serializable]
+    public struct InputDescription
+    {
+        public string path;
+        public Sprite defaultSprite;
+        public Sprite dualshockSprite;
+    }
+
+    public InputDescription FindDescription(string path)
+    {
+        return inputs.FirstOrDefault(InputDescription => InputDescription.path == path);
+    }
+
+    /*
+    public Sprite GetSpriteFromControlPath(string path, InputDevice device)
+    {
+        return Resources.Load<Sprite>($"Sprites/Controller Icons/{device}/{path}");
+    }
+    */
 
     private void Awake()
     {

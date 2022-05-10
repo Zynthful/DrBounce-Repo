@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int groundCheckBoxes;
     private int boxDegrees;
     [SerializeField] private CheckMaterial materialChecker = null;
+    [SerializeField] private float slopeCheckDistance;
 
     [Header("Unity Events")]
     public UnityEvent onJump = null;
@@ -145,7 +146,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         trueVelocity = new Vector3(move.x + velocity.x, 0, move.z + velocity.z);
-        print(trueVelocity.magnitude);
         //@cole :)
         if (isDashing == true)
         {
@@ -177,11 +177,11 @@ public class PlayerMovement : MonoBehaviour
                 oldMove = move;
                 move = ((transform.right * x + transform.forward * z).normalized * acceleration) * speed; //Creates a value to move the player in local space based on this value.
                 controller.Move(move * Time.deltaTime); //uses move value to move the player.
-                velocity -= ((move - oldMove) * 0.5f);
+                //velocity -= ((move - oldMove) * 0.5f);
             }
             else
             {
-                move = (slideLeftRight * x) * strafeStrength; //Creates a value to move the player in local space based on this value.
+                move = (slideLeftRight * x).normalized * strafeStrength; //Creates a value to move the player in local space based on this value.
                 controller.Move(move * Time.deltaTime); //uses move value to move the player.
             }
 
@@ -227,12 +227,12 @@ public class PlayerMovement : MonoBehaviour
             if (slideDirectionDecided == false)
             {
                 slideDirectionDecided = true;
-                slideDirection = transform.forward;
+                slideDirection = transform.forward * slideStrength;
                 slideLeftRight = transform.right;
-                velocity.x = (slideDirection.x * slideStrength) * 1.5f; //Move them forward at a speed based on the dash strength
-                velocity.z = (slideDirection.z * slideStrength) * 1.5f;
+                velocity.x = (slideDirection.x); //Move them forward at a speed based on the dash strength
+                velocity.z = (slideDirection.z);
             }
-            controller.Move(slideDirection * slideStrength * Time.deltaTime);
+            controller.Move(slideDirection * Time.deltaTime);
             h = playerHeight * 0.35f;
             float lastHeight = charController.height;
             //Moves the player downward
@@ -343,16 +343,17 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        controller.Move(new Vector3(Mathf.Abs(charController.velocity.x + trueVelocity.x + bounceForce.x) * velocity.x / (10 / (0.1f * momentumStrength)),
-            velocity.y,
-            Mathf.Abs(charController.velocity.z + trueVelocity.z + bounceForce.z) * velocity.z / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+        controller.Move(new Vector3((trueVelocity.x + bounceForce.x) / (10 / (0.1f * momentumStrength)),
+        velocity.y,
+        (trueVelocity.z + bounceForce.z) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
-        if (gameObject.GetComponent<CharacterController>().velocity.x == 0 && bounceForce.x == 0)
+
+        if (gameObject.GetComponent<CharacterController>().velocity.x == 0)
         {
             velocity.x = 0;
         }
 
-        if (gameObject.GetComponent<CharacterController>().velocity.z == 0 && bounceForce.z == 0)
+        if (gameObject.GetComponent<CharacterController>().velocity.z == 0)
         {
             velocity.z = 0;
         }
@@ -376,7 +377,7 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         //isGrounded = Physics.CheckBox(groundcheckPos, new Vector3(0.2f,0.1f,0.2f), transform.rotation, ~groundMask);
         headIsTouchingSomething = Physics.CheckBox(new Vector3(transform.position.x, transform.position.y + (charController.height / 2) + headCheckHeight.y, transform.position.z), headCheckHeight, transform.rotation, ~headMask);
-        slopeCheck = Physics.CheckBox(groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
+        slopeCheck = Physics.CheckBox(groundcheckPos + (move / slopeCheckDistance) + (slideDirection / (slopeCheckDistance * 2)) + (Vector3.down / 2.5f), new Vector3(0.01f, slopeSensitivity, 0.01f), transform.rotation, ~groundMask);
 
         coyoteTime -= Time.deltaTime;
 
@@ -399,7 +400,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //If the player has movement velocity and isn't sliding
-            if ((velocity.z != 0 || velocity.x != 0) && isSliding == false)
+            if ((velocity.z != 0 || velocity.x != 0) && !isSliding)
             {
                 // reduce the velocity over time by the momentum loss rate.
                 //If the player is moving with the momentum, it won't be depleted.
@@ -493,7 +494,7 @@ public class PlayerMovement : MonoBehaviour
         onLand?.Invoke();
 
         // Is the ground we landed on NOT bounceable?
-        if (!isGrounded && bounceForce == Vector3.zero)
+        if (!Physics.CheckSphere(groundcheckPos, groundDistance, bounceableMask))
         {
             onLandOnNonBounceableGround?.Invoke();
         }
@@ -664,7 +665,7 @@ public class PlayerMovement : MonoBehaviour
         if (debugSlopeCheck)
         {
             GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube2.transform.position = groundcheckPos + (move / 2) + (slideDirection / 2) + (Vector3.down / 2.5f);
+            cube2.transform.position = groundcheckPos + (move / slopeCheckDistance) + (slideDirection / (slopeCheckDistance * 2)) + (Vector3.down / 2.5f);
             cube2.transform.rotation = transform.rotation;
             cube2.transform.localScale = new Vector3(0.01f, slopeSensitivity, 0.01f) * 2;
             cube2.GetComponent<Collider>().enabled = false;
@@ -688,6 +689,4 @@ public class PlayerMovement : MonoBehaviour
     public bool GetIsCrouching() { return isCrouching; }
 
     public bool GetIsMoving() { return isMoving; }
-
-    public bool GetIsGrounded() { return isGrounded; }
 }

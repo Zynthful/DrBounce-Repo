@@ -19,7 +19,13 @@ MonoBehaviour:
   returnbullet: 0
   overrideMovement: 0
   bezierPower: -0.025
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 1024
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 4
   onSpawn:
     m_PersistentCalls:
       m_Calls: []
@@ -126,6 +132,10 @@ PrefabInstance:
     - target: {fileID: 6224650039348094081, guid: 445d897268dc8a1468cefa5f2f98757d, type: 3}
       propertyPath: m_Name
       value: BossCharged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224650039348094093, guid: 445d897268dc8a1468cefa5f2f98757d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8761576255234807835, guid: 445d897268dc8a1468cefa5f2f98757d, type: 3}
       propertyPath: shrinkSpeed

@@ -148,4 +148,9 @@ public class InputActionSetting : SettingData
     {
         return blockingActionNames;
     }
+
+    public string GetEffectivePath()
+    {
+        return actionReference.action.bindings[bindingIndex].effectivePath;
+    }
 }
