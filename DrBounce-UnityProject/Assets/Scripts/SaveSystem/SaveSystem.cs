@@ -39,7 +39,7 @@ public static class SaveSystem
     public static void SaveGameData(GameSaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/save.dat";
+        string path = Application.persistentDataPath + "/drsave.dat";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, data);
@@ -48,7 +48,7 @@ public static class SaveSystem
 
     public static GameSaveData LoadGameData()
     {
-        string path = Application.persistentDataPath + "/save.dat";
+        string path = Application.persistentDataPath + "/drsave.dat";
         if(File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -83,9 +83,9 @@ public static class SaveSystem
     public static void DeleteGameData()
     {
         DeleteLevelData();
-        if (File.Exists(Application.persistentDataPath + "/save.dat"))
+        if (File.Exists(Application.persistentDataPath + "/drsave.dat"))
         {
-            File.Delete(Application.persistentDataPath + "/save.dat");
+            File.Delete(Application.persistentDataPath + "/drsave.dat");
         }
     }
 
