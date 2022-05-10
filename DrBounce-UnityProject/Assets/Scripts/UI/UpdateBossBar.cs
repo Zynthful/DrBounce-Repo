@@ -19,14 +19,14 @@ public class UpdateBossBar : MonoBehaviour
         bossNameText.text = boss.GetName();
 
         //healthBar.SetBar(boss.health.GetHealth(), 0.0f, boss.health.GetMaxHealth());  // this doesn't actually set the max value for some reason. i hate you feel.
-        healthBar.SetBar01(boss.health.GetHealth() / boss.health.GetMaxHealth());
+        healthBar.SetBar01((float)boss.health.GetHealth() / (float)boss.health.GetMaxHealth());
     }
 
     public void UpdateBar(float value)
     {
         if (currentBoss != null)
         {
-            healthBar.UpdateBar01(value / currentBoss.health.GetMaxHealth());
+            healthBar.UpdateBar01(value / (float)currentBoss.health.GetMaxHealth());
         }
     }
 }
