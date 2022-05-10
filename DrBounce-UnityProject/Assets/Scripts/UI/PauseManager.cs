@@ -81,7 +81,7 @@ public static class PauseHandler
 
     public static void SetTimeFreeze(bool value)
     {
-        Time.timeScale = value ? 0.0f : 1.0f;
+        TimeManager.SetTimeScale(value ? 0.0f : 1.0f);
         GameManager.s_Instance.paused = value;
         onIsFrozen.Invoke(value);
 
@@ -97,13 +97,6 @@ public static class PauseHandler
             InputManager.SetActionMapActive(InputManager.inputMaster.Player, true);
             disabledControls = false;
         }
-    }
-
-    public static IEnumerator FreezeFrame(float duration)
-    {
-        Time.timeScale = 0.0f;
-        yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = 1.0f;
     }
 }
 
@@ -163,7 +156,7 @@ public class PauseManager : MonoBehaviour
     {
         if (Time.timeScale != 0)
         {
-            StartCoroutine(PauseHandler.FreezeFrame(duration));
+            TimeManager.FreezeFrame(duration, this);
         }
     }
 
