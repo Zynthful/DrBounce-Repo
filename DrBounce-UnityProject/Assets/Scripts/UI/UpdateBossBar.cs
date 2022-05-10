@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 using MoreMountains.Tools;
 
@@ -13,7 +14,30 @@ public class UpdateBossBar : MonoBehaviour
 
     private Enemy currentBoss = null;
 
-    public void InitialiseBar(Enemy boss)
+    [Header("Events")]
+    public UnityEvent onEnable;
+    public UnityEvent onDisable;
+
+    public void Enable(Enemy boss)
+    {
+        SetEnabled(boss, true);
+    }
+
+    public void Disable(Enemy boss)
+    {
+        SetEnabled(boss, false);
+    }
+
+    public void SetEnabled(Enemy boss, bool value)
+    {
+        healthBar.enabled = value;
+        if (value)
+        {
+            InitialiseBar(boss);
+        }
+    }
+
+    private void InitialiseBar(Enemy boss)
     {
         currentBoss = boss;
         bossNameText.text = boss.GetName();
