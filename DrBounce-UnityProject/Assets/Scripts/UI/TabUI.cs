@@ -65,6 +65,8 @@ public class TabUI : MonoBehaviour
         {
             InputManager.inputMaster.Menu.Next.performed += OnNextPerformed;
             InputManager.inputMaster.Menu.Previous.performed += OnPreviousPerformed;
+            InputManager.inputMaster.Menu.Next.Enable();
+            InputManager.inputMaster.Menu.Previous.Enable();
         }
 
         // Select (or re-select) the starting tab (or our last selected one if we're re-selecting)
@@ -86,6 +88,8 @@ public class TabUI : MonoBehaviour
         {
             InputManager.inputMaster.Menu.Next.performed -= OnNextPerformed;
             InputManager.inputMaster.Menu.Previous.performed -= OnPreviousPerformed;
+            InputManager.inputMaster.Menu.Next.Disable();
+            InputManager.inputMaster.Menu.Previous.Disable();
         }
     }
 
