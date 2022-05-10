@@ -35,7 +35,7 @@ public class LevelComplete : MonoBehaviour
 
         // Save level times
         data.lastLevelTimes[levelsData.GetCurrentLevelIndex()] = Timer.GetEndTime();
-        if (Timer.GetEndTime() < data.levelPBTimes[levelsData.GetCurrentLevelIndex()])
+        if (Timer.GetEndTime() < data.levelPBTimes[levelsData.GetCurrentLevelIndex()] || data.levelPBTimes[levelsData.GetCurrentLevelIndex()] == 0)
         {
             data.levelPBTimes[levelsData.GetCurrentLevelIndex()] = Timer.GetEndTime();
         }
