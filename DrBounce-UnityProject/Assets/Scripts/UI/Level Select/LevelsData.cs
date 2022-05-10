@@ -77,6 +77,7 @@ public class LevelsData : ScriptableObject
     public void RestartLevel()
     {
         SaveSystem.DeleteLevelData();
+        LoadLevel(currentLevelIndex);
     }
 
     public void ReloadLevelFromCheckpoint()
