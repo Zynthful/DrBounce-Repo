@@ -23,19 +23,27 @@ public class LevelComplete : MonoBehaviour
     /// </summary>
     public void Complete() 
     {
+        onComplete.Invoke();
+        onLevelComplete?.Invoke();
+
         GameSaveData data = SaveSystem.LoadGameData();
         if(data == null)
             data = new GameSaveData();
         
+        // Unlock next level
         data.levelUnlocked = levelsData.GetCurrentLevelIndex() + 1;
-        data.levelPBTimes[levelsData.GetCurrentLevelIndex()] = Timer.GetEndTime();
+
+        // Save level times
+        data.lastLevelTimes[levelsData.GetCurrentLevelIndex()] = Timer.GetEndTime();
+        if (Timer.GetEndTime() < data.levelPBTimes[levelsData.GetCurrentLevelIndex()])
+        {
+            data.levelPBTimes[levelsData.GetCurrentLevelIndex()] = Timer.GetEndTime();
+        }
+
         SaveSystem.SaveGameData(data);
         SaveSystem.DeleteLevelData();
 
         GameManager.s_Instance.currentSettings = null;
-
-        onComplete.Invoke();
-        onLevelComplete?.Invoke();
     }
 
     public void ShowResults()
