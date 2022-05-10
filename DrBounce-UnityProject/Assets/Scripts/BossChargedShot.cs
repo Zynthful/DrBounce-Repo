@@ -12,8 +12,8 @@ public class BossChargedShot : BulletMovement
     private GameObject explosionTrigger;
     private bool expanding;
 
-    [SerializeField] [Range(.01f, 50f)] float expansionSpeed;
-    [SerializeField] [Range(.01f, 50f)] float shrinkSpeed;
+    [SerializeField] [Range(20f, 200f)] float expansionSpeed;
+    [SerializeField] [Range(20f, 200f)] float shrinkSpeed;
     private MeshRenderer shotRenderer;
     private MeshCollider shotModelCollider;
     private CheckForBouncing bounceCheck;
