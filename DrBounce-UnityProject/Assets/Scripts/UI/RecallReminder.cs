@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RecallReminder : MonoBehaviour
 {
     [SerializeField] private GameObject Text;
+    public UnityEvent OnRecallPrompt = null;
+    public UnityEvent OnRecallDone = null;
 
     private void Start()
     {
@@ -27,10 +30,12 @@ public class RecallReminder : MonoBehaviour
     private void TurnOn()
     {
         Text.SetActive(true);
+        OnRecallPrompt?.Invoke();
     }
 
     private void TurnOff()
     {
         Text.SetActive(false);
+        OnRecallDone?.Invoke();
     }
 }
