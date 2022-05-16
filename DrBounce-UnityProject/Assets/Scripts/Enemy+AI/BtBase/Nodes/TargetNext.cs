@@ -8,7 +8,7 @@ public class TargetNext : BtNode
 
     public TargetNext(Vector3[] positions)
     {
-        this.m_positions = positions;
+        m_positions = positions;
     }
 
     public override NodeState evaluate(Blackboard blackboard)
@@ -16,7 +16,8 @@ public class TargetNext : BtNode
         if (m_positions.Length == 0)
         {
             //Debug.Log("Failed to target next");
-            return NodeState.FAILURE;
+            m_positions = new Vector3[0];
+            m_positions[0] = blackboard.owner.transform.position;
         }
 
         if (blackboard.noBounceAIController == null)
