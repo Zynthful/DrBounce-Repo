@@ -1341,6 +1341,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_NextCheckpoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""18f47463-10fc-4cd4-8c72-22c121dca6db"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_PrevCheckpoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""7025722a-9d29-4e32-b0f3-34b90730dc73"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -1517,6 +1533,94 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""DEBUG_ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbccb605-271b-4a5a-9774-2b3d88a07f7e"",
+                    ""path"": ""<Keyboard>/numpadPlus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca0575ef-24ae-4dd4-b1e0-944563a66a8e"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3029c0d0-40ed-422f-a44d-fce1e5cbbd89"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2809a33b-4d9f-45f4-ad6c-716d57425378"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""319ef88c-c78b-4b2d-b340-7d280c67631f"",
+                    ""path"": ""<Keyboard>/numpadMinus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""daf4e6d0-0078-4eba-9d41-9cbf0c3376bc"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69bee84f-bffb-4349-8235-533aaac37a3f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_PrevCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b5cfad7-3f42-4b9a-88b4-d27f8fec0cfe"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_PrevCheckpoint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1730,6 +1834,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Debug_DEBUG_NextLevel = m_Debug.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
         m_Debug_DEBUG_Pause = m_Debug.FindAction("DEBUG_Pause", throwIfNotFound: true);
         m_Debug_DEBUG_ReloadScene = m_Debug.FindAction("DEBUG_ReloadScene", throwIfNotFound: true);
+        m_Debug_DEBUG_NextCheckpoint = m_Debug.FindAction("DEBUG_NextCheckpoint", throwIfNotFound: true);
+        m_Debug_DEBUG_PrevCheckpoint = m_Debug.FindAction("DEBUG_PrevCheckpoint", throwIfNotFound: true);
         // Comic
         m_Comic = asset.FindActionMap("Comic", throwIfNotFound: true);
         m_Comic_NextPage = m_Comic.FindAction("NextPage", throwIfNotFound: true);
@@ -2035,6 +2141,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Debug_DEBUG_NextLevel;
     private readonly InputAction m_Debug_DEBUG_Pause;
     private readonly InputAction m_Debug_DEBUG_ReloadScene;
+    private readonly InputAction m_Debug_DEBUG_NextCheckpoint;
+    private readonly InputAction m_Debug_DEBUG_PrevCheckpoint;
     public struct DebugActions
     {
         private @InputMaster m_Wrapper;
@@ -2043,6 +2151,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @DEBUG_NextLevel => m_Wrapper.m_Debug_DEBUG_NextLevel;
         public InputAction @DEBUG_Pause => m_Wrapper.m_Debug_DEBUG_Pause;
         public InputAction @DEBUG_ReloadScene => m_Wrapper.m_Debug_DEBUG_ReloadScene;
+        public InputAction @DEBUG_NextCheckpoint => m_Wrapper.m_Debug_DEBUG_NextCheckpoint;
+        public InputAction @DEBUG_PrevCheckpoint => m_Wrapper.m_Debug_DEBUG_PrevCheckpoint;
         public InputActionMap Get() { return m_Wrapper.m_Debug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2064,6 +2174,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DEBUG_ReloadScene.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_ReloadScene;
+                @DEBUG_NextCheckpoint.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_NextCheckpoint;
+                @DEBUG_NextCheckpoint.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_NextCheckpoint;
+                @DEBUG_NextCheckpoint.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_NextCheckpoint;
+                @DEBUG_PrevCheckpoint.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_PrevCheckpoint;
+                @DEBUG_PrevCheckpoint.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_PrevCheckpoint;
+                @DEBUG_PrevCheckpoint.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_PrevCheckpoint;
             }
             m_Wrapper.m_DebugActionsCallbackInterface = instance;
             if (instance != null)
@@ -2080,6 +2196,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DEBUG_ReloadScene.started += instance.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.performed += instance.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.canceled += instance.OnDEBUG_ReloadScene;
+                @DEBUG_NextCheckpoint.started += instance.OnDEBUG_NextCheckpoint;
+                @DEBUG_NextCheckpoint.performed += instance.OnDEBUG_NextCheckpoint;
+                @DEBUG_NextCheckpoint.canceled += instance.OnDEBUG_NextCheckpoint;
+                @DEBUG_PrevCheckpoint.started += instance.OnDEBUG_PrevCheckpoint;
+                @DEBUG_PrevCheckpoint.performed += instance.OnDEBUG_PrevCheckpoint;
+                @DEBUG_PrevCheckpoint.canceled += instance.OnDEBUG_PrevCheckpoint;
             }
         }
     }
@@ -2228,6 +2350,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDEBUG_NextLevel(InputAction.CallbackContext context);
         void OnDEBUG_Pause(InputAction.CallbackContext context);
         void OnDEBUG_ReloadScene(InputAction.CallbackContext context);
+        void OnDEBUG_NextCheckpoint(InputAction.CallbackContext context);
+        void OnDEBUG_PrevCheckpoint(InputAction.CallbackContext context);
     }
     public interface IComicActions
     {
