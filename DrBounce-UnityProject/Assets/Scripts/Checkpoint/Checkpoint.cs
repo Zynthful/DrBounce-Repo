@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,9 @@ public class Checkpoint : MonoBehaviour
     // The ID of our current checkpoint. When we hit a new checkpoint, this ID is set to the ID of the hit checkpoint (but only if the new ID is higher than our current one).
     private static int currentCheckpointID = -1;
 
+    private static CheckpointHit[] checkpoints = null;
+    public static CheckpointHit[] GetCheckpoints() { return checkpoints; }
+
 #if UNITY_EDITOR
     // Whether we've ran awake or not
     private static bool doneAwake = false;
@@ -20,6 +24,8 @@ public class Checkpoint : MonoBehaviour
 
     private void Awake()
     {
+        checkpoints = FindCheckpoints();
+
 #if UNITY_EDITOR
         // When entering playmode (and running Awake for the first time) in editor, delete our save data
         if (!doneAwake)
@@ -157,5 +163,17 @@ public class Checkpoint : MonoBehaviour
     public static void ResetCurrentCheckpoint()
     {
         currentCheckpointID = -1;
+    }
+
+    private CheckpointHit[] FindCheckpoints()
+    {
+        CheckpointHit[] checkpoints = FindObjectsOfType<CheckpointHit>();
+        Array.Sort(checkpoints, new CheckpointComparer());
+        return checkpoints;
+    }
+
+    public static void GoToCheckpoint(int index)
+    {
+        checkpoints[index].TeleportHere();
     }
 }
