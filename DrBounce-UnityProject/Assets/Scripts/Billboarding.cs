@@ -13,6 +13,6 @@ public class Billboarding : MonoBehaviour
 
     void Update()
     {
-        transform.rotation = camTransform.transform.rotation;
+        transform.rotation = camTransform.transform.rotation * Quaternion.Euler(0,180,0);
     }
 }
