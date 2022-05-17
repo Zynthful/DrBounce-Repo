@@ -29,6 +29,7 @@ public class StoryScroll : MonoBehaviour
         controls = new InputMaster();
         controls = InputManager.inputMaster;
 
+        //Creates a list of all the pages/panels childed and sets all of them to inactive - apart from the first.
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             pages.Add(gameObject.transform.GetChild(i).gameObject);
@@ -37,60 +38,72 @@ public class StoryScroll : MonoBehaviour
                 pages[i].SetActive(false);
             }
         }
-        StartCoroutine(WaitOnSceneLoad());
+
+        //A small buffer once the scene has loaded so the player doesn't click and skip the first page or panel immediately
+
+    }
+
+    private void Start()
+    {
+        if (waitTime != 0)
+        {
+            StartCoroutine(WaitOnSceneLoad());
+        }
+
+        else
+        {
+            waitComplete = true;
+        }
     }
 
     public void OnNextPage(InputAction.CallbackContext context)
     {
+        print("testing 1 - " + gameObject.name);
         if (context.performed && doneFadingIn == true && waitComplete == true)
         {
+            print("testing 2 - " + gameObject.name);
+            //If the object running this code is the canvas rather than a single page, and the page currently active either has no panels or all panels have been activated
             if (isBook && (pages[pageNo].transform.childCount == 0 || pages[pageNo].GetComponent<StoryScroll>().allChildrenActive == true))
             {
-                doneFadingIn = false;
-                StartCoroutine(FadeOut(pages[pageNo].GetComponent<Image>()));
+                if (pages.Count == pageNo + 1)
+                {
+                    levelsData.LoadLevel(0);
+                }
+
+                //Disable the current page and enable the next one
+                pages[pageNo].SetActive(false);
+                pageNo += 1;
+                pages[pageNo].SetActive(true);
+                //StartCoroutine(FadeOut(pages[pageNo].GetComponent<Image>()));
             }
 
+            //If the object running this is a page within the book canvas
             if (isPage)
             {
+                print("testing 3 - " + gameObject.name);
                 doneFadingIn = false;
                 pageNo += 1;
 
+                //If the number of pages total is equal to the number of pages active
                 if(pages.Count == pageNo)
                 {
+                    //Allow the book canvas to go to the next page
                     allChildrenActive = true;
                 }
                 else
                 {
+                    //Activate the next page
                     StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
                 }
+                print("testing 4 - " + gameObject.name);
             }
-        }
-    }
-
-    private IEnumerator FadeOut(Image image)
-    {
-        if (pages.Count == pageNo + 1)
-        {
-            levelsData.LoadLevel(0);
-            yield break;
-        }
-
-        while (image.color.a > 0.0f)
-        {
-            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime * fadeRate));
-            yield return null;
-        }
-        if (image.color.a <= 0.0f)
-        {
-            image.gameObject.SetActive(false);
-            pageNo += 1;
-
-            StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
         }
     }
 
     private IEnumerator FadeIn(Image image)
     {
+        print("testing 5 - " + gameObject.name);
+
         image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
         image.gameObject.SetActive(true);
         while (image.color.a < 1.0f)
@@ -109,4 +122,26 @@ public class StoryScroll : MonoBehaviour
         yield return new WaitForSecondsRealtime(waitTime);
         waitComplete = true;
     }
+
+    //private IEnumerator FadeOut(Image image)
+    //{
+    //    if (pages.Count == pageNo + 1)
+    //    {
+    //        levelsData.LoadLevel(0);
+    //        yield break;
+    //    }
+
+    //    while (image.color.a > 0.0f)
+    //    {
+    //        image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime * fadeRate));
+    //        yield return null;
+    //    }
+    //    if (image.color.a <= 0.0f)
+    //    {
+    //        image.gameObject.SetActive(false);
+    //        pageNo += 1;
+
+    //        StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+    //    }
+    //}
 }
