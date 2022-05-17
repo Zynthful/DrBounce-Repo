@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 1975456255851058990}
   - component: {fileID: 1975456255851058977}
   - component: {fileID: 1975456255851058976}
+  - component: {fileID: 2189075026486709519}
   - component: {fileID: 1595012946}
   - component: {fileID: 2991567613312117168}
   m_Layer: 2
@@ -423,9 +424,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758bc30ab85aa394ca492e0ba14ffb5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 64838678907559684, guid: 65e19d6d3360dcd4196641569080d662, type: 3}
+  trigger: {fileID: 2189075026486709519}
+  renderers:
+  - {fileID: 1975456255851058990}
   unlocksOnPickup: {fileID: 11400000, guid: aea97512f728b6e4a9be5da051f03742, type: 2}
   destroyOnPickup: 1
   timeBeforeDestroy: 0.05
+  uiPromptDelay: 1
   onPickup:
     m_PersistentCalls:
       m_Calls:
@@ -465,6 +471,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2189075026486709519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975456255851058979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720db78a2faa42e4b9981fb03399c127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookForLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  lookForThrownGun: 0
+  triggerDelay: 0
+  triggerOnce: 1
+  onPreDetect:
+    m_PersistentCalls:
+      m_Calls: []
+  onDetect:
+    m_PersistentCalls:
+      m_Calls: []
+  onDetectStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onLostDetection:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1595012946
 MonoBehaviour:
   m_ObjectHideFlags: 0
