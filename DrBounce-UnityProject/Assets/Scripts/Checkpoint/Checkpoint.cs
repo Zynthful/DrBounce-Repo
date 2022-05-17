@@ -149,7 +149,8 @@ public class Checkpoint : MonoBehaviour
         player.rotation = rotation;
 
         PlayerHealth health = player.GetComponent<PlayerHealth>();
-        health.Damage(Mathf.Abs(data.health - health.GetMaxHealth()));
+
+        data.health = health.GetMaxHealth();
 
         player.GetComponentInChildren<Shooting>().SetCharge(data.charges);
     }
