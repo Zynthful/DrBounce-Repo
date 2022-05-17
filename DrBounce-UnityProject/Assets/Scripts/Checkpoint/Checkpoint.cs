@@ -80,7 +80,7 @@ public class Checkpoint : MonoBehaviour
     /// <param name="checkpoint">The checkpoint we've hit.</param>
     private void HitCheckpoint(CheckpointHit checkpoint)
     {
-        if (checkpoint.id > checkpoints[currentCheckpoint].id)
+        if (currentCheckpoint < 0 || currentCheckpoint > checkpoints.Length - 1 || checkpoint.id > checkpoints[currentCheckpoint].id)
         {
             currentCheckpoint = Array.IndexOf(checkpoints, checkpoint);
             SaveLevelProgress();
