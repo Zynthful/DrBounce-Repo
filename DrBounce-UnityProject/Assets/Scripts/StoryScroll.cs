@@ -74,6 +74,19 @@ public class StoryScroll : MonoBehaviour
             //Add to the time value
             time += Time.deltaTime;
         }
+
+        //Once a second of holding down has occurred
+        if (time >= 1 && isPage)
+        {
+            holding = false;
+            //Activate all panels, prevent any more panels from activating and allow the book to move to the next page
+            foreach (GameObject page in pages)
+            {
+                doneFadingIn = false;
+                page.SetActive(true);
+                allChildrenActive = true;
+            }
+        }
     }
 
     public void OnNextPage(InputAction.CallbackContext context)
@@ -89,21 +102,13 @@ public class StoryScroll : MonoBehaviour
         if (context.canceled)
         {
             holding = false;
+            time = 0;
         }
 
-        //Once a second of holding down has occurred
-        if (time >= 1 && isPage)
-        {
-            //Activate all panels, prevent any more panels from activating and allow the book to move to the next page
-            foreach (GameObject page in pages)
-            {
-                doneFadingIn = false;
-                page.SetActive(true);
-                allChildrenActive = true;
-            }
-        }
         if (context.performed && doneFadingIn == true && waitComplete == true)
         {
+
+
             //If the object running this code is the canvas rather than a single page, and the page currently active either has no panels or all panels have been activated
             if (isBook && (pages[pageNo].transform.childCount == 0 || pages[pageNo].GetComponent<StoryScroll>().allChildrenActive == true))
             {
