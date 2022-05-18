@@ -11171,6 +11171,11 @@
 						<Property Name="Color" Type="int16" Value="5"/>
 						<Property Name="OverrideColor" Type="bool" Value="True"/>
 						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-6</Value>
+							</ValueList>
+						</Property>
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Attenuation">
@@ -11199,11 +11204,6 @@
 								<Property Name="UseMaxSoundPerInstance" Type="bool">
 									<ValueList>
 										<Value>True</Value>
-									</ValueList>
-								</Property>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-8</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -13094,6 +13094,74 @@
 									</ChildrenList>
 									<ObjectLists/>
 								</ActorMixer>
+							</ChildrenList>
+							<ObjectLists/>
+						</ActorMixer>
+						<ActorMixer Name="Frederico" ID="{A7414C7C-26E9-4D9F-A8E1-7370C351036A}" ShortID="1019173357">
+							<PropertyList>
+								<Property Name="OverrideOutput" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="frederico_hey_kid" ID="{239B8528-AFE8-4273-9E18-81B7ADC55627}" ShortID="324565663">
+									<PropertyList>
+										<Property Name="IsVoice" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="frederico_hey_kid" ID="{765E2E4E-9B18-4194-83A0-86B0134BD754}">
+											<Language>English(US)</Language>
+											<AudioFile>frederico_hey_kid.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="526799706"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="frederico_hey_kid" ID="{765E2E4E-9B18-4194-83A0-86B0134BD754}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="frederico_thanks_kid" ID="{8111A78F-C9A7-4B24-8EE0-FFB4614877D8}" ShortID="941077232">
+									<PropertyList>
+										<Property Name="IsVoice" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="frederico_thanks_kid" ID="{0C02A072-6206-4E03-B23C-AC6B3AF0DD1C}">
+											<Language>English(US)</Language>
+											<AudioFile>frederico_thanks_kid.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="860229184"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="frederico_thanks_kid" ID="{0C02A072-6206-4E03-B23C-AC6B3AF0DD1C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 							<ObjectLists/>
 						</ActorMixer>
