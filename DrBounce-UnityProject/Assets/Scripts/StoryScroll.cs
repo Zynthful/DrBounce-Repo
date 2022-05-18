@@ -52,7 +52,7 @@ public class StoryScroll : MonoBehaviour
             waitComplete = true;
         }
 
-        if(isBook && pageNo == 0)
+        if (isBook && pageNo == 0)
         {
             pages[pageNo].SetActive(true);
         }
@@ -60,11 +60,13 @@ public class StoryScroll : MonoBehaviour
         if (isPage && pageNo == 0)
         {
             StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+            doneFadingIn = false;
         }
     }
 
     public void OnNextPage(InputAction.CallbackContext context)
     {
+
         print("testing 1 - " + gameObject.name);
         if (context.performed && doneFadingIn == true && waitComplete == true)
         {
