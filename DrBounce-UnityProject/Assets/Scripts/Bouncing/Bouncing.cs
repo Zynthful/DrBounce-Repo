@@ -143,7 +143,7 @@ public class Bouncing : MonoBehaviour
                 return BounceForward(collision.transform, position, origin);
 
             case BounceType.W_Straight:
-                return BounceStraight(collision.transform, collision.contacts[0].normal, position, false);
+                return BounceStraight(collision.transform, collision.transform.TransformDirection(Vector3.up), position, false);
         }
 
         return null;
@@ -166,7 +166,7 @@ public class Bouncing : MonoBehaviour
                 return PlayerBounceForward(collision.transform, position, direction);
 
             case BounceType.W_Straight:
-                return BounceStraight(collision.transform, collision.normal, position, true);
+                return BounceStraight(collision.transform, collision.transform.TransformDirection(Vector3.up), position, true);
         }
 
         return null;
