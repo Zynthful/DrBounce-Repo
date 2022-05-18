@@ -383,8 +383,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            bounceForce = Vector3.zero;
-
             coyoteTime = oldCoyoteTime;
             dashesPerformed = 0;
 
@@ -415,6 +413,8 @@ public class PlayerMovement : MonoBehaviour
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
                 velocity.y = -1000;
             }
+
+            bounceForce = Vector3.zero;
 
             if (!headIsTouchingSomething)
             {
