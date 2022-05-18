@@ -23,6 +23,8 @@ public class StoryScroll : MonoBehaviour
     [SerializeField] private bool isPage;
     [SerializeField] private float waitTime;
     public bool allChildrenActive = false;
+    private bool holding;
+    private float time;
 
     void Awake()
     {
@@ -64,17 +66,47 @@ public class StoryScroll : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        //While the button is being held down
+        if(holding == true)
+        {
+            //Add to the time value
+            time += Time.deltaTime;
+        }
+    }
+
     public void OnNextPage(InputAction.CallbackContext context)
     {
+        //Activates when any mapped button is initially pressed
+        if (context.started)
+        {
+            //sets the holding value to true, allowing the time value in update to be raised - keeping track of how long the player has held the button down for in seconds
+            holding = true;
+        }
 
-        print("testing 1 - " + gameObject.name);
+        //activates when said button is let go of
+        if (context.canceled)
+        {
+            holding = false;
+        }
+
+        //Once a second of holding down has occurred
+        if (time >= 1 && isPage)
+        {
+            //Activate all panels, prevent any more panels from activating and allow the book to move to the next page
+            foreach (GameObject page in pages)
+            {
+                doneFadingIn = false;
+                page.SetActive(true);
+                allChildrenActive = true;
+            }
+        }
         if (context.performed && doneFadingIn == true && waitComplete == true)
         {
-            print("testing 2 - " + gameObject.name);
             //If the object running this code is the canvas rather than a single page, and the page currently active either has no panels or all panels have been activated
             if (isBook && (pages[pageNo].transform.childCount == 0 || pages[pageNo].GetComponent<StoryScroll>().allChildrenActive == true))
             {
-                print("testing 6 - " + gameObject.name);
                 if (pages.Count == pageNo + 1)
                 {
                     levelsData.LoadLevel(0);
@@ -90,33 +122,39 @@ public class StoryScroll : MonoBehaviour
             //If the object running this is a page within the book canvas
             if (isPage)
             {
-                print("testing 3 - " + gameObject.name);
                 doneFadingIn = false;
 
                 //If the number of pages total is equal to the number of pages active
                 StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
-
-                print("testing 4 - " + gameObject.name);
             }
         }
     }
 
     private IEnumerator FadeIn(Image image)
     {
-        print("testing 5 - " + gameObject.name);
-
+        //Sets the alpha value of the image to 0 - being invisible
         image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
         image.gameObject.SetActive(true);
+
+        //While the alpha of the image is lower than 1 - being fully visible
         while (image.color.a < 1.0f)
         {
+            //raise the alpha value at a speed determined by the fadeRate value
             image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (Time.deltaTime * fadeRate));
             yield return null;
         }
+
+        //If the alpha reaches 1
         if (image.color.a >= 1)
         {
+            //Set doneFadingIn to true, which allows the next panel to start fading in
             doneFadingIn = true;
         }
+
+        //Sets the next target of FadeIn to the next page by adding one to the pageNo value
         pageNo += 1;
+
+        //If the total number of pages is equal to the current page number (plus one)
         if (pages.Count == pageNo)
         {
             //Allow the book canvas to go to the next page
