@@ -11179,7 +11179,7 @@
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Attenuation">
-							<ObjectRef Name="Dialogue Speaker" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+							<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
 						</Reference>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -11191,7 +11191,7 @@
 					<ChildrenList>
 						<ActorMixer Name="D0C" ID="{7E3E5C65-0BAF-493C-B355-4EEFB80615A2}" ShortID="1001376648">
 							<PropertyList>
-								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
 								<Property Name="Color" Type="int16" Value="5"/>
 								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 								<Property Name="MaxSoundPerInstance" Type="int16">
@@ -11201,6 +11201,7 @@
 								</Property>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
 								<Property Name="OverrideEffect" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 								<Property Name="UseMaxSoundPerInstance" Type="bool">
 									<ValueList>
 										<Value>True</Value>
@@ -11209,7 +11210,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="Gun" ID="{F2511A2E-500C-400A-A9DB-F6DD606CD1CA}" WorkUnitID="{D3F0C834-B526-4B8F-9A28-758EE4151F74}"/>
+									<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -12973,7 +12974,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Dialogue Speaker" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+													<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -13003,7 +13004,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
-													<ObjectRef Name="Dialogue Speaker" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+													<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
 												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -13099,9 +13100,15 @@
 						</ActorMixer>
 						<ActorMixer Name="Frederico" ID="{A7414C7C-26E9-4D9F-A8E1-7370C351036A}" ShortID="1019173357">
 							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 								<Property Name="OverrideOutput" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 							</PropertyList>
 							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="Frederico" ID="{14CA0923-2E9D-4CCD-9F96-2B377F1CFFE6}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 								</Reference>
@@ -13162,6 +13169,143 @@
 										<ActiveSource Name="frederico_thanks_kid" ID="{0C02A072-6206-4E03-B23C-AC6B3AF0DD1C}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<ActorMixer Name="Scream" ID="{BF645C47-EE8F-41F0-854A-A7EE405609B0}" ShortID="1018360696">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>510</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<Custom CreatedFrom="{14CA0923-2E9D-4CCD-9F96-2B377F1CFFE6}">
+												<Attenuation Name="Frederico (Custom)" ID="{036636C7-2408-4B0E-ADA0-849E91CF8018}" ShortID="667982138">
+													<PropertyList>
+														<Property Name="RadiusMax" Type="Real64" Value="140"/>
+													</PropertyList>
+													<CurveUsageInfoList>
+														<VolumeDryUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																<Curve Name="VolumeDry" ID="{3BD134FE-9507-4FB9-A03A-6595D26260DD}">
+																	<PropertyList>
+																		<Property Name="Flags" Type="int32" Value="3"/>
+																	</PropertyList>
+																	<PointList>
+																		<Point>
+																			<XPos>0</XPos>
+																			<YPos>0</YPos>
+																			<Flags>5</Flags>
+																			<SegmentShape>Log1</SegmentShape>
+																		</Point>
+																		<Point>
+																			<XPos>140</XPos>
+																			<YPos>-200</YPos>
+																			<Flags>37</Flags>
+																		</Point>
+																	</PointList>
+																</Curve>
+															</CurveUsageInfo>
+														</VolumeDryUsage>
+														<VolumeWetGameUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+														</VolumeWetGameUsage>
+														<VolumeWetUserUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+														</VolumeWetUserUsage>
+														<LowPassFilterUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</LowPassFilterUsage>
+														<HighPassFilterUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</HighPassFilterUsage>
+														<SpreadUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</SpreadUsage>
+														<FocusUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</FocusUsage>
+													</CurveUsageInfoList>
+												</Attenuation>
+											</Custom>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="frederico_scream_loop" ID="{E420D0F4-2BBF-4CBC-8AED-3AC5D98C234F}" ShortID="346293183">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="IsVoice" Type="bool" Value="True"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="frederico_scream_loop" ID="{6532B130-03EC-4FFA-91E2-E0F6A0ACE512}">
+													<Language>English(US)</Language>
+													<AudioFile>frederico_scream_loop.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="384430343"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="frederico_scream_loop" ID="{6532B130-03EC-4FFA-91E2-E0F6A0ACE512}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="frederico_scream_start" ID="{5FD29B1F-4E67-48D3-8330-755184AA508E}" ShortID="153741482">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="IsVoice" Type="bool" Value="True"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="frederico_scream_continuous" ID="{381D63A3-C0E7-4C6C-8007-81087E5808A4}">
+													<Language>English(US)</Language>
+													<AudioFile>frederico_scream_continuous.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="644901279"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="frederico_scream_continuous" ID="{381D63A3-C0E7-4C6C-8007-81087E5808A4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<ObjectLists/>
+								</ActorMixer>
 							</ChildrenList>
 							<ObjectLists/>
 						</ActorMixer>

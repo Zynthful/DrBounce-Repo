@@ -358,6 +358,43 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Frd_Scream_Start" ID="{EBB44FA0-9F07-43EB-BA46-597930C82A49}">
+					<ChildrenList>
+						<Action Name="" ID="{B2B88364-B0BB-4383-A07A-B25152EA86A3}" ShortID="288528900">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="frederico_scream_start" ID="{5FD29B1F-4E67-48D3-8330-755184AA508E}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{863ADB88-9621-4545-A7B8-B2639935B9A1}" ShortID="249841100">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="1.4"/>
+								<Property Name="FadeInCurve" Type="int16" Value="6"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="frederico_scream_loop" ID="{E420D0F4-2BBF-4CBC-8AED-3AC5D98C234F}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Frd_Scream_Stop" ID="{02253767-5BE1-449B-8152-9937CEEEFA01}">
+					<ChildrenList>
+						<Action Name="" ID="{77B1711F-2515-4310-B6CD-ACE417951708}" ShortID="838196519">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Scream" ID="{BF645C47-EE8F-41F0-854A-A7EE405609B0}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
