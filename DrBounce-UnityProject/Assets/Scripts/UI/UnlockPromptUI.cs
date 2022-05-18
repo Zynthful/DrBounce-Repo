@@ -12,6 +12,7 @@ public class UnlockPromptUI : MonoBehaviour
     public void Close()
     {
         PauseHandler.SetTimeFreeze(false);
+        PauseHandler.SetCanPause(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Destroy(gameObject);

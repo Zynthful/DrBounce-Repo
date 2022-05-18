@@ -48,7 +48,7 @@ public class LevelPickup : MonoBehaviour
 
     private IEnumerator DelayUIPrompt()
     {
-        yield return new WaitForSecondsRealtime(uiPromptDelay);
+        yield return new WaitForSeconds(uiPromptDelay);
         ShowUIPrompt();
     }
 
@@ -56,6 +56,7 @@ public class LevelPickup : MonoBehaviour
     {
         // Freeze game and show cursor
         PauseHandler.SetTimeFreeze(true);
+        PauseHandler.SetCanPause(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
