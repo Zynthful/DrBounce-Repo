@@ -33,10 +33,7 @@ public class StoryScroll : MonoBehaviour
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             pages.Add(gameObject.transform.GetChild(i).gameObject);
-            if (i >= 1)
-            {
-                pages[i].SetActive(false);
-            }
+            pages[i].SetActive(false);
         }
 
         //A small buffer once the scene has loaded so the player doesn't click and skip the first page or panel immediately
@@ -54,6 +51,17 @@ public class StoryScroll : MonoBehaviour
         {
             waitComplete = true;
         }
+
+        if(isBook && pageNo == 0)
+        {
+            pages[pageNo].SetActive(true);
+        }
+
+        if (isPage && pageNo == 0)
+        {
+            StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+            pageNo += 1;
+        }
     }
 
     public void OnNextPage(InputAction.CallbackContext context)
@@ -65,6 +73,7 @@ public class StoryScroll : MonoBehaviour
             //If the object running this code is the canvas rather than a single page, and the page currently active either has no panels or all panels have been activated
             if (isBook && (pages[pageNo].transform.childCount == 0 || pages[pageNo].GetComponent<StoryScroll>().allChildrenActive == true))
             {
+                print("testing 6 - " + gameObject.name);
                 if (pages.Count == pageNo + 1)
                 {
                     levelsData.LoadLevel(0);
@@ -82,7 +91,6 @@ public class StoryScroll : MonoBehaviour
             {
                 print("testing 3 - " + gameObject.name);
                 doneFadingIn = false;
-                pageNo += 1;
 
                 //If the number of pages total is equal to the number of pages active
                 if(pages.Count == pageNo)
@@ -94,6 +102,7 @@ public class StoryScroll : MonoBehaviour
                 {
                     //Activate the next page
                     StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+                    pageNo += 1;
                 }
                 print("testing 4 - " + gameObject.name);
             }
