@@ -60,7 +60,6 @@ public class StoryScroll : MonoBehaviour
         if (isPage && pageNo == 0)
         {
             StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
-            pageNo += 1;
         }
     }
 
@@ -93,17 +92,8 @@ public class StoryScroll : MonoBehaviour
                 doneFadingIn = false;
 
                 //If the number of pages total is equal to the number of pages active
-                if(pages.Count == pageNo)
-                {
-                    //Allow the book canvas to go to the next page
-                    allChildrenActive = true;
-                }
-                else
-                {
-                    //Activate the next page
-                    StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
-                    pageNo += 1;
-                }
+                StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+
                 print("testing 4 - " + gameObject.name);
             }
         }
@@ -123,6 +113,12 @@ public class StoryScroll : MonoBehaviour
         if (image.color.a >= 1)
         {
             doneFadingIn = true;
+        }
+        pageNo += 1;
+        if (pages.Count == pageNo)
+        {
+            //Allow the book canvas to go to the next page
+            allChildrenActive = true;
         }
     }
 
