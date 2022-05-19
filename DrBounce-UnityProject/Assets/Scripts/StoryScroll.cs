@@ -14,8 +14,8 @@ public class StoryScroll : MonoBehaviour
     public InputMaster controls;
     private int pageNo = 0;
 
-    [SerializeField]
-    private float fadeRate = 1;
+    [SerializeField] private float fadeRate = 1;
+    [SerializeField] private float sequenceFadeRate;
     private bool doneFadingIn = true;
     private bool waitComplete = false;
 
@@ -23,7 +23,6 @@ public class StoryScroll : MonoBehaviour
     [SerializeField] private bool isPage;
     [SerializeField] private float waitTime;
     private bool sequence = false;
-    [SerializeField] private float sequenceFadeSpeed;
     public bool allChildrenActive = false;
     private bool holding;
     private float time;
@@ -63,7 +62,7 @@ public class StoryScroll : MonoBehaviour
 
         if (isPage && pageNo == 0)
         {
-            StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+            StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>(), fadeRate));
             doneFadingIn = false;
         }
     }
@@ -93,7 +92,7 @@ public class StoryScroll : MonoBehaviour
         {
             print("TestA");
             doneFadingIn = false;
-            StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+            StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>(), sequenceFadeRate));
             print("TestB");
         }
     }
@@ -137,12 +136,12 @@ public class StoryScroll : MonoBehaviour
                 doneFadingIn = false;
 
                 //If the number of pages total is equal to the number of pages active
-                StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+                StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>(), fadeRate));
             }
         }
     }
 
-    private IEnumerator FadeIn(Image image)
+    private IEnumerator FadeIn(Image image, float fadeRate)
     {
         //Sets the alpha value of the image to 0 - being invisible
         image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
