@@ -22,6 +22,8 @@ public class StoryScroll : MonoBehaviour
     [SerializeField] private bool isBook;
     [SerializeField] private bool isPage;
     [SerializeField] private float waitTime;
+    private bool sequence = false;
+    [SerializeField] private float sequenceFadeSpeed;
     public bool allChildrenActive = false;
     private bool holding;
     private float time;
@@ -87,6 +89,13 @@ public class StoryScroll : MonoBehaviour
                 allChildrenActive = true;
             }
         }
+        if(sequence == true && doneFadingIn == true)
+        {
+            print("TestA");
+            doneFadingIn = false;
+            StartCoroutine(FadeIn(pages[pageNo].GetComponent<Image>()));
+            print("TestB");
+        }
     }
 
     public void OnNextPage(InputAction.CallbackContext context)
@@ -107,8 +116,6 @@ public class StoryScroll : MonoBehaviour
 
         if (context.performed && doneFadingIn == true && waitComplete == true)
         {
-
-
             //If the object running this code is the canvas rather than a single page, and the page currently active either has no panels or all panels have been activated
             if (isBook && (pages[pageNo].transform.childCount == 0 || pages[pageNo].GetComponent<StoryScroll>().allChildrenActive == true))
             {
@@ -164,6 +171,15 @@ public class StoryScroll : MonoBehaviour
         {
             //Allow the book canvas to go to the next page
             allChildrenActive = true;
+        }
+
+        if (image.gameObject.GetComponent<ComicSequence>() != null && image.gameObject.GetComponent<ComicSequence>().startOfSequence == true)
+        {
+            sequence = true;
+        }
+        if (image.gameObject.GetComponent<ComicSequence>() != null && image.gameObject.GetComponent<ComicSequence>().endOfSequence == true)
+        {
+            sequence = false;
         }
     }
 
