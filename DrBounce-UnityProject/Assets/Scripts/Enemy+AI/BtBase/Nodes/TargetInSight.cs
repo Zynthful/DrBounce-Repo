@@ -11,6 +11,8 @@ public class TargetInSight : BtNode
     private float m_sightAngle;
     public bool m_canSeePlayer;
 
+    private LayerMask mask = LayerMask.GetMask(new string[2] { "TransparentFX", "Ignore Raycast" });
+
     private Vector3 m_originLos;
 
     /// <summary>
@@ -32,6 +34,8 @@ public class TargetInSight : BtNode
         m_sightAngle = sightAngle;
         m_blackboard = blackboard;
         m_originLos = originLos + blackboard.owner.transform.position;
+
+        mask = ~mask;
     }
 
 
@@ -42,20 +46,27 @@ public class TargetInSight : BtNode
 
         //Debug.Log("Successfuly reached " + getName());
 
+        int outcome = PlayerLosCheck();
 
-        if (PlayerLosCheck())
+        switch (outcome)
         {
-            m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
-            enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
+            case 0:
+                m_blackboard.currentAction = Blackboard.Actions.LOST;
+                m_blackboard.target.NewTarget(false, null);
+                return NodeState.FAILURE;
 
-            return NodeState.SUCCESS;
+            case 1:
+                m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
+                enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
+                return NodeState.SUCCESS;
+
+            case 2:
+                m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
+                enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
+                return NodeState.FAILURE;
         }
-        else
-        {
-            m_blackboard.currentAction = Blackboard.Actions.LOST;
-            m_blackboard.target.NewTarget(false, null);
-            return NodeState.FAILURE;
-        }
+
+        return NodeState.FAILURE;
     }
 
     /// <summary>
@@ -63,7 +74,7 @@ public class TargetInSight : BtNode
     /// </summary>
     /// <returns></returns>
     /// 
-    protected bool PlayerLosCheck()
+    protected int PlayerLosCheck()
     {
         //added null check to stop error in console 
         if (PlayerMovement.player != null)
@@ -80,13 +91,28 @@ public class TargetInSight : BtNode
 
                     if (m_blackboard.noBounceAIController == false)
                     {
-                        return true;
+                        return 1;
                     }
 
                     m_blackboard.searchTime = 0;
                     m_blackboard.notSeenPlayer = false;
                     m_blackboard.spottedPlayer = true;
-                    return true;
+                    return 1;
+                }
+
+                else if (Physics.Raycast(ray, out hit, m_viewDist, mask) && hit.transform.root.CompareTag("Player"))
+                {
+                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - m_originLos).normalized * m_viewDist, Color.blue);
+
+                    if (m_blackboard.noBounceAIController == false)
+                    {
+                        return 2;
+                    }
+
+                    m_blackboard.searchTime = 0;
+                    m_blackboard.notSeenPlayer = false;
+                    m_blackboard.spottedPlayer = true;
+                    return 2;
                 }
 
                 else
@@ -95,9 +121,9 @@ public class TargetInSight : BtNode
                     Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - m_originLos).normalized * m_viewDist, Color.red);
                 }
             }
-            return false;
+            return 0;
         }
-        return false;
+        return 0;
     }
 
     public override string getName()

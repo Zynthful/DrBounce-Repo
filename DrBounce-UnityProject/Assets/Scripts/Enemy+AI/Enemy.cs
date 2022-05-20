@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if(m_blackboard.currentAction != recentAction)
         {
@@ -183,6 +183,11 @@ public class Enemy : MonoBehaviour
                 m_root.reset();
             }
         }
+
+        if(m_blackboard.shotDelay >= 0)
+            m_blackboard.shotDelay -= Time.deltaTime;
+        if (m_blackboard.chargedShotDelay >= 0)
+            m_blackboard.chargedShotDelay -= Time.deltaTime;
     }
 
     private void OnDisable() 
