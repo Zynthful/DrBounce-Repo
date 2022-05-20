@@ -12210,6 +12210,11 @@
 																				<Sound Name="lv01_a01_doc04C" ID="{5C876B24-E757-4178-A2F6-BF59BA6433E2}" ShortID="1063824914">
 																					<PropertyList>
 																						<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																						<Property Name="Inclusion" Type="bool">
+																							<ValueList>
+																								<Value>False</Value>
+																							</ValueList>
+																						</Property>
 																						<Property Name="IsVoice" Type="bool" Value="True"/>
 																					</PropertyList>
 																					<ReferenceList>
@@ -12286,7 +12291,7 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<ActorMixer Name="Intro Elevator" ID="{73AA7ED5-5AD1-41B5-B0D2-3E4516375CB0}" ShortID="77840260">
+														<ActorMixer Name="01-Elevator" ID="{73AA7ED5-5AD1-41B5-B0D2-3E4516375CB0}" ShortID="77840260">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -12377,7 +12382,7 @@
 															</ChildrenList>
 															<ObjectLists/>
 														</ActorMixer>
-														<ActorMixer Name="Yellow Enemy Vent" ID="{302C4CBF-E70A-4966-86A7-ED893209A4A1}" ShortID="148995362">
+														<ActorMixer Name="02-Yellow Enemy Vent" ID="{302C4CBF-E70A-4966-86A7-ED893209A4A1}" ShortID="148995362">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -12471,7 +12476,7 @@
 															</ChildrenList>
 															<ObjectLists/>
 														</ActorMixer>
-														<BlendContainer Name="Down The Vent" ID="{96F0EF47-91C8-4671-BA06-0964B44E9C4B}" ShortID="471148236">
+														<BlendContainer Name="03-Down The Vent" ID="{96F0EF47-91C8-4671-BA06-0964B44E9C4B}" ShortID="471148236">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -12604,6 +12609,105 @@
 															</ChildrenList>
 															<ObjectLists/>
 														</BlendContainer>
+														<ActorMixer Name="04-Boss" ID="{FE63A3F0-5AF0-4598-B977-B3C002B4E1E3}" ShortID="82015909">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv02_a04_doc01" ID="{7EFF438C-EB77-4F6F-8E15-AC0927461340}" ShortID="869028820">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{3461C680-1261-4080-BD65-96F151A599DD}" ShortID="566426770" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv02_a04_doc01" ID="{4B776483-521B-4BBB-829A-9C81E26D0439}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv02_a04_doc01.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="177194211"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv02_a04_doc01" ID="{4B776483-521B-4BBB-829A-9C81E26D0439}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="lv02_a04_doc02" ID="{7E122027-8F06-4694-B7D0-53C3B5177169}" ShortID="1002287130">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{2544C671-D326-4078-81A3-5DD52BE9F884}" ShortID="833333536" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv02_a04_doc02" ID="{15A45476-ADA1-44D6-B2E8-6548107AE90A}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv02_a04_doc02.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="34356788"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv02_a04_doc02" ID="{15A45476-ADA1-44D6-B2E8-6548107AE90A}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</ActorMixer>
 													</ChildrenList>
 													<ObjectLists/>
 												</ActorMixer>
@@ -12619,6 +12723,627 @@
 															<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
+													<ChildrenList>
+														<ActorMixer Name="01-Elevator" ID="{E36248CF-D25A-41E9-918D-5DE504CC432D}" ShortID="158685849">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv03_a01_doc01" ID="{FAE583AF-972C-41F1-9DD3-13DADCF94A01}" ShortID="352153230">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{629B6ADC-BE38-4805-8A79-538FDC904DF6}" ShortID="762436837" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a01_doc01" ID="{61B4BE87-B027-4097-82B0-1EB810DDBD16}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a01_doc01.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="444724773"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a01_doc01" ID="{61B4BE87-B027-4097-82B0-1EB810DDBD16}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="lv03_a01_doc02" ID="{7A019678-2EC4-404F-993F-1ED04D89C531}" ShortID="251780085">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{3FBC2718-CB41-45EB-9738-B23C0480CB69}" ShortID="194204637" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a01_doc02" ID="{C6DFD34F-C573-412F-8A46-D927EEC1D6BA}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a01_doc02.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="15930421"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a01_doc02" ID="{C6DFD34F-C573-412F-8A46-D927EEC1D6BA}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</ActorMixer>
+														<ActorMixer Name="02-Bounce Pad Launch" ID="{67758704-CEDF-44D8-98B3-78249397DB01}" ShortID="14127981">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv03_a02_doc01" ID="{306BC5FE-8E0C-4C3E-9C48-EF48FFFB20A6}" ShortID="112558203">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{7E32BF7E-706B-4A81-89B6-033845941802}" ShortID="264222212" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a02_doc01" ID="{D0EA788C-9BE0-4A40-A146-42E019FA066B}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a02_doc01.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="431818100"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a02_doc01" ID="{D0EA788C-9BE0-4A40-A146-42E019FA066B}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="lv02_a03_doc01D" ID="{9F9C08EE-EF8B-4169-AB15-74209094A9E3}" ShortID="528535607">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{8CEE3B2C-11D6-480E-B656-1EAF8F58F00C}" ShortID="630011395" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv02_a03_doc01D" ID="{363612AE-8C41-4B54-95A6-A12EED3CF3A5}">
+																			<Language>SFX</Language>
+																			<AudioFile>lv02_a03_doc01D.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="38780635"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv02_a03_doc01D" ID="{363612AE-8C41-4B54-95A6-A12EED3CF3A5}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</ActorMixer>
+														<ActorMixer Name="03-Bounce Pad Encounter" ID="{4DC3A5D0-73A8-45F1-B590-3186B479E71E}" ShortID="237491792">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv03_a03_doc01" ID="{CD465C19-B0D2-4CA9-A6BD-52CA6D892764}" ShortID="83768116">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{92B87778-5833-4CC3-8B4D-950F71F6329E}" ShortID="947892323" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a03_doc01" ID="{F94DA698-45BF-48E8-B0B3-D662A7CBECD0}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a03_doc01.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="988412378"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a03_doc01" ID="{F94DA698-45BF-48E8-B0B3-D662A7CBECD0}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</ActorMixer>
+														<ActorMixer Name="04-Vent Boss" ID="{5C6926EA-86A8-4E90-BC16-EE0F5137755D}" ShortID="383348794">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv03_a04_doc01" ID="{28C25CA7-12D9-48A3-9879-9E5E2D75D0A7}" ShortID="913077756">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{2062DB20-617E-4811-BCC0-F74D00711CC2}" ShortID="621682424" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a04_doc01" ID="{B7ECAD21-1420-4066-8757-37A09090C551}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a04_doc01.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="138844736"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a04_doc01" ID="{B7ECAD21-1420-4066-8757-37A09090C551}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</ActorMixer>
+														<ActorMixer Name="05-Long Throw" ID="{608CB928-DCD9-43C1-B77B-886AAC794723}" ShortID="774390147">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv03_a05_doc01" ID="{51D1F17E-C7FC-43A4-A0EB-78F5C65E8EE9}" ShortID="192684603">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{1B566204-FBEC-4318-870D-6288289EB4B8}" ShortID="379316856" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a05_doc01" ID="{0D3F969B-2A60-4B76-AEA8-1E9516DD8DC9}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a05_doc01.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="996351538"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a05_doc01" ID="{0D3F969B-2A60-4B76-AEA8-1E9516DD8DC9}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</ActorMixer>
+														<ActorMixer Name="06-Glass Pipe Break" ID="{3702D9E0-B738-44AF-8D53-DD1EB4735E94}" ShortID="1006554028">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv03_a06_doc01" ID="{0FBCEDDD-C05D-428F-A465-340EBA3B51FE}" ShortID="31293190">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{2480DB30-D3DF-4781-91BD-7CFDFDD39CD6}" ShortID="926499028" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a06_doc01" ID="{E11B4CCC-B272-43C5-BE88-DDA26D84D7E8}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a06_doc01.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="715050494"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a06_doc01" ID="{E11B4CCC-B272-43C5-BE88-DDA26D84D7E8}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</ActorMixer>
+														<ActorMixer Name="07-Before Boss" ID="{E6916524-7CB7-494E-9249-1A513DE0A81C}" ShortID="362494941">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv03_a07_doc02" ID="{ACC39C9E-AC7B-49E0-B4FF-365A282EA36A}" ShortID="587933288">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{799D3301-AAE4-47F2-BADC-2A6F35898A44}" ShortID="211870328" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a07_doc02" ID="{ED0D2810-E51C-4963-B558-39EBDD00A78B}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a07_doc02.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="50087554"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a07_doc02" ID="{ED0D2810-E51C-4963-B558-39EBDD00A78B}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="lv03_a07_doc01" ID="{6156A11F-662C-48A8-9442-048149644E82}" ShortID="482193">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{CC6DFFAC-C324-4302-AD11-8F5258491181}" ShortID="386740882" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a07_doc01" ID="{CD0DADAA-BC05-4A6A-BBE6-F940A3E645D6}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a07_doc01.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="970561125"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a07_doc01" ID="{CD0DADAA-BC05-4A6A-BBE6-F940A3E645D6}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</ActorMixer>
+														<ActorMixer Name="08-Boss" ID="{CA55B0DA-F635-4119-956E-E571E27E2E7E}" ShortID="990608416">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="lv03_a08_doc01" ID="{6FE3B782-89F9-411F-80F8-6AC0D4587059}" ShortID="423459805">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{B86F9A46-9225-456C-8BA0-9468D2E60F4A}" ShortID="963726348" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a08_doc01" ID="{DE93259F-EBD9-4196-ACCA-0C32C4F68860}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a08_doc01.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="447351982"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a08_doc01" ID="{DE93259F-EBD9-4196-ACCA-0C32C4F68860}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="lv03_a08_doc02" ID="{B051DE4C-C05A-4377-ADB1-E89A5BC359A7}" ShortID="978016173">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsVoice" Type="bool" Value="True"/>
+																		<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="D0C" ID="{B7BDE889-274A-4250-AF61-089687B25E1F}" WorkUnitID="{B67B806E-8B91-4F54-BBB1-232D02D026FD}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																		</Reference>
+																		<Reference Name="Effect0">
+																			<Custom>
+																				<Effect Name="Wwise Flanger (Custom)" ID="{D0C07388-E859-41B2-AD48-AE9A4E6F5C00}" ShortID="470890515" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+																					<PropertyList>
+																						<Property Name="DelayTime" Type="Real32" Value="18.6"/>
+																						<Property Name="EnableLFO" Type="bool" Value="False"/>
+																						<Property Name="FeedBackLevel" Type="Real32" Value="0.6"/>
+																						<Property Name="WetDryMix" Type="Real32" Value="35"/>
+																					</PropertyList>
+																				</Effect>
+																			</Custom>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Critical" ID="{2AAAF8AF-F89C-4059-B575-DD05BA2BCBE9}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="lv03_a08_doc02" ID="{89B6758F-82AF-4A39-98CB-F7560BABC1CB}">
+																			<Language>English(US)</Language>
+																			<AudioFile>lv03_a08_doc02.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="585784108"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ObjectLists/>
+																	<ActiveSourceList>
+																		<ActiveSource Name="lv03_a08_doc02" ID="{89B6758F-82AF-4A39-98CB-F7560BABC1CB}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+															<ObjectLists/>
+														</ActorMixer>
+													</ChildrenList>
 													<ObjectLists/>
 												</ActorMixer>
 												<ActorMixer Name="Level Complete" ID="{F7F383CA-28FC-4A61-A7A9-29D7EAA6468C}" ShortID="183376059">
