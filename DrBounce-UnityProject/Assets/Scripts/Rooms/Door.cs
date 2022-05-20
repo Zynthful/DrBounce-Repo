@@ -34,6 +34,10 @@ public class Door : MonoBehaviour
     public UnityEvent onCloseWithEnemiesAlive = null;
     public UnityEvent<int> onNumEnemiesValueChanged = null;
 
+    [Header("Wwise")]
+    [SerializeField]
+    private AK.Wwise.Switch doorSwitch;
+
     private enum InitialState
     {
         Open,
@@ -60,6 +64,8 @@ public class Door : MonoBehaviour
 
     private void OnEnable()
     {
+        doorSwitch.SetValue(gameObject);
+
         numAlive = GetNumAlive();
 
         if (numAlive <= 0)
