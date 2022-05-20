@@ -131,6 +131,8 @@ public class CheckForBouncing : MonoBehaviour
             }
         }
 
+        if (other.GetComponent<EnemyHealth>())
+            other.GetComponent<EnemyHealth>().SetRecentAttacked();
         return true;
     }
 
