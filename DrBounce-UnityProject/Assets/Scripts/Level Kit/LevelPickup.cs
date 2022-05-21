@@ -22,7 +22,7 @@ public class LevelPickup : MonoBehaviour
     private float uiPromptDelay = 1.0f;
 
     [Header("Events")]
-    public UnityEvent onPickup = null;
+    public UnityEvent onPickup;
 
     private void OnEnable()
     {
@@ -36,9 +36,10 @@ public class LevelPickup : MonoBehaviour
 
     private void Pickup(GameObject obj)
     {
-        onPickup.Invoke();
         UnlockTracker.instance.PickupNewUnlocks(unlocksOnPickup.unlocks);
         Player.GetPlayer().StartCoroutine(DelayUIPrompt());
+
+        onPickup.Invoke();
 
         if (destroyOnPickup)
             Destroy(gameObject, timeBeforeDestroy);

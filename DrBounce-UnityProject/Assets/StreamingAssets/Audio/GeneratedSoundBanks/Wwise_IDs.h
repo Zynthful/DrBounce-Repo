@@ -135,6 +135,8 @@ namespace AK
         static const AkUniqueID UNFREEZE = 1984048681U;
         static const AkUniqueID UNPAUSE = 3412868374U;
         static const AkUniqueID UPGRADE_PICKUP = 3807985526U;
+        static const AkUniqueID UPGRADE_POPUP_CLOSE = 3301735049U;
+        static const AkUniqueID UPGRADE_POPUP_OPEN = 985081435U;
         static const AkUniqueID WORLD_BOUNCEPAD_BOUNCE_OBJECT = 3194510422U;
         static const AkUniqueID WORLD_BOUNCEPAD_BOUNCE_PLAYER = 104711096U;
         static const AkUniqueID WORLD_ELEVATOR_DESCEND = 2143773331U;

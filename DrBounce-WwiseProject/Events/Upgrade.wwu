@@ -8,6 +8,54 @@
 			</PropertyList>
 			<ChildrenList>
 				<Event Name="Upgrade_Pickup" ID="{5A65B28C-9F65-43DE-BECC-167700335296}"/>
+				<Event Name="Upgrade_Popup_Close" ID="{369671E3-6C0C-4A6F-8E60-516448062F49}">
+					<ChildrenList>
+						<Action Name="" ID="{66EE5601-D9EE-4F90-B420-411264B808D3}" ShortID="843288957">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="41"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Unpause" ID="{FC7ACCB8-CA12-4905-8847-73132E93A31F}" WorkUnitID="{A026E6EE-1AC6-43DB-8F41-8C240E965728}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{347DBDBF-8561-4146-B8E5-D00D0935CD8C}" ShortID="18305848">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="41"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Unfreeze" ID="{330FDAC6-05BE-442A-98C4-21F13F7D97C1}" WorkUnitID="{A026E6EE-1AC6-43DB-8F41-8C240E965728}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Upgrade_Popup_Open" ID="{3302B70B-0D0E-4C07-B5FB-18501B0D9897}">
+					<ChildrenList>
+						<Action Name="" ID="{15DA0722-DE57-4287-93E5-A8FE8A3FAB6F}" ShortID="384003140">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="41"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Pause" ID="{D6EC6811-499D-453F-955C-8F4D0185B4C3}" WorkUnitID="{A026E6EE-1AC6-43DB-8F41-8C240E965728}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{4C8B473C-FCD0-4F82-8659-97F2226DA441}" ShortID="346282221">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="41"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Freeze" ID="{E0CBB3F3-B6FF-4E69-B603-3DABC9EF37C1}" WorkUnitID="{A026E6EE-1AC6-43DB-8F41-8C240E965728}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

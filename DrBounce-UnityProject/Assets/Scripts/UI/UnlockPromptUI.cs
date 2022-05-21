@@ -6,6 +6,7 @@ using TMPro;
 
 public class UnlockPromptUI : MonoBehaviour
 {
+    [Header("References")]
     public TextMeshProUGUI unlockNameText = null;
     public VideoPlayer videoPlayer = null;
 
