@@ -60,7 +60,6 @@ namespace AK
         static const AkUniqueID DOOR_CLOSE = 128625444U;
         static const AkUniqueID DOOR_OPEN = 535830432U;
         static const AkUniqueID ENEMY_BOSS_CHARGESHOT_BEGINCHARGE = 894791742U;
-        static const AkUniqueID ENEMY_BOSS_CHARGESHOT_FIRE = 1492926391U;
         static const AkUniqueID ENEMY_BOUNCED = 524693026U;
         static const AkUniqueID ENEMY_BULLET_IMPACT = 3738812119U;
         static const AkUniqueID ENEMY_HEALTH_DEATH = 2932285363U;
@@ -245,6 +244,7 @@ namespace AK
 
             namespace SWITCH
             {
+                static const AkUniqueID EL_SLIMO_CHARGE = 2517937480U;
                 static const AkUniqueID EXPLOSIVE = 433216386U;
                 static const AkUniqueID SLIME_BULLET = 2478666286U;
             } // namespace SWITCH

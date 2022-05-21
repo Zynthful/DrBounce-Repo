@@ -10,6 +10,8 @@ public class BulletType : ScriptableObject
     public float speed;
     public int damage;
     public float lifespan;
+
+    [Header("Wwise")]
     public AK.Wwise.Switch typeSwitch;
 
     public BulletType(float siz, float spe, int dam, float life)

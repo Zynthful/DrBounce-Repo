@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3409145572097132122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1458527982251977354}
+  - component: {fileID: 4015901228934879384}
+  m_Layer: 2
+  m_Name: On Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1458527982251977354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409145572097132122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8441335968726963164}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4015901228934879384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409145572097132122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aba46dcb64ec7545b9c56afe2562456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ef46762ce5c3fa240b03153e1b4f319f, type: 2}
+  objToPost: {fileID: 2386541466708041752}
+  postOn: 0
 --- !u!114 &3414082499064017055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28,7 +77,19 @@ MonoBehaviour:
     m_Bits: 4
   onSpawn:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4015901228934879384}
+        m_TargetAssemblyTypeName: WwiseEvent, Assembly-CSharp
+        m_MethodName: Post
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -243,6 +304,11 @@ GameObject:
 --- !u!1 &447203671494407770 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8162806984866083523, guid: 445d897268dc8a1468cefa5f2f98757d, type: 3}
+  m_PrefabInstance: {fileID: 8609990692915741849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8441335968726963164 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 169292612901754693, guid: 445d897268dc8a1468cefa5f2f98757d, type: 3}
   m_PrefabInstance: {fileID: 8609990692915741849}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6480279484878706886 stripped
