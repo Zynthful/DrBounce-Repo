@@ -69,6 +69,7 @@ public class Shooting : MonoBehaviour
     public UnityEvent<bool> onHasCharge = null;
     public UnityEvent<bool> onHasChargeAndIsHeld = null;
     public UnityEvent onFirstGainChargeSinceEmpty = null;
+    public UnityEvent onAtFullCharge = null;
 
     [Header("Firing Events")]
     public UnityEvent onFire = null;
@@ -241,10 +242,17 @@ public class Shooting : MonoBehaviour
             _onFirstGainChargeSinceEmpty?.Raise();
         }
 
-        if (value > maxCharges)
+        if (value >= maxCharges)
+        {
+            if (gunCharge != maxCharges)
+                onAtFullCharge.Invoke();
+
             gunCharge = maxCharges;
+        }
         else
+        {
             gunCharge = value;
+        }
 
         anim.SetInteger("ChargesLeft", gunCharge);
 
