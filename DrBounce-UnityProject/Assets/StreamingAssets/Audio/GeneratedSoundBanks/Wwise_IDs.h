@@ -45,7 +45,6 @@ namespace AK
         static const AkUniqueID D0C_LEVEL_03_05LONGTHROW = 444260925U;
         static const AkUniqueID D0C_LEVEL_03_06PIPESMASH = 2424284846U;
         static const AkUniqueID D0C_LEVEL_03_07BOSS_01BUILDUP = 1640055141U;
-        static const AkUniqueID D0C_LEVEL_03_07BOSS_02COMBAT = 189634229U;
         static const AkUniqueID D0C_LEVEL_03_08END = 3937012899U;
         static const AkUniqueID D0C_LEVEL_COMPLETE = 1779956647U;
         static const AkUniqueID D0C_LONELY = 513920766U;
