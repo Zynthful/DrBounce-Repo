@@ -5407,6 +5407,7 @@ GameObject:
   - component: {fileID: 6612411157935086121}
   - component: {fileID: 3955827138688826068}
   - component: {fileID: 6382192689631491248}
+  - component: {fileID: 3708695964576164469}
   m_Layer: 5
   m_Name: Charge
   m_TagString: Untagged
@@ -5550,6 +5551,34 @@ MonoBehaviour:
       - m_Target: {fileID: 1756671828413803832}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3708695964576164469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7449690314612932017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533a3c1250a46794ebb7d90413ad4ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 274c5598d0201d64e81bf09a4b9c5b64, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 405257590043821518}
+        m_TargetAssemblyTypeName: CompareBoolInvoke, Assembly-CSharp
+        m_MethodName: Compare
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6747,6 +6776,7 @@ GameObject:
   - component: {fileID: 7260512218829498211}
   - component: {fileID: 924262626250654274}
   - component: {fileID: 6651327439149595589}
+  - component: {fileID: 405257590043821518}
   m_Layer: 5
   m_Name: T_Hit!
   m_TagString: Untagged
@@ -6870,6 +6900,48 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &405257590043821518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8095997685699564714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dae3696c78390b40aa3988d14a37c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  True:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6651327439149595589}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Max
+          m_BoolArgument: 0
+        m_CallState: 2
+  False:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6651327439149595589}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Charge
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8104859400243801505
 GameObject:
   m_ObjectHideFlags: 0
@@ -7386,11 +7458,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a71741299c513314199476a3d8558785, type: 3}
---- !u!224 &3488024034334735189 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1731615229135019110, guid: a71741299c513314199476a3d8558785, type: 3}
-  m_PrefabInstance: {fileID: 2909357797604075315}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5314007788006348083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7052417582480175616, guid: a71741299c513314199476a3d8558785, type: 3}
@@ -7402,6 +7469,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a42a23ce4f9ed24abde69beacbef2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3488024034334735189 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1731615229135019110, guid: a71741299c513314199476a3d8558785, type: 3}
+  m_PrefabInstance: {fileID: 2909357797604075315}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3636428085506914781
 PrefabInstance:
   m_ObjectHideFlags: 0
