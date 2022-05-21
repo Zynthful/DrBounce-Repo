@@ -142,6 +142,7 @@ public class LoadingScreenManager : MonoBehaviour
                 SceneManager.UnloadSceneAsync(loadedScenes[i], UnloadSceneOptions.None);
             }
         }
+        PauseHandler.SetCanPause(true);
         PauseHandler.SetPaused(false);
         LoadDestination();
     }
