@@ -19,6 +19,7 @@ namespace AK
         static const AkUniqueID CAMERA_FLY_QUICK = 3362723590U;
         static const AkUniqueID COMBAT_START = 1137411260U;
         static const AkUniqueID COMBAT_STOP = 1600024336U;
+        static const AkUniqueID D0C_BOSS_COMBAT = 2266222615U;
         static const AkUniqueID D0C_CAUGHT = 2245601839U;
         static const AkUniqueID D0C_COLLIDE_BOUNCE = 1558343114U;
         static const AkUniqueID D0C_COLLIDE_NON_BOUNCE = 3930748326U;

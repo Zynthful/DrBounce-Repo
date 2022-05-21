@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439142ca99ccfb64d94d466945a17968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outOfCombatDelay: 5
   onEnterCombat: {fileID: 11400000, guid: 395c0574cf7160942bacdf0921f9a9f8, type: 2}
   onExitCombat: {fileID: 11400000, guid: 48a3a4d9f36913b40bdf8da522b69eb1, type: 2}
   onEnterCombatWithEnemy: {fileID: 11400000, guid: 3681a0696d382ca40afcfb4e40aac0fc, type: 2}
@@ -185,9 +186,69 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5356301915536098851}
+  - {fileID: 5250754740985163718}
   m_Father: {fileID: 4381540523067003074}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6584852447449915069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5250754740985163718}
+  - component: {fileID: 5220972263368563161}
+  m_Layer: 0
+  m_Name: Boss Combat Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5250754740985163718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584852447449915069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7406927724251150184}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5220972263368563161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584852447449915069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0f7e3940c2a514bbe80fc4a6f599dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f2bf4f58e568cee469c9cd53f68681a2, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 7bb839d2c8eb92341ab7dfe874933131, type: 2}
+        m_TargetAssemblyTypeName: DialogueData, Assembly-CSharp
+        m_MethodName: PlayFromSource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8674942165155096590
 GameObject:
   m_ObjectHideFlags: 0
