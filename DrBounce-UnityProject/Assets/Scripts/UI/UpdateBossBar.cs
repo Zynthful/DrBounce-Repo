@@ -14,7 +14,6 @@ public class UpdateBossBar : MonoBehaviour
 
     [SerializeField]
     private GameObject[] barObjects = null;
-
     private Enemy currentBoss = null;
 
     [Header("Events")]
@@ -60,7 +59,11 @@ public class UpdateBossBar : MonoBehaviour
     private void InitialiseBar(Enemy boss)
     {
         currentBoss = boss;
-        bossNameText.text = boss.GetName();
+
+        if (boss.GetNameDelay() > 0)
+            StartCoroutine(DelayNameChange(boss));
+        else
+            bossNameText.text = boss.GetName();
 
         //healthBar.SetBar(boss.health.GetHealth(), 0.0f, boss.health.GetMaxHealth());  // this doesn't actually set the max value for some reason. i hate you feel.
         healthBar.SetBar01((float)boss.health.GetHealth() / (float)boss.health.GetMaxHealth());
@@ -72,5 +75,12 @@ public class UpdateBossBar : MonoBehaviour
         {
             healthBar.UpdateBar01(value / (float)currentBoss.health.GetMaxHealth());
         }
+    }
+
+    private IEnumerator DelayNameChange(Enemy boss)
+    {
+        bossNameText.text = boss.GetUnknowneName();
+        yield return new WaitForSeconds(boss.GetNameDelay());
+        bossNameText.text = boss.GetName();
     }
 }

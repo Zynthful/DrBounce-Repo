@@ -94,9 +94,22 @@ public class Enemy : MonoBehaviour
     [Header("Enemy Data")]
     [SerializeField]
     private EnemyType type = EnemyType.Normal;
+    public EnemyType GetEnemyType() { return type; }
+
     [SerializeField]
     [Tooltip("Name of the enemy. Currently used for Boss HP bars.")]
     new private string name = "";
+    public string GetName() { return name; }
+
+    [SerializeField]
+    [Tooltip("The text displayed when the enemy name has not been revealed.")]
+    private string unknownName = "???";
+    public string GetUnknowneName() { return unknownName; }
+
+    [SerializeField]
+    [Tooltip("If this is greater than 0 and this Enemy is a Boss Enemy, the name will be hidden as '???' until this delay has passed.")]
+    private float nameChangeDelay = 0;
+    public float GetNameDelay() { return nameChangeDelay; }
 
     public enum EnemyType
     {
@@ -198,7 +211,4 @@ public class Enemy : MonoBehaviour
     {
         m_root.reset();
     }
-
-    public string GetName() { return name; }
-    public EnemyType GetEnemyType() { return type; }
 }
