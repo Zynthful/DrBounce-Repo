@@ -8347,9 +8347,6 @@
 								<Property Name="OverrideOutput" Type="bool" Value="True"/>
 								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-3</Value>
-									</ValueList>
 									<RTPCList>
 										<RTPC Name="" ID="{55A61CE2-5965-42DD-AFF7-66067B126310}" ShortID="442276303">
 											<ReferenceList>
@@ -8394,6 +8391,13 @@
 							</ReferenceList>
 							<ChildrenList>
 								<ActorMixer Name="Health" ID="{41F3305D-EAB1-4D78-8723-B0B7D9C0D5E7}" ShortID="229174780">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -8734,199 +8738,96 @@
 											</ChildrenList>
 											<ObjectLists/>
 										</RandomSequenceContainer>
-										<BlendContainer Name="Death" ID="{B0AE8333-9853-4A8E-AD99-AE2B7EC28480}" ShortID="351856876">
-											<PropertyList>
-												<Property Name="3DSpatialization" Type="int16" Value="1"/>
-												<Property Name="BypassEffect0" Type="bool">
-													<RTPCList>
-														<RTPC Name="" ID="{A8EC4FFF-E736-4C01-BC71-961C5B331B10}" ShortID="818085189">
-															<ReferenceList>
-																<Reference Name="ControlInput">
-																	<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
-																</Reference>
-															</ReferenceList>
-															<Curve Name="" ID="{83130451-D589-494A-ABA8-77C272452E4B}">
-																<PropertyList>
-																	<Property Name="Flags" Type="int32" Value="65537"/>
-																</PropertyList>
-																<PointList>
-																	<Point>
-																		<XPos>0</XPos>
-																		<YPos>1</YPos>
-																		<Flags>5</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>100</XPos>
-																		<YPos>0</YPos>
-																		<Flags>0</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>1000</XPos>
-																		<YPos>0</YPos>
-																		<Flags>37</Flags>
-																	</Point>
-																</PointList>
-															</Curve>
-														</RTPC>
-													</RTPCList>
-												</Property>
-												<Property Name="InitialDelay" Type="Real64">
-													<RTPCList>
-														<RTPC Name="" ID="{4C198155-F409-4097-A77E-DA257698AE88}" ShortID="923930670">
-															<ReferenceList>
-																<Reference Name="ControlInput">
-																	<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
-																</Reference>
-															</ReferenceList>
-															<Curve Name="" ID="{317F5F09-98FA-4E46-B3E6-1500DF091103}">
-																<PropertyList>
-																	<Property Name="Flags" Type="int32" Value="1"/>
-																</PropertyList>
-																<PointList>
-																	<Point>
-																		<XPos>0</XPos>
-																		<YPos>0.0599999999994907</YPos>
-																		<Flags>5</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>100</XPos>
-																		<YPos>0.0899999999996908</YPos>
-																		<Flags>0</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>1000</XPos>
-																		<YPos>0.0899999999996908</YPos>
-																		<Flags>37</Flags>
-																	</Point>
-																</PointList>
-															</Curve>
-														</RTPC>
-													</RTPCList>
-												</Property>
-												<Property Name="OverridePositioning" Type="bool" Value="True"/>
-												<Property Name="Pitch" Type="int32">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{F9E78E97-89A1-4485-BE07-F44BACCC74EC}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="200"/>
-																	<Property Name="Min" Type="Real64" Value="-200"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="Volume" Type="Real64">
-													<RTPCList>
-														<RTPC Name="" ID="{B9EF5B03-8139-4E34-B63F-E875CFE82F68}" ShortID="532154720">
-															<ReferenceList>
-																<Reference Name="ControlInput">
-																	<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
-																</Reference>
-															</ReferenceList>
-															<Curve Name="" ID="{FE9F4380-87F1-4650-A19B-68E9EF86B43E}">
-																<PropertyList>
-																	<Property Name="Flags" Type="int32" Value="3"/>
-																</PropertyList>
-																<PointList>
-																	<Point>
-																		<XPos>0</XPos>
-																		<YPos>-7</YPos>
-																		<Flags>5</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>100</XPos>
-																		<YPos>-4</YPos>
-																		<Flags>0</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>1000</XPos>
-																		<YPos>-4</YPos>
-																		<Flags>37</Flags>
-																	</Point>
-																</PointList>
-															</Curve>
-														</RTPC>
-													</RTPCList>
-												</Property>
-											</PropertyList>
+										<SwitchContainer Name="Death" ID="{BB59B457-1CE6-49A3-BFB2-3F3498D68A73}" ShortID="1027836839">
 											<ReferenceList>
-												<Reference Name="Attenuation">
-													<ObjectRef Name="Enemy Death" ID="{06336F2B-FD14-4BDB-B589-6353AA81D833}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
-												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="DefaultSwitchOrState">
+													<ObjectRef Name="Medium" ID="{263CFE83-B1B1-4991-B3CF-2E8570A19D27}" WorkUnitID="{CC8306B2-CA2F-4503-B330-772FF3726B70}"/>
 												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="Object_Size" ID="{55750A57-9F56-45F2-9C0A-1719830D080D}" WorkUnitID="{CC8306B2-CA2F-4503-B330-772FF3726B70}"/>
+												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="Death" ID="{A8341F40-E425-44A2-8FDB-1FA0DB35BB33}" ShortID="308782557">
+												<BlendContainer Name="Medium" ID="{B0AE8333-9853-4A8E-AD99-AE2B7EC28480}" ShortID="351856876">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="BypassEffect0" Type="bool">
+															<RTPCList>
+																<RTPC Name="" ID="{A8EC4FFF-E736-4C01-BC71-961C5B331B10}" ShortID="818085189">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{83130451-D589-494A-ABA8-77C272452E4B}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="65537"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>1</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>100</XPos>
+																				<YPos>0</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1000</XPos>
+																				<YPos>0</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+														<Property Name="InitialDelay" Type="Real64">
+															<RTPCList>
+																<RTPC Name="" ID="{4C198155-F409-4097-A77E-DA257698AE88}" ShortID="923930670">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{317F5F09-98FA-4E46-B3E6-1500DF091103}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="1"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>0.0599999999994907</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>100</XPos>
+																				<YPos>0.0899999999996908</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1000</XPos>
+																				<YPos>0.0899999999996908</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+														<Property Name="OverridePositioning" Type="bool" Value="True"/>
 														<Property Name="Pitch" Type="int32">
 															<ModifierList>
 																<ModifierInfo>
-																	<Modifier Name="" ID="{E6B1362B-80C1-4B80-A06F-525E7CC07894}">
-																		<PropertyList>
-																			<Property Name="Max" Type="Real64" Value="200"/>
-																			<Property Name="Min" Type="Real64" Value="-200"/>
-																		</PropertyList>
-																	</Modifier>
-																</ModifierInfo>
-															</ModifierList>
-														</Property>
-														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
-														<Property Name="Volume" Type="Real64">
-															<ModifierList>
-																<ModifierInfo>
-																	<Modifier Name="" ID="{7ADF040D-F378-4347-9C1B-EC89C8D8926B}">
-																		<PropertyList>
-																			<Property Name="Max" Type="Real64" Value="1"/>
-																			<Property Name="Min" Type="Real64" Value="-1"/>
-																		</PropertyList>
-																	</Modifier>
-																</ModifierInfo>
-															</ModifierList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
-														</Reference>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-														<Reference Name="ReflectionsAuxSend">
-															<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{9ECFFDD9-BD3F-4404-8AFC-8BB4A3CB76FD}">
-															<Language>SFX</Language>
-															<AudioFile>DB_SFX_Enemy_Death_Draft_3.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="980807061"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{9ECFFDD9-BD3F-4404-8AFC-8BB4A3CB76FD}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{AF7E0AD1-2664-4079-A169-7B1C595DC7A6}" ShortID="516236235">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Pitch" Type="int32">
-															<ModifierList>
-																<ModifierInfo>
-																	<Modifier Name="" ID="{360D3A1E-D8D0-433E-A510-4D5B464EEFDD}">
+																	<Modifier Name="" ID="{F9E78E97-89A1-4485-BE07-F44BACCC74EC}">
 																		<PropertyList>
 																			<Property Name="Enabled" Type="bool" Value="True"/>
 																			<Property Name="Max" Type="Real64" Value="200"/>
@@ -8938,52 +8839,668 @@
 														</Property>
 														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 														<Property Name="Volume" Type="Real64">
+															<RTPCList>
+																<RTPC Name="" ID="{B9EF5B03-8139-4E34-B63F-E875CFE82F68}" ShortID="532154720">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{FE9F4380-87F1-4650-A19B-68E9EF86B43E}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="3"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>-7</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>100</XPos>
+																				<YPos>-4</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1000</XPos>
+																				<YPos>-4</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Enemy Death" ID="{06336F2B-FD14-4BDB-B589-6353AA81D833}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="Death" ID="{A8341F40-E425-44A2-8FDB-1FA0DB35BB33}" ShortID="308782557">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{E6B1362B-80C1-4B80-A06F-525E7CC07894}">
+																				<PropertyList>
+																					<Property Name="Max" Type="Real64" Value="200"/>
+																					<Property Name="Min" Type="Real64" Value="-200"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{7ADF040D-F378-4347-9C1B-EC89C8D8926B}">
+																				<PropertyList>
+																					<Property Name="Max" Type="Real64" Value="1"/>
+																					<Property Name="Min" Type="Real64" Value="-1"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+																<Reference Name="ReflectionsAuxSend">
+																	<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{9ECFFDD9-BD3F-4404-8AFC-8BB4A3CB76FD}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Death_Draft_3.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="980807061"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{9ECFFDD9-BD3F-4404-8AFC-8BB4A3CB76FD}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{AF7E0AD1-2664-4079-A169-7B1C595DC7A6}" ShortID="516236235">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{360D3A1E-D8D0-433E-A510-4D5B464EEFDD}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Max" Type="Real64" Value="200"/>
+																					<Property Name="Min" Type="Real64" Value="-200"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-5</Value>
+																	</ValueList>
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{854A54DC-EC83-4ECE-8EB5-755D77E0CCE0}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Min" Type="Real64" Value="-8"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+																<Reference Name="ReflectionsAuxSend">
+																	<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{87B2DA54-DCE4-4136-ACF9-C3DAD5BBE9D8}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Death_Splatter_Long.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="40979692"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{87B2DA54-DCE4-4136-ACF9-C3DAD5BBE9D8}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Large" ID="{FA9864FE-5ED1-4A44-BAB9-FD307C1C2953}" ShortID="370353315">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="BypassEffect0" Type="bool">
+															<RTPCList>
+																<RTPC Name="" ID="{7933DC1A-74BC-4ABF-BF9D-DA19A29F7AA2}" ShortID="82635185">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{BD1504F2-9217-47F3-9A75-086438B10108}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="65537"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>1</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>100</XPos>
+																				<YPos>0</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1000</XPos>
+																				<YPos>0</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+														<Property Name="InitialDelay" Type="Real64">
+															<RTPCList>
+																<RTPC Name="" ID="{B439DEBB-BA04-47FE-8B6E-BE18608C94F6}" ShortID="575444079">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{A70503D7-DABB-4B33-9C6B-D4B585CA7C80}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="1"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>0.0599999999994907</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>100</XPos>
+																				<YPos>0.0899999999996908</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1000</XPos>
+																				<YPos>0.0899999999996908</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+														<Property Name="OverridePositioning" Type="bool" Value="True"/>
+														<Property Name="Pitch" Type="int32">
 															<ValueList>
-																<Value>-5</Value>
+																<Value>-610</Value>
 															</ValueList>
 															<ModifierList>
 																<ModifierInfo>
-																	<Modifier Name="" ID="{854A54DC-EC83-4ECE-8EB5-755D77E0CCE0}">
+																	<Modifier Name="" ID="{73FF9E87-F05C-4C3B-B3B1-1E3F121578BF}">
 																		<PropertyList>
 																			<Property Name="Enabled" Type="bool" Value="True"/>
-																			<Property Name="Min" Type="Real64" Value="-8"/>
+																			<Property Name="Max" Type="Real64" Value="200"/>
+																			<Property Name="Min" Type="Real64" Value="-200"/>
 																		</PropertyList>
 																	</Modifier>
 																</ModifierInfo>
 															</ModifierList>
 														</Property>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+														<Property Name="Volume" Type="Real64">
+															<RTPCList>
+																<RTPC Name="" ID="{7B12832E-F982-4E31-BE21-B7AC2F650EB9}" ShortID="329602903">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{391954C8-DA75-4707-9E4A-4770A28BF630}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="3"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>-7</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>100</XPos>
+																				<YPos>-4</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1000</XPos>
+																				<YPos>-4</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
-															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+															<ObjectRef Name="Enemy Death" ID="{06336F2B-FD14-4BDB-B589-6353AA81D833}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
 														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 														</Reference>
 														<Reference Name="OutputBus">
-															<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
-														</Reference>
-														<Reference Name="ReflectionsAuxSend">
-															<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+															<ObjectRef Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{87B2DA54-DCE4-4136-ACF9-C3DAD5BBE9D8}">
-															<Language>SFX</Language>
-															<AudioFile>DB_SFX_Enemy_Death_Splatter_Long.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="40979692"/>
-															</MediaIDList>
-														</AudioFileSource>
+														<Sound Name="Death" ID="{6C95AC55-AADC-46EC-A7CB-75B74DE956A8}" ShortID="518288573">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+																<Reference Name="ReflectionsAuxSend">
+																	<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{6D2D21CF-1865-46BD-83DC-35672D996FBE}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Death_Draft_3.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="980807061"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{6D2D21CF-1865-46BD-83DC-35672D996FBE}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{1926C542-2E44-4C13-ADF8-76846E3586EB}" ShortID="884348936">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{1E290D6D-D648-4504-BBC0-79FDAC7ACC38}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Max" Type="Real64" Value="200"/>
+																					<Property Name="Min" Type="Real64" Value="-200"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-5</Value>
+																	</ValueList>
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{B25824D5-D450-4FD8-A1F7-5D400F92D571}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Min" Type="Real64" Value="-8"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+																<Reference Name="ReflectionsAuxSend">
+																	<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{C03F5C3B-5C66-40D7-8C79-251B2A265254}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Death_Splatter_Long.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="40979692"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{C03F5C3B-5C66-40D7-8C79-251B2A265254}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
 													</ChildrenList>
 													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{87B2DA54-DCE4-4136-ACF9-C3DAD5BBE9D8}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
+												</BlendContainer>
+												<BlendContainer Name="Small" ID="{EC729E24-58E5-4CC3-9F51-440FED63B098}" ShortID="549728671">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="BypassEffect0" Type="bool">
+															<RTPCList>
+																<RTPC Name="" ID="{3CC24EA1-322D-4720-B892-26800CF04564}" ShortID="300387988">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{01B9D4A2-32B7-4823-AD5D-28E2E3A2331F}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="65537"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>1</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>100</XPos>
+																				<YPos>0</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1000</XPos>
+																				<YPos>0</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+														<Property Name="InitialDelay" Type="Real64">
+															<RTPCList>
+																<RTPC Name="" ID="{9EC756AB-CE0A-4E0F-B3C7-2A4C1BC2F680}" ShortID="141183578">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{F96E2BDB-779B-4D1C-835A-6DA6970D8B51}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="1"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>0.0599999999994907</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>100</XPos>
+																				<YPos>0.0899999999996908</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1000</XPos>
+																				<YPos>0.0899999999996908</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+														<Property Name="OverridePositioning" Type="bool" Value="True"/>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>350</Value>
+															</ValueList>
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{839D16D1-A8BA-4005-BEDB-FBF875963ACB}">
+																		<PropertyList>
+																			<Property Name="Enabled" Type="bool" Value="True"/>
+																			<Property Name="Max" Type="Real64" Value="200"/>
+																			<Property Name="Min" Type="Real64" Value="-200"/>
+																		</PropertyList>
+																	</Modifier>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+														<Property Name="Volume" Type="Real64">
+															<RTPCList>
+																<RTPC Name="" ID="{DDD7864C-B2B8-4D0C-9678-156363E4C71D}" ShortID="2385517">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Health_Hit_Damage" ID="{C8A5D8FD-5D56-4CB2-8BDB-9ACE207E86B0}" WorkUnitID="{AAB64BDD-898C-40CB-9D99-E577DBE1916F}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{6B6D0001-5CC3-4B2C-9D01-F1C1DD97DD57}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="3"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>-7</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>100</XPos>
+																				<YPos>-4</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1000</XPos>
+																				<YPos>-4</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Enemy Death" ID="{06336F2B-FD14-4BDB-B589-6353AA81D833}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="Death" ID="{EE3F7D78-157C-4A22-BC1B-7C146EBAAB51}" ShortID="270957519">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+																<Reference Name="ReflectionsAuxSend">
+																	<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{9AEEC0D7-2508-4A39-B8AF-EE5C4E58E8BD}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Death_Draft_3.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="980807061"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Death_Draft_3" ID="{9AEEC0D7-2508-4A39-B8AF-EE5C4E58E8BD}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{21234BD8-29A7-4FE1-820E-8A24812C2B0D}" ShortID="239364677">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{DCDB856A-6973-427F-A0BC-9A03B5A0DB1A}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Max" Type="Real64" Value="200"/>
+																					<Property Name="Min" Type="Real64" Value="-200"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-5</Value>
+																	</ValueList>
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{711C7FA7-9D9B-4813-8A7F-D733D9DC8F35}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Min" Type="Real64" Value="-8"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+																<Reference Name="ReflectionsAuxSend">
+																	<ObjectRef Name="Aux_Room_Medium" ID="{BC873BBD-A0EC-40D3-BE6F-0B5D6058EB4D}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{0E8AFF5F-41EB-4C37-BD4C-805A7ACA2611}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Death_Splatter_Long.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="40979692"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Death_Splatter_Long" ID="{0E8AFF5F-41EB-4C37-BD4C-805A7ACA2611}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
 											</ChildrenList>
 											<ObjectLists/>
-										</BlendContainer>
+											<GroupingInfo>
+												<GroupingBehaviorList>
+													<GroupingBehavior>
+														<ItemRef Name="Small" ID="{EC729E24-58E5-4CC3-9F51-440FED63B098}"/>
+													</GroupingBehavior>
+													<GroupingBehavior>
+														<ItemRef Name="Medium" ID="{B0AE8333-9853-4A8E-AD99-AE2B7EC28480}"/>
+													</GroupingBehavior>
+													<GroupingBehavior>
+														<ItemRef Name="Large" ID="{FA9864FE-5ED1-4A44-BAB9-FD307C1C2953}"/>
+													</GroupingBehavior>
+												</GroupingBehaviorList>
+												<GroupingList>
+													<Grouping>
+														<SwitchRef Name="Small" ID="{7541FF06-DE28-4A34-AA45-E90291790C05}"/>
+														<ItemList>
+															<ItemRef Name="Small" ID="{EC729E24-58E5-4CC3-9F51-440FED63B098}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
+														<SwitchRef Name="Medium" ID="{263CFE83-B1B1-4991-B3CF-2E8570A19D27}"/>
+														<ItemList>
+															<ItemRef Name="Medium" ID="{B0AE8333-9853-4A8E-AD99-AE2B7EC28480}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
+														<SwitchRef Name="Large" ID="{86247AEE-EC1F-4315-A90F-D8A821FBCDB0}"/>
+														<ItemList>
+															<ItemRef Name="Large" ID="{FA9864FE-5ED1-4A44-BAB9-FD307C1C2953}"/>
+														</ItemList>
+													</Grouping>
+												</GroupingList>
+											</GroupingInfo>
+										</SwitchContainer>
 									</ChildrenList>
 									<ObjectLists/>
 								</ActorMixer>
@@ -8993,7 +9510,7 @@
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-15</Value>
+												<Value>-18</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -9290,11 +9807,6 @@
 														</ModifierInfo>
 													</ModifierList>
 												</Property>
-												<Property Name="Volume" Type="Real64">
-													<ValueList>
-														<Value>-13</Value>
-													</ValueList>
-												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -9322,6 +9834,13 @@
 													</ReferenceList>
 													<ChildrenList>
 														<Sound Name="DB_SFX_Enemy_Stunned_Notif_Large" ID="{18D75ACA-FD36-4814-8888-8098310C6FFB}" ShortID="608307163">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ValueList>
+																		<Value>-450</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -9349,6 +9868,11 @@
 																<Property Name="Pitch" Type="int32">
 																	<ValueList>
 																		<Value>-300</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-10</Value>
 																	</ValueList>
 																</Property>
 															</PropertyList>
@@ -9381,6 +9905,11 @@
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-7</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -9424,6 +9953,11 @@
 															<PropertyList>
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-10</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
@@ -9460,6 +9994,11 @@
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-7</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -9523,6 +10062,11 @@
 																	</ValueList>
 																</Property>
 																<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-10</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
@@ -9977,23 +10521,17 @@
 											</ChildrenList>
 											<ObjectLists/>
 										</BlendContainer>
-										<BlendContainer Name="Stun_Progress" ID="{E683CF77-CECB-4CF3-B7EA-B7919EBA3428}" ShortID="658833133">
+										<SwitchContainer Name="Stun_Progress" ID="{264BD5C4-2C10-42EB-A16D-EB08CE1D7337}" ShortID="553634775">
 											<PropertyList>
-												<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 												<Property Name="Pitch" Type="int32">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{ABC0E711-1CE4-40BC-A6A8-30AF7D5FBBA6}"/>
-														</ModifierInfo>
-													</ModifierList>
 													<RTPCList>
-														<RTPC Name="" ID="{237C1154-79BA-47B5-A25A-FEDCB39FD29A}" ShortID="846362067">
+														<RTPC Name="" ID="{239C9A6C-3437-4712-99EC-EF79F8149BA5}" ShortID="415098763">
 															<ReferenceList>
 																<Reference Name="ControlInput">
 																	<ObjectRef Name="Stun_Progress" ID="{CEAD2F06-16FD-4E6D-B730-8CEFD38E3FD6}" WorkUnitID="{53509FFC-1E2F-4F4E-8366-0ECAAE502B6D}"/>
 																</Reference>
 															</ReferenceList>
-															<Curve Name="" ID="{B16E6ED8-D763-4C92-A90E-1EFEDDE29FD6}">
+															<Curve Name="" ID="{D9D59958-684D-4C1F-89A9-2C30AD6694A9}">
 																<PropertyList>
 																	<Property Name="Flags" Type="int32" Value="65537"/>
 																</PropertyList>
@@ -10014,17 +10552,14 @@
 													</RTPCList>
 												</Property>
 												<Property Name="Volume" Type="Real64">
-													<ValueList>
-														<Value>-15</Value>
-													</ValueList>
 													<RTPCList>
-														<RTPC Name="" ID="{FB91EE2C-3279-4F8F-B2B1-249F06548C99}" ShortID="670122607">
+														<RTPC Name="" ID="{1B37199F-244E-4C28-8E2F-5CE83E20B96E}" ShortID="626040956">
 															<ReferenceList>
 																<Reference Name="ControlInput">
 																	<ObjectRef Name="Stun_Progress" ID="{CEAD2F06-16FD-4E6D-B730-8CEFD38E3FD6}" WorkUnitID="{53509FFC-1E2F-4F4E-8366-0ECAAE502B6D}"/>
 																</Reference>
 															</ReferenceList>
-															<Curve Name="" ID="{859E748C-D385-4A62-B930-13D47D799DF4}">
+															<Curve Name="" ID="{43DBD91A-BF5F-4DA9-808D-42B9C8E1E619}">
 																<PropertyList>
 																	<Property Name="Flags" Type="int32" Value="3"/>
 																</PropertyList>
@@ -10049,41 +10584,225 @@
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 												</Reference>
+												<Reference Name="DefaultSwitchOrState">
+													<ObjectRef Name="Medium" ID="{263CFE83-B1B1-4991-B3CF-2E8570A19D27}" WorkUnitID="{CC8306B2-CA2F-4503-B330-772FF3726B70}"/>
+												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="Object_Size" ID="{55750A57-9F56-45F2-9C0A-1719830D080D}" WorkUnitID="{CC8306B2-CA2F-4503-B330-772FF3726B70}"/>
+												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="DB_SFX_Enemy_Stun_Progress" ID="{16DF2090-58A6-4701-A6A6-0D418292D80A}" ShortID="110469463">
+												<BlendContainer Name="Medium" ID="{E683CF77-CECB-4CF3-B7EA-B7919EBA3428}" ShortID="658833133">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
+														<Property Name="Pitch" Type="int32">
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{ABC0E711-1CE4-40BC-A6A8-30AF7D5FBBA6}"/>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-15</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
 														</Reference>
 														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+															<ObjectRef Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="DB_SFX_Enemy_Stun_Progress" ID="{7BBC93F6-2416-44D5-8798-3B8EAAE12E28}">
-															<Language>SFX</Language>
-															<AudioFile>DB_SFX_Enemy_Stun_Progress.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="1059073891"/>
-															</MediaIDList>
-														</AudioFileSource>
+														<Sound Name="DB_SFX_Enemy_Stun_Progress" ID="{16DF2090-58A6-4701-A6A6-0D418292D80A}" ShortID="110469463">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Stun_Progress" ID="{7BBC93F6-2416-44D5-8798-3B8EAAE12E28}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Stun_Progress.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1059073891"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Stun_Progress" ID="{7BBC93F6-2416-44D5-8798-3B8EAAE12E28}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
 													</ChildrenList>
 													<ObjectLists/>
-													<ActiveSourceList>
-														<ActiveSource Name="DB_SFX_Enemy_Stun_Progress" ID="{7BBC93F6-2416-44D5-8798-3B8EAAE12E28}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
+												</BlendContainer>
+												<BlendContainer Name="Large" ID="{AE512E25-496A-4E61-83F3-35A3708E2B39}" ShortID="846363994">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>-500</Value>
+															</ValueList>
+														</Property>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-15</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="DB_SFX_Enemy_Stun_Progress" ID="{A45E35DE-F71D-4ADA-938D-2173F64DFB7E}" ShortID="728069982">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Stun_Progress" ID="{CD979F7E-DEC6-4E2D-9316-79A57DAD62BB}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Stun_Progress.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1059073891"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Stun_Progress" ID="{CD979F7E-DEC6-4E2D-9316-79A57DAD62BB}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
+												<BlendContainer Name="Small" ID="{7DD18DFF-5B64-4BAF-8343-069CD7C2C95C}" ShortID="278496461">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>300</Value>
+															</ValueList>
+														</Property>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-15</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Enemy" ID="{C08FF871-D4D1-45B3-8C26-210119542F82}" WorkUnitID="{228E5A2F-386D-452C-B200-D6DF8721EF6F}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Enemy" ID="{C2113548-530C-40A1-8752-135FE8EF7B34}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="DB_SFX_Enemy_Stun_Progress" ID="{FB027714-FA2E-43BA-A32D-A8291FAD0685}" ShortID="176038715">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="DB_SFX_Enemy_Stun_Progress" ID="{85A7770B-9172-4DF8-A2D9-A44594F64F6D}">
+																	<Language>SFX</Language>
+																	<AudioFile>DB_SFX_Enemy_Stun_Progress.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1059073891"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ObjectLists/>
+															<ActiveSourceList>
+																<ActiveSource Name="DB_SFX_Enemy_Stun_Progress" ID="{85A7770B-9172-4DF8-A2D9-A44594F64F6D}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<ObjectLists/>
+												</BlendContainer>
 											</ChildrenList>
 											<ObjectLists/>
-										</BlendContainer>
+											<GroupingInfo>
+												<GroupingBehaviorList>
+													<GroupingBehavior>
+														<ItemRef Name="Large" ID="{AE512E25-496A-4E61-83F3-35A3708E2B39}"/>
+													</GroupingBehavior>
+													<GroupingBehavior>
+														<ItemRef Name="Medium" ID="{E683CF77-CECB-4CF3-B7EA-B7919EBA3428}"/>
+													</GroupingBehavior>
+													<GroupingBehavior>
+														<ItemRef Name="Small" ID="{7DD18DFF-5B64-4BAF-8343-069CD7C2C95C}"/>
+													</GroupingBehavior>
+												</GroupingBehaviorList>
+												<GroupingList>
+													<Grouping>
+														<SwitchRef Name="Small" ID="{7541FF06-DE28-4A34-AA45-E90291790C05}"/>
+														<ItemList>
+															<ItemRef Name="Small" ID="{7DD18DFF-5B64-4BAF-8343-069CD7C2C95C}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
+														<SwitchRef Name="Medium" ID="{263CFE83-B1B1-4991-B3CF-2E8570A19D27}"/>
+														<ItemList>
+															<ItemRef Name="Medium" ID="{E683CF77-CECB-4CF3-B7EA-B7919EBA3428}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
+														<SwitchRef Name="Large" ID="{86247AEE-EC1F-4315-A90F-D8A821FBCDB0}"/>
+														<ItemList>
+															<ItemRef Name="Large" ID="{AE512E25-496A-4E61-83F3-35A3708E2B39}"/>
+														</ItemList>
+													</Grouping>
+												</GroupingList>
+											</GroupingInfo>
+										</SwitchContainer>
 									</ChildrenList>
 									<ObjectLists/>
 								</ActorMixer>
 								<ActorMixer Name="Movement" ID="{26C25D67-8638-4FE9-9E8D-B4096B292A3F}" ShortID="557873504">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
@@ -10143,7 +10862,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-5</Value>
+												<Value>-8</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
