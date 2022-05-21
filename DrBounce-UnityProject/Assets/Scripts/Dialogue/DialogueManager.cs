@@ -17,6 +17,9 @@ public class DialogueManager : MonoBehaviour
 
     private bool playing = false;
 
+    [SerializeField]
+    private BoolSetting enableSubtitlesSetting;
+
     [Header("Global Cooldown Settings")]
     [SerializeField]
     [Tooltip("The global cooldown in seconds, triggered everytime a new dialogue line is played. No dialogue (except that which overrides) may play during this cooldown period.")]
@@ -53,6 +56,10 @@ public class DialogueManager : MonoBehaviour
 
     private void InitialiseUI()
     {
+        // Don't create our UI if subtitles are disabled
+        if (!enableSubtitlesSetting.GetCurrentValue())
+            return;
+
         uiInstance = Instantiate(dialogueCanvas);
         uiInstance.SetActive(false);
         subtitleUI = uiInstance.GetComponent<DialogueSubtitleUI>();
@@ -62,14 +69,16 @@ public class DialogueManager : MonoBehaviour
     {
         playing = true;
 
-        CheckNullUI();
-
         // Play dialogue
         line.GetEvent().Post(@object, (uint)(AkCallbackType.AK_Marker | AkCallbackType.AK_EndOfEvent), Callback);
         lastPlayedDialogue = line;
 
         // Show subtitles
-        subtitleUI.ShowSubtitle(line);
+        if (enableSubtitlesSetting.GetCurrentValue())
+        {
+            CheckNullUI();
+            subtitleUI.ShowSubtitle(line);
+        }
 
         // Stop any running global cooldowns
         if (globalCooldownCoroutine != null && coolingDown)
@@ -95,7 +104,9 @@ public class DialogueManager : MonoBehaviour
 
     public void OnEndOfEvent()
     {
-        subtitleUI.Disable();
+        if (subtitleUI != null)
+            subtitleUI.Disable();
+
         playing = false;
     }
 
@@ -103,11 +114,11 @@ public class DialogueManager : MonoBehaviour
     {
         CheckNullUI();
 
-        // Show subtitles
-        uiInstance.SetActive(true);
-
         // Update text with subtitle read from marker on audio file
         subtitleUI.SetSubtitleText(info.strLabel);
+
+        // Show subtitles if we have them enabled, otherwise hide them
+        uiInstance.SetActive(enableSubtitlesSetting.GetCurrentValue());
     }
 
     public IEnumerator Cooldown(DialogueData data, float duration)
