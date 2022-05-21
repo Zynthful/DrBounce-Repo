@@ -71,6 +71,7 @@ namespace AK
         static const AkUniqueID ENEMY_STUN_INCREASE = 3231467681U;
         static const AkUniqueID ENEMY_STUN_PARTICLE_SPAWN = 865452671U;
         static const AkUniqueID ENEMY_STUN_STUNNED = 1850312910U;
+        static const AkUniqueID EXPLOSION = 13776098U;
         static const AkUniqueID FRD_GREETING = 2798466007U;
         static const AkUniqueID FRD_SCREAM_START = 3369220952U;
         static const AkUniqueID FRD_SCREAM_STOP = 2748421092U;
