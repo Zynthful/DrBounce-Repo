@@ -59,6 +59,8 @@ namespace AK
         static const AkUniqueID DEBUG_UHH_CHEESED_TO_MEET_YOU = 3359401404U;
         static const AkUniqueID DOOR_CLOSE = 128625444U;
         static const AkUniqueID DOOR_OPEN = 535830432U;
+        static const AkUniqueID ENEMY_BOSS_CHARGESHOT_BEGINCHARGE = 894791742U;
+        static const AkUniqueID ENEMY_BOSS_CHARGESHOT_FIRE = 1492926391U;
         static const AkUniqueID ENEMY_BOUNCED = 524693026U;
         static const AkUniqueID ENEMY_BULLET_IMPACT = 3738812119U;
         static const AkUniqueID ENEMY_HEALTH_DEATH = 2932285363U;

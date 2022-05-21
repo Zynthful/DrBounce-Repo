@@ -25,6 +25,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	780312891	Player_Heal			\Default Work Unit\Player\Health\Player_Heal	
 	816336509	D0C_Milo_Death			\Default Work Unit\Dialogue\Gameplay\D0C_Milo_Death	
 	865452671	Enemy_Stun_Particle_Spawn			\Default Work Unit\Enemy\Stun\Enemy_Stun_Particle_Spawn	
+	894791742	Enemy_Boss_ChargeShot_BeginCharge			\Default Work Unit\Enemy\Enemy_Boss_ChargeShot_BeginCharge	
 	895307742	D0C_Level_01_02CCTV_01Found			\Default Work Unit\Dialogue\Level\D0C_Level_01_02CCTV_01Found	
 	926850530	UI_Toolbox_Selectable_PointerEnter			\Default Work Unit\UI\Toolbox\UI_Toolbox_Selectable_PointerEnter	
 	935477938	UI_BP_Button_Click_Success			\Default Work Unit\UI\Blueprint\UI_BP_Button_Click_Success	
@@ -41,6 +42,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1305133589	Player_Jump			\Default Work Unit\Player\Movement\Player_Jump	
 	1419047013	Level_Quit			\Default Work Unit\State\Levels\Level_Quit	
 	1473555518	D0C_Magnetised			\Default Work Unit\Dialogue\Gameplay\D0C_Magnetised	
+	1492926391	Enemy_Boss_ChargeShot_Fire			\Default Work Unit\Enemy\Enemy_Boss_ChargeShot_Fire	
 	1544786970	UI_TV_Selectable_Select			\Default Work Unit\UI\TV\UI_TV_Selectable_Select	
 	1550160059	Player_Gun_OutOfCharge			\Default Work Unit\Player\Gun\Charge\Player_Gun_OutOfCharge	
 	1558343114	D0C_Collide_Bounce			\Default Work Unit\Dialogue\Gameplay\D0C_Collide_Bounce	
@@ -296,6 +298,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	260901875	DB_SFX_Enemy_Stunned_Pop_Firework_1	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Enemy_Stunned_Pop_Firework_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Enemy\Stun\Stun_Particle_Pop\Firework\DB_SFX_Enemy_Stunned_Pop_Firework_1		1210
 	262900642	DB_MSC_Trck3_End	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Trck3_End_1E482D5A.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Track_01\End\DB_MSC_Trck3_End\DB_MSC_Trck3_End		173201
 	269041585	DB_SFX_Elevator_Descend_Loop	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\Voices\English(US)\DB_SFX_Elevator_Descend_Loop_E511C0EB.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\World Object\Elevator\Descend\DB_SFX_Elevator_Descend_Loop		222913
+	269711614	DB_SFX_Enemy_Boss_ChargeShot_Fire	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Enemy_Boss_ChargeShot_Fire_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Enemy\Charge Shot\DB_SFX_Enemy_Boss_ChargeShot_Fire		41999
 	271513161	DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth_1E482D5A.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Track_01\Combat\Chorus Combat\DB_MSC_Trck3_Chorus_Battle_4-4_141bpm_Ld Synth		239730
 	281373660	DB_MSC_Lv3_Boss_Medium_4-4_141bpm_Drums	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Lv3_Boss_Medium_4-4_141bpm_Drums_1E482D5A.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Track_03\Boss Medium\Intro\DB_MSC_Lv3_Boss_Medium_4-4_141bpm_Drums		350753
 	282672113	FEETHmn_MetalWalking_SP_7	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_MetalWalking_SP_7_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Player\Movement\Jump\Metal\FEETHmn_MetalWalking_SP_7		4736
@@ -304,6 +307,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	303007568	FEETHmn_MetalWalking_SP_9	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_MetalWalking_SP_9_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Player\Movement\Jump\Metal\FEETHmn_MetalWalking_SP_9		4546
 	308630234	Assist_Loop	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Magnet_Pulling_Loop_E511C0EB.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Player\Magnet\Assist_Loop		140272
 	309614483	FEETHmn_BootsRunningDCFloor_JC_DB_20L	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_20L_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Player\Movement\Jump\Lab\2\FEETHmn_BootsRunningDCFloor_JC_DB_20L		3848
+	314414576	Pickup	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Upgrade_Pickup_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\World Object\Pickup\Pickup		20404
 	329343887	DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Riff Synth	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Riff Synth_1E482D5A.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Track_03\Pt3 Medium\Pt2 Verse 2 Medium\DB_MSC_Trck3_Pt2_Medium_4-4_141bpm_Riff Synth		519725
 	331240589	Bounce_Feedback_5	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\SFX_Gun_Rebound_Feedback_5_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Player\Gun\Bounce Feedback\Bounce_Feedback_5		33197
 	334781775	FEETHmn_MetalWalking_SP_13	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_MetalWalking_SP_13_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Player\Movement\Jump\Metal\FEETHmn_MetalWalking_SP_13		5018
@@ -467,6 +471,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	797377411	FEETHmn_BootsLandingDCFloor_JC_DB_1	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsLandingDCFloor_JC_DB_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Player\Movement\Land\Lab\FEETHmn_BootsLandingDCFloor_JC_DB_1		3972
 	797826254	Whoosh_Ascending_3	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\Whoosh_Ascending_3_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Player\Movement\Jump\Generic\Whoosh\Whoosh_Ascending_3		4055
 	798609601	DB_SFX_UI_BP_Button_Return_1	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_BP_Button_Return_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Non-World\UI\Blueprint\Button_Click_Success\Return\Paper\DB_SFX_UI_BP_Button_Return_1		2273
+	804755337	DB_SFX_Enemy_Boss_ChargeShot_Charge	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_Enemy_Boss_ChargeShot_Charge_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Enemy\Charge Shot\DB_SFX_Enemy_Boss_ChargeShot_Charge		17248
 	806374425	DB_SFX_UI_BP_Button_Enter_1	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_SFX_UI_BP_Button_Enter_1_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Non-World\UI\Blueprint\Button_Click_Success\Enter\Paper\DB_SFX_UI_BP_Button_Enter_1		4164
 	808191837	FEETHmn_BootsRunningDCFloor_JC_DB_2L	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\FEETHmn_BootsRunningDCFloor_JC_DB_2L_BF9DD30D.wem		\Actor-Mixer Hierarchy\Default Work Unit\World\Player\Movement\Jump\Lab\1\FEETHmn_BootsRunningDCFloor_JC_DB_2L		3670
 	808356521	DB_MSC_Lv2_Boss_Battle_C_130bpm	D:\Projects\Dr. Bounce\DrBounce-Repo\DrBounce-WwiseProject\.cache\Windows\SFX\DB_MSC_Lv2_Boss_Battle_C_130bpm_1E482D5A.wem		\Interactive Music Hierarchy\Default Work Unit\Level BGM\Track_02\Boss_Combat\DB_MSC_Lv2_Boss_Battle_C_130bpm\DB_MSC_Lv2_Boss_Battle_C_130bpm		257852

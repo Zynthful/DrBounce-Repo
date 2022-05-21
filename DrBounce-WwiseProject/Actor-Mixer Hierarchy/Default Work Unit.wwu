@@ -8280,6 +8280,57 @@
 									</ChildrenList>
 									<ObjectLists/>
 								</ActorMixer>
+								<ActorMixer Name="Pickup" ID="{4D662EB2-4249-4847-A00B-E6240F4D9DBB}" ShortID="504847389">
+									<PropertyList>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-10</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Pickup" ID="{4C9C1991-EBDB-4541-BEEB-D1A7F85718F1}" WorkUnitID="{3B69B879-9D57-4333-96D6-4C6C3BA2B107}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Pickup" ID="{256302EC-765C-42E6-822C-11BD57AA6BBC}" ShortID="421784416">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DB_SFX_Upgrade_Pickup" ID="{7CE98346-8BFD-42EB-89A9-76CED260197E}">
+													<Language>SFX</Language>
+													<AudioFile>DB_SFX_Upgrade_Pickup.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="314414576"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DB_SFX_Upgrade_Pickup" ID="{7CE98346-8BFD-42EB-89A9-76CED260197E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<ObjectLists/>
+								</ActorMixer>
 							</ChildrenList>
 							<ObjectLists/>
 						</ActorMixer>
@@ -10080,6 +10131,72 @@
 											</ChildrenList>
 											<ObjectLists/>
 										</BlendContainer>
+									</ChildrenList>
+									<ObjectLists/>
+								</ActorMixer>
+								<ActorMixer Name="Charge Shot" ID="{1D79B9A4-35F5-4C57-8F79-7EC3E0645059}" ShortID="64032663">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="DB_SFX_Enemy_Boss_ChargeShot_Charge" ID="{20FECC50-8CA9-4F9F-A26E-92AD87402DA9}" ShortID="393185384">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DB_SFX_Enemy_Boss_ChargeShot_Charge" ID="{924642F5-BDB7-4F70-B6C6-0A661BF979B9}">
+													<Language>SFX</Language>
+													<AudioFile>DB_SFX_Enemy_Boss_ChargeShot_Charge.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="804755337"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DB_SFX_Enemy_Boss_ChargeShot_Charge" ID="{924642F5-BDB7-4F70-B6C6-0A661BF979B9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="DB_SFX_Enemy_Boss_ChargeShot_Fire" ID="{2AF140E5-3834-41E7-AA6C-266EFD26CA74}" ShortID="521973102">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{86154D2A-79E2-4E87-8AD7-552A9978927D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{D32FDF0D-8F39-4CA8-853B-53537E9F1C38}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DB_SFX_Enemy_Boss_ChargeShot_Fire" ID="{51FD4E84-7811-4442-92CE-824206B6DDBF}">
+													<Language>SFX</Language>
+													<AudioFile>DB_SFX_Enemy_Boss_ChargeShot_Fire.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="269711614"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="DB_SFX_Enemy_Boss_ChargeShot_Fire" ID="{51FD4E84-7811-4442-92CE-824206B6DDBF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 									<ObjectLists/>
 								</ActorMixer>

@@ -7,7 +7,17 @@
 				<Property Name="OverrideColor" Type="bool" Value="True"/>
 			</PropertyList>
 			<ChildrenList>
-				<Event Name="Upgrade_Pickup" ID="{5A65B28C-9F65-43DE-BECC-167700335296}"/>
+				<Event Name="Upgrade_Pickup" ID="{5A65B28C-9F65-43DE-BECC-167700335296}">
+					<ChildrenList>
+						<Action Name="" ID="{02B723F0-4EDA-4742-9F15-64D7FEDFF352}" ShortID="489192602">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Pickup" ID="{256302EC-765C-42E6-822C-11BD57AA6BBC}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 				<Event Name="Upgrade_Popup_Close" ID="{369671E3-6C0C-4A6F-8E60-516448062F49}">
 					<ChildrenList>
 						<Action Name="" ID="{66EE5601-D9EE-4F90-B420-411264B808D3}" ShortID="843288957">
