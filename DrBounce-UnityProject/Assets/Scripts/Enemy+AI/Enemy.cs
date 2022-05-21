@@ -96,6 +96,12 @@ public class Enemy : MonoBehaviour
     private EnemyType type = EnemyType.Normal;
     public EnemyType GetEnemyType() { return type; }
 
+    public enum EnemyType
+    {
+        Normal,
+        Boss,
+    }
+
     [SerializeField]
     [Tooltip("Name of the enemy. Currently used for Boss HP bars.")]
     new private string name = "";
@@ -111,11 +117,9 @@ public class Enemy : MonoBehaviour
     private float nameChangeDelay = 0;
     public float GetNameDelay() { return nameChangeDelay; }
 
-    public enum EnemyType
-    {
-        Normal,
-        Boss,
-    }
+    [SerializeField]
+    [Tooltip("Whether to remove this enemy from our list of enemies in combat with if this enemy loses track of its target.")]
+    private bool removeFromCombatWhenLost = true;
     #endregion
 
     private void Start()
@@ -169,7 +173,8 @@ public class Enemy : MonoBehaviour
                 case Blackboard.Actions.LOST:
                     rotateToDefault = true;
                     onGiveUp?.Invoke();
-                    CombatManager.s_Instance.RemoveEnemy(this);
+                    if (removeFromCombatWhenLost)
+                        CombatManager.s_Instance.RemoveEnemy(this);
                     break;
 
                 case Blackboard.Actions.FIRSTSPOTTED:
