@@ -14,6 +14,9 @@ public class Checkpoint : MonoBehaviour
     [SerializeField]
     private BoolSetting debugControlsEnabled = null;
 
+    [SerializeField]
+    private float invincibleTime;
+
     // The index of our current checkpoint from our CheckpointHit array
     private static int currentCheckpoint = -1;
 
@@ -150,6 +153,8 @@ public class Checkpoint : MonoBehaviour
 
         PlayerHealth health = player.GetComponent<PlayerHealth>();
 
+        StartCoroutine(respawnInvincibility(health));
+
         data.health = health.GetMaxHealth();
 
         player.GetComponentInChildren<Shooting>().SetCharge(data.charges);
@@ -186,6 +191,13 @@ public class Checkpoint : MonoBehaviour
     {
         currentCheckpoint = index;
         checkpoints[index].TeleportHere();
+    }
+
+    IEnumerator respawnInvincibility(PlayerHealth health)
+    {
+        health.respawnInvincibility = true;
+        yield return new WaitForSeconds(invincibleTime);
+        health.respawnInvincibility = false;
     }
 
     private void OnNextCheckpointPerformed(InputAction.CallbackContext ctx)

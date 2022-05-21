@@ -22,6 +22,8 @@ public class Health : MonoBehaviour
     protected bool godmode = false;
     public virtual void SetGodmodeActive(bool value) { godmode = value; }
 
+    public bool respawnInvincibility;
+
     [Header("Low Health Settings")]
     [SerializeField]
     [Tooltip("When this object's health drops below this percentage value, it will be considered as being on low health.")]
@@ -88,6 +90,9 @@ public class Health : MonoBehaviour
     protected virtual void SetHealth(int value, bool showBar, bool ignoreGod = false)
     {
         if (godmode && !ignoreGod)
+            return;
+
+        if (respawnInvincibility)
             return;
 
         health = value;
