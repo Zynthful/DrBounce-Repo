@@ -146,10 +146,16 @@ public class Checkpoint : MonoBehaviour
         tracker.NewUnlocks(unlocks);
         GameManager.s_Instance.currentSettings = unlocks;
 
+        /*
+        // Set position and rotation from save data
         Vector3 newPosition = new Vector3(data.position[0], data.position[1], data.position[2]);
         Quaternion rotation = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
         player.position = newPosition;
         player.rotation = rotation;
+        */
+
+        // Teleport player to checkpoint
+        GoToCheckpoint(data.checkpoint);
 
         PlayerHealth health = player.GetComponent<PlayerHealth>();
 
