@@ -83,6 +83,7 @@ namespace AK
         static const AkUniqueID LEVEL_QUIT = 1419047013U;
         static const AkUniqueID LEVEL_RELOAD_FROM_CHECKPOINT = 3639439855U;
         static const AkUniqueID LEVEL_RESTART = 2707338441U;
+        static const AkUniqueID LOADING_FINISHED = 2428620196U;
         static const AkUniqueID MAGNET_FAIL = 1584966534U;
         static const AkUniqueID MAGNET_PULLING_CANCEL = 3882615750U;
         static const AkUniqueID MAGNET_PULLING_START = 2278189420U;
