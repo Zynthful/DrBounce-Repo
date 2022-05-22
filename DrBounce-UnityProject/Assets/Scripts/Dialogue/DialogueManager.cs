@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager s_Instance = null;
-    private GameObject uiInstance = null;
+    public static DialogueManager s_Instance;
+    private GameObject uiInstance;
 
     [SerializeField]
-    private GameObject dialogueCanvas = null;
+    private GameObject dialogueCanvas;
 
-    private DialogueSubtitleUI subtitleUI = null;
+    private DialogueSubtitleUI subtitleUI;
 
-    private DialogueData lastPlayedDialogue = null;
+    private DialogueData lastPlayedDialogue;
+    private GameObject lastSourceObject;
 
     private bool playing = false;
 
@@ -26,7 +27,11 @@ public class DialogueManager : MonoBehaviour
     private float globalCooldown = 0.0f;
 
     private bool coolingDown = false;
-    private Coroutine globalCooldownCoroutine = null;
+    private Coroutine globalCooldownCoroutine;
+
+    [SerializeField]
+    private float subtitleDisableDelay = 1.2f;
+    private Coroutine delayDisableUICoroutine;
 
     private void Awake()
     {
@@ -69,9 +74,21 @@ public class DialogueManager : MonoBehaviour
     {
         playing = true;
 
+        // Stop previous dialogue if it exists
+        if (lastPlayedDialogue != null)
+            lastPlayedDialogue.GetEvent().Stop(lastSourceObject);
+
+        // Stop disabling subtitle UI if it is about to be disabled
+        if (delayDisableUICoroutine != null)
+        {
+            StopCoroutine(delayDisableUICoroutine);
+            delayDisableUICoroutine = null;
+        }
+
         // Play dialogue
         line.GetEvent().Post(@object, (uint)(AkCallbackType.AK_Marker | AkCallbackType.AK_EndOfEvent), Callback);
         lastPlayedDialogue = line;
+        lastSourceObject = @object;
 
         // Show subtitles
         if (enableSubtitlesSetting.GetCurrentValue())
@@ -104,9 +121,7 @@ public class DialogueManager : MonoBehaviour
 
     public void OnEndOfEvent()
     {
-        if (subtitleUI != null)
-            subtitleUI.Disable();
-
+        delayDisableUICoroutine = StartCoroutine(DelayDisableUI(subtitleDisableDelay));
         playing = false;
     }
 
@@ -133,6 +148,14 @@ public class DialogueManager : MonoBehaviour
         coolingDown = true;
         yield return new WaitForSeconds(duration);
         coolingDown = false;
+    }
+
+    private IEnumerator DelayDisableUI(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (subtitleUI != null)
+            subtitleUI.Disable();
     }
 
     public DialogueData GetLastPlayed() { return lastPlayedDialogue; }
