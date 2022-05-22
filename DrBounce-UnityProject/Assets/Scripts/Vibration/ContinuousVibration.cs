@@ -55,7 +55,11 @@ public class ContinuousVibration : Vibration
 
     public override void Trigger()
     {
+        if (VibrationManager.activeContinuousVibrations.Contains(this))
+            return;
+
         base.Trigger();
+
         VibrationManager.activeContinuousVibrations.Add(this);
         MMVibrationManager.ContinuousHaptic(intensity, sharpness, duration, HapticTypes.None, GameManager.s_Instance, alsoRumble, controllerID, threaded, fullIntensity);
     }
@@ -81,4 +85,27 @@ public class ContinuousVibration : Vibration
     {
         Stop(true);
     }
+
+    /*
+    public virtual void SetPaused(bool value)
+    {
+        if (value)
+            Pause();
+        else
+            Resume();
+    }
+
+    public virtual void Pause()
+    {
+        if (!VibrationManager.activeContinuousVibrations.Contains(this))
+            return;
+
+        MMVibrationManager.StopContinuousHaptic(true);
+    }
+
+    public virtual void Resume()
+    {
+
+    }
+    */
 }

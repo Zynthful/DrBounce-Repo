@@ -104,4 +104,11 @@ public class VibrationManager : MonoBehaviour
             MMVibrationManager.StopContinuousHaptic(true);
         }
     }
+
+    /*
+    public static void SetPaused(bool value)
+    {
+
+    }
+    */
 }
