@@ -64,7 +64,7 @@ public class SkipCutscene : MonoBehaviour
             currentTime += Time.deltaTime;
 
             float progress = currentTime / holdDuration;
-            buttonPrompt.fillAmount = progress;
+            buttonPrompt.fillAmount = 1 - progress;
             onProgressChange.Invoke(progress);
 
             if (currentTime >= holdDuration)
