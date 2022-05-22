@@ -17,6 +17,8 @@ public class CheckForBouncing : MonoBehaviour
     ControllerColliderHit recentHit;
     Coroutine recentHitRun;
 
+    bool isExplosive;
+
     private int numOfPlayerBounces = 0;
 
     [Tooltip("Only used if specific bounces is a requirement")]
@@ -31,6 +33,9 @@ public class CheckForBouncing : MonoBehaviour
         {
             specialInteractions = GetComponent<GunThrowing>();
         }
+
+        if (GetComponent<ExplosiveShot>())
+            isExplosive = true;
 
         rb = GetComponent<Rigidbody>();
 
@@ -56,7 +61,10 @@ public class CheckForBouncing : MonoBehaviour
         {
             Vector3[] returnVectors = new Vector3[3];
 
-            returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision, bounceOriginPoint);
+            if (isExplosive)
+                returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision, bounceOriginPoint, false);
+            else
+                returnVectors = collision.gameObject.GetComponent<Bouncing>().BounceObject(transform.position, rb.velocity.normalized, collision, bounceOriginPoint);
 
             if (returnVectors.Length > 0)
             {
@@ -77,7 +85,11 @@ public class CheckForBouncing : MonoBehaviour
 
                 transform.position = returnVectors[0];
                 bounceOriginPoint = returnVectors[1];
-                rb.velocity = returnVectors[2];
+
+                if (isExplosive)
+                    rb.velocity = returnVectors[2].normalized * rb.velocity.magnitude;
+                else
+                    rb.velocity = returnVectors[2];
             }
         }
     }

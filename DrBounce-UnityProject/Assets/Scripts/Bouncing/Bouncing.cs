@@ -102,7 +102,7 @@ public class Bouncing : MonoBehaviour
         return vectors;
     }
 
-    public Vector3[] BounceStraight(Transform collision, Vector3 normal, Vector3 position, bool isPlayer)
+    public Vector3[] BounceStraight(Transform collision, Vector3 normal, Vector3 position, bool isPlayer, bool boostY)
     {
         Vector3[] vectors = new Vector3[3];
 
@@ -110,7 +110,9 @@ public class Bouncing : MonoBehaviour
 
         vectors[1] = position;
 
-        vectors[2] = normal.normalized; vectors[2].y += .2f;
+        vectors[2] = normal.normalized; 
+        
+        if(boostY) vectors[2].y += .2f;
 
         if (isPlayer)
         {
@@ -126,7 +128,7 @@ public class Bouncing : MonoBehaviour
         return vectors;
     }
 
-    public Vector3[] BounceObject(Vector3 position, Vector3 direction, Collision collision, Vector3 origin)
+    public Vector3[] BounceObject(Vector3 position, Vector3 direction, Collision collision, Vector3 origin, bool boostY = true)
     {
         onBounceAny?.Invoke();
         onBounceObject?.Invoke();
@@ -143,13 +145,13 @@ public class Bouncing : MonoBehaviour
                 return BounceForward(collision.transform, position, origin);
 
             case BounceType.W_Straight:
-                return BounceStraight(collision.transform, collision.transform.TransformDirection(Vector3.up), position, false);
+                return BounceStraight(collision.transform, collision.transform.TransformDirection(Vector3.up), position, false, boostY);
         }
 
         return null;
     }
 
-    public Vector3[] BouncePlayer(Vector3 position, Vector3 direction, ControllerColliderHit collision, int numOfBounces)
+    public Vector3[] BouncePlayer(Vector3 position, Vector3 direction, ControllerColliderHit collision, int numOfBounces, bool boostY = true)
     {
         onBounceAny?.Invoke();
         onBouncePlayer?.Invoke(numOfBounces);
@@ -166,7 +168,7 @@ public class Bouncing : MonoBehaviour
                 return PlayerBounceForward(collision.transform, position, direction);
 
             case BounceType.W_Straight:
-                return BounceStraight(collision.transform, collision.transform.TransformDirection(Vector3.up), position, true);
+                return BounceStraight(collision.transform, collision.transform.TransformDirection(Vector3.up), position, true, boostY);
         }
 
         return null;
