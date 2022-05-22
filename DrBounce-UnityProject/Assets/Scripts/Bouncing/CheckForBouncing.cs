@@ -193,6 +193,7 @@ public class CheckForBouncing : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         recentHit = null;
+        recentHitRun = null;
     }
 
     public void SetNumOfPlayerBounces(int value)
