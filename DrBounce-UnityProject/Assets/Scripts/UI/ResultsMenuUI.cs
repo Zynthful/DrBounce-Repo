@@ -14,6 +14,13 @@ public class ResultsMenuUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI pbText = null;
 
+    [SerializeField]
+    private GameObject resultsObj;
+    [SerializeField]
+    private GameObject afterContinueObj;
+    [SerializeField]
+    private Selectable afterContinueDefaultSelected;
+
     private void OnEnable()
     {
         GameSaveData data = SaveSystem.LoadGameData();
@@ -22,5 +29,18 @@ public class ResultsMenuUI : MonoBehaviour
             currentTimeText.text = TimeConversion.ToTime(data.lastLevelTimes[levelsData.GetCurrentLevelIndex()]);
             pbText.text = TimeConversion.ToTime(data.levelPBTimes[levelsData.GetCurrentLevelIndex()]);
         }
+    }
+
+    public void ShowButtons()
+    {
+        StartCoroutine(DelayShowButtons());
+    }
+
+    private IEnumerator DelayShowButtons()
+    {
+        resultsObj.SetActive(false);
+        yield return new WaitForSecondsRealtime(0.5f);
+        afterContinueObj.SetActive(true);
+        afterContinueDefaultSelected.Select();
     }
 }

@@ -387,6 +387,8 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   inputAction: {fileID: 6109138126033607271, guid: 6b12349f2974fbb4282601c867959b87, type: 3}
+  delayUseScaledTime: 0
+  listenDelay: 0
 --- !u!1 &248877408
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,13 +950,13 @@ PrefabInstance:
       value: IMG_InputAction_Continue
       objectReference: {fileID: 0}
     - target: {fileID: 3185038897408487969, guid: 586fa056ecb6c0749b3207fcb1d0d5d1, type: 3}
+      propertyPath: actionSettingKeyboard
+      value: 
+      objectReference: {fileID: 11400000, guid: de8ea0983f86c8446a7126140f1dc005, type: 2}
+    - target: {fileID: 3185038897408487969, guid: 586fa056ecb6c0749b3207fcb1d0d5d1, type: 3}
       propertyPath: actionSettingController
       value: 
       objectReference: {fileID: 11400000, guid: ea70a7c80d2223547aaf09e642dbb32d, type: 2}
-    - target: {fileID: 4580887936402571242, guid: 586fa056ecb6c0749b3207fcb1d0d5d1, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6207238770712803791, guid: 586fa056ecb6c0749b3207fcb1d0d5d1, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -1427,15 +1429,11 @@ PrefabInstance:
     - target: {fileID: 3185038897408487969, guid: 586fa056ecb6c0749b3207fcb1d0d5d1, type: 3}
       propertyPath: actionSettingKeyboard
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 02fadccd6d0ba434c80b92668d712068, type: 2}
     - target: {fileID: 3185038897408487969, guid: 586fa056ecb6c0749b3207fcb1d0d5d1, type: 3}
       propertyPath: actionSettingController
       value: 
       objectReference: {fileID: 11400000, guid: 68fa5486d9d02714b8e9858ce90878ef, type: 2}
-    - target: {fileID: 4580887936402571242, guid: 586fa056ecb6c0749b3207fcb1d0d5d1, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6207238770712803791, guid: 586fa056ecb6c0749b3207fcb1d0d5d1, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -2607,15 +2605,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -2624,11 +2622,11 @@ PrefabInstance:
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3644750041497969834}
+      objectReference: {fileID: 5068758716453615753}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1759993803}
+      objectReference: {fileID: 710361642}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -2647,11 +2645,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ShowButtons
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: Select
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -2659,15 +2657,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: ResultsMenuUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: UnityEngine.UI.Selectable, UnityEngine.UI
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: UnityEngine.UI.Selectable, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6387167537323577757, guid: a1775ff0068cb65498798cb8f7a36df5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
@@ -2993,10 +2995,10 @@ MonoBehaviour:
   onActionPerformed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3644750041497969834}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 5068758716453615753}
+        m_TargetAssemblyTypeName: ResultsMenuUI, Assembly-CSharp
+        m_MethodName: ShowButtons
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3005,31 +3007,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1759993803}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 710361642}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: Select
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  inputAction: {fileID: -7314196808421350163, guid: 6b12349f2974fbb4282601c867959b87, type: 3}
+  inputAction: {fileID: -2246298912590191143, guid: 6b12349f2974fbb4282601c867959b87, type: 3}
+  delayUseScaledTime: 0
+  listenDelay: 0.3
 --- !u!222 &2410022037863696229
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3738,6 +3718,9 @@ MonoBehaviour:
   levelsData: {fileID: 11400000, guid: 6c9624ee56dab6d42ade1bd6c083ef34, type: 2}
   currentTimeText: {fileID: 3260032364796028677}
   pbText: {fileID: 5862455817600222732}
+  resultsObj: {fileID: 3644750041497969834}
+  afterContinueObj: {fileID: 1759993803}
+  afterContinueDefaultSelected: {fileID: 710361642}
 --- !u!224 &5339437197081211576
 RectTransform:
   m_ObjectHideFlags: 0
