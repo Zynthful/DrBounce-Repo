@@ -418,7 +418,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
             }
 
-            if (slopeCheck && bounceForce == Vector3.zero)
+            if (slopeCheck && isBouncing == false)
             {
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
                 velocity.y = -1000;
@@ -433,26 +433,18 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (isCrouching == true)
+            {
+                onUncrouch.Invoke();
+                isCrouching = false;
+                speed = oldSpeed; //Un-crouches the player before jumping
+            }
             Gravity();
         }
 
         if (headIsTouchingSomething)
         {
             hasJumped = true;
-            if (isCrouching == true)
-            {
-                cooldown = true;
-            }
-            if (!isGrounded)
-            {
-                Gravity();
-            }
-        }
-
-        if (!headIsTouchingSomething && isCrouching == true)
-        {
-            isGrounded = true;
-            cooldown = false;
         }
 
         // Check if we've just become grounded
@@ -597,7 +589,6 @@ public class PlayerMovement : MonoBehaviour
 
             onDash?.Invoke();
 
-            isCrouching = false;
             StartCoroutine(Cooldown());
 
             velocity.y = 0;
