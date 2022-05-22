@@ -905,8 +905,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c2bcf952-4677-44ad-9253-78915fb66d7d"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""34707ae8-d614-4e5f-b272-b03699283f78"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -916,8 +916,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""34707ae8-d614-4e5f-b272-b03699283f78"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""c2bcf952-4677-44ad-9253-78915fb66d7d"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",

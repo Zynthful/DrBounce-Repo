@@ -26,6 +26,16 @@ public class SetSpriteFromInputAction : MonoBehaviour
 
     private void OnEnable()
     {
+        // Initialise w/ gamepad controls if one is plugged in, otherwise try keyboard
+        if (Gamepad.current != null)
+        {
+            UpdateUI(Gamepad.current);
+        }
+        else if (Keyboard.current != null)
+        {
+            UpdateUI(Keyboard.current);
+        }
+
         InputUser.listenForUnpairedDeviceActivity = 1;
         InputUser.onUnpairedDeviceUsed += OnUnpairedDeviceUsed;
     }
