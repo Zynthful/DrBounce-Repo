@@ -1214,99 +1214,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
             ]
         },
         {
-            ""name"": ""Cutscene"",
-            ""id"": ""3595e960-3f68-4b6e-bc25-40de9e4fd298"",
-            ""actions"": [
-                {
-                    ""name"": ""SkipCutscene"",
-                    ""type"": ""Button"",
-                    ""id"": ""c14458bb-3510-4d43-8f96-6537b3b3b1f5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""6963477f-00fc-46b4-afeb-f7f93e3d2ea1"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7736dad4-1b6b-4adb-a10a-45da4484d457"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""38072035-a215-4399-882f-c702254efe7a"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""055fd26d-e412-4853-9fa3-4d57473ecf73"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""88ca4da0-01b5-4cb8-a584-9f0baf761db8"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""68d4e04c-9958-4f38-9810-b47193fbe0a8"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b271a1fe-2f9e-4b4c-b0e2-764d2cb12d4e"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Debug"",
             ""id"": ""0bb7150d-53a8-48e7-8b1e-e5f6a2aeda09"",
             ""actions"": [
@@ -1825,9 +1732,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Menu_Previous = m_Menu.FindAction("Previous", throwIfNotFound: true);
         m_Menu_PreviousSubTab = m_Menu.FindAction("Previous (Sub Tab)", throwIfNotFound: true);
         m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
-        // Cutscene
-        m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
-        m_Cutscene_SkipCutscene = m_Cutscene.FindAction("SkipCutscene", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_DEBUG_PrevLevel = m_Debug.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
@@ -2101,39 +2005,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     }
     public MenuActions @Menu => new MenuActions(this);
 
-    // Cutscene
-    private readonly InputActionMap m_Cutscene;
-    private ICutsceneActions m_CutsceneActionsCallbackInterface;
-    private readonly InputAction m_Cutscene_SkipCutscene;
-    public struct CutsceneActions
-    {
-        private @InputMaster m_Wrapper;
-        public CutsceneActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SkipCutscene => m_Wrapper.m_Cutscene_SkipCutscene;
-        public InputActionMap Get() { return m_Wrapper.m_Cutscene; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CutsceneActions set) { return set.Get(); }
-        public void SetCallbacks(ICutsceneActions instance)
-        {
-            if (m_Wrapper.m_CutsceneActionsCallbackInterface != null)
-            {
-                @SkipCutscene.started -= m_Wrapper.m_CutsceneActionsCallbackInterface.OnSkipCutscene;
-                @SkipCutscene.performed -= m_Wrapper.m_CutsceneActionsCallbackInterface.OnSkipCutscene;
-                @SkipCutscene.canceled -= m_Wrapper.m_CutsceneActionsCallbackInterface.OnSkipCutscene;
-            }
-            m_Wrapper.m_CutsceneActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @SkipCutscene.started += instance.OnSkipCutscene;
-                @SkipCutscene.performed += instance.OnSkipCutscene;
-                @SkipCutscene.canceled += instance.OnSkipCutscene;
-            }
-        }
-    }
-    public CutsceneActions @Cutscene => new CutsceneActions(this);
-
     // Debug
     private readonly InputActionMap m_Debug;
     private IDebugActions m_DebugActionsCallbackInterface;
@@ -2339,10 +2210,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnPrevious(InputAction.CallbackContext context);
         void OnPreviousSubTab(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
-    }
-    public interface ICutsceneActions
-    {
-        void OnSkipCutscene(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {
