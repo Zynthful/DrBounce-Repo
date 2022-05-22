@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving = false;
     [HideInInspector] public Vector3 bounceForce;
     private Vector3 oldMove;
+    [HideInInspector] public bool bounceAdded = true;
+    private bool isBouncing;
 
     [Header("Jump")]
     [SerializeField] private float jumpPeak = 3f;
@@ -145,6 +147,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!bounceAdded)
+        {
+            bounceAdded = true;
+            isBouncing = true;
+            velocity.x += bounceForce.x;
+            velocity.z += bounceForce.z;
+        }
+
         trueVelocity = new Vector3(move.x + velocity.x, 0, move.z + velocity.z);
         //@cole :)
         if (isDashing == true)
@@ -331,7 +341,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Allows the player to push against their momentum to slow it down without springing back after letting go
         //This is accomplished by subtracting the player's input value 'move' from the player's velocity when they're in opposite directions
-        if (bounceForce == Vector3.zero && !isSliding)
+        if (!isSliding && isBouncing == false)
         {
             if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
             {
@@ -343,9 +353,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        controller.Move(new Vector3((trueVelocity.x + bounceForce.x) / (10 / (0.1f * momentumStrength)),
+        controller.Move(new Vector3((trueVelocity.x) / (10 / (0.1f * momentumStrength)),
         velocity.y,
-        (trueVelocity.z + bounceForce.z) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+        (trueVelocity.z) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
 
         if (gameObject.GetComponent<CharacterController>().velocity.x == 0)
@@ -414,7 +424,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = -1000;
             }
 
-            bounceForce = Vector3.zero;
+            isBouncing = false;
 
             if (!headIsTouchingSomething)
             {
