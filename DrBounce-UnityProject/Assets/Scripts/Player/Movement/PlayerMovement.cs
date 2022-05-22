@@ -433,7 +433,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (isCrouching == true)
+            if (isCrouching == true && !headIsTouchingSomething && !slopeCheck)
             {
                 onUncrouch.Invoke();
                 isCrouching = false;
