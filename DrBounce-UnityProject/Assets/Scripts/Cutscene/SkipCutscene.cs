@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SkipCutscene : MonoBehaviour
 {
     public delegate void CameraAnim();
     public static event CameraAnim OnEnd;
+
+    [SerializeField]
+    private Image buttonPrompt = null;
 
     [Header("Input Settings")]
     [SerializeField]
@@ -38,14 +42,14 @@ public class SkipCutscene : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.inputMaster.Cutscene.SkipCutscene.started += OnSkipStarted;
-        InputManager.inputMaster.Cutscene.SkipCutscene.canceled += OnSkipCancelled;
+        InputManager.inputMaster.Menu.Continue.started += OnSkipStarted;
+        InputManager.inputMaster.Menu.Continue.canceled += OnSkipCancelled;
     }
 
     private void OnDisable()
     {
-        InputManager.inputMaster.Cutscene.SkipCutscene.started -= OnSkipStarted;
-        InputManager.inputMaster.Cutscene.SkipCutscene.canceled -= OnSkipCancelled;
+        InputManager.inputMaster.Menu.Continue.started -= OnSkipStarted;
+        InputManager.inputMaster.Menu.Continue.canceled -= OnSkipCancelled;
     }
 
     private void Start()
@@ -59,7 +63,9 @@ public class SkipCutscene : MonoBehaviour
         {
             currentTime += Time.deltaTime;
 
-            onProgressChange.Invoke(currentTime / holdDuration);
+            float progress = currentTime / holdDuration;
+            buttonPrompt.fillAmount = progress;
+            onProgressChange.Invoke(progress);
 
             if (currentTime >= holdDuration)
             {
@@ -82,6 +88,7 @@ public class SkipCutscene : MonoBehaviour
     private void ResetProgress(bool doFadeDelay)
     {
         holding = false;
+        buttonPrompt.fillAmount = 1.0f;
         currentTime = 0;
         onProgressChange.Invoke(0);
         if (this != null) StopAllCoroutines();
