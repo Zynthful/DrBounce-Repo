@@ -29,9 +29,12 @@ public class ContinuousVibration : Vibration
     [Tooltip("[OPTIONAL] The events that will stop all continuous vibrations (including rumble). Only supports null events : (")]
     protected GameEvent[] stopEvents = null;
 
+    private bool paused = false;
+
     protected override void OnEnable()
     {
         base.OnEnable();
+        paused = false;
         if (stopEvents != null)
         {
             for (int i = 0; i < stopEvents.Length; i++)
@@ -44,6 +47,7 @@ public class ContinuousVibration : Vibration
     protected override void OnDisable()
     {
         base.OnDisable();
+        Stop(true);
         if (stopEvents != null)
         {
             for (int i = 0; i < stopEvents.Length; i++)
@@ -86,17 +90,21 @@ public class ContinuousVibration : Vibration
         Stop(true);
     }
 
-    /*
     public virtual void SetPaused(bool value)
     {
         if (value)
             Pause();
         else
             Resume();
+
+        paused = value;
     }
 
     public virtual void Pause()
     {
+        if (paused)
+            return;
+
         if (!VibrationManager.activeContinuousVibrations.Contains(this))
             return;
 
@@ -105,7 +113,9 @@ public class ContinuousVibration : Vibration
 
     public virtual void Resume()
     {
+        if (!paused)
+            return;
 
+        MMVibrationManager.ContinuousHaptic(intensity, sharpness, duration, HapticTypes.None, GameManager.s_Instance, alsoRumble, controllerID, threaded, fullIntensity);
     }
-    */
 }

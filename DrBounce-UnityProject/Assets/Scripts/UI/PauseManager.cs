@@ -44,6 +44,8 @@ public static class PauseHandler
         SetTimeFreeze(value);
         onIsPaused.Invoke(value);
 
+        VibrationManager.SetAllPaused(value);
+
         if (value)
         {
             hasPausedOnce = true;

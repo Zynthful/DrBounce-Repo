@@ -105,10 +105,15 @@ public class VibrationManager : MonoBehaviour
         }
     }
 
-    /*
-    public static void SetPaused(bool value)
+    public static void SetAllPaused(bool value)
     {
-
+        for (int i = 0; i < activeContinuousVibrations.Count; i++)
+        {
+            activeContinuousVibrations[i].SetPaused(value);
+        }
     }
-    */
+
+    public static void PauseAll() { SetAllPaused(true); }
+
+    public static void ResumeAll() { SetAllPaused(false); }
 }
