@@ -16,7 +16,7 @@ public class TargetNext : BtNode
         if (m_positions.Length == 0)
         {
             //Debug.Log("Failed to target next");
-            m_positions = new Vector3[0];
+            m_positions = new Vector3[1];
             m_positions[0] = blackboard.owner.transform.position;
         }
 

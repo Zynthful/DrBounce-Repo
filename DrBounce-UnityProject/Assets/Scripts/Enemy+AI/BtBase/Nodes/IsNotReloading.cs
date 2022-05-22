@@ -21,8 +21,9 @@ public class IsNotReloading : BtNode
     /// <returns></returns>
     public override NodeState evaluate(Blackboard blackboard)
     {
-        if (m_blackboard.shotDelay >= 0 && m_blackboard.chargedShotDelay >= 0)
+        if (m_blackboard.shotDelay > 0 && m_blackboard.chargedShotDelay >= 0)
         {
+            Debug.Log("Hold on a minute, I'm still waiting on my thing to thing! Shot Delay: " + m_blackboard.shotDelay + " //// Charged Delay: " + m_blackboard.chargedShotDelay);
             return NodeState.FAILURE;
         }
 
