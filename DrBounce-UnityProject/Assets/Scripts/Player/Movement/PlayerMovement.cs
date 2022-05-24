@@ -304,7 +304,7 @@ public class PlayerMovement : MonoBehaviour
 
             velocity.y = (Mathf.Sqrt(jumpHeight * -2 * gravity));
 
-            if (controls.Player.Jump.ReadValue<float>() == 1)
+            if (controls.Player.Jump.ReadValue<float>() == 1 && !headIsTouchingSomething)
             {
                 jumpHeight += (5f * Time.fixedDeltaTime);
             }
@@ -440,11 +440,6 @@ public class PlayerMovement : MonoBehaviour
                 speed = oldSpeed; //Un-crouches the player before jumping
             }
             Gravity();
-        }
-
-        if (headIsTouchingSomething)
-        {
-            hasJumped = true;
         }
 
         // Check if we've just become grounded
