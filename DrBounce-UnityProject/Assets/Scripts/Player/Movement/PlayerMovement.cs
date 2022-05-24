@@ -321,7 +321,6 @@ public class PlayerMovement : MonoBehaviour
                 jump = false;
                 jumpHeight = 0;
                 velocity.y -= floatiness;
-
             }
         }
 
@@ -338,7 +337,6 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Momentum
-
         //Allows the player to push against their momentum to slow it down without springing back after letting go
         //This is accomplished by subtracting the player's input value 'move' from the player's velocity when they're in opposite directions
         if (!isSliding && isBouncing == false)
@@ -440,6 +438,17 @@ public class PlayerMovement : MonoBehaviour
                 speed = oldSpeed; //Un-crouches the player before jumping
             }
             Gravity();
+        }
+
+        if (headIsTouchingSomething && isCrouching)
+        {
+            hasJumped = true;
+        }
+
+        if (headIsTouchingSomething && !isGrounded)
+        {
+            velocity.y -= 1;
+            jump = false;
         }
 
         // Check if we've just become grounded
