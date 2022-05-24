@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool cooldown = false;
     private Vector3 dashDirection;
     [HideInInspector] public bool isDashing = false;
-    private int dashesPerformed = 0;
+    [HideInInspector] public int dashesPerformed = 0;
     private bool dashLocker = false;
 
     private float dashSliderTime = 0f;
@@ -591,6 +591,7 @@ public class PlayerMovement : MonoBehaviour
 
             StartCoroutine(Cooldown());
 
+            dashesPerformed += 1;
             velocity.y = 0;
             jumpHeight = 0;
             jump = false;
@@ -599,8 +600,6 @@ public class PlayerMovement : MonoBehaviour
             gravity = 0;
 
             yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
-
-            dashesPerformed += 1;
 
             isDashing = false;
             dashLocker = false;
