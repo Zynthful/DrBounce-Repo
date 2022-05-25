@@ -118,10 +118,10 @@ public class Bouncing : MonoBehaviour
 
         if (isPlayer)
         {
-            PlayerMovement.instance.dashesPerformed = 0;
-            PlayerMovement.instance.onDashSliderValue?.Raise(100);
             PlayerMovement.instance.bounceForce = vectors[2];
             PlayerMovement.instance.bounceAdded = false;
+            PlayerMovement.instance.dashesPerformed = 0;
+            PlayerMovement.instance.onDashSliderValue?.Raise(100);
         }
 
         return vectors;
