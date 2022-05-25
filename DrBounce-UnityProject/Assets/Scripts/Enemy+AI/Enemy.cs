@@ -171,6 +171,7 @@ public class Enemy : MonoBehaviour
                 case Blackboard.Actions.CHASING:
                     rotateToDefault = false;
                     onChase?.Invoke();
+                    CombatManager.s_Instance.AddEnemy(this);
                     break;
 
                 case Blackboard.Actions.LOST:
