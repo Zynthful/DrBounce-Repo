@@ -37,13 +37,6 @@
 						</Event>
 						<Event Name="Enemy_Health_Death" ID="{9E33BC64-B73D-4A5D-A8DE-54DD3EADAA78}">
 							<ChildrenList>
-								<Action Name="" ID="{4CCA523D-2F4B-4A56-B735-70FBC626F929}" ShortID="155131236">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Death" ID="{B0AE8333-9853-4A8E-AD99-AE2B7EC28480}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
 								<Action Name="" ID="{C20C67C3-7838-4551-9264-6C13931AE812}" ShortID="318981464">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="41"/>
@@ -51,6 +44,13 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Enemy_Stun_End" ID="{8F2B4F21-AC22-4C9D-AEDA-A648B7E4E9DC}" WorkUnitID="{510D12E1-003D-4145-8536-5858DF0C5DBA}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{7341ED8E-8906-47BD-ACB2-87F35074CB82}" ShortID="771382870">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Death" ID="{BB59B457-1CE6-49A3-BFB2-3F3498D68A73}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -98,10 +98,10 @@
 						</Event>
 						<Event Name="Enemy_Stun_Increase" ID="{C1FC2716-B43A-4C95-AD44-1165A9A7CF11}">
 							<ChildrenList>
-								<Action Name="" ID="{F6E4C78A-8395-4A5B-827B-98249DBFAD2B}" ShortID="187639110">
+								<Action Name="" ID="{E2E84EF0-EFFA-476E-953F-113851EBC066}" ShortID="708239858">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Stun_Progress" ID="{E683CF77-CECB-4CF3-B7EA-B7919EBA3428}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+											<ObjectRef Name="Stun_Progress" ID="{264BD5C4-2C10-42EB-A16D-EB08CE1D7337}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -141,6 +141,17 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="Bounced_Gun" ID="{CF7B0274-407F-4772-9873-69488E2FAC93}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Enemy_Boss_ChargeShot_BeginCharge" ID="{7CC6AE92-79C7-4C1E-A36E-8B3AB7AAD556}">
+					<ChildrenList>
+						<Action Name="" ID="{06C6551F-840C-4639-90DF-E295BC1F008A}" ShortID="259862375">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="DB_SFX_Enemy_Boss_ChargeShot_Charge" ID="{20FECC50-8CA9-4F9F-A26E-92AD87402DA9}" WorkUnitID="{54C11D35-1795-4374-BC6E-E655AD33D8E3}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

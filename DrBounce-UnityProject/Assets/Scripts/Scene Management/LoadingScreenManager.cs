@@ -142,7 +142,6 @@ public class LoadingScreenManager : MonoBehaviour
                 SceneManager.UnloadSceneAsync(loadedScenes[i], UnloadSceneOptions.None);
             }
         }
-        PauseHandler.SetTimeFreeze(false);
         LoadDestination();
     }
 
@@ -196,6 +195,10 @@ public class LoadingScreenManager : MonoBehaviour
             // Stop listening for continue input
             InputManager.inputMaster.Menu.Continue.performed -= _ => Continue();
             InputManager.inputMaster.Menu.Continue.Disable();
+
+            // Unpause game
+            PauseHandler.SetCanPause(true);
+            PauseHandler.SetPaused(false);
 
             // Activate loaded scene
             destinationOperation.allowSceneActivation = true;

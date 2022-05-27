@@ -36,9 +36,22 @@ public class AnimateTransformPatrol : MonoBehaviour
 
     private bool coolingDown = false;
 
+    [SerializeField]
+    private bool destroyObjs = true;
+
+    [SerializeField]
+    private float disableAfterTime = 0;
+
+    private bool noNewObjs = false;
+
+    private void Start() {
+        if(disableAfterTime > 0)
+            StartCoroutine(StopAfterTime(disableAfterTime));
+    }
+
     private void Update()
     {
-        if (!coolingDown)
+        if (!coolingDown && !noNewObjs)
             SpawnNew();
     }
 
@@ -71,7 +84,10 @@ public class AnimateTransformPatrol : MonoBehaviour
 
         public void DestroyObj(AnimatedObject activeObj)
     {
-        Destroy(activeObj.obj);
+        if(destroyObjs)
+            Destroy(activeObj.obj);
+        else
+            Destroy(activeObj.obj, 15);
         activeObjs.Remove(activeObj);
     }
 
@@ -91,5 +107,12 @@ public class AnimateTransformPatrol : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnCooldown);
         coolingDown = false;
+    }
+
+    private IEnumerator StopAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        destroyObjs = true;
+        noNewObjs = true;
     }
 }

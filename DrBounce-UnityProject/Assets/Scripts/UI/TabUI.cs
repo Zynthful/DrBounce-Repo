@@ -111,7 +111,13 @@ public class TabUI : MonoBehaviour
 
     private void SelectTab(int index)
     {
-        tabs[selectedTabIndex].SetActive(false);    // Disable last tab objects
+        // Disable all tab objects (possible workaround for bug where multiple tabs could remain active (but only in build.. somehow))
+        for (int i = 0; i < tabs.Length; i++)
+        {
+            tabs[i].SetActive(false);
+        }
+
+        //tabs[selectedTabIndex].SetActive(false);    // Disable last tab objects
         tabs[index].SetActive(true);                // Enable new tab objects
         tabs[index].onSelect.Invoke();
         selectedTabIndex = index;

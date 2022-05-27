@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class Checkpoint : MonoBehaviour
 {
@@ -10,8 +11,17 @@ public class Checkpoint : MonoBehaviour
     [SerializeField]
     private LevelsData levelsData = null;
 
-    // The ID of our current checkpoint. When we hit a new checkpoint, this ID is set to the ID of the hit checkpoint (but only if the new ID is higher than our current one).
-    private static int currentCheckpointID = -1;
+    [SerializeField]
+    private BoolSetting debugControlsEnabled = null;
+
+    [SerializeField]
+    private float invincibleTime;
+
+    // The index of our current checkpoint from our CheckpointHit array
+    private static int currentCheckpoint = -1;
+
+    private static CheckpointHit[] checkpoints = null;
+    public static CheckpointHit[] GetCheckpoints() { return checkpoints; }
 
 #if UNITY_EDITOR
     // Whether we've ran awake or not
@@ -20,6 +30,8 @@ public class Checkpoint : MonoBehaviour
 
     private void Awake()
     {
+        checkpoints = FindCheckpoints();
+
 #if UNITY_EDITOR
         // When entering playmode (and running Awake for the first time) in editor, delete our save data
         if (!doneAwake)
@@ -33,12 +45,18 @@ public class Checkpoint : MonoBehaviour
     {
         CheckpointHit.onHit += HitCheckpoint;           // Listen for when we hit a checkpoint. Passes through the checkpoint we've hit.
         SceneManager.sceneLoaded += OnSceneLoaded;      // Listen for when we load a new scene (which we use to load level progress).
+
+        InputManager.inputMaster.Debug.DEBUG_NextCheckpoint.performed += OnNextCheckpointPerformed;
+        InputManager.inputMaster.Debug.DEBUG_PrevCheckpoint.performed += OnPrevCheckpointPerformed;
     }
 
     private void OnDisable()
     {
         CheckpointHit.onHit -= HitCheckpoint;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        InputManager.inputMaster.Debug.DEBUG_NextCheckpoint.performed -= OnNextCheckpointPerformed;
+        InputManager.inputMaster.Debug.DEBUG_PrevCheckpoint.performed -= OnPrevCheckpointPerformed;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -65,9 +83,9 @@ public class Checkpoint : MonoBehaviour
     /// <param name="checkpoint">The checkpoint we've hit.</param>
     private void HitCheckpoint(CheckpointHit checkpoint)
     {
-        if (checkpoint.id > currentCheckpointID)
+        if (currentCheckpoint < 0 || currentCheckpoint > checkpoints.Length - 1 || checkpoint.id > checkpoints[currentCheckpoint].id)
         {
-            currentCheckpointID = checkpoint.id;
+            currentCheckpoint = Array.IndexOf(checkpoints, checkpoint);
             SaveLevelProgress();
         }
     }
@@ -97,7 +115,7 @@ public class Checkpoint : MonoBehaviour
             unlockFilter[i] = (int)GameManager.s_Instance.currentSettings[i];
         }
         LevelSaveData data = new LevelSaveData(levelsData.GetCurrentLevelIndex(),
-                                                currentCheckpointID,
+                                                currentCheckpoint,
                                                 player.GetComponent<PlayerHealth>().GetHealth(),
                                                 new float[3] { player.position.x, player.position.y, player.position.z },
                                                 new float[4] { player.rotation.x, player.rotation.y, player.rotation.z, player.rotation.w },
@@ -115,7 +133,7 @@ public class Checkpoint : MonoBehaviour
     /// <param name="data">The save data to load.</param>
     public void LoadLevelProgress(LevelSaveData data)
     {
-        currentCheckpointID = data.checkpointID;
+        currentCheckpoint = data.checkpoint;
 
         UnlockTracker.UnlockTypes[] unlocks = new UnlockTracker.UnlockTypes[data.unlocks.Length];
         for (int i = 0; i < data.unlocks.Length; i++)
@@ -128,13 +146,22 @@ public class Checkpoint : MonoBehaviour
         tracker.NewUnlocks(unlocks);
         GameManager.s_Instance.currentSettings = unlocks;
 
+        /*
+        // Set position and rotation from save data
         Vector3 newPosition = new Vector3(data.position[0], data.position[1], data.position[2]);
         Quaternion rotation = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
         player.position = newPosition;
         player.rotation = rotation;
+        */
+
+        // Teleport player to checkpoint
+        GoToCheckpoint(data.checkpoint);
 
         PlayerHealth health = player.GetComponent<PlayerHealth>();
-        health.Damage(Mathf.Abs(data.health - health.GetMaxHealth()));
+
+        StartCoroutine(respawnInvincibility(health));
+
+        data.health = health.GetMaxHealth();
 
         player.GetComponentInChildren<Shooting>().SetCharge(data.charges);
     }
@@ -145,7 +172,7 @@ public class Checkpoint : MonoBehaviour
     /// <param name="feedback"></param>
     public void ElevatorCheck(GameObject feedback)
     {
-        if (currentCheckpointID == -1)
+        if (currentCheckpoint == -1)
         {
             feedback.GetComponent<MoreMountains.Feedbacks.MMFeedbacks>().PlayFeedbacks();
         }
@@ -156,6 +183,48 @@ public class Checkpoint : MonoBehaviour
     /// </summary>
     public static void ResetCurrentCheckpoint()
     {
-        currentCheckpointID = -1;
+        currentCheckpoint = -1;
+    }
+
+    private CheckpointHit[] FindCheckpoints()
+    {
+        CheckpointHit[] checkpoints = FindObjectsOfType<CheckpointHit>();
+        Array.Sort(checkpoints, new CheckpointComparer());
+        return checkpoints;
+    }
+
+    public static void GoToCheckpoint(int index)
+    {
+        currentCheckpoint = index;
+        checkpoints[index].TeleportHere();
+    }
+
+    IEnumerator respawnInvincibility(PlayerHealth health)
+    {
+        health.respawnInvincibility = true;
+        yield return new WaitForSeconds(invincibleTime);
+        health.respawnInvincibility = false;
+    }
+
+    private void OnNextCheckpointPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed && debugControlsEnabled.GetCurrentValue())
+        {
+            if (currentCheckpoint < checkpoints.Length - 1)
+            {
+                GoToCheckpoint(currentCheckpoint + 1);
+            }
+        }
+    }
+
+    private void OnPrevCheckpointPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed && debugControlsEnabled.GetCurrentValue())
+        {
+            if (currentCheckpoint > 0)
+            {
+                GoToCheckpoint(currentCheckpoint - 1);
+            }
+        }
     }
 }

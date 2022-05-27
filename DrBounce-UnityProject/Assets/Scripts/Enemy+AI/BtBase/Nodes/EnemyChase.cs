@@ -27,11 +27,10 @@ public class EnemyChase : BtNode
     {
         if (m_blackboard.spottedPlayer == true)
         {
-
             if (PlayerMovement.instance.isGrounded == true)
             {
                 //Test if the player can be reached by the AI. Only while grounded so the enemy continues to chase the player even while jumping
-                NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position, PlayerMovement.instance.groundcheckPos, NavMesh.AllAreas, path);
+                NavMesh.CalculatePath(m_blackboard.noBounceAIController.transform.position - new Vector3(0, blackboard.owner.transform.localScale.y / 2, 0), PlayerMovement.instance.groundcheckPos, NavMesh.AllAreas, path);
             }
 
             if (path.status == NavMeshPathStatus.PathComplete)

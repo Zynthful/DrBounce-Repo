@@ -11,6 +11,9 @@ public class CheckpointHit : MonoBehaviour
     [Tooltip("Unique ID for this checkpoint. Each checkpoint should be ordered ascending by ID (i.e., later checkpoints = use higher id). When we hit this checkpoint, this ID will be used to set our current checkpoint.")]
     public int id = -1;
 
+    [Tooltip("The transform information of where the player will spawn when teleporting to this checkpoint. If this is not assigned, it will use this object's transform.")]
+    public Transform respawnPoint = null;
+
     private void Awake()
     {
         /*
@@ -28,5 +31,27 @@ public class CheckpointHit : MonoBehaviour
     public void OnHit()
     {
         onHit?.Invoke(this);
+    }
+
+    public void TeleportHere()
+    {
+        if (respawnPoint != null)
+        {
+            Player.GetPlayer().transform.position = respawnPoint.position;
+            Player.GetPlayer().transform.rotation = respawnPoint.rotation;
+        }
+        else
+        {
+            Player.GetPlayer().transform.position = transform.position;
+            Player.GetPlayer().transform.rotation = transform.rotation;
+        }
+    }
+}
+
+public class CheckpointComparer : IComparer
+{
+    public int Compare(object x, object y)
+    {
+        return ((CheckpointHit)x).id - ((CheckpointHit)y).id;
     }
 }

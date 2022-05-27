@@ -76,6 +76,11 @@
 							<ChildrenList>
 								<Bus Name="SFX" ID="{BE883F18-B66E-434A-8779-D4221C7B6A63}">
 									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
 										<Property Name="Color" Type="int16" Value="1"/>
 										<Property Name="OutputBusLowpass" Type="int16">
 											<RTPCList>
@@ -200,12 +205,12 @@
 														<PointList>
 															<Point>
 																<XPos>0</XPos>
-																<YPos>60</YPos>
+																<YPos>50</YPos>
 																<Flags>5</Flags>
 															</Point>
 															<Point>
 																<XPos>0.25</XPos>
-																<YPos>30</YPos>
+																<YPos>20</YPos>
 																<Flags>0</Flags>
 															</Point>
 															<Point>
@@ -320,13 +325,13 @@
 										</Property>
 										<Property Name="BypassEffect0" Type="bool">
 											<RTPCList>
-												<RTPC Name="" ID="{C3B8CD2C-C586-4FF9-B8D5-F708B033B144}" ShortID="506474468">
+												<RTPC Name="" ID="{A0338750-4B83-49E3-9990-33B5187E11F7}" ShortID="72214814">
 													<ReferenceList>
 														<Reference Name="ControlInput">
 															<ObjectRef Name="Player_Health_Normalized" ID="{386A8602-41E2-46F0-B60F-CF10F6EFAF9D}" WorkUnitID="{E1605B34-B066-4C5B-9C33-F28E2B10A0A1}"/>
 														</Reference>
 													</ReferenceList>
-													<Curve Name="" ID="{B1E57FB8-49A6-4F11-9EBE-DF407AA7A7F9}">
+													<Curve Name="" ID="{18692E9D-4B3C-47A0-B1DE-BC409CC4C52E}">
 														<PropertyList>
 															<Property Name="Flags" Type="int32" Value="65537"/>
 														</PropertyList>
@@ -459,6 +464,39 @@
 							<ChildrenList>
 								<Bus Name="Music" ID="{0A35ECAB-F7E1-4D5E-9244-1449B0B657FF}">
 									<PropertyList>
+										<Property Name="BypassEffect0" Type="bool">
+											<RTPCList>
+												<RTPC Name="" ID="{AA9200A9-7D6E-4EE1-986B-C88924719BF1}" ShortID="731566834">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="Gun_MaxShot_Charge_Progress" ID="{58E4EA3E-DE47-4FFF-A6A4-2CB2EC21B2A5}" WorkUnitID="{4E71A38A-235C-4320-A9A8-B6BB92B7CC8A}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{D016E434-2D5A-4ADB-BB66-6C6656994A48}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="65537"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>1</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>0.00951</XPos>
+																<YPos>0</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1</XPos>
+																<YPos>0</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
+										</Property>
 										<Property Name="Color" Type="int16" Value="11"/>
 										<Property Name="OutputBusLowpass" Type="int16">
 											<RTPCList>
@@ -480,7 +518,7 @@
 															</Point>
 															<Point>
 																<XPos>1</XPos>
-																<YPos>50</YPos>
+																<YPos>51</YPos>
 																<Flags>37</Flags>
 															</Point>
 														</PointList>
@@ -660,11 +698,117 @@
 											</RTPCList>
 										</Property>
 									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Effect0">
+											<Custom>
+												<Effect Name="Wwise RoomVerb (Custom)" ID="{B9F4BFCD-251C-4EEC-A954-ED4B3F439313}" ShortID="797122845" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+													<PropertyList>
+														<Property Name="DecayTime" Type="Real32" Value="2.3"/>
+														<Property Name="DryLevel" Type="Real32" Value="-0.3">
+															<RTPCList>
+																<RTPC Name="" ID="{A198162F-3239-4058-94AB-D8580B3BE9E1}" ShortID="819751635">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Gun_MaxShot_Charge_Progress" ID="{58E4EA3E-DE47-4FFF-A6A4-2CB2EC21B2A5}" WorkUnitID="{4E71A38A-235C-4320-A9A8-B6BB92B7CC8A}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{EE49F9DF-C245-4095-BE4A-B2D41DB28996}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="3"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>0</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1</XPos>
+																				<YPos>-2</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+														<Property Name="ERLevel" Type="Real32" Value="-14"/>
+														<Property Name="ERPattern" Type="int32" Value="8"/>
+														<Property Name="PreDelay" Type="Real32" Value="0"/>
+														<Property Name="ReverbLevel" Type="Real32" Value="-17">
+															<RTPCList>
+																<RTPC Name="" ID="{0076D4C9-A4F4-4302-BEEC-CE54ADE77D90}" ShortID="118085374">
+																	<ReferenceList>
+																		<Reference Name="ControlInput">
+																			<ObjectRef Name="Gun_MaxShot_Charge_Progress" ID="{58E4EA3E-DE47-4FFF-A6A4-2CB2EC21B2A5}" WorkUnitID="{4E71A38A-235C-4320-A9A8-B6BB92B7CC8A}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<Curve Name="" ID="{58B64947-F355-4B00-84EC-113DD0A672DB}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="3"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>-96.3000030517578</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>1</XPos>
+																				<YPos>0</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</RTPC>
+															</RTPCList>
+														</Property>
+														<Property Name="RoomSize" Type="Real32" Value="46"/>
+													</PropertyList>
+												</Effect>
+											</Custom>
+										</Reference>
+									</ReferenceList>
 									<ChildrenList>
 										<Bus Name="Drums" ID="{F19A1643-FE9A-4A7A-85C6-B8196175E84F}">
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<RTPCList>
+														<RTPC Name="" ID="{A6393D26-C1EC-4979-9066-F9850CBEE6C0}" ShortID="601046776">
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<ObjectRef Name="Player_Health_Normalized" ID="{386A8602-41E2-46F0-B60F-CF10F6EFAF9D}" WorkUnitID="{E1605B34-B066-4C5B-9C33-F28E2B10A0A1}"/>
+																</Reference>
+															</ReferenceList>
+															<Curve Name="" ID="{8CB13516-3088-4600-97EA-6C3B020E7FD5}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>0.25</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>0</Flags>
+																		<SegmentShape>Exp3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>0.35</XPos>
+																		<YPos>-0</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>1</XPos>
+																		<YPos>0</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</RTPC>
 														<RTPC Name="" ID="{1F7744BB-7B36-431F-A99A-106561B9C5DC}" ShortID="1044869215">
 															<ReferenceList>
 																<Reference Name="ControlInput">
@@ -692,7 +836,6 @@
 													</RTPCList>
 												</Property>
 											</PropertyList>
-											<ReferenceList/>
 											<ObjectLists/>
 										</Bus>
 									</ChildrenList>

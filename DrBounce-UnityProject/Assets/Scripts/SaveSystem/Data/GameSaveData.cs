@@ -16,7 +16,7 @@ public class GameSaveData
         levelUnlocked = highestLevel;
         beenOnLowHealth = _beenOnLowHealth;
         healedOnLowHealth = _healedOnLowHealth;
-        levelPBTimes = _levelPBTimes == null ? new float[2] : _levelPBTimes;
-        lastLevelTimes = _lastLevelTimes == null ? new float[2] : _lastLevelTimes;
+        levelPBTimes = _levelPBTimes == null ? new float[3] : _levelPBTimes;            // insert number of levels here cos im bad plz tyty
+        lastLevelTimes = _lastLevelTimes == null ? new float[3] : _lastLevelTimes;      // insert number of levels here cos im bad plz tyty
     }
 }

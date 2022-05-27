@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -14,10 +15,17 @@ public class InputListener : MonoBehaviour
     [SerializeField]
     private InputActionReference inputAction;
 
+    [SerializeField]
+    private bool delayUseScaledTime = false;
+
+    [SerializeField]
+    [Tooltip("Delay before we start listening for input. Only works with OnEnable right now.")]
+    private float listenDelay = 0.0f;
+
     private void OnEnable()
     {
         if (autoListenOnEnable)
-            Listen();
+            StartCoroutine(DelayListen());
     }
 
     private void OnDisable()
@@ -41,5 +49,15 @@ public class InputListener : MonoBehaviour
     private void OnActionPerformed(InputAction.CallbackContext ctx)
     {
         onActionPerformed.Invoke();
+    }
+
+    private IEnumerator DelayListen()
+    {
+        if (delayUseScaledTime)
+            yield return new WaitForSeconds(listenDelay);
+        else
+            yield return new WaitForSecondsRealtime(listenDelay);
+
+        Listen();
     }
 }

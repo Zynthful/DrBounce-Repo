@@ -11,6 +11,8 @@ public class TargetInSight : BtNode
     private float m_sightAngle;
     public bool m_canSeePlayer;
 
+    private LayerMask mask = LayerMask.GetMask(new string[2] { "TransparentFX", "Ignore Raycast" });
+
     private Vector3 m_originLos;
 
     /// <summary>
@@ -31,7 +33,9 @@ public class TargetInSight : BtNode
         m_viewDist = viewDist;
         m_sightAngle = sightAngle;
         m_blackboard = blackboard;
-        m_originLos = originLos + blackboard.owner.transform.position;
+        m_originLos = originLos;
+
+        mask = ~mask;
     }
 
 
@@ -42,20 +46,27 @@ public class TargetInSight : BtNode
 
         //Debug.Log("Successfuly reached " + getName());
 
+        int outcome = PlayerLosCheck();
 
-        if (PlayerLosCheck())
+        switch (outcome)
         {
-            m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
-            enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
+            case 0:
+                m_blackboard.currentAction = Blackboard.Actions.LOST;
+                m_blackboard.target.NewTarget(false, null);
+                return NodeState.FAILURE;
 
-            return NodeState.SUCCESS;
+            case 1:
+                m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
+                enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
+                return NodeState.SUCCESS;
+
+            case 2:
+                m_blackboard.target.NewTarget(true, PlayerMovement.player.gameObject);
+                enemyPosition.rotation = Quaternion.RotateTowards(enemyPosition.rotation, Quaternion.LookRotation((m_blackboard.target.playerObject.transform.position - enemyPosition.position).normalized), Time.deltaTime / .0045f);
+                return NodeState.FAILURE;
         }
-        else
-        {
-            m_blackboard.currentAction = Blackboard.Actions.LOST;
-            m_blackboard.target.NewTarget(false, null);
-            return NodeState.FAILURE;
-        }
+
+        return NodeState.FAILURE;
     }
 
     /// <summary>
@@ -63,41 +74,57 @@ public class TargetInSight : BtNode
     /// </summary>
     /// <returns></returns>
     /// 
-    protected bool PlayerLosCheck()
+    protected int PlayerLosCheck()
     {
+        Vector3 eyePos = m_originLos + enemyPosition.position;
         //added null check to stop error in console 
         if (PlayerMovement.player != null)
         {
-            if (Vector3.Dot(enemyPosition.TransformDirection(Vector3.forward), (PlayerMovement.player.position - m_originLos).normalized) > (90 - m_sightAngle) / 90)
+            if (Vector3.Dot(enemyPosition.TransformDirection(Vector3.forward), (PlayerMovement.player.position - eyePos).normalized) > (90 - m_sightAngle) / 90)
             {
                 RaycastHit hit;
 
-                Ray ray = new Ray(m_originLos, (PlayerMovement.player.position - m_originLos).normalized);
+                Ray ray = new Ray(eyePos, (PlayerMovement.player.position - eyePos).normalized);
 
                 if (Physics.Raycast(ray, out hit, m_viewDist) && hit.transform.root.CompareTag("Player"))
                 {
-                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - m_originLos).normalized * m_viewDist, Color.green);
+                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - eyePos).normalized * m_viewDist, Color.green);
 
                     if (m_blackboard.noBounceAIController == false)
                     {
-                        return true;
+                        return 1;
                     }
 
                     m_blackboard.searchTime = 0;
                     m_blackboard.notSeenPlayer = false;
                     m_blackboard.spottedPlayer = true;
-                    return true;
+                    return 1;
+                }
+
+                else if (Physics.Raycast(ray, out hit, m_viewDist, mask) && hit.transform.root.CompareTag("Player"))
+                {
+                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - eyePos).normalized * m_viewDist, Color.blue);
+
+                    if (m_blackboard.noBounceAIController == false)
+                    {
+                        return 2;
+                    }
+
+                    m_blackboard.searchTime = 0;
+                    m_blackboard.notSeenPlayer = false;
+                    m_blackboard.spottedPlayer = true;
+                    return 2;
                 }
 
                 else
                 {
                     m_blackboard.notSeenPlayer = true;
-                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - m_originLos).normalized * m_viewDist, Color.red);
+                    Debug.DrawLine(ray.origin, ray.origin + (PlayerMovement.player.position - eyePos).normalized * m_viewDist, Color.red);
                 }
             }
-            return false;
+            return 0;
         }
-        return false;
+        return 0;
     }
 
     public override string getName()

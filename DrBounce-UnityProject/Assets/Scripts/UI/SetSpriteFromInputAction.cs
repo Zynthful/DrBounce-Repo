@@ -21,11 +21,27 @@ public class SetSpriteFromInputAction : MonoBehaviour
     private bool disableImageIfControllerActionNull = true;
 
     [SerializeField]
+    private bool useSVG = true;
+
+    [SerializeField]
     [Tooltip("The SVG image to apply the sprite to.")]
-    private SVGImage image;
+    private SVGImage svgImage;
+    [SerializeField]
+    [Tooltip("Alternatively, the image to apply the sprite to.")]
+    private Image image;
 
     private void OnEnable()
     {
+        // Initialise w/ gamepad controls if one is plugged in, otherwise try keyboard
+        if (Gamepad.current != null)
+        {
+            UpdateUI(Gamepad.current);
+        }
+        else if (Keyboard.current != null)
+        {
+            UpdateUI(Keyboard.current);
+        }
+
         InputUser.listenForUnpairedDeviceActivity = 1;
         InputUser.onUnpairedDeviceUsed += OnUnpairedDeviceUsed;
     }
@@ -33,6 +49,32 @@ public class SetSpriteFromInputAction : MonoBehaviour
     private void OnDisable()
     {
         InputUser.onUnpairedDeviceUsed -= OnUnpairedDeviceUsed;
+    }
+
+    private void SetImageEnabled(bool value)
+    {
+        if (useSVG)
+        {
+            svgImage.enabled = value;
+            image.enabled = false;
+        }
+        else
+        {
+            image.enabled = value;
+            svgImage.enabled = false;
+        }
+    }
+
+    public void SetSprite(Sprite sprite)
+    {
+        if (useSVG)
+        {
+            svgImage.sprite = sprite;
+        }
+        else
+        {
+            image.sprite = sprite;
+        }
     }
 
     private void OnUnpairedDeviceUsed(InputControl control, InputEventPtr ptr)
@@ -45,7 +87,7 @@ public class SetSpriteFromInputAction : MonoBehaviour
 
     private void UpdateUI(InputDevice device)
     {
-        if (image == null)
+        if (image == null && svgImage == null)
         {
             Debug.LogWarning($"{name}: An image has not been set for this object.", this);
             return;
@@ -60,24 +102,26 @@ public class SetSpriteFromInputAction : MonoBehaviour
         if (device is Mouse || device is Keyboard)
         {
             if (disableImageIfKeyboardActionNull)
-                image.enabled = actionSettingKeyboard != null;      // Disable image if we have no keyboard action
+            {
+                SetImageEnabled(actionSettingKeyboard != null);      // Disable image if we have no keyboard action
+            }
 
             if (actionSettingKeyboard != null)
             {
-                image.sprite =
-                    InputManager.s_Instance.FindDescription(actionSettingKeyboard.GetEffectivePath()).defaultSprite;
+                SetSprite(InputManager.s_Instance.FindDescription(actionSettingKeyboard.GetEffectivePath()).defaultSprite);
             }
         }
         else if (device is Gamepad)
         {
             if (disableImageIfControllerActionNull)
-                image.enabled = actionSettingController != null;    // Disable image if we have no controller action
+                SetImageEnabled(actionSettingController != null);    // Disable image if we have no controller action
 
             if (actionSettingController != null)
             {
-                image.sprite = device is DualShockGamepad ?
+                SetSprite(device is DualShockGamepad ?
                     InputManager.s_Instance.FindDescription(actionSettingController.GetEffectivePath()).dualshockSprite :
-                    InputManager.s_Instance.FindDescription(actionSettingController.GetEffectivePath()).defaultSprite;
+                    InputManager.s_Instance.FindDescription(actionSettingController.GetEffectivePath()).defaultSprite);
+ 
             }
         }
     }

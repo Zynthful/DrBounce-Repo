@@ -94,15 +94,32 @@ public class Enemy : MonoBehaviour
     [Header("Enemy Data")]
     [SerializeField]
     private EnemyType type = EnemyType.Normal;
-    [SerializeField]
-    [Tooltip("Name of the enemy. Currently used for Boss HP bars.")]
-    new private string name = "";
+    public EnemyType GetEnemyType() { return type; }
 
     public enum EnemyType
     {
         Normal,
         Boss,
     }
+
+    [SerializeField]
+    [Tooltip("Name of the enemy. Currently used for Boss HP bars.")]
+    new private string name = "";
+    public string GetName() { return name; }
+
+    [SerializeField]
+    [Tooltip("The text displayed when the enemy name has not been revealed.")]
+    private string unknownName = "???";
+    public string GetUnknowneName() { return unknownName; }
+
+    [SerializeField]
+    [Tooltip("If this is greater than 0 and this Enemy is a Boss Enemy, the name will be hidden as '???' until this delay has passed.")]
+    private float nameChangeDelay = 0;
+    public float GetNameDelay() { return nameChangeDelay; }
+
+    [SerializeField]
+    [Tooltip("Whether to remove this enemy from our list of enemies in combat with if this enemy loses track of its target.")]
+    private bool removeFromCombatWhenLost = true;
     #endregion
 
     private void Start()
@@ -131,9 +148,12 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        if(m_blackboard.currentAction != recentAction)
+        if (m_blackboard.shotDelay >= 0)
+            m_blackboard.shotDelay -= Time.deltaTime;
+
+        if (m_blackboard.currentAction != recentAction)
         {
             switch (m_blackboard.currentAction)
             {
@@ -151,12 +171,14 @@ public class Enemy : MonoBehaviour
                 case Blackboard.Actions.CHASING:
                     rotateToDefault = false;
                     onChase?.Invoke();
+                    CombatManager.s_Instance.AddEnemy(this);
                     break;
 
                 case Blackboard.Actions.LOST:
                     rotateToDefault = true;
                     onGiveUp?.Invoke();
-                    CombatManager.s_Instance.RemoveEnemy(this);
+                    if (removeFromCombatWhenLost)
+                        CombatManager.s_Instance.RemoveEnemy(this);
                     break;
 
                 case Blackboard.Actions.FIRSTSPOTTED:
@@ -195,7 +217,4 @@ public class Enemy : MonoBehaviour
     {
         m_root.reset();
     }
-
-    public string GetName() { return name; }
-    public EnemyType GetEnemyType() { return type; }
 }

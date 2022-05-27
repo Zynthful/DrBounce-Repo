@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving = false;
     [HideInInspector] public Vector3 bounceForce;
     private Vector3 oldMove;
+    [HideInInspector] public bool bounceAdded = true;
+    private bool isBouncing;
 
     [Header("Jump")]
     [SerializeField] private float jumpPeak = 3f;
@@ -52,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool cooldown = false;
     private Vector3 dashDirection;
     [HideInInspector] public bool isDashing = false;
-    private int dashesPerformed = 0;
+    [HideInInspector] public int dashesPerformed = 0;
     private bool dashLocker = false;
 
     private float dashSliderTime = 0f;
@@ -145,6 +147,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!bounceAdded)
+        {
+            bounceAdded = true;
+            isBouncing = true;
+            velocity.x += bounceForce.x;
+            velocity.z += bounceForce.z;
+        }
+
         trueVelocity = new Vector3(move.x + velocity.x, 0, move.z + velocity.z);
         //@cole :)
         if (isDashing == true)
@@ -294,7 +304,7 @@ public class PlayerMovement : MonoBehaviour
 
             velocity.y = (Mathf.Sqrt(jumpHeight * -2 * gravity));
 
-            if (controls.Player.Jump.ReadValue<float>() == 1)
+            if (controls.Player.Jump.ReadValue<float>() == 1 && !headIsTouchingSomething)
             {
                 jumpHeight += (5f * Time.fixedDeltaTime);
             }
@@ -311,7 +321,6 @@ public class PlayerMovement : MonoBehaviour
                 jump = false;
                 jumpHeight = 0;
                 velocity.y -= floatiness;
-
             }
         }
 
@@ -328,10 +337,9 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Momentum
-
         //Allows the player to push against their momentum to slow it down without springing back after letting go
         //This is accomplished by subtracting the player's input value 'move' from the player's velocity when they're in opposite directions
-        if (bounceForce == Vector3.zero && !isSliding)
+        if (!isSliding && isBouncing == false)
         {
             if (velocity.x > 0 && move.x < 0 || velocity.x < 0 && move.x > 0)
             {
@@ -343,9 +351,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        controller.Move(new Vector3((trueVelocity.x + bounceForce.x) / (10 / (0.1f * momentumStrength)),
+        controller.Move(new Vector3((trueVelocity.x) / (10 / (0.1f * momentumStrength)),
         velocity.y,
-        (trueVelocity.z + bounceForce.z) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
+        (trueVelocity.z) / (10 / (0.1f * momentumStrength))) * Time.deltaTime);
 
 
         if (gameObject.GetComponent<CharacterController>().velocity.x == 0)
@@ -383,8 +391,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            bounceForce = Vector3.zero;
-
             coyoteTime = oldCoyoteTime;
             dashesPerformed = 0;
 
@@ -410,11 +416,13 @@ public class PlayerMovement : MonoBehaviour
                 velocity.z -= ((velocity.normalized.z * momentumLossRate) - ((move.normalized.z * momentumLossRate / 2))) * Time.deltaTime;
             }
 
-            if (slopeCheck && bounceForce == Vector3.zero)
+            if (slopeCheck && isBouncing == false)
             {
                 //The heavier the gravity value here, the better the player will stick to slopes when walking or sliding down them.
                 velocity.y = -1000;
             }
+
+            isBouncing = false;
 
             if (!headIsTouchingSomething)
             {
@@ -423,26 +431,24 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (isCrouching == true && !headIsTouchingSomething && !slopeCheck)
+            {
+                onUncrouch.Invoke();
+                isCrouching = false;
+                speed = oldSpeed; //Un-crouches the player before jumping
+            }
             Gravity();
         }
 
-        if (headIsTouchingSomething)
+        if (headIsTouchingSomething && isCrouching)
         {
             hasJumped = true;
-            if (isCrouching == true)
-            {
-                cooldown = true;
-            }
-            if (!isGrounded)
-            {
-                Gravity();
-            }
         }
 
-        if (!headIsTouchingSomething && isCrouching == true)
+        if (headIsTouchingSomething && !isGrounded)
         {
-            isGrounded = true;
-            cooldown = false;
+            velocity.y -= 1;
+            jump = false;
         }
 
         // Check if we've just become grounded
@@ -587,9 +593,9 @@ public class PlayerMovement : MonoBehaviour
 
             onDash?.Invoke();
 
-            isCrouching = false;
             StartCoroutine(Cooldown());
 
+            dashesPerformed += 1;
             velocity.y = 0;
             jumpHeight = 0;
             jump = false;
@@ -598,8 +604,6 @@ public class PlayerMovement : MonoBehaviour
             gravity = 0;
 
             yield return new WaitForSeconds(dashLength); //Continue this if statement every frame for the set dash length
-
-            dashesPerformed += 1;
 
             isDashing = false;
             dashLocker = false;

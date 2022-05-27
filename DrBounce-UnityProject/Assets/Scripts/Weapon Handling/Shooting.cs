@@ -64,35 +64,37 @@ public class Shooting : MonoBehaviour
 
     #region UnityEvents
     [Header("Gun Charge Events")]
-    public UnityEvent<int> onChargeUpdate = null;
-    public UnityEvent onChargesEmpty = null;
-    public UnityEvent<bool> onHasCharge = null;
-    public UnityEvent<bool> onHasChargeAndIsHeld = null;
-    public UnityEvent onFirstGainChargeSinceEmpty = null;
+    public UnityEvent<int> onChargeUpdate;
+    public UnityEvent onChargesEmpty;
+    public UnityEvent<bool> onHasCharge;
+    public UnityEvent<bool> onHasChargeAndIsHeld;
+    public UnityEvent onFirstGainChargeSinceEmpty;
+    public UnityEvent onAtFullCharge;
+    public UnityEvent<bool> onIsAtFullCharge;
 
     [Header("Firing Events")]
-    public UnityEvent onFire = null;
-    public UnityEvent onUnchargedShotFired = null;
-    public UnityEvent<int> onChargedShotFired = null;
-    public UnityEvent onSingleChargeShotFired = null;
-    public UnityEvent onExplosiveShot = null;
+    public UnityEvent onFire;
+    public UnityEvent onUnchargedShotFired;
+    public UnityEvent<int> onChargedShotFired;
+    public UnityEvent onSingleChargeShotFired;
+    public UnityEvent onExplosiveShot;
 
     [Header("Max Charge Shot Events")]
-    public UnityEvent<float> onChargingMaxShotProgress = null;     // Every frame that the max shot is charging. Passes progress as a percentage between 0-1.
-    public UnityEvent onChargeMaxShotBegin = null;                 // When starting to charge the max shot by holding the button
-    public UnityEvent onChargeMaxShotCancel = null;                // When cancelling the max shot charge by letting go of the button too early
-    public UnityEvent onMaxShotCharged = null;                     // When the max shot has been fully charged (but not fired)
-    public UnityEvent<int> onMaxShotFired = null;                  // When the max shot has been fired. Passes number of charges consumed.
+    public UnityEvent<float> onChargingMaxShotProgress;     // Every frame that the max shot is charging. Passes progress as a percentage between 0-1.
+    public UnityEvent onChargeMaxShotBegin;                 // When starting to charge the max shot by holding the button
+    public UnityEvent onChargeMaxShotCancel;                // When cancelling the max shot charge by letting go of the button too early
+    public UnityEvent onMaxShotCharged;                     // When the max shot has been fully charged (but not fired)
+    public UnityEvent<int> onMaxShotFired;                  // When the max shot has been fired. Passes number of charges consumed.
 
     [Header("Heal Fail Events")]
-    public UnityEvent onFailHeal = null;
-    public UnityEvent onFailHealFullHP = null;
-    public UnityEvent onFailHealNoCharge = null;
-    public UnityEvent onFailHealNotHeld = null;
-    public UnityEvent onFailHealAlreadyDead = null;
+    public UnityEvent onFailHeal;
+    public UnityEvent onFailHealFullHP;
+    public UnityEvent onFailHealNoCharge;
+    public UnityEvent onFailHealNotHeld;
+    public UnityEvent onFailHealAlreadyDead;
 
     [Header("Mouse Look Events")]
-    public UnityEvent<bool> onEnemyHover = null;
+    public UnityEvent<bool> onEnemyHover;
     #endregion
 
     #region GameEvents
@@ -241,10 +243,19 @@ public class Shooting : MonoBehaviour
             _onFirstGainChargeSinceEmpty?.Raise();
         }
 
-        if (value > maxCharges)
+        if (value >= maxCharges)
+        {
+            if (gunCharge != maxCharges)
+                onAtFullCharge.Invoke();
+
             gunCharge = maxCharges;
+        }
         else
+        {
             gunCharge = value;
+        }
+
+        onIsAtFullCharge.Invoke(gunCharge == maxCharges);
 
         anim.SetInteger("ChargesLeft", gunCharge);
 

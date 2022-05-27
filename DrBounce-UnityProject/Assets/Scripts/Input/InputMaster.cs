@@ -905,8 +905,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c2bcf952-4677-44ad-9253-78915fb66d7d"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""34707ae8-d614-4e5f-b272-b03699283f78"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -916,8 +916,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""34707ae8-d614-4e5f-b272-b03699283f78"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""c2bcf952-4677-44ad-9253-78915fb66d7d"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -1214,99 +1214,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
             ]
         },
         {
-            ""name"": ""Cutscene"",
-            ""id"": ""3595e960-3f68-4b6e-bc25-40de9e4fd298"",
-            ""actions"": [
-                {
-                    ""name"": ""SkipCutscene"",
-                    ""type"": ""Button"",
-                    ""id"": ""c14458bb-3510-4d43-8f96-6537b3b3b1f5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""6963477f-00fc-46b4-afeb-f7f93e3d2ea1"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7736dad4-1b6b-4adb-a10a-45da4484d457"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""38072035-a215-4399-882f-c702254efe7a"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""055fd26d-e412-4853-9fa3-4d57473ecf73"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""88ca4da0-01b5-4cb8-a584-9f0baf761db8"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""68d4e04c-9958-4f38-9810-b47193fbe0a8"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b271a1fe-2f9e-4b4c-b0e2-764d2cb12d4e"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipCutscene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Debug"",
             ""id"": ""0bb7150d-53a8-48e7-8b1e-e5f6a2aeda09"",
             ""actions"": [
@@ -1338,6 +1245,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": ""DEBUG_ReloadScene"",
                     ""type"": ""Button"",
                     ""id"": ""e8737602-6d0b-4cb5-8884-74f917cfaeed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_NextCheckpoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""18f47463-10fc-4cd4-8c72-22c121dca6db"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DEBUG_PrevCheckpoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""7025722a-9d29-4e32-b0f3-34b90730dc73"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -1519,6 +1442,94 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""DEBUG_ReloadScene"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbccb605-271b-4a5a-9774-2b3d88a07f7e"",
+                    ""path"": ""<Keyboard>/numpadPlus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca0575ef-24ae-4dd4-b1e0-944563a66a8e"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3029c0d0-40ed-422f-a44d-fce1e5cbbd89"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2809a33b-4d9f-45f4-ad6c-716d57425378"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""319ef88c-c78b-4b2d-b340-7d280c67631f"",
+                    ""path"": ""<Keyboard>/numpadMinus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""daf4e6d0-0078-4eba-9d41-9cbf0c3376bc"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DEBUG_PrevCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69bee84f-bffb-4349-8235-533aaac37a3f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_PrevCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b5cfad7-3f42-4b9a-88b4-d27f8fec0cfe"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DEBUG_PrevCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1575,7 +1586,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""NextPage"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1721,15 +1732,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Menu_Previous = m_Menu.FindAction("Previous", throwIfNotFound: true);
         m_Menu_PreviousSubTab = m_Menu.FindAction("Previous (Sub Tab)", throwIfNotFound: true);
         m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
-        // Cutscene
-        m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
-        m_Cutscene_SkipCutscene = m_Cutscene.FindAction("SkipCutscene", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_DEBUG_PrevLevel = m_Debug.FindAction("DEBUG_PrevLevel", throwIfNotFound: true);
         m_Debug_DEBUG_NextLevel = m_Debug.FindAction("DEBUG_NextLevel", throwIfNotFound: true);
         m_Debug_DEBUG_Pause = m_Debug.FindAction("DEBUG_Pause", throwIfNotFound: true);
         m_Debug_DEBUG_ReloadScene = m_Debug.FindAction("DEBUG_ReloadScene", throwIfNotFound: true);
+        m_Debug_DEBUG_NextCheckpoint = m_Debug.FindAction("DEBUG_NextCheckpoint", throwIfNotFound: true);
+        m_Debug_DEBUG_PrevCheckpoint = m_Debug.FindAction("DEBUG_PrevCheckpoint", throwIfNotFound: true);
         // Comic
         m_Comic = asset.FindActionMap("Comic", throwIfNotFound: true);
         m_Comic_NextPage = m_Comic.FindAction("NextPage", throwIfNotFound: true);
@@ -1995,39 +2005,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     }
     public MenuActions @Menu => new MenuActions(this);
 
-    // Cutscene
-    private readonly InputActionMap m_Cutscene;
-    private ICutsceneActions m_CutsceneActionsCallbackInterface;
-    private readonly InputAction m_Cutscene_SkipCutscene;
-    public struct CutsceneActions
-    {
-        private @InputMaster m_Wrapper;
-        public CutsceneActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SkipCutscene => m_Wrapper.m_Cutscene_SkipCutscene;
-        public InputActionMap Get() { return m_Wrapper.m_Cutscene; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CutsceneActions set) { return set.Get(); }
-        public void SetCallbacks(ICutsceneActions instance)
-        {
-            if (m_Wrapper.m_CutsceneActionsCallbackInterface != null)
-            {
-                @SkipCutscene.started -= m_Wrapper.m_CutsceneActionsCallbackInterface.OnSkipCutscene;
-                @SkipCutscene.performed -= m_Wrapper.m_CutsceneActionsCallbackInterface.OnSkipCutscene;
-                @SkipCutscene.canceled -= m_Wrapper.m_CutsceneActionsCallbackInterface.OnSkipCutscene;
-            }
-            m_Wrapper.m_CutsceneActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @SkipCutscene.started += instance.OnSkipCutscene;
-                @SkipCutscene.performed += instance.OnSkipCutscene;
-                @SkipCutscene.canceled += instance.OnSkipCutscene;
-            }
-        }
-    }
-    public CutsceneActions @Cutscene => new CutsceneActions(this);
-
     // Debug
     private readonly InputActionMap m_Debug;
     private IDebugActions m_DebugActionsCallbackInterface;
@@ -2035,6 +2012,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Debug_DEBUG_NextLevel;
     private readonly InputAction m_Debug_DEBUG_Pause;
     private readonly InputAction m_Debug_DEBUG_ReloadScene;
+    private readonly InputAction m_Debug_DEBUG_NextCheckpoint;
+    private readonly InputAction m_Debug_DEBUG_PrevCheckpoint;
     public struct DebugActions
     {
         private @InputMaster m_Wrapper;
@@ -2043,6 +2022,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @DEBUG_NextLevel => m_Wrapper.m_Debug_DEBUG_NextLevel;
         public InputAction @DEBUG_Pause => m_Wrapper.m_Debug_DEBUG_Pause;
         public InputAction @DEBUG_ReloadScene => m_Wrapper.m_Debug_DEBUG_ReloadScene;
+        public InputAction @DEBUG_NextCheckpoint => m_Wrapper.m_Debug_DEBUG_NextCheckpoint;
+        public InputAction @DEBUG_PrevCheckpoint => m_Wrapper.m_Debug_DEBUG_PrevCheckpoint;
         public InputActionMap Get() { return m_Wrapper.m_Debug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2064,6 +2045,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DEBUG_ReloadScene.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_ReloadScene;
+                @DEBUG_NextCheckpoint.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_NextCheckpoint;
+                @DEBUG_NextCheckpoint.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_NextCheckpoint;
+                @DEBUG_NextCheckpoint.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_NextCheckpoint;
+                @DEBUG_PrevCheckpoint.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_PrevCheckpoint;
+                @DEBUG_PrevCheckpoint.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_PrevCheckpoint;
+                @DEBUG_PrevCheckpoint.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDEBUG_PrevCheckpoint;
             }
             m_Wrapper.m_DebugActionsCallbackInterface = instance;
             if (instance != null)
@@ -2080,6 +2067,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DEBUG_ReloadScene.started += instance.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.performed += instance.OnDEBUG_ReloadScene;
                 @DEBUG_ReloadScene.canceled += instance.OnDEBUG_ReloadScene;
+                @DEBUG_NextCheckpoint.started += instance.OnDEBUG_NextCheckpoint;
+                @DEBUG_NextCheckpoint.performed += instance.OnDEBUG_NextCheckpoint;
+                @DEBUG_NextCheckpoint.canceled += instance.OnDEBUG_NextCheckpoint;
+                @DEBUG_PrevCheckpoint.started += instance.OnDEBUG_PrevCheckpoint;
+                @DEBUG_PrevCheckpoint.performed += instance.OnDEBUG_PrevCheckpoint;
+                @DEBUG_PrevCheckpoint.canceled += instance.OnDEBUG_PrevCheckpoint;
             }
         }
     }
@@ -2218,16 +2211,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnPreviousSubTab(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
     }
-    public interface ICutsceneActions
-    {
-        void OnSkipCutscene(InputAction.CallbackContext context);
-    }
     public interface IDebugActions
     {
         void OnDEBUG_PrevLevel(InputAction.CallbackContext context);
         void OnDEBUG_NextLevel(InputAction.CallbackContext context);
         void OnDEBUG_Pause(InputAction.CallbackContext context);
         void OnDEBUG_ReloadScene(InputAction.CallbackContext context);
+        void OnDEBUG_NextCheckpoint(InputAction.CallbackContext context);
+        void OnDEBUG_PrevCheckpoint(InputAction.CallbackContext context);
     }
     public interface IComicActions
     {
